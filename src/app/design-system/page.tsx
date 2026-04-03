@@ -167,7 +167,10 @@ const PlaceholderBox = ({ children }: { children?: React.ReactNode }) => (
 function Swatch({ color, shade }: { color: string; shade: string }) {
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className={`w-10 h-10 rounded bg-${color}-${shade}`} />
+      <div
+        className="w-10 h-10 rounded"
+        style={{ backgroundColor: `var(--raw-${color}-${shade})` }}
+      />
       <Mono className="text-xs">{shade}</Mono>
     </div>
   )
