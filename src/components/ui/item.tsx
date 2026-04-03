@@ -1,0 +1,54 @@
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
+  active?: boolean
+  disabled?: boolean
+}
+
+function Item({ className, active, disabled, ...props }: ItemProps) {
+  return (
+    <div
+      data-slot="item"
+      data-active={active ? "true" : undefined}
+      data-disabled={disabled ? "true" : undefined}
+      className={cn(
+        "flex items-center gap-2 rounded-md px-3 py-2 text-sm cursor-pointer transition-colors",
+        "hover:bg-surface-interactive",
+        "data-[active=true]:bg-surface-interactive data-[active=true]:font-medium",
+        "data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function ItemIcon({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span
+      data-slot="item-icon"
+      className={cn("shrink-0 [&_svg]:size-4", className)}
+      {...props}
+    />
+  )
+}
+
+function ItemLabel({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span
+      data-slot="item-label"
+      className={cn("truncate", className)}
+      {...props}
+    />
+  )
+}
+
+export { Item, ItemIcon, ItemLabel }
