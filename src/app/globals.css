@@ -342,6 +342,14 @@
   --color-status-error-surface: var(--status-error-surface);
   --color-status-error-text: var(--status-error-text);
 
+  /* ── SubstrateUI: Spacing scale ── */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
   /* ── Typography ── */
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "DM Mono", "SF Mono", monospace;
@@ -362,4 +370,13 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ── Layout utilities ── */
+.grid-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(var(--grid-min, 280px), 1fr));
+}
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 280px), 1fr));
 }
