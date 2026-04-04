@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 /** Spinner size variants. Use with cn(spinnerVariants({...})) for non-spinner elements. */
 const spinnerVariants = cva(
-  "animate-spin rounded-full border-2 border-surface-interactive border-t-primary",
+  "rounded-full border-2",
   {
     variants: {
       size: {

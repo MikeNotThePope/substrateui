@@ -350,6 +350,15 @@
   border-color: var(--border);
 }
 
+@keyframes sui-spin {
+  to { transform: rotate(360deg); }
+}
+[data-slot="spinner"] {
+  animation: sui-spin 1s linear infinite;
+  border-color: var(--border);
+  border-top-color: var(--primary);
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
