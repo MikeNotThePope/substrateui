@@ -1,3 +1,15 @@
+import { Form } from "@/components/ui/form"
+import {
+  FormSection,
+  FormSectionHeader,
+  FormSectionTitle,
+  FormSectionDescription,
+  FormSectionContent,
+} from "@/components/ui/form-section"
+import { FormActions } from "@/components/ui/form-actions"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
@@ -77,11 +89,31 @@ import { Button } from "@/components/ui/button"
   </FormActions>
 </Form>`}
         >
-          <p className="text-sm text-muted-foreground">
-            The Form component wraps a native form element with a Stack layout
-            for consistent vertical spacing between sections. See the code
-            example for a complete usage pattern.
-          </p>
+          <Form gap="xl" className="w-full">
+            <FormSection>
+              <FormSectionHeader>
+                <FormSectionTitle>Profile</FormSectionTitle>
+                <FormSectionDescription>
+                  Basic information about your account.
+                </FormSectionDescription>
+              </FormSectionHeader>
+              <FormSectionContent>
+                <Field>
+                  <FieldLabel>Name</FieldLabel>
+                  <Input placeholder="Jane Doe" />
+                </Field>
+                <Field>
+                  <FieldLabel>Email</FieldLabel>
+                  <Input type="email" placeholder="jane@example.com" />
+                </Field>
+              </FormSectionContent>
+            </FormSection>
+
+            <FormActions>
+              <Button variant="outline">Cancel</Button>
+              <Button type="submit">Save</Button>
+            </FormActions>
+          </Form>
         </ComponentPreview>
       </Stack>
 
