@@ -21,7 +21,7 @@ function Empty({
     <div
       data-slot="empty"
       className={cn(
-        "flex flex-col items-center justify-center py-12 px-6 text-center",
+        "flex w-full flex-col items-center justify-center py-12 px-6 text-center",
         className
       )}
       {...props}
