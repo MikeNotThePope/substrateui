@@ -43,11 +43,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
           cancelButton:
             "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
           success:
-            "group-[.toaster]:border-status-success group-[.toaster]:bg-status-success-surface group-[.toaster]:text-status-success-text",
+            "group-[.toaster]:!border-status-success group-[.toaster]:!bg-status-success-surface group-[.toaster]:!text-status-success-text",
           error:
-            "group-[.toaster]:border-status-error group-[.toaster]:bg-status-error-surface group-[.toaster]:text-status-error-text",
+            "group-[.toaster]:!border-status-error group-[.toaster]:!bg-status-error-surface group-[.toaster]:!text-status-error-text",
           warning:
-            "group-[.toaster]:border-status-warning group-[.toaster]:bg-status-warning-surface group-[.toaster]:text-status-warning-text",
+            "group-[.toaster]:!border-status-warning group-[.toaster]:!bg-status-warning-surface group-[.toaster]:!text-status-warning-text",
         },
       }}
       {...props}
