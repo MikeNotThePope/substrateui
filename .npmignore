@@ -1,0 +1,36 @@
+# Source code (published via dist/)
+src/
+public/
+.next/
+
+# Config files
+tsconfig.json
+tsconfig.build.json
+tsup.config.ts
+next.config.ts
+postcss.config.mjs
+eslint.config.mjs
+components.json
+next-env.d.ts
+
+# Dev files
+.git/
+.gitignore
+.env*
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE
+
+# Prompt files
+PROMPT-*.md
+SETUP.md
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+CLAUDE.md
+AGENTS.md

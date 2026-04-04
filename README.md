@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SubstrateUI
 
-## Getting Started
+A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v4, Radix UI primitives.
 
-First, run the development server:
+[![npm version](https://img.shields.io/npm/v/substrateui.svg)](https://www.npmjs.com/package/substrateui)
+[![license](https://img.shields.io/npm/l/substrateui.svg)](https://github.com/substrateui/substrateui/blob/main/LICENSE)
+
+## Features
+
+- 75 components from atomic Button to organism App Shell
+- 3-layer OKLCH color system: raw palette → semantic tokens → Tailwind utilities
+- Dark mode as a token swap — zero component changes
+- Chunky 2px borders and press-down animations
+- CVD-safe plum + amber color pairing
+- Built for Tailwind CSS v4 (`@theme inline`, CSS-first config)
+- Full TypeScript support with exported types
+- Tree-shakeable ESM exports
+
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install substrateui
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### CSS Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "substrateui/styles.css";
+@source "../node_modules/substrateui";
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Font Setup (recommended)
 
-## Learn More
+```tsx
+// layout.tsx
+import { DM_Sans, DM_Mono } from "next/font/google"
 
-To learn more about Next.js, take a look at the following resources:
+const sans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" })
+const mono = DM_Mono({ weight: ["400", "500"], subsets: ["latin"], variable: "--font-mono" })
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html className={`${sans.variable} ${mono.variable}`}>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Dark Mode
 
-## Deploy on Vercel
+```tsx
+import { ThemeProvider } from "next-themes"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+// Wrap your app:
+<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+  {children}
+</ThemeProvider>
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Use Components
+
+```tsx
+import { Button, Stack, Card, CardHeader, CardTitle, CardContent } from "substrateui"
+import { AppShell, AppShellSidebar, AppShellMain } from "substrateui/organisms"
+import { cn } from "substrateui/utils"
+```
+
+## Exports
+
+| Import path | Contents |
+|---|---|
+| `substrateui` | All 75 UI primitives (Button, Card, Input, Table, etc.) |
+| `substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
+| `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
+| `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
+
+## Requirements
+
+- React 18+
+- Tailwind CSS 4+
+- `tw-animate-css` (for animations)
+- `next-themes` (optional, for dark mode toggle)
+- `next` 15+ (optional, only for `substrateui/organisms` which use `next/link`)
+
+## Token Architecture
+
+SubstrateUI uses a 3-layer OKLCH color system:
+
+1. **Raw palette** — OKLCH values (`--raw-plum-600`, `--raw-amber-500`, etc.)
+2. **Semantic tokens** — Purpose-based mappings (`--primary`, `--surface-raised`, `--status-error`, etc.) with automatic dark mode via `.dark` class
+3. **Tailwind utilities** — `@theme inline` maps tokens to `bg-primary`, `text-foreground`, `border-border`, etc.
+
+## Component Categories
+
+- **General** — Button, ButtonGroup, Badge, Kbd, Spinner, Empty
+- **Typography** — H1-H4, P, Lead, Large, Small, Muted, Code, Mono
+- **Layout** — Stack, Cluster, Grid, Center, Divider, Spacer, Separator, AspectRatio, ResizablePanels
+- **Forms** — Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, DatePicker, Combobox, InputGroup, InputOTP, SearchField, Field, Fieldset, FormSection, FormActions
+- **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item
+- **Feedback** — Alert, AlertDialog, Dialog, Progress, Skeleton, Sonner (toast)
+- **Overlays** — Sheet, Drawer, Popover, Tooltip, ContextMenu, DropdownMenu, Command
+- **Navigation** — Tabs, Breadcrumb, NavigationMenu, Menubar, Pagination, ScrollArea, Sidebar, Collapsible, Accordion
+- **Patterns** — AppShell, PageHeader, PageBody, PageTabs, StatCard
+
+## Customization
+
+Override tokens after importing the stylesheet:
+
+```css
+/* After importing substrateui/styles.css */
+:root {
+  --primary: oklch(0.55 0.15 250);  /* Change primary to blue */
+}
+```
+
+## Links
+
+- [GitHub](https://github.com/substrateui/substrateui)
+- [npm](https://www.npmjs.com/package/substrateui)
+
+## License
+
+MIT
