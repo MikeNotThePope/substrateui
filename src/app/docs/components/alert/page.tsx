@@ -9,10 +9,10 @@ import { PropsTable, type PropDef } from "../../_components/props-table"
 const alertProps: PropDef[] = [
   {
     name: "variant",
-    type: '"default" | "destructive"',
+    type: '"default" | "destructive" | "success" | "warning"',
     default: '"default"',
     description:
-      "The visual style of the alert. Destructive uses a red color scheme for error states.",
+      "The visual style of the alert. Each variant uses its corresponding status color from the design tokens.",
   },
   {
     name: "className",
@@ -38,13 +38,13 @@ export default function AlertPage() {
   <AlertDescription>This is a default informational alert.</AlertDescription>
 </Alert>
 
-<Alert>
+<Alert variant="success">
   <CheckCircle className="h-4 w-4" />
   <AlertTitle>Success</AlertTitle>
   <AlertDescription>Your changes have been saved successfully.</AlertDescription>
 </Alert>
 
-<Alert>
+<Alert variant="warning">
   <AlertTriangle className="h-4 w-4" />
   <AlertTitle>Warning</AlertTitle>
   <AlertDescription>Your session is about to expire.</AlertDescription>
@@ -62,12 +62,12 @@ export default function AlertPage() {
               <AlertTitle>Information</AlertTitle>
               <AlertDescription>This is a default informational alert.</AlertDescription>
             </Alert>
-            <Alert>
+            <Alert variant="success">
               <CheckCircle className="h-4 w-4" />
               <AlertTitle>Success</AlertTitle>
               <AlertDescription>Your changes have been saved successfully.</AlertDescription>
             </Alert>
-            <Alert>
+            <Alert variant="warning">
               <AlertTriangle className="h-4 w-4" />
               <AlertTitle>Warning</AlertTitle>
               <AlertDescription>Your session is about to expire.</AlertDescription>
