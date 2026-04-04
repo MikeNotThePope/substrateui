@@ -2,6 +2,17 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Centered empty state container for when no content is available.
+ *
+ * @example
+ * <Empty>
+ *   <EmptyIcon><InboxIcon /></EmptyIcon>
+ *   <EmptyTitle>No results</EmptyTitle>
+ *   <EmptyDescription>Try adjusting your filters.</EmptyDescription>
+ *   <EmptyAction><Button>Reset</Button></EmptyAction>
+ * </Empty>
+ */
 function Empty({
   className,
   ...props
@@ -18,6 +29,7 @@ function Empty({
   )
 }
 
+/** Icon container displayed above the empty state title. */
 function EmptyIcon({
   className,
   children,
@@ -34,6 +46,7 @@ function EmptyIcon({
   )
 }
 
+/** Heading text for the empty state. */
 function EmptyTitle({
   className,
   ...props
@@ -47,6 +60,7 @@ function EmptyTitle({
   )
 }
 
+/** Muted description text below the empty state title. */
 function EmptyDescription({
   className,
   ...props
@@ -63,6 +77,7 @@ function EmptyDescription({
   )
 }
 
+/** Container for a call-to-action button in the empty state. */
 function EmptyAction({
   className,
   ...props

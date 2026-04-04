@@ -6,12 +6,16 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
+/** Root component that manages alert dialog open/close state. */
 const AlertDialog = AlertDialogPrimitive.Root
 
+/** Button that opens the alert dialog. */
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger
 
+/** Portal that renders alert dialog content outside the DOM hierarchy. */
 const AlertDialogPortal = AlertDialogPrimitive.Portal
 
+/** Semi-transparent backdrop rendered behind the alert dialog. */
 function AlertDialogOverlay({
   className,
   ref,
@@ -30,6 +34,7 @@ function AlertDialogOverlay({
   )
 }
 
+/** Centered modal panel containing the alert dialog body. */
 function AlertDialogContent({
   className,
   ref,
@@ -51,6 +56,7 @@ function AlertDialogContent({
   )
 }
 
+/** Layout wrapper for the title and description at the top of the dialog. */
 function AlertDialogHeader({
   className,
   ...props
@@ -67,6 +73,7 @@ function AlertDialogHeader({
   )
 }
 
+/** Layout wrapper for action/cancel buttons at the bottom of the dialog. */
 function AlertDialogFooter({
   className,
   ...props
@@ -83,6 +90,7 @@ function AlertDialogFooter({
   )
 }
 
+/** Accessible title rendered inside the alert dialog header. */
 function AlertDialogTitle({
   className,
   ref,
@@ -98,6 +106,7 @@ function AlertDialogTitle({
   )
 }
 
+/** Accessible description text rendered inside the alert dialog header. */
 function AlertDialogDescription({
   className,
   ref,
@@ -113,6 +122,7 @@ function AlertDialogDescription({
   )
 }
 
+/** Primary confirmation button that closes the dialog on click. */
 function AlertDialogAction({
   className,
   ref,
@@ -128,6 +138,7 @@ function AlertDialogAction({
   )
 }
 
+/** Secondary cancel button that dismisses the dialog. */
 function AlertDialogCancel({
   className,
   ref,

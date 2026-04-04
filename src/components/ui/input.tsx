@@ -2,6 +2,12 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Styled text input with focus ring, border, and disabled state support.
+ *
+ * @example
+ * <Input type="email" placeholder="you@example.com" />
+ */
 function Input({
   className,
   type,

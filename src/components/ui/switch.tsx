@@ -5,6 +5,12 @@ import * as SwitchPrimitives from "@radix-ui/react-switch"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A toggle switch for boolean on/off input.
+ *
+ * @example
+ * <Switch checked={enabled} onCheckedChange={setEnabled} />
+ */
 function Switch({
   className,
   ref,

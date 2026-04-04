@@ -37,6 +37,16 @@ interface DatePickerProps {
   disabled?: boolean
 }
 
+/**
+ * Single-date picker with a popover calendar and formatted display.
+ *
+ * @example
+ * <DatePicker date={date} onDateChange={setDate} placeholder="Select date" />
+ *
+ * @prop date - Currently selected date
+ * @prop onDateChange - Callback when a date is selected
+ * @prop placeholder - Text shown when no date is selected
+ */
 function DatePicker({
   date,
   onDateChange,
@@ -83,6 +93,16 @@ interface DateRangePickerProps {
   disabled?: boolean
 }
 
+/**
+ * Date range picker with a two-month popover calendar.
+ *
+ * @example
+ * <DateRangePicker dateRange={range} onDateRangeChange={setRange} />
+ *
+ * @prop dateRange - Currently selected date range
+ * @prop onDateRangeChange - Callback when the range changes
+ * @prop placeholder - Text shown when no range is selected
+ */
 function DateRangePicker({
   dateRange,
   onDateRangeChange,

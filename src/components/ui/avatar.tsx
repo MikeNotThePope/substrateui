@@ -5,6 +5,12 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Circular container for a user profile image with fallback support.
+ *
+ * @example
+ * <Avatar><AvatarImage src="/me.jpg" /><AvatarFallback>CN</AvatarFallback></Avatar>
+ */
 function Avatar({
   className,
   ref,
@@ -23,6 +29,7 @@ function Avatar({
   )
 }
 
+/** Image displayed inside an Avatar; hidden automatically when loading fails. */
 function AvatarImage({
   className,
   ref,
@@ -38,6 +45,7 @@ function AvatarImage({
   )
 }
 
+/** Placeholder content shown while the avatar image loads or when it fails. */
 function AvatarFallback({
   className,
   ref,

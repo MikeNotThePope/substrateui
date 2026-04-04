@@ -7,14 +7,19 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Root component that manages sheet open/closed state. */
 const Sheet = SheetPrimitive.Root
 
+/** A button or element that opens the sheet when clicked. */
 const SheetTrigger = SheetPrimitive.Trigger
 
+/** A button or element that closes the sheet when clicked. */
 const SheetClose = SheetPrimitive.Close
 
+/** Portals sheet content into the document body. */
 const SheetPortal = SheetPrimitive.Portal
 
+/** A semi-transparent backdrop displayed behind the sheet content. */
 function SheetOverlay({
   className,
   ref,
@@ -33,6 +38,7 @@ function SheetOverlay({
   )
 }
 
+/** Sheet position variants for top/bottom/left/right sides. Use with cn(sheetVariants({...})) for non-sheet elements. */
 const sheetVariants = cva(
   "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
@@ -56,6 +62,17 @@ interface SheetContentProps
   extends React.ComponentPropsWithRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
+/**
+ * The sliding panel content of the sheet, rendered from a specified side.
+ *
+ * @example
+ * <Sheet>
+ *   <SheetTrigger>Open</SheetTrigger>
+ *   <SheetContent side="right">Content here</SheetContent>
+ * </Sheet>
+ *
+ * @prop side - Which edge the sheet slides in from (top, bottom, left, right).
+ */
 function SheetContent({
   side = "right",
   className,
@@ -82,6 +99,7 @@ function SheetContent({
   )
 }
 
+/** A layout container for the sheet's title and description at the top. */
 function SheetHeader({
   className,
   ...props
@@ -98,6 +116,7 @@ function SheetHeader({
   )
 }
 
+/** A layout container for action buttons at the bottom of the sheet. */
 function SheetFooter({
   className,
   ...props
@@ -114,6 +133,7 @@ function SheetFooter({
   )
 }
 
+/** The accessible title heading for the sheet. */
 function SheetTitle({
   className,
   ref,
@@ -129,6 +149,7 @@ function SheetTitle({
   )
 }
 
+/** An accessible description for the sheet content. */
 function SheetDescription({
   className,
   ref,

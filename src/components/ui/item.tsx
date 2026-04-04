@@ -7,6 +7,15 @@ interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean
 }
 
+/**
+ * Interactive list item with active and disabled states, commonly used in menus and lists.
+ *
+ * @example
+ * <Item active onClick={handleClick}><ItemIcon><StarIcon /></ItemIcon><ItemLabel>Favorites</ItemLabel></Item>
+ *
+ * @prop active - Highlights the item as currently selected
+ * @prop disabled - Dims the item and disables pointer events
+ */
 function Item({ className, active, disabled, ...props }: ItemProps) {
   return (
     <div
@@ -25,6 +34,7 @@ function Item({ className, active, disabled, ...props }: ItemProps) {
   )
 }
 
+/** Shrink-proof icon wrapper inside an Item. */
 function ItemIcon({
   className,
   ...props
@@ -38,6 +48,7 @@ function ItemIcon({
   )
 }
 
+/** Truncating text label inside an Item. */
 function ItemLabel({
   className,
   ...props

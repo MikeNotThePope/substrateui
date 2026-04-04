@@ -14,6 +14,7 @@ interface FieldContextValue {
 
 const FieldContext = React.createContext<FieldContextValue | null>(null)
 
+/** Hook that returns the current Field context (id, error state, aria IDs). */
 function useFieldContext() {
   return React.useContext(FieldContext)
 }
@@ -23,6 +24,18 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string
 }
 
+/**
+ * Form field wrapper that provides shared context for label, hint, and error linking.
+ *
+ * @example
+ * <Field error={!!errors.name}>
+ *   <FieldLabel>Name</FieldLabel>
+ *   <Input />
+ *   <FieldError>{errors.name}</FieldError>
+ * </Field>
+ *
+ * @prop error - Whether the field is in an error state
+ */
 function Field({ className, error = false, id: idProp, children, ...props }: FieldProps) {
   const generatedId = React.useId()
   const id = idProp ?? generatedId
@@ -55,6 +68,7 @@ function Field({ className, error = false, id: idProp, children, ...props }: Fie
   )
 }
 
+/** Label automatically linked to the parent Field's input via htmlFor. */
 function FieldLabel({
   className,
   ...props
@@ -75,6 +89,7 @@ function FieldLabel({
   )
 }
 
+/** Muted helper text displayed below a field input. */
 function FieldHint({
   className,
   ...props
@@ -91,6 +106,7 @@ function FieldHint({
   )
 }
 
+/** Error message that renders only when children are provided, with role="alert". */
 function FieldError({
   className,
   children,

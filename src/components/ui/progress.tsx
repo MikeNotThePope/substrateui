@@ -5,6 +5,14 @@ import * as ProgressPrimitive from "@radix-ui/react-progress"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Horizontal progress bar indicating completion percentage.
+ *
+ * @example
+ * <Progress value={60} />
+ *
+ * @prop value - Current progress from 0 to 100.
+ */
 function Progress({
   className,
   value,

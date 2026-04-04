@@ -3,6 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+/** Spinner size variants. Use with cn(spinnerVariants({...})) for non-spinner elements. */
 const spinnerVariants = cva(
   "animate-spin rounded-full border-2 border-surface-interactive border-t-primary",
   {
@@ -19,6 +20,14 @@ const spinnerVariants = cva(
   }
 )
 
+/**
+ * An animated loading spinner indicator.
+ *
+ * @example
+ * <Spinner size="lg" />
+ *
+ * @prop size - The spinner diameter (sm, default, lg).
+ */
 function Spinner({
   className,
   size,

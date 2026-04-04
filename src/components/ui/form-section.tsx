@@ -4,6 +4,15 @@ import { cn } from "@/lib/utils"
 import { Stack } from "./stack"
 import { Grid } from "./grid"
 
+/**
+ * Fieldset-based section for grouping related form fields with a header.
+ *
+ * @example
+ * <FormSection>
+ *   <FormSectionHeader><FormSectionTitle>Account</FormSectionTitle></FormSectionHeader>
+ *   <FormSectionContent><Field>...</Field></FormSectionContent>
+ * </FormSection>
+ */
 function FormSection({
   className,
   ref,
@@ -19,6 +28,7 @@ function FormSection({
   )
 }
 
+/** Container for the section title and description. */
 function FormSectionHeader({
   className,
   ...props
@@ -32,6 +42,7 @@ function FormSectionHeader({
   )
 }
 
+/** Legend element used as the section heading. */
 function FormSectionTitle({
   className,
   ...props
@@ -45,6 +56,7 @@ function FormSectionTitle({
   )
 }
 
+/** Muted paragraph describing the purpose of the form section. */
 function FormSectionDescription({
   className,
   ...props
@@ -62,6 +74,11 @@ interface FormSectionContentProps extends React.ComponentPropsWithRef<"div"> {
   layout?: "stack" | "grid"
 }
 
+/**
+ * Content area for form fields, rendered as a stack or two-column grid.
+ *
+ * @prop layout - "stack" (default) or "grid" for two-column layout
+ */
 function FormSectionContent({
   layout = "stack",
   className,

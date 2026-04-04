@@ -6,18 +6,25 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Root dropdown menu component that manages open/close state. */
 const DropdownMenu = DropdownMenuPrimitive.Root
 
+/** Button or element that toggles the dropdown menu. */
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
 
+/** Groups related dropdown menu items together. */
 const DropdownMenuGroup = DropdownMenuPrimitive.Group
 
+/** Portals dropdown menu content into document body. */
 const DropdownMenuPortal = DropdownMenuPrimitive.Portal
 
+/** Root component for a nested submenu within a dropdown. */
 const DropdownMenuSub = DropdownMenuPrimitive.Sub
 
+/** Groups radio items so only one can be selected at a time. */
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
 
+/** Menu item that opens a nested submenu on hover or focus. */
 function DropdownMenuSubTrigger({
   className,
   inset,
@@ -44,6 +51,7 @@ function DropdownMenuSubTrigger({
   )
 }
 
+/** Animated content panel for a nested submenu. */
 function DropdownMenuSubContent({
   className,
   ref,
@@ -62,6 +70,15 @@ function DropdownMenuSubContent({
   )
 }
 
+/**
+ * Animated popover panel containing the dropdown menu items.
+ *
+ * @example
+ * <DropdownMenu>
+ *   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+ *   <DropdownMenuContent><DropdownMenuItem>Action</DropdownMenuItem></DropdownMenuContent>
+ * </DropdownMenu>
+ */
 function DropdownMenuContent({
   className,
   sideOffset = 4,
@@ -84,6 +101,7 @@ function DropdownMenuContent({
   )
 }
 
+/** Clickable item within a dropdown menu. */
 function DropdownMenuItem({
   className,
   inset,
@@ -106,6 +124,7 @@ function DropdownMenuItem({
   )
 }
 
+/** Menu item with a checkbox indicator for toggling boolean options. */
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -134,6 +153,7 @@ function DropdownMenuCheckboxItem({
   )
 }
 
+/** Menu item with a radio indicator for single-select groups. */
 function DropdownMenuRadioItem({
   className,
   children,
@@ -160,6 +180,7 @@ function DropdownMenuRadioItem({
   )
 }
 
+/** Non-interactive label used to title a group of menu items. */
 function DropdownMenuLabel({
   className,
   inset,
@@ -182,6 +203,7 @@ function DropdownMenuLabel({
   )
 }
 
+/** Horizontal divider line between groups of menu items. */
 function DropdownMenuSeparator({
   className,
   ref,
@@ -197,6 +219,7 @@ function DropdownMenuSeparator({
   )
 }
 
+/** Right-aligned keyboard shortcut hint displayed within a menu item. */
 function DropdownMenuShortcut({
   className,
   ...props

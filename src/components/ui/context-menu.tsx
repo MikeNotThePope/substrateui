@@ -6,18 +6,25 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Root component that manages context menu open/close state. */
 const ContextMenu = ContextMenuPrimitive.Root
 
+/** Area that opens the context menu on right-click. */
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger
 
+/** Groups related context menu items together. */
 const ContextMenuGroup = ContextMenuPrimitive.Group
 
+/** Portal that renders context menu content outside the DOM hierarchy. */
 const ContextMenuPortal = ContextMenuPrimitive.Portal
 
+/** Root for a nested sub-menu within the context menu. */
 const ContextMenuSub = ContextMenuPrimitive.Sub
 
+/** Groups mutually exclusive radio items in the context menu. */
 const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup
 
+/** Item that opens a nested sub-menu on hover. */
 function ContextMenuSubTrigger({
   className,
   inset,
@@ -44,6 +51,7 @@ function ContextMenuSubTrigger({
   )
 }
 
+/** Dropdown panel for a nested sub-menu. */
 function ContextMenuSubContent({
   className,
   ref,
@@ -62,6 +70,7 @@ function ContextMenuSubContent({
   )
 }
 
+/** Positioned dropdown panel containing the context menu items. */
 function ContextMenuContent({
   className,
   ref,
@@ -82,6 +91,7 @@ function ContextMenuContent({
   )
 }
 
+/** Clickable action item within the context menu. */
 function ContextMenuItem({
   className,
   inset,
@@ -104,6 +114,7 @@ function ContextMenuItem({
   )
 }
 
+/** Context menu item with a toggleable checkbox indicator. */
 function ContextMenuCheckboxItem({
   className,
   children,
@@ -132,6 +143,7 @@ function ContextMenuCheckboxItem({
   )
 }
 
+/** Context menu item with a radio indicator for single-select groups. */
 function ContextMenuRadioItem({
   className,
   children,
@@ -158,6 +170,7 @@ function ContextMenuRadioItem({
   )
 }
 
+/** Non-interactive label used to title a group of context menu items. */
 function ContextMenuLabel({
   className,
   inset,
@@ -180,6 +193,7 @@ function ContextMenuLabel({
   )
 }
 
+/** Horizontal divider between context menu sections. */
 function ContextMenuSeparator({
   className,
   ref,
@@ -195,6 +209,7 @@ function ContextMenuSeparator({
   )
 }
 
+/** Keyboard shortcut hint displayed alongside a context menu item. */
 function ContextMenuShortcut({
   className,
   ...props

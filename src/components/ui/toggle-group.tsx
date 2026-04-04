@@ -14,6 +14,14 @@ const ToggleGroupContext = React.createContext<
   variant: "default",
 })
 
+/** A group of toggle buttons that share variant and size context.
+ *
+ * @example
+ * <ToggleGroup type="single" variant="outline"><ToggleGroupItem value="a">A</ToggleGroupItem></ToggleGroup>
+ *
+ * @prop variant - Visual style applied to all child items.
+ * @prop size - Size applied to all child items.
+ */
 function ToggleGroup({
   className,
   variant,
@@ -37,6 +45,7 @@ function ToggleGroup({
   )
 }
 
+/** Individual toggle item within a ToggleGroup. */
 function ToggleGroupItem({
   className,
   children,

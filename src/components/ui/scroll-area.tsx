@@ -5,6 +5,14 @@ import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A scrollable area with custom styled scrollbars.
+ *
+ * @example
+ * <ScrollArea className="h-72">
+ *   <div>Scrollable content</div>
+ * </ScrollArea>
+ */
 function ScrollArea({
   className,
   children,
@@ -27,6 +35,7 @@ function ScrollArea({
   )
 }
 
+/** A styled scrollbar track and thumb, used internally by ScrollArea. */
 function ScrollBar({
   className,
   orientation = "vertical",

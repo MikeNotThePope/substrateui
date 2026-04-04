@@ -5,10 +5,21 @@ import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
 
 import { cn } from "@/lib/utils"
 
+/** Root hover card component that manages open/close state on hover. */
 const HoverCard = HoverCardPrimitive.Root
 
+/** Element that triggers the hover card on mouse enter. */
 const HoverCardTrigger = HoverCardPrimitive.Trigger
 
+/**
+ * Animated popover panel that appears on hover over the trigger.
+ *
+ * @example
+ * <HoverCard>
+ *   <HoverCardTrigger>Hover me</HoverCardTrigger>
+ *   <HoverCardContent>Details here</HoverCardContent>
+ * </HoverCard>
+ */
 function HoverCardContent({
   className,
   align = "center",

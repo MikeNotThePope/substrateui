@@ -6,6 +6,14 @@ interface FieldsetProps extends React.ComponentPropsWithRef<"fieldset"> {
   legend: string
 }
 
+/**
+ * Accessible fieldset wrapper with a visible legend label.
+ *
+ * @example
+ * <Fieldset legend="Personal Info"><Input /><Input /></Fieldset>
+ *
+ * @prop legend - Text displayed as the fieldset legend
+ */
 function Fieldset({
   legend,
   className,

@@ -6,6 +6,15 @@ import { Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A group of radio inputs where only one can be selected at a time.
+ *
+ * @example
+ * <RadioGroup defaultValue="a">
+ *   <RadioGroupItem value="a" />
+ *   <RadioGroupItem value="b" />
+ * </RadioGroup>
+ */
 function RadioGroup({
   className,
   ref,
@@ -21,6 +30,7 @@ function RadioGroup({
   )
 }
 
+/** An individual radio option within a RadioGroup. */
 function RadioGroupItem({
   className,
   ref,

@@ -2,6 +2,14 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Bordered container for grouping related content.
+ *
+ * @example
+ * <Card><CardHeader><CardTitle>Title</CardTitle></CardHeader><CardContent>Body</CardContent></Card>
+ *
+ * @prop interactive - Adds hover and click styles when true
+ */
 function Card({
   className,
   interactive = false,
@@ -23,6 +31,7 @@ function Card({
   )
 }
 
+/** Top section of a Card containing the title and description. */
 function CardHeader({
   className,
   ref,
@@ -38,6 +47,7 @@ function CardHeader({
   )
 }
 
+/** Primary heading inside a CardHeader. */
 function CardTitle({
   className,
   ref,
@@ -56,6 +66,7 @@ function CardTitle({
   )
 }
 
+/** Secondary description text inside a CardHeader. */
 function CardDescription({
   className,
   ref,
@@ -71,6 +82,7 @@ function CardDescription({
   )
 }
 
+/** Main body area of a Card. */
 function CardContent({
   className,
   ref,
@@ -86,6 +98,7 @@ function CardContent({
   )
 }
 
+/** Bottom section of a Card, typically for actions. */
 function CardFooter({
   className,
   ref,

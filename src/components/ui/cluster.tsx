@@ -31,6 +31,7 @@ type Gap = keyof typeof gapMap
 type Align = keyof typeof alignMap
 type Justify = keyof typeof justifyMap
 
+/** Props accepted by the Cluster component. */
 interface ClusterProps extends React.ComponentPropsWithRef<"div"> {
   gap?: Gap
   align?: Align
@@ -39,6 +40,18 @@ interface ClusterProps extends React.ComponentPropsWithRef<"div"> {
   asChild?: boolean
 }
 
+/**
+ * Flexbox layout primitive for horizontal grouping with configurable gap, alignment, and wrapping.
+ *
+ * @example
+ * <Cluster gap="md" justify="between"><Badge>A</Badge><Badge>B</Badge></Cluster>
+ *
+ * @prop gap - Spacing between items: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
+ * @prop align - Cross-axis alignment: "start" | "center" | "end" | "baseline"
+ * @prop justify - Main-axis justification: "start" | "center" | "end" | "between"
+ * @prop wrap - Enable flex-wrap (default true)
+ * @prop asChild - Merge props onto child element instead of rendering a div
+ */
 function Cluster({
   gap = "sm",
   align = "center",

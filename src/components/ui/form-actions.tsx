@@ -3,6 +3,15 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Cluster } from "./cluster"
 
+/**
+ * Horizontal action bar for form submit/cancel buttons, separated by a top border.
+ *
+ * @example
+ * <FormActions>
+ *   <Button variant="outline">Cancel</Button>
+ *   <Button>Save</Button>
+ * </FormActions>
+ */
 function FormActions({
   className,
   children,
@@ -48,6 +57,7 @@ function FormActions({
   )
 }
 
+/** Left-aligned container for secondary form actions (e.g., delete or reset). */
 function FormActionsSecondary({
   className,
   ...props
@@ -61,6 +71,7 @@ function FormActionsSecondary({
   )
 }
 
+/** Right-aligned container for primary form actions (e.g., submit). */
 function FormActionsPrimary({
   className,
   ...props

@@ -5,6 +5,12 @@ import * as SeparatorPrimitive from "@radix-ui/react-separator"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A visual divider that separates content horizontally or vertically.
+ *
+ * @example
+ * <Separator orientation="horizontal" />
+ */
 function Separator({
   className,
   orientation = "horizontal",

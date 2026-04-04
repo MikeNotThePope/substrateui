@@ -6,36 +6,54 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Wrapper for an individual menu within the menubar. */
 function MenubarMenu({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Menu>) {
   return <MenubarPrimitive.Menu data-slot="menubar-menu" {...props} />
 }
 
+/** Groups related menubar items together. */
 function MenubarGroup({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Group>) {
   return <MenubarPrimitive.Group data-slot="menubar-group" {...props} />
 }
 
+/** Portal for rendering menubar content outside the DOM hierarchy. */
 function MenubarPortal({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Portal>) {
   return <MenubarPrimitive.Portal {...props} />
 }
 
+/** Groups menubar radio items for single-selection behavior. */
 function MenubarRadioGroup({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.RadioGroup>) {
   return <MenubarPrimitive.RadioGroup data-slot="menubar-radio-group" {...props} />
 }
 
+/** Container for a nested submenu within the menubar. */
 function MenubarSub({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Sub>) {
   return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />
 }
 
+/**
+ * Horizontal menubar root component built on Radix UI Menubar.
+ *
+ * @example
+ * <Menubar>
+ *   <MenubarMenu>
+ *     <MenubarTrigger>File</MenubarTrigger>
+ *     <MenubarContent>
+ *       <MenubarItem>New</MenubarItem>
+ *     </MenubarContent>
+ *   </MenubarMenu>
+ * </Menubar>
+ */
 function Menubar({
   className,
   ref,
@@ -54,6 +72,7 @@ function Menubar({
   )
 }
 
+/** Button that opens a menubar dropdown. */
 function MenubarTrigger({
   className,
   ref,
@@ -72,6 +91,7 @@ function MenubarTrigger({
   )
 }
 
+/** Trigger that opens a nested submenu, displaying a chevron indicator. */
 function MenubarSubTrigger({
   className,
   inset,
@@ -98,6 +118,7 @@ function MenubarSubTrigger({
   )
 }
 
+/** Animated dropdown content for a menubar submenu. */
 function MenubarSubContent({
   className,
   ref,
@@ -116,6 +137,7 @@ function MenubarSubContent({
   )
 }
 
+/** Animated dropdown content panel for a top-level menubar menu. */
 function MenubarContent({
   className,
   align = "start",
@@ -142,6 +164,7 @@ function MenubarContent({
   )
 }
 
+/** An interactive item within a menubar dropdown. */
 function MenubarItem({
   className,
   inset,
@@ -164,6 +187,7 @@ function MenubarItem({
   )
 }
 
+/** A menubar item with a checkbox indicator for toggling options. */
 function MenubarCheckboxItem({
   className,
   children,
@@ -192,6 +216,7 @@ function MenubarCheckboxItem({
   )
 }
 
+/** A menubar item with a radio indicator for exclusive selection. */
 function MenubarRadioItem({
   className,
   children,
@@ -218,6 +243,7 @@ function MenubarRadioItem({
   )
 }
 
+/** Non-interactive label used to title a group of menubar items. */
 function MenubarLabel({
   className,
   inset,
@@ -240,6 +266,7 @@ function MenubarLabel({
   )
 }
 
+/** Visual divider between groups of menubar items. */
 function MenubarSeparator({
   className,
   ref,
@@ -255,6 +282,7 @@ function MenubarSeparator({
   )
 }
 
+/** Displays a keyboard shortcut hint aligned to the right of a menubar item. */
 function MenubarShortcut({
   className,
   ...props

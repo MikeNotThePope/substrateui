@@ -5,12 +5,20 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
+/** Global tooltip configuration provider (delay, skip-delay, etc.). */
 const TooltipProvider = TooltipPrimitive.Provider
 
+/** Root tooltip wrapper that manages open state. */
 const Tooltip = TooltipPrimitive.Root
 
+/** Element that triggers the tooltip on hover/focus. */
 const TooltipTrigger = TooltipPrimitive.Trigger
 
+/** Animated popover content displayed when the tooltip is open.
+ *
+ * @example
+ * <Tooltip><TooltipTrigger>Hover me</TooltipTrigger><TooltipContent>Tip text</TooltipContent></Tooltip>
+ */
 function TooltipContent({
   className,
   sideOffset = 4,

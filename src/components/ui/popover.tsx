@@ -5,10 +5,21 @@ import * as PopoverPrimitive from "@radix-ui/react-popover"
 
 import { cn } from "@/lib/utils"
 
+/** Root popover component that manages open/close state. */
 const Popover = PopoverPrimitive.Root
 
+/** Element that toggles the popover open and closed. */
 const PopoverTrigger = PopoverPrimitive.Trigger
 
+/**
+ * Animated floating content panel displayed when a popover is open.
+ *
+ * @example
+ * <Popover>
+ *   <PopoverTrigger>Open</PopoverTrigger>
+ *   <PopoverContent>Content here</PopoverContent>
+ * </Popover>
+ */
 function PopoverContent({
   className,
   align = "center",

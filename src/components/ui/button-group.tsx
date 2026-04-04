@@ -2,6 +2,12 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Groups multiple buttons into a single visual unit with shared borders.
+ *
+ * @example
+ * <ButtonGroup><Button>Left</Button><Button>Right</Button></ButtonGroup>
+ */
 function ButtonGroup({
   className,
   children,

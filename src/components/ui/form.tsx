@@ -9,6 +9,14 @@ interface FormProps extends React.ComponentPropsWithRef<"form"> {
   gap?: Gap
 }
 
+/**
+ * Form element with vertical stack layout and configurable gap spacing.
+ *
+ * @example
+ * <Form gap="lg" onSubmit={handleSubmit}><Field>...</Field></Form>
+ *
+ * @prop gap - Vertical spacing between children (default "xl")
+ */
 function Form({
   gap = "xl",
   className,

@@ -3,6 +3,11 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Stack } from "@/components/ui/stack"
 
+/** Page-level header with bottom border, card background, and vertical stack layout.
+ *
+ * @example
+ * <PageHeader><PageHeaderContent><PageHeaderTitle>Dashboard</PageHeaderTitle></PageHeaderContent></PageHeader>
+ */
 function PageHeader({
   className,
   ref,
@@ -19,6 +24,7 @@ function PageHeader({
   )
 }
 
+/** Container for breadcrumb navigation above the page title. */
 function PageHeaderBreadcrumb({
   className,
   ref,
@@ -34,6 +40,7 @@ function PageHeaderBreadcrumb({
   )
 }
 
+/** Flex row that spaces the title area and actions apart responsively. */
 function PageHeaderContent({
   className,
   ref,
@@ -52,6 +59,7 @@ function PageHeaderContent({
   )
 }
 
+/** Primary page heading rendered as a bold h1. */
 function PageHeaderTitle({
   className,
   ref,
@@ -67,6 +75,7 @@ function PageHeaderTitle({
   )
 }
 
+/** Short muted description text displayed below the page title. */
 function PageHeaderDescription({
   className,
   ref,
@@ -82,6 +91,7 @@ function PageHeaderDescription({
   )
 }
 
+/** Container for action buttons aligned to the right of the header. */
 function PageHeaderActions({
   className,
   ref,

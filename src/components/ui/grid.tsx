@@ -32,6 +32,18 @@ interface GridProps extends React.ComponentPropsWithRef<"div"> {
   asChild?: boolean
 }
 
+/**
+ * CSS Grid layout component with configurable columns, gap, and auto-fill/auto-fit modes.
+ *
+ * @example
+ * <Grid columns={3} gap="lg"><Card /><Card /><Card /></Grid>
+ * <Grid columns="auto-fill" minChildWidth="200px" gap="md">...</Grid>
+ *
+ * @prop columns - Number of columns (1-6) or "auto-fill"/"auto-fit"
+ * @prop gap - Gap size between grid items
+ * @prop minChildWidth - Minimum child width for auto-fill/auto-fit columns
+ * @prop asChild - Merge props onto child element via Slot
+ */
 function Grid({
   columns = 1,
   gap = "md",

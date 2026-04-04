@@ -151,7 +151,7 @@ const comboboxOptions = [
 // ─── Helpers ────────────────────────────────────────────────────────────
 
 const sections = [
-  "colors", "typography", "buttons", "badges", "form-controls",
+  "api-reference", "colors", "typography", "buttons", "badges", "form-controls",
   "form-patterns", "cards", "data-display", "feedback",
   "overlays-floating", "navigation", "layout-primitives", "utility",
 ]
@@ -181,6 +181,38 @@ function SemanticSwatch({ className, label }: { className: string; label: string
     <div className="flex flex-col items-center gap-1">
       <div className={`w-16 h-10 rounded border-2 border-border ${className}`} />
       <Mono className="text-xs text-center">{label}</Mono>
+    </div>
+  )
+}
+
+// ─── Props Table ───────────────────────────────────────────────────────
+
+function PropsTable({ name, props }: { name: string; props: { prop: string; type: string; default?: string; description: string }[] }) {
+  return (
+    <div className="space-y-2">
+      <H3>{name}</H3>
+      <div className="border-2 rounded-lg overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Prop</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Default</TableHead>
+              <TableHead>Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {props.map(p => (
+              <TableRow key={p.prop}>
+                <TableCell><Code>{p.prop}</Code></TableCell>
+                <TableCell><Mono>{p.type}</Mono></TableCell>
+                <TableCell>{p.default ? <Code>{p.default}</Code> : <Muted>—</Muted>}</TableCell>
+                <TableCell>{p.description}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   )
 }
@@ -230,6 +262,132 @@ export default function DesignSystemPage() {
             ))}
           </Cluster>
         </Stack>
+
+        <Divider />
+
+        {/* ── API Reference ─────────────────────────────────── */}
+        <section id="api-reference">
+          <Stack gap="lg">
+            <div>
+              <H2>API Reference</H2>
+              <Muted>Props and variants for key components.</Muted>
+            </div>
+
+            <Stack gap="xl">
+              <PropsTable name="Button" props={[
+                { prop: "variant", type: '"default" | "destructive" | "outline" | "secondary" | "amber" | "ghost" | "link"', default: '"default"', description: "Visual style of the button" },
+                { prop: "size", type: '"default" | "sm" | "lg" | "icon"', default: '"default"', description: "Button size" },
+                { prop: "asChild", type: "boolean", default: "false", description: "Merge props onto child element instead of rendering a <button>" },
+              ]} />
+
+              <PropsTable name="Badge" props={[
+                { prop: "variant", type: '"default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error"', default: '"default"', description: "Visual style and color of the badge" },
+              ]} />
+
+              <PropsTable name="Card" props={[
+                { prop: "interactive", type: "boolean", default: "false", description: "Adds hover border, shadow lift, and press-down effect" },
+              ]} />
+
+              <PropsTable name="Input" props={[
+                { prop: "type", type: "string", description: "HTML input type (text, email, password, etc.)" },
+                { prop: "className", type: "string", description: "Additional classes. Uses border-2 and focus:ring by default." },
+              ]} />
+
+              <PropsTable name="Field" props={[
+                { prop: "error", type: "boolean", default: "false", description: "Applies error styling to label and child inputs" },
+                { prop: "id", type: "string", description: "Custom id — auto-generated if not provided" },
+              ]} />
+
+              <PropsTable name="Combobox" props={[
+                { prop: "options", type: "{ value: string; label: string }[]", description: "List of selectable options" },
+                { prop: "value", type: "string | string[]", description: "Currently selected value(s)" },
+                { prop: "onValueChange", type: "(value) => void", description: "Callback when selection changes" },
+                { prop: "multiple", type: "boolean", default: "false", description: "Enable multi-select mode" },
+                { prop: "placeholder", type: "string", default: '"Select..."', description: "Text shown when nothing is selected" },
+                { prop: "searchPlaceholder", type: "string", default: '"Search..."', description: "Placeholder inside the search input" },
+                { prop: "emptyMessage", type: "string", default: '"No results found."', description: "Message when no options match the search" },
+              ]} />
+
+              <PropsTable name="DataTable" props={[
+                { prop: "columns", type: "ColumnDef<TData>[]", description: "TanStack Table column definitions" },
+                { prop: "data", type: "TData[]", description: "Array of row data" },
+                { prop: "toolbar", type: "ReactNode", description: "Optional toolbar rendered above the table" },
+              ]} />
+
+              <PropsTable name="DatePicker" props={[
+                { prop: "date", type: "Date", description: "Currently selected date" },
+                { prop: "onDateChange", type: "(date: Date | undefined) => void", description: "Callback when a date is selected" },
+                { prop: "placeholder", type: "string", default: '"Pick a date"', description: "Text shown when no date is selected" },
+              ]} />
+
+              <PropsTable name="SearchField" props={[
+                { prop: "value", type: "string", description: "Current search string" },
+                { prop: "onChange", type: "(value: string) => void", description: "Callback when the search value changes" },
+                { prop: "placeholder", type: "string", default: '"Search..."', description: "Input placeholder text" },
+                { prop: "shortcut", type: "string", description: 'Optional keyboard shortcut hint (e.g. "/")' },
+                { prop: "onClear", type: "() => void", description: "Optional callback when the clear button is clicked" },
+              ]} />
+
+              <PropsTable name="Stack" props={[
+                { prop: "gap", type: '"none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"', default: '"md"', description: "Vertical spacing between children" },
+                { prop: "align", type: '"start" | "center" | "end" | "stretch"', default: '"stretch"', description: "Cross-axis alignment" },
+                { prop: "asChild", type: "boolean", default: "false", description: "Merge props onto child element" },
+              ]} />
+
+              <PropsTable name="Cluster" props={[
+                { prop: "gap", type: '"none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"', default: '"sm"', description: "Spacing between items" },
+                { prop: "align", type: '"start" | "center" | "end" | "baseline"', default: '"center"', description: "Cross-axis alignment" },
+                { prop: "justify", type: '"start" | "center" | "end" | "between"', default: '"start"', description: "Main-axis justification" },
+                { prop: "wrap", type: "boolean", default: "true", description: "Allow items to wrap to the next line" },
+              ]} />
+
+              <PropsTable name="Grid" props={[
+                { prop: "columns", type: '1 | 2 | 3 | 4 | 5 | 6 | "auto-fill" | "auto-fit"', default: "1", description: "Number of columns or auto layout mode" },
+                { prop: "gap", type: '"none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"', default: '"md"', description: "Gap between grid cells" },
+                { prop: "minChildWidth", type: "string", description: 'Minimum child width for auto modes (e.g. "280px")' },
+              ]} />
+
+              <PropsTable name="Center" props={[
+                { prop: "max", type: '"sm" | "md" | "lg" | "xl" | "2xl" | "full"', default: '"2xl"', description: "Maximum width constraint" },
+                { prop: "padding", type: "boolean", default: "true", description: "Apply responsive horizontal padding" },
+              ]} />
+
+              <PropsTable name="Alert" props={[
+                { prop: "variant", type: '"default" | "destructive" | "success" | "warning"', default: '"default"', description: "Visual style and color of the alert" },
+              ]} />
+
+              <PropsTable name="Spinner" props={[
+                { prop: "size", type: '"sm" | "default" | "lg"', default: '"default"', description: "Spinner diameter" },
+              ]} />
+
+              <PropsTable name="Empty" props={[
+                { prop: "children", type: "ReactNode", description: "Compose with EmptyIcon, EmptyTitle, EmptyDescription, EmptyAction" },
+              ]} />
+
+              <PropsTable name="FormSection" props={[
+                { prop: "children", type: "ReactNode", description: "Compose with FormSectionHeader, FormSectionTitle, FormSectionDescription, FormSectionContent" },
+              ]} />
+
+              <PropsTable name="FormSectionContent" props={[
+                { prop: "layout", type: '"stack" | "grid"', default: '"stack"', description: 'Layout mode — "grid" renders a responsive two-column grid' },
+              ]} />
+
+              <PropsTable name="StatCard" props={[
+                { prop: "title", type: "string", description: "Metric label displayed above the value" },
+                { prop: "value", type: "string", description: "Primary metric value" },
+                { prop: "change", type: "string", description: 'Optional delta text (e.g. "+12.5%")' },
+                { prop: "changeType", type: '"positive" | "negative" | "neutral"', default: '"neutral"', description: "Color of the change text" },
+                { prop: "icon", type: "ComponentType", description: "Optional icon component rendered top-right" },
+              ]} />
+
+              <PropsTable name="AppShellNavItem" props={[
+                { prop: "href", type: "string", description: "Navigation link URL" },
+                { prop: "icon", type: "ComponentType", description: "Icon component rendered before the label" },
+                { prop: "active", type: "boolean", default: "false", description: "Highlights the item as the current page" },
+              ]} />
+            </Stack>
+          </Stack>
+        </section>
 
         <Divider />
 

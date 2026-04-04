@@ -1,5 +1,11 @@
 import { cn } from "@/lib/utils"
 
+/**
+ * A pulsing placeholder element used to indicate loading content.
+ *
+ * @example
+ * <Skeleton className="h-4 w-48" />
+ */
 function Skeleton({
   className,
   ...props

@@ -44,6 +44,7 @@ type SidebarContextProps = {
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null)
 
+/** Returns the sidebar context including open state, toggle, and mobile detection. */
 function useSidebar() {
   const context = React.useContext(SidebarContext)
   if (!context) {
@@ -53,6 +54,15 @@ function useSidebar() {
   return context
 }
 
+/**
+ * Provides sidebar context and manages expand/collapse state, mobile sheet, and keyboard shortcut.
+ *
+ * @example
+ * <SidebarProvider>
+ *   <Sidebar>...</Sidebar>
+ *   <SidebarInset>main content</SidebarInset>
+ * </SidebarProvider>
+ */
 function SidebarProvider({
   defaultOpen = true,
   open: openProp,
@@ -155,6 +165,13 @@ function SidebarProvider({
   )
 }
 
+/**
+ * The main sidebar container that renders as a fixed panel on desktop or a sheet on mobile.
+ *
+ * @prop side - Which edge the sidebar appears on (left or right).
+ * @prop variant - Visual variant (sidebar, floating, inset).
+ * @prop collapsible - Collapse behavior (offcanvas, icon, none).
+ */
 function Sidebar({
   side = "left",
   variant = "sidebar",
@@ -257,6 +274,7 @@ function Sidebar({
   )
 }
 
+/** A button that toggles the sidebar open/closed state. */
 function SidebarTrigger({
   className,
   onClick,
@@ -285,6 +303,7 @@ function SidebarTrigger({
   )
 }
 
+/** A thin interactive rail at the sidebar edge for toggling via click or drag. */
 function SidebarRail({
   className,
   ref,
@@ -315,6 +334,7 @@ function SidebarRail({
   )
 }
 
+/** The main content area adjacent to the sidebar. */
 function SidebarInset({
   className,
   ref,
@@ -334,6 +354,7 @@ function SidebarInset({
   )
 }
 
+/** A styled text input for use within the sidebar. */
 function SidebarInput({
   className,
   ref,
@@ -353,6 +374,7 @@ function SidebarInput({
   )
 }
 
+/** A container for content at the top of the sidebar. */
 function SidebarHeader({
   className,
   ref,
@@ -369,6 +391,7 @@ function SidebarHeader({
   )
 }
 
+/** A container for content at the bottom of the sidebar. */
 function SidebarFooter({
   className,
   ref,
@@ -385,6 +408,7 @@ function SidebarFooter({
   )
 }
 
+/** A horizontal divider styled for the sidebar context. */
 function SidebarSeparator({
   className,
   ref,
@@ -401,6 +425,7 @@ function SidebarSeparator({
   )
 }
 
+/** The scrollable body area of the sidebar that holds groups and menus. */
 function SidebarContent({
   className,
   ref,
@@ -420,6 +445,7 @@ function SidebarContent({
   )
 }
 
+/** A logical grouping of sidebar items, typically with a label. */
 function SidebarGroup({
   className,
   ref,
@@ -436,6 +462,7 @@ function SidebarGroup({
   )
 }
 
+/** A small label heading for a SidebarGroup. */
 function SidebarGroupLabel({
   className,
   asChild = false,
@@ -459,6 +486,7 @@ function SidebarGroupLabel({
   )
 }
 
+/** An action button positioned at the top-right of a SidebarGroup. */
 function SidebarGroupAction({
   className,
   asChild = false,
@@ -484,6 +512,7 @@ function SidebarGroupAction({
   )
 }
 
+/** A wrapper for the content within a SidebarGroup. */
 function SidebarGroupContent({
   className,
   ref,
@@ -500,6 +529,7 @@ function SidebarGroupContent({
   )
 }
 
+/** A list container for sidebar menu items. */
 function SidebarMenu({
   className,
   ref,
@@ -516,6 +546,7 @@ function SidebarMenu({
   )
 }
 
+/** A list item wrapper for a single sidebar menu entry. */
 function SidebarMenuItem({
   className,
   ref,
@@ -532,6 +563,7 @@ function SidebarMenuItem({
   )
 }
 
+/** Sidebar menu button style variants. Use with cn(sidebarMenuButtonVariants({...})) for non-button elements. */
 const sidebarMenuButtonVariants = cva(
   "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] active:translate-y-[1.5px] transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
@@ -554,6 +586,12 @@ const sidebarMenuButtonVariants = cva(
   }
 )
 
+/**
+ * An interactive button within a sidebar menu item, with optional tooltip when collapsed.
+ *
+ * @prop isActive - Whether the item is currently active/selected.
+ * @prop tooltip - Tooltip content shown when the sidebar is collapsed.
+ */
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
@@ -606,6 +644,7 @@ function SidebarMenuButton({
   )
 }
 
+/** A secondary action button (e.g. delete, edit) within a sidebar menu item. */
 function SidebarMenuAction({
   className,
   asChild = false,
@@ -640,6 +679,7 @@ function SidebarMenuAction({
   )
 }
 
+/** A badge displayed alongside a sidebar menu button, such as a count indicator. */
 function SidebarMenuBadge({
   className,
   ref,
@@ -664,6 +704,7 @@ function SidebarMenuBadge({
   )
 }
 
+/** A loading placeholder skeleton for a sidebar menu item. */
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -704,6 +745,7 @@ function SidebarMenuSkeleton({
   )
 }
 
+/** A nested sub-menu list within a sidebar menu item. */
 function SidebarMenuSub({
   className,
   ref,
@@ -724,6 +766,7 @@ function SidebarMenuSub({
   )
 }
 
+/** A list item wrapper for a single entry within a SidebarMenuSub. */
 function SidebarMenuSubItem({
   ref,
   ...props
@@ -731,6 +774,7 @@ function SidebarMenuSubItem({
   return <li ref={ref} data-slot="sidebar-menu-sub-item" {...props} />
 }
 
+/** An interactive button within a sidebar sub-menu item. */
 function SidebarMenuSubButton({
   asChild = false,
   size = "md",

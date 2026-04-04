@@ -5,6 +5,12 @@ import * as SliderPrimitive from "@radix-ui/react-slider"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A range input that allows selecting a numeric value by dragging a thumb along a track.
+ *
+ * @example
+ * <Slider defaultValue={[50]} max={100} step={1} />
+ */
 function Slider({
   className,
   ref,

@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
+/** Handle returned by Embla Carousel for programmatic control. */
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
@@ -32,6 +33,7 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
+/** Hook to access carousel context (scroll methods, state). Must be used inside a Carousel. */
 function useCarousel() {
   const context = React.useContext(CarouselContext)
 
@@ -42,6 +44,14 @@ function useCarousel() {
   return context
 }
 
+/**
+ * Scrollable content carousel powered by Embla Carousel.
+ *
+ * @example
+ * <Carousel><CarouselContent><CarouselItem>Slide 1</CarouselItem></CarouselContent><CarouselPrevious /><CarouselNext /></Carousel>
+ *
+ * @prop orientation - Scroll direction: "horizontal" | "vertical"
+ */
 function Carousel({
   orientation = "horizontal",
   opts,
@@ -143,6 +153,7 @@ function Carousel({
   )
 }
 
+/** Scrollable track containing CarouselItem children. */
 function CarouselContent({
   className,
   ref,
@@ -166,6 +177,7 @@ function CarouselContent({
   )
 }
 
+/** Individual slide within CarouselContent. */
 function CarouselItem({
   className,
   ref,
@@ -189,6 +201,7 @@ function CarouselItem({
   )
 }
 
+/** Button that scrolls the carousel to the previous slide. */
 function CarouselPrevious({
   className,
   variant = "outline",
@@ -221,6 +234,7 @@ function CarouselPrevious({
   )
 }
 
+/** Button that scrolls the carousel to the next slide. */
 function CarouselNext({
   className,
   variant = "outline",

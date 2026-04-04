@@ -5,6 +5,15 @@ import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Root drawer component powered by Vaul, slides up from the bottom of the viewport.
+ *
+ * @example
+ * <Drawer>
+ *   <DrawerTrigger>Open</DrawerTrigger>
+ *   <DrawerContent><DrawerHeader><DrawerTitle>Title</DrawerTitle></DrawerHeader></DrawerContent>
+ * </Drawer>
+ */
 function Drawer({
   shouldScaleBackground = true,
   ...props
@@ -17,12 +26,16 @@ function Drawer({
   )
 }
 
+/** Button or element that opens the drawer when clicked. */
 const DrawerTrigger = DrawerPrimitive.Trigger
 
+/** Portals drawer content into document body. */
 const DrawerPortal = DrawerPrimitive.Portal
 
+/** Button or element that closes the drawer when clicked. */
 const DrawerClose = DrawerPrimitive.Close
 
+/** Semi-transparent backdrop overlay behind the drawer. */
 function DrawerOverlay({
   className,
   ref,
@@ -38,6 +51,7 @@ function DrawerOverlay({
   )
 }
 
+/** Drawer panel that slides up from the bottom with a drag handle. */
 function DrawerContent({
   className,
   children,
@@ -63,6 +77,7 @@ function DrawerContent({
   )
 }
 
+/** Container for drawer title and description. */
 function DrawerHeader({
   className,
   ...props
@@ -76,6 +91,7 @@ function DrawerHeader({
   )
 }
 
+/** Container for action buttons at the bottom of the drawer. */
 function DrawerFooter({
   className,
   ...props
@@ -89,6 +105,7 @@ function DrawerFooter({
   )
 }
 
+/** Accessible title heading for the drawer. */
 function DrawerTitle({
   className,
   ref,
@@ -107,6 +124,7 @@ function DrawerTitle({
   )
 }
 
+/** Accessible description text displayed below the drawer title. */
 function DrawerDescription({
   className,
   ref,

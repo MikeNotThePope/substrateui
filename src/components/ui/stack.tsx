@@ -29,6 +29,19 @@ interface StackProps extends React.ComponentPropsWithRef<"div"> {
   asChild?: boolean
 }
 
+/**
+ * A vertical flex container with configurable gap and alignment.
+ *
+ * @example
+ * <Stack gap="lg" align="center">
+ *   <div>Item 1</div>
+ *   <div>Item 2</div>
+ * </Stack>
+ *
+ * @prop gap - The spacing between children (none, xs, sm, md, lg, xl, 2xl).
+ * @prop align - Cross-axis alignment of children.
+ * @prop asChild - Merge props onto the child element instead of rendering a div.
+ */
 function Stack({
   gap = "md",
   align = "stretch",

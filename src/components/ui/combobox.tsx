@@ -20,6 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
+/** A single selectable option in the Combobox dropdown. */
 export interface ComboboxOption {
   value: string
   label: string
@@ -48,6 +49,16 @@ interface ComboboxMultipleProps extends ComboboxBaseProps {
 
 type ComboboxProps = ComboboxSingleProps | ComboboxMultipleProps
 
+/**
+ * Searchable select dropdown supporting single or multi-select modes.
+ *
+ * @example
+ * <Combobox options={[{ value: "a", label: "Alpha" }]} value={val} onValueChange={setVal} />
+ *
+ * @prop options - Array of selectable options
+ * @prop multiple - Enable multi-select mode when true
+ * @prop placeholder - Text shown when no value is selected
+ */
 function Combobox({
   options,
   placeholder = "Select...",

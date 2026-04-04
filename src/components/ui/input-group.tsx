@@ -2,6 +2,16 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Container that visually groups an Input with prefix/suffix addons sharing a single border.
+ *
+ * @example
+ * <InputGroup>
+ *   <InputGroupPrefix>$</InputGroupPrefix>
+ *   <Input placeholder="0.00" />
+ *   <InputGroupSuffix>USD</InputGroupSuffix>
+ * </InputGroup>
+ */
 function InputGroup({
   className,
   ...props
@@ -19,6 +29,7 @@ function InputGroup({
   )
 }
 
+/** Left-side addon content (icon, text) within an InputGroup. */
 function InputGroupPrefix({
   className,
   ...props
@@ -32,6 +43,7 @@ function InputGroupPrefix({
   )
 }
 
+/** Right-side addon content (icon, text) within an InputGroup. */
 function InputGroupSuffix({
   className,
   ...props

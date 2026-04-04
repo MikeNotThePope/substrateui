@@ -3,6 +3,11 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Stack } from "@/components/ui/stack"
 
+/** Full-height application shell container with horizontal flex layout.
+ *
+ * @example
+ * <AppShell><AppShellSidebar>...</AppShellSidebar><AppShellMain>...</AppShellMain></AppShell>
+ */
 function AppShell({
   className,
   ref,
@@ -18,6 +23,10 @@ function AppShell({
   )
 }
 
+/** Fixed-width sidebar panel hidden on mobile, visible on md+ screens.
+ *
+ * @prop collapsed - Whether the sidebar is in collapsed state.
+ */
 function AppShellSidebar({
   collapsed = false,
   className,
@@ -38,6 +47,7 @@ function AppShellSidebar({
   )
 }
 
+/** Logo area at the top of the sidebar with a bottom border. */
 function AppShellLogo({
   className,
   ref,
@@ -56,6 +66,7 @@ function AppShellLogo({
   )
 }
 
+/** Scrollable navigation region within the sidebar. */
 function AppShellNav({
   className,
   ref,
@@ -72,11 +83,20 @@ function AppShellNav({
   )
 }
 
+/** Props for AppShellNavItem including optional icon and active state. */
 interface AppShellNavItemProps extends React.ComponentPropsWithRef<"a"> {
   icon?: React.ComponentType<{ className?: string }>
   active?: boolean
 }
 
+/** Navigation link with optional leading icon and active highlight.
+ *
+ * @example
+ * <AppShellNavItem icon={HomeIcon} active href="/">Home</AppShellNavItem>
+ *
+ * @prop icon - Optional icon component rendered before the label.
+ * @prop active - Whether this item represents the current page.
+ */
 function AppShellNavItem({
   icon: Icon,
   active = false,
@@ -105,6 +125,7 @@ function AppShellNavItem({
   )
 }
 
+/** Footer area pinned to the bottom of the sidebar with a top border. */
 function AppShellFooter({
   className,
   ref,
@@ -120,6 +141,7 @@ function AppShellFooter({
   )
 }
 
+/** Scrollable main content area that fills remaining horizontal space. */
 function AppShellMain({
   className,
   ref,

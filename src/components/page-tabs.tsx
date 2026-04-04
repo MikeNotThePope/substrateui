@@ -5,6 +5,11 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
+/** Full-width page-level tabs container.
+ *
+ * @example
+ * <PageTabs defaultValue="overview"><PageTabsList><PageTabsTrigger value="overview">Overview</PageTabsTrigger></PageTabsList><PageTabsContent value="overview">...</PageTabsContent></PageTabs>
+ */
 function PageTabs({
   className,
   ...props
@@ -18,6 +23,7 @@ function PageTabs({
   )
 }
 
+/** Underline-style tab list with transparent background and bottom border. */
 function PageTabsList({
   className,
   ref,
@@ -36,6 +42,7 @@ function PageTabsList({
   )
 }
 
+/** Individual page tab trigger with an active underline indicator. */
 function PageTabsTrigger({
   className,
   ref,
@@ -54,6 +61,7 @@ function PageTabsTrigger({
   )
 }
 
+/** Content panel associated with a page tab value. */
 function PageTabsContent({
   className,
   ref,

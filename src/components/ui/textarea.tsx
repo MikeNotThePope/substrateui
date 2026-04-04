@@ -2,6 +2,11 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/** Multi-line text input with consistent border, focus ring, and disabled styles.
+ *
+ * @example
+ * <Textarea placeholder="Enter description..." rows={4} />
+ */
 function Textarea({
   className,
   ref,

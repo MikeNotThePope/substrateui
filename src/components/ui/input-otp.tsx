@@ -6,6 +6,16 @@ import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * One-time password input supporting configurable length and pattern validation.
+ *
+ * @example
+ * <InputOTP maxLength={6}>
+ *   <InputOTPGroup><InputOTPSlot index={0} /><InputOTPSlot index={1} /></InputOTPGroup>
+ *   <InputOTPSeparator />
+ *   <InputOTPGroup><InputOTPSlot index={2} /><InputOTPSlot index={3} /></InputOTPGroup>
+ * </InputOTP>
+ */
 function InputOTP({
   className,
   containerClassName,
@@ -26,6 +36,7 @@ function InputOTP({
   )
 }
 
+/** Groups adjacent OTP slots together visually. */
 function InputOTPGroup({
   className,
   ref,
@@ -36,6 +47,11 @@ function InputOTPGroup({
   )
 }
 
+/**
+ * Individual character slot within an OTP input displaying a single digit.
+ *
+ * @prop index - Zero-based position of this slot in the OTP sequence
+ */
 function InputOTPSlot({
   index,
   className,
@@ -66,6 +82,7 @@ function InputOTPSlot({
   )
 }
 
+/** Dot separator rendered between OTP slot groups. */
 function InputOTPSeparator({
   ref,
   ...props

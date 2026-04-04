@@ -7,6 +7,17 @@ interface DividerProps extends React.ComponentPropsWithRef<"div"> {
   label?: string
 }
 
+/**
+ * Visual separator rendered as a horizontal rule, vertical line, or labeled divider.
+ *
+ * @example
+ * <Divider />
+ * <Divider label="OR" />
+ * <Divider orientation="vertical" />
+ *
+ * @prop orientation - "horizontal" (default) or "vertical"
+ * @prop label - Optional centered text within a horizontal divider
+ */
 function Divider({
   orientation = "horizontal",
   label,

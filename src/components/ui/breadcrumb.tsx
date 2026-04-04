@@ -4,6 +4,12 @@ import { ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Navigation component showing the user's location in a page hierarchy.
+ *
+ * @example
+ * <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem></BreadcrumbList></Breadcrumb>
+ */
 function Breadcrumb({
   ref,
   ...props
@@ -13,6 +19,7 @@ function Breadcrumb({
   return <nav ref={ref} aria-label="breadcrumb" data-slot="breadcrumb" {...props} />
 }
 
+/** Ordered list container for breadcrumb items. */
 function BreadcrumbList({
   className,
   ref,
@@ -31,6 +38,7 @@ function BreadcrumbList({
   )
 }
 
+/** Individual breadcrumb entry wrapping a link or page indicator. */
 function BreadcrumbItem({
   className,
   ref,
@@ -46,6 +54,7 @@ function BreadcrumbItem({
   )
 }
 
+/** Clickable link within a breadcrumb item; supports asChild for custom link components. */
 function BreadcrumbLink({
   asChild,
   className,
@@ -66,6 +75,7 @@ function BreadcrumbLink({
   )
 }
 
+/** Non-interactive label representing the current page in the breadcrumb trail. */
 function BreadcrumbPage({
   className,
   ref,
@@ -84,6 +94,7 @@ function BreadcrumbPage({
   )
 }
 
+/** Visual divider between breadcrumb items; defaults to a chevron icon. */
 function BreadcrumbSeparator({
   children,
   className,
@@ -102,6 +113,7 @@ function BreadcrumbSeparator({
   )
 }
 
+/** Ellipsis indicator used when breadcrumb items are collapsed. */
 function BreadcrumbEllipsis({
   className,
   ...props

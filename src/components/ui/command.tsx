@@ -8,6 +8,12 @@ import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
+/**
+ * Command palette container with built-in search and keyboard navigation.
+ *
+ * @example
+ * <Command><CommandInput /><CommandList><CommandItem>Action</CommandItem></CommandList></Command>
+ */
 function Command({
   className,
   ref,
@@ -26,6 +32,7 @@ function Command({
   )
 }
 
+/** Command palette rendered inside a modal dialog. */
 function CommandDialog({ children, ...props }: DialogProps) {
   return (
     <Dialog {...props}>
@@ -38,6 +45,7 @@ function CommandDialog({ children, ...props }: DialogProps) {
   )
 }
 
+/** Search input field within a Command palette. */
 function CommandInput({
   className,
   ref,
@@ -59,6 +67,7 @@ function CommandInput({
   )
 }
 
+/** Scrollable list container for command items and groups. */
 function CommandList({
   className,
   ref,
@@ -74,6 +83,7 @@ function CommandList({
   )
 }
 
+/** Placeholder shown when no command items match the search query. */
 function CommandEmpty({
   ref,
   ...props
@@ -88,6 +98,7 @@ function CommandEmpty({
   )
 }
 
+/** Labeled group of related command items. */
 function CommandGroup({
   className,
   ref,
@@ -106,6 +117,7 @@ function CommandGroup({
   )
 }
 
+/** Horizontal divider between command groups or items. */
 function CommandSeparator({
   className,
   ref,
@@ -121,6 +133,7 @@ function CommandSeparator({
   )
 }
 
+/** Selectable action item within a CommandList. */
 function CommandItem({
   className,
   ref,
@@ -139,6 +152,7 @@ function CommandItem({
   )
 }
 
+/** Keyboard shortcut hint displayed alongside a CommandItem. */
 function CommandShortcut({
   className,
   ...props

@@ -5,8 +5,14 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 
 import { cn } from "@/lib/utils"
 
+/** Root container for a tabbed interface built on Radix Tabs.
+ *
+ * @example
+ * <Tabs defaultValue="tab1"><TabsList><TabsTrigger value="tab1">Tab</TabsTrigger></TabsList><TabsContent value="tab1">Content</TabsContent></Tabs>
+ */
 const Tabs = TabsPrimitive.Root
 
+/** Horizontal container for tab triggers with a sunken background. */
 function TabsList({
   className,
   ref,
@@ -25,6 +31,7 @@ function TabsList({
   )
 }
 
+/** Individual tab button that activates its associated content panel. */
 function TabsTrigger({
   className,
   ref,
@@ -43,6 +50,7 @@ function TabsTrigger({
   )
 }
 
+/** Content panel displayed when its matching tab trigger is active. */
 function TabsContent({
   className,
   ref,

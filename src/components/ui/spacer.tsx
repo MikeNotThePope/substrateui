@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/** Map of size tokens to pixel values for the Spacer component. */
 const sizeMap = {
   none: "0px",
   xs: "4px",
@@ -19,6 +20,15 @@ interface SpacerProps extends React.ComponentPropsWithRef<"div"> {
   axis?: "horizontal" | "vertical"
 }
 
+/**
+ * A flexible spacing element that either fills available space or adds a fixed gap.
+ *
+ * @example
+ * <Spacer size="md" axis="vertical" />
+ *
+ * @prop size - The spacing size token; omit to fill available flex space.
+ * @prop axis - Whether spacing is applied horizontally or vertically.
+ */
 function Spacer({
   size,
   axis = "vertical",

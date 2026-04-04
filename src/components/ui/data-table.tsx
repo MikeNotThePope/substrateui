@@ -43,6 +43,15 @@ interface DataTableColumnHeaderProps<TData, TValue>
   title: string
 }
 
+/**
+ * Sortable column header button that toggles sort direction on click.
+ *
+ * @example
+ * <DataTableColumnHeader column={column} title="Name" />
+ *
+ * @prop column - TanStack Table column instance
+ * @prop title - Display text for the header
+ */
 function DataTableColumnHeader<TData, TValue>({
   column,
   title,
@@ -79,6 +88,14 @@ interface DataTableViewOptionsProps<TData> {
   table: import("@tanstack/react-table").Table<TData>
 }
 
+/**
+ * Dropdown menu for toggling column visibility in a data table.
+ *
+ * @example
+ * <DataTableViewOptions table={table} />
+ *
+ * @prop table - TanStack Table instance
+ */
 function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
@@ -122,6 +139,14 @@ interface DataTablePaginationProps<TData> {
   table: import("@tanstack/react-table").Table<TData>
 }
 
+/**
+ * Pagination controls displaying row selection count and page navigation.
+ *
+ * @example
+ * <DataTablePagination table={table} />
+ *
+ * @prop table - TanStack Table instance
+ */
 function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
@@ -166,6 +191,12 @@ interface DataTableToolbarProps {
   className?: string
 }
 
+/**
+ * Horizontal toolbar container for data table filters and actions.
+ *
+ * @example
+ * <DataTableToolbar><Input placeholder="Filter..." /></DataTableToolbar>
+ */
 function DataTableToolbar({ children, className }: DataTableToolbarProps) {
   return (
     <div
@@ -179,6 +210,12 @@ function DataTableToolbar({ children, className }: DataTableToolbarProps) {
 
 // ─── Selection column helper ─────────────────────────────────────────
 
+/**
+ * Creates a checkbox selection column definition for use with TanStack Table.
+ *
+ * @example
+ * const columns = [createSelectColumn<MyData>(), ...otherColumns]
+ */
 function createSelectColumn<TData>(): ColumnDef<TData> {
   return {
     id: "select",
@@ -213,6 +250,16 @@ interface DataTableProps<TData, TValue> {
   toolbar?: React.ReactNode
 }
 
+/**
+ * Full-featured data table with sorting, filtering, pagination, and row selection.
+ *
+ * @example
+ * <DataTable columns={columns} data={data} toolbar={<DataTableToolbar>...</DataTableToolbar>} />
+ *
+ * @prop columns - TanStack Table column definitions
+ * @prop data - Array of row data
+ * @prop toolbar - Optional toolbar rendered above the table
+ */
 function DataTable<TData, TValue>({
   columns,
   data,

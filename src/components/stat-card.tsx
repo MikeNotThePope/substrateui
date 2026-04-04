@@ -3,6 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
+/** Props for StatCard including title, value, and optional change indicator. */
 interface StatCardProps extends Omit<React.ComponentPropsWithRef<"div">, "title"> {
   title: string
   value: string
@@ -11,12 +12,24 @@ interface StatCardProps extends Omit<React.ComponentPropsWithRef<"div">, "title"
   icon?: React.ComponentType<{ className?: string }>
 }
 
+/** Color map for stat change indicators keyed by sentiment. */
 const changeTypeStyles = {
   positive: "text-status-success-text",
   negative: "text-status-error-text",
   neutral: "text-muted-foreground",
 } as const
 
+/** Card displaying a key metric with title, value, optional change badge, and icon.
+ *
+ * @example
+ * <StatCard title="Revenue" value="$12,345" change="+12%" changeType="positive" />
+ *
+ * @prop title - Metric label displayed in uppercase monospace.
+ * @prop value - Primary numeric or text value.
+ * @prop change - Optional change indicator text (e.g. "+5%").
+ * @prop changeType - Color coding: "positive", "negative", or "neutral".
+ * @prop icon - Optional icon component displayed at top-right.
+ */
 function StatCard({
   title,
   value,

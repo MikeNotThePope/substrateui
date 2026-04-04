@@ -4,6 +4,18 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 
+/**
+ * Navigation container for paginated content.
+ *
+ * @example
+ * <Pagination>
+ *   <PaginationContent>
+ *     <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+ *     <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+ *     <PaginationItem><PaginationNext href="#" /></PaginationItem>
+ *   </PaginationContent>
+ * </Pagination>
+ */
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
@@ -16,6 +28,7 @@ function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   )
 }
 
+/** Flex row container for pagination items. */
 function PaginationContent({
   className,
   ref,
@@ -31,6 +44,7 @@ function PaginationContent({
   )
 }
 
+/** List item wrapper for a single pagination element. */
 function PaginationItem({
   className,
   ref,
@@ -46,6 +60,12 @@ type PaginationLinkProps = {
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">
 
+/**
+ * Styled anchor for an individual page number.
+ *
+ * @prop isActive - Highlights the link as the current page.
+ * @prop size - Button size variant, defaults to "icon".
+ */
 function PaginationLink({
   className,
   isActive,
@@ -68,6 +88,7 @@ function PaginationLink({
   )
 }
 
+/** "Previous" pagination link with a left chevron icon. */
 function PaginationPrevious({
   className,
   ...props
@@ -86,6 +107,7 @@ function PaginationPrevious({
   )
 }
 
+/** "Next" pagination link with a right chevron icon. */
 function PaginationNext({
   className,
   ...props
@@ -104,6 +126,7 @@ function PaginationNext({
   )
 }
 
+/** Ellipsis indicator representing omitted page numbers. */
 function PaginationEllipsis({
   className,
   ...props

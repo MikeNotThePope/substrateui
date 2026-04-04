@@ -6,8 +6,10 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Root accordion container that manages expand/collapse state for its items. */
 const Accordion = AccordionPrimitive.Root
 
+/** A single collapsible section within an Accordion. */
 function AccordionItem({
   className,
   ref,
@@ -23,6 +25,7 @@ function AccordionItem({
   )
 }
 
+/** Clickable header that toggles the visibility of its associated AccordionContent. */
 function AccordionTrigger({
   className,
   children,
@@ -47,6 +50,7 @@ function AccordionTrigger({
   )
 }
 
+/** Animated collapsible content panel revealed by its sibling AccordionTrigger. */
 function AccordionContent({
   className,
   children,

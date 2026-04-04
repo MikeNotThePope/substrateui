@@ -14,12 +14,23 @@ const maxMap = {
 
 type Max = keyof typeof maxMap
 
+/** Props accepted by the Center component. */
 interface CenterProps extends React.ComponentPropsWithRef<"div"> {
   max?: Max
   padding?: boolean
   asChild?: boolean
 }
 
+/**
+ * Horizontally centers its content with a configurable max-width and optional padding.
+ *
+ * @example
+ * <Center max="lg" padding>Content</Center>
+ *
+ * @prop max - Max-width breakpoint: "sm" | "md" | "lg" | "xl" | "2xl" | "full"
+ * @prop padding - Adds responsive horizontal padding when true
+ * @prop asChild - Merge props onto child element instead of rendering a div
+ */
 function Center({
   max = "2xl",
   padding = true,

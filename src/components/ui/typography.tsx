@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/** Semantic h1 heading with bold, tight tracking at 4xl size. */
 function H1({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h1
@@ -12,6 +13,7 @@ function H1({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   )
 }
 
+/** Semantic h2 heading with semibold weight at 3xl size. */
 function H2({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
@@ -22,6 +24,7 @@ function H2({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   )
 }
 
+/** Semantic h3 heading with semibold weight at 2xl size. */
 function H3({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
@@ -32,6 +35,7 @@ function H3({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   )
 }
 
+/** Semantic h4 heading with semibold weight at xl size. */
 function H4({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h4
@@ -42,6 +46,7 @@ function H4({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   )
 }
 
+/** Standard paragraph element with base size and relaxed leading. */
 function P({
   className,
   ...props
@@ -55,6 +60,7 @@ function P({
   )
 }
 
+/** Lead paragraph rendered in xl muted text for introductory copy. */
 function Lead({
   className,
   ...props
@@ -68,6 +74,7 @@ function Lead({
   )
 }
 
+/** Large semibold text block rendered as a div. */
 function Large({
   className,
   ...props
@@ -81,6 +88,7 @@ function Large({
   )
 }
 
+/** Small text element with medium weight and tight leading. */
 function Small({
   className,
   ...props
@@ -94,6 +102,7 @@ function Small({
   )
 }
 
+/** Muted paragraph in small size for secondary or helper text. */
 function Muted({
   className,
   ...props
@@ -107,6 +116,7 @@ function Muted({
   )
 }
 
+/** Inline code snippet with monospace font and sunken background. */
 function Code({
   className,
   ...props
@@ -123,6 +133,7 @@ function Code({
   )
 }
 
+/** Inline monospace span without background styling. */
 function Mono({
   className,
   ...props

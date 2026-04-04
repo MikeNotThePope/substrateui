@@ -6,12 +6,26 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Root component that manages select state and context. */
 const Select = SelectPrimitive.Root
 
+/** Groups related select items with an optional label. */
 const SelectGroup = SelectPrimitive.Group
 
+/** Renders the currently selected value or placeholder text. */
 const SelectValue = SelectPrimitive.Value
 
+/**
+ * The button that toggles the select dropdown.
+ *
+ * @example
+ * <Select>
+ *   <SelectTrigger><SelectValue placeholder="Pick one" /></SelectTrigger>
+ *   <SelectContent>
+ *     <SelectItem value="a">Option A</SelectItem>
+ *   </SelectContent>
+ * </Select>
+ */
 function SelectTrigger({
   className,
   children,
@@ -36,6 +50,7 @@ function SelectTrigger({
   )
 }
 
+/** A button shown at the top of the dropdown to scroll content upward. */
 function SelectScrollUpButton({
   className,
   ref,
@@ -56,6 +71,7 @@ function SelectScrollUpButton({
   )
 }
 
+/** A button shown at the bottom of the dropdown to scroll content downward. */
 function SelectScrollDownButton({
   className,
   ref,
@@ -76,6 +92,7 @@ function SelectScrollDownButton({
   )
 }
 
+/** The dropdown popover that contains selectable items. */
 function SelectContent({
   className,
   children,
@@ -113,6 +130,7 @@ function SelectContent({
   )
 }
 
+/** A non-interactive label for a group of select items. */
 function SelectLabel({
   className,
   ref,
@@ -128,6 +146,7 @@ function SelectLabel({
   )
 }
 
+/** A selectable option within the select dropdown. */
 function SelectItem({
   className,
   children,
@@ -155,6 +174,7 @@ function SelectItem({
   )
 }
 
+/** A visual divider between groups of select items. */
 function SelectSeparator({
   className,
   ref,

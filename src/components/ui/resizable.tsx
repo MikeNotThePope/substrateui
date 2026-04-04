@@ -5,6 +5,16 @@ import { Group, Panel, Separator } from "react-resizable-panels"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A container that arranges resizable panels in a horizontal or vertical layout.
+ *
+ * @example
+ * <ResizablePanelGroup direction="horizontal">
+ *   <ResizablePanel>Left</ResizablePanel>
+ *   <ResizableHandle />
+ *   <ResizablePanel>Right</ResizablePanel>
+ * </ResizablePanelGroup>
+ */
 const ResizablePanelGroup = ({
   className,
   ...props
@@ -18,8 +28,17 @@ const ResizablePanelGroup = ({
   />
 )
 
+/** A single resizable panel within a ResizablePanelGroup. */
 const ResizablePanel = Panel
 
+/**
+ * A draggable handle between resizable panels for adjusting their sizes.
+ *
+ * @example
+ * <ResizableHandle withHandle />
+ *
+ * @prop withHandle - Whether to show a visible grip icon on the handle.
+ */
 const ResizableHandle = ({
   withHandle,
   className,

@@ -2,6 +2,11 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/** Scrollable data table wrapper that renders a full-width HTML table.
+ *
+ * @example
+ * <Table><TableHeader>...</TableHeader><TableBody>...</TableBody></Table>
+ */
 function Table({
   className,
   ref,
@@ -19,6 +24,7 @@ function Table({
   )
 }
 
+/** Table head section that applies a bottom border to its rows. */
 function TableHeader({
   className,
   ref,
@@ -29,6 +35,7 @@ function TableHeader({
   )
 }
 
+/** Table body section that removes the border from the last row. */
 function TableBody({
   className,
   ref,
@@ -44,6 +51,7 @@ function TableBody({
   )
 }
 
+/** Table footer with a muted background and top border. */
 function TableFooter({
   className,
   ref,
@@ -62,6 +70,7 @@ function TableFooter({
   )
 }
 
+/** Table row with hover highlight and selected state styling. */
 function TableRow({
   className,
   ref,
@@ -80,6 +89,7 @@ function TableRow({
   )
 }
 
+/** Table header cell with uppercase monospace label styling. */
 function TableHead({
   className,
   ref,
@@ -98,6 +108,7 @@ function TableHead({
   )
 }
 
+/** Standard table data cell with consistent padding. */
 function TableCell({
   className,
   ref,
@@ -113,6 +124,7 @@ function TableCell({
   )
 }
 
+/** Table caption rendered below the table in muted text. */
 function TableCaption({
   className,
   ref,

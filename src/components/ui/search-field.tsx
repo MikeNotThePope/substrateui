@@ -8,6 +8,7 @@ import { Input } from "./input"
 import { InputGroup, InputGroupPrefix, InputGroupSuffix } from "./input-group"
 import { Kbd } from "./kbd"
 
+/** Props for the SearchField component. */
 interface SearchFieldProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   placeholder?: string
@@ -17,6 +18,17 @@ interface SearchFieldProps
   onClear?: () => void
 }
 
+/**
+ * A search input with a search icon, clearable value, and optional keyboard shortcut hint.
+ *
+ * @example
+ * <SearchField value={query} onChange={setQuery} shortcut="/" />
+ *
+ * @prop value - The current search string.
+ * @prop onChange - Callback fired when the search value changes.
+ * @prop shortcut - Optional keyboard shortcut label displayed when empty.
+ * @prop onClear - Optional callback fired when the clear button is clicked.
+ */
 function SearchField({
   placeholder = "Search...",
   shortcut,

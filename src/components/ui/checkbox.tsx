@@ -6,6 +6,12 @@ import { Check } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A toggleable checkbox input with checked/unchecked states.
+ *
+ * @example
+ * <Checkbox checked={checked} onCheckedChange={setChecked} />
+ */
 function Checkbox({
   className,
   ref,

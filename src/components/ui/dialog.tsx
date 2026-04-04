@@ -6,14 +6,19 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** Root dialog component that manages open/close state. */
 const Dialog = DialogPrimitive.Root
 
+/** Button or element that opens the dialog when clicked. */
 const DialogTrigger = DialogPrimitive.Trigger
 
+/** Portals dialog content into document body. */
 const DialogPortal = DialogPrimitive.Portal
 
+/** Button or element that closes the dialog when clicked. */
 const DialogClose = DialogPrimitive.Close
 
+/** Semi-transparent backdrop overlay behind the dialog. */
 function DialogOverlay({
   className,
   ref,
@@ -32,6 +37,15 @@ function DialogOverlay({
   )
 }
 
+/**
+ * Centered dialog panel with overlay, close button, and animated transitions.
+ *
+ * @example
+ * <Dialog>
+ *   <DialogTrigger>Open</DialogTrigger>
+ *   <DialogContent><DialogHeader><DialogTitle>Title</DialogTitle></DialogHeader></DialogContent>
+ * </Dialog>
+ */
 function DialogContent({
   className,
   children,
@@ -60,6 +74,7 @@ function DialogContent({
   )
 }
 
+/** Container for dialog title and description at the top of the dialog. */
 function DialogHeader({
   className,
   ...props
@@ -76,6 +91,7 @@ function DialogHeader({
   )
 }
 
+/** Container for action buttons at the bottom of the dialog. */
 function DialogFooter({
   className,
   ...props
@@ -92,6 +108,7 @@ function DialogFooter({
   )
 }
 
+/** Accessible title heading for the dialog. */
 function DialogTitle({
   className,
   ref,
@@ -110,6 +127,7 @@ function DialogTitle({
   )
 }
 
+/** Accessible description text displayed below the dialog title. */
 function DialogDescription({
   className,
   ref,
