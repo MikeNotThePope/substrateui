@@ -1,65 +1,220 @@
-import Image from "next/image";
+import Link from "next/link"
+import { ArrowRight, Box, Palette, Layers, Moon, Blocks, Puzzle } from "lucide-react"
 
-export default function Home() {
+import { H1, H2, H3, P, Lead, Mono, Code } from "@/components/ui/typography"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Stack } from "@/components/ui/stack"
+import { Cluster } from "@/components/ui/cluster"
+import { Grid } from "@/components/ui/grid"
+import { Center } from "@/components/ui/center"
+import { Input } from "@/components/ui/input"
+import { Field, FieldLabel, FieldHint } from "@/components/ui/field"
+
+// ─── Feature Data ─────────────────────────────────────────────────────
+
+const features = [
+  {
+    icon: Box,
+    title: "Chunky Borders",
+    description: "border-2 everywhere. Intentional, tactile, unapologetic.",
+  },
+  {
+    icon: Palette,
+    title: "OKLCH Color System",
+    description: "Perceptually uniform. CVD-safe plum + amber pairing.",
+  },
+  {
+    icon: Layers,
+    title: "Tailwind CSS v4 Native",
+    description: "@theme inline, no config file, CSS-first tokens.",
+  },
+  {
+    icon: Moon,
+    title: "Dark Mode as Token Swap",
+    description: "Flip .dark and the whole system follows. Zero component changes.",
+  },
+  {
+    icon: Blocks,
+    title: "70+ Components",
+    description: "From atomic Button to organism App Shell. Batteries included.",
+  },
+  {
+    icon: Puzzle,
+    title: "Composition Over Configuration",
+    description: "Field context, sub-component patterns, slot-based APIs.",
+  },
+]
+
+// ─── Page ─────────────────────────────────────────────────────────────
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen bg-background">
+      {/* Nav */}
+      <header className="border-b-2 bg-card">
+        <Center max="2xl" className="px-4">
+          <div className="flex items-center justify-between h-14">
+            <span className="font-bold text-lg tracking-tight">SubstrateUI</span>
+            <Cluster gap="sm">
+              <Link href="/docs">
+                <Button variant="ghost" size="sm">Docs</Button>
+              </Link>
+              <Link href="/docs/components/button">
+                <Button variant="ghost" size="sm">Components</Button>
+              </Link>
+              <Link href="/design-system">
+                <Button variant="ghost" size="sm">Playground</Button>
+              </Link>
+            </Cluster>
+          </div>
+        </Center>
+      </header>
+
+      {/* Hero */}
+      <section className="py-20 md:py-32">
+        <Center max="xl" className="px-4 text-center">
+          <Stack gap="lg" className="items-center">
+            <Badge variant="secondary" className="font-mono text-xs">v0.1 — early access</Badge>
+            <H1 className="text-4xl md:text-6xl font-bold tracking-tight">SubstrateUI</H1>
+            <Lead className="max-w-2xl text-lg md:text-xl">
+              A chunky, opinionated design system for Next.js. OKLCH color tokens,
+              Tailwind CSS v4, Radix UI primitives, and a personality that isn't afraid of borders.
+            </Lead>
+            <Cluster gap="sm">
+              <Link href="/docs">
+                <Button size="lg">
+                  Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/docs/components/button">
+                <Button variant="outline" size="lg">Browse Components</Button>
+              </Link>
+            </Cluster>
+          </Stack>
+        </Center>
+      </section>
+
+      {/* Preview card */}
+      <section className="pb-20">
+        <Center max="md" className="px-4">
+          <Card className="border-2">
+            <CardHeader>
+              <CardTitle>Create Project</CardTitle>
+              <CardDescription>Spin up a new project in one click.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Stack gap="md">
+                <Field>
+                  <FieldLabel>Project Name</FieldLabel>
+                  <Input placeholder="my-awesome-app" defaultValue="my-awesome-app" />
+                  <FieldHint>This will be your repository name.</FieldHint>
+                </Field>
+                <Cluster gap="sm">
+                  <Badge>Next.js</Badge>
+                  <Badge variant="secondary">TypeScript</Badge>
+                  <Badge variant="outline">Tailwind</Badge>
+                </Cluster>
+              </Stack>
+            </CardContent>
+            <CardFooter>
+              <Cluster gap="sm">
+                <Button variant="amber">Create Project</Button>
+                <Button variant="outline">Cancel</Button>
+              </Cluster>
+            </CardFooter>
+          </Card>
+        </Center>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-20 bg-card border-y-2">
+        <Center max="2xl" className="px-4">
+          <Stack gap="xl">
+            <div className="text-center">
+              <H2 className="text-3xl font-bold tracking-tight">Built Different</H2>
+              <P className="text-muted-foreground mt-2">Every decision is intentional. Every token is earned.</P>
+            </div>
+            <Grid columns={3} gap="lg">
+              {features.map((feature) => (
+                <Card key={feature.title} className="border-2">
+                  <CardContent className="pt-6">
+                    <Stack gap="sm">
+                      <feature.icon className="h-8 w-8 text-primary" />
+                      <H3 className="text-lg font-semibold">{feature.title}</H3>
+                      <P className="text-sm text-muted-foreground">{feature.description}</P>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              ))}
+            </Grid>
+          </Stack>
+        </Center>
+      </section>
+
+      {/* Code Example */}
+      <section className="py-20">
+        <Center max="lg" className="px-4">
+          <Stack gap="xl">
+            <div className="text-center">
+              <H2 className="text-3xl font-bold tracking-tight">Quick Start</H2>
+              <P className="text-muted-foreground mt-2">Three imports and you're in.</P>
+            </div>
+
+            <div className="border-2 rounded-lg overflow-hidden">
+              <div className="px-4 py-2 bg-muted border-b-2">
+                <Mono className="text-xs text-muted-foreground">globals.css</Mono>
+              </div>
+              <pre className="p-4 bg-warm-950 dark:bg-warm-900 text-warm-200 text-sm overflow-x-auto">
+                <code>{`@import "tailwindcss";
+@import "tw-animate-css";
+@import "substrateui/styles.css";
+@source "../node_modules/substrateui";`}</code>
+              </pre>
+            </div>
+
+            <div className="border-2 rounded-lg overflow-hidden">
+              <div className="px-4 py-2 bg-muted border-b-2">
+                <Mono className="text-xs text-muted-foreground">app.tsx</Mono>
+              </div>
+              <pre className="p-4 bg-warm-950 dark:bg-warm-900 text-warm-200 text-sm overflow-x-auto">
+                <code>{`import { Button, Stack, Field, FieldLabel, Input } from 'substrateui'
+
+export default function App() {
+  return (
+    <Stack gap="md">
+      <Field>
+        <FieldLabel>Email</FieldLabel>
+        <Input type="email" placeholder="you@example.com" />
+      </Field>
+      <Button variant="amber">Subscribe</Button>
+    </Stack>
+  )
+}`}</code>
+              </pre>
+            </div>
+
+            <div className="text-center">
+              <Link href="/docs">
+                <Button size="lg">
+                  Read the Docs <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </Stack>
+        </Center>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t-2 py-8">
+        <Center max="2xl" className="px-4">
+          <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <Mono className="text-xs">SubstrateUI</Mono>
+            <Mono className="text-xs">OKLCH tokens. Chunky borders. Ship it.</Mono>
+          </div>
+        </Center>
+      </footer>
     </div>
-  );
+  )
 }
