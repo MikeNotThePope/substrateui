@@ -20,9 +20,9 @@ export function PropsTable({ props }: PropsTableProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Prop</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Default</TableHead>
+            <TableHead className="w-[25%]">Prop</TableHead>
+            <TableHead className="w-[20%]">Type</TableHead>
+            <TableHead className="w-[10%]">Default</TableHead>
             <TableHead>Description</TableHead>
           </TableRow>
         </TableHeader>
