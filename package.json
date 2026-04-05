@@ -8,6 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/MikeNotThePope/substrateui.git"
   },
+  "homepage": "https://www.substrateui.dev/",
   "keywords": [
     "design-system",
     "react",
