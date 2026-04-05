@@ -32,12 +32,11 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript((frozenNow) => {
     const OriginalDate = Date;
     class FrozenDate extends OriginalDate {
-      constructor(...args: ConstructorParameters<typeof Date>) {
+      constructor(...args: unknown[]) {
         if (args.length === 0) {
           super(frozenNow);
         } else {
-          // @ts-expect-error - forwarding variadic args
-          super(...args);
+          super(...(args as ConstructorParameters<typeof Date>));
         }
       }
       static now() {
