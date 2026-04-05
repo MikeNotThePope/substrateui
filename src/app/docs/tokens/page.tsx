@@ -21,10 +21,10 @@ const semanticTokens = [
   { name: "primary-foreground", light: "white", dark: "white" },
   { name: "secondary", light: "warm-100", dark: "warm-800" },
   { name: "muted", light: "warm-100", dark: "warm-800" },
-  { name: "muted-foreground", light: "warm-500", dark: "warm-400" },
+  { name: "muted-foreground", light: "warm-600", dark: "warm-400" },
   { name: "accent", light: "plum-100", dark: "plum @ 15%" },
   { name: "destructive", light: "error", dark: "error (lighter)" },
-  { name: "border", light: "warm-300", dark: "warm-700" },
+  { name: "border", light: "warm-500", dark: "warm-400" },
   { name: "card", light: "warm-white", dark: "warm-850" },
   { name: "ring", light: "plum-500", dark: "plum-400" },
 ]

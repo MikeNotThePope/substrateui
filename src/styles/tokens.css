@@ -93,12 +93,12 @@
   --secondary: var(--raw-warm-100);
   --secondary-foreground: var(--raw-warm-900);
   --muted: var(--raw-warm-100);
-  --muted-foreground: var(--raw-warm-500);
+  --muted-foreground: var(--raw-warm-600);
   --accent: var(--raw-plum-100);
   --accent-foreground: var(--raw-plum-700);
   --destructive: var(--raw-error);
-  --border: var(--raw-warm-300);
-  --input: var(--raw-warm-300);
+  --border: var(--raw-warm-500);
+  --input: var(--raw-warm-500);
   --ring: var(--raw-plum-500);
 
   /* ── Chart colors ── */
@@ -127,7 +127,7 @@
   --surface-interactive-hover: var(--raw-warm-200);
 
   /* ── SubstrateUI extended: Borders ── */
-  --border-default: var(--raw-warm-300);
+  --border-default: var(--raw-warm-500);
   --border-strong: var(--raw-warm-700);
   --border-subtle: var(--raw-warm-200);
   --border-accent: var(--raw-plum-500);
@@ -178,9 +178,9 @@
   --muted-foreground: var(--raw-warm-400);
   --accent: oklch(0.556 0.150 314 / 0.15);
   --accent-foreground: var(--raw-plum-300);
-  --destructive: oklch(0.65 0.18 25);
-  --border: var(--raw-warm-700);
-  --input: var(--raw-warm-700);
+  --destructive: oklch(0.58 0.18 25);
+  --border: var(--raw-warm-400);
+  --input: var(--raw-warm-400);
   --ring: var(--raw-plum-400);
 
   /* ── Chart ── */
@@ -193,7 +193,7 @@
   /* ── Sidebar ── */
   --sidebar: var(--raw-warm-900);
   --sidebar-foreground: var(--raw-warm-100);
-  --sidebar-primary: var(--raw-plum-400);
+  --sidebar-primary: var(--raw-plum-500);
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.556 0.150 314 / 0.15);
   --sidebar-accent-foreground: var(--raw-plum-300);
@@ -209,7 +209,7 @@
   --surface-interactive-hover: var(--raw-warm-700);
 
   /* ── SubstrateUI extended: Borders ── */
-  --border-default: var(--raw-warm-700);
+  --border-default: var(--raw-warm-400);
   --border-strong: var(--raw-warm-400);
   --border-subtle: var(--raw-warm-800);
   --border-accent: var(--raw-plum-400);

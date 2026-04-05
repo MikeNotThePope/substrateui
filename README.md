@@ -12,6 +12,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 - Dark mode as a token swap — zero component changes
 - Chunky 2px borders and press-down animations
 - CVD-safe plum + amber color pairing
+- WCAG AA contrast verified on every token pairing — see [contrast report](./audit-contrast-report.md)
 - Built for Tailwind CSS v4 (`@theme inline`, CSS-first config)
 - Full TypeScript support with exported types
 - Tree-shakeable ESM exports

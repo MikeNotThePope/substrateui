@@ -30,6 +30,12 @@ const navSections = [
     ],
   },
   {
+    title: "Accessibility",
+    items: [
+      { label: "Contrast Matrix", href: "/docs/accessibility/contrast" },
+    ],
+  },
+  {
     title: "General",
     items: [
       { label: "Button", href: "/docs/components/button" },
