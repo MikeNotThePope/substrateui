@@ -47,3 +47,7 @@ dist/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# Storybook
+/storybook-static/
+/public/storybook/

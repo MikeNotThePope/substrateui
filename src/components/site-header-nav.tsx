@@ -14,7 +14,14 @@ import {
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
-const navLinks = [
+type NavLink = {
+  label: string
+  href: string
+  match: string
+  external?: boolean
+}
+
+const navLinks: NavLink[] = [
   { label: "Docs", href: "/docs", match: "/docs" },
   {
     label: "Components",
@@ -22,6 +29,12 @@ const navLinks = [
     match: "/docs/components",
   },
   { label: "Design System", href: "/design-system", match: "/design-system" },
+  {
+    label: "Storybook",
+    href: "/storybook/",
+    match: "/storybook",
+    external: true,
+  },
 ]
 
 function matches(pathname: string, match: string) {
@@ -47,17 +60,27 @@ export function SiteHeaderNav() {
     <nav aria-label="Primary" className="hidden md:flex items-center gap-6">
       {navLinks.map((link) => {
         const active = link.match === activeMatch
+        const className = cn(
+          "text-sm transition-colors",
+          active
+            ? "text-foreground font-medium"
+            : "text-muted-foreground hover:text-foreground"
+        )
+        if (link.external) {
+          return (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className={className}
+            >
+              {link.label}
+            </a>
+          )
+        }
         return (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={cn(
-              "text-sm transition-colors",
-              active
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
+          <Link key={link.href} href={link.href} className={className}>
             {link.label}
           </Link>
         )
@@ -90,17 +113,32 @@ export function SiteHeaderMobileNav() {
         <nav aria-label="Primary" className="flex flex-col gap-2">
           {navLinks.map((link) => {
             const active = link.match === activeMatch
+            const className = cn(
+              "px-3 py-2 rounded-md text-sm transition-colors",
+              active
+                ? "bg-accent text-accent-foreground font-medium"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+            )
+            if (link.external) {
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className={className}
+                >
+                  {link.label}
+                </a>
+              )
+            }
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={cn(
-                  "px-3 py-2 rounded-md text-sm transition-colors",
-                  active
-                    ? "bg-accent text-accent-foreground font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                )}
+                className={className}
               >
                 {link.label}
               </Link>

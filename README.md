@@ -12,6 +12,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 [![CI](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml)
 
 - **Docs:** <VERCEL-PRODUCTION-URL>
+- **Storybook:** https://substrateui.dev/storybook/ — run locally with `bun run storybook`
 - **npm:** `@substrateui/core` (not yet published)
 
 ## Features
@@ -136,10 +137,22 @@ SubstrateUI meets WCAG AA contrast requirements (verified by automated audit) an
 
 Every component ships with accessible defaults. For guidance on specific components, see the "Accessibility" section on each component's documentation page.
 
+## Storybook
+
+Contributors can browse components in isolation, flip between light/dark themes, swap `ltr`/`rtl` direction, and switch the semantic palette (Plum / Forest) from the toolbar.
+
+```bash
+bun run storybook        # dev server on http://localhost:6006
+bun run build-storybook  # static bundle in ./storybook-static
+```
+
+Hosted build: https://substrateui.dev/storybook/
+
 ## Links
 
 - [GitHub](https://github.com/substrateui/substrateui)
 - [npm](https://www.npmjs.com/package/substrateui)
+- [Storybook](https://substrateui.dev/storybook/)
 
 ## License
 
