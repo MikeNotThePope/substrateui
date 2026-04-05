@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-05T13:06:34.843Z",
+  "generatedAt": "2026-04-05T17:11:08.458Z",
   "results": [
     {
       "name": "foreground on background",
@@ -230,30 +230,6 @@
       "darkPass": true
     },
     {
-      "name": "warm-900 on amber-500 (light amber button)",
-      "fg": "raw-warm-900",
-      "bg": "raw-amber-500",
-      "type": "normal",
-      "backdrop": null,
-      "required": 4.5,
-      "light": 6.763946694234807,
-      "dark": 6.763946694234807,
-      "lightPass": true,
-      "darkPass": true
-    },
-    {
-      "name": "warm-950 on amber-400 (dark amber button)",
-      "fg": "raw-warm-950",
-      "bg": "raw-amber-400",
-      "type": "normal",
-      "backdrop": null,
-      "required": 4.5,
-      "light": 11.459823468021588,
-      "dark": 11.459823468021588,
-      "lightPass": true,
-      "darkPass": true
-    },
-    {
       "name": "border on background",
       "fg": "border",
       "bg": "background",
@@ -312,6 +288,842 @@
       "dark": 4.685138940918969,
       "lightPass": true,
       "darkPass": true
+    },
+    {
+      "name": "warm-900 on amber-500 (light amber button)",
+      "fg": "raw-warm-900",
+      "bg": "raw-amber-500",
+      "type": "normal",
+      "backdrop": null,
+      "required": 4.5,
+      "light": 6.763946694234807,
+      "dark": 6.763946694234807,
+      "lightPass": true,
+      "darkPass": true
+    },
+    {
+      "name": "warm-950 on amber-400 (dark amber button)",
+      "fg": "raw-warm-950",
+      "bg": "raw-amber-400",
+      "type": "normal",
+      "backdrop": null,
+      "required": 4.5,
+      "light": 11.459823468021588,
+      "dark": 11.459823468021588,
+      "lightPass": true,
+      "darkPass": true
+    }
+  ],
+  "themes": [
+    {
+      "name": "default",
+      "results": [
+        {
+          "mode": "light",
+          "name": "foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.690043287047263,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.717345280640146,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "card-foreground on card",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 17.38498890152808,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "card-foreground on card",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.534923511761454,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "popover-foreground on popover",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 17.38498890152808,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "popover-foreground on popover",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 12.969381871144716,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary-foreground on primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.044664192281127,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary-foreground on primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.093650526126205,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "secondary-foreground on secondary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.455224970832033,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "secondary-foreground on secondary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 12.969381871144716,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "muted-foreground on muted",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.321195993167089,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "muted-foreground on muted",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.753559313157316,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "muted-foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.826237401977385,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "muted-foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.416254574529242,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "accent-foreground on accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.546189891848669,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "accent-foreground on accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.933215583853083,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-foreground on sidebar",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 17.38498890152808,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-foreground on sidebar",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.455224970832033,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-primary-foreground on sidebar-primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.044664192281127,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-primary-foreground on sidebar-primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.093650526126205,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-accent-foreground on sidebar-accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.546189891848669,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-accent-foreground on sidebar-accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.2436470684679195,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-ground",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.690043287047263,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-ground",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.717345280640146,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-page",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 17.38498890152808,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-page",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.455224970832033,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-raised",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 17.38498890152808,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-raised",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.534923511761454,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-sunken",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.455224970832033,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-sunken",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.717345280640146,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-interactive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.455224970832033,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-interactive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 12.969381871144716,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-success-text on status-success-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.696825084931398,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-success-text on status-success-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.554646740963084,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-warning-text on status-warning-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.775619585951132,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-warning-text on status-warning-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 10.703496940889677,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-error-text on status-error-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.419782045874076,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-error-text on status-error-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.2684006222798025,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.221393239947256,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 7.416254574529242,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border-strong on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 10.303382983491964,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border-strong on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 7.416254574529242,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "ring on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.806764125140769,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "ring on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.747140737835221,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border on card",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.397165026074199,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border on card",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.448074809423677,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary-foreground on destructive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 4.886100753257184,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary-foreground on destructive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 4.685138940918969,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "warm-900 on amber-500 (light amber button)",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.763946694234807,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "warm-900 on amber-500 (light amber button)",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.763946694234807,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "warm-950 on amber-400 (dark amber button)",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 11.459823468021588,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "warm-950 on amber-400 (dark amber button)",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 11.459823468021588,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "forest",
+      "results": [
+        {
+          "mode": "light",
+          "name": "foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.738730898525843,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.378152290306524,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "card-foreground on card",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.463774739850685,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "card-foreground on card",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.078982882166839,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "popover-foreground on popover",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.463774739850685,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "popover-foreground on popover",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 10.814821047565687,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary-foreground on primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.500198958857902,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary-foreground on primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.500198958857902,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "secondary-foreground on secondary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.078982882166839,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "secondary-foreground on secondary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 10.814821047565687,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "muted-foreground on muted",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.7613951533663235,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "muted-foreground on muted",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.390432595244936,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "muted-foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 8.67637319672307,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "muted-foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 9.677781794588183,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "accent-foreground on accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 9.244908035631846,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "accent-foreground on accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.653762342357399,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-foreground on sidebar",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.463774739850685,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-foreground on sidebar",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.078982882166839,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-primary-foreground on sidebar-primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.500198958857902,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-primary-foreground on sidebar-primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.500198958857902,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-accent-foreground on sidebar-accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 9.244908035631846,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-accent-foreground on sidebar-accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.613530497394697,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-ground",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.738730898525843,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-ground",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.378152290306524,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-page",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.463774739850685,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-page",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.078982882166839,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-raised",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.463774739850685,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-raised",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 10.814821047565687,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-sunken",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.078982882166839,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-sunken",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.378152290306524,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-interactive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.078982882166839,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-interactive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 10.814821047565687,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-success-text on status-success-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.696825084931398,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-success-text on status-success-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.691371185357569,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-warning-text on status-warning-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.1611270513712055,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-warning-text on status-warning-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.653762342357399,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-error-text on status-error-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.419782045874076,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-error-text on status-error-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.611420817276324,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.144102303989151,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.547116473200645,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border-strong on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 8.67637319672307,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border-strong on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 9.677781794588183,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "ring on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.144102303989151,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "ring on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.547116473200645,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border on card",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.335010698871794,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border on card",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.628030507952937,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary-foreground on destructive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 4.886100753257184,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary-foreground on destructive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 4.685138940918969,
+          "pass": true
+        }
+      ]
     }
   ]
 }

@@ -10,6 +10,9 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Mono } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
+import { DirectionToggle } from "@/components/direction-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { DocsThemeProvider, ThemePicker } from "./_components/theme-picker"
 
 // ─── Navigation Data ──────────────────────────────────────────────────
 
@@ -26,6 +29,7 @@ const navSections = [
       { label: "Colors", href: "/docs/tokens" },
       { label: "Typography", href: "/docs/tokens/typography" },
       { label: "Spacing", href: "/docs/tokens/spacing" },
+      { label: "Themes", href: "/docs/foundations/themes" },
     ],
   },
   {
@@ -190,45 +194,53 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   const [open, setOpen] = React.useState(false)
 
   return (
-    <div className="flex">
-      {/* Desktop sidebar — sticky so the SiteFooter renders below it */}
-      <aside className="hidden md:flex md:w-[280px] md:flex-col md:shrink-0 md:sticky md:top-0 md:h-screen md:self-start border-e-2 bg-card">
-        <div className="flex items-center h-14 px-4 border-b-2">
+    <DocsThemeProvider>
+      <div className="flex">
+        {/* Desktop sidebar — sticky so the SiteFooter renders below it */}
+        <aside className="hidden md:flex md:w-[280px] md:flex-col md:shrink-0 md:sticky md:top-0 md:h-screen md:self-start border-e-2 bg-card">
+          <div className="flex items-center h-14 px-4 border-b-2">
+            <Link href="/" className="font-bold text-lg tracking-tight">
+              SubstrateUI
+            </Link>
+          </div>
+          <ScrollArea className="flex-1 py-4 px-2">
+            <SidebarNav />
+          </ScrollArea>
+        </aside>
+
+        {/* Mobile header */}
+        <div className="md:hidden fixed top-0 inset-x-0 z-50 h-14 border-b-2 bg-card flex items-center justify-between px-4">
           <Link href="/" className="font-bold text-lg tracking-tight">
             SubstrateUI
           </Link>
+          <div className="flex items-center gap-2">
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label="Open navigation menu">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] p-0">
+                <SheetTitle className="px-4 pt-4 font-bold text-lg">Navigation</SheetTitle>
+                <ScrollArea className="h-full py-4 px-2">
+                  <SidebarNav onNavigate={() => setOpen(false)} />
+                </ScrollArea>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-        <ScrollArea className="flex-1 py-4 px-2">
-          <SidebarNav />
-        </ScrollArea>
-      </aside>
 
-      {/* Mobile header */}
-      <div className="md:hidden fixed top-0 inset-x-0 z-50 h-14 border-b-2 bg-card flex items-center justify-between px-4">
-        <Link href="/" className="font-bold text-lg tracking-tight">
-          SubstrateUI
-        </Link>
-        <div className="flex items-center gap-2">
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open navigation menu">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[280px] p-0">
-              <SheetTitle className="px-4 pt-4 font-bold text-lg">Navigation</SheetTitle>
-              <ScrollArea className="h-full py-4 px-2">
-                <SidebarNav onNavigate={() => setOpen(false)} />
-              </ScrollArea>
-            </SheetContent>
-          </Sheet>
-        </div>
+        {/* Main content */}
+        <main className="flex-1 min-w-0 mt-14 md:mt-0">
+          {/* Docs header — theme, direction, light/dark controls */}
+          <div className="sticky top-0 z-40 flex h-14 items-center justify-end gap-2 border-b-2 bg-card/90 backdrop-blur px-4 md:px-6">
+            <ThemePicker />
+            <DirectionToggle />
+            <ThemeToggle />
+          </div>
+          {children}
+        </main>
       </div>
-
-      {/* Main content */}
-      <main className="flex-1 min-w-0 mt-14 md:mt-0">
-        {children}
-      </main>
-    </div>
+    </DocsThemeProvider>
   )
 }

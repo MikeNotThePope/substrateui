@@ -10,32 +10,77 @@ const __dirname = path.dirname(__filename)
 
 type TokenMap = Record<string, string>
 
-function extractTokens(css: string): { light: TokenMap; dark: TokenMap } {
-  const light: TokenMap = {}
-  const dark: TokenMap = {}
-
-  // Find all :root blocks (there are multiple)
-  const rootBlocks = [...css.matchAll(/:root\s*\{([^}]+)\}/g)]
-  for (const block of rootBlocks) {
-    extractDeclarations(block[1], light)
-  }
-
-  // Find .dark block
-  const darkBlock = css.match(/\.dark\s*\{([^}]+)\}/)
-  if (darkBlock) {
-    // Dark inherits from light, then overrides
-    Object.assign(dark, light)
-    extractDeclarations(darkBlock[1], dark)
-  }
-
-  return { light, dark }
+/**
+ * Parse every top-level CSS block from a stylesheet into
+ * { selector, declarations } tuples. Brace-aware so that nested
+ * at-rules (like @theme inline { ... }) do not corrupt the scan.
+ */
+interface CssBlock {
+  selector: string
+  decls: TokenMap
 }
 
-function extractDeclarations(block: string, target: TokenMap): void {
-  const decls = block.matchAll(/--([a-z0-9-]+):\s*([^;]+);/gi)
-  for (const decl of decls) {
-    target[decl[1]] = decl[2].trim()
+function parseBlocks(css: string): CssBlock[] {
+  const blocks: CssBlock[] = []
+  let i = 0
+  while (i < css.length) {
+    // Skip whitespace and /* comments */
+    while (i < css.length) {
+      if (/\s/.test(css[i])) { i++; continue }
+      if (css[i] === "/" && css[i + 1] === "*") {
+        const end = css.indexOf("*/", i + 2)
+        if (end === -1) return blocks
+        i = end + 2
+        continue
+      }
+      break
+    }
+    if (i >= css.length) break
+
+    // Read selector up to the first `{` or `;`. A top-level `;` means
+    // this is a semicolon-terminated at-rule (e.g. @custom-variant,
+    // @import) that has no body — skip it and continue.
+    const selStart = i
+    while (i < css.length && css[i] !== "{" && css[i] !== ";") i++
+    if (i >= css.length) break
+    if (css[i] === ";") { i++; continue }
+    const selector = css.slice(selStart, i).trim()
+    i++ // consume {
+
+    // Read body, tracking nested braces
+    const bodyStart = i
+    let depth = 1
+    while (i < css.length && depth > 0) {
+      if (css[i] === "{") depth++
+      else if (css[i] === "}") depth--
+      if (depth > 0) i++
+    }
+    const body = css.slice(bodyStart, i)
+    i++ // consume }
+
+    // At-rules (@theme, @media, @custom-variant...) are skipped for
+    // the token map. We only care about style rules that define
+    // custom properties at the top level.
+    if (selector.startsWith("@")) continue
+
+    const decls: TokenMap = {}
+    const declMatches = body.matchAll(/--([a-z0-9-]+):\s*([^;]+);/gi)
+    for (const m of declMatches) decls[m[1]] = m[2].trim()
+    blocks.push({ selector, decls })
   }
+  return blocks
+}
+
+/**
+ * Collect all declarations from blocks whose selector matches `target`.
+ * Returns declarations merged in source order (later overrides earlier).
+ */
+function mergeMatchingBlocks(blocks: CssBlock[], target: string): TokenMap {
+  const out: TokenMap = {}
+  for (const b of blocks) {
+    if (b.selector === target) Object.assign(out, b.decls)
+  }
+  return out
 }
 
 function resolveValue(name: string, tokens: TokenMap, seen = new Set<string>()): string | null {
@@ -53,6 +98,23 @@ function resolveValue(name: string, tokens: TokenMap, seen = new Set<string>()):
 
   return value
 }
+
+// ─── Themes to audit ──────────────────────────────────────────────────
+
+interface ThemeSpec {
+  name: string
+  lightSelector: string
+  darkSelector: string
+}
+
+const THEMES: ThemeSpec[] = [
+  { name: "default", lightSelector: ":root", darkSelector: ".dark" },
+  {
+    name: "forest",
+    lightSelector: '[data-theme="forest"]',
+    darkSelector: '[data-theme="forest"].dark',
+  },
+]
 
 // ─── Pairings to audit ────────────────────────────────────────────────
 
@@ -94,10 +156,6 @@ const pairings: Pairing[] = [
   { name: "status-warning-text on status-warning-surface", fg: "status-warning-text", bg: "status-warning-surface", type: "normal", backdrop: "background" },
   { name: "status-error-text on status-error-surface", fg: "status-error-text", bg: "status-error-surface", type: "normal", backdrop: "background" },
 
-  // Amber button (uses raw palette with explicit dark overrides)
-  { name: "warm-900 on amber-500 (light amber button)", fg: "raw-warm-900", bg: "raw-amber-500", type: "normal" },
-  { name: "warm-950 on amber-400 (dark amber button)", fg: "raw-warm-950", bg: "raw-amber-400", type: "normal" },
-
   // UI element contrast (3:1 minimum)
   { name: "border on background", fg: "border", bg: "background", type: "ui" },
   { name: "border-strong on background", fg: "border-strong", bg: "background", type: "ui" },
@@ -108,46 +166,80 @@ const pairings: Pairing[] = [
   { name: "primary-foreground on destructive", fg: "primary-foreground", bg: "destructive", type: "normal" },
 ]
 
+// Pairings that only apply to the default theme (reference raw palette tokens
+// that other themes don't consume directly).
+const defaultOnlyPairings: Pairing[] = [
+  { name: "warm-900 on amber-500 (light amber button)", fg: "raw-warm-900", bg: "raw-amber-500", type: "normal" },
+  { name: "warm-950 on amber-400 (dark amber button)", fg: "raw-warm-950", bg: "raw-amber-400", type: "normal" },
+]
+
 // ─── Audit runner ─────────────────────────────────────────────────────
 
 const THRESHOLDS = { normal: 4.5, large: 3, ui: 3 }
 
 interface Result {
+  theme: string
+  mode: "light" | "dark"
   pairing: Pairing
-  lightRatio: number | null
-  darkRatio: number | null
-  lightPass: boolean
-  darkPass: boolean
+  ratio: number | null
+  pass: boolean
   required: number
 }
 
 function audit(): Result[] {
   const cssPath = path.resolve(__dirname, "../src/styles/tokens.css")
   const css = readFileSync(cssPath, "utf8")
-  const { light, dark } = extractTokens(css)
+  const blocks = parseBlocks(css)
 
-  return pairings.map((p) => {
-    const required = THRESHOLDS[p.type]
-    const lightFg = resolveValue(p.fg, light)
-    const lightBg = resolveValue(p.bg, light)
-    const darkFg = resolveValue(p.fg, dark)
-    const darkBg = resolveValue(p.bg, dark)
+  // Default/root token map: all :root declarations merged.
+  const rootTokens = mergeMatchingBlocks(blocks, ":root")
 
-    const lightBackdrop = p.backdrop ? resolveValue(p.backdrop, light) : null
-    const darkBackdrop = p.backdrop ? resolveValue(p.backdrop, dark) : null
+  const results: Result[] = []
 
-    const lightRatio = lightFg && lightBg ? computeRatio(lightFg, lightBg, lightBackdrop) : null
-    const darkRatio = darkFg && darkBg ? computeRatio(darkFg, darkBg, darkBackdrop) : null
-
-    return {
-      pairing: p,
-      lightRatio,
-      darkRatio,
-      lightPass: lightRatio !== null && lightRatio >= required,
-      darkPass: darkRatio !== null && darkRatio >= required,
-      required,
+  for (const theme of THEMES) {
+    // Light tokens: start from :root, then layer theme-specific light overrides.
+    const lightTokens: TokenMap = { ...rootTokens }
+    if (theme.lightSelector !== ":root") {
+      Object.assign(lightTokens, mergeMatchingBlocks(blocks, theme.lightSelector))
     }
-  })
+
+    // Dark tokens: start from the theme's light map, then layer
+    // default `.dark` overrides, then theme-specific dark overrides.
+    // This lets a theme inherit default .dark values for tokens it
+    // doesn't explicitly override.
+    const darkTokens: TokenMap = { ...lightTokens }
+    Object.assign(darkTokens, mergeMatchingBlocks(blocks, ".dark"))
+    if (theme.darkSelector !== ".dark") {
+      Object.assign(darkTokens, mergeMatchingBlocks(blocks, theme.darkSelector))
+    }
+
+    const themePairings =
+      theme.name === "default" ? [...pairings, ...defaultOnlyPairings] : pairings
+
+    for (const p of themePairings) {
+      const required = THRESHOLDS[p.type]
+      const modeTokenPairs: Array<["light" | "dark", TokenMap]> = [
+        ["light", lightTokens],
+        ["dark", darkTokens],
+      ]
+      for (const [mode, tokens] of modeTokenPairs) {
+        const fg = resolveValue(p.fg, tokens)
+        const bg = resolveValue(p.bg, tokens)
+        const backdrop = p.backdrop ? resolveValue(p.backdrop, tokens) : null
+        const ratio = fg && bg ? computeRatio(fg, bg, backdrop) : null
+        results.push({
+          theme: theme.name,
+          mode,
+          pairing: p,
+          ratio,
+          pass: ratio !== null && ratio >= required,
+          required,
+        })
+      }
+    }
+  }
+
+  return results
 }
 
 function computeRatio(fg: string, bg: string, backdrop?: string | null): number | null {
@@ -188,6 +280,10 @@ function composite(over: ParsedColor, under: ParsedColor): ParsedColor {
 
 // ─── Report generation ────────────────────────────────────────────────
 
+function formatThemeLabel(name: string): string {
+  return name.charAt(0).toUpperCase() + name.slice(1)
+}
+
 function generateReport(results: Result[]): string {
   const lines: string[] = [
     "# SubstrateUI Contrast Audit Report",
@@ -196,41 +292,40 @@ function generateReport(results: Result[]): string {
     "",
     "WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)",
     "",
-    "| Pairing | Type | Required | Light | Dark | Status |",
-    "|---|---|---|---|---|---|",
   ]
 
-  for (const r of results) {
-    const lightStr = r.lightRatio !== null ? r.lightRatio.toFixed(2) : "—"
-    const darkStr = r.darkRatio !== null ? r.darkRatio.toFixed(2) : "—"
-    const lightMark = r.lightPass ? "✅" : "❌"
-    const darkMark = r.darkPass ? "✅" : "❌"
-    lines.push(
-      `| ${r.pairing.name} | ${r.pairing.type} | ${r.required}:1 | ${lightStr} ${lightMark} | ${darkStr} ${darkMark} | ${
-        r.lightPass && r.darkPass ? "PASS" : "REVIEW"
-      } |`
-    )
+  for (const theme of THEMES) {
+    lines.push(`## ${formatThemeLabel(theme.name)} theme`, "")
+    for (const mode of ["light", "dark"] as const) {
+      lines.push(`### ${mode.charAt(0).toUpperCase() + mode.slice(1)} mode`, "")
+      lines.push("| Pairing | Type | Required | Ratio | Status |")
+      lines.push("|---|---|---|---|---|")
+      const scoped = results.filter((r) => r.theme === theme.name && r.mode === mode)
+      for (const r of scoped) {
+        const ratioStr = r.ratio !== null ? r.ratio.toFixed(2) : "—"
+        const mark = r.pass ? "✅" : "❌"
+        lines.push(
+          `| ${r.pairing.name} | ${r.pairing.type} | ${r.required}:1 | ${ratioStr} ${mark} | ${
+            r.pass ? "PASS" : "REVIEW"
+          } |`
+        )
+      }
+      lines.push("")
+    }
   }
 
-  const failures = results.filter((r) => !r.lightPass || !r.darkPass)
-  lines.push("")
-  lines.push("## Summary")
-  lines.push("")
+  const failures = results.filter((r) => !r.pass)
+  lines.push("## Summary", "")
   lines.push(`- Total pairings audited: ${results.length}`)
-  lines.push(`- Passing (light + dark): ${results.length - failures.length}`)
+  lines.push(`- Passing: ${results.length - failures.length}`)
   lines.push(`- Failing or incomplete: ${failures.length}`)
 
   if (failures.length > 0) {
-    lines.push("")
-    lines.push("## Failures")
-    lines.push("")
+    lines.push("", "## Failures", "")
     for (const r of failures) {
-      lines.push(`### ${r.pairing.name}`)
-      lines.push("")
+      lines.push(`### [${r.theme} / ${r.mode}] ${r.pairing.name}`, "")
       lines.push(`- Required: ${r.required}:1 (${r.pairing.type})`)
-      lines.push(`- Light: ${r.lightRatio?.toFixed(2) ?? "unresolved"}`)
-      lines.push(`- Dark: ${r.darkRatio?.toFixed(2) ?? "unresolved"}`)
-      lines.push("")
+      lines.push(`- Ratio: ${r.ratio?.toFixed(2) ?? "unresolved"}`, "")
     }
   }
 
@@ -246,20 +341,49 @@ writeFileSync(outPath, report)
 console.log(`Wrote ${outPath}`)
 
 // Also emit a JSON manifest for the docs page to render.
+// The docs contrast matrix currently only consumes the default theme;
+// we keep that shape (light/dark per pairing) for backwards compat and
+// ship the full multi-theme results alongside it.
+const defaultResults = results.filter((r) => r.theme === "default")
+const byPairing = new Map<
+  string,
+  { light: Result | null; dark: Result | null; pairing: Pairing }
+>()
+for (const r of defaultResults) {
+  const key = r.pairing.name
+  const entry = byPairing.get(key) ?? { light: null, dark: null, pairing: r.pairing }
+  if (r.mode === "light") entry.light = r
+  else entry.dark = r
+  byPairing.set(key, entry)
+}
+
 const jsonPath = path.resolve(__dirname, "../src/app/docs/accessibility/contrast/contrast-data.json")
 const jsonData = {
   generatedAt: new Date().toISOString(),
-  results: results.map((r) => ({
-    name: r.pairing.name,
-    fg: r.pairing.fg,
-    bg: r.pairing.bg,
-    type: r.pairing.type,
-    backdrop: r.pairing.backdrop ?? null,
-    required: r.required,
-    light: r.lightRatio,
-    dark: r.darkRatio,
-    lightPass: r.lightPass,
-    darkPass: r.darkPass,
+  results: [...byPairing.values()].map(({ pairing, light, dark }) => ({
+    name: pairing.name,
+    fg: pairing.fg,
+    bg: pairing.bg,
+    type: pairing.type,
+    backdrop: pairing.backdrop ?? null,
+    required: THRESHOLDS[pairing.type],
+    light: light?.ratio ?? null,
+    dark: dark?.ratio ?? null,
+    lightPass: light?.pass ?? false,
+    darkPass: dark?.pass ?? false,
+  })),
+  themes: THEMES.map((t) => ({
+    name: t.name,
+    results: results
+      .filter((r) => r.theme === t.name)
+      .map((r) => ({
+        mode: r.mode,
+        name: r.pairing.name,
+        type: r.pairing.type,
+        required: r.required,
+        ratio: r.ratio,
+        pass: r.pass,
+      })),
   })),
 }
 try {
@@ -269,12 +393,12 @@ try {
   // Directory may not exist yet; ignore.
 }
 
-const failures = results.filter((r) => !r.lightPass || !r.darkPass)
+const failures = results.filter((r) => !r.pass)
 if (failures.length > 0) {
   console.log(`\n⚠️  ${failures.length} pairing(s) failed or could not be resolved:`)
   for (const r of failures) {
-    console.log(`  - ${r.pairing.name}`)
+    console.log(`  - [${r.theme}/${r.mode}] ${r.pairing.name}`)
   }
   process.exit(1)
 }
-console.log("\n✅ All pairings pass WCAG AA.")
+console.log("\n✅ All pairings pass WCAG AA across all themes.")

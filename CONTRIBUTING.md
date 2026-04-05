@@ -190,3 +190,40 @@ One-time setup:
 
 This enforces that no PR can merge to main if the contrast audit, lint,
 typecheck, or builds fail.
+
+## Adding a new theme
+
+SubstrateUI's token architecture supports multiple brand themes that
+layer orthogonally on top of light/dark mode. The default theme lives
+in `:root` / `.dark`; alternative themes attach via
+`[data-theme="..."]` on `<html>`. See
+[/docs/foundations/themes](./src/app/docs/foundations/themes/page.tsx)
+for the end-user-facing explanation.
+
+To add a theme:
+
+1. **Add your raw palette** to `src/styles/tokens.css` in the palette
+   section. Use OKLCH, with a 50–950 lightness ramp. Keep chroma
+   consistent across stops so the palette reads as one family.
+2. **Add `[data-theme="your-name"]` and `[data-theme="your-name"].dark`
+   selectors** below the existing `:root` and `.dark` declarations.
+3. **Mirror every semantic token.** Every custom property declared in
+   `:root` must be declared in `[data-theme="your-name"]`, and every
+   one in `.dark` must be declared in `[data-theme="your-name"].dark`.
+   Missing mappings fall through to the default theme, creating
+   subtle cross-theme bugs.
+4. **Add your theme to the contrast audit rotation** in
+   `scripts/audit-contrast.ts` (the `THEMES` array).
+5. **Run `bun run audit:contrast`.** If any pairing fails, adjust
+   OKLCH lightness values in 0.05 increments until all pass. Every
+   theme must independently pass WCAG AA in both modes.
+6. **Add the theme to the docs `ThemePicker`** component for in-docs
+   testing.
+7. **If this is a public theme, add scoped visual regression coverage**
+   for it — landing page, contrast matrix, and two representative
+   component pages. Don't snapshot every component in every theme.
+
+A theme should ONLY vary color tokens. Spacing, typography, radii, and
+shadows stay constant across themes — they're structural, not brand.
+If you find yourself needing per-theme spacing or typography, rethink
+the abstraction before forking it.
