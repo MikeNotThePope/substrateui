@@ -80,7 +80,7 @@ export default function HomePage() {
             <H1 className="text-4xl md:text-6xl font-bold tracking-tight">SubstrateUI</H1>
             <Lead className="max-w-2xl text-lg md:text-xl">
               A chunky, opinionated design system for Next.js. OKLCH color tokens,
-              Tailwind CSS v4, Radix UI primitives, and a personality that isn't afraid of borders.
+              Tailwind CSS v4, Radix UI primitives, and a personality that isn&apos;t afraid of borders.
             </Lead>
             <Cluster gap="sm">
               <Link href="/docs">
@@ -159,7 +159,7 @@ export default function HomePage() {
           <Stack gap="xl">
             <div className="text-center">
               <H2 className="text-3xl font-bold tracking-tight">Quick Start</H2>
-              <P className="text-muted-foreground mt-2">Three imports and you're in.</P>
+              <P className="text-muted-foreground mt-2">Three imports and you&apos;re in.</P>
             </div>
 
             <div className="border-2 rounded-lg overflow-hidden">

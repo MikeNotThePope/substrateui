@@ -22,8 +22,8 @@ function FormActions({
     (child) =>
       React.isValidElement(child) &&
       typeof child.type === "function" &&
-      ((child.type as Function).name === "FormActionsPrimary" ||
-        (child.type as Function).name === "FormActionsSecondary")
+      ((child.type as { name?: string }).name === "FormActionsPrimary" ||
+        (child.type as { name?: string }).name === "FormActionsSecondary")
   )
 
   if (!hasSubComponents) {

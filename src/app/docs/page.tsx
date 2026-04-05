@@ -134,7 +134,7 @@ export default function RootLayout({ children }) {
           <H2>Your First Component</H2>
           <Stack gap="md" className="mt-4">
             <p className="text-muted-foreground">
-              Here's a complete example combining Button, Stack, Card, and Field:
+              Here&apos;s a complete example combining Button, Stack, Card, and Field:
             </p>
             <ComponentPreview
               code={`import { Button, Stack, Card, CardHeader, CardTitle, CardContent, CardFooter, Field, FieldLabel, FieldHint, Input, Badge, Cluster } from 'substrateui'

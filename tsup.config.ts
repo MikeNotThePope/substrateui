@@ -1,6 +1,7 @@
 import { defineConfig } from "tsup"
 import path from "path"
 import { fileURLToPath } from "url"
+import type { PluginBuild, OnResolveArgs } from "esbuild"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -11,8 +12,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
  */
 const aliasPlugin = {
   name: "resolve-at-alias",
-  setup(build: any) {
-    build.onResolve({ filter: /^@\// }, async (args: any) => {
+  setup(build: PluginBuild) {
+    build.onResolve({ filter: /^@\// }, async (args: OnResolveArgs) => {
       const stripped = args.path.replace(/^@\//, "")
       return build.resolve("./" + stripped, {
         resolveDir: path.resolve(__dirname, "src"),
