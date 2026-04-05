@@ -20,11 +20,17 @@ const applyRootAttributes = (theme: Theme, direction: Direction, palette: Palett
   }
 }
 
-const withSubstrate: Decorator = (Story, context) => {
-  const theme = context.globals.theme as Theme
-  const direction = context.globals.direction as Direction
-  const palette = context.globals.palette as Palette
-
+const SubstrateFrame = ({
+  theme,
+  direction,
+  palette,
+  children,
+}: {
+  theme: Theme
+  direction: Direction
+  palette: Palette
+  children: React.ReactNode
+}) => {
   React.useEffect(() => {
     applyRootAttributes(theme, direction, palette)
   }, [theme, direction, palette])
@@ -35,9 +41,21 @@ const withSubstrate: Decorator = (Story, context) => {
   return (
     <DirectionProvider dir={direction}>
       <div className="bg-background text-foreground p-6 min-h-[120px]">
-        <Story />
+        {children}
       </div>
     </DirectionProvider>
+  )
+}
+
+const withSubstrate: Decorator = (Story, context) => {
+  const theme = context.globals.theme as Theme
+  const direction = context.globals.direction as Direction
+  const palette = context.globals.palette as Palette
+
+  return (
+    <SubstrateFrame theme={theme} direction={direction} palette={palette}>
+      <Story />
+    </SubstrateFrame>
   )
 }
 
