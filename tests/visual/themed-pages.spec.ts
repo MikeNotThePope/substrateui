@@ -48,7 +48,7 @@ async function preparePage(page: import('@playwright/test').Page) {
     const expected = localStorage.getItem('substrateui-direction') ?? 'ltr';
     return document.documentElement.getAttribute('dir') === expected;
   });
-  // Wait for DocsThemeProvider to apply data-theme from localStorage.
+  // Wait for SiteThemeProvider to apply data-theme from localStorage.
   // Default theme clears the attribute; named themes set it.
   await page.waitForFunction(() => {
     const storedTheme = localStorage.getItem('substrateui-theme') ?? 'default';

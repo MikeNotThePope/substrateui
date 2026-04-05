@@ -52,26 +52,6 @@ const features = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Nav */}
-      <header className="border-b-2 bg-card">
-        <Center max="2xl" className="px-4">
-          <div className="flex items-center justify-between h-14">
-            <span className="font-bold text-lg tracking-tight">SubstrateUI</span>
-            <Cluster gap="sm">
-              <Link href="/docs">
-                <Button variant="ghost" size="sm">Docs</Button>
-              </Link>
-              <Link href="/docs/components/button">
-                <Button variant="ghost" size="sm">Components</Button>
-              </Link>
-              <Link href="/design-system">
-                <Button variant="ghost" size="sm">Playground</Button>
-              </Link>
-            </Cluster>
-          </div>
-        </Center>
-      </header>
-
       {/* Hero */}
       <section className="py-20 md:py-32">
         <Center max="xl" className="px-4 text-center">

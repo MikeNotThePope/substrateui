@@ -191,6 +191,25 @@ One-time setup:
 This enforces that no PR can merge to main if the contrast audit, lint,
 typecheck, or builds fail.
 
+## Site chrome
+
+SubstrateUI has exactly one `SiteHeader` and one `SiteFooter`, both
+rendered by the root layout (`src/app/layout.tsx`) and present on every
+route with zero per-page or per-section variation.
+
+- **Preference controls** (theme picker, light/dark mode toggle,
+  direction toggle) live only in the header's `SitePreferences` popover.
+  They do not appear in the footer, in route-specific layouts, or in
+  page content.
+- **Page-specific chrome** (like the docs sidebar) is fine, but only
+  when it is *additive* to the global chrome, not a replacement. The
+  docs sidebar sits below the global header; it does not try to reclaim
+  the top bar.
+- **If you find yourself building a second header** in a route group,
+  stop. Ask whether the global `SiteHeader` should be extended instead.
+  Persistent, predictable, identical chrome on every page is the whole
+  point.
+
 ## Adding a new theme
 
 SubstrateUI's token architecture supports multiple brand themes that

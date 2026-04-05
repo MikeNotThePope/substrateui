@@ -23,7 +23,7 @@ function applyTheme(t: Theme) {
   }
 }
 
-export function DocsThemeProvider({
+export function SiteThemeProvider({
   children,
 }: {
   children: React.ReactNode

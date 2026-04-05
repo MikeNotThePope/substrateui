@@ -1,12 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import { type ColumnDef } from "@tanstack/react-table"
 import {
   Plus,
-  Sun,
-  Moon,
   Info,
   CheckCircle,
   AlertTriangle,
@@ -219,7 +216,6 @@ function PropsTable({ name, props }: { name: string; props: { prop: string; type
 // ─── Page ───────────────────────────────────────────────────────────────
 
 export default function DesignSystemPage() {
-  const { setTheme, resolvedTheme } = useTheme()
   const [searchValue, setSearchValue] = React.useState("")
   const [sliderValue, setSliderValue] = React.useState([50])
   const [comboValue, setComboValue] = React.useState("")
@@ -234,18 +230,9 @@ export default function DesignSystemPage() {
 
         {/* ── Header ─────────────────────────────────────────── */}
         <Stack gap="md">
-          <div className="flex items-center justify-between">
-            <div>
-              <H1>SubstrateUI</H1>
-              <Lead>Component Design System</Lead>
-            </div>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            >
-              {resolvedTheme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-            </Button>
+          <div>
+            <H1>Design System</H1>
+            <Lead>Component reference and live examples.</Lead>
           </div>
 
           {/* Section nav */}
