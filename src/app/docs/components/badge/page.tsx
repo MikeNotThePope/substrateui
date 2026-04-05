@@ -1,8 +1,9 @@
+import { Check, Clock, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
-import { H3 } from "@/components/ui/typography"
+import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -112,6 +113,37 @@ export default function BadgePage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={badgeProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Don&apos;t rely on color alone to communicate status. Badge
+            variants have distinct colors, but users with color vision
+            deficiency or monochrome displays will not distinguish them.
+            Pair status badges with an icon or explicit text so the meaning
+            is carried by more than hue.
+          </P>
+          <ComponentPreview
+            code={`<Badge variant="success"><Check /> Active</Badge>
+<Badge variant="secondary"><Clock /> Pending</Badge>
+<Badge variant="destructive"><X /> Failed</Badge>`}
+          >
+            <Cluster gap="sm">
+              <Badge variant="success">
+                <Check className="w-3 h-3 mr-1" /> Active
+              </Badge>
+              <Badge variant="secondary">
+                <Clock className="w-3 h-3 mr-1" /> Pending
+              </Badge>
+              <Badge variant="destructive">
+                <X className="w-3 h-3 mr-1" /> Failed
+              </Badge>
+            </Cluster>
+          </ComponentPreview>
+        </Stack>
       </Stack>
     </DocPage>
   )

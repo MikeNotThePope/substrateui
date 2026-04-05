@@ -1,7 +1,7 @@
 import { Field, FieldLabel, FieldHint, FieldError } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -180,6 +180,29 @@ export default function FieldPage() {
 
         <H3>FieldError</H3>
         <PropsTable props={fieldErrorProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Field automatically links FieldLabel to the input via{" "}
+            <Code>htmlFor</Code>, and connects FieldHint and FieldError via{" "}
+            <Code>aria-describedby</Code>, so screen reader users hear the
+            label, the hint, and any validation error as a single unit.
+          </P>
+          <P>
+            FieldError uses <Code>role=&quot;alert&quot;</Code> so screen
+            readers announce validation errors the moment they appear,
+            without the user needing to navigate back to the field.
+          </P>
+          <P>
+            Always include a FieldLabel. Placeholder text is not a
+            substitute for a label — it disappears when users start typing
+            and is often low-contrast.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

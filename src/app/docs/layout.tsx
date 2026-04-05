@@ -32,6 +32,7 @@ const navSections = [
   {
     title: "Accessibility",
     items: [
+      { label: "Overview", href: "/docs/accessibility" },
       { label: "Contrast Matrix", href: "/docs/accessibility/contrast" },
     ],
   },

@@ -3,7 +3,7 @@
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -77,6 +77,23 @@ export default function DrawerPage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={drawerProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Built on Vaul, which implements focus trapping and restoration
+            and closes on Escape. The backdrop is marked{" "}
+            <Code>aria-hidden</Code>.
+          </P>
+          <P>
+            Every drawer must have a DrawerTitle. If the title should be
+            visually hidden, wrap it in <Code>VisuallyHidden</Code> from
+            Radix so the accessible name is still announced.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

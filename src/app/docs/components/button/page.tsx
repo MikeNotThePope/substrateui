@@ -2,7 +2,7 @@ import { Plus, ArrowRight, Download, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -136,6 +136,36 @@ export default function ButtonPage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={buttonProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Icon-only buttons (<Code>size=&quot;icon&quot;</Code>, or buttons
+            with no visible text children) MUST provide an{" "}
+            <Code>aria-label</Code> so assistive technology can announce what
+            the control does.
+          </P>
+          <ComponentPreview
+            code={`<Button size="icon" aria-label="Add item"><Plus /></Button>`}
+          >
+            <Button size="icon" aria-label="Add item">
+              <Plus />
+            </Button>
+          </ComponentPreview>
+          <P>
+            The default button height is 40px. For mobile-primary contexts,
+            prefer <Code>size=&quot;lg&quot;</Code> (44px) to meet WCAG 2.5.5
+            touch target guidance.
+          </P>
+          <P>
+            The press-down animation respects{" "}
+            <Code>prefers-reduced-motion</Code> and is disabled for users who
+            request reduced motion.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

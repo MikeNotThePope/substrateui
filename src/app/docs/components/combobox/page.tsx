@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Combobox } from "@/components/ui/combobox"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -87,6 +87,29 @@ export default function ComboboxPage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={comboboxProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Combobox follows the ARIA combobox pattern via Radix Popover +
+            CMDK Command. It supports full keyboard navigation: arrow keys
+            to move through options, Enter to select, Escape to close the
+            listbox.
+          </P>
+          <P>
+            Always provide a label via Field + FieldLabel or an explicit{" "}
+            <Code>aria-label</Code>. Without one, screen readers will
+            announce the combobox without context.
+          </P>
+          <P>
+            For multi-select, selected items are rendered as removable
+            Badges. Each remove button has an <Code>aria-label</Code>{" "}
+            identifying which item it removes.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

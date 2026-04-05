@@ -48,6 +48,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild:lib": "bun run audit:contrast",
     "build:lib": "tsup && cp src/styles/tokens.css dist/styles.css",
     "start": "next start",
     "lint": "eslint",

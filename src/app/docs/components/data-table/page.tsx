@@ -11,7 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable } from "../../_components/props-table"
@@ -222,6 +222,30 @@ const columns: ColumnDef<Person>[] = [
               ]}
             />
           </Stack>
+        </Stack>
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Always provide an accessible label for the table, either via the{" "}
+            <Code>toolbar</Code> prop (which typically contains context
+            identifying what the table holds) or by wrapping the DataTable
+            in a landmark with <Code>aria-label</Code>.
+          </P>
+          <P>
+            Sortable columns use DataTableColumnHeader, which renders as a
+            button with <Code>aria-sort</Code> reflecting the current sort
+            state, so screen reader users know which column is sorted and in
+            which direction.
+          </P>
+          <P>
+            Row selection (via <Code>createSelectColumn</Code>) uses
+            Checkbox, which is keyboard-accessible and screen-reader-friendly
+            out of the box.
+          </P>
         </Stack>
       </Stack>
     </DocPage>

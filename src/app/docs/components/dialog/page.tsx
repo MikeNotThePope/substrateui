@@ -3,7 +3,7 @@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -81,6 +81,25 @@ export default function DialogPage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={dialogProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Built on Radix primitives, so focus is trapped inside the
+            overlay while open and restored to the trigger on close.
+            Escape closes the overlay. The backdrop is marked{" "}
+            <Code>aria-hidden</Code>.
+          </P>
+          <P>
+            Every dialog must have a DialogTitle. If the title should be
+            visually hidden, wrap it in <Code>VisuallyHidden</Code> from
+            Radix — the accessible name is required even when the design
+            doesn&apos;t show it.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

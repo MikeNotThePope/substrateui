@@ -3,7 +3,7 @@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -76,6 +76,26 @@ export default function AlertDialogPage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={alertDialogProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Built on Radix primitives, so focus is trapped inside the alert
+            dialog while open and restored to the trigger on close. Unlike
+            regular Dialog, Escape does not dismiss — the user must choose
+            Cancel or Action explicitly, which is appropriate for
+            destructive confirmations.
+          </P>
+          <P>
+            Every alert dialog must have an AlertDialogTitle and should
+            include an AlertDialogDescription that explains the
+            consequences of the action. The description is wired up via{" "}
+            <Code>aria-describedby</Code> automatically.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

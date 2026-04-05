@@ -3,7 +3,7 @@
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -79,6 +79,23 @@ export default function SheetPage() {
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={sheetProps} />
+      </Stack>
+
+      {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            Built on Radix primitives, so focus is trapped inside the sheet
+            while open and restored to the trigger on close. Escape closes
+            the sheet. The backdrop is marked <Code>aria-hidden</Code>.
+          </P>
+          <P>
+            Every sheet must have a SheetTitle. If the title should be
+            visually hidden, wrap it in <Code>VisuallyHidden</Code> from
+            Radix.
+          </P>
+        </Stack>
       </Stack>
     </DocPage>
   )

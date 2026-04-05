@@ -118,6 +118,15 @@ Override tokens after importing the stylesheet:
 }
 ```
 
+## Accessibility
+
+SubstrateUI meets WCAG AA contrast requirements (verified by automated audit) and is built on Radix UI primitives for robust keyboard and screen reader support.
+
+- [Accessibility documentation](https://substrateui.dev/docs/accessibility)
+- [Contrast audit report](./audit-contrast-report.md)
+
+Every component ships with accessible defaults. For guidance on specific components, see the "Accessibility" section on each component's documentation page.
+
 ## Links
 
 - [GitHub](https://github.com/substrateui/substrateui)
