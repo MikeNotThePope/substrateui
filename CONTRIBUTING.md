@@ -73,6 +73,33 @@ Every new component MUST pass this checklist before merging:
   you find yourself adding a fifth boolean flag to a component,
   reconsider the shape of the API.
 
+## Writing component tests
+
+Every component with documented behavior should have a test file at
+`tests/unit/components/ui/<name>.test.tsx` (or wherever the component
+lives).
+
+**The rule:** every behavior in the component&apos;s docs page is a test.
+
+Write tests from the user&apos;s perspective:
+
+- What do they see? (`screen.getByRole`, `screen.getByLabelText`)
+- What can they do? (`userEvent.click`, `userEvent.type`, `userEvent.tab`)
+- What do they get back? (visible changes, fired handlers, updated
+  ARIA state)
+
+**Avoid:**
+
+- Testing implementation details (internal state, private methods,
+  exact class-name lists beyond a characteristic marker).
+- Testing behaviors that Radix already tests (focus trap, portal
+  rendering, etc.) — only test the behavior **you** add on top of Radix.
+- Snapshot tests for markup — visual regression in
+  `tests/visual/` handles that.
+
+Run `bun run test:watch` during development. Run `bun run test` to match
+CI.
+
 ## Versioning
 
 SubstrateUI follows semantic versioning.
