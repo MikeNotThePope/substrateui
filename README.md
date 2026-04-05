@@ -5,6 +5,15 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 [![npm version](https://img.shields.io/npm/v/substrateui.svg)](https://www.npmjs.com/package/substrateui)
 [![license](https://img.shields.io/npm/l/substrateui.svg)](https://github.com/substrateui/substrateui/blob/main/LICENSE)
 
+<!-- Replace <OWNER>/<REPO> with the GitHub owner/repo once the repo is pushed,
+     and <VERCEL-PRODUCTION-URL> with the production URL after Vercel deploys. -->
+## Status
+
+[![CI](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml)
+
+- **Docs:** <VERCEL-PRODUCTION-URL>
+- **npm:** `@substrateui/core` (not yet published)
+
 ## Features
 
 - 75 components from atomic Button to organism App Shell

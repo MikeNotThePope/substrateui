@@ -92,3 +92,20 @@ SubstrateUI follows semantic versioning.
 
 Always use `bun` for installs and scripts in this repository — never
 `npm` or `npx`, even when upstream docs suggest otherwise.
+
+## Branch protection (repo owner setup)
+
+The `main` branch should require the CI check to pass before merge.
+One-time setup:
+
+1. Go to repo Settings → Branches → Add branch protection rule
+2. Branch name pattern: `main`
+3. Enable: **Require a pull request before merging**
+4. Enable: **Require status checks to pass before merging**
+5. Search for and select the `verify` check (it will appear after the
+   first CI run)
+6. Enable: **Require branches to be up to date before merging**
+7. Save
+
+This enforces that no PR can merge to main if the contrast audit, lint,
+typecheck, or builds fail.
