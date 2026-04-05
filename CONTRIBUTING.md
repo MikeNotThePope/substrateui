@@ -83,14 +83,49 @@ SubstrateUI follows semantic versioning.
   defaults.
 - **Patch** — bug fixes, performance improvements, documentation fixes.
 
+## Creating a changeset
+
+Every PR that ships a user-facing change must include a changeset. This
+is how we track what's in each release.
+
+After making your changes, run:
+
+```
+bunx changeset
+```
+
+You'll be prompted to:
+
+1. Select which packages changed (just `substrateui` for now)
+2. Select the bump type — patch (bug fix), minor (new feature), major
+   (breaking change)
+3. Write a short summary of the change
+
+This creates a markdown file in `.changeset/`. Commit it with your PR.
+
+**When to skip a changeset:** docs-only changes, internal refactors,
+test updates, CI changes. Anything that doesn't affect what ships to
+consumers.
+
+A bot will comment on your PR confirming the changeset is present. If
+it's not, add one before merging.
+
 ## Releasing
 
-1. Update `CHANGELOG.md` with the changes in this release.
-2. Run `bun run audit:contrast` and ensure it passes. (The build runs
-   this as a prebuild step, but running it up front keeps the feedback
-   loop tight.)
-3. Run `bun run build:lib` and verify the `dist/` output looks right.
-4. Tag the release and publish.
+Releases are automated via changesets and GitHub Actions. The flow is:
+
+1. You merge a PR to `main` that contains one or more `.changeset/*.md`
+   files.
+2. The `release` workflow opens (or updates) a **Version Packages** PR
+   that consumes the changesets, bumps `package.json`, and updates
+   `CHANGELOG.md`.
+3. Review the Version Packages PR. Merge it when the version bump and
+   changelog read correctly.
+4. The `release` workflow runs again on that merge, detects the version
+   is already bumped, and publishes to npm via OIDC trusted publishing
+   (no stored tokens).
+
+See `docs/deployment.md` for the one-time npm OIDC setup.
 
 Always use `bun` for installs and scripts in this repository — never
 `npm` or `npx`, even when upstream docs suggest otherwise.
