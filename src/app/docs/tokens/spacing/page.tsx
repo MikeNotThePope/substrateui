@@ -1,8 +1,6 @@
 import { DocPage } from "../../_components/doc-page"
 import { H2, Mono, Muted, Code, P } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
-import { Cluster } from "@/components/ui/cluster"
-import { Grid } from "@/components/ui/grid"
 import { Card, CardContent } from "@/components/ui/card"
 import { ComponentPreview } from "../../_components/component-preview"
 

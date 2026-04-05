@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { Check, Copy } from "lucide-react"
-import { Code } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 

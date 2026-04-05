@@ -1,6 +1,6 @@
 import { DocPage } from "./_components/doc-page"
 import { ComponentPreview } from "./_components/component-preview"
-import { H2, H3, Code, Mono } from "@/components/ui/typography"
+import { H2, Code, Mono } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"

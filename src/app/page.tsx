@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, Box, Palette, Layers, Moon, Blocks, Puzzle } from "lucide-react"
 
-import { H1, H2, H3, P, Lead, Mono, Code } from "@/components/ui/typography"
+import { H1, H2, H3, P, Lead, Mono } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"

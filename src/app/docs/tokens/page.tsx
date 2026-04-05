@@ -2,11 +2,10 @@
 
 import * as React from "react"
 import { DocPage } from "../_components/doc-page"
-import { H2, H3, Mono, Code, P } from "@/components/ui/typography"
+import { H2, Mono, P } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
 import { Grid } from "@/components/ui/grid"
-import { Badge } from "@/components/ui/badge"
 
 // ─── Color Data ───────────────────────────────────────────────────────
 

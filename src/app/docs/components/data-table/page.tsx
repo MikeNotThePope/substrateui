@@ -4,12 +4,9 @@ import { type ColumnDef } from "@tanstack/react-table"
 import {
   DataTable,
   DataTableColumnHeader,
-  DataTableToolbar,
-  DataTableViewOptions,
   createSelectColumn,
 } from "@/components/ui/data-table"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
 import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"

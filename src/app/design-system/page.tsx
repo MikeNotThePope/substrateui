@@ -12,7 +12,6 @@ import {
   AlertTriangle,
   XCircle,
   Inbox,
-  ChevronRight,
   MoreHorizontal,
   User,
   CreditCard,

@@ -6,14 +6,6 @@ import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
 import { Grid } from "@/components/ui/grid"
 
-function PlaceholderBox({ children }: { children?: React.ReactNode }) {
-  return (
-    <div className="h-16 rounded-lg bg-surface-sunken border-2 border-dashed border-border flex items-center justify-center text-muted-foreground text-sm font-mono">
-      {children}
-    </div>
-  )
-}
-
 function Tag({ children }: { children: React.ReactNode }) {
   return (
     <div className="px-4 py-2 rounded-lg bg-surface-sunken border-2 border-dashed border-border text-muted-foreground text-sm font-mono whitespace-nowrap">

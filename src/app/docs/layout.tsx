@@ -9,7 +9,7 @@ import { Menu, Sun, Moon, Monitor } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Mono, Small } from "@/components/ui/typography"
+import { Mono } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
 
 // ─── Navigation Data ──────────────────────────────────────────────────
