@@ -200,6 +200,8 @@ function ThemeToggle() {
         size="icon"
         className="h-7 w-7"
         onClick={() => setTheme("light")}
+        aria-label="Light theme"
+        aria-pressed={theme === "light"}
       >
         <Sun className="h-4 w-4" />
       </Button>
@@ -208,6 +210,8 @@ function ThemeToggle() {
         size="icon"
         className="h-7 w-7"
         onClick={() => setTheme("dark")}
+        aria-label="Dark theme"
+        aria-pressed={theme === "dark"}
       >
         <Moon className="h-4 w-4" />
       </Button>
@@ -216,6 +220,8 @@ function ThemeToggle() {
         size="icon"
         className="h-7 w-7"
         onClick={() => setTheme("system")}
+        aria-label="System theme"
+        aria-pressed={theme === "system"}
       >
         <Monitor className="h-4 w-4" />
       </Button>
@@ -254,7 +260,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Open navigation menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>

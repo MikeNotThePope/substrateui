@@ -375,3 +375,22 @@ body {
 .grid-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 280px), 1fr));
 }
+
+
+/* ================================================================
+   REDUCED MOTION
+
+   Respects prefers-reduced-motion: reduce for users with
+   vestibular disorders or motion sensitivity.
+================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

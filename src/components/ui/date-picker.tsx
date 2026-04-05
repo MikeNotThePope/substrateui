@@ -66,7 +66,7 @@ function DatePicker({
             className
           )}
         >
-          <CalendarIcon className="size-4 text-muted-foreground" />
+          <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
           {date ? (
             <span>{formatDate(date)}</span>
           ) : (
@@ -122,7 +122,7 @@ function DateRangePicker({
             className
           )}
         >
-          <CalendarIcon className="size-4 text-muted-foreground" />
+          <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
           {dateRange?.from ? (
             <span>
               {formatDateShort(dateRange.from)}

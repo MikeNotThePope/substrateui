@@ -22,6 +22,7 @@ function Item({ className, active, disabled, ...props }: ItemProps) {
       data-slot="item"
       data-active={active ? "true" : undefined}
       data-disabled={disabled ? "true" : undefined}
+      aria-disabled={disabled || undefined}
       className={cn(
         "flex items-center gap-2 rounded-md px-3 py-2 text-sm cursor-pointer transition-colors",
         "hover:bg-surface-interactive",

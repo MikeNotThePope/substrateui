@@ -37,6 +37,7 @@ export function ComponentPreview({ children, code, title }: ComponentPreviewProp
           size="icon"
           className="absolute top-2 right-2 h-8 w-8 text-warm-400 hover:text-warm-100 hover:bg-warm-800"
           onClick={handleCopy}
+          aria-label={copied ? "Copied" : "Copy code"}
         >
           {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
         </Button>

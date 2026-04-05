@@ -69,14 +69,21 @@ function DataTableColumnHeader<TData, TValue>({
       size="sm"
       className={cn("-ml-3 h-8 font-mono text-xs", className)}
       onClick={() => column.toggleSorting(sorted === "asc")}
+      aria-label={
+        sorted === "asc"
+          ? `${title}, sorted ascending. Click to sort descending.`
+          : sorted === "desc"
+            ? `${title}, sorted descending. Click to remove sort.`
+            : `${title}, not sorted. Click to sort ascending.`
+      }
     >
       {title}
       {sorted === "asc" ? (
-        <ArrowUp className="ml-2 size-3.5" />
+        <ArrowUp className="ml-2 size-3.5" aria-hidden="true" />
       ) : sorted === "desc" ? (
-        <ArrowDown className="ml-2 size-3.5" />
+        <ArrowDown className="ml-2 size-3.5" aria-hidden="true" />
       ) : (
-        <ArrowUpDown className="ml-2 size-3.5" />
+        <ArrowUpDown className="ml-2 size-3.5" aria-hidden="true" />
       )}
     </Button>
   )
@@ -167,6 +174,7 @@ function DataTablePagination<TData>({
           className="h-8 border-2"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          aria-label="Previous page"
         >
           Previous
         </Button>
@@ -176,6 +184,7 @@ function DataTablePagination<TData>({
           className="h-8 border-2"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          aria-label="Next page"
         >
           Next
         </Button>

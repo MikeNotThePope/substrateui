@@ -81,13 +81,13 @@ export default function ButtonPage() {
           code={`<Button size="default">Default</Button>
 <Button size="sm">Small</Button>
 <Button size="lg">Large</Button>
-<Button size="icon"><Plus /></Button>`}
+<Button size="icon" aria-label="Add"><Plus /></Button>`}
         >
           <Cluster gap="sm" align="center">
             <Button size="default">Default</Button>
             <Button size="sm">Small</Button>
             <Button size="lg">Large</Button>
-            <Button size="icon">
+            <Button size="icon" aria-label="Add">
               <Plus />
             </Button>
           </Cluster>

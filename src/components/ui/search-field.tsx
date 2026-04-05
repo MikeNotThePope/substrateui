@@ -41,27 +41,37 @@ function SearchField({
   return (
     <InputGroup
       data-slot="search-field"
+      role="search"
       className={cn(className)}
       {...props}
     >
       <InputGroupPrefix>
-        <Search className="size-4" />
+        <Search className="size-4" aria-hidden="true" />
       </InputGroupPrefix>
       <Input
+        type="search"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        aria-label={placeholder}
         className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
       />
       {value ? (
         <InputGroupSuffix>
-          <X
-            className="size-4 cursor-pointer hover:text-foreground transition-colors"
+          <button
+            type="button"
+            aria-label="Clear search"
             onClick={() => {
               onChange("")
               onClear?.()
             }}
-          />
+            className="inline-flex items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            <X
+              className="size-4 cursor-pointer hover:text-foreground transition-colors"
+              aria-hidden="true"
+            />
+          </button>
         </InputGroupSuffix>
       ) : shortcut ? (
         <InputGroupSuffix>
