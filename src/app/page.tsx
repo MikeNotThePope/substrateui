@@ -206,15 +206,6 @@ export default function App() {
         </Center>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t-2 py-8">
-        <Center max="2xl" className="px-4">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <Mono className="text-xs">SubstrateUI</Mono>
-            <Mono className="text-xs">OKLCH tokens. Chunky borders. Ship it.</Mono>
-          </div>
-        </Center>
-      </footer>
     </div>
   )
 }

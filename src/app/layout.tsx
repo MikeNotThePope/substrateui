@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { DirectionController } from "@/components/providers/direction-controller";
+import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -31,7 +32,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${dmMono.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <DirectionController>{children}</DirectionController>
+          <DirectionController>
+            <div className="flex min-h-screen flex-col">
+              <div className="flex-1">{children}</div>
+              <SiteFooter />
+            </div>
+          </DirectionController>
         </ThemeProvider>
       </body>
     </html>

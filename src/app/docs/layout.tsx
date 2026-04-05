@@ -3,15 +3,13 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useTheme } from "next-themes"
-import { Menu, Sun, Moon, Monitor } from "lucide-react"
+import { Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Mono } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
-import { DirectionToggle } from "./_components/direction-toggle"
 
 // ─── Navigation Data ──────────────────────────────────────────────────
 
@@ -186,61 +184,15 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-// ─── Theme Toggle ─────────────────────────────────────────────────────
-
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => setMounted(true), [])
-
-  if (!mounted) return <div className="h-9" />
-
-  return (
-    <div className="flex items-center gap-1 border-2 rounded-lg p-1">
-      <Button
-        variant={theme === "light" ? "secondary" : "ghost"}
-        size="icon"
-        className="h-7 w-7"
-        onClick={() => setTheme("light")}
-        aria-label="Light theme"
-        aria-pressed={theme === "light"}
-      >
-        <Sun className="h-4 w-4" />
-      </Button>
-      <Button
-        variant={theme === "dark" ? "secondary" : "ghost"}
-        size="icon"
-        className="h-7 w-7"
-        onClick={() => setTheme("dark")}
-        aria-label="Dark theme"
-        aria-pressed={theme === "dark"}
-      >
-        <Moon className="h-4 w-4" />
-      </Button>
-      <Button
-        variant={theme === "system" ? "secondary" : "ghost"}
-        size="icon"
-        className="h-7 w-7"
-        onClick={() => setTheme("system")}
-        aria-label="System theme"
-        aria-pressed={theme === "system"}
-      >
-        <Monitor className="h-4 w-4" />
-      </Button>
-    </div>
-  )
-}
-
 // ─── Layout ───────────────────────────────────────────────────────────
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <div className="flex min-h-screen">
-      {/* Desktop sidebar */}
-      <aside className="hidden md:flex md:w-[280px] md:flex-col md:fixed md:inset-y-0 md:start-0 border-e-2 bg-card">
+    <div className="flex">
+      {/* Desktop sidebar — sticky so the SiteFooter renders below it */}
+      <aside className="hidden md:flex md:w-[280px] md:flex-col md:shrink-0 md:sticky md:top-0 md:h-screen md:self-start border-e-2 bg-card">
         <div className="flex items-center h-14 px-4 border-b-2">
           <Link href="/" className="font-bold text-lg tracking-tight">
             SubstrateUI
@@ -249,10 +201,6 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <ScrollArea className="flex-1 py-4 px-2">
           <SidebarNav />
         </ScrollArea>
-        <div className="p-4 border-t-2 flex items-center gap-2 flex-wrap">
-          <ThemeToggle />
-          <DirectionToggle />
-        </div>
       </aside>
 
       {/* Mobile header */}
@@ -261,8 +209,6 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           SubstrateUI
         </Link>
         <div className="flex items-center gap-2">
-          <DirectionToggle />
-          <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open navigation menu">
@@ -280,7 +226,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       </div>
 
       {/* Main content */}
-      <main className="flex-1 md:ms-[280px] mt-14 md:mt-0 min-h-screen">
+      <main className="flex-1 min-w-0 mt-14 md:mt-0">
         {children}
       </main>
     </div>
