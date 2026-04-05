@@ -85,7 +85,7 @@ function DrawerHeader({
   return (
     <div
       data-slot="drawer-header"
-      className={cn("grid gap-1.5 p-4 text-center sm:text-left", className)}
+      className={cn("grid gap-1.5 p-4 text-center sm:text-start", className)}
       {...props}
     />
   )

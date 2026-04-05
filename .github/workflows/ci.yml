@@ -22,6 +22,7 @@ jobs:
           node-version: 22
       - run: bun install --frozen-lockfile
       - run: bun run audit:contrast
+      - run: bun run audit:direction
       - run: bun run lint
       - run: bunx tsc --noEmit
       - run: bun run build:lib

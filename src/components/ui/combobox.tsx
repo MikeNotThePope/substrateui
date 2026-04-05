@@ -111,7 +111,7 @@ function Combobox({
                 {opt?.label ?? v}
                 <button
                   type="button"
-                  className="ml-1 rounded-full hover:bg-muted"
+                  className="ms-1 rounded-full hover:bg-muted"
                   onClick={(e) => handleRemove(v, e)}
                 >
                   <X className="size-3" />
@@ -146,7 +146,7 @@ function Combobox({
           )}
         >
           {displayLabel()}
-          <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ms-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
@@ -164,7 +164,7 @@ function Combobox({
                 >
                   <Check
                     className={cn(
-                      "mr-2 size-4",
+                      "me-2 size-4",
                       selectedValues.includes(option.value)
                         ? "opacity-100"
                         : "opacity-0"

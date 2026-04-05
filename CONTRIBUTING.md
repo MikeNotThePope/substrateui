@@ -40,6 +40,23 @@ answer three questions:
   over `pl-4` / `pr-4` where it doesn&apos;t fight Tailwind. This keeps
   the door open for RTL support later.
 
+## RTL and logical properties
+
+This library supports right-to-left rendering via `DirectionProvider`. All components must use Tailwind&apos;s **logical direction** utilities instead of physical ones:
+
+| Don&apos;t use | Use instead |
+|---|---|
+| pl-*, pr-* | ps-*, pe-* |
+| ml-*, mr-* | ms-*, me-* |
+| left-*, right-* | start-*, end-* |
+| border-l, border-r | border-s, border-e |
+| rounded-l-*, rounded-r-* | rounded-s-*, rounded-e-* |
+| text-left, text-right | text-start, text-end |
+
+The CI pipeline runs `bun run audit:direction` on every PR and fails if physical utilities appear in component files. Run it locally before committing.
+
+If a physical property is genuinely required (e.g., an icon whose visual position should NOT flip in RTL, or physical centering like `left-1/2 -translate-x-1/2`), add an inline comment explaining why — and consider if an ESLint-disable comment is appropriate.
+
 ## Accessibility Checklist
 
 Every new component MUST pass this checklist before merging:

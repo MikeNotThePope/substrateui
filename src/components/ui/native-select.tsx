@@ -44,12 +44,12 @@ function NativeSelect({
   return (
     <div data-slot="native-select" className="relative">
       <select
-        className={cn(nativeSelectVariants({ size }), "pr-8", className)}
+        className={cn(nativeSelectVariants({ size }), "pe-8", className)}
         {...props}
       >
         {children}
       </select>
-      <ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+      <ChevronDown className="pointer-events-none absolute end-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
     </div>
   )
 }

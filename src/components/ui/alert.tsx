@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 /** Alert style variants (default, destructive, success, warning). Use with cn(alertVariants({...})) for non-div elements. */
 const alertVariants = cva(
-  "relative w-full rounded-lg border-2 p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  "relative w-full rounded-lg border-2 p-4 [&>svg~*]:ps-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:start-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
     variants: {
       variant: {

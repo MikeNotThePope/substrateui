@@ -37,9 +37,9 @@ describe('ButtonGroup', () => {
       </ButtonGroup>
     )
     const first = screen.getByRole('button', { name: 'First' })
-    // first is not last, so rounded-r-none applied; but rounded-l-none should NOT be applied
-    expect(first.className).not.toContain('rounded-l-none')
-    expect(first.className).toContain('rounded-r-none')
+    // first is not last, so rounded-e-none applied; but rounded-s-none should NOT be applied
+    expect(first.className).not.toContain('rounded-s-none')
+    expect(first.className).toContain('rounded-e-none')
   })
 
   it('does not strip rounded corners from the last button on the right side', () => {
@@ -50,9 +50,9 @@ describe('ButtonGroup', () => {
       </ButtonGroup>
     )
     const last = screen.getByRole('button', { name: 'Last' })
-    // last is not first, so rounded-l-none applied; rounded-r-none should NOT
-    expect(last.className).toContain('rounded-l-none')
-    expect(last.className).not.toContain('rounded-r-none')
+    // last is not first, so rounded-s-none applied; rounded-e-none should NOT
+    expect(last.className).toContain('rounded-s-none')
+    expect(last.className).not.toContain('rounded-e-none')
   })
 
   it('flushes both sides of middle buttons', () => {
@@ -64,8 +64,8 @@ describe('ButtonGroup', () => {
       </ButtonGroup>
     )
     const middle = screen.getByRole('button', { name: 'Middle' })
-    expect(middle.className).toContain('rounded-l-none')
-    expect(middle.className).toContain('rounded-r-none')
+    expect(middle.className).toContain('rounded-s-none')
+    expect(middle.className).toContain('rounded-e-none')
   })
 
   it('leaves a single-child group fully rounded', () => {
@@ -75,8 +75,8 @@ describe('ButtonGroup', () => {
       </ButtonGroup>
     )
     const only = screen.getByRole('button', { name: 'Only' })
-    expect(only.className).not.toContain('rounded-l-none')
-    expect(only.className).not.toContain('rounded-r-none')
+    expect(only.className).not.toContain('rounded-s-none')
+    expect(only.className).not.toContain('rounded-e-none')
   })
 
   it('preserves the child button\'s original className', () => {

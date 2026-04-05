@@ -37,7 +37,7 @@ function InputGroupPrefix({
   return (
     <div
       data-slot="input-group-prefix"
-      className={cn("flex items-center pl-3 text-muted-foreground", className)}
+      className={cn("flex items-center ps-3 text-muted-foreground", className)}
       {...props}
     />
   )
@@ -51,7 +51,7 @@ function InputGroupSuffix({
   return (
     <div
       data-slot="input-group-suffix"
-      className={cn("flex items-center pr-3 text-muted-foreground", className)}
+      className={cn("flex items-center pe-3 text-muted-foreground", className)}
       {...props}
     />
   )

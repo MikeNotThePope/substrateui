@@ -38,7 +38,7 @@ function AppShellSidebar({
       ref={ref}
       data-slot="app-shell-sidebar"
       className={cn(
-        "flex-col w-64 shrink-0 border-r-2 bg-card",
+        "flex-col w-64 shrink-0 border-e-2 bg-card",
         collapsed ? "hidden md:flex" : "hidden md:flex",
         className,
       )}

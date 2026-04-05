@@ -57,14 +57,14 @@ describe('Sheet', () => {
   it('defaults to the right side', async () => {
     render(<SheetHarness initialOpen />)
     const dialog = await screen.findByRole('dialog')
-    expect(dialog.className).toContain('right-0')
+    expect(dialog.className).toContain('end-0')
     expect(dialog.className).toContain('slide-in-from-right')
   })
 
   it('applies left side positioning classes when side="left"', async () => {
     render(<SheetHarness initialOpen side="left" />)
     const dialog = await screen.findByRole('dialog')
-    expect(dialog.className).toContain('left-0')
+    expect(dialog.className).toContain('start-0')
     expect(dialog.className).toContain('slide-in-from-left')
   })
 

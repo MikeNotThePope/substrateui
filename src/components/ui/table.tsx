@@ -100,7 +100,7 @@ function TableHead({
       ref={ref}
       data-slot="table-head"
       className={cn(
-        "h-12 px-4 text-left align-middle bg-surface-sunken font-mono text-xs uppercase tracking-wider text-muted-foreground [&:has([role=checkbox])]:pr-0",
+        "h-12 px-4 text-start align-middle bg-surface-sunken font-mono text-xs uppercase tracking-wider text-muted-foreground [&:has([role=checkbox])]:pe-0",
         className
       )}
       {...props}
@@ -118,7 +118,7 @@ function TableCell({
     <td
       ref={ref}
       data-slot="table-cell"
-      className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+      className={cn("p-4 align-middle [&:has([role=checkbox])]:pe-0", className)}
       {...props}
     />
   )

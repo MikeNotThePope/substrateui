@@ -31,7 +31,7 @@ function Divider({
         data-slot="divider"
         role="separator"
         aria-orientation="vertical"
-        className={cn("border-l-2 border-border self-stretch", className)}
+        className={cn("border-s-2 border-border self-stretch", className)}
         ref={ref}
         {...props}
       />

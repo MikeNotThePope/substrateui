@@ -67,7 +67,7 @@ function DataTableColumnHeader<TData, TValue>({
     <Button
       variant="ghost"
       size="sm"
-      className={cn("-ml-3 h-8 font-mono text-xs", className)}
+      className={cn("-ms-3 h-8 font-mono text-xs", className)}
       onClick={() => column.toggleSorting(sorted === "asc")}
       aria-label={
         sorted === "asc"
@@ -79,11 +79,11 @@ function DataTableColumnHeader<TData, TValue>({
     >
       {title}
       {sorted === "asc" ? (
-        <ArrowUp className="ml-2 size-3.5" aria-hidden="true" />
+        <ArrowUp className="ms-2 size-3.5" aria-hidden="true" />
       ) : sorted === "desc" ? (
-        <ArrowDown className="ml-2 size-3.5" aria-hidden="true" />
+        <ArrowDown className="ms-2 size-3.5" aria-hidden="true" />
       ) : (
-        <ArrowUpDown className="ml-2 size-3.5" aria-hidden="true" />
+        <ArrowUpDown className="ms-2 size-3.5" aria-hidden="true" />
       )}
     </Button>
   )
@@ -109,8 +109,8 @@ function DataTableViewOptions<TData>({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ml-auto h-8 border-2">
-          <Settings2 className="mr-2 size-4" />
+        <Button variant="outline" size="sm" className="ms-auto h-8 border-2">
+          <Settings2 className="me-2 size-4" />
           <span className="font-mono text-xs">View</span>
         </Button>
       </DropdownMenuTrigger>

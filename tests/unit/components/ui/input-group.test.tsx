@@ -81,7 +81,7 @@ describe('InputGroupPrefix', () => {
       '[data-slot="input-group-prefix"]'
     ) as HTMLElement
     expect(prefix).toBeInTheDocument()
-    expect(prefix.className).toContain('pl-3')
+    expect(prefix.className).toContain('ps-3')
     expect(prefix.textContent).toBe('$')
   })
 
@@ -93,7 +93,7 @@ describe('InputGroupPrefix', () => {
       '[data-slot="input-group-prefix"]'
     ) as HTMLElement
     expect(prefix.className).toContain('extra')
-    expect(prefix.className).toContain('pl-3')
+    expect(prefix.className).toContain('ps-3')
   })
 })
 
@@ -104,7 +104,7 @@ describe('InputGroupSuffix', () => {
       '[data-slot="input-group-suffix"]'
     ) as HTMLElement
     expect(suffix).toBeInTheDocument()
-    expect(suffix.className).toContain('pr-3')
+    expect(suffix.className).toContain('pe-3')
     expect(suffix.textContent).toBe('USD')
   })
 
@@ -116,6 +116,6 @@ describe('InputGroupSuffix', () => {
       '[data-slot="input-group-suffix"]'
     ) as HTMLElement
     expect(suffix.className).toContain('extra')
-    expect(suffix.className).toContain('pr-3')
+    expect(suffix.className).toContain('pe-3')
   })
 })

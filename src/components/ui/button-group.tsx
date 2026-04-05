@@ -30,8 +30,8 @@ function ButtonGroup({
         return React.cloneElement(child as React.ReactElement<{ className?: string }>, {
           className: cn(
             (child as React.ReactElement<{ className?: string }>).props.className,
-            !isFirst && "rounded-l-none",
-            !isLast && "rounded-r-none"
+            !isFirst && "rounded-s-none",
+            !isLast && "rounded-e-none"
           ),
         })
       })}
