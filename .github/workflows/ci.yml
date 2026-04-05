@@ -26,3 +26,11 @@ jobs:
       - run: bunx tsc --noEmit
       - run: bun run build:lib
       - run: bun run build
+      - run: bunx playwright install --with-deps chromium
+      - run: bun run test:visual
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

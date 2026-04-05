@@ -42,3 +42,8 @@ next-env.d.ts
 
 # Library build output
 dist/
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/

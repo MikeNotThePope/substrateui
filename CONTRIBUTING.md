@@ -58,6 +58,8 @@ Every new component MUST pass this checklist before merging:
 - [ ] Component has a documentation page with live examples and a
   props table
 - [ ] Component is added to the barrel export
+- [ ] If the component&apos;s appearance changes, update visual
+  snapshots (`bun run test:visual:update`) and commit the new baselines
 
 ## Making Changes to Existing Components
 
