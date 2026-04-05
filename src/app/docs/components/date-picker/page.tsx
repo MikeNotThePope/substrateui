@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -55,6 +55,18 @@ export default function DatePickerPage() {
             placeholder="Select a date..."
           />
         </ComponentPreview>
+      </Stack>
+
+      {/* Direction */}
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <P>
+          Month-navigation chevrons flip automatically so &quot;previous
+          month&quot; points in the reading direction. Week start day is a
+          locale concern, not a direction concern — Saturday-start vs.
+          Sunday-start calendars are controlled by the calendar locale
+          prop, not by <code>dir</code>.
+        </P>
       </Stack>
 
       {/* API Reference */}

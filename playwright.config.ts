@@ -31,7 +31,10 @@ export default defineConfig({
           origins: [
             {
               origin: 'http://localhost:3000',
-              localStorage: [{ name: 'theme', value: 'light' }],
+              localStorage: [
+                { name: 'theme', value: 'light' },
+                { name: 'substrateui-direction', value: 'ltr' },
+              ],
             },
           ],
         },
@@ -48,7 +51,50 @@ export default defineConfig({
           origins: [
             {
               origin: 'http://localhost:3000',
-              localStorage: [{ name: 'theme', value: 'dark' }],
+              localStorage: [
+                { name: 'theme', value: 'dark' },
+                { name: 'substrateui-direction', value: 'ltr' },
+              ],
+            },
+          ],
+        },
+      },
+    },
+    {
+      name: 'light-rtl',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
+        storageState: {
+          cookies: [],
+          origins: [
+            {
+              origin: 'http://localhost:3000',
+              localStorage: [
+                { name: 'theme', value: 'light' },
+                { name: 'substrateui-direction', value: 'rtl' },
+              ],
+            },
+          ],
+        },
+      },
+    },
+    {
+      name: 'dark-rtl',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
+        storageState: {
+          cookies: [],
+          origins: [
+            {
+              origin: 'http://localhost:3000',
+              localStorage: [
+                { name: 'theme', value: 'dark' },
+                { name: 'substrateui-direction', value: 'rtl' },
+              ],
             },
           ],
         },

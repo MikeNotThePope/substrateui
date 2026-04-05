@@ -148,6 +148,20 @@ const columns: ColumnDef<Person>[] = [
           </ComponentPreview>
         </Stack>
 
+        {/* ── Direction ─────────────────────────────────── */}
+        <Stack gap="md">
+          <H3>Direction</H3>
+          <P>
+            Column order follows the <Code>columns</Code> prop, which means
+            in RTL the first column still renders at the start (now visually
+            on the right) and the last column at the end. If your data is
+            semantically ordered — e.g., timestamp then description — you
+            may want to reverse column definitions for RTL users so the
+            reading flow stays natural. Sort indicators and header chevrons
+            flip automatically via logical CSS properties.
+          </P>
+        </Stack>
+
         {/* ── API Reference ─────────────────────────────── */}
         <Stack gap="md">
           <H3>API Reference</H3>

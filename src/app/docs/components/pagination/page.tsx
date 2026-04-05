@@ -7,7 +7,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -70,6 +70,16 @@ export default function PaginationPage() {
             </PaginationContent>
           </Pagination>
         </ComponentPreview>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <P>
+          Previous and next buttons swap visually in RTL — the previous
+          link sits on the right, next on the left, and the chevron icons
+          rotate to point in reading direction. Order within the list
+          follows the DOM, so logical ordering is preserved.
+        </P>
       </Stack>
 
       <Stack gap="md">

@@ -1,7 +1,11 @@
 # Visual regression tests
 
-Playwright snapshots every component docs page in light and dark mode.
-Baselines live in `components.spec.ts-snapshots/`.
+Playwright snapshots every component docs page across four projects:
+`light`, `dark`, `light-rtl`, and `dark-rtl`. Each project seeds
+`localStorage` with the matching theme and `substrateui-direction`
+values, so every baseline captures a theme × direction combination.
+Baselines live in `components.spec.ts-snapshots/`, one subdirectory
+per project.
 
 ## Running locally
 

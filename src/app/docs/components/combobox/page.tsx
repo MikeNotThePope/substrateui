@@ -83,6 +83,18 @@ export default function ComboboxPage() {
         </ComponentPreview>
       </Stack>
 
+      {/* Direction */}
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <P>
+          The chevron indicator and selected-check icon placement flip
+          automatically in RTL — the chevron sits on the start edge (right
+          in RTL) alongside the label. The popover anchors to the trigger
+          and mirrors open-direction, so filtered results still read in
+          the expected order.
+        </P>
+      </Stack>
+
       {/* API Reference */}
       <Stack gap="md">
         <H3>API Reference</H3>

@@ -60,6 +60,12 @@ async function preparePage(page: import('@playwright/test').Page) {
   // enough for a deterministic snapshot when combined with document.fonts.ready.
   await page.waitForLoadState('load');
   await page.evaluate(() => document.fonts.ready);
+  // Wait for DirectionController to apply dir from localStorage so the
+  // snapshot never captures an LTR-flash before the RTL toggle kicks in.
+  await page.waitForFunction(() => {
+    const expected = localStorage.getItem('substrateui-direction') ?? 'ltr';
+    return document.documentElement.getAttribute('dir') === expected;
+  });
   await page.addStyleTag({
     content: `
       *, *::before, *::after {

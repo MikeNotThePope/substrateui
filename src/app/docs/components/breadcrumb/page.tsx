@@ -7,7 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
@@ -62,6 +62,16 @@ export default function BreadcrumbDocsPage() {
             </BreadcrumbList>
           </Breadcrumb>
         </ComponentPreview>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <P>
+          The default chevron separator flips automatically in RTL so it
+          points in reading direction. If you pass a custom separator, make
+          sure its glyph also respects direction — a &quot;/&quot; is
+          direction-neutral, but an arrow is not.
+        </P>
       </Stack>
 
       <Stack gap="md">

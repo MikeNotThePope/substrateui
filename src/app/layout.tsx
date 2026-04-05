@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { DirectionController } from "@/components/providers/direction-controller";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -30,7 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${dmMono.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <DirectionController>{children}</DirectionController>
         </ThemeProvider>
       </body>
     </html>
