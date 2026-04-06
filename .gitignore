@@ -47,6 +47,7 @@ dist/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+tests/visual/**/*-snapshots/
 
 # Storybook
 /storybook-static/

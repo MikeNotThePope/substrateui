@@ -4,15 +4,31 @@ Playwright snapshots every component docs page across four projects:
 `light`, `dark`, `light-rtl`, and `dark-rtl`. Each project seeds
 `localStorage` with the matching theme and `substrateui-direction`
 values, so every baseline captures a theme × direction combination.
-Baselines live in `components.spec.ts-snapshots/`, one subdirectory
-per project.
+
+Baselines are stored in Cloudflare R2 (not in the git repo) and
+downloaded before tests run. The snapshot directory
+`components.spec.ts-snapshots/` is gitignored.
+
+## Environment variables
+
+Set these for any snapshot download or upload operation:
+
+```
+R2_ACCOUNT_ID=<your Cloudflare account ID>
+R2_ACCESS_KEY_ID=<R2 API token access key>
+R2_SECRET_ACCESS_KEY=<R2 API token secret key>
+R2_BUCKET=substrateui-snapshots
+```
+
+In CI these are injected from GitHub Actions secrets. Locally, export
+them in your shell or add them to `.env.local` and source the file.
 
 ## Running locally
 
 ```
-bun run test:visual          # verify against baselines
-bun run test:visual:update   # regenerate baselines
-bun run test:visual:report   # open HTML report from last run
+bun run snapshots:download    # fetch baselines from R2
+bun run test:visual           # verify against baselines
+bun run test:visual:report    # open HTML report from last run
 ```
 
 ## Updating baselines
@@ -20,8 +36,8 @@ bun run test:visual:report   # open HTML report from last run
 Baselines must be generated on Ubuntu to match CI. Use the Playwright
 Docker image. The image ships with Node but not bun, so install bun
 inside the container. Anonymous volumes shadow `node_modules` and
-`.next` so the container&apos;s Linux binaries don&apos;t overwrite your
-host machine&apos;s platform-specific ones:
+`.next` so the container's Linux binaries don't overwrite your
+host machine's platform-specific ones:
 
 ```
 docker run --rm --network host \
@@ -33,8 +49,17 @@ docker run --rm --network host \
   bash -c "npm install -g bun && bun install --frozen-lockfile && bun run test:visual:update"
 ```
 
-Commit the resulting `.png` files under
-`tests/visual/components.spec.ts-snapshots/`.
+Then upload the new baselines from your host machine:
+
+```
+bun run snapshots:upload
+```
+
+This uploads all local snapshots to R2 and deletes any stale images
+that no longer exist locally (e.g. removed components).
+
+Alternatively, trigger the **Update Visual Baselines** workflow from
+the GitHub Actions tab — it regenerates and uploads in one step.
 
 ## When tests fail in CI
 
