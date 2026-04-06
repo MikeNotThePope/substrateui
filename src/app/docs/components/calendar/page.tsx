@@ -45,7 +45,7 @@ const calendarProps: PropDef[] = [
 ]
 
 export default function CalendarPage() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date())
+  const [date, setDate] = React.useState<Date | undefined>(new Date(2025, 0, 20))
 
   return (
     <DocPage
