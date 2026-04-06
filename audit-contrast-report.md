@@ -68,68 +68,8 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | warm-900 on amber-500 (light amber button) | normal | 4.5:1 | 6.76 ✅ | PASS |
 | warm-950 on amber-400 (dark amber button) | normal | 4.5:1 | 11.46 ✅ | PASS |
 
-## Forest theme
-
-### Light mode
-
-| Pairing | Type | Required | Ratio | Status |
-|---|---|---|---|---|
-| foreground on background | normal | 4.5:1 | 15.74 ✅ | PASS |
-| card-foreground on card | normal | 4.5:1 | 16.46 ✅ | PASS |
-| popover-foreground on popover | normal | 4.5:1 | 16.46 ✅ | PASS |
-| primary-foreground on primary | normal | 4.5:1 | 6.50 ✅ | PASS |
-| secondary-foreground on secondary | normal | 4.5:1 | 14.08 ✅ | PASS |
-| muted-foreground on muted | normal | 4.5:1 | 7.76 ✅ | PASS |
-| muted-foreground on background | normal | 4.5:1 | 8.68 ✅ | PASS |
-| accent-foreground on accent | normal | 4.5:1 | 9.24 ✅ | PASS |
-| sidebar-foreground on sidebar | normal | 4.5:1 | 16.46 ✅ | PASS |
-| sidebar-primary-foreground on sidebar-primary | normal | 4.5:1 | 6.50 ✅ | PASS |
-| sidebar-accent-foreground on sidebar-accent | normal | 4.5:1 | 9.24 ✅ | PASS |
-| foreground on surface-ground | normal | 4.5:1 | 15.74 ✅ | PASS |
-| foreground on surface-page | normal | 4.5:1 | 16.46 ✅ | PASS |
-| foreground on surface-raised | normal | 4.5:1 | 16.46 ✅ | PASS |
-| foreground on surface-sunken | normal | 4.5:1 | 14.08 ✅ | PASS |
-| foreground on surface-interactive | normal | 4.5:1 | 14.08 ✅ | PASS |
-| status-success-text on status-success-surface | normal | 4.5:1 | 5.70 ✅ | PASS |
-| status-warning-text on status-warning-surface | normal | 4.5:1 | 6.16 ✅ | PASS |
-| status-error-text on status-error-surface | normal | 4.5:1 | 6.42 ✅ | PASS |
-| border on background | ui | 3:1 | 4.14 ✅ | PASS |
-| border-strong on background | ui | 3:1 | 8.68 ✅ | PASS |
-| ring on background | ui | 3:1 | 4.14 ✅ | PASS |
-| border on card | ui | 3:1 | 4.34 ✅ | PASS |
-| primary-foreground on destructive | normal | 4.5:1 | 4.89 ✅ | PASS |
-
-### Dark mode
-
-| Pairing | Type | Required | Ratio | Status |
-|---|---|---|---|---|
-| foreground on background | normal | 4.5:1 | 16.38 ✅ | PASS |
-| card-foreground on card | normal | 4.5:1 | 14.08 ✅ | PASS |
-| popover-foreground on popover | normal | 4.5:1 | 10.81 ✅ | PASS |
-| primary-foreground on primary | normal | 4.5:1 | 6.50 ✅ | PASS |
-| secondary-foreground on secondary | normal | 4.5:1 | 10.81 ✅ | PASS |
-| muted-foreground on muted | normal | 4.5:1 | 6.39 ✅ | PASS |
-| muted-foreground on background | normal | 4.5:1 | 9.68 ✅ | PASS |
-| accent-foreground on accent | normal | 4.5:1 | 7.65 ✅ | PASS |
-| sidebar-foreground on sidebar | normal | 4.5:1 | 14.08 ✅ | PASS |
-| sidebar-primary-foreground on sidebar-primary | normal | 4.5:1 | 6.50 ✅ | PASS |
-| sidebar-accent-foreground on sidebar-accent | normal | 4.5:1 | 6.61 ✅ | PASS |
-| foreground on surface-ground | normal | 4.5:1 | 16.38 ✅ | PASS |
-| foreground on surface-page | normal | 4.5:1 | 14.08 ✅ | PASS |
-| foreground on surface-raised | normal | 4.5:1 | 10.81 ✅ | PASS |
-| foreground on surface-sunken | normal | 4.5:1 | 16.38 ✅ | PASS |
-| foreground on surface-interactive | normal | 4.5:1 | 10.81 ✅ | PASS |
-| status-success-text on status-success-surface | normal | 4.5:1 | 7.69 ✅ | PASS |
-| status-warning-text on status-warning-surface | normal | 4.5:1 | 7.65 ✅ | PASS |
-| status-error-text on status-error-surface | normal | 4.5:1 | 7.61 ✅ | PASS |
-| border on background | ui | 3:1 | 6.55 ✅ | PASS |
-| border-strong on background | ui | 3:1 | 9.68 ✅ | PASS |
-| ring on background | ui | 3:1 | 6.55 ✅ | PASS |
-| border on card | ui | 3:1 | 5.63 ✅ | PASS |
-| primary-foreground on destructive | normal | 4.5:1 | 4.69 ✅ | PASS |
-
 ## Summary
 
-- Total pairings audited: 100
-- Passing: 100
+- Total pairings audited: 50
+- Passing: 50
 - Failing or incomplete: 0

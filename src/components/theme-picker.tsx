@@ -2,12 +2,11 @@
 
 import * as React from "react"
 
-type Theme = "default" | "forest"
+type Theme = "default"
 
 const STORAGE_KEY = "substrateui-theme"
 const THEMES: Array<{ value: Theme; label: string }> = [
   { value: "default", label: "Default" },
-  { value: "forest", label: "Forest" },
 ]
 
 const ThemeContext = React.createContext<{
@@ -32,7 +31,7 @@ export function SiteThemeProvider({
 
   React.useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
-    if (stored === "default" || stored === "forest") {
+    if (stored === "default") {
       setThemeState(stored)
       applyTheme(stored)
     }

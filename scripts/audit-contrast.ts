@@ -109,11 +109,6 @@ interface ThemeSpec {
 
 const THEMES: ThemeSpec[] = [
   { name: "default", lightSelector: ":root", darkSelector: ".dark" },
-  {
-    name: "forest",
-    lightSelector: '[data-theme="forest"]',
-    darkSelector: '[data-theme="forest"].dark',
-  },
 ]
 
 // ─── Pairings to audit ────────────────────────────────────────────────

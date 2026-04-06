@@ -139,7 +139,7 @@ Every component ships with accessible defaults. For guidance on specific compone
 
 ## Storybook
 
-Contributors can browse components in isolation, flip between light/dark themes, swap `ltr`/`rtl` direction, and switch the semantic palette (Plum / Forest) from the toolbar.
+Contributors can browse components in isolation, flip between light/dark themes, swap `ltr`/`rtl` direction, and switch the semantic palette from the toolbar.
 
 ```bash
 bun run storybook        # dev server on http://localhost:6006

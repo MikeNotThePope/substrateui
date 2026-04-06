@@ -4,10 +4,10 @@ import { H3, P, Code } from "@/components/ui/typography"
 
 const cascadeExample = `:root { /* default light */ }
 .dark { /* default dark — overrides :root */ }
-[data-theme="forest"] { /* forest light */ }
-[data-theme="forest"].dark { /* forest dark */ }`
+[data-theme="ocean"] { /* ocean light */ }
+[data-theme="ocean"].dark { /* ocean dark */ }`
 
-const enableExample = `<html data-theme="forest">
+const enableExample = `<html data-theme="ocean">
   <body className={isDark ? "dark" : ""}>
     {children}
   </body>
@@ -69,8 +69,8 @@ export default function ThemesPage() {
           on the <Code>&lt;html&gt;</Code> element. Because theme selectors
           come after the default declarations in the stylesheet, they win
           on specificity ties — and the compound selector{" "}
-          <Code>[data-theme=&quot;forest&quot;].dark</Code> beats plain{" "}
-          <Code>.dark</Code> for forest-specific dark overrides.
+          <Code>[data-theme=&quot;ocean&quot;].dark</Code> beats plain{" "}
+          <Code>.dark</Code> for theme-specific dark overrides.
         </P>
       </Stack>
 
@@ -85,8 +85,8 @@ export default function ThemesPage() {
         </pre>
         <P>
           These docs include a theme picker at the top of every page — switch
-          between Default and Forest, then toggle light/dark and LTR/RTL to
-          see all eight combinations in action.
+          between themes, then toggle light/dark and LTR/RTL to
+          see all combinations in action.
         </P>
       </Stack>
 

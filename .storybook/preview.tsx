@@ -6,7 +6,7 @@ import { DirectionProvider } from "../src/components/ui/direction"
 
 type Theme = "light" | "dark"
 type Direction = "ltr" | "rtl"
-type Palette = "plum" | "forest"
+type Palette = "plum"
 
 const applyRootAttributes = (theme: Theme, direction: Direction, palette: Palette) => {
   if (typeof document === "undefined") return
@@ -107,7 +107,6 @@ const preview: Preview = {
         icon: "paintbrush",
         items: [
           { value: "plum", title: "Plum" },
-          { value: "forest", title: "Forest" },
         ],
         dynamicTitle: true,
       },

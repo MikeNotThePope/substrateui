@@ -104,50 +104,6 @@ export default defineConfig({
         },
       },
     },
-    {
-      name: 'forest-light',
-      testMatch: /themed-pages\.spec\.ts/,
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 720 },
-        deviceScaleFactor: 1,
-        storageState: {
-          cookies: [],
-          origins: [
-            {
-              origin: 'http://localhost:3000',
-              localStorage: [
-                { name: 'theme', value: 'light' },
-                { name: 'substrateui-direction', value: 'ltr' },
-                { name: 'substrateui-theme', value: 'forest' },
-              ],
-            },
-          ],
-        },
-      },
-    },
-    {
-      name: 'forest-dark',
-      testMatch: /themed-pages\.spec\.ts/,
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 720 },
-        deviceScaleFactor: 1,
-        storageState: {
-          cookies: [],
-          origins: [
-            {
-              origin: 'http://localhost:3000',
-              localStorage: [
-                { name: 'theme', value: 'dark' },
-                { name: 'substrateui-direction', value: 'ltr' },
-                { name: 'substrateui-theme', value: 'forest' },
-              ],
-            },
-          ],
-        },
-      },
-    },
   ],
   webServer: {
     command: 'bun run dev',
