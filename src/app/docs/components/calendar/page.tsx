@@ -68,6 +68,7 @@ export default function CalendarPage() {
             mode="single"
             selected={date}
             onSelect={setDate}
+            defaultMonth={new Date(2025, 0)}
           />
         </ComponentPreview>
       </Stack>
@@ -78,7 +79,7 @@ export default function CalendarPage() {
         <ComponentPreview
           code={`<Calendar />`}
         >
-          <Calendar />
+          <Calendar defaultMonth={new Date(2025, 0)} />
         </ComponentPreview>
       </Stack>
 
