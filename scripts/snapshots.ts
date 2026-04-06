@@ -1,13 +1,12 @@
 import {
   S3Client,
-  ListObjectsV2Command,
   GetObjectCommand,
   PutObjectCommand,
-  DeleteObjectsCommand,
 } from "@aws-sdk/client-s3"
-import { readFileSync, mkdirSync, writeFileSync } from "node:fs"
-import { basename, dirname, join, relative } from "node:path"
+import { readFileSync, mkdirSync, writeFileSync, unlinkSync } from "node:fs"
+import { dirname, join } from "node:path"
 import { Glob } from "bun"
+import { execSync } from "node:child_process"
 
 // ─── Config ──────────────────────────────────────────────────────────
 
@@ -15,9 +14,10 @@ const ACCOUNT_ID = process.env.R2_ACCOUNT_ID
 const ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID
 const SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
 const BUCKET = process.env.R2_BUCKET ?? "substrateui-snapshots"
-const PREFIX = "baselines/main/"
+const ARCHIVE_KEY = "baselines/main/snapshots.tar.gz"
 
 const VISUAL_DIR = join(process.cwd(), "tests/visual")
+const ARCHIVE_PATH = join(VISUAL_DIR, "snapshots.tar.gz")
 
 function requireEnv() {
   if (!ACCOUNT_ID || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
@@ -31,7 +31,7 @@ function requireEnv() {
 function createClient(): S3Client {
   return new S3Client({
     region: "auto",
-    endpoint: `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    endpoint: "https://snapshots.r2.substrateui.dev",
     credentials: {
       accessKeyId: ACCESS_KEY_ID!,
       secretAccessKey: SECRET_ACCESS_KEY!,
@@ -39,67 +39,31 @@ function createClient(): S3Client {
   })
 }
 
-// ─── List all keys under the prefix ──────────────────────────────────
-
-async function listAllKeys(client: S3Client): Promise<string[]> {
-  const keys: string[] = []
-  let continuationToken: string | undefined
-
-  do {
-    const resp = await client.send(
-      new ListObjectsV2Command({
-        Bucket: BUCKET,
-        Prefix: PREFIX,
-        ContinuationToken: continuationToken,
-      }),
-    )
-    for (const obj of resp.Contents ?? []) {
-      if (obj.Key) keys.push(obj.Key)
-    }
-    continuationToken = resp.IsTruncated
-      ? resp.NextContinuationToken
-      : undefined
-  } while (continuationToken)
-
-  return keys
-}
-
 // ─── Download ────────────────────────────────────────────────────────
 
 async function download() {
   requireEnv()
   const client = createClient()
-  const keys = await listAllKeys(client)
 
-  if (keys.length === 0) {
-    console.log("No baselines found in R2.")
+  console.log("Downloading snapshot archive from R2...")
+
+  const resp = await client.send(
+    new GetObjectCommand({ Bucket: BUCKET, Key: ARCHIVE_KEY }),
+  )
+
+  if (!resp.Body) {
+    console.log("No baseline archive found in R2.")
     return
   }
 
-  console.log(`Downloading ${keys.length} snapshots from R2...`)
+  const bytes = await resp.Body.transformToByteArray()
+  mkdirSync(VISUAL_DIR, { recursive: true })
+  writeFileSync(ARCHIVE_PATH, bytes)
 
-  const CONCURRENCY = 20
-  let completed = 0
+  execSync(`tar xzf ${ARCHIVE_PATH}`, { cwd: VISUAL_DIR })
+  unlinkSync(ARCHIVE_PATH)
 
-  for (let i = 0; i < keys.length; i += CONCURRENCY) {
-    const batch = keys.slice(i, i + CONCURRENCY)
-    await Promise.all(
-      batch.map(async (key) => {
-        const relativePath = key.slice(PREFIX.length)
-        const localPath = join(VISUAL_DIR, relativePath)
-        mkdirSync(dirname(localPath), { recursive: true })
-
-        const resp = await client.send(
-          new GetObjectCommand({ Bucket: BUCKET, Key: key }),
-        )
-        const bytes = await resp.Body!.transformToByteArray()
-        writeFileSync(localPath, bytes)
-        completed++
-      }),
-    )
-  }
-
-  console.log(`Downloaded ${completed} snapshots.`)
+  console.log("Snapshots extracted.")
 }
 
 // ─── Upload ──────────────────────────────────────────────────────────
@@ -120,54 +84,30 @@ async function upload() {
     process.exit(1)
   }
 
-  console.log(`Uploading ${localFiles.length} snapshots to R2...`)
+  console.log(`Packing ${localFiles.length} snapshots into archive...`)
 
-  const CONCURRENCY = 20
-  const uploadedKeys = new Set<string>()
-  let completed = 0
+  mkdirSync(dirname(ARCHIVE_PATH), { recursive: true })
+  execSync(
+    `tar czf ${ARCHIVE_PATH} ${localFiles.map((f) => `'${f}'`).join(" ")}`,
+    { cwd: VISUAL_DIR },
+  )
 
-  for (let i = 0; i < localFiles.length; i += CONCURRENCY) {
-    const batch = localFiles.slice(i, i + CONCURRENCY)
-    await Promise.all(
-      batch.map(async (filePath) => {
-        const key = PREFIX + filePath
-        const fullPath = join(VISUAL_DIR, filePath)
-        const body = readFileSync(fullPath)
+  const body = readFileSync(ARCHIVE_PATH)
+  console.log(
+    `Uploading archive (${(body.length / 1024 / 1024).toFixed(1)} MB) to R2...`,
+  )
 
-        await client.send(
-          new PutObjectCommand({
-            Bucket: BUCKET,
-            Key: key,
-            Body: body,
-            ContentType: "image/png",
-          }),
-        )
-        uploadedKeys.add(key)
-        completed++
-      }),
-    )
-  }
+  await client.send(
+    new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: ARCHIVE_KEY,
+      Body: body,
+      ContentType: "application/gzip",
+    }),
+  )
 
-  console.log(`Uploaded ${completed} snapshots.`)
-
-  // Delete stale keys that no longer exist locally
-  const existingKeys = await listAllKeys(client)
-  const staleKeys = existingKeys.filter((k) => !uploadedKeys.has(k))
-
-  if (staleKeys.length > 0) {
-    console.log(`Deleting ${staleKeys.length} stale snapshots from R2...`)
-    // DeleteObjects accepts max 1000 keys per request
-    for (let i = 0; i < staleKeys.length; i += 1000) {
-      const batch = staleKeys.slice(i, i + 1000)
-      await client.send(
-        new DeleteObjectsCommand({
-          Bucket: BUCKET,
-          Delete: { Objects: batch.map((Key) => ({ Key })) },
-        }),
-      )
-    }
-    console.log(`Deleted ${staleKeys.length} stale snapshots.`)
-  }
+  unlinkSync(ARCHIVE_PATH)
+  console.log("Upload complete.")
 }
 
 // ─── CLI ─────────────────────────────────────────────────────────────

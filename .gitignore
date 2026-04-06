@@ -48,6 +48,8 @@ dist/
 /playwright-report/
 /playwright/.cache/
 tests/visual/**/*-snapshots/
+tests/visual/**/*.png
+tests/visual/**/*.tar.gz
 
 # Storybook
 /storybook-static/
