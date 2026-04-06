@@ -31,7 +31,8 @@ function requireEnv() {
 function createClient(): S3Client {
   return new S3Client({
     region: "auto",
-    endpoint: "https://snapshots.r2.substrateui.dev",
+    endpoint: `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    forcePathStyle: true,
     credentials: {
       accessKeyId: ACCESS_KEY_ID!,
       secretAccessKey: SECRET_ACCESS_KEY!,
