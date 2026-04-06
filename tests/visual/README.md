@@ -33,11 +33,18 @@ bun run test:visual:report    # open HTML report from last run
 
 ## Updating baselines
 
-Baselines must be generated on Ubuntu to match CI. Use the Playwright
-Docker image. The image ships with Node but not bun, so install bun
-inside the container. Anonymous volumes shadow `node_modules` and
-`.next` so the container's Linux binaries don't overwrite your
-host machine's platform-specific ones:
+Baselines must be generated on Ubuntu to match CI. The easiest way is
+the all-in-one command that runs Docker + uploads to R2:
+
+```
+bun run snapshots:regenerate
+```
+
+This resolves the Playwright version from your local install, runs
+`test:visual:update` inside the matching Docker image, then uploads
+the new baselines to R2.
+
+If you need to run the steps separately, the Docker command is:
 
 ```
 docker run --rm --network host \
@@ -45,11 +52,11 @@ docker run --rm --network host \
   -v /work/node_modules \
   -v /work/.next \
   -w /work \
-  mcr.microsoft.com/playwright:v1.59.1-jammy \
-  bash -c "npm install -g bun && bun install --frozen-lockfile && bun run test:visual:update"
+  mcr.microsoft.com/playwright:v<VERSION>-jammy \
+  bash -c "apt-get update && apt-get install -y unzip && curl -fsSL https://bun.sh/install | bash && export PATH=\$HOME/.bun/bin:\$PATH && bun install --frozen-lockfile && bun run test:visual:update"
 ```
 
-Then upload the new baselines from your host machine:
+Then upload from your host machine:
 
 ```
 bun run snapshots:upload

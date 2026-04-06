@@ -66,6 +66,7 @@
     "test:visual:report": "playwright show-report",
     "snapshots:download": "bun scripts/snapshots.ts download",
     "snapshots:upload": "bun scripts/snapshots.ts upload",
+    "snapshots:regenerate": "bash scripts/snapshots-regenerate.sh",
     "scan:deprecations": "tsx scripts/scan-deprecations.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o public/storybook && node .storybook/rewrite-base-paths.mjs",
