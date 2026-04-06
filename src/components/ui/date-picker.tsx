@@ -12,6 +12,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
 // ─── i18n labels ────────────────────────────────────────────────────
 
@@ -48,14 +50,16 @@ const defaultDatePickerLabels: Required<DatePickerLabels> = {
   formatDateShort: (date) => defaultFormatDateShort(date, "en-US"),
 }
 
-function resolveDatePickerLabels(labels?: DatePickerLabels): Required<DatePickerLabels> {
-  if (!labels) return defaultDatePickerLabels
-  const locale = labels.locale ?? defaultDatePickerLabels.locale
+function resolveDatePickerLabels(
+  context?: Partial<DatePickerLabels>,
+  prop?: Partial<DatePickerLabels>,
+): Required<DatePickerLabels> {
+  const merged = resolveLabels(defaultDatePickerLabels, context, prop)
+  const locale = merged.locale
   return {
-    ...defaultDatePickerLabels,
-    ...labels,
-    formatDate: labels.formatDate ?? ((date) => defaultFormatDate(date, locale)),
-    formatDateShort: labels.formatDateShort ?? ((date) => defaultFormatDateShort(date, locale)),
+    ...merged,
+    formatDate: prop?.formatDate ?? context?.formatDate ?? ((date: Date) => defaultFormatDate(date, locale)),
+    formatDateShort: prop?.formatDateShort ?? context?.formatDateShort ?? ((date: Date) => defaultFormatDateShort(date, locale)),
   }
 }
 
@@ -87,10 +91,12 @@ function DatePicker({
   className,
   disabled,
 }: DatePickerProps) {
-  const labels = resolveDatePickerLabels({
+  const ctx = useLabels()
+  const mergedProp: DatePickerLabels = {
     ...labelsProp,
     ...(placeholder != null && { placeholder }),
-  })
+  }
+  const labels = resolveDatePickerLabels(ctx.datePicker, mergedProp)
 
   return (
     <Popover>
@@ -151,10 +157,12 @@ function DateRangePicker({
   className,
   disabled,
 }: DateRangePickerProps) {
-  const labels = resolveDatePickerLabels({
+  const ctx = useLabels()
+  const mergedProp: DatePickerLabels = {
     ...labelsProp,
     ...(placeholder != null && { rangePlaceholder: placeholder }),
-  })
+  }
+  const labels = resolveDatePickerLabels(ctx.datePicker, mergedProp)
 
   return (
     <Popover>

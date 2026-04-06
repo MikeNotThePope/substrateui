@@ -7,6 +7,8 @@ import useEmblaCarousel, {
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 import { Button } from "@/components/ui/button"
 
 // ─── i18n labels ────────────────────────────────────────────────────
@@ -20,11 +22,6 @@ interface CarouselLabels {
 const defaultCarouselLabels: Required<CarouselLabels> = {
   previousSlide: "Previous slide",
   nextSlide: "Next slide",
-}
-
-function resolveCarouselLabels(labels?: CarouselLabels): Required<CarouselLabels> {
-  if (!labels) return defaultCarouselLabels
-  return { ...defaultCarouselLabels, ...labels }
 }
 
 /** Handle returned by Embla Carousel for programmatic control. */
@@ -229,7 +226,8 @@ function CarouselPrevious({
   ...props
 }: React.ComponentPropsWithRef<typeof Button> & { labels?: CarouselLabels }) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
-  const labels = resolveCarouselLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultCarouselLabels, ctx.carousel, labelsProp)
 
   return (
     <Button
@@ -264,7 +262,8 @@ function CarouselNext({
   ...props
 }: React.ComponentPropsWithRef<typeof Button> & { labels?: CarouselLabels }) {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
-  const labels = resolveCarouselLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultCarouselLabels, ctx.carousel, labelsProp)
 
   return (
     <Button

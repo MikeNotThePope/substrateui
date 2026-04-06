@@ -34,6 +34,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { resolveLabels as resolveLabelsGeneric } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
 // ─── i18n labels ────────────────────────────────────────────────────
 
@@ -72,10 +74,6 @@ const defaultLabels: Required<DataTableLabels> = {
     `${title}, not sorted. Click to sort ascending.`,
 }
 
-function resolveLabels(labels?: DataTableLabels): Required<DataTableLabels> {
-  if (!labels) return defaultLabels
-  return { ...defaultLabels, ...labels }
-}
 
 // ─── DataTableColumnHeader ───────────────────────────────────────────
 
@@ -101,7 +99,8 @@ function DataTableColumnHeader<TData, TValue>({
   className,
   labels: labelsProp,
 }: DataTableColumnHeaderProps<TData, TValue>) {
-  const labels = resolveLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabelsGeneric(defaultLabels, ctx.dataTable, labelsProp)
 
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>
@@ -154,7 +153,8 @@ function DataTableViewOptions<TData>({
   table,
   labels: labelsProp,
 }: DataTableViewOptionsProps<TData>) {
-  const labels = resolveLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabelsGeneric(defaultLabels, ctx.dataTable, labelsProp)
 
   return (
     <DropdownMenu>
@@ -209,7 +209,8 @@ function DataTablePagination<TData>({
   table,
   labels: labelsProp,
 }: DataTablePaginationProps<TData>) {
-  const labels = resolveLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabelsGeneric(defaultLabels, ctx.dataTable, labelsProp)
 
   return (
     <div className="flex items-center justify-between px-2 py-4">
@@ -286,7 +287,7 @@ function DataTableToolbar({ children, className }: DataTableToolbarProps) {
 function createSelectColumn<TData>(
   labels?: DataTableLabels
 ): ColumnDef<TData> {
-  const resolved = resolveLabels(labels)
+  const resolved = resolveLabelsGeneric(defaultLabels, undefined, labels)
   return {
     id: "select",
     header: ({ table }) => (
@@ -339,7 +340,8 @@ function DataTable<TData, TValue>({
   toolbar,
   labels: labelsProp,
 }: DataTableProps<TData, TValue>) {
-  const labels = resolveLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabelsGeneric(defaultLabels, ctx.dataTable, labelsProp)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] =
     React.useState<ColumnFiltersState>([])

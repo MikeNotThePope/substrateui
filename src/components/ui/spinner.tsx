@@ -1,7 +1,11 @@
+"use client"
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
 // ─── i18n labels ────────────────────────────────────────────────────
 
@@ -12,11 +16,6 @@ interface SpinnerLabels {
 
 const defaultSpinnerLabels: Required<SpinnerLabels> = {
   loading: "Loading…",
-}
-
-function resolveSpinnerLabels(labels?: SpinnerLabels): Required<SpinnerLabels> {
-  if (!labels) return defaultSpinnerLabels
-  return { ...defaultSpinnerLabels, ...labels }
 }
 
 /** Spinner size variants. Use with cn(spinnerVariants({...})) for non-spinner elements. */
@@ -51,7 +50,8 @@ function Spinner({
   ...props
 }: React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof spinnerVariants> & { labels?: SpinnerLabels }) {
-  const labels = resolveSpinnerLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSpinnerLabels, ctx.spinner, labelsProp)
 
   return (
     <div

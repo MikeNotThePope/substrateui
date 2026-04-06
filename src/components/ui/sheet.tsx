@@ -6,6 +6,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
 // ─── i18n labels ────────────────────────────────────────────────────
 
@@ -16,11 +18,6 @@ interface SheetLabels {
 
 const defaultSheetLabels: Required<SheetLabels> = {
   close: "Close",
-}
-
-function resolveSheetLabels(labels?: SheetLabels): Required<SheetLabels> {
-  if (!labels) return defaultSheetLabels
-  return { ...defaultSheetLabels, ...labels }
 }
 
 /** Root component that manages sheet open/closed state. */
@@ -97,7 +94,8 @@ function SheetContent({
   ref,
   ...props
 }: SheetContentProps & { labels?: SheetLabels }) {
-  const labels = resolveSheetLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSheetLabels, ctx.sheet, labelsProp)
 
   return (
     <SheetPortal>

@@ -19,6 +19,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
 /** A single selectable option in the Combobox dropdown. */
 export interface ComboboxOption {
@@ -41,10 +43,6 @@ const defaultComboboxLabels: Required<ComboboxLabels> = {
   noResults: "No results found.",
 }
 
-function resolveComboboxLabels(labels?: ComboboxLabels): Required<ComboboxLabels> {
-  if (!labels) return defaultComboboxLabels
-  return { ...defaultComboboxLabels, ...labels }
-}
 
 interface ComboboxBaseProps {
   options: ComboboxOption[]
@@ -93,12 +91,14 @@ function Combobox({
   disabled,
   ...props
 }: ComboboxProps) {
-  const labels = resolveComboboxLabels({
+  const ctx = useLabels()
+  const mergedProp: ComboboxLabels = {
     ...labelsProp,
     ...(placeholder != null && { placeholder }),
     ...(searchPlaceholder != null && { searchPlaceholder }),
     ...(emptyMessage != null && { noResults: emptyMessage }),
-  })
+  }
+  const labels = resolveLabels(defaultComboboxLabels, ctx.combobox, mergedProp)
   const [open, setOpen] = React.useState(false)
 
   const isMultiple = props.multiple === true

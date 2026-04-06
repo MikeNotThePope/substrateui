@@ -5,6 +5,8 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
 // ─── i18n labels ────────────────────────────────────────────────────
 
@@ -15,11 +17,6 @@ interface DialogLabels {
 
 const defaultDialogLabels: Required<DialogLabels> = {
   close: "Close",
-}
-
-function resolveDialogLabels(labels?: DialogLabels): Required<DialogLabels> {
-  if (!labels) return defaultDialogLabels
-  return { ...defaultDialogLabels, ...labels }
 }
 
 /** Root dialog component that manages open/close state. */
@@ -69,7 +66,8 @@ function DialogContent({
   ref,
   ...props
 }: React.ComponentPropsWithRef<typeof DialogPrimitive.Content> & { labels?: DialogLabels }) {
-  const labels = resolveDialogLabels(labelsProp)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultDialogLabels, ctx.dialog, labelsProp)
 
   return (
     <DialogPortal>
