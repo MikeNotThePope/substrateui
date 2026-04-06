@@ -33,6 +33,7 @@ jobs:
       - run: bunx playwright install --with-deps chromium
       - name: Download visual baselines
         if: env.R2_ACCESS_KEY_ID != ''
+        timeout-minutes: 2
         run: bun run snapshots:download
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
@@ -41,6 +42,7 @@ jobs:
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
       - name: Run visual tests
         if: env.R2_ACCESS_KEY_ID != ''
+        timeout-minutes: 12
         run: bun run test:visual
         env:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
