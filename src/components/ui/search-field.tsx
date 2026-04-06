@@ -16,6 +16,8 @@ interface SearchFieldProps
   value: string
   onChange: (value: string) => void
   onClear?: () => void
+  /** Accessible label for the clear button. @default "Clear search" */
+  clearLabel?: string
 }
 
 /**
@@ -35,6 +37,7 @@ function SearchField({
   value,
   onChange,
   onClear,
+  clearLabel = "Clear search",
   className,
   ...props
 }: SearchFieldProps) {
@@ -60,7 +63,7 @@ function SearchField({
         <InputGroupSuffix>
           <button
             type="button"
-            aria-label="Clear search"
+            aria-label={clearLabel}
             onClick={() => {
               onChange("")
               onClear?.()

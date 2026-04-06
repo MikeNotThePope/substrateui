@@ -35,12 +35,55 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by DataTable sub-components. All keys have English defaults. */
+interface DataTableLabels {
+  previous?: string
+  next?: string
+  noResults?: string
+  view?: string
+  toggleColumns?: string
+  selectAll?: string
+  selectRow?: string
+  rowsSelected?: (selected: number, total: number) => string
+  pageOf?: (page: number, total: number) => string
+  sortedAscending?: (title: string) => string
+  sortedDescending?: (title: string) => string
+  notSorted?: (title: string) => string
+}
+
+const defaultLabels: Required<DataTableLabels> = {
+  previous: "Previous",
+  next: "Next",
+  noResults: "No results.",
+  view: "View",
+  toggleColumns: "Toggle columns",
+  selectAll: "Select all",
+  selectRow: "Select row",
+  rowsSelected: (selected, total) =>
+    `${selected} of ${total} row(s) selected.`,
+  pageOf: (page, total) => `Page ${page} of ${total}`,
+  sortedAscending: (title) =>
+    `${title}, sorted ascending. Click to sort descending.`,
+  sortedDescending: (title) =>
+    `${title}, sorted descending. Click to remove sort.`,
+  notSorted: (title) =>
+    `${title}, not sorted. Click to sort ascending.`,
+}
+
+function resolveLabels(labels?: DataTableLabels): Required<DataTableLabels> {
+  if (!labels) return defaultLabels
+  return { ...defaultLabels, ...labels }
+}
+
 // ─── DataTableColumnHeader ───────────────────────────────────────────
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
   column: import("@tanstack/react-table").Column<TData, TValue>
   title: string
+  labels?: DataTableLabels
 }
 
 /**
@@ -56,7 +99,10 @@ function DataTableColumnHeader<TData, TValue>({
   column,
   title,
   className,
+  labels: labelsProp,
 }: DataTableColumnHeaderProps<TData, TValue>) {
+  const labels = resolveLabels(labelsProp)
+
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>
   }
@@ -71,10 +117,10 @@ function DataTableColumnHeader<TData, TValue>({
       onClick={() => column.toggleSorting(sorted === "asc")}
       aria-label={
         sorted === "asc"
-          ? `${title}, sorted ascending. Click to sort descending.`
+          ? labels.sortedAscending(title)
           : sorted === "desc"
-            ? `${title}, sorted descending. Click to remove sort.`
-            : `${title}, not sorted. Click to sort ascending.`
+            ? labels.sortedDescending(title)
+            : labels.notSorted(title)
       }
     >
       {title}
@@ -93,6 +139,7 @@ function DataTableColumnHeader<TData, TValue>({
 
 interface DataTableViewOptionsProps<TData> {
   table: import("@tanstack/react-table").Table<TData>
+  labels?: DataTableLabels
 }
 
 /**
@@ -105,18 +152,21 @@ interface DataTableViewOptionsProps<TData> {
  */
 function DataTableViewOptions<TData>({
   table,
+  labels: labelsProp,
 }: DataTableViewOptionsProps<TData>) {
+  const labels = resolveLabels(labelsProp)
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="ms-auto h-8 border-2">
           <Settings2 className="me-2 size-4" />
-          <span className="font-mono text-xs">View</span>
+          <span className="font-mono text-xs">{labels.view}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">
         <DropdownMenuLabel className="font-mono text-xs">
-          Toggle columns
+          {labels.toggleColumns}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
@@ -144,6 +194,7 @@ function DataTableViewOptions<TData>({
 
 interface DataTablePaginationProps<TData> {
   table: import("@tanstack/react-table").Table<TData>
+  labels?: DataTableLabels
 }
 
 /**
@@ -156,17 +207,24 @@ interface DataTablePaginationProps<TData> {
  */
 function DataTablePagination<TData>({
   table,
+  labels: labelsProp,
 }: DataTablePaginationProps<TData>) {
+  const labels = resolveLabels(labelsProp)
+
   return (
     <div className="flex items-center justify-between px-2 py-4">
       <div className="flex-1 font-mono text-xs text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
+        {labels.rowsSelected(
+          table.getFilteredSelectedRowModel().rows.length,
+          table.getFilteredRowModel().rows.length
+        )}
       </div>
       <div className="flex items-center gap-2">
         <div className="font-mono text-xs text-muted-foreground">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}
+          {labels.pageOf(
+            table.getState().pagination.pageIndex + 1,
+            table.getPageCount()
+          )}
         </div>
         <Button
           variant="outline"
@@ -174,9 +232,9 @@ function DataTablePagination<TData>({
           className="h-8 border-2"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-          aria-label="Previous page"
+          aria-label={labels.previous}
         >
-          Previous
+          {labels.previous}
         </Button>
         <Button
           variant="outline"
@@ -184,9 +242,9 @@ function DataTablePagination<TData>({
           className="h-8 border-2"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-          aria-label="Next page"
+          aria-label={labels.next}
         >
-          Next
+          {labels.next}
         </Button>
       </div>
     </div>
@@ -225,7 +283,10 @@ function DataTableToolbar({ children, className }: DataTableToolbarProps) {
  * @example
  * const columns = [createSelectColumn<MyData>(), ...otherColumns]
  */
-function createSelectColumn<TData>(): ColumnDef<TData> {
+function createSelectColumn<TData>(
+  labels?: DataTableLabels
+): ColumnDef<TData> {
+  const resolved = resolveLabels(labels)
   return {
     id: "select",
     header: ({ table }) => (
@@ -235,14 +296,14 @@ function createSelectColumn<TData>(): ColumnDef<TData> {
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        aria-label={resolved.selectAll}
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        aria-label={resolved.selectRow}
       />
     ),
     enableSorting: false,
@@ -257,6 +318,8 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
   className?: string
   toolbar?: React.ReactNode
+  /** Translatable strings for all DataTable sub-components. */
+  labels?: DataTableLabels
 }
 
 /**
@@ -274,7 +337,9 @@ function DataTable<TData, TValue>({
   data,
   className,
   toolbar,
+  labels: labelsProp,
 }: DataTableProps<TData, TValue>) {
+  const labels = resolveLabels(labelsProp)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] =
     React.useState<ColumnFiltersState>([])
@@ -347,14 +412,14 @@ function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center text-muted-foreground"
                 >
-                  No results.
+                  {labels.noResults}
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} labels={labelsProp} />
     </div>
   )
 }
@@ -367,3 +432,5 @@ export {
   DataTableViewOptions,
   createSelectColumn,
 }
+
+export type { DataTableLabels }

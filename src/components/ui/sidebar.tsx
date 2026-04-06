@@ -178,12 +178,18 @@ function Sidebar({
   collapsible = "offcanvas",
   className,
   children,
+  mobileTitle = "Sidebar",
+  mobileDescription = "Displays the mobile sidebar.",
   ref,
   ...props
 }: React.ComponentPropsWithRef<"div"> & {
   side?: "left" | "right"
   variant?: "sidebar" | "floating" | "inset"
   collapsible?: "offcanvas" | "icon" | "none"
+  /** Screen-reader title for the mobile sheet. @default "Sidebar" */
+  mobileTitle?: string
+  /** Screen-reader description for the mobile sheet. @default "Displays the mobile sidebar." */
+  mobileDescription?: string
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
@@ -219,8 +225,8 @@ function Sidebar({
           side={side}
         >
           <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+            <SheetTitle>{mobileTitle}</SheetTitle>
+            <SheetDescription>{mobileDescription}</SheetDescription>
           </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
@@ -278,9 +284,13 @@ function Sidebar({
 function SidebarTrigger({
   className,
   onClick,
+  label = "Toggle Sidebar",
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof Button>) {
+}: React.ComponentPropsWithRef<typeof Button> & {
+  /** Screen-reader label for the trigger button. @default "Toggle Sidebar" */
+  label?: string
+}) {
   const { toggleSidebar } = useSidebar()
 
   return (
@@ -298,7 +308,7 @@ function SidebarTrigger({
       {...props}
     >
       <PanelLeft />
-      <span className="sr-only">Toggle Sidebar</span>
+      <span className="sr-only">{label}</span>
     </Button>
   )
 }
@@ -306,9 +316,13 @@ function SidebarTrigger({
 /** A thin interactive rail at the sidebar edge for toggling via click or drag. */
 function SidebarRail({
   className,
+  label = "Toggle Sidebar",
   ref,
   ...props
-}: React.ComponentPropsWithRef<"button">) {
+}: React.ComponentPropsWithRef<"button"> & {
+  /** Accessible label for the rail. @default "Toggle Sidebar" */
+  label?: string
+}) {
   const { toggleSidebar } = useSidebar()
 
   return (
@@ -316,10 +330,10 @@ function SidebarRail({
       ref={ref}
       data-slot="sidebar-rail"
       data-sidebar="rail"
-      aria-label="Toggle Sidebar"
+      aria-label={label}
       tabIndex={-1}
       onClick={toggleSidebar}
-      title="Toggle Sidebar"
+      title={label}
       className={cn(
         "absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:start-1/2 after:w-[2px] hover:after:bg-sidebar-border group-data-[side=left]:-end-4 group-data-[side=right]:start-0 sm:flex",
         "[[data-side=left]_&]:cursor-w-resize [[data-side=right]_&]:cursor-e-resize",

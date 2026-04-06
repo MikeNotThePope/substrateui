@@ -12,11 +12,12 @@ import { cn } from "@/lib/utils"
  */
 function Breadcrumb({
   ref,
+  "aria-label": ariaLabel = "breadcrumb",
   ...props
 }: React.ComponentPropsWithRef<"nav"> & {
   separator?: React.ReactNode
 }) {
-  return <nav ref={ref} aria-label="breadcrumb" data-slot="breadcrumb" {...props} />
+  return <nav ref={ref} aria-label={ariaLabel} data-slot="breadcrumb" {...props} />
 }
 
 /** Ordered list container for breadcrumb items. */
@@ -116,8 +117,12 @@ function BreadcrumbSeparator({
 /** Ellipsis indicator used when breadcrumb items are collapsed. */
 function BreadcrumbEllipsis({
   className,
+  label = "More",
   ...props
-}: React.ComponentProps<"span">) {
+}: React.ComponentProps<"span"> & {
+  /** Screen-reader text for the ellipsis. @default "More" */
+  label?: string
+}) {
   return (
     <span
       role="presentation"
@@ -127,7 +132,7 @@ function BreadcrumbEllipsis({
       {...props}
     >
       <MoreHorizontal className="h-4 w-4" />
-      <span className="sr-only">More</span>
+      <span className="sr-only">{label}</span>
     </span>
   )
 }

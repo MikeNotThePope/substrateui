@@ -16,11 +16,15 @@ import { ButtonProps, buttonVariants } from "@/components/ui/button"
  *   </PaginationContent>
  * </Pagination>
  */
-function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
+function Pagination({
+  className,
+  "aria-label": ariaLabel = "pagination",
+  ...props
+}: React.ComponentProps<"nav">) {
   return (
     <nav
       role="navigation"
-      aria-label="pagination"
+      aria-label={ariaLabel}
       data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
       {...props}
@@ -91,18 +95,22 @@ function PaginationLink({
 /** "Previous" pagination link with a left chevron icon. */
 function PaginationPrevious({
   className,
+  label = "Previous",
   ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+}: React.ComponentProps<typeof PaginationLink> & {
+  /** Visible text label. @default "Previous" */
+  label?: string
+}) {
   return (
     <PaginationLink
-      aria-label="Go to previous page"
+      aria-label={props["aria-label"] ?? label}
       size="default"
       data-slot="pagination-previous"
       className={cn("gap-1 ps-2.5", className)}
       {...props}
     >
       <ChevronLeft className="h-4 w-4" />
-      <span>Previous</span>
+      <span>{label}</span>
     </PaginationLink>
   )
 }
@@ -110,17 +118,21 @@ function PaginationPrevious({
 /** "Next" pagination link with a right chevron icon. */
 function PaginationNext({
   className,
+  label = "Next",
   ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+}: React.ComponentProps<typeof PaginationLink> & {
+  /** Visible text label. @default "Next" */
+  label?: string
+}) {
   return (
     <PaginationLink
-      aria-label="Go to next page"
+      aria-label={props["aria-label"] ?? label}
       size="default"
       data-slot="pagination-next"
       className={cn("gap-1 pe-2.5", className)}
       {...props}
     >
-      <span>Next</span>
+      <span>{label}</span>
       <ChevronRight className="h-4 w-4" />
     </PaginationLink>
   )
@@ -129,8 +141,12 @@ function PaginationNext({
 /** Ellipsis indicator representing omitted page numbers. */
 function PaginationEllipsis({
   className,
+  label = "More pages",
   ...props
-}: React.ComponentProps<"span">) {
+}: React.ComponentProps<"span"> & {
+  /** Screen-reader text for the ellipsis. @default "More pages" */
+  label?: string
+}) {
   return (
     <span
       aria-hidden
@@ -139,7 +155,7 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontal className="h-4 w-4" />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">{label}</span>
     </span>
   )
 }
