@@ -13,6 +13,23 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by SiteHeaderNav. All keys have English defaults. */
+interface SiteHeaderNavLabels {
+  primaryNav?: string
+  openNavigationMenu?: string
+  navigation?: string
+}
+
+const defaultSiteHeaderNavLabels: Required<SiteHeaderNavLabels> = {
+  primaryNav: "Primary",
+  openNavigationMenu: "Open navigation menu",
+  navigation: "Navigation",
+}
 
 type NavLink = {
   label: string
@@ -52,12 +69,14 @@ function findActiveMatch(pathname: string): string | null {
   )
 }
 
-export function SiteHeaderNav() {
+export function SiteHeaderNav({ labels: labelsProp }: { labels?: SiteHeaderNavLabels } = {}) {
   const pathname = usePathname()
   const activeMatch = findActiveMatch(pathname)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSiteHeaderNavLabels, ctx.siteHeaderNav, labelsProp)
 
   return (
-    <nav aria-label="Primary" className="hidden md:flex items-center gap-6">
+    <nav aria-label={labels.primaryNav} className="hidden md:flex items-center gap-6">
       {navLinks.map((link) => {
         const active = link.match === activeMatch
         const className = cn(
@@ -89,10 +108,12 @@ export function SiteHeaderNav() {
   )
 }
 
-export function SiteHeaderMobileNav() {
+export function SiteHeaderMobileNav({ labels: labelsProp }: { labels?: SiteHeaderNavLabels } = {}) {
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
   const activeMatch = findActiveMatch(pathname)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSiteHeaderNavLabels, ctx.siteHeaderNav, labelsProp)
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -101,16 +122,16 @@ export function SiteHeaderMobileNav() {
           variant="ghost"
           size="icon"
           className="md:hidden"
-          aria-label="Open navigation menu"
+          aria-label={labels.openNavigationMenu}
         >
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-[280px] p-6">
         <SheetTitle className="font-bold text-lg tracking-tight mb-6">
-          Navigation
+          {labels.navigation}
         </SheetTitle>
-        <nav aria-label="Primary" className="flex flex-col gap-2">
+        <nav aria-label={labels.primaryNav} className="flex flex-col gap-2">
           {navLinks.map((link) => {
             const active = link.match === activeMatch
             const className = cn(
@@ -149,3 +170,5 @@ export function SiteHeaderMobileNav() {
     </Sheet>
   )
 }
+
+export type { SiteHeaderNavLabels }

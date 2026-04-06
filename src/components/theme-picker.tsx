@@ -1,6 +1,19 @@
 "use client"
 
 import * as React from "react"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by ThemePicker. All keys have English defaults. */
+interface ThemePickerLabels {
+  theme?: string
+}
+
+const defaultThemePickerLabels: Required<ThemePickerLabels> = {
+  theme: "Theme",
+}
 
 type Theme = "default"
 
@@ -50,9 +63,11 @@ export function SiteThemeProvider({
   )
 }
 
-export function ThemePicker() {
+export function ThemePicker({ labels: labelsProp }: { labels?: ThemePickerLabels } = {}) {
   const { theme, setTheme } = React.useContext(ThemeContext)
   const [mounted, setMounted] = React.useState(false)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultThemePickerLabels, ctx.themePicker, labelsProp)
 
   React.useEffect(() => setMounted(true), [])
 
@@ -62,7 +77,7 @@ export function ThemePicker() {
     <select
       value={theme}
       onChange={(e) => setTheme(e.target.value as Theme)}
-      aria-label="Theme"
+      aria-label={labels.theme}
       className="h-9 rounded-lg border-2 px-3 text-sm bg-background text-foreground"
     >
       {THEMES.map((t) => (
@@ -73,3 +88,5 @@ export function ThemePicker() {
     </select>
   )
 }
+
+export type { ThemePickerLabels }

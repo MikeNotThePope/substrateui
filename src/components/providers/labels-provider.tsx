@@ -13,6 +13,13 @@ import type { SearchFieldLabels } from "@/components/ui/search-field"
 import type { SheetLabels } from "@/components/ui/sheet"
 import type { SidebarLabels } from "@/components/ui/sidebar"
 import type { SpinnerLabels } from "@/components/ui/spinner"
+import type { DirectionToggleLabels } from "@/components/direction-toggle"
+import type { SiteHeaderLabels } from "@/components/site-header"
+import type { SiteHeaderNavLabels } from "@/components/site-header-nav"
+import type { SitePreferencesLabels } from "@/components/site-preferences"
+import type { StatCardLabels } from "@/components/stat-card"
+import type { ThemePickerLabels } from "@/components/theme-picker"
+import type { ThemeToggleLabels } from "@/components/theme-toggle"
 
 /** All translatable strings for SubstrateUI components, keyed by component. */
 interface SubstrateUILabels {
@@ -27,6 +34,13 @@ interface SubstrateUILabels {
   sheet?: Partial<SheetLabels>
   sidebar?: Partial<SidebarLabels>
   spinner?: Partial<SpinnerLabels>
+  directionToggle?: Partial<DirectionToggleLabels>
+  siteHeader?: Partial<SiteHeaderLabels>
+  siteHeaderNav?: Partial<SiteHeaderNavLabels>
+  sitePreferences?: Partial<SitePreferencesLabels>
+  statCard?: Partial<StatCardLabels>
+  themePicker?: Partial<ThemePickerLabels>
+  themeToggle?: Partial<ThemeToggleLabels>
 }
 
 const LabelsContext = React.createContext<SubstrateUILabels>({})
@@ -39,7 +53,7 @@ const LabelsContext = React.createContext<SubstrateUILabels>({})
  * `labels` props still override the provider value.
  *
  * @example
- * <LabelsProvider labels={{ dialog: { close: "Fermer" }, spinner: { loading: "Chargement\u2026" } }}>
+ * <LabelsProvider labels={{ dialog: { close: "Fermer" }, spinner: { loading: "Chargement…" } }}>
  *   <App />
  * </LabelsProvider>
  */

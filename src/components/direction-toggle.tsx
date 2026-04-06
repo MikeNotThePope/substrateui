@@ -2,10 +2,29 @@
 
 import * as React from "react"
 import { useDirectionController } from "@/components/providers/direction-controller"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 
-export function DirectionToggle() {
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by DirectionToggle. All keys have English defaults. */
+interface DirectionToggleLabels {
+  textDirection?: string
+  ltr?: string
+  rtl?: string
+}
+
+const defaultDirectionToggleLabels: Required<DirectionToggleLabels> = {
+  textDirection: "Text direction",
+  ltr: "LTR",
+  rtl: "RTL",
+}
+
+export function DirectionToggle({ labels: labelsProp }: { labels?: DirectionToggleLabels } = {}) {
   const { direction, setDirection } = useDirectionController()
   const [mounted, setMounted] = React.useState(false)
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultDirectionToggleLabels, ctx.directionToggle, labelsProp)
 
   React.useEffect(() => setMounted(true), [])
 
@@ -15,7 +34,7 @@ export function DirectionToggle() {
     <div
       className="inline-flex items-center rounded-lg border-2 p-1"
       role="group"
-      aria-label="Text direction"
+      aria-label={labels.textDirection}
     >
       <button
         type="button"
@@ -27,7 +46,7 @@ export function DirectionToggle() {
             : "text-muted-foreground hover:text-foreground"
         }`}
       >
-        LTR
+        {labels.ltr}
       </button>
       <button
         type="button"
@@ -39,8 +58,10 @@ export function DirectionToggle() {
             : "text-muted-foreground hover:text-foreground"
         }`}
       >
-        RTL
+        {labels.rtl}
       </button>
     </div>
   )
 }
+
+export type { DirectionToggleLabels }

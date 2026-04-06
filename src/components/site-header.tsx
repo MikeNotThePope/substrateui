@@ -6,10 +6,26 @@ import {
   SiteHeaderMobileNav,
   SiteHeaderNav,
 } from "@/components/site-header-nav"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by SiteHeader. All keys have English defaults. */
+interface SiteHeaderLabels {
+  githubRepository?: string
+}
+
+const defaultSiteHeaderLabels: Required<SiteHeaderLabels> = {
+  githubRepository: "GitHub repository",
+}
 
 const GITHUB_URL = "https://github.com/MikeNotThePope/substrateui"
 
-export function SiteHeader() {
+export function SiteHeader({ labels: labelsProp }: { labels?: SiteHeaderLabels } = {}) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSiteHeaderLabels, ctx.siteHeader, labelsProp)
+
   return (
     <header
       role="banner"
@@ -28,7 +44,7 @@ export function SiteHeader() {
             variant="ghost"
             size="icon"
             asChild
-            aria-label="GitHub repository"
+            aria-label={labels.githubRepository}
           >
             <a href={GITHUB_URL} target="_blank" rel="noreferrer noopener">
               <svg
@@ -47,3 +63,5 @@ export function SiteHeader() {
     </header>
   )
 }
+
+export type { SiteHeaderLabels }
