@@ -95,10 +95,10 @@ describe('DataTable', () => {
   it('renders pagination controls with page count and status text', () => {
     render(<DataTable columns={plainColumns} data={people} />)
     expect(
-      screen.getByRole('button', { name: 'Previous page' })
+      screen.getByRole('button', { name: 'Previous' })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: 'Next page' })
+      screen.getByRole('button', { name: 'Next' })
     ).toBeInTheDocument()
     expect(screen.getByText(/Page 1 of 1/)).toBeInTheDocument()
     expect(screen.getByText(/0 of 3 row\(s\) selected/)).toBeInTheDocument()
@@ -106,8 +106,8 @@ describe('DataTable', () => {
 
   it('disables prev/next when there is only one page', () => {
     render(<DataTable columns={plainColumns} data={people} />)
-    expect(screen.getByRole('button', { name: 'Previous page' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Previous' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled()
   })
 
   it('advances pages when there is more than one page', async () => {
@@ -120,13 +120,13 @@ describe('DataTable', () => {
     }))
     render(<DataTable columns={plainColumns} data={many} />)
     expect(screen.getByText(/Page 1 of 2/)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Previous page' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Previous' })).toBeDisabled()
     expect(
-      screen.getByRole('button', { name: 'Next page' })
+      screen.getByRole('button', { name: 'Next' })
     ).not.toBeDisabled()
-    await user.click(screen.getByRole('button', { name: 'Next page' }))
+    await user.click(screen.getByRole('button', { name: 'Next' }))
     expect(screen.getByText(/Page 2 of 2/)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled()
   })
 
   it('sorts ascending on first click of a sortable header, descending on second', async () => {

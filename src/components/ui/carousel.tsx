@@ -9,6 +9,24 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by Carousel navigation buttons. All keys have English defaults. */
+interface CarouselLabels {
+  previousSlide?: string
+  nextSlide?: string
+}
+
+const defaultCarouselLabels: Required<CarouselLabels> = {
+  previousSlide: "Previous slide",
+  nextSlide: "Next slide",
+}
+
+function resolveCarouselLabels(labels?: CarouselLabels): Required<CarouselLabels> {
+  if (!labels) return defaultCarouselLabels
+  return { ...defaultCarouselLabels, ...labels }
+}
+
 /** Handle returned by Embla Carousel for programmatic control. */
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -206,10 +224,12 @@ function CarouselPrevious({
   className,
   variant = "outline",
   size = "icon",
+  labels: labelsProp,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof Button>) {
+}: React.ComponentPropsWithRef<typeof Button> & { labels?: CarouselLabels }) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const labels = resolveCarouselLabels(labelsProp)
 
   return (
     <Button
@@ -229,7 +249,7 @@ function CarouselPrevious({
       {...props}
     >
       <ArrowLeft className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
+      <span className="sr-only">{labels.previousSlide}</span>
     </Button>
   )
 }
@@ -239,10 +259,12 @@ function CarouselNext({
   className,
   variant = "outline",
   size = "icon",
+  labels: labelsProp,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof Button>) {
+}: React.ComponentPropsWithRef<typeof Button> & { labels?: CarouselLabels }) {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const labels = resolveCarouselLabels(labelsProp)
 
   return (
     <Button
@@ -262,13 +284,14 @@ function CarouselNext({
       {...props}
     >
       <ArrowRight className="h-4 w-4" />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">{labels.nextSlide}</span>
     </Button>
   )
 }
 
 export {
   type CarouselApi,
+  type CarouselLabels,
   Carousel,
   CarouselContent,
   CarouselItem,

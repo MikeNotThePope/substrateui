@@ -13,26 +13,58 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat("en-US", {
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by DatePicker / DateRangePicker. All keys have English defaults. */
+interface DatePickerLabels {
+  placeholder?: string
+  rangePlaceholder?: string
+  locale?: string
+  formatDate?: (date: Date) => string
+  formatDateShort?: (date: Date) => string
+}
+
+function defaultFormatDate(date: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
   }).format(date)
 }
 
-function formatDateShort(date: Date): string {
-  return new Intl.DateTimeFormat("en-US", {
+function defaultFormatDateShort(date: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
   }).format(date)
 }
 
+const defaultDatePickerLabels: Required<DatePickerLabels> = {
+  placeholder: "Pick a date",
+  rangePlaceholder: "Pick a date range",
+  locale: "en-US",
+  formatDate: (date) => defaultFormatDate(date, "en-US"),
+  formatDateShort: (date) => defaultFormatDateShort(date, "en-US"),
+}
+
+function resolveDatePickerLabels(labels?: DatePickerLabels): Required<DatePickerLabels> {
+  if (!labels) return defaultDatePickerLabels
+  const locale = labels.locale ?? defaultDatePickerLabels.locale
+  return {
+    ...defaultDatePickerLabels,
+    ...labels,
+    formatDate: labels.formatDate ?? ((date) => defaultFormatDate(date, locale)),
+    formatDateShort: labels.formatDateShort ?? ((date) => defaultFormatDateShort(date, locale)),
+  }
+}
+
 interface DatePickerProps {
   date?: Date
   onDateChange?: (date: Date | undefined) => void
+  /** @deprecated Use `labels.placeholder` instead. */
   placeholder?: string
+  labels?: DatePickerLabels
   className?: string
   disabled?: boolean
 }
@@ -50,10 +82,16 @@ interface DatePickerProps {
 function DatePicker({
   date,
   onDateChange,
-  placeholder = "Pick a date",
+  placeholder,
+  labels: labelsProp,
   className,
   disabled,
 }: DatePickerProps) {
+  const labels = resolveDatePickerLabels({
+    ...labelsProp,
+    ...(placeholder != null && { placeholder }),
+  })
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -68,9 +106,9 @@ function DatePicker({
         >
           <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
           {date ? (
-            <span>{formatDate(date)}</span>
+            <span>{labels.formatDate(date)}</span>
           ) : (
-            <span className="text-muted-foreground">{placeholder}</span>
+            <span className="text-muted-foreground">{labels.placeholder}</span>
           )}
         </Button>
       </PopoverTrigger>
@@ -88,7 +126,9 @@ function DatePicker({
 interface DateRangePickerProps {
   dateRange?: DateRange
   onDateRangeChange?: (range: DateRange | undefined) => void
+  /** @deprecated Use `labels.rangePlaceholder` instead. */
   placeholder?: string
+  labels?: DatePickerLabels
   className?: string
   disabled?: boolean
 }
@@ -106,10 +146,16 @@ interface DateRangePickerProps {
 function DateRangePicker({
   dateRange,
   onDateRangeChange,
-  placeholder = "Pick a date range",
+  placeholder,
+  labels: labelsProp,
   className,
   disabled,
 }: DateRangePickerProps) {
+  const labels = resolveDatePickerLabels({
+    ...labelsProp,
+    ...(placeholder != null && { rangePlaceholder: placeholder }),
+  })
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -125,11 +171,11 @@ function DateRangePicker({
           <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
           {dateRange?.from ? (
             <span>
-              {formatDateShort(dateRange.from)}
-              {dateRange.to && ` – ${formatDateShort(dateRange.to)}`}
+              {labels.formatDateShort(dateRange.from)}
+              {dateRange.to && ` – ${labels.formatDateShort(dateRange.to)}`}
             </span>
           ) : (
-            <span className="text-muted-foreground">{placeholder}</span>
+            <span className="text-muted-foreground">{labels.rangePlaceholder}</span>
           )}
         </Button>
       </PopoverTrigger>
@@ -145,4 +191,4 @@ function DateRangePicker({
   )
 }
 
-export { DatePicker, DateRangePicker }
+export { DatePicker, DateRangePicker, type DatePickerLabels }

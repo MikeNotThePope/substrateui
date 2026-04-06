@@ -26,11 +26,35 @@ export interface ComboboxOption {
   label: string
 }
 
-interface ComboboxBaseProps {
-  options: ComboboxOption[]
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by Combobox. All keys have English defaults. */
+interface ComboboxLabels {
   placeholder?: string
   searchPlaceholder?: string
+  noResults?: string
+}
+
+const defaultComboboxLabels: Required<ComboboxLabels> = {
+  placeholder: "Select...",
+  searchPlaceholder: "Search...",
+  noResults: "No results found.",
+}
+
+function resolveComboboxLabels(labels?: ComboboxLabels): Required<ComboboxLabels> {
+  if (!labels) return defaultComboboxLabels
+  return { ...defaultComboboxLabels, ...labels }
+}
+
+interface ComboboxBaseProps {
+  options: ComboboxOption[]
+  /** @deprecated Use `labels.placeholder` instead. */
+  placeholder?: string
+  /** @deprecated Use `labels.searchPlaceholder` instead. */
+  searchPlaceholder?: string
+  /** @deprecated Use `labels.noResults` instead. */
   emptyMessage?: string
+  labels?: ComboboxLabels
   className?: string
   disabled?: boolean
 }
@@ -61,13 +85,20 @@ type ComboboxProps = ComboboxSingleProps | ComboboxMultipleProps
  */
 function Combobox({
   options,
-  placeholder = "Select...",
-  searchPlaceholder = "Search...",
-  emptyMessage = "No results found.",
+  placeholder,
+  searchPlaceholder,
+  emptyMessage,
+  labels: labelsProp,
   className,
   disabled,
   ...props
 }: ComboboxProps) {
+  const labels = resolveComboboxLabels({
+    ...labelsProp,
+    ...(placeholder != null && { placeholder }),
+    ...(searchPlaceholder != null && { searchPlaceholder }),
+    ...(emptyMessage != null && { noResults: emptyMessage }),
+  })
   const [open, setOpen] = React.useState(false)
 
   const isMultiple = props.multiple === true
@@ -128,7 +159,7 @@ function Combobox({
       return <span>{opt?.label ?? props.value}</span>
     }
 
-    return <span className="text-muted-foreground">{placeholder}</span>
+    return <span className="text-muted-foreground">{labels.placeholder}</span>
   }
 
   return (
@@ -151,9 +182,9 @@ function Combobox({
       </PopoverTrigger>
       <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
         <Command>
-          <CommandInput placeholder={searchPlaceholder} />
+          <CommandInput placeholder={labels.searchPlaceholder} />
           <CommandList>
-            <CommandEmpty>{emptyMessage}</CommandEmpty>
+            <CommandEmpty>{labels.noResults}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem
@@ -181,4 +212,4 @@ function Combobox({
   )
 }
 
-export { Combobox }
+export { Combobox, type ComboboxLabels }

@@ -3,6 +3,22 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by Spinner. All keys have English defaults. */
+interface SpinnerLabels {
+  loading?: string
+}
+
+const defaultSpinnerLabels: Required<SpinnerLabels> = {
+  loading: "Loading…",
+}
+
+function resolveSpinnerLabels(labels?: SpinnerLabels): Required<SpinnerLabels> {
+  if (!labels) return defaultSpinnerLabels
+  return { ...defaultSpinnerLabels, ...labels }
+}
+
 /** Spinner size variants. Use with cn(spinnerVariants({...})) for non-spinner elements. */
 const spinnerVariants = cva(
   "rounded-full border-2",
@@ -31,9 +47,12 @@ const spinnerVariants = cva(
 function Spinner({
   className,
   size,
+  labels: labelsProp,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof spinnerVariants>) {
+  VariantProps<typeof spinnerVariants> & { labels?: SpinnerLabels }) {
+  const labels = resolveSpinnerLabels(labelsProp)
+
   return (
     <div
       data-slot="spinner"
@@ -41,9 +60,9 @@ function Spinner({
       className={cn(spinnerVariants({ size }), className)}
       {...props}
     >
-      <span className="sr-only">Loading…</span>
+      <span className="sr-only">{labels.loading}</span>
     </div>
   )
 }
 
-export { Spinner, spinnerVariants }
+export { Spinner, spinnerVariants, type SpinnerLabels }
