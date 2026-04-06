@@ -3,6 +3,21 @@ import { Slot } from "@radix-ui/react-slot"
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by Breadcrumb. All keys have English defaults. */
+interface BreadcrumbLabels {
+  breadcrumb?: string
+  more?: string
+}
+
+const defaultBreadcrumbLabels: Required<BreadcrumbLabels> = {
+  breadcrumb: "breadcrumb",
+  more: "More",
+}
 
 /**
  * Navigation component showing the user's location in a page hierarchy.
@@ -12,12 +27,17 @@ import { cn } from "@/lib/utils"
  */
 function Breadcrumb({
   ref,
-  "aria-label": ariaLabel = "breadcrumb",
+  "aria-label": ariaLabel,
+  labels: labelsProp,
   ...props
 }: React.ComponentPropsWithRef<"nav"> & {
   separator?: React.ReactNode
+  labels?: BreadcrumbLabels
 }) {
-  return <nav ref={ref} aria-label={ariaLabel} data-slot="breadcrumb" {...props} />
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultBreadcrumbLabels, ctx.breadcrumb, labelsProp)
+
+  return <nav ref={ref} aria-label={ariaLabel ?? labels.breadcrumb} data-slot="breadcrumb" {...props} />
 }
 
 /** Ordered list container for breadcrumb items. */
@@ -117,12 +137,17 @@ function BreadcrumbSeparator({
 /** Ellipsis indicator used when breadcrumb items are collapsed. */
 function BreadcrumbEllipsis({
   className,
-  label = "More",
+  label,
+  labels: labelsProp,
   ...props
 }: React.ComponentProps<"span"> & {
   /** Screen-reader text for the ellipsis. @default "More" */
   label?: string
+  labels?: BreadcrumbLabels
 }) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultBreadcrumbLabels, ctx.breadcrumb, labelsProp)
+  const resolvedLabel = label ?? labels.more
   return (
     <span
       role="presentation"
@@ -132,12 +157,13 @@ function BreadcrumbEllipsis({
       {...props}
     >
       <MoreHorizontal className="h-4 w-4" />
-      <span className="sr-only">{label}</span>
+      <span className="sr-only">{resolvedLabel}</span>
     </span>
   )
 }
 
 export {
+  type BreadcrumbLabels,
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,

@@ -2,7 +2,26 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by Pagination. All keys have English defaults. */
+interface PaginationLabels {
+  pagination?: string
+  previous?: string
+  next?: string
+  morePages?: string
+}
+
+const defaultPaginationLabels: Required<PaginationLabels> = {
+  pagination: "pagination",
+  previous: "Previous",
+  next: "Next",
+  morePages: "More pages",
+}
 
 /**
  * Navigation container for paginated content.
@@ -18,13 +37,17 @@ import { ButtonProps, buttonVariants } from "@/components/ui/button"
  */
 function Pagination({
   className,
-  "aria-label": ariaLabel = "pagination",
+  "aria-label": ariaLabel,
+  labels: labelsProp,
   ...props
-}: React.ComponentProps<"nav">) {
+}: React.ComponentProps<"nav"> & { labels?: PaginationLabels }) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultPaginationLabels, ctx.pagination, labelsProp)
+
   return (
     <nav
       role="navigation"
-      aria-label={ariaLabel}
+      aria-label={ariaLabel ?? labels.pagination}
       data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
       {...props}
@@ -95,22 +118,28 @@ function PaginationLink({
 /** "Previous" pagination link with a left chevron icon. */
 function PaginationPrevious({
   className,
-  label = "Previous",
+  label,
+  labels: labelsProp,
   ...props
 }: React.ComponentProps<typeof PaginationLink> & {
   /** Visible text label. @default "Previous" */
   label?: string
+  labels?: PaginationLabels
 }) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultPaginationLabels, ctx.pagination, labelsProp)
+  const resolvedLabel = label ?? labels.previous
+
   return (
     <PaginationLink
-      aria-label={props["aria-label"] ?? label}
+      aria-label={props["aria-label"] ?? resolvedLabel}
       size="default"
       data-slot="pagination-previous"
       className={cn("gap-1 ps-2.5", className)}
       {...props}
     >
       <ChevronLeft className="h-4 w-4" />
-      <span>{label}</span>
+      <span>{resolvedLabel}</span>
     </PaginationLink>
   )
 }
@@ -118,21 +147,27 @@ function PaginationPrevious({
 /** "Next" pagination link with a right chevron icon. */
 function PaginationNext({
   className,
-  label = "Next",
+  label,
+  labels: labelsProp,
   ...props
 }: React.ComponentProps<typeof PaginationLink> & {
   /** Visible text label. @default "Next" */
   label?: string
+  labels?: PaginationLabels
 }) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultPaginationLabels, ctx.pagination, labelsProp)
+  const resolvedLabel = label ?? labels.next
+
   return (
     <PaginationLink
-      aria-label={props["aria-label"] ?? label}
+      aria-label={props["aria-label"] ?? resolvedLabel}
       size="default"
       data-slot="pagination-next"
       className={cn("gap-1 pe-2.5", className)}
       {...props}
     >
-      <span>{label}</span>
+      <span>{resolvedLabel}</span>
       <ChevronRight className="h-4 w-4" />
     </PaginationLink>
   )
@@ -141,12 +176,17 @@ function PaginationNext({
 /** Ellipsis indicator representing omitted page numbers. */
 function PaginationEllipsis({
   className,
-  label = "More pages",
+  label,
+  labels: labelsProp,
   ...props
 }: React.ComponentProps<"span"> & {
   /** Screen-reader text for the ellipsis. @default "More pages" */
   label?: string
+  labels?: PaginationLabels
 }) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultPaginationLabels, ctx.pagination, labelsProp)
+  const resolvedLabel = label ?? labels.morePages
   return (
     <span
       aria-hidden
@@ -155,12 +195,13 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontal className="h-4 w-4" />
-      <span className="sr-only">{label}</span>
+      <span className="sr-only">{resolvedLabel}</span>
     </span>
   )
 }
 
 export {
+  type PaginationLabels,
   Pagination,
   PaginationContent,
   PaginationEllipsis,

@@ -7,6 +7,8 @@ import { PanelLeft } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
@@ -24,6 +26,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by Sidebar. All keys have English defaults. */
+interface SidebarLabels {
+  toggleSidebar?: string
+  mobileTitle?: string
+  mobileDescription?: string
+}
+
+const defaultSidebarLabels: Required<SidebarLabels> = {
+  toggleSidebar: "Toggle Sidebar",
+  mobileTitle: "Sidebar",
+  mobileDescription: "Displays the mobile sidebar.",
+}
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -178,8 +195,9 @@ function Sidebar({
   collapsible = "offcanvas",
   className,
   children,
-  mobileTitle = "Sidebar",
-  mobileDescription = "Displays the mobile sidebar.",
+  mobileTitle,
+  mobileDescription,
+  labels: labelsProp,
   ref,
   ...props
 }: React.ComponentPropsWithRef<"div"> & {
@@ -190,8 +208,13 @@ function Sidebar({
   mobileTitle?: string
   /** Screen-reader description for the mobile sheet. @default "Displays the mobile sidebar." */
   mobileDescription?: string
+  labels?: SidebarLabels
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSidebarLabels, ctx.sidebar, labelsProp)
+  const resolvedMobileTitle = mobileTitle ?? labels.mobileTitle
+  const resolvedMobileDescription = mobileDescription ?? labels.mobileDescription
 
   if (collapsible === "none") {
     return (
@@ -225,8 +248,8 @@ function Sidebar({
           side={side}
         >
           <SheetHeader className="sr-only">
-            <SheetTitle>{mobileTitle}</SheetTitle>
-            <SheetDescription>{mobileDescription}</SheetDescription>
+            <SheetTitle>{resolvedMobileTitle}</SheetTitle>
+            <SheetDescription>{resolvedMobileDescription}</SheetDescription>
           </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
@@ -284,14 +307,19 @@ function Sidebar({
 function SidebarTrigger({
   className,
   onClick,
-  label = "Toggle Sidebar",
+  label,
+  labels: labelsProp,
   ref,
   ...props
 }: React.ComponentPropsWithRef<typeof Button> & {
   /** Screen-reader label for the trigger button. @default "Toggle Sidebar" */
   label?: string
+  labels?: SidebarLabels
 }) {
   const { toggleSidebar } = useSidebar()
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSidebarLabels, ctx.sidebar, labelsProp)
+  const resolvedLabel = label ?? labels.toggleSidebar
 
   return (
     <Button
@@ -308,7 +336,7 @@ function SidebarTrigger({
       {...props}
     >
       <PanelLeft />
-      <span className="sr-only">{label}</span>
+      <span className="sr-only">{resolvedLabel}</span>
     </Button>
   )
 }
@@ -316,24 +344,29 @@ function SidebarTrigger({
 /** A thin interactive rail at the sidebar edge for toggling via click or drag. */
 function SidebarRail({
   className,
-  label = "Toggle Sidebar",
+  label,
+  labels: labelsProp,
   ref,
   ...props
 }: React.ComponentPropsWithRef<"button"> & {
   /** Accessible label for the rail. @default "Toggle Sidebar" */
   label?: string
+  labels?: SidebarLabels
 }) {
   const { toggleSidebar } = useSidebar()
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSidebarLabels, ctx.sidebar, labelsProp)
+  const resolvedLabel = label ?? labels.toggleSidebar
 
   return (
     <button
       ref={ref}
       data-slot="sidebar-rail"
       data-sidebar="rail"
-      aria-label={label}
+      aria-label={resolvedLabel}
       tabIndex={-1}
       onClick={toggleSidebar}
-      title={label}
+      title={resolvedLabel}
       className={cn(
         "absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:start-1/2 after:w-[2px] hover:after:bg-sidebar-border group-data-[side=left]:-end-4 group-data-[side=right]:start-0 sm:flex",
         "[[data-side=left]_&]:cursor-w-resize [[data-side=right]_&]:cursor-e-resize",
@@ -825,6 +858,7 @@ function SidebarMenuSubButton({
 }
 
 export {
+  type SidebarLabels,
   Sidebar,
   SidebarContent,
   SidebarFooter,

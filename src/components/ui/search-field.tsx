@@ -4,9 +4,24 @@ import * as React from "react"
 import { Search, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveLabels } from "@/lib/resolve-labels"
+import { useLabels } from "@/components/providers/labels-provider"
 import { Input } from "./input"
 import { InputGroup, InputGroupPrefix, InputGroupSuffix } from "./input-group"
 import { Kbd } from "./kbd"
+
+// ─── i18n labels ────────────────────────────────────────────────────
+
+/** Translatable strings used by SearchField. All keys have English defaults. */
+interface SearchFieldLabels {
+  placeholder?: string
+  clearSearch?: string
+}
+
+const defaultSearchFieldLabels: Required<SearchFieldLabels> = {
+  placeholder: "Search...",
+  clearSearch: "Clear search",
+}
 
 /** Props for the SearchField component. */
 interface SearchFieldProps
@@ -18,6 +33,7 @@ interface SearchFieldProps
   onClear?: () => void
   /** Accessible label for the clear button. @default "Clear search" */
   clearLabel?: string
+  labels?: SearchFieldLabels
 }
 
 /**
@@ -32,15 +48,21 @@ interface SearchFieldProps
  * @prop onClear - Optional callback fired when the clear button is clicked.
  */
 function SearchField({
-  placeholder = "Search...",
+  placeholder,
   shortcut,
   value,
   onChange,
   onClear,
-  clearLabel = "Clear search",
+  clearLabel,
+  labels: labelsProp,
   className,
   ...props
 }: SearchFieldProps) {
+  const ctx = useLabels()
+  const labels = resolveLabels(defaultSearchFieldLabels, ctx.searchField, labelsProp)
+  const resolvedPlaceholder = placeholder ?? labels.placeholder
+  const resolvedClearLabel = clearLabel ?? labels.clearSearch
+
   return (
     <InputGroup
       data-slot="search-field"
@@ -53,17 +75,17 @@ function SearchField({
       </InputGroupPrefix>
       <Input
         type="search"
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        aria-label={placeholder}
+        aria-label={resolvedPlaceholder}
         className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
       />
       {value ? (
         <InputGroupSuffix>
           <button
             type="button"
-            aria-label={clearLabel}
+            aria-label={resolvedClearLabel}
             onClick={() => {
               onChange("")
               onClear?.()
@@ -85,4 +107,4 @@ function SearchField({
   )
 }
 
-export { SearchField }
+export { SearchField, type SearchFieldLabels }
