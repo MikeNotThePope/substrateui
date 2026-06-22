@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Divider } from "@/components/ui/divider"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Sheet,
@@ -177,7 +178,7 @@ export function SiteHeaderMobileNav({ labels: labelsProp }: { labels?: SiteHeade
 
           {showDocsNav && (
             <>
-              <div className="my-6 border-t-2" />
+              <Divider className="my-6" />
               <SidebarNav onNavigate={() => setOpen(false)} />
             </>
           )}

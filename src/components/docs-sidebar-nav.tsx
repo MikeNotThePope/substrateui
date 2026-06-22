@@ -3,7 +3,13 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { Mono } from "@/components/ui/typography"
+import {
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuItem,
+  sidebarMenuButtonVariants,
+} from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
 
 // ─── Navigation Data ──────────────────────────────────────────────────
@@ -147,34 +153,33 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
 
   return (
-    <nav className="space-y-6">
+    <nav aria-label="Documentation" className="flex flex-col">
       {navSections.map((section) => (
-        <div key={section.title}>
-          <Mono className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-3 mb-1">
-            {section.title}
-          </Mono>
-          <ul className="space-y-0.5">
+        <SidebarGroup key={section.title}>
+          <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
+          <SidebarMenu>
             {section.items.map((item) => {
               const isActive = pathname === item.href
               return (
-                <li key={item.href}>
+                <SidebarMenuItem key={item.href}>
+                  {/* Compose the suite's menu-button styling onto a Next Link.
+                      sidebarMenuButtonVariants is the documented path for
+                      non-button elements, so we avoid SidebarMenuButton's
+                      useSidebar() dependency (no SidebarProvider needed here). */}
                   <Link
                     href={item.href}
                     onClick={onNavigate}
-                    className={cn(
-                      "block px-3 py-1.5 text-sm rounded-md transition-colors",
-                      isActive
-                        ? "bg-accent text-accent-foreground font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    )}
+                    data-active={isActive}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(sidebarMenuButtonVariants())}
                   >
                     {item.label}
                   </Link>
-                </li>
+                </SidebarMenuItem>
               )
             })}
-          </ul>
-        </div>
+          </SidebarMenu>
+        </SidebarGroup>
       ))}
     </nav>
   )
