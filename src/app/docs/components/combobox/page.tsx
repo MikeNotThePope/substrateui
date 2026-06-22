@@ -69,16 +69,20 @@ export default function ComboboxPage() {
   options={frameworks}
   value={value}
   onValueChange={setValue}
-  placeholder="Select a framework..."
-  emptyMessage="No framework found."
+  labels={{
+    placeholder: "Select a framework...",
+    noResults: "No framework found.",
+  }}
 />`}
         >
           <Combobox
             options={frameworks}
             value={value}
             onValueChange={setValue}
-            placeholder="Select a framework..."
-            emptyMessage="No framework found."
+            labels={{
+              placeholder: "Select a framework...",
+              noResults: "No framework found.",
+            }}
           />
         </ComponentPreview>
       </Stack>

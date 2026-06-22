@@ -46,13 +46,13 @@ export default function DatePickerPage() {
 <DatePicker
   date={date}
   onDateChange={setDate}
-  placeholder="Select a date..."
+  labels={{ placeholder: "Select a date..." }}
 />`}
         >
           <DatePicker
             date={date}
             onDateChange={setDate}
-            placeholder="Select a date..."
+            labels={{ placeholder: "Select a date..." }}
           />
         </ComponentPreview>
       </Stack>

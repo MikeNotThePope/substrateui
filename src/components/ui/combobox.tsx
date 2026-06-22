@@ -83,9 +83,13 @@ type ComboboxProps = ComboboxSingleProps | ComboboxMultipleProps
  */
 function Combobox({
   options,
+  // These deprecated props are still accepted and forwarded into the labels
+  // API below for backward compatibility (see ComboboxBaseProps).
+  /* eslint-disable @typescript-eslint/no-deprecated */
   placeholder,
   searchPlaceholder,
   emptyMessage,
+  /* eslint-enable @typescript-eslint/no-deprecated */
   labels: labelsProp,
   className,
   disabled,

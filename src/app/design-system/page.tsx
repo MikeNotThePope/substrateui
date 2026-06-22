@@ -620,8 +620,10 @@ export default function DesignSystemPage() {
               options={comboboxOptions}
               value={comboValue}
               onValueChange={(v) => setComboValue(v as string)}
-              placeholder="Select a framework..."
-              searchPlaceholder="Search frameworks..."
+              labels={{
+                placeholder: "Select a framework...",
+                searchPlaceholder: "Search frameworks...",
+              }}
             />
 
             <H3>Date Picker</H3>
@@ -721,8 +723,10 @@ export default function DesignSystemPage() {
                     <FieldLabel>Favorite Framework</FieldLabel>
                     <Combobox
                       options={comboboxOptions}
-                      placeholder="Select a framework..."
-                      searchPlaceholder="Search..."
+                      labels={{
+                        placeholder: "Select a framework...",
+                        searchPlaceholder: "Search...",
+                      }}
                     />
                   </Field>
                 </FormSectionContent>

@@ -86,6 +86,8 @@ interface DatePickerProps {
 function DatePicker({
   date,
   onDateChange,
+  // Deprecated; forwarded into the labels API below for backward compatibility.
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   placeholder,
   labels: labelsProp,
   className,
@@ -152,6 +154,8 @@ interface DateRangePickerProps {
 function DateRangePicker({
   dateRange,
   onDateRangeChange,
+  // Deprecated; forwarded into the labels API below for backward compatibility.
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   placeholder,
   labels: labelsProp,
   className,
