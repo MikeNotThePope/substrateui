@@ -6,12 +6,14 @@ import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { SidebarNav } from "@/components/docs-sidebar-nav"
 import { cn } from "@/lib/utils"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
@@ -115,6 +117,11 @@ export function SiteHeaderMobileNav({ labels: labelsProp }: { labels?: SiteHeade
   const ctx = useLabels()
   const labels = resolveLabels(defaultSiteHeaderNavLabels, ctx.siteHeaderNav, labelsProp)
 
+  // On docs pages, fold the section navigation into this same drawer so
+  // there's a single hamburger rather than one for the header and one for
+  // the docs sidebar.
+  const showDocsNav = matches(pathname, "/docs")
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -127,45 +134,54 @@ export function SiteHeaderMobileNav({ labels: labelsProp }: { labels?: SiteHeade
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[280px] p-6">
-        <SheetTitle className="font-bold text-lg tracking-tight mb-6">
+      <SheetContent side="left" className="flex w-[280px] flex-col p-0">
+        <SheetTitle className="px-6 pt-6 font-bold text-lg tracking-tight">
           {labels.navigation}
         </SheetTitle>
-        <nav aria-label={labels.primaryNav} className="flex flex-col gap-2">
-          {navLinks.map((link) => {
-            const active = link.match === activeMatch
-            const className = cn(
-              "px-3 py-2 rounded-md text-sm transition-colors",
-              active
-                ? "bg-accent text-accent-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted"
-            )
-            if (link.external) {
+        <ScrollArea className="flex-1 px-3 py-6">
+          <nav aria-label={labels.primaryNav} className="flex flex-col gap-1">
+            {navLinks.map((link) => {
+              const active = link.match === activeMatch
+              const className = cn(
+                "px-3 py-2 rounded-md text-sm transition-colors",
+                active
+                  ? "bg-accent text-accent-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+              )
+              if (link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setOpen(false)}
+                    className={className}
+                  >
+                    {link.label}
+                  </a>
+                )
+              }
               return (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
                   onClick={() => setOpen(false)}
                   className={className}
                 >
                   {link.label}
-                </a>
+                </Link>
               )
-            }
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={className}
-              >
-                {link.label}
-              </Link>
-            )
-          })}
-        </nav>
+            })}
+          </nav>
+
+          {showDocsNav && (
+            <>
+              <div className="my-6 border-t-2" />
+              <SidebarNav onNavigate={() => setOpen(false)} />
+            </>
+          )}
+        </ScrollArea>
       </SheetContent>
     </Sheet>
   )
