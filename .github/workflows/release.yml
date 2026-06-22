@@ -40,4 +40,7 @@ jobs:
           version: bun run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # setup-node writes .npmrc with `_authToken=${NODE_AUTH_TOKEN}`;
+          # supply it from the NPM_TOKEN secret so changeset publish can auth.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"
