@@ -1,5 +1,5 @@
 ---
-"substrateui": patch
+"@mikenotthepope/substrateui": patch
 ---
 
 Fix the Spinner so its motion is visible in light mode. The arc (top border)
