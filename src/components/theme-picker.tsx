@@ -1,6 +1,13 @@
 "use client"
 
 import * as React from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
 
@@ -74,18 +81,18 @@ export function ThemePicker({ labels: labelsProp }: { labels?: ThemePickerLabels
   if (!mounted) return <div className="h-9 w-24" aria-hidden="true" />
 
   return (
-    <select
-      value={theme}
-      onChange={(e) => setTheme(e.target.value as Theme)}
-      aria-label={labels.theme}
-      className="h-9 rounded-lg border-2 px-3 text-sm bg-background text-foreground"
-    >
-      {THEMES.map((t) => (
-        <option key={t.value} value={t.value}>
-          {t.label}
-        </option>
-      ))}
-    </select>
+    <Select value={theme} onValueChange={(v) => setTheme(v as Theme)}>
+      <SelectTrigger aria-label={labels.theme} className="h-9 text-sm">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {THEMES.map((t) => (
+          <SelectItem key={t.value} value={t.value}>
+            {t.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   )
 }
 

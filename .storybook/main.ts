@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url"
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const config: StorybookConfig = {
-  stories: ["../src/components/ui/**/*.stories.@(ts|tsx)"],
+  stories: ["../src/components/**/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-a11y"],
   // Storybook auto-uses ../public as a static dir; we host Storybook under
   // /storybook, so that would recurse and bloat the output. Opt out.
