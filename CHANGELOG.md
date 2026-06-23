@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+- [#3](https://github.com/MikeNotThePope/substrateui/pull/3) [`1b21d12`](https://github.com/MikeNotThePope/substrateui/commit/1b21d126f9626c34285247613c9eb1e296c05b70) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Fix the Spinner so its motion is visible in light mode. The arc (top border)
+  previously used a dark plum on a prominent medium-gray track, so it blended in
+  and the ring looked static. A dedicated, per-mode `--spinner-track` token now
+  gives light mode a subtle light-gray track for the arc to stand out against;
+  dark mode is unchanged.
+
 ## 0.2.0
 
 ### Minor Changes
