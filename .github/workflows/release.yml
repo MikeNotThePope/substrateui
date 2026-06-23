@@ -28,6 +28,9 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
 
+      # npm OIDC trusted publishing requires npm >= 11.5.1; node 20 ships npm 10.
+      - run: npm install -g npm@latest
+
       - run: bun install --frozen-lockfile
 
       - run: bun run audit:contrast
@@ -40,7 +43,7 @@ jobs:
           version: bun run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # setup-node writes .npmrc with `_authToken=${NODE_AUTH_TOKEN}`;
-          # supply it from the NPM_TOKEN secret so changeset publish can auth.
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # No npm token: publish authenticates via OIDC trusted publishing
+          # (configured on the npm package). Requires `id-token: write` above
+          # and npm >= 11.5.1 (installed above). Provenance is part of OIDC.
           NPM_CONFIG_PROVENANCE: "true"
