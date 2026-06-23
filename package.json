@@ -1,6 +1,6 @@
 {
   "name": "@mikenotthepope/substrateui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A chunky, OKLCH-powered design system for Next.js — built on Tailwind CSS v4, Radix UI, and Atomic Design principles.",
   "license": "MIT",
   "author": "SubstrateUI",
