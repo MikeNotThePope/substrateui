@@ -11,6 +11,10 @@ import { Grid } from "@/components/ui/grid"
 import { Center } from "@/components/ui/center"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel, FieldHint } from "@/components/ui/field"
+import pkg from "../../package.json"
+
+// Derived once at build time (Server Component) — shows major.minor, e.g. "v0.2"
+const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
 
 // ─── Feature Data ─────────────────────────────────────────────────────
 
@@ -56,7 +60,7 @@ export default function HomePage() {
       <section className="py-20 md:py-32">
         <Center max="xl" className="px-4 text-center">
           <Stack gap="lg" className="items-center">
-            <Badge variant="secondary" className="font-mono text-xs">v0.1 — early access</Badge>
+            <Badge variant="secondary" className="font-mono text-xs">{version} — early access</Badge>
             <H1 className="text-4xl md:text-6xl font-bold tracking-tight">SubstrateUI</H1>
             <Lead className="max-w-2xl text-lg md:text-xl">
               A chunky, opinionated design system for Next.js. OKLCH color tokens,
