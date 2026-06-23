@@ -1,6 +1,6 @@
 # SubstrateUI Contrast Audit Report
 
-Generated: 2026-04-05T17:11:08.457Z
+Generated: 2026-06-23T05:14:03.772Z
 
 WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 
@@ -70,6 +70,6 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 
 ## Summary
 
-- Total pairings audited: 50
-- Passing: 50
+- Total pairings audited: 52
+- Passing: 52
 - Failing or incomplete: 0

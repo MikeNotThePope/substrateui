@@ -132,6 +132,9 @@
   --border-subtle: var(--raw-warm-200);
   --border-accent: var(--raw-plum-500);
 
+  /* Spinner track: a subtle light gray so the plum arc reads as it spins */
+  --spinner-track: var(--raw-warm-300);
+
   /* ── SubstrateUI extended: Accent fills ── */
   --accent-fill: var(--raw-plum-600);
   --accent-fill-hover: var(--raw-plum-700);
@@ -213,6 +216,9 @@
   --border-strong: var(--raw-warm-400);
   --border-subtle: var(--raw-warm-800);
   --border-accent: var(--raw-plum-400);
+
+  /* Spinner track: unchanged from the previously tuned dark-mode value */
+  --spinner-track: var(--raw-warm-400);
 
   /* ── SubstrateUI extended: Accent fills ── */
   --accent-fill: var(--raw-plum-500);
@@ -355,7 +361,7 @@
 }
 [data-slot="spinner"] {
   animation: sui-spin 1s linear infinite;
-  border-color: var(--border);
+  border-color: var(--spinner-track);
   border-top-color: var(--primary);
 }
 
