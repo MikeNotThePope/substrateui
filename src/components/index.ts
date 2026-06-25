@@ -1,4 +1,5 @@
 export * from "./app-shell"
+export * from "./auth-shell"
 export * from "./page-body"
 export * from "./page-header"
 export * from "./page-tabs"

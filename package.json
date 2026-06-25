@@ -117,7 +117,6 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "@rollup/rollup-linux-arm64-gnu": "^4.60.1",
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -132,6 +131,9 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
     "vaul": "^1.1.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-arm64-gnu": "^4.60.1"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1024.0",
