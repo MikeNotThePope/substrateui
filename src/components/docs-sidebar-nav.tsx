@@ -80,6 +80,7 @@ export const navSections = [
       { label: "DatePicker", href: "/docs/components/date-picker" },
       { label: "InputOTP", href: "/docs/components/input-otp" },
       { label: "SearchField", href: "/docs/components/search-field" },
+      { label: "PasswordInput", href: "/docs/components/password-input" },
     ],
   },
   {
@@ -141,6 +142,7 @@ export const navSections = [
     title: "Patterns",
     items: [
       { label: "App Shell", href: "/docs/patterns/app-shell" },
+      { label: "Auth Shell", href: "/docs/patterns/auth-shell" },
       { label: "Forms", href: "/docs/patterns/forms" },
       { label: "Page Layout", href: "/docs/patterns/page-layout" },
     ],
