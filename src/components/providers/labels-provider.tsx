@@ -9,6 +9,7 @@ import type { DataTableLabels } from "@/components/ui/data-table"
 import type { DatePickerLabels } from "@/components/ui/date-picker"
 import type { DialogLabels } from "@/components/ui/dialog"
 import type { PaginationLabels } from "@/components/ui/pagination"
+import type { PasswordInputLabels } from "@/components/ui/password-input"
 import type { SearchFieldLabels } from "@/components/ui/search-field"
 import type { SheetLabels } from "@/components/ui/sheet"
 import type { SidebarLabels } from "@/components/ui/sidebar"
@@ -30,6 +31,7 @@ interface SubstrateUILabels {
   datePicker?: Partial<DatePickerLabels>
   dialog?: Partial<DialogLabels>
   pagination?: Partial<PaginationLabels>
+  passwordInput?: Partial<PasswordInputLabels>
   searchField?: Partial<SearchFieldLabels>
   sheet?: Partial<SheetLabels>
   sidebar?: Partial<SidebarLabels>
