@@ -132,6 +132,7 @@ export const navSections = [
     title: "Navigation",
     items: [
       { label: "Tabs", href: "/docs/components/tabs" },
+      { label: "NavTabs", href: "/docs/components/nav-tabs" },
       { label: "Breadcrumb", href: "/docs/components/breadcrumb" },
       { label: "Pagination", href: "/docs/components/pagination" },
       { label: "NavigationMenu", href: "/docs/components/navigation-menu" },
