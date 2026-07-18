@@ -11,7 +11,7 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "secondary", "destructive", "outline", "success", "warning", "error"],
+      options: ["default", "secondary", "destructive", "outline", "success", "warning", "error", "info"],
     },
     children: { control: "text" },
   },
@@ -29,6 +29,7 @@ export const Outline: Story = { args: { variant: "outline" } }
 export const Success: Story = { args: { variant: "success", children: "Active" } }
 export const Warning: Story = { args: { variant: "warning", children: "Pending" } }
 export const Error: Story = { args: { variant: "error", children: "Failed" } }
+export const Info: Story = { args: { variant: "info", children: "New" } }
 
 export const Playground: Story = {
   args: { variant: "default", children: "Playground" },
