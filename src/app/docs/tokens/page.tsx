@@ -6,27 +6,113 @@ import { H2, Mono, P } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
 import { Grid } from "@/components/ui/grid"
+import { useSiteTheme, type Theme } from "@/components/theme-picker"
 
-// ─── Color Data ───────────────────────────────────────────────────────
+// ─── Color Data (keyed by active site theme) ──────────────────────────
 
-const plumShades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
-const amberShades = ["50", "100", "200", "300", "400", "500", "600", "700", "800"]
-const warmShades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
+interface Ramp {
+  title: string
+  description: string
+  prefix: string
+  shades: string[]
+}
 
-const semanticTokens = [
-  { name: "background", light: "warm-50", dark: "warm-950" },
-  { name: "foreground", light: "warm-900", dark: "warm-100" },
-  { name: "primary", light: "plum-600", dark: "plum-500" },
-  { name: "primary-foreground", light: "white", dark: "white" },
-  { name: "secondary", light: "warm-100", dark: "warm-800" },
-  { name: "muted", light: "warm-100", dark: "warm-800" },
-  { name: "muted-foreground", light: "warm-600", dark: "warm-400" },
-  { name: "accent", light: "plum-100", dark: "plum @ 15%" },
-  { name: "destructive", light: "error", dark: "error (lighter)" },
-  { name: "border", light: "warm-500", dark: "warm-400" },
-  { name: "card", light: "warm-white", dark: "warm-850" },
-  { name: "ring", light: "plum-500", dark: "plum-400" },
-]
+interface ThemeColorData {
+  ramps: Ramp[]
+  status: Array<{ variable: string; label: string }>
+  semantic: Array<{ name: string; light: string; dark: string }>
+}
+
+const themeColorData: Record<Theme, ThemeColorData> = {
+  default: {
+    ramps: [
+      {
+        title: "Plum (Primary)",
+        description:
+          "The primary accent. Used for interactive elements, focus rings, and brand presence.",
+        prefix: "plum",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+      {
+        title: "Amber (Secondary)",
+        description:
+          "CVD-safe secondary color. Used for call-to-action buttons and warm highlights.",
+        prefix: "amber",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800"],
+      },
+      {
+        title: "Warm Neutrals",
+        description:
+          "The backbone of the system. Backgrounds, borders, text — all warm-toned for cohesion.",
+        prefix: "warm",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+    ],
+    status: [
+      { variable: "--raw-success", label: "success" },
+      { variable: "--raw-warning", label: "warning" },
+      { variable: "--raw-error", label: "error" },
+    ],
+    semantic: [
+      { name: "background", light: "warm-50", dark: "warm-950" },
+      { name: "foreground", light: "warm-900", dark: "warm-100" },
+      { name: "primary", light: "plum-600", dark: "plum-500" },
+      { name: "primary-foreground", light: "white", dark: "white" },
+      { name: "secondary", light: "warm-100", dark: "warm-800" },
+      { name: "muted", light: "warm-100", dark: "warm-800" },
+      { name: "muted-foreground", light: "warm-600", dark: "warm-400" },
+      { name: "accent", light: "plum-100", dark: "plum @ 15%" },
+      { name: "destructive", light: "error", dark: "error (lighter)" },
+      { name: "border", light: "warm-500", dark: "warm-400" },
+      { name: "card", light: "warm-white", dark: "warm-850" },
+      { name: "ring", light: "plum-500", dark: "plum-400" },
+    ],
+  },
+  lava: {
+    ramps: [
+      {
+        title: "Magma (Primary)",
+        description:
+          "The primary accent, following lava's cooling curve — hue slides from yellow to red as lightness falls.",
+        prefix: "magma",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+      {
+        title: "Sulfur (Secondary)",
+        description:
+          "Vent-crust yellow. Used for call-to-action buttons and warm highlights.",
+        prefix: "sulfur",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800"],
+      },
+      {
+        title: "Basalt Neutrals",
+        description:
+          "Cooled-lava grays, warmed toward the magma hue. Backgrounds, borders, and text.",
+        prefix: "basalt",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "850", "900", "950"],
+      },
+    ],
+    status: [
+      { variable: "--raw-olivine", label: "success" },
+      { variable: "--raw-sulfur-500", label: "warning" },
+      { variable: "--raw-cherry", label: "error" },
+    ],
+    semantic: [
+      { name: "background", light: "basalt-50", dark: "basalt-950" },
+      { name: "foreground", light: "basalt-900", dark: "basalt-100" },
+      { name: "primary", light: "magma-700", dark: "magma-500" },
+      { name: "primary-foreground", light: "white", dark: "basalt-950" },
+      { name: "secondary", light: "basalt-100", dark: "basalt-800" },
+      { name: "muted", light: "basalt-100", dark: "basalt-800" },
+      { name: "muted-foreground", light: "basalt-600", dark: "basalt-300" },
+      { name: "accent", light: "magma-100", dark: "magma @ 15%" },
+      { name: "destructive", light: "cherry", dark: "cherry (lighter)" },
+      { name: "border", light: "basalt-500", dark: "basalt-400" },
+      { name: "card", light: "warm-white", dark: "basalt-850" },
+      { name: "ring", light: "magma-600", dark: "magma-400" },
+    ],
+  },
+}
 
 // ─── Swatch ───────────────────────────────────────────────────────────
 
@@ -85,58 +171,35 @@ function SemanticRow({ name, light, dark }: { name: string; light: string; dark:
 // ─── Page ─────────────────────────────────────────────────────────────
 
 export default function ColorsPage() {
+  const { theme } = useSiteTheme()
+  const data = themeColorData[theme]
+
   return (
     <DocPage
       title="Colors"
-      description="OKLCH-based color system with perceptually uniform scaling and CVD-safe pairings."
+      description="OKLCH-based color system with perceptually uniform scaling and CVD-safe pairings. Showing the active theme — switch themes in the header to compare."
     >
       <Stack gap="xl">
-        {/* Plum */}
-        <section>
-          <H2>Plum (Primary)</H2>
-          <P className="text-muted-foreground mt-1 mb-4">
-            The primary accent. Used for interactive elements, focus rings, and brand presence.
-          </P>
-          <Cluster gap="md" className="flex-wrap">
-            {plumShades.map((shade) => (
-              <Swatch key={shade} variable={`--raw-plum-${shade}`} label={shade} />
-            ))}
-          </Cluster>
-        </section>
-
-        {/* Amber */}
-        <section>
-          <H2>Amber (Secondary)</H2>
-          <P className="text-muted-foreground mt-1 mb-4">
-            CVD-safe secondary color. Used for call-to-action buttons and warm highlights.
-          </P>
-          <Cluster gap="md" className="flex-wrap">
-            {amberShades.map((shade) => (
-              <Swatch key={shade} variable={`--raw-amber-${shade}`} label={shade} />
-            ))}
-          </Cluster>
-        </section>
-
-        {/* Warm Neutrals */}
-        <section>
-          <H2>Warm Neutrals</H2>
-          <P className="text-muted-foreground mt-1 mb-4">
-            The backbone of the system. Backgrounds, borders, text — all warm-toned for cohesion.
-          </P>
-          <Cluster gap="md" className="flex-wrap">
-            {warmShades.map((shade) => (
-              <Swatch key={shade} variable={`--raw-warm-${shade}`} label={shade} />
-            ))}
-          </Cluster>
-        </section>
+        {/* Palette ramps */}
+        {data.ramps.map((ramp) => (
+          <section key={ramp.prefix}>
+            <H2>{ramp.title}</H2>
+            <P className="text-muted-foreground mt-1 mb-4">{ramp.description}</P>
+            <Cluster gap="md" className="flex-wrap">
+              {ramp.shades.map((shade) => (
+                <Swatch key={shade} variable={`--raw-${ramp.prefix}-${shade}`} label={shade} />
+              ))}
+            </Cluster>
+          </section>
+        ))}
 
         {/* Status */}
         <section>
           <H2>Status Colors</H2>
           <Cluster gap="md" className="mt-4">
-            <Swatch variable="--raw-success" label="success" />
-            <Swatch variable="--raw-warning" label="warning" />
-            <Swatch variable="--raw-error" label="error" />
+            {data.status.map((s) => (
+              <Swatch key={s.variable} variable={s.variable} label={s.label} />
+            ))}
           </Cluster>
         </section>
 
@@ -147,7 +210,7 @@ export default function ColorsPage() {
             These tokens are what you actually use in components. They map to the raw palette and flip automatically in dark mode. Click to copy the CSS variable.
           </P>
           <Grid columns={2} gap="sm">
-            {semanticTokens.map((token) => (
+            {data.semantic.map((token) => (
               <SemanticRow key={token.name} {...token} />
             ))}
           </Grid>
