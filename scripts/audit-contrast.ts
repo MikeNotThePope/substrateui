@@ -151,6 +151,7 @@ const pairings: Pairing[] = [
   { name: "status-success-text on status-success-surface", fg: "status-success-text", bg: "status-success-surface", type: "normal", backdrop: "background" },
   { name: "status-warning-text on status-warning-surface", fg: "status-warning-text", bg: "status-warning-surface", type: "normal", backdrop: "background" },
   { name: "status-error-text on status-error-surface", fg: "status-error-text", bg: "status-error-surface", type: "normal", backdrop: "background" },
+  { name: "status-info-text on status-info-surface", fg: "status-info-text", bg: "status-info-surface", type: "normal", backdrop: "background" },
 
   // UI element contrast (3:1 minimum)
   { name: "border on background", fg: "border", bg: "background", type: "ui" },

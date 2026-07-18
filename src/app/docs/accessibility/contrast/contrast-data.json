@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T03:10:56.242Z",
+  "generatedAt": "2026-07-18T03:34:09.189Z",
   "results": [
     {
       "name": "foreground on background",
@@ -226,6 +226,18 @@
       "required": 4.5,
       "light": 6.419782045874076,
       "dark": 7.2684006222798025,
+      "lightPass": true,
+      "darkPass": true
+    },
+    {
+      "name": "status-info-text on status-info-surface",
+      "fg": "status-info-text",
+      "bg": "status-info-surface",
+      "type": "normal",
+      "backdrop": "background",
+      "required": 4.5,
+      "light": 5.856133481837164,
+      "dark": 7.54988338243205,
       "lightPass": true,
       "darkPass": true
     },
@@ -620,6 +632,22 @@
           "type": "normal",
           "required": 4.5,
           "ratio": 7.2684006222798025,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-info-text on status-info-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.856133481837164,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-info-text on status-info-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.54988338243205,
           "pass": true
         },
         {
@@ -1041,6 +1069,22 @@
           "type": "normal",
           "required": 4.5,
           "ratio": 8.431857017846573,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-info-text on status-info-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.837609825417126,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-info-text on status-info-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 8.426361123165645,
           "pass": true
         },
         {

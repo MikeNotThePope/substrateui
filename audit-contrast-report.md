@@ -1,6 +1,6 @@
 # SubstrateUI Contrast Audit Report
 
-Generated: 2026-07-18T03:10:56.235Z
+Generated: 2026-07-18T03:34:09.185Z
 
 WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 
@@ -29,6 +29,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-success-text on status-success-surface | normal | 4.5:1 | 5.70 ✅ | PASS |
 | status-warning-text on status-warning-surface | normal | 4.5:1 | 6.78 ✅ | PASS |
 | status-error-text on status-error-surface | normal | 4.5:1 | 6.42 ✅ | PASS |
+| status-info-text on status-info-surface | normal | 4.5:1 | 5.86 ✅ | PASS |
 | border on background | ui | 3:1 | 4.22 ✅ | PASS |
 | border-strong on background | ui | 3:1 | 10.30 ✅ | PASS |
 | ring on background | ui | 3:1 | 4.81 ✅ | PASS |
@@ -60,6 +61,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-success-text on status-success-surface | normal | 4.5:1 | 7.55 ✅ | PASS |
 | status-warning-text on status-warning-surface | normal | 4.5:1 | 10.70 ✅ | PASS |
 | status-error-text on status-error-surface | normal | 4.5:1 | 7.27 ✅ | PASS |
+| status-info-text on status-info-surface | normal | 4.5:1 | 7.55 ✅ | PASS |
 | border on background | ui | 3:1 | 7.42 ✅ | PASS |
 | border-strong on background | ui | 3:1 | 7.42 ✅ | PASS |
 | ring on background | ui | 3:1 | 5.75 ✅ | PASS |
@@ -93,6 +95,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-success-text on status-success-surface | normal | 4.5:1 | 6.28 ✅ | PASS |
 | status-warning-text on status-warning-surface | normal | 4.5:1 | 6.85 ✅ | PASS |
 | status-error-text on status-error-surface | normal | 4.5:1 | 6.45 ✅ | PASS |
+| status-info-text on status-info-surface | normal | 4.5:1 | 5.84 ✅ | PASS |
 | border on background | ui | 3:1 | 4.46 ✅ | PASS |
 | border-strong on background | ui | 3:1 | 9.20 ✅ | PASS |
 | ring on background | ui | 3:1 | 3.97 ✅ | PASS |
@@ -122,6 +125,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-success-text on status-success-surface | normal | 4.5:1 | 8.51 ✅ | PASS |
 | status-warning-text on status-warning-surface | normal | 4.5:1 | 10.39 ✅ | PASS |
 | status-error-text on status-error-surface | normal | 4.5:1 | 8.43 ✅ | PASS |
+| status-info-text on status-info-surface | normal | 4.5:1 | 8.43 ✅ | PASS |
 | border on background | ui | 3:1 | 6.23 ✅ | PASS |
 | border-strong on background | ui | 3:1 | 6.23 ✅ | PASS |
 | ring on background | ui | 3:1 | 8.32 ✅ | PASS |
@@ -130,6 +134,6 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 
 ## Summary
 
-- Total pairings audited: 100
-- Passing: 100
+- Total pairings audited: 104
+- Passing: 104
 - Failing or incomplete: 0
