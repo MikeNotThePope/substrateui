@@ -1,27 +1,4 @@
 import { defineConfig } from "tsup"
-import path from "path"
-import { fileURLToPath } from "url"
-import type { PluginBuild, OnResolveArgs } from "esbuild"
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-/**
- * Resolves @/ path aliases to ./src/ for esbuild.
- * Components use @/lib/utils, @/components/ui/badge, etc.
- * This plugin ensures those resolve correctly during the library build.
- */
-const aliasPlugin = {
-  name: "resolve-at-alias",
-  setup(build: PluginBuild) {
-    build.onResolve({ filter: /^@\// }, async (args: OnResolveArgs) => {
-      const stripped = args.path.replace(/^@\//, "")
-      return build.resolve("./" + stripped, {
-        resolveDir: path.resolve(__dirname, "src"),
-        kind: args.kind,
-      })
-    })
-  },
-}
 
 export default defineConfig({
   entry: {
@@ -42,6 +19,8 @@ export default defineConfig({
     "next/link",
     "next-themes",
   ],
+  // Not banner: {js}: treeshake's rollup pass strips module-level directives,
+  // so "use client" must be prepended after the build instead.
   onSuccess: async () => {
     const { readdir, readFile, writeFile } = await import("fs/promises")
     const files = await readdir("dist")
@@ -55,5 +34,4 @@ export default defineConfig({
   outDir: "dist",
   clean: true,
   tsconfig: "./tsconfig.build.json",
-  esbuildPlugins: [aliasPlugin],
 })

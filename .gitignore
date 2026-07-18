@@ -54,3 +54,7 @@ tests/visual/**/*.tar.gz
 # Storybook
 /storybook-static/
 /public/storybook/
+
+# generated
+package-lock.json
+audit-contrast-report.md
