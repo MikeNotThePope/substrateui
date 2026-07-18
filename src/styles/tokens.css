@@ -63,8 +63,9 @@
   --raw-warm-950: oklch(0.170 0.004 48);
 
   /* ── Status ── */
-  --raw-success: oklch(0.614 0.130 152);
-  --raw-warning: oklch(0.711 0.147 78);
+  /* success/warning darkened so alert borders clear 3:1 (WCAG non-text) on light surfaces */
+  --raw-success: oklch(0.58 0.130 152);
+  --raw-warning: oklch(0.631 0.130 77);
   --raw-error:   oklch(0.570 0.180 25);
   --raw-info:    oklch(0.580 0.140 245);
 }
@@ -299,9 +300,10 @@
   --raw-basalt-950: oklch(0.16 0.010 35);
 
   /* ── Lava status ── */
-  --raw-olivine: oklch(0.62 0.150 135);
+  /* olivine/ijen darkened so alert borders clear 3:1 (WCAG non-text) on light surfaces */
+  --raw-olivine: oklch(0.58 0.150 135);
   --raw-cherry:  oklch(0.55 0.210 28);
-  --raw-ijen:    oklch(0.65 0.170 240);
+  --raw-ijen:    oklch(0.58 0.160 240);
 }
 
 
@@ -376,7 +378,8 @@
   --status-success: var(--raw-olivine);
   --status-success-surface: oklch(0.92 0.06 135);
   --status-success-text: oklch(0.43 0.10 135);
-  --status-warning: var(--raw-sulfur-500);
+  /* sulfur-500 only reaches 1.9:1 against the pale surface — 700 is the first step that clears 3:1 */
+  --status-warning: var(--raw-sulfur-700);
   --status-warning-surface: var(--raw-sulfur-100);
   --status-warning-text: var(--raw-sulfur-800);
   --status-error: var(--raw-cherry);
