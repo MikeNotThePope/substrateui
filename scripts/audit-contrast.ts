@@ -159,6 +159,16 @@ const pairings: Pairing[] = [
   { name: "ring on background", fg: "ring", bg: "background", type: "ui" },
   { name: "border on card", fg: "border", bg: "card", type: "ui" },
 
+  // Status borders (Alert/Toast draw status-X as a border around status-X-surface)
+  { name: "status-success on status-success-surface", fg: "status-success", bg: "status-success-surface", type: "ui", backdrop: "background" },
+  { name: "status-warning on status-warning-surface", fg: "status-warning", bg: "status-warning-surface", type: "ui", backdrop: "background" },
+  { name: "status-error on status-error-surface", fg: "status-error", bg: "status-error-surface", type: "ui", backdrop: "background" },
+  { name: "status-info on status-info-surface", fg: "status-info", bg: "status-info-surface", type: "ui", backdrop: "background" },
+  { name: "status-success on background", fg: "status-success", bg: "background", type: "ui" },
+  { name: "status-warning on background", fg: "status-warning", bg: "background", type: "ui" },
+  { name: "status-error on background", fg: "status-error", bg: "background", type: "ui" },
+  { name: "status-info on background", fg: "status-info", bg: "background", type: "ui" },
+
   // Destructive
   { name: "primary-foreground on destructive", fg: "primary-foreground", bg: "destructive", type: "normal" },
 ]

@@ -1,6 +1,6 @@
 # SubstrateUI Contrast Audit Report
 
-Generated: 2026-07-18T03:34:09.185Z
+Generated: 2026-07-18T04:35:01.050Z
 
 WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 
@@ -34,6 +34,14 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | border-strong on background | ui | 3:1 | 10.30 ✅ | PASS |
 | ring on background | ui | 3:1 | 4.81 ✅ | PASS |
 | border on card | ui | 3:1 | 4.40 ✅ | PASS |
+| status-success on status-success-surface | ui | 3:1 | 3.24 ✅ | PASS |
+| status-warning on status-warning-surface | ui | 3:1 | 3.19 ✅ | PASS |
+| status-error on status-error-surface | ui | 3:1 | 3.92 ✅ | PASS |
+| status-info on status-info-surface | ui | 3:1 | 3.37 ✅ | PASS |
+| status-success on background | ui | 3:1 | 3.81 ✅ | PASS |
+| status-warning on background | ui | 3:1 | 3.35 ✅ | PASS |
+| status-error on background | ui | 3:1 | 4.61 ✅ | PASS |
+| status-info on background | ui | 3:1 | 4.01 ✅ | PASS |
 | primary-foreground on destructive | normal | 4.5:1 | 4.89 ✅ | PASS |
 | warm-900 on amber-500 (light amber button) | normal | 4.5:1 | 6.76 ✅ | PASS |
 | warm-950 on amber-400 (dark amber button) | normal | 4.5:1 | 11.46 ✅ | PASS |
@@ -66,6 +74,14 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | border-strong on background | ui | 3:1 | 7.42 ✅ | PASS |
 | ring on background | ui | 3:1 | 5.75 ✅ | PASS |
 | border on card | ui | 3:1 | 6.45 ✅ | PASS |
+| status-success on status-success-surface | ui | 3:1 | 6.38 ✅ | PASS |
+| status-warning on status-warning-surface | ui | 3:1 | 9.24 ✅ | PASS |
+| status-error on status-error-surface | ui | 3:1 | 4.83 ✅ | PASS |
+| status-info on status-info-surface | ui | 3:1 | 5.83 ✅ | PASS |
+| status-success on background | ui | 3:1 | 7.56 ✅ | PASS |
+| status-warning on background | ui | 3:1 | 11.46 ✅ | PASS |
+| status-error on background | ui | 3:1 | 5.44 ✅ | PASS |
+| status-info on background | ui | 3:1 | 6.71 ✅ | PASS |
 | primary-foreground on destructive | normal | 4.5:1 | 4.69 ✅ | PASS |
 | warm-900 on amber-500 (light amber button) | normal | 4.5:1 | 6.76 ✅ | PASS |
 | warm-950 on amber-400 (dark amber button) | normal | 4.5:1 | 11.46 ✅ | PASS |
@@ -100,6 +116,14 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | border-strong on background | ui | 3:1 | 9.20 ✅ | PASS |
 | ring on background | ui | 3:1 | 3.97 ✅ | PASS |
 | border on card | ui | 3:1 | 4.78 ✅ | PASS |
+| status-success on status-success-surface | ui | 3:1 | 3.27 ✅ | PASS |
+| status-warning on status-warning-surface | ui | 3:1 | 4.27 ✅ | PASS |
+| status-error on status-error-surface | ui | 3:1 | 4.34 ✅ | PASS |
+| status-info on status-info-surface | ui | 3:1 | 3.35 ✅ | PASS |
+| status-success on background | ui | 3:1 | 3.72 ✅ | PASS |
+| status-warning on background | ui | 3:1 | 4.49 ✅ | PASS |
+| status-error on background | ui | 3:1 | 4.95 ✅ | PASS |
+| status-info on background | ui | 3:1 | 3.86 ✅ | PASS |
 | primary-foreground on destructive | normal | 4.5:1 | 5.40 ✅ | PASS |
 
 ### Dark mode
@@ -130,10 +154,18 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | border-strong on background | ui | 3:1 | 6.23 ✅ | PASS |
 | ring on background | ui | 3:1 | 8.32 ✅ | PASS |
 | border on card | ui | 3:1 | 5.00 ✅ | PASS |
+| status-success on status-success-surface | ui | 3:1 | 6.45 ✅ | PASS |
+| status-warning on status-warning-surface | ui | 3:1 | 8.78 ✅ | PASS |
+| status-error on status-error-surface | ui | 3:1 | 5.01 ✅ | PASS |
+| status-info on status-info-surface | ui | 3:1 | 6.33 ✅ | PASS |
+| status-success on background | ui | 3:1 | 7.62 ✅ | PASS |
+| status-warning on background | ui | 3:1 | 11.14 ✅ | PASS |
+| status-error on background | ui | 3:1 | 5.50 ✅ | PASS |
+| status-info on background | ui | 3:1 | 7.40 ✅ | PASS |
 | primary-foreground on destructive | normal | 4.5:1 | 5.50 ✅ | PASS |
 
 ## Summary
 
-- Total pairings audited: 104
-- Passing: 104
+- Total pairings audited: 136
+- Passing: 136
 - Failing or incomplete: 0
