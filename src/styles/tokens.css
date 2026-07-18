@@ -245,6 +245,220 @@
 
 
 /* ================================================================
+   LAVA THEME — enable with <html data-theme="lava">
+
+   Palette derived from lava at the moment of eruption: magma
+   (primary, hue rotates yellow→red as it cools), sulfur (secondary),
+   basalt (neutrals), and geologically-sourced status colors.
+================================================================ */
+
+:root {
+  /* ── Magma (lava primary) ── */
+  --raw-magma-50:  oklch(0.97 0.035 95);
+  --raw-magma-100: oklch(0.93 0.085 90);
+  --raw-magma-200: oklch(0.88 0.125 80);
+  --raw-magma-300: oklch(0.82 0.155 70);
+  --raw-magma-400: oklch(0.75 0.185 60);
+  --raw-magma-500: oklch(0.68 0.210 50);
+  --raw-magma-600: oklch(0.60 0.215 42);
+  --raw-magma-700: oklch(0.52 0.195 35);
+  --raw-magma-800: oklch(0.42 0.155 30);
+  --raw-magma-900: oklch(0.32 0.100 28);
+  --raw-magma-950: oklch(0.22 0.050 25);
+
+  /* ── Sulfur (lava secondary) ── */
+  --raw-sulfur-50:  oklch(0.98 0.040 105);
+  --raw-sulfur-100: oklch(0.95 0.090 103);
+  --raw-sulfur-200: oklch(0.91 0.140 100);
+  --raw-sulfur-300: oklch(0.87 0.165 98);
+  --raw-sulfur-400: oklch(0.82 0.175 95);
+  --raw-sulfur-500: oklch(0.76 0.170 92);
+  --raw-sulfur-600: oklch(0.66 0.150 88);
+  --raw-sulfur-700: oklch(0.55 0.120 85);
+  --raw-sulfur-800: oklch(0.44 0.090 80);
+
+  /* ── Basalt (lava neutrals) ── */
+  --raw-basalt-50:  oklch(0.97 0.005 50);
+  --raw-basalt-100: oklch(0.93 0.006 50);
+  --raw-basalt-200: oklch(0.87 0.007 50);
+  --raw-basalt-300: oklch(0.78 0.008 50);
+  --raw-basalt-400: oklch(0.66 0.009 50);
+  --raw-basalt-500: oklch(0.55 0.010 50);
+  --raw-basalt-600: oklch(0.46 0.010 48);
+  --raw-basalt-700: oklch(0.38 0.011 45);
+  --raw-basalt-800: oklch(0.30 0.012 42);
+  --raw-basalt-850: oklch(0.26 0.012 40);
+  --raw-basalt-900: oklch(0.22 0.012 38);
+  --raw-basalt-950: oklch(0.16 0.010 35);
+
+  /* ── Lava status ── */
+  --raw-olivine: oklch(0.62 0.150 135);
+  --raw-cherry:  oklch(0.55 0.210 28);
+  --raw-ijen:    oklch(0.65 0.170 240);
+}
+
+
+/* ── LAVA LIGHT ── */
+
+[data-theme="lava"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-basalt-50);
+  --foreground: var(--raw-basalt-900);
+  --card: var(--raw-warm-white);
+  --card-foreground: var(--raw-basalt-900);
+  --popover: var(--raw-warm-white);
+  --popover-foreground: var(--raw-basalt-900);
+  --primary: var(--raw-magma-700);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--raw-basalt-100);
+  --secondary-foreground: var(--raw-basalt-900);
+  --muted: var(--raw-basalt-100);
+  --muted-foreground: var(--raw-basalt-600);
+  --accent: var(--raw-magma-100);
+  --accent-foreground: var(--raw-magma-800);
+  --destructive: var(--raw-cherry);
+  --border: var(--raw-basalt-500);
+  --input: var(--raw-basalt-500);
+  --ring: var(--raw-magma-600);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-magma-600);
+  --chart-2: var(--raw-sulfur-500);
+  --chart-3: var(--raw-magma-400);
+  --chart-4: var(--raw-sulfur-300);
+  --chart-5: var(--raw-magma-200);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-warm-white);
+  --sidebar-foreground: var(--raw-basalt-900);
+  --sidebar-primary: var(--raw-magma-700);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--raw-magma-100);
+  --sidebar-accent-foreground: var(--raw-magma-800);
+  --sidebar-border: var(--raw-basalt-200);
+  --sidebar-ring: var(--raw-magma-600);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-basalt-50);
+  --surface-page: var(--raw-warm-white);
+  --surface-raised: var(--raw-warm-white);
+  --surface-sunken: var(--raw-basalt-100);
+  --surface-interactive: var(--raw-basalt-100);
+  --surface-interactive-hover: var(--raw-basalt-200);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-basalt-500);
+  --border-strong: var(--raw-basalt-700);
+  --border-subtle: var(--raw-basalt-200);
+  --border-accent: var(--raw-magma-600);
+
+  --spinner-track: var(--raw-basalt-300);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-magma-700);
+  --accent-fill-hover: var(--raw-magma-800);
+  --accent-surface: var(--raw-magma-100);
+
+  /* ── Secondary (sulfur) ── */
+  --secondary-fill: var(--raw-sulfur-500);
+  --secondary-fill-hover: var(--raw-sulfur-600);
+  --secondary-surface: var(--raw-sulfur-100);
+  --secondary-text: var(--raw-sulfur-800);
+
+  /* ── Status ── */
+  --status-success: var(--raw-olivine);
+  --status-success-surface: oklch(0.92 0.06 135);
+  --status-success-text: oklch(0.43 0.10 135);
+  --status-warning: var(--raw-sulfur-500);
+  --status-warning-surface: var(--raw-sulfur-100);
+  --status-warning-text: var(--raw-sulfur-800);
+  --status-error: var(--raw-cherry);
+  --status-error-surface: oklch(0.93 0.04 28);
+  --status-error-text: oklch(0.45 0.15 28);
+}
+
+
+/* ── LAVA DARK ── */
+
+[data-theme="lava"].dark {
+  /* ── Shadcn core ── */
+  --background: var(--raw-basalt-950);
+  --foreground: var(--raw-basalt-100);
+  --card: var(--raw-basalt-850);
+  --card-foreground: var(--raw-basalt-100);
+  --popover: var(--raw-basalt-800);
+  --popover-foreground: var(--raw-basalt-100);
+  --primary: var(--raw-magma-500);
+  --primary-foreground: var(--raw-basalt-950);
+  --secondary: var(--raw-basalt-800);
+  --secondary-foreground: var(--raw-basalt-100);
+  --muted: var(--raw-basalt-800);
+  --muted-foreground: var(--raw-basalt-300);
+  --accent: oklch(0.68 0.210 50 / 0.15);
+  --accent-foreground: var(--raw-magma-300);
+  --destructive: oklch(0.65 0.190 28);
+  --border: var(--raw-basalt-400);
+  --input: var(--raw-basalt-400);
+  --ring: var(--raw-magma-400);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-magma-400);
+  --chart-2: var(--raw-sulfur-400);
+  --chart-3: var(--raw-magma-300);
+  --chart-4: var(--raw-sulfur-300);
+  --chart-5: var(--raw-magma-600);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-basalt-900);
+  --sidebar-foreground: var(--raw-basalt-100);
+  --sidebar-primary: var(--raw-magma-500);
+  --sidebar-primary-foreground: var(--raw-basalt-950);
+  --sidebar-accent: oklch(0.68 0.210 50 / 0.15);
+  --sidebar-accent-foreground: var(--raw-magma-300);
+  --sidebar-border: var(--raw-basalt-700);
+  --sidebar-ring: var(--raw-magma-400);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-basalt-950);
+  --surface-page: var(--raw-basalt-900);
+  --surface-raised: var(--raw-basalt-850);
+  --surface-sunken: var(--raw-basalt-950);
+  --surface-interactive: var(--raw-basalt-800);
+  --surface-interactive-hover: var(--raw-basalt-700);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-basalt-400);
+  --border-strong: var(--raw-basalt-400);
+  --border-subtle: var(--raw-basalt-800);
+  --border-accent: var(--raw-magma-400);
+
+  --spinner-track: var(--raw-basalt-400);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-magma-500);
+  --accent-fill-hover: var(--raw-magma-400);
+  --accent-surface: oklch(0.68 0.210 50 / 0.15);
+
+  /* ── Secondary (sulfur) ── */
+  --secondary-fill: var(--raw-sulfur-400);
+  --secondary-fill-hover: var(--raw-sulfur-300);
+  --secondary-surface: oklch(0.82 0.175 95 / 0.12);
+  --secondary-text: var(--raw-sulfur-300);
+
+  /* ── Status ── */
+  --status-success: oklch(0.70 0.14 135);
+  --status-success-surface: oklch(0.62 0.150 135 / 0.15);
+  --status-success-text: oklch(0.78 0.11 135);
+  --status-warning: var(--raw-sulfur-400);
+  --status-warning-surface: oklch(0.76 0.170 92 / 0.15);
+  --status-warning-text: var(--raw-sulfur-300);
+  --status-error: oklch(0.65 0.190 28);
+  --status-error-surface: oklch(0.55 0.210 28 / 0.15);
+  --status-error-text: oklch(0.78 0.12 28);
+}
+
+
+/* ================================================================
    @theme inline — MAPS VARIABLES TO TAILWIND UTILITIES
 
    This replaces tailwind.config.ts entirely.

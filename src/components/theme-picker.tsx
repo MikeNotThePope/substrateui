@@ -22,11 +22,12 @@ const defaultThemePickerLabels: Required<ThemePickerLabels> = {
   theme: "Theme",
 }
 
-type Theme = "default"
+type Theme = "default" | "lava"
 
 const STORAGE_KEY = "substrateui-theme"
 const THEMES: Array<{ value: Theme; label: string }> = [
   { value: "default", label: "Default" },
+  { value: "lava", label: "Lava" },
 ]
 
 const ThemeContext = React.createContext<{
@@ -51,7 +52,7 @@ export function SiteThemeProvider({
 
   React.useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
-    if (stored === "default") {
+    if (stored && THEMES.some((t) => t.value === stored)) {
       setThemeState(stored)
       applyTheme(stored)
     }

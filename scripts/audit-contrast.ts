@@ -109,6 +109,7 @@ interface ThemeSpec {
 
 const THEMES: ThemeSpec[] = [
   { name: "default", lightSelector: ":root", darkSelector: ".dark" },
+  { name: "lava", lightSelector: '[data-theme="lava"]', darkSelector: '[data-theme="lava"].dark' },
 ]
 
 // ─── Pairings to audit ────────────────────────────────────────────────
