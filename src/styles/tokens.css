@@ -99,6 +99,7 @@
   --accent: var(--raw-plum-100);
   --accent-foreground: var(--raw-plum-700);
   --destructive: var(--raw-error);
+  --destructive-foreground: oklch(1 0 0);
   --border: var(--raw-warm-500);
   --input: var(--raw-warm-500);
   --ring: var(--raw-plum-500);
@@ -187,6 +188,7 @@
   --accent: oklch(0.556 0.150 314 / 0.15);
   --accent-foreground: var(--raw-plum-300);
   --destructive: oklch(0.58 0.18 25);
+  --destructive-foreground: oklch(1 0 0);
   --border: var(--raw-warm-400);
   --input: var(--raw-warm-400);
   --ring: var(--raw-plum-400);
@@ -326,6 +328,7 @@
   --accent: var(--raw-magma-100);
   --accent-foreground: var(--raw-magma-800);
   --destructive: var(--raw-cherry);
+  --destructive-foreground: oklch(1 0 0);
   --border: var(--raw-basalt-500);
   --input: var(--raw-basalt-500);
   --ring: var(--raw-magma-600);
@@ -410,6 +413,8 @@
   --accent: oklch(0.68 0.210 50 / 0.15);
   --accent-foreground: var(--raw-magma-300);
   --destructive: oklch(0.65 0.190 28);
+  /* white on this lighter fill only hits 3.5:1 — near-black clears 5.5:1 */
+  --destructive-foreground: var(--raw-basalt-950);
   --border: var(--raw-basalt-400);
   --input: var(--raw-basalt-400);
   --ring: var(--raw-magma-400);
@@ -499,6 +504,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

@@ -169,8 +169,8 @@ const pairings: Pairing[] = [
   { name: "status-error on background", fg: "status-error", bg: "background", type: "ui" },
   { name: "status-info on background", fg: "status-info", bg: "background", type: "ui" },
 
-  // Destructive
-  { name: "primary-foreground on destructive", fg: "primary-foreground", bg: "destructive", type: "normal" },
+  // Destructive (Button/Badge pair destructive-foreground with the destructive fill)
+  { name: "destructive-foreground on destructive", fg: "destructive-foreground", bg: "destructive", type: "normal" },
 ]
 
 // Pairings that only apply to the default theme (reference raw palette tokens
