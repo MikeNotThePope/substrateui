@@ -71,6 +71,10 @@ export function SiteThemeProvider({
   )
 }
 
+export function useSiteTheme() {
+  return React.useContext(ThemeContext)
+}
+
 export function ThemePicker({ labels: labelsProp }: { labels?: ThemePickerLabels } = {}) {
   const { theme, setTheme } = React.useContext(ThemeContext)
   const [mounted, setMounted] = React.useState(false)
@@ -97,4 +101,4 @@ export function ThemePicker({ labels: labelsProp }: { labels?: ThemePickerLabels
   )
 }
 
-export type { ThemePickerLabels }
+export type { Theme, ThemePickerLabels }
