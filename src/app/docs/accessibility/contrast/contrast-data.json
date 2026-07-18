@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T04:35:01.052Z",
+  "generatedAt": "2026-07-18T04:40:43.447Z",
   "results": [
     {
       "name": "foreground on background",
@@ -386,8 +386,8 @@
       "darkPass": true
     },
     {
-      "name": "primary-foreground on destructive",
-      "fg": "primary-foreground",
+      "name": "destructive-foreground on destructive",
+      "fg": "destructive-foreground",
       "bg": "destructive",
       "type": "normal",
       "backdrop": null,
@@ -940,7 +940,7 @@
         },
         {
           "mode": "light",
-          "name": "primary-foreground on destructive",
+          "name": "destructive-foreground on destructive",
           "type": "normal",
           "required": 4.5,
           "ratio": 4.886100753257184,
@@ -948,7 +948,7 @@
         },
         {
           "mode": "dark",
-          "name": "primary-foreground on destructive",
+          "name": "destructive-foreground on destructive",
           "type": "normal",
           "required": 4.5,
           "ratio": 4.685138940918969,
@@ -1505,7 +1505,7 @@
         },
         {
           "mode": "light",
-          "name": "primary-foreground on destructive",
+          "name": "destructive-foreground on destructive",
           "type": "normal",
           "required": 4.5,
           "ratio": 5.399795732496436,
@@ -1513,7 +1513,7 @@
         },
         {
           "mode": "dark",
-          "name": "primary-foreground on destructive",
+          "name": "destructive-foreground on destructive",
           "type": "normal",
           "required": 4.5,
           "ratio": 5.5049969602544,

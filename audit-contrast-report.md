@@ -1,6 +1,6 @@
 # SubstrateUI Contrast Audit Report
 
-Generated: 2026-07-18T04:35:01.050Z
+Generated: 2026-07-18T04:40:43.445Z
 
 WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 
@@ -42,7 +42,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-warning on background | ui | 3:1 | 3.35 ✅ | PASS |
 | status-error on background | ui | 3:1 | 4.61 ✅ | PASS |
 | status-info on background | ui | 3:1 | 4.01 ✅ | PASS |
-| primary-foreground on destructive | normal | 4.5:1 | 4.89 ✅ | PASS |
+| destructive-foreground on destructive | normal | 4.5:1 | 4.89 ✅ | PASS |
 | warm-900 on amber-500 (light amber button) | normal | 4.5:1 | 6.76 ✅ | PASS |
 | warm-950 on amber-400 (dark amber button) | normal | 4.5:1 | 11.46 ✅ | PASS |
 
@@ -82,7 +82,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-warning on background | ui | 3:1 | 11.46 ✅ | PASS |
 | status-error on background | ui | 3:1 | 5.44 ✅ | PASS |
 | status-info on background | ui | 3:1 | 6.71 ✅ | PASS |
-| primary-foreground on destructive | normal | 4.5:1 | 4.69 ✅ | PASS |
+| destructive-foreground on destructive | normal | 4.5:1 | 4.69 ✅ | PASS |
 | warm-900 on amber-500 (light amber button) | normal | 4.5:1 | 6.76 ✅ | PASS |
 | warm-950 on amber-400 (dark amber button) | normal | 4.5:1 | 11.46 ✅ | PASS |
 
@@ -124,7 +124,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-warning on background | ui | 3:1 | 4.49 ✅ | PASS |
 | status-error on background | ui | 3:1 | 4.95 ✅ | PASS |
 | status-info on background | ui | 3:1 | 3.86 ✅ | PASS |
-| primary-foreground on destructive | normal | 4.5:1 | 5.40 ✅ | PASS |
+| destructive-foreground on destructive | normal | 4.5:1 | 5.40 ✅ | PASS |
 
 ### Dark mode
 
@@ -162,7 +162,7 @@ WCAG AA thresholds: 4.5:1 (normal text), 3:1 (large text / UI elements)
 | status-warning on background | ui | 3:1 | 11.14 ✅ | PASS |
 | status-error on background | ui | 3:1 | 5.50 ✅ | PASS |
 | status-info on background | ui | 3:1 | 7.40 ✅ | PASS |
-| primary-foreground on destructive | normal | 4.5:1 | 5.50 ✅ | PASS |
+| destructive-foreground on destructive | normal | 4.5:1 | 5.50 ✅ | PASS |
 
 ## Summary
 
