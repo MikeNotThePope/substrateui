@@ -66,6 +66,7 @@
   --raw-success: oklch(0.614 0.130 152);
   --raw-warning: oklch(0.711 0.147 78);
   --raw-error:   oklch(0.570 0.180 25);
+  --raw-info:    oklch(0.580 0.140 245);
 }
 
 
@@ -156,6 +157,9 @@
   --status-error: var(--raw-error);
   --status-error-surface: oklch(0.93 0.04 25);
   --status-error-text: oklch(0.45 0.14 25);
+  --status-info: var(--raw-info);
+  --status-info-surface: oklch(0.92 0.045 245);
+  --status-info-text: oklch(0.45 0.10 245);
 
   /* ── SubstrateUI structural (shared across modes) ── */
   --border-width: 2px;
@@ -241,6 +245,9 @@
   --status-error: oklch(0.65 0.18 25);
   --status-error-surface: oklch(0.570 0.180 25 / 0.15);
   --status-error-text: oklch(0.75 0.12 25);
+  --status-info: oklch(0.68 0.13 245);
+  --status-info-surface: oklch(0.580 0.140 245 / 0.15);
+  --status-info-text: oklch(0.75 0.10 245);
 }
 
 
@@ -375,6 +382,9 @@
   --status-error: var(--raw-cherry);
   --status-error-surface: oklch(0.93 0.04 28);
   --status-error-text: oklch(0.45 0.15 28);
+  --status-info: var(--raw-ijen);
+  --status-info-surface: oklch(0.92 0.05 240);
+  --status-info-text: oklch(0.45 0.10 240);
 }
 
 
@@ -455,6 +465,9 @@
   --status-error: oklch(0.65 0.190 28);
   --status-error-surface: oklch(0.55 0.210 28 / 0.15);
   --status-error-text: oklch(0.78 0.12 28);
+  --status-info: oklch(0.70 0.14 240);
+  --status-info-surface: oklch(0.65 0.170 240 / 0.15);
+  --status-info-text: oklch(0.78 0.10 240);
 }
 
 
@@ -555,6 +568,9 @@
   --color-status-error: var(--status-error);
   --color-status-error-surface: var(--status-error-surface);
   --color-status-error-text: var(--status-error-text);
+  --color-status-info: var(--status-info);
+  --color-status-info-surface: var(--status-info-surface);
+  --color-status-info-text: var(--status-info-text);
 
   /* ── Typography ── */
   --font-sans: "DM Sans", system-ui, sans-serif;

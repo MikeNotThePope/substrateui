@@ -52,6 +52,7 @@ const themeColorData: Record<Theme, ThemeColorData> = {
       { variable: "--raw-success", label: "success" },
       { variable: "--raw-warning", label: "warning" },
       { variable: "--raw-error", label: "error" },
+      { variable: "--raw-info", label: "info" },
     ],
     semantic: [
       { name: "background", light: "warm-50", dark: "warm-950" },
@@ -96,6 +97,7 @@ const themeColorData: Record<Theme, ThemeColorData> = {
       { variable: "--raw-olivine", label: "success" },
       { variable: "--raw-sulfur-500", label: "warning" },
       { variable: "--raw-cherry", label: "error" },
+      { variable: "--raw-ijen", label: "info" },
     ],
     semantic: [
       { name: "background", light: "basalt-50", dark: "basalt-950" },
