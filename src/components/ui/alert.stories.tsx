@@ -9,7 +9,7 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "destructive", "success", "warning"],
+      options: ["default", "destructive", "success", "warning", "info"],
     },
   },
   render: (args) => (
@@ -28,3 +28,4 @@ export const Default: Story = { args: { variant: "default" } }
 export const Destructive: Story = { args: { variant: "destructive" } }
 export const Success: Story = { args: { variant: "success" } }
 export const Warning: Story = { args: { variant: "warning" } }
+export const Info: Story = { args: { variant: "info" } }

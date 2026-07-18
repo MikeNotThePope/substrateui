@@ -9,7 +9,7 @@ import { PropsTable, type PropDef } from "../../_components/props-table"
 const alertProps: PropDef[] = [
   {
     name: "variant",
-    type: '"default" | "destructive" | "success" | "warning"',
+    type: '"default" | "destructive" | "success" | "warning" | "info"',
     default: '"default"',
     description:
       "The visual style of the alert. Each variant uses its corresponding status color from the design tokens.",
@@ -33,9 +33,14 @@ export default function AlertPage() {
         <H3>Alert Types</H3>
         <ComponentPreview
           code={`<Alert>
+  <AlertTitle>Note</AlertTitle>
+  <AlertDescription>This is a default alert.</AlertDescription>
+</Alert>
+
+<Alert variant="info">
   <Info className="h-4 w-4" />
   <AlertTitle>Information</AlertTitle>
-  <AlertDescription>This is a default informational alert.</AlertDescription>
+  <AlertDescription>A new version is available.</AlertDescription>
 </Alert>
 
 <Alert variant="success">
@@ -58,9 +63,13 @@ export default function AlertPage() {
         >
           <Stack gap="sm" className="w-full">
             <Alert>
+              <AlertTitle>Note</AlertTitle>
+              <AlertDescription>This is a default alert.</AlertDescription>
+            </Alert>
+            <Alert variant="info">
               <Info className="h-4 w-4" />
               <AlertTitle>Information</AlertTitle>
-              <AlertDescription>This is a default informational alert.</AlertDescription>
+              <AlertDescription>A new version is available.</AlertDescription>
             </Alert>
             <Alert variant="success">
               <CheckCircle className="h-4 w-4" />

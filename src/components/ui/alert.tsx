@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-/** Alert style variants (default, destructive, success, warning). Use with cn(alertVariants({...})) for non-div elements. */
+/** Alert style variants (default, destructive, success, warning, info). Use with cn(alertVariants({...})) for non-div elements. */
 const alertVariants = cva(
   "relative w-full rounded-lg border-2 p-4 [&>svg~*]:ps-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:start-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
@@ -16,6 +16,8 @@ const alertVariants = cva(
           "border-status-success bg-status-success-surface text-status-success-text [&>svg]:text-status-success-text",
         warning:
           "border-status-warning bg-status-warning-surface text-status-warning-text [&>svg]:text-status-warning-text",
+        info:
+          "border-status-info bg-status-info-surface text-status-info-text [&>svg]:text-status-info-text",
       },
     },
     defaultVariants: {
@@ -30,7 +32,7 @@ const alertVariants = cva(
  * @example
  * <Alert variant="destructive"><AlertTitle>Error</AlertTitle></Alert>
  *
- * @prop variant - Visual style: "default" | "destructive" | "success" | "warning"
+ * @prop variant - Visual style: "default" | "destructive" | "success" | "warning" | "info"
  */
 function Alert({
   className,

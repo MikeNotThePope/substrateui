@@ -36,6 +36,12 @@ const toastProps: PropDef[] = [
     description: "Shows a warning toast with a yellow icon.",
   },
   {
+    name: "toast.info(message)",
+    type: "function",
+    default: undefined,
+    description: "Shows an informational toast with a blue info icon.",
+  },
+  {
     name: "description",
     type: "string",
     default: undefined,
@@ -59,7 +65,8 @@ export default function ToastPage() {
 toast("Event has been created")
 toast.success("Profile saved successfully")
 toast.error("Something went wrong")
-toast.warning("Please review your input")`}
+toast.warning("Please review your input")
+toast.info("A new version is available")`}
         >
           <Cluster gap="sm">
             <Button variant="outline" onClick={() => toast("Event has been created")}>
@@ -73,6 +80,9 @@ toast.warning("Please review your input")`}
             </Button>
             <Button variant="outline" onClick={() => toast.warning("Please review your input")}>
               Warning Toast
+            </Button>
+            <Button variant="outline" onClick={() => toast.info("A new version is available")}>
+              Info Toast
             </Button>
           </Cluster>
         </ComponentPreview>

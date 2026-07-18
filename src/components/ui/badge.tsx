@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-/** Badge style variants (default, secondary, destructive, outline, success, warning, error). Use with cn(badgeVariants({...})) for non-div elements. */
+/** Badge style variants (default, secondary, destructive, outline, success, warning, error, info). Use with cn(badgeVariants({...})) for non-div elements. */
 const badgeVariants = cva(
   "inline-flex items-center rounded-full border-2 px-2.5 py-0.5 font-mono uppercase tracking-wider text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
@@ -22,6 +22,8 @@ const badgeVariants = cva(
           "border-transparent bg-status-warning-surface text-status-warning-text",
         error:
           "border-transparent bg-status-error-surface text-status-error-text",
+        info:
+          "border-transparent bg-status-info-surface text-status-info-text",
       },
     },
     defaultVariants: {
@@ -41,7 +43,7 @@ export interface BadgeProps
  * @example
  * <Badge variant="success">Active</Badge>
  *
- * @prop variant - Visual style: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error"
+ * @prop variant - Visual style: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error" | "info"
  */
 function Badge({ className, variant, ...props }: BadgeProps) {
   return (

@@ -11,7 +11,7 @@ import { PropsTable, type PropDef } from "../../_components/props-table"
 const badgeProps: PropDef[] = [
   {
     name: "variant",
-    type: '"default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error"',
+    type: '"default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error" | "info"',
     default: '"default"',
     description:
       "The visual style of the badge. Each variant uses a distinct color scheme suited to its semantic meaning.",
@@ -40,7 +40,8 @@ export default function BadgePage() {
 <Badge variant="outline">Outline</Badge>
 <Badge variant="success">Success</Badge>
 <Badge variant="warning">Warning</Badge>
-<Badge variant="error">Error</Badge>`}
+<Badge variant="error">Error</Badge>
+<Badge variant="info">Info</Badge>`}
         >
           <Cluster gap="sm">
             <Badge>Default</Badge>
@@ -50,6 +51,7 @@ export default function BadgePage() {
             <Badge variant="success">Success</Badge>
             <Badge variant="warning">Warning</Badge>
             <Badge variant="error">Error</Badge>
+            <Badge variant="info">Info</Badge>
           </Cluster>
         </ComponentPreview>
       </Stack>
