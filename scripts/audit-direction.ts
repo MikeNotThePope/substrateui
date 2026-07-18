@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from "node:fs"
+import { readFileSync, readdirSync } from "node:fs"
 import { join } from "node:path"
 
 const COMPONENT_DIR = "src/components"
@@ -30,19 +30,10 @@ const BANNED_PATTERNS: Array<{ regex: RegExp; name: string; fix: string }> = [
   { regex: /\bfloat-right\b/g, name: "float-right", fix: "float-end" },
 ]
 
-function walk(dir: string, files: string[] = []): string[] {
-  for (const entry of readdirSync(dir)) {
-    const fullPath = join(dir, entry)
-    if (statSync(fullPath).isDirectory()) {
-      walk(fullPath, files)
-    } else if (/\.(tsx?|css)$/.test(entry)) {
-      files.push(fullPath)
-    }
-  }
-  return files
-}
-
-const files = walk(COMPONENT_DIR)
+const files = readdirSync(COMPONENT_DIR, { recursive: true })
+  .map(String)
+  .filter((entry) => /\.(tsx?|css)$/.test(entry))
+  .map((entry) => join(COMPONENT_DIR, entry))
 const violations: Array<{ file: string; line: number; match: string; fix: string }> = []
 
 for (const file of files) {
