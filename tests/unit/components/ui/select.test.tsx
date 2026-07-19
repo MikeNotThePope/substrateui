@@ -12,7 +12,7 @@ import {
 function Harness(props: {
   value?: string
   defaultValue?: string
-  onValueChange?: (v: string) => void
+  onValueChange?: (v: string | null) => void
   disabled?: boolean
 }) {
   return (
@@ -67,7 +67,7 @@ describe('Select', () => {
     await user.click(screen.getByLabelText('fruit'))
     const option = await screen.findByRole('option', { name: 'Banana' })
     await user.click(option)
-    expect(onValueChange).toHaveBeenCalledWith('b')
+    expect(onValueChange).toHaveBeenCalledWith('b', expect.anything())
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
     expect(screen.getByLabelText('fruit')).toHaveTextContent('Banana')
   })

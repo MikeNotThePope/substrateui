@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { DirectionProvider as RadixDirectionProvider } from "@radix-ui/react-direction"
+import { DirectionProvider as BaseDirectionProvider } from "@base-ui/react/direction-provider"
 
 /** Text direction, either left-to-right or right-to-left. */
 type Direction = "ltr" | "rtl"
 
 /**
  * Context provider that sets the text direction for descendant components.
- * All Radix-based components in this library read from this provider automatically.
+ * All Base UI-based components in this library read from this provider automatically.
  *
  * @example
  * <DirectionProvider dir="rtl">{children}</DirectionProvider>
@@ -22,10 +22,12 @@ function DirectionProvider({
   dir?: Direction
   children: React.ReactNode
 }) {
-  return <RadixDirectionProvider dir={dir}>{children}</RadixDirectionProvider>
+  return (
+    <BaseDirectionProvider direction={dir}>{children}</BaseDirectionProvider>
+  )
 }
 
 export { DirectionProvider }
 /** Hook that returns the current text direction from DirectionProvider context. */
-export { useDirection } from "@radix-ui/react-direction"
+export { useDirection } from "@base-ui/react/direction-provider"
 export type { Direction }
