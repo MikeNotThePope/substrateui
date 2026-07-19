@@ -31,12 +31,12 @@ function FormActions({
       <div
         data-slot="form-actions"
         className={cn(
-          "flex items-center justify-between border-t-2 pt-6 mt-6",
+          "flex flex-wrap items-center justify-between gap-2 border-t-2 pt-6 mt-6",
           className
         )}
         {...props}
       >
-        <Cluster gap="sm" justify="end" className="ml-auto">
+        <Cluster gap="sm" justify="end" className="ms-auto">
           {children}
         </Cluster>
       </div>
@@ -47,7 +47,7 @@ function FormActions({
     <div
       data-slot="form-actions"
       className={cn(
-        "flex items-center justify-between border-t-2 pt-6 mt-6",
+        "flex flex-wrap items-center justify-between gap-2 border-t-2 pt-6 mt-6",
         className
       )}
       {...props}
@@ -79,7 +79,7 @@ function FormActionsPrimary({
   return (
     <div
       data-slot="form-actions-primary"
-      className={cn("flex items-center gap-2 ml-auto", className)}
+      className={cn("flex flex-wrap items-center gap-2 ms-auto", className)}
       {...props}
     />
   )

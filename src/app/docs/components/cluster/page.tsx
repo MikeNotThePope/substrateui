@@ -24,7 +24,7 @@ export default function ClusterPage() {
         {/* ── Gap Variants ────────────────────────────────── */}
         <Stack gap="md">
           <H3>Gap Variants</H3>
-          <Grid columns={2} gap="lg">
+          <Grid gap="lg" className="sm:grid-cols-2">
             <ComponentPreview
               title="gap=&quot;xs&quot;"
               code={`<Cluster gap="xs">
@@ -146,7 +146,7 @@ export default function ClusterPage() {
         {/* ── Justify Variations ──────────────────────────── */}
         <Stack gap="md">
           <H3>Justify Variations</H3>
-          <Grid columns={2} gap="lg">
+          <Grid gap="lg" className="sm:grid-cols-2">
             <ComponentPreview
               title="justify=&quot;start&quot;"
               code={`<Cluster justify="start">
@@ -212,7 +212,7 @@ export default function ClusterPage() {
         {/* ── Align Variations ────────────────────────────── */}
         <Stack gap="md">
           <H3>Align Variations</H3>
-          <Grid columns={2} gap="lg">
+          <Grid gap="lg" className="sm:grid-cols-2">
             <ComponentPreview
               title="align=&quot;start&quot;"
               code={`<Cluster align="start">
