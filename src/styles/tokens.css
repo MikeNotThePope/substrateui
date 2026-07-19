@@ -24,7 +24,9 @@
 
 :root {
   /* ── Plum ── */
-  --raw-plum-50:  oklch(0.975 0.009 314);
+  /* plum-50 carries enough chroma to read as a tint — at C 0.009 it was
+     within a just-noticeable difference of the warm neutrals. */
+  --raw-plum-50:  oklch(0.972 0.020 314);
   --raw-plum-100: oklch(0.937 0.024 313);
   --raw-plum-200: oklch(0.871 0.049 313);
   --raw-plum-300: oklch(0.772 0.086 314);
@@ -46,6 +48,7 @@
   --raw-amber-600: oklch(0.631 0.130 77);
   --raw-amber-700: oklch(0.518 0.106 77);
   --raw-amber-800: oklch(0.435 0.088 78);
+  --raw-amber-900: oklch(0.350 0.070 78);
 
   /* ── Warm Neutrals ── */
   --raw-warm-white: oklch(0.994 0.003 85);
@@ -53,20 +56,26 @@
   --raw-warm-100: oklch(0.954 0.007 68);
   --raw-warm-200: oklch(0.909 0.011 77);
   --raw-warm-300: oklch(0.840 0.016 74);
+  --raw-warm-350: oklch(0.775 0.016 71);
   --raw-warm-400: oklch(0.710 0.015 68);
+  --raw-warm-450: oklch(0.640 0.015 70);
   --raw-warm-500: oklch(0.570 0.015 71);
   --raw-warm-600: oklch(0.457 0.012 68);
   --raw-warm-700: oklch(0.359 0.010 74);
   --raw-warm-800: oklch(0.275 0.009 75);
   --raw-warm-850: oklch(0.236 0.006 78);
   --raw-warm-900: oklch(0.211 0.005 68);
+  /* warm-950 is a text color (near-black on amber fills) — dark-mode
+     surfaces use the 975/900/850/800 ladder, not 950. */
   --raw-warm-950: oklch(0.170 0.004 48);
   --raw-warm-975: oklch(0.135 0.004 48);
 
   /* ── Status ── */
   /* success/warning darkened so alert borders clear 3:1 (WCAG non-text) on light surfaces */
   --raw-success: oklch(0.58 0.130 152);
-  --raw-warning: oklch(0.631 0.130 77);
+  /* warning shares the amber ramp by design (CVD-safe with plum) —
+     aliased so the two can never drift apart silently */
+  --raw-warning: var(--raw-amber-600);
   --raw-error:   oklch(0.570 0.180 25);
   --raw-info:    oklch(0.580 0.140 245);
 }
@@ -159,7 +168,7 @@
   --status-success-text: oklch(0.45 0.10 152);
   --status-warning: var(--raw-warning);
   --status-warning-surface: var(--raw-amber-100);
-  --status-warning-text: oklch(0.45 0.09 78);
+  --status-warning-text: var(--raw-amber-800);
   --status-error: var(--raw-error);
   --status-error-surface: oklch(0.93 0.04 25);
   --status-error-text: oklch(0.45 0.14 25);
@@ -307,13 +316,16 @@
   --raw-sulfur-600: oklch(0.66 0.150 88);
   --raw-sulfur-700: oklch(0.55 0.120 85);
   --raw-sulfur-800: oklch(0.44 0.090 80);
+  --raw-sulfur-900: oklch(0.35 0.070 76);
 
   /* ── Basalt (lava neutrals) ── */
   --raw-basalt-50:  oklch(0.97 0.005 50);
   --raw-basalt-100: oklch(0.93 0.006 50);
   --raw-basalt-200: oklch(0.87 0.007 50);
   --raw-basalt-300: oklch(0.78 0.008 50);
+  --raw-basalt-350: oklch(0.72 0.008 50);
   --raw-basalt-400: oklch(0.66 0.009 50);
+  --raw-basalt-450: oklch(0.605 0.009 50);
   --raw-basalt-500: oklch(0.55 0.010 50);
   --raw-basalt-600: oklch(0.46 0.010 48);
   --raw-basalt-700: oklch(0.38 0.011 45);
@@ -581,12 +593,15 @@
   --color-amber-600: var(--raw-amber-600);
   --color-amber-700: var(--raw-amber-700);
   --color-amber-800: var(--raw-amber-800);
+  --color-amber-900: var(--raw-amber-900);
 
   --color-warm-50:  var(--raw-warm-50);
   --color-warm-100: var(--raw-warm-100);
   --color-warm-200: var(--raw-warm-200);
   --color-warm-300: var(--raw-warm-300);
+  --color-warm-350: var(--raw-warm-350);
   --color-warm-400: var(--raw-warm-400);
+  --color-warm-450: var(--raw-warm-450);
   --color-warm-500: var(--raw-warm-500);
   --color-warm-600: var(--raw-warm-600);
   --color-warm-700: var(--raw-warm-700);
