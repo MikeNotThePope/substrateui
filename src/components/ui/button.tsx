@@ -5,21 +5,25 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 /** Button style variants (variant + size). Use with cn(buttonVariants({...})) for non-button elements. */
+/**
+ * Hard-shadow press mechanics shared by solid variants: rest on a small
+ * offset shadow, lift toward the light on hover, sink flush on press.
+ */
+const pressable =
+  "shadow-hard-sm hover:-translate-x-px hover:-translate-y-px hover:shadow-hard active:translate-x-[3px] active:translate-y-[3px] active:shadow-none motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 motion-reduce:active:translate-x-0 motion-reduce:active:translate-y-0"
+
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors active:translate-y-[1.5px] motion-reduce:active:translate-y-0 transition-transform motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-[transform,box-shadow,background-color,color,border-color] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground border-2 border-transparent hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground border-2 border-transparent hover:bg-destructive/90",
-        outline:
-          "border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground border-2 border-transparent hover:bg-secondary/80",
-        amber:
-          "bg-amber-500 text-warm-900 border-2 border-amber-600 hover:bg-amber-400 dark:bg-amber-400 dark:text-warm-950 dark:border-amber-500 dark:hover:bg-amber-300",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        default: `bg-primary text-primary-foreground border-2 border-primary-border hover:bg-primary/90 ${pressable}`,
+        destructive: `bg-destructive text-destructive-foreground border-2 border-transparent hover:bg-destructive/90 ${pressable}`,
+        outline: `border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground ${pressable}`,
+        secondary: `bg-secondary text-secondary-foreground border-2 border-transparent hover:bg-secondary/80 ${pressable}`,
+        amber: `bg-secondary-fill text-secondary-fill-foreground border-2 border-secondary-fill-border hover:bg-secondary-fill-hover ${pressable}`,
+        ghost:
+          "hover:bg-accent hover:text-accent-foreground active:translate-y-[1.5px] motion-reduce:active:translate-y-0",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

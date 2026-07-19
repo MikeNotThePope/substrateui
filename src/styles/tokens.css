@@ -61,6 +61,7 @@
   --raw-warm-850: oklch(0.236 0.006 78);
   --raw-warm-900: oklch(0.211 0.005 68);
   --raw-warm-950: oklch(0.170 0.004 48);
+  --raw-warm-975: oklch(0.135 0.004 48);
 
   /* ── Status ── */
   /* success/warning darkened so alert borders clear 3:1 (WCAG non-text) on light surfaces */
@@ -84,7 +85,7 @@
   --radius: 0.625rem;
 
   /* ── Shadcn core tokens ── */
-  --background: var(--raw-warm-50);
+  --background: var(--raw-warm-100);
   --foreground: var(--raw-warm-900);
   --card: var(--raw-warm-white);
   --card-foreground: var(--raw-warm-900);
@@ -92,9 +93,10 @@
   --popover-foreground: var(--raw-warm-900);
   --primary: var(--raw-plum-600);
   --primary-foreground: oklch(1 0 0);
-  --secondary: var(--raw-warm-100);
+  --primary-border: var(--raw-plum-800);
+  --secondary: var(--raw-warm-200);
   --secondary-foreground: var(--raw-warm-900);
-  --muted: var(--raw-warm-100);
+  --muted: var(--raw-warm-200);
   --muted-foreground: var(--raw-warm-600);
   --accent: var(--raw-plum-100);
   --accent-foreground: var(--raw-plum-700);
@@ -122,12 +124,12 @@
   --sidebar-ring: var(--raw-plum-500);
 
   /* ── SubstrateUI extended: Surfaces ── */
-  --surface-ground: var(--raw-warm-50);
-  --surface-page: var(--raw-warm-white);
+  --surface-ground: var(--raw-warm-100);
+  --surface-page: var(--raw-warm-50);
   --surface-raised: var(--raw-warm-white);
-  --surface-sunken: var(--raw-warm-100);
-  --surface-interactive: var(--raw-warm-100);
-  --surface-interactive-hover: var(--raw-warm-200);
+  --surface-sunken: var(--raw-warm-200);
+  --surface-interactive: var(--raw-warm-200);
+  --surface-interactive-hover: var(--raw-warm-300);
 
   /* ── SubstrateUI extended: Borders ── */
   --border-default: var(--raw-warm-500);
@@ -145,7 +147,9 @@
 
   /* ── SubstrateUI extended: Secondary (amber) ── */
   --secondary-fill: var(--raw-amber-500);
-  --secondary-fill-hover: var(--raw-amber-600);
+  --secondary-fill-hover: var(--raw-amber-400);
+  --secondary-fill-foreground: var(--raw-warm-900);
+  --secondary-fill-border: var(--raw-amber-700);
   --secondary-surface: var(--raw-amber-100);
   --secondary-text: var(--raw-amber-700);
 
@@ -163,6 +167,15 @@
   --status-info-surface: oklch(0.92 0.045 245);
   --status-info-text: oklch(0.45 0.10 245);
 
+  /* ── SubstrateUI extended: Hard shadows (neubrutalist offset) ── */
+  /* Solid offset shadows — the "chunky" depth language. Color is a
+     token so each mode/theme can tune how hard the drop reads. */
+  --hard-shadow-color: var(--raw-warm-800);
+  --hard-shadow-sm: 3px 3px 0 0 var(--hard-shadow-color);
+  --hard-shadow: 4px 4px 0 0 var(--hard-shadow-color);
+  --hard-shadow-lg: 6px 6px 0 0 var(--hard-shadow-color);
+  --hard-shadow-amber: 6px 6px 0 0 var(--secondary-fill);
+
   /* ── SubstrateUI structural (shared across modes) ── */
   --border-width: 2px;
   --press-depth: 1.5px;
@@ -173,7 +186,7 @@
 
 .dark {
   /* ── Shadcn core ── */
-  --background: var(--raw-warm-950);
+  --background: var(--raw-warm-975);
   --foreground: var(--raw-warm-100);
   --card: var(--raw-warm-850);
   --card-foreground: var(--raw-warm-100);
@@ -181,7 +194,8 @@
   --popover-foreground: var(--raw-warm-100);
   --primary: var(--raw-plum-500);
   --primary-foreground: oklch(1 0 0);
-  --secondary: var(--raw-warm-800);
+  --primary-border: var(--raw-plum-300);
+  --secondary: var(--raw-warm-700);
   --secondary-foreground: var(--raw-warm-100);
   --muted: var(--raw-warm-800);
   --muted-foreground: var(--raw-warm-400);
@@ -211,10 +225,10 @@
   --sidebar-ring: var(--raw-plum-400);
 
   /* ── SubstrateUI extended: Surfaces ── */
-  --surface-ground: var(--raw-warm-950);
+  --surface-ground: var(--raw-warm-975);
   --surface-page: var(--raw-warm-900);
   --surface-raised: var(--raw-warm-850);
-  --surface-sunken: var(--raw-warm-950);
+  --surface-sunken: var(--raw-warm-975);
   --surface-interactive: var(--raw-warm-800);
   --surface-interactive-hover: var(--raw-warm-700);
 
@@ -235,8 +249,15 @@
   /* ── SubstrateUI extended: Secondary (amber) ── */
   --secondary-fill: var(--raw-amber-400);
   --secondary-fill-hover: var(--raw-amber-300);
+  --secondary-fill-foreground: var(--raw-warm-950);
+  --secondary-fill-border: var(--raw-amber-600);
   --secondary-surface: oklch(0.837 0.164 84 / 0.12);
   --secondary-text: var(--raw-amber-300);
+
+  /* ── SubstrateUI extended: Hard shadows ── */
+  /* A dark drop vanishes on the near-black ground, so dark mode extrudes
+     instead: the slab picks up the border tone and reads as solid depth. */
+  --hard-shadow-color: var(--raw-warm-500);
 
   /* ── SubstrateUI extended: Status ── */
   --status-success: oklch(0.70 0.13 152);
@@ -300,6 +321,7 @@
   --raw-basalt-850: oklch(0.26 0.012 40);
   --raw-basalt-900: oklch(0.22 0.012 38);
   --raw-basalt-950: oklch(0.16 0.010 35);
+  --raw-basalt-975: oklch(0.125 0.009 35);
 
   /* ── Lava status ── */
   /* olivine/ijen darkened so alert borders clear 3:1 (WCAG non-text) on light surfaces */
@@ -313,7 +335,7 @@
 
 [data-theme="lava"] {
   /* ── Shadcn core ── */
-  --background: var(--raw-basalt-50);
+  --background: var(--raw-basalt-100);
   --foreground: var(--raw-basalt-900);
   --card: var(--raw-warm-white);
   --card-foreground: var(--raw-basalt-900);
@@ -321,9 +343,10 @@
   --popover-foreground: var(--raw-basalt-900);
   --primary: var(--raw-magma-700);
   --primary-foreground: oklch(1 0 0);
-  --secondary: var(--raw-basalt-100);
+  --primary-border: var(--raw-magma-900);
+  --secondary: var(--raw-basalt-200);
   --secondary-foreground: var(--raw-basalt-900);
-  --muted: var(--raw-basalt-100);
+  --muted: var(--raw-basalt-200);
   --muted-foreground: var(--raw-basalt-600);
   --accent: var(--raw-magma-100);
   --accent-foreground: var(--raw-magma-800);
@@ -351,12 +374,12 @@
   --sidebar-ring: var(--raw-magma-600);
 
   /* ── Surfaces ── */
-  --surface-ground: var(--raw-basalt-50);
-  --surface-page: var(--raw-warm-white);
+  --surface-ground: var(--raw-basalt-100);
+  --surface-page: var(--raw-basalt-50);
   --surface-raised: var(--raw-warm-white);
-  --surface-sunken: var(--raw-basalt-100);
-  --surface-interactive: var(--raw-basalt-100);
-  --surface-interactive-hover: var(--raw-basalt-200);
+  --surface-sunken: var(--raw-basalt-200);
+  --surface-interactive: var(--raw-basalt-200);
+  --surface-interactive-hover: var(--raw-basalt-300);
 
   /* ── Borders ── */
   --border-default: var(--raw-basalt-500);
@@ -373,9 +396,14 @@
 
   /* ── Secondary (sulfur) ── */
   --secondary-fill: var(--raw-sulfur-500);
-  --secondary-fill-hover: var(--raw-sulfur-600);
+  --secondary-fill-hover: var(--raw-sulfur-400);
+  --secondary-fill-foreground: var(--raw-basalt-900);
+  --secondary-fill-border: var(--raw-sulfur-700);
   --secondary-surface: var(--raw-sulfur-100);
   --secondary-text: var(--raw-sulfur-800);
+
+  /* ── Hard shadows ── */
+  --hard-shadow-color: var(--raw-basalt-800);
 
   /* ── Status ── */
   --status-success: var(--raw-olivine);
@@ -398,7 +426,7 @@
 
 [data-theme="lava"].dark {
   /* ── Shadcn core ── */
-  --background: var(--raw-basalt-950);
+  --background: var(--raw-basalt-975);
   --foreground: var(--raw-basalt-100);
   --card: var(--raw-basalt-850);
   --card-foreground: var(--raw-basalt-100);
@@ -406,7 +434,8 @@
   --popover-foreground: var(--raw-basalt-100);
   --primary: var(--raw-magma-500);
   --primary-foreground: var(--raw-basalt-950);
-  --secondary: var(--raw-basalt-800);
+  --primary-border: var(--raw-magma-300);
+  --secondary: var(--raw-basalt-700);
   --secondary-foreground: var(--raw-basalt-100);
   --muted: var(--raw-basalt-800);
   --muted-foreground: var(--raw-basalt-300);
@@ -437,10 +466,10 @@
   --sidebar-ring: var(--raw-magma-400);
 
   /* ── Surfaces ── */
-  --surface-ground: var(--raw-basalt-950);
+  --surface-ground: var(--raw-basalt-975);
   --surface-page: var(--raw-basalt-900);
   --surface-raised: var(--raw-basalt-850);
-  --surface-sunken: var(--raw-basalt-950);
+  --surface-sunken: var(--raw-basalt-975);
   --surface-interactive: var(--raw-basalt-800);
   --surface-interactive-hover: var(--raw-basalt-700);
 
@@ -460,8 +489,13 @@
   /* ── Secondary (sulfur) ── */
   --secondary-fill: var(--raw-sulfur-400);
   --secondary-fill-hover: var(--raw-sulfur-300);
+  --secondary-fill-foreground: var(--raw-basalt-950);
+  --secondary-fill-border: var(--raw-sulfur-600);
   --secondary-surface: oklch(0.82 0.175 95 / 0.12);
   --secondary-text: var(--raw-sulfur-300);
+
+  /* ── Hard shadows ── */
+  --hard-shadow-color: var(--raw-basalt-500);
 
   /* ── Status ── */
   --status-success: oklch(0.70 0.14 135);
@@ -497,6 +531,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-border: var(--primary-border);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -566,6 +601,20 @@
   --color-surface-sunken: var(--surface-sunken);
   --color-surface-interactive: var(--surface-interactive);
   --color-surface-interactive-hover: var(--surface-interactive-hover);
+
+  /* ── SubstrateUI: Secondary fills (amber / theme secondary) ── */
+  --color-secondary-fill: var(--secondary-fill);
+  --color-secondary-fill-hover: var(--secondary-fill-hover);
+  --color-secondary-fill-foreground: var(--secondary-fill-foreground);
+  --color-secondary-fill-border: var(--secondary-fill-border);
+  --color-secondary-surface: var(--secondary-surface);
+  --color-secondary-text: var(--secondary-text);
+
+  /* ── SubstrateUI: Hard shadows (shadow-hard-sm / shadow-hard / shadow-hard-lg) ── */
+  --shadow-hard-sm: var(--hard-shadow-sm);
+  --shadow-hard: var(--hard-shadow);
+  --shadow-hard-lg: var(--hard-shadow-lg);
+  --shadow-hard-amber: var(--hard-shadow-amber);
 
   /* ── SubstrateUI: Status ── */
   --color-status-success: var(--status-success);

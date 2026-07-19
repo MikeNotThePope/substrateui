@@ -30,7 +30,7 @@ describe('Button', () => {
     ['destructive', 'bg-destructive'],
     ['outline', 'border-input'],
     ['secondary', 'bg-secondary'],
-    ['amber', 'bg-amber-500'],
+    ['amber', 'bg-secondary-fill'],
     ['ghost', 'hover:bg-accent'],
     ['link', 'underline-offset-4'],
   ] as const)('applies variant=%s classes', (variant, expectedClass) => {
