@@ -42,7 +42,7 @@ export default function SliderPage() {
   return (
     <DocPage
       title="Slider"
-      description="A draggable range input for selecting numeric values. Built on Radix primitives with smooth thumb interaction and track fill."
+      description="A draggable range input for selecting numeric values. Built on Base UI primitives with smooth thumb interaction and track fill."
     >
       {/* Default */}
       <Stack gap="md">

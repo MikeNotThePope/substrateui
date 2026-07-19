@@ -25,7 +25,7 @@ describe('RadioGroup', () => {
       </RadioGroup>
     )
     await user.click(screen.getByLabelText('B'))
-    expect(onValueChange).toHaveBeenCalledWith('b')
+    expect(onValueChange).toHaveBeenCalledWith('b', expect.anything())
   })
 
   it('only one item is selected at a time (controlled)', () => {
@@ -64,8 +64,8 @@ it('disabled on the group disables all items', () => {
         <RadioGroupItem value="b" aria-label="B" />
       </RadioGroup>
     )
-    expect(screen.getByLabelText('A')).toBeDisabled()
-    expect(screen.getByLabelText('B')).toBeDisabled()
+    expect(screen.getByLabelText('A')).toHaveAttribute('aria-disabled', 'true')
+    expect(screen.getByLabelText('B')).toHaveAttribute('aria-disabled', 'true')
   })
 
   it('disabled on an individual item disables just that one', async () => {
@@ -77,8 +77,8 @@ it('disabled on the group disables all items', () => {
         <RadioGroupItem value="b" aria-label="B" />
       </RadioGroup>
     )
-    expect(screen.getByLabelText('A')).toBeDisabled()
-    expect(screen.getByLabelText('B')).not.toBeDisabled()
+    expect(screen.getByLabelText('A')).toHaveAttribute('aria-disabled', 'true')
+    expect(screen.getByLabelText('B')).not.toHaveAttribute('aria-disabled')
     await user.click(screen.getByLabelText('A'))
     expect(onValueChange).not.toHaveBeenCalled()
   })

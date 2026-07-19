@@ -97,7 +97,7 @@ export default function ClusterPage() {
   <Tag>TypeScript</Tag>
   <Tag>Tailwind CSS</Tag>
   <Tag>Next.js</Tag>
-  <Tag>Radix UI</Tag>
+  <Tag>Base UI</Tag>
   <Tag>Node.js</Tag>
   <Tag>PostgreSQL</Tag>
   <Tag>GraphQL</Tag>
@@ -112,7 +112,7 @@ export default function ClusterPage() {
               <Tag>TypeScript</Tag>
               <Tag>Tailwind CSS</Tag>
               <Tag>Next.js</Tag>
-              <Tag>Radix UI</Tag>
+              <Tag>Base UI</Tag>
               <Tag>Node.js</Tag>
               <Tag>PostgreSQL</Tag>
               <Tag>GraphQL</Tag>
@@ -130,7 +130,7 @@ export default function ClusterPage() {
   <Tag>TypeScript</Tag>
   <Tag>Tailwind CSS</Tag>
   <Tag>Next.js</Tag>
-  <Tag>Radix UI</Tag>
+  <Tag>Base UI</Tag>
 </Cluster>`}
           >
             <Cluster gap="sm" wrap={false} className="w-full overflow-x-auto">
@@ -138,7 +138,7 @@ export default function ClusterPage() {
               <Tag>TypeScript</Tag>
               <Tag>Tailwind CSS</Tag>
               <Tag>Next.js</Tag>
-              <Tag>Radix UI</Tag>
+              <Tag>Base UI</Tag>
             </Cluster>
           </ComponentPreview>
         </Stack>
@@ -309,11 +309,11 @@ export default function ClusterPage() {
                   "Whether items wrap to the next line when they exceed the container width.",
               },
               {
-                name: "asChild",
-                type: "boolean",
-                default: "false",
+                name: "render",
+                type: "ReactElement",
+                default: "—",
                 description:
-                  "When true, merges props onto the child element via Radix Slot instead of rendering a wrapping div.",
+                  "Render a different element instead of a wrapping div, merging this component's props onto it (e.g. render={<section />}).",
               },
             ]}
           />

@@ -1,50 +1,45 @@
+"use client"
+
 import * as React from "react"
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
 
-/** Semantic h1 heading with bold, tight tracking at 4xl size. */
-function H1({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h1
-      data-slot="h1"
-      className={cn("text-4xl font-bold tracking-tight", className)}
-      {...props}
-    />
-  )
+function createHeading(
+  tag: "h1" | "h2" | "h3" | "h4",
+  headingClassName: string
+) {
+  return function Heading({
+    className,
+    render,
+    ...props
+  }: useRender.ComponentProps<typeof tag>) {
+    return useRender({
+      defaultTagName: tag,
+      render,
+      props: mergeProps<typeof tag>(
+        {
+          className: cn(headingClassName, className),
+          "data-slot": tag,
+        } as useRender.ElementProps<typeof tag>,
+        props
+      ),
+    })
+  }
 }
+
+/** Semantic h1 heading with bold, tight tracking at 4xl size. */
+const H1 = createHeading("h1", "text-4xl font-bold tracking-tight")
 
 /** Semantic h2 heading with semibold weight at 3xl size. */
-function H2({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h2
-      data-slot="h2"
-      className={cn("text-3xl font-semibold tracking-tight", className)}
-      {...props}
-    />
-  )
-}
+const H2 = createHeading("h2", "text-3xl font-semibold tracking-tight")
 
 /** Semantic h3 heading with semibold weight at 2xl size. */
-function H3({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h3
-      data-slot="h3"
-      className={cn("text-2xl font-semibold", className)}
-      {...props}
-    />
-  )
-}
+const H3 = createHeading("h3", "text-2xl font-semibold")
 
 /** Semantic h4 heading with semibold weight at xl size. */
-function H4({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h4
-      data-slot="h4"
-      className={cn("text-xl font-semibold", className)}
-      {...props}
-    />
-  )
-}
+const H4 = createHeading("h4", "text-xl font-semibold")
 
 /** Standard paragraph element with base size and relaxed leading. */
 function P({

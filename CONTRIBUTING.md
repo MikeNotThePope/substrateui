@@ -29,7 +29,7 @@ answer three questions:
   `substrateui/organisms`).
 - **Naming.** Components use `PascalCase`. Files use `kebab-case`. The
   export name and file name should obviously relate.
-- **Use Radix primitives where applicable.** They give you focus
+- **Use Base UI primitives where applicable.** They give you focus
   management, ARIA, and keyboard navigation for free. Don&apos;t
   reimplement overlays, menus, or tabs from scratch.
 - **Use existing tokens, not raw palette values.** Reach for
@@ -109,8 +109,8 @@ Write tests from the user&apos;s perspective:
 
 - Testing implementation details (internal state, private methods,
   exact class-name lists beyond a characteristic marker).
-- Testing behaviors that Radix already tests (focus trap, portal
-  rendering, etc.) — only test the behavior **you** add on top of Radix.
+- Testing behaviors that Base UI already tests (focus trap, portal
+  rendering, etc.) — only test the behavior **you** add on top of Base UI.
 - Snapshot tests for markup — visual regression in
   `tests/visual/` handles that.
 

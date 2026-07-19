@@ -110,8 +110,8 @@ export default function ComboboxPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Combobox follows the ARIA combobox pattern via Radix Popover +
-            CMDK Command. It supports full keyboard navigation: arrow keys
+            Combobox follows the ARIA combobox pattern via Base UI&apos;s
+            Combobox. It supports full keyboard navigation: arrow keys
             to move through options, Enter to select, Escape to close the
             listbox.
           </P>

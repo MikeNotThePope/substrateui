@@ -26,6 +26,8 @@ const eslintConfig = defineConfig([
     "build/**",
     "dist/**",
     "next-env.d.ts",
+    // Built Storybook (gitignored, but present locally after `bun run build`).
+    "public/storybook/**",
   ]),
 ]);
 

@@ -34,9 +34,7 @@ export default function DrawerPage() {
         <H3>Bottom Drawer</H3>
         <ComponentPreview
           code={`<Drawer>
-  <DrawerTrigger asChild>
-    <Button variant="outline">Open Drawer</Button>
-  </DrawerTrigger>
+  <DrawerTrigger render={<Button variant="outline" />}>Open Drawer</DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Move to folder</DrawerTitle>
@@ -53,9 +51,7 @@ export default function DrawerPage() {
 </Drawer>`}
         >
           <Drawer>
-            <DrawerTrigger asChild>
-              <Button variant="outline">Open Drawer</Button>
-            </DrawerTrigger>
+            <DrawerTrigger render={<Button variant="outline" />}>Open Drawer</DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
                 <DrawerTitle>Move to folder</DrawerTitle>
@@ -84,14 +80,14 @@ export default function DrawerPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Built on Vaul, which implements focus trapping and restoration
-            and closes on Escape. The backdrop is marked{" "}
+            Built on Base UI&apos;s Drawer, which implements focus trapping
+            and restoration and closes on Escape. The backdrop is marked{" "}
             <Code>aria-hidden</Code>.
           </P>
           <P>
             Every drawer must have a DrawerTitle. If the title should be
             visually hidden, wrap it in <Code>VisuallyHidden</Code> from
-            Radix so the accessible name is still announced.
+            Base UI so the accessible name is still announced.
           </P>
         </Stack>
       </Stack>

@@ -42,7 +42,7 @@ export default function SelectPage() {
   return (
     <DocPage
       title="Select"
-      description="A dropdown select built on Radix primitives. Provides a styled trigger, animated content panel, and accessible keyboard navigation."
+      description="A dropdown select built on Base UI primitives. Provides a styled trigger, animated content panel, and accessible keyboard navigation."
     >
       {/* Basic */}
       <Stack gap="md">

@@ -10,7 +10,7 @@ describe('Checkbox', () => {
     const onCheckedChange = vi.fn()
     render(<Checkbox onCheckedChange={onCheckedChange} aria-label="Accept" />)
     await user.click(screen.getByRole('checkbox'))
-    expect(onCheckedChange).toHaveBeenCalledWith(true)
+    expect(onCheckedChange).toHaveBeenCalledWith(true, expect.anything())
   })
 
   it('toggles when Space is pressed while focused', async () => {
@@ -20,7 +20,7 @@ describe('Checkbox', () => {
     const cb = screen.getByRole('checkbox')
     cb.focus()
     await user.keyboard(' ')
-    expect(onCheckedChange).toHaveBeenCalledWith(true)
+    expect(onCheckedChange).toHaveBeenCalledWith(true, expect.anything())
   })
 
   it('does not toggle when disabled', async () => {
@@ -71,7 +71,7 @@ describe('Checkbox', () => {
       />
     )
     await user.click(screen.getByRole('checkbox'))
-    expect(onCheckedChange).toHaveBeenCalledWith(false)
+    expect(onCheckedChange).toHaveBeenCalledWith(false, expect.anything())
   })
 
   it('associates with label via htmlFor/id', () => {
@@ -81,7 +81,7 @@ describe('Checkbox', () => {
         <Checkbox id="terms" />
       </>
     )
-    expect(screen.getByLabelText('Terms')).toBeInTheDocument()
+    expect(screen.getByRole('checkbox', { name: 'Terms' })).toBeInTheDocument()
   })
 
   it('forwards ref to the underlying element', () => {
@@ -98,7 +98,7 @@ describe('Checkbox', () => {
   })
 
   it('supports indeterminate (mixed) state', () => {
-    render(<Checkbox checked="indeterminate" aria-label="Accept" />)
+    render(<Checkbox indeterminate aria-label="Accept" />)
     expect(screen.getByRole('checkbox')).toHaveAttribute(
       'aria-checked',
       'mixed'

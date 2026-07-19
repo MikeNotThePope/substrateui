@@ -1,12 +1,16 @@
 "use client"
 
 import * as React from "react"
-import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-/** Root accordion container that manages expand/collapse state for its items. */
+/**
+ * Root accordion container that manages expand/collapse state for its items.
+ * One item is open at a time by default; set `multiple` to allow several.
+ * `value`/`defaultValue` are arrays of open item values.
+ */
 const Accordion = AccordionPrimitive.Root
 
 /** A single collapsible section within an Accordion. */
@@ -38,7 +42,7 @@ function AccordionTrigger({
         ref={ref}
         data-slot="accordion-trigger"
         className={cn(
-          "flex flex-1 items-center justify-between py-4 font-medium transition-all active:translate-y-[1.5px] transition-transform hover:underline [&[data-state=open]>svg]:rotate-180",
+          "flex flex-1 items-center justify-between py-4 font-medium transition-all active:translate-y-[1.5px] transition-transform hover:underline [&[data-panel-open]>svg]:rotate-180",
           className
         )}
         {...props}
@@ -56,16 +60,16 @@ function AccordionContent({
   children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof AccordionPrimitive.Content>) {
+}: React.ComponentPropsWithRef<typeof AccordionPrimitive.Panel>) {
   return (
-    <AccordionPrimitive.Content
+    <AccordionPrimitive.Panel
       ref={ref}
       data-slot="accordion-content"
-      className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+      className="h-[var(--accordion-panel-height)] overflow-hidden text-sm transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0"
       {...props}
     >
       <div className={cn("pb-4 pt-0", className)}>{children}</div>
-    </AccordionPrimitive.Content>
+    </AccordionPrimitive.Panel>
   )
 }
 

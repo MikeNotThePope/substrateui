@@ -40,9 +40,7 @@ export default function SheetPage() {
         <H3>Right Sheet</H3>
         <ComponentPreview
           code={`<Sheet>
-  <SheetTrigger asChild>
-    <Button variant="outline">Open Sheet</Button>
-  </SheetTrigger>
+  <SheetTrigger render={<Button variant="outline" />}>Open Sheet</SheetTrigger>
   <SheetContent>
     <SheetHeader>
       <SheetTitle>Settings</SheetTitle>
@@ -57,9 +55,7 @@ export default function SheetPage() {
 </Sheet>`}
         >
           <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline">Open Sheet</Button>
-            </SheetTrigger>
+            <SheetTrigger render={<Button variant="outline" />}>Open Sheet</SheetTrigger>
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>Settings</SheetTitle>
@@ -86,14 +82,14 @@ export default function SheetPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Built on Radix primitives, so focus is trapped inside the sheet
+            Built on Base UI primitives, so focus is trapped inside the sheet
             while open and restored to the trigger on close. Escape closes
             the sheet. The backdrop is marked <Code>aria-hidden</Code>.
           </P>
           <P>
             Every sheet must have a SheetTitle. If the title should be
             visually hidden, wrap it in <Code>VisuallyHidden</Code> from
-            Radix.
+            Base UI.
           </P>
         </Stack>
       </Stack>

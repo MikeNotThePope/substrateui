@@ -1,12 +1,38 @@
 "use client"
 
 import * as React from "react"
-import { type DialogProps } from "@radix-ui/react-dialog"
-import { Command as CommandPrimitive } from "cmdk"
+import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete"
 import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
+
+/** Extracts the plain text of a React node, used to derive item values. */
+function textContent(node: React.ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node)
+  if (Array.isArray(node)) return node.map(textContent).join("")
+  if (React.isValidElement(node)) {
+    return textContent((node.props as { children?: React.ReactNode }).children)
+  }
+  return ""
+}
+
+function matches(text: string, query: string) {
+  return text.toLowerCase().includes(query.trim().toLowerCase())
+}
+
+interface CommandContextValue {
+  query: string
+  matchCount: number
+  register: (id: string, text: string) => () => void
+}
+
+/**
+ * Items register their filter text here so the palette can filter statically
+ * declared children (Base UI's Autocomplete only filters items passed via the
+ * `items` prop) and CommandEmpty can know when nothing matches.
+ */
+const CommandContext = React.createContext<CommandContextValue | null>(null)
 
 /**
  * Command palette container with built-in search and keyboard navigation.
@@ -16,28 +42,72 @@ import { Dialog, DialogContent } from "@/components/ui/dialog"
  */
 function Command({
   className,
+  children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive>) {
+}: React.ComponentPropsWithRef<"div">) {
+  const [query, setQuery] = React.useState("")
+  const [entries, setEntries] = React.useState<ReadonlyMap<string, string>>(
+    () => new Map()
+  )
+
+  const register = React.useCallback((id: string, text: string) => {
+    setEntries((prev) => new Map(prev).set(id, text))
+    return () => {
+      setEntries((prev) => {
+        const next = new Map(prev)
+        next.delete(id)
+        return next
+      })
+    }
+  }, [])
+
+  const matchCount = query
+    ? [...entries.values()].filter((t) => matches(t, query)).length
+    : entries.size
+
+  const context = React.useMemo(
+    () => ({ query, matchCount, register }),
+    [query, matchCount, register]
+  )
+
   return (
-    <CommandPrimitive
-      ref={ref}
-      data-slot="command"
-      className={cn(
-        "flex h-full w-full flex-col overflow-hidden rounded-lg border-2 bg-popover text-popover-foreground shadow-hard",
-        className
-      )}
-      {...props}
-    />
+    <CommandContext.Provider value={context}>
+      <AutocompletePrimitive.Root
+        open
+        inline
+        mode="none"
+        autoHighlight="always"
+        value={query}
+        onValueChange={setQuery}
+      >
+        <div
+          ref={ref}
+          data-slot="command"
+          className={cn(
+            "flex h-full w-full flex-col overflow-hidden rounded-lg border-2 bg-popover text-popover-foreground shadow-hard",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </AutocompletePrimitive.Root>
+    </CommandContext.Provider>
   )
 }
 
 /** Command palette rendered inside a modal dialog. */
-function CommandDialog({ children, ...props }: DialogProps) {
+function CommandDialog({
+  children,
+  ...props
+}: Omit<React.ComponentProps<typeof Dialog>, "children"> & {
+  children?: React.ReactNode
+}) {
   return (
     <Dialog {...props}>
       <DialogContent className="overflow-hidden p-0 shadow-hard-lg">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+        <Command className="[&_[data-slot=command-group-heading]]:px-2 [&_[data-slot=command-group-heading]]:font-medium [&_[data-slot=command-group-heading]]:text-muted-foreground [&_[data-slot=command-group]]:px-2 [&_[data-slot=command-input-wrapper]_svg]:h-5 [&_[data-slot=command-input-wrapper]_svg]:w-5 [&_[data-slot=command-input]]:h-12 [&_[data-slot=command-item]]:px-2 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-item]_svg]:h-5 [&_[data-slot=command-item]_svg]:w-5">
           {children}
         </Command>
       </DialogContent>
@@ -50,11 +120,14 @@ function CommandInput({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive.Input>) {
+}: React.ComponentPropsWithRef<typeof AutocompletePrimitive.Input>) {
   return (
-    <div className="flex items-center border-b-2 px-3" cmdk-input-wrapper="">
+    <div
+      className="flex items-center border-b-2 px-3"
+      data-slot="command-input-wrapper"
+    >
       <Search className="me-2 h-4 w-4 shrink-0 opacity-50" />
-      <CommandPrimitive.Input
+      <AutocompletePrimitive.Input
         ref={ref}
         data-slot="command-input"
         className={cn(
@@ -72,9 +145,9 @@ function CommandList({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive.List>) {
+}: React.ComponentPropsWithRef<typeof AutocompletePrimitive.List>) {
   return (
-    <CommandPrimitive.List
+    <AutocompletePrimitive.List
       ref={ref}
       data-slot="command-list"
       className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
@@ -85,46 +158,63 @@ function CommandList({
 
 /** Placeholder shown when no command items match the search query. */
 function CommandEmpty({
-  ref,
+  className,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive.Empty>) {
+}: React.ComponentPropsWithRef<"div">) {
+  const context = React.useContext(CommandContext)
+  if (!context || !context.query || context.matchCount > 0) return null
   return (
-    <CommandPrimitive.Empty
-      ref={ref}
+    <div
       data-slot="command-empty"
-      className="py-6 text-center text-sm"
+      className={cn("py-6 text-center text-sm", className)}
       {...props}
     />
   )
 }
 
-/** Labeled group of related command items. */
+/** Labeled group of related command items. Hides itself when no items match. */
 function CommandGroup({
   className,
+  children,
+  heading,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive.Group>) {
+}: React.ComponentPropsWithRef<typeof AutocompletePrimitive.Group> & {
+  heading?: React.ReactNode
+}) {
   return (
-    <CommandPrimitive.Group
+    <AutocompletePrimitive.Group
       ref={ref}
       data-slot="command-group"
       className={cn(
-        "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
+        "overflow-hidden p-1 text-foreground [&:not(:has([data-slot=command-item]))]:hidden",
         className
       )}
       {...props}
-    />
+    >
+      {heading != null && (
+        <AutocompletePrimitive.GroupLabel
+          data-slot="command-group-heading"
+          className="px-2 py-1.5 text-xs font-medium text-muted-foreground"
+        >
+          {heading}
+        </AutocompletePrimitive.GroupLabel>
+      )}
+      {children}
+    </AutocompletePrimitive.Group>
   )
 }
 
-/** Horizontal divider between command groups or items. */
+/** Horizontal divider between command groups or items. Hidden while searching. */
 function CommandSeparator({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive.Separator>) {
+}: React.ComponentPropsWithRef<"div">) {
+  const context = React.useContext(CommandContext)
+  if (context?.query) return null
   return (
-    <CommandPrimitive.Separator
+    <div
       ref={ref}
       data-slot="command-separator"
       className={cn("-mx-1 h-px bg-border", className)}
@@ -136,19 +226,57 @@ function CommandSeparator({
 /** Selectable action item within a CommandList. */
 function CommandItem({
   className,
+  value,
+  keywords,
+  onSelect,
+  onClick,
+  children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof CommandPrimitive.Item>) {
+}: Omit<
+  React.ComponentPropsWithRef<typeof AutocompletePrimitive.Item>,
+  "value" | "onSelect"
+> & {
+  /** Value used for filtering and selection; derived from text content when omitted. */
+  value?: string
+  /** Extra strings matched by the filter in addition to the value. */
+  keywords?: string[]
+  /** Called when the item is activated by click or Enter. */
+  onSelect?: (value: string) => void
+}) {
+  const id = React.useId()
+  const context = React.useContext(CommandContext)
+  const derivedValue = value ?? textContent(children)
+  const filterText = keywords?.length
+    ? [derivedValue, ...keywords].join(" ")
+    : derivedValue
+
+  const register = context?.register
+  React.useEffect(() => {
+    return register?.(id, filterText)
+  }, [register, id, filterText])
+
+  if (context && context.query && !matches(filterText, context.query)) {
+    return null
+  }
+
   return (
-    <CommandPrimitive.Item
+    <AutocompletePrimitive.Item
       ref={ref}
       data-slot="command-item"
+      value={derivedValue}
+      onClick={(event) => {
+        onClick?.(event)
+        onSelect?.(derivedValue)
+      }}
       className={cn(
-        "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-surface-interactive data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-surface-interactive data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </AutocompletePrimitive.Item>
   )
 }
 

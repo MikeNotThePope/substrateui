@@ -146,11 +146,11 @@ export default function CenterPage() {
                   "Adds responsive horizontal padding (px-4 sm:px-6 lg:px-8) when true.",
               },
               {
-                name: "asChild",
-                type: "boolean",
-                default: "false",
+                name: "render",
+                type: "ReactElement",
+                default: "—",
                 description:
-                  "When true, merges props onto the child element via Radix Slot instead of rendering a wrapping div.",
+                  "Render a different element instead of a wrapping div, merging this component's props onto it (e.g. render={<section />}).",
               },
             ]}
           />

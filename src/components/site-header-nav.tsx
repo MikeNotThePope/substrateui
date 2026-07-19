@@ -125,15 +125,17 @@ export function SiteHeaderMobileNav({ labels: labelsProp }: { labels?: SiteHeade
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          aria-label={labels.openNavigationMenu}
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
+      <SheetTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            aria-label={labels.openNavigationMenu}
+          />
+        }
+      >
+        <Menu className="h-5 w-5" />
       </SheetTrigger>
       <SheetContent side="left" className="flex w-[280px] flex-col p-0">
         <SheetTitle className="px-6 pt-6 font-bold text-lg tracking-tight">

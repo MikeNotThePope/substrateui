@@ -34,8 +34,8 @@ export default function DialogPage() {
         <H3>Basic Dialog</H3>
         <ComponentPreview
           code={`<Dialog>
-  <DialogTrigger asChild>
-    <Button variant="outline">Edit Profile</Button>
+  <DialogTrigger render={<Button variant="outline" />}>
+    Edit Profile
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -55,8 +55,8 @@ export default function DialogPage() {
 </Dialog>`}
         >
           <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">Edit Profile</Button>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Edit Profile
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -88,7 +88,7 @@ export default function DialogPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Built on Radix primitives, so focus is trapped inside the
+            Built on Base UI primitives, so focus is trapped inside the
             overlay while open and restored to the trigger on close.
             Escape closes the overlay. The backdrop is marked{" "}
             <Code>aria-hidden</Code>.
@@ -96,7 +96,7 @@ export default function DialogPage() {
           <P>
             Every dialog must have a DialogTitle. If the title should be
             visually hidden, wrap it in <Code>VisuallyHidden</Code> from
-            Radix — the accessible name is required even when the design
+            Base UI — the accessible name is required even when the design
             doesn&apos;t show it.
           </P>
         </Stack>

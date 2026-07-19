@@ -18,8 +18,8 @@ const meta: Meta<typeof AlertDialog> = {
   component: AlertDialog,
   render: (args) => (
     <AlertDialog {...args}>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline">Delete account</Button>
+      <AlertDialogTrigger render={<Button variant="outline" />}>
+        Delete account
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

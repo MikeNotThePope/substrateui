@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -12,7 +11,7 @@ const labelVariants = cva(
 )
 
 /**
- * Accessible label component built on Radix UI Label primitive.
+ * Accessible label component rendered as a native `<label>` element.
  *
  * @example
  * <Label htmlFor="email">Email</Label>
@@ -21,10 +20,9 @@ function Label({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof LabelPrimitive.Root> &
-  VariantProps<typeof labelVariants>) {
+}: React.ComponentPropsWithRef<"label"> & VariantProps<typeof labelVariants>) {
   return (
-    <LabelPrimitive.Root
+    <label
       ref={ref}
       data-slot="label"
       className={cn(labelVariants(), className)}

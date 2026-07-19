@@ -12,8 +12,8 @@ const meta: Meta<typeof HoverCard> = {
   component: HoverCard,
   render: (args) => (
     <HoverCard {...args}>
-      <HoverCardTrigger asChild>
-        <Button variant="link">@substrate</Button>
+      <HoverCardTrigger render={<Button variant="link" />}>
+        @substrate
       </HoverCardTrigger>
       <HoverCardContent>
         <div className="space-y-1">

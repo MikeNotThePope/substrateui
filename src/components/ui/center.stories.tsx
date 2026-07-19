@@ -15,7 +15,6 @@ const meta: Meta<typeof Center> = {
       options: ["sm", "md", "lg", "xl", "2xl", "full"],
     },
     padding: { control: "boolean" },
-    asChild: { control: "boolean" },
   },
   render: (args) => (
     <Center {...args}>

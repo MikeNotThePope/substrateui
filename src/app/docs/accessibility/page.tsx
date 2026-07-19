@@ -32,7 +32,7 @@ export default function AccessibilityPage() {
       <Stack gap="md">
         <H3>What SubstrateUI Provides</H3>
         <P>
-          Interactive components are built on Radix UI primitives, which
+          Interactive components are built on Base UI primitives, which
           supply focus management, correct ARIA roles and states, keyboard
           navigation, and screen reader announcements out of the box. Overlays
           trap focus while open and restore it to the trigger on close.

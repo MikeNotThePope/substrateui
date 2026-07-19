@@ -37,7 +37,7 @@ export default function RadioGroupPage() {
   return (
     <DocPage
       title="Radio Group"
-      description="A set of mutually exclusive options. Built on Radix primitives with keyboard navigation and focus management."
+      description="A set of mutually exclusive options. Built on Base UI primitives with keyboard navigation and focus management."
     >
       {/* Basic */}
       <Stack gap="md">

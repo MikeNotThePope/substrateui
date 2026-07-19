@@ -33,10 +33,8 @@ export default function HoverCardPage() {
         <H3>Basic Hover Card</H3>
         <ComponentPreview
           code={`<HoverCard>
-  <HoverCardTrigger asChild>
-    <a href="#" className="underline text-sm font-medium">
-      @substrate_ui
-    </a>
+  <HoverCardTrigger render={<a href="#" className="underline text-sm font-medium" />}>
+    @substrate_ui
   </HoverCardTrigger>
   <HoverCardContent>
     <div className="space-y-2">
@@ -53,10 +51,8 @@ export default function HoverCardPage() {
 </HoverCard>`}
         >
           <HoverCard>
-            <HoverCardTrigger asChild>
-              <a href="#" className="underline text-sm font-medium">
-                @substrate_ui
-              </a>
+            <HoverCardTrigger render={<a href="#" className="underline text-sm font-medium" />}>
+              @substrate_ui
             </HoverCardTrigger>
             <HoverCardContent>
               <div className="space-y-2">

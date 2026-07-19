@@ -23,11 +23,11 @@ const buttonProps: PropDef[] = [
       "Controls the height, padding, and border-radius of the button.",
   },
   {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
+    name: "render",
+    type: "ReactElement",
+    default: "—",
     description:
-      "When true, the button merges its props onto its child element instead of rendering a <button> tag. Useful for rendering links styled as buttons.",
+      "Render a different element instead of a <button> tag, merging the button's props onto it. Useful for rendering links styled as buttons: render={<a href=… />}.",
   },
   {
     name: "className",

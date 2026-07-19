@@ -1,5 +1,7 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+"use client"
+
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
 
@@ -15,10 +17,9 @@ const maxMap = {
 type Max = keyof typeof maxMap
 
 /** Props accepted by the Center component. */
-interface CenterProps extends React.ComponentPropsWithRef<"div"> {
+interface CenterProps extends useRender.ComponentProps<"div"> {
   max?: Max
   padding?: boolean
-  asChild?: boolean
 }
 
 /**
@@ -29,30 +30,31 @@ interface CenterProps extends React.ComponentPropsWithRef<"div"> {
  *
  * @prop max - Max-width breakpoint: "sm" | "md" | "lg" | "xl" | "2xl" | "full"
  * @prop padding - Adds responsive horizontal padding when true
- * @prop asChild - Merge props onto child element instead of rendering a div
+ * @prop render - Render a different element instead of a div, e.g. render={<main />}
  */
 function Center({
   max = "2xl",
   padding = true,
-  asChild = false,
   className,
-  ref,
+  render,
   ...props
 }: CenterProps) {
-  const Comp = asChild ? Slot : "div"
-  return (
-    <Comp
-      data-slot="center"
-      className={cn(
-        "mx-auto w-full",
-        maxMap[max],
-        padding && "px-4 sm:px-6 lg:px-8",
-        className,
-      )}
-      ref={ref}
-      {...props}
-    />
-  )
+  return useRender({
+    defaultTagName: "div",
+    render,
+    props: mergeProps<"div">(
+      {
+        "data-slot": "center",
+        className: cn(
+          "mx-auto w-full",
+          maxMap[max],
+          padding && "px-4 sm:px-6 lg:px-8",
+          className,
+        ),
+      } as useRender.ElementProps<"div">,
+      props
+    ),
+  })
 }
 
 export { Center, type CenterProps }

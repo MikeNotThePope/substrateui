@@ -1,6 +1,6 @@
 # SubstrateUI
 
-A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v4, Radix UI primitives.
+A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v4, Base UI primitives.
 
 [![npm version](https://img.shields.io/npm/v/substrateui.svg)](https://www.npmjs.com/package/substrateui)
 [![license](https://img.shields.io/npm/l/substrateui.svg)](https://github.com/substrateui/substrateui/blob/main/LICENSE)
@@ -130,7 +130,7 @@ Override tokens after importing the stylesheet:
 
 ## Accessibility
 
-SubstrateUI meets WCAG AA contrast requirements (verified by automated audit) and is built on Radix UI primitives for robust keyboard and screen reader support.
+SubstrateUI meets WCAG AA contrast requirements (verified by automated audit) and is built on Base UI primitives for robust keyboard and screen reader support.
 
 - [Accessibility documentation](https://substrateui.dev/docs/accessibility)
 - [Contrast audit report](./audit-contrast-report.md)

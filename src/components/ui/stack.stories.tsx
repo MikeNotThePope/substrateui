@@ -24,7 +24,6 @@ const meta: Meta<typeof Stack> = {
       control: "select",
       options: ["start", "center", "end", "stretch"],
     },
-    asChild: { control: "boolean" },
   },
   render: (args) => (
     <Stack {...args}>

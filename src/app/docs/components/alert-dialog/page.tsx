@@ -34,8 +34,8 @@ export default function AlertDialogPage() {
         <H3>Confirmation Dialog</H3>
         <ComponentPreview
           code={`<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="destructive">Delete Account</Button>
+  <AlertDialogTrigger render={<Button variant="destructive" />}>
+    Delete Account
   </AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
@@ -53,8 +53,8 @@ export default function AlertDialogPage() {
 </AlertDialog>`}
         >
           <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete Account</Button>
+            <AlertDialogTrigger render={<Button variant="destructive" />}>
+              Delete Account
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -83,7 +83,7 @@ export default function AlertDialogPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Built on Radix primitives, so focus is trapped inside the alert
+            Built on Base UI primitives, so focus is trapped inside the alert
             dialog while open and restored to the trigger on close. Unlike
             regular Dialog, Escape does not dismiss — the user must choose
             Cancel or Action explicitly, which is appropriate for

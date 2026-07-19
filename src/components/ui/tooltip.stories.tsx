@@ -14,8 +14,8 @@ const meta: Meta<typeof Tooltip> = {
   render: (args) => (
     <TooltipProvider>
       <Tooltip {...args}>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Hover me</Button>
+        <TooltipTrigger render={<Button variant="outline" />}>
+          Hover me
         </TooltipTrigger>
         <TooltipContent>Helpful hint</TooltipContent>
       </Tooltip>

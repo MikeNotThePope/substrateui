@@ -6,7 +6,7 @@ afterEach(() => {
   cleanup()
 })
 
-// Radix UI + jsdom compatibility shims
+// Base UI + jsdom compatibility shims
 if (typeof window !== 'undefined') {
   // ResizeObserver isn't in jsdom
   global.ResizeObserver = class ResizeObserver {
@@ -15,7 +15,7 @@ if (typeof window !== 'undefined') {
     disconnect() {}
   }
 
-  // matchMedia isn't in jsdom — Radix and next-themes both need it
+  // matchMedia isn't in jsdom — Base UI and next-themes both need it
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: (query: string) => ({
@@ -30,7 +30,7 @@ if (typeof window !== 'undefined') {
     }),
   })
 
-  // PointerEvent isn't fully in jsdom — Radix uses it heavily
+  // PointerEvent isn't fully in jsdom — Base UI uses it heavily
   if (!window.PointerEvent) {
     class PointerEvent extends MouseEvent {
       constructor(type: string, params: PointerEventInit = {}) {
@@ -41,13 +41,13 @@ if (typeof window !== 'undefined') {
     window.PointerEvent = PointerEvent as any
   }
 
-  // hasPointerCapture / releasePointerCapture / setPointerCapture — Radix calls these
+  // hasPointerCapture / releasePointerCapture / setPointerCapture — Base UI calls these
   if (!HTMLElement.prototype.hasPointerCapture) {
     HTMLElement.prototype.hasPointerCapture = () => false
     HTMLElement.prototype.releasePointerCapture = () => {}
     HTMLElement.prototype.setPointerCapture = () => {}
   }
 
-  // scrollIntoView — Radix Select uses this
+  // scrollIntoView — Base UI Select uses this
   HTMLElement.prototype.scrollIntoView = () => {}
 }

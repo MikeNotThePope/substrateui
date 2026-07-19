@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
+import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
+import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group"
 import { type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -16,8 +17,11 @@ const ToggleGroupContext = React.createContext<
 
 /** A group of toggle buttons that share variant and size context.
  *
+ * One item is pressed at a time by default; set `multiple` to allow
+ * several. `value`/`defaultValue` are arrays of pressed item values.
+ *
  * @example
- * <ToggleGroup type="single" variant="outline"><ToggleGroupItem value="a">A</ToggleGroupItem></ToggleGroup>
+ * <ToggleGroup variant="outline"><ToggleGroupItem value="a">A</ToggleGroupItem></ToggleGroup>
  *
  * @prop variant - Visual style applied to all child items.
  * @prop size - Size applied to all child items.
@@ -29,10 +33,10 @@ function ToggleGroup({
   children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof ToggleGroupPrimitive.Root> &
+}: React.ComponentPropsWithRef<typeof ToggleGroupPrimitive> &
   VariantProps<typeof toggleVariants>) {
   return (
-    <ToggleGroupPrimitive.Root
+    <ToggleGroupPrimitive
       ref={ref}
       data-slot="toggle-group"
       className={cn("flex items-center justify-center gap-1", className)}
@@ -41,24 +45,23 @@ function ToggleGroup({
       <ToggleGroupContext.Provider value={{ variant, size }}>
         {children}
       </ToggleGroupContext.Provider>
-    </ToggleGroupPrimitive.Root>
+    </ToggleGroupPrimitive>
   )
 }
 
 /** Individual toggle item within a ToggleGroup. */
 function ToggleGroupItem({
   className,
-  children,
   variant,
   size,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof ToggleGroupPrimitive.Item> &
+}: React.ComponentPropsWithRef<typeof TogglePrimitive> &
   VariantProps<typeof toggleVariants>) {
   const context = React.useContext(ToggleGroupContext)
 
   return (
-    <ToggleGroupPrimitive.Item
+    <TogglePrimitive
       ref={ref}
       data-slot="toggle-group-item"
       className={cn(
@@ -69,9 +72,7 @@ function ToggleGroupItem({
         className
       )}
       {...props}
-    >
-      {children}
-    </ToggleGroupPrimitive.Item>
+    />
   )
 }
 

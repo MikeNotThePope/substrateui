@@ -158,11 +158,11 @@ function DataTableViewOptions<TData>({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ms-auto h-8 border-2">
-          <Settings2 className="me-2 size-4" />
-          <span className="font-mono text-xs">{labels.view}</span>
-        </Button>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" size="sm" className="ms-auto h-8 border-2" />}
+      >
+        <Settings2 className="me-2 size-4" />
+        <span className="font-mono text-xs">{labels.view}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">
         <DropdownMenuLabel className="font-mono text-xs">
@@ -292,9 +292,10 @@ function createSelectColumn<TData>(
     id: "select",
     header: ({ table }) => (
       <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={
+          table.getIsSomePageRowsSelected() &&
+          !table.getIsAllPageRowsSelected()
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label={resolved.selectAll}

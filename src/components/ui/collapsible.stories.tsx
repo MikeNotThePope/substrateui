@@ -14,13 +14,13 @@ const meta: Meta<typeof Collapsible> = {
     <Collapsible {...args} className="w-64 space-y-2">
       <div className="flex items-center justify-between">
         <span className="text-sm font-medium">@peduarte starred 3 repositories</span>
-        <CollapsibleTrigger asChild>
-          <Button variant="outline" size="sm">Toggle</Button>
+        <CollapsibleTrigger render={<Button variant="outline" size="sm" />}>
+          Toggle
         </CollapsibleTrigger>
       </div>
-      <div className="rounded border-2 px-3 py-2 font-mono text-xs">@radix-ui/primitives</div>
+      <div className="rounded border-2 px-3 py-2 font-mono text-xs">@base-ui/react</div>
       <CollapsibleContent className="space-y-2">
-        <div className="rounded border-2 px-3 py-2 font-mono text-xs">@radix-ui/colors</div>
+        <div className="rounded border-2 px-3 py-2 font-mono text-xs">@mui/material</div>
         <div className="rounded border-2 px-3 py-2 font-mono text-xs">@stitches/react</div>
       </CollapsibleContent>
     </Collapsible>

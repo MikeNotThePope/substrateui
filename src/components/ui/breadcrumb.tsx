@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -77,25 +78,23 @@ function BreadcrumbItem({
   )
 }
 
-/** Clickable link within a breadcrumb item; supports asChild for custom link components. */
+/** Clickable link within a breadcrumb item; supports `render` for custom link components. */
 function BreadcrumbLink({
-  asChild,
   className,
-  ref,
+  render,
   ...props
-}: React.ComponentPropsWithRef<"a"> & {
-  asChild?: boolean
-}) {
-  const Comp = asChild ? Slot : "a"
-
-  return (
-    <Comp
-      ref={ref}
-      data-slot="breadcrumb-link"
-      className={cn("text-muted-foreground transition-colors hover:text-foreground", className)}
-      {...props}
-    />
-  )
+}: useRender.ComponentProps<"a">) {
+  return useRender({
+    defaultTagName: "a",
+    render,
+    props: mergeProps<"a">(
+      {
+        "data-slot": "breadcrumb-link",
+        className: cn("text-muted-foreground transition-colors hover:text-foreground", className),
+      } as useRender.ElementProps<"a">,
+      props
+    ),
+  })
 }
 
 /** Non-interactive label representing the current page in the breadcrumb trail. */

@@ -20,7 +20,7 @@ describe('Switch', () => {
       />
     )
     await user.click(screen.getByRole('switch'))
-    expect(onCheckedChange).toHaveBeenCalledWith(true)
+    expect(onCheckedChange).toHaveBeenCalledWith(true, expect.anything())
   })
 
   it('toggles on Space keypress when focused', async () => {
@@ -35,7 +35,7 @@ describe('Switch', () => {
     const sw = screen.getByRole('switch')
     sw.focus()
     await user.keyboard(' ')
-    expect(onCheckedChange).toHaveBeenCalledWith(true)
+    expect(onCheckedChange).toHaveBeenCalledWith(true, expect.anything())
   })
 
   it('reflects controlled checked state via aria-checked', () => {

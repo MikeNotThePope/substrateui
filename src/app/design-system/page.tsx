@@ -263,7 +263,7 @@ export default function DesignSystemPage() {
               <PropsTable name="Button" props={[
                 { prop: "variant", type: '"default" | "destructive" | "outline" | "secondary" | "amber" | "ghost" | "link"', default: '"default"', description: "Visual style of the button" },
                 { prop: "size", type: '"default" | "sm" | "lg" | "icon"', default: '"default"', description: "Button size" },
-                { prop: "asChild", type: "boolean", default: "false", description: "Merge props onto child element instead of rendering a <button>" },
+                { prop: "render", type: "ReactElement", description: "Render a different element instead of a <button>, e.g. render={<a href=\"…\" />}" },
               ]} />
 
               <PropsTable name="Badge" props={[
@@ -317,7 +317,7 @@ export default function DesignSystemPage() {
               <PropsTable name="Stack" props={[
                 { prop: "gap", type: '"none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"', default: '"md"', description: "Vertical spacing between children" },
                 { prop: "align", type: '"start" | "center" | "end" | "stretch"', default: '"stretch"', description: "Cross-axis alignment" },
-                { prop: "asChild", type: "boolean", default: "false", description: "Merge props onto child element" },
+                { prop: "render", type: "ReactElement", description: "Render a different element instead of a <div>" },
               ]} />
 
               <PropsTable name="Cluster" props={[
@@ -830,11 +830,11 @@ export default function DesignSystemPage() {
             <DataTable columns={dataTableColumns} data={people} />
 
             <H3>Accordion</H3>
-            <Accordion type="single" collapsible>
+            <Accordion>
               <AccordionItem value="item-1">
                 <AccordionTrigger>What is SubstrateUI?</AccordionTrigger>
                 <AccordionContent>
-                  SubstrateUI is a design system built on Radix primitives with a bold, distinctive visual style.
+                  SubstrateUI is a design system built on Base UI primitives with a bold, distinctive visual style.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
@@ -846,7 +846,7 @@ export default function DesignSystemPage() {
               <AccordionItem value="item-3">
                 <AccordionTrigger>Is it accessible?</AccordionTrigger>
                 <AccordionContent>
-                  Yes. All interactive components are built on Radix UI primitives which provide full accessibility support.
+                  Yes. All interactive components are built on Base UI primitives which provide full accessibility support.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -960,8 +960,8 @@ export default function DesignSystemPage() {
             <Cluster gap="sm" wrap>
               {/* Dialog */}
               <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="outline">Open Dialog</Button>
+                <DialogTrigger render={<Button variant="outline" />}>
+                  Open Dialog
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
@@ -978,8 +978,8 @@ export default function DesignSystemPage() {
 
               {/* Alert Dialog */}
               <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="outline">Open Alert Dialog</Button>
+                <AlertDialogTrigger render={<Button variant="outline" />}>
+                  Open Alert Dialog
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
@@ -995,8 +995,8 @@ export default function DesignSystemPage() {
 
               {/* Sheet */}
               <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline">Open Sheet</Button>
+                <SheetTrigger render={<Button variant="outline" />}>
+                  Open Sheet
                 </SheetTrigger>
                 <SheetContent>
                   <SheetHeader>
@@ -1011,8 +1011,8 @@ export default function DesignSystemPage() {
 
               {/* Drawer */}
               <Drawer>
-                <DrawerTrigger asChild>
-                  <Button variant="outline">Open Drawer</Button>
+                <DrawerTrigger render={<Button variant="outline" />}>
+                  Open Drawer
                 </DrawerTrigger>
                 <DrawerContent>
                   <DrawerHeader>
@@ -1027,8 +1027,8 @@ export default function DesignSystemPage() {
 
               {/* Popover */}
               <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline">Open Popover</Button>
+                <PopoverTrigger render={<Button variant="outline" />}>
+                  Open Popover
                 </PopoverTrigger>
                 <PopoverContent>
                   <Stack gap="sm">
@@ -1041,8 +1041,8 @@ export default function DesignSystemPage() {
               {/* Tooltip */}
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button variant="outline">Hover for Tooltip</Button>
+                  <TooltipTrigger render={<Button variant="outline" />}>
+                    Hover for Tooltip
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>This is a helpful tooltip</p>
@@ -1052,13 +1052,13 @@ export default function DesignSystemPage() {
 
               {/* Hover Card */}
               <HoverCard>
-                <HoverCardTrigger asChild>
-                  <Button variant="link">Hover Card</Button>
+                <HoverCardTrigger render={<Button variant="link" />}>
+                  Hover Card
                 </HoverCardTrigger>
                 <HoverCardContent>
                   <Stack gap="sm">
                     <H4>@substrateui</H4>
-                    <P>A bold design system built with Radix and Tailwind.</P>
+                    <P>A bold design system built with Base UI and Tailwind.</P>
                     <Muted>Joined March 2024</Muted>
                   </Stack>
                 </HoverCardContent>
@@ -1066,10 +1066,8 @@ export default function DesignSystemPage() {
 
               {/* Dropdown Menu */}
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    <MoreHorizontal className="size-4" />
-                  </Button>
+                <DropdownMenuTrigger render={<Button variant="outline" />}>
+                  <MoreHorizontal className="size-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>

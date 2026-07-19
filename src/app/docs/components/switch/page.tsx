@@ -32,7 +32,7 @@ export default function SwitchPage() {
   return (
     <DocPage
       title="Switch"
-      description="A toggle switch for on/off states. Built on Radix primitives with smooth thumb animation and accessible labeling."
+      description="A toggle switch for on/off states. Built on Base UI primitives with smooth thumb animation and accessible labeling."
     >
       {/* Standalone */}
       <Stack gap="md">

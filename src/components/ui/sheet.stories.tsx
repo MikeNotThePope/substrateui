@@ -15,8 +15,8 @@ const meta: Meta<typeof Sheet> = {
   component: Sheet,
   render: (args) => (
     <Sheet {...args}>
-      <SheetTrigger asChild>
-        <Button variant="outline">Open Sheet</Button>
+      <SheetTrigger render={<Button variant="outline" />}>
+        Open Sheet
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
