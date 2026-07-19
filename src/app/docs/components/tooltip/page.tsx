@@ -42,9 +42,7 @@ export default function TooltipPage() {
         <ComponentPreview
           code={`<TooltipProvider>
   <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Hover me</Button>
-    </TooltipTrigger>
+    <TooltipTrigger render={<Button variant="outline" />}>Hover me</TooltipTrigger>
     <TooltipContent>
       <p>This is a tooltip</p>
     </TooltipContent>
@@ -53,9 +51,7 @@ export default function TooltipPage() {
         >
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline">Hover me</Button>
-              </TooltipTrigger>
+              <TooltipTrigger render={<Button variant="outline" />}>Hover me</TooltipTrigger>
               <TooltipContent>
                 <p>This is a tooltip</p>
               </TooltipContent>

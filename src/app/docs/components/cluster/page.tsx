@@ -309,11 +309,11 @@ export default function ClusterPage() {
                   "Whether items wrap to the next line when they exceed the container width.",
               },
               {
-                name: "asChild",
-                type: "boolean",
-                default: "false",
+                name: "render",
+                type: "ReactElement",
+                default: "—",
                 description:
-                  "When true, merges props onto the child element via Base UI Slot instead of rendering a wrapping div.",
+                  "Render a different element instead of a wrapping div, merging this component's props onto it (e.g. render={<section />}).",
               },
             ]}
           />

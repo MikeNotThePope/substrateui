@@ -46,9 +46,7 @@ export default function PopoverPage() {
         <H3>Basic Popover</H3>
         <ComponentPreview
           code={`<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">Open Popover</Button>
-  </PopoverTrigger>
+  <PopoverTrigger render={<Button variant="outline" />}>Open Popover</PopoverTrigger>
   <PopoverContent>
     <div className="space-y-2">
       <h4 className="font-medium text-sm">Dimensions</h4>
@@ -60,9 +58,7 @@ export default function PopoverPage() {
 </Popover>`}
         >
           <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline">Open Popover</Button>
-            </PopoverTrigger>
+            <PopoverTrigger render={<Button variant="outline" />}>Open Popover</PopoverTrigger>
             <PopoverContent>
               <div className="space-y-2">
                 <h4 className="font-medium text-sm">Dimensions</h4>

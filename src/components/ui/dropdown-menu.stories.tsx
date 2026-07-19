@@ -16,8 +16,8 @@ const meta: Meta<typeof DropdownMenu> = {
   component: DropdownMenu,
   render: (args) => (
     <DropdownMenu {...args}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open Menu</Button>
+      <DropdownMenuTrigger render={<Button variant="outline" />}>
+        Open Menu
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

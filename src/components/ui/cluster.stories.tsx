@@ -31,7 +31,6 @@ const meta: Meta<typeof Cluster> = {
       options: ["start", "center", "end", "between"],
     },
     wrap: { control: "boolean" },
-    asChild: { control: "boolean" },
   },
   render: (args) => (
     <Cluster {...args}>

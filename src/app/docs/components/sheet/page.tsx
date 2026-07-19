@@ -40,9 +40,7 @@ export default function SheetPage() {
         <H3>Right Sheet</H3>
         <ComponentPreview
           code={`<Sheet>
-  <SheetTrigger asChild>
-    <Button variant="outline">Open Sheet</Button>
-  </SheetTrigger>
+  <SheetTrigger render={<Button variant="outline" />}>Open Sheet</SheetTrigger>
   <SheetContent>
     <SheetHeader>
       <SheetTitle>Settings</SheetTitle>
@@ -57,9 +55,7 @@ export default function SheetPage() {
 </Sheet>`}
         >
           <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline">Open Sheet</Button>
-            </SheetTrigger>
+            <SheetTrigger render={<Button variant="outline" />}>Open Sheet</SheetTrigger>
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>Settings</SheetTitle>

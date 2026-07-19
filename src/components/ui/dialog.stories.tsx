@@ -16,8 +16,8 @@ const meta: Meta<typeof Dialog> = {
   component: Dialog,
   render: (args) => (
     <Dialog {...args}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Open Dialog</Button>
+      <DialogTrigger render={<Button variant="outline" />}>
+        Open Dialog
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

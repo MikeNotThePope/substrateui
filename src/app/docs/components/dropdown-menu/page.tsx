@@ -35,10 +35,8 @@ export default function DropdownMenuPage() {
         <H3>Grouped Menu</H3>
         <ComponentPreview
           code={`<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="ghost" size="icon" aria-label="Open menu">
-      <MoreHorizontal className="h-4 w-4" />
-    </Button>
+  <DropdownMenuTrigger render={<Button variant="ghost" size="icon" aria-label="Open menu" />}>
+    <MoreHorizontal className="h-4 w-4" />
   </DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -52,10 +50,8 @@ export default function DropdownMenuPage() {
 </DropdownMenu>`}
         >
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open menu">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
+            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" aria-label="Open menu" />}>
+              <MoreHorizontal className="h-4 w-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>

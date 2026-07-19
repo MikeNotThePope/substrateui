@@ -79,7 +79,7 @@ export default function TypographyTokensPage() {
             <PropsTable props={[
               { name: "className", type: "string", description: "Additional CSS classes" },
               { name: "children", type: "React.ReactNode", required: true, description: "Text content" },
-              { name: "asChild", type: "boolean", default: "false", description: "Render as child element (H1-H4 only)" },
+              { name: "render", type: "ReactElement", default: "—", description: "Render a different element (H1-H4 only)" },
             ]} />
           </div>
         </section>

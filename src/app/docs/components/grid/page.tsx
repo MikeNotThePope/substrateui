@@ -174,11 +174,11 @@ export default function GridPage() {
                   "Minimum child width for auto-fill/auto-fit columns (e.g. \"200px\").",
               },
               {
-                name: "asChild",
-                type: "boolean",
-                default: "false",
+                name: "render",
+                type: "ReactElement",
+                default: "—",
                 description:
-                  "When true, merges props onto the child element via Base UI Slot instead of rendering a wrapping div.",
+                  "Render a different element instead of a wrapping div, merging this component's props onto it (e.g. render={<section />}).",
               },
             ]}
           />

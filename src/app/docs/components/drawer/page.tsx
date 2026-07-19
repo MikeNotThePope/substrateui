@@ -34,9 +34,7 @@ export default function DrawerPage() {
         <H3>Bottom Drawer</H3>
         <ComponentPreview
           code={`<Drawer>
-  <DrawerTrigger asChild>
-    <Button variant="outline">Open Drawer</Button>
-  </DrawerTrigger>
+  <DrawerTrigger render={<Button variant="outline" />}>Open Drawer</DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Move to folder</DrawerTitle>
@@ -53,9 +51,7 @@ export default function DrawerPage() {
 </Drawer>`}
         >
           <Drawer>
-            <DrawerTrigger asChild>
-              <Button variant="outline">Open Drawer</Button>
-            </DrawerTrigger>
+            <DrawerTrigger render={<Button variant="outline" />}>Open Drawer</DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
                 <DrawerTitle>Move to folder</DrawerTitle>

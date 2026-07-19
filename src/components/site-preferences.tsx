@@ -39,14 +39,16 @@ export function SitePreferences({ labels: labelsProp }: { labels?: SitePreferenc
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label={labels.displayPreferences}
-        >
-          <Sliders className="h-4 w-4" />
-        </Button>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={labels.displayPreferences}
+          />
+        }
+      >
+        <Sliders className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-64">
         <DropdownMenuLabel>{labels.theme}</DropdownMenuLabel>

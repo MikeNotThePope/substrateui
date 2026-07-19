@@ -216,11 +216,11 @@ export default function StackPage() {
                   "Cross-axis alignment of children within the stack.",
               },
               {
-                name: "asChild",
-                type: "boolean",
-                default: "false",
+                name: "render",
+                type: "ReactElement",
+                default: "—",
                 description:
-                  "When true, merges props onto the child element via Base UI Slot instead of rendering a wrapping div.",
+                  "Render a different element instead of a wrapping div, merging this component's props onto it (e.g. render={<section />}).",
               },
             ]}
           />

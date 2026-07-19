@@ -8,8 +8,8 @@ const meta: Meta<typeof Popover> = {
   component: Popover,
   render: (args) => (
     <Popover {...args}>
-      <PopoverTrigger asChild>
-        <Button variant="outline">Open Popover</Button>
+      <PopoverTrigger render={<Button variant="outline" />}>
+        Open Popover
       </PopoverTrigger>
       <PopoverContent>
         <div className="space-y-2">

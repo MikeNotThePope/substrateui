@@ -16,8 +16,8 @@ const meta: Meta<typeof Drawer> = {
   component: Drawer,
   render: (args) => (
     <Drawer {...args}>
-      <DrawerTrigger asChild>
-        <Button variant="outline">Open Drawer</Button>
+      <DrawerTrigger render={<Button variant="outline" />}>
+        Open Drawer
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>

@@ -26,11 +26,11 @@ const navTabsLinkProps: PropDef[] = [
     description: "Optional trailing count or status pill.",
   },
   {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
+    name: "render",
+    type: "ReactElement",
+    default: "—",
     description:
-      "Merge props onto the child element (e.g. a Next.js <Link>) instead of rendering an <a>, so the tab keeps soft navigation.",
+      "Render a different element instead of an <a> (e.g. render={<Link href=… />}), so the tab keeps soft navigation.",
   },
 ]
 
@@ -69,22 +69,14 @@ export default function NavTabsPage() {
         <H3>With a Next.js Link</H3>
         <ComponentPreview
           code={`<NavTabs>
-  <NavTabsLink asChild active>
-    <Link href="?tab=applications">Applications</Link>
-  </NavTabsLink>
-  <NavTabsLink asChild>
-    <Link href="?tab=faq">FAQ</Link>
-  </NavTabsLink>
+  <NavTabsLink active render={<Link href="?tab=applications" />}>Applications</NavTabsLink>
+  <NavTabsLink render={<Link href="?tab=faq" />}>FAQ</NavTabsLink>
 </NavTabs>`}
         >
           <div className="w-full">
             <NavTabs>
-              <NavTabsLink asChild active>
-                <a href="#applications">Applications</a>
-              </NavTabsLink>
-              <NavTabsLink asChild>
-                <a href="#faq">FAQ</a>
-              </NavTabsLink>
+              <NavTabsLink active render={<a href="#applications" />}>Applications</NavTabsLink>
+              <NavTabsLink render={<a href="#faq" />}>FAQ</NavTabsLink>
             </NavTabs>
           </div>
         </ComponentPreview>

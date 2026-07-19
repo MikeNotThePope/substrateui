@@ -34,8 +34,8 @@ export default function DialogPage() {
         <H3>Basic Dialog</H3>
         <ComponentPreview
           code={`<Dialog>
-  <DialogTrigger asChild>
-    <Button variant="outline">Edit Profile</Button>
+  <DialogTrigger render={<Button variant="outline" />}>
+    Edit Profile
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -55,8 +55,8 @@ export default function DialogPage() {
 </Dialog>`}
         >
           <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">Edit Profile</Button>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Edit Profile
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>

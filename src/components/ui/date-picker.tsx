@@ -102,23 +102,25 @@ function DatePicker({
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          disabled={disabled}
-          data-slot="date-picker"
-          className={cn(
-            "border-2 rounded-md h-10 px-3 w-full justify-start gap-2 font-normal",
-            className
-          )}
-        >
-          <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
-          {date ? (
-            <span>{labels.formatDate(date)}</span>
-          ) : (
-            <span className="text-muted-foreground">{labels.placeholder}</span>
-          )}
-        </Button>
+      <PopoverTrigger
+        render={
+          <Button
+            variant="outline"
+            disabled={disabled}
+            data-slot="date-picker"
+            className={cn(
+              "border-2 rounded-md h-10 px-3 w-full justify-start gap-2 font-normal",
+              className
+            )}
+          />
+        }
+      >
+        <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
+        {date ? (
+          <span>{labels.formatDate(date)}</span>
+        ) : (
+          <span className="text-muted-foreground">{labels.placeholder}</span>
+        )}
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
@@ -170,26 +172,28 @@ function DateRangePicker({
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          disabled={disabled}
-          data-slot="date-range-picker"
-          className={cn(
-            "border-2 rounded-md h-10 px-3 w-full justify-start gap-2 font-normal",
-            className
-          )}
-        >
-          <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
-          {dateRange?.from ? (
-            <span>
-              {labels.formatDateShort(dateRange.from)}
-              {dateRange.to && ` – ${labels.formatDateShort(dateRange.to)}`}
-            </span>
-          ) : (
-            <span className="text-muted-foreground">{labels.rangePlaceholder}</span>
-          )}
-        </Button>
+      <PopoverTrigger
+        render={
+          <Button
+            variant="outline"
+            disabled={disabled}
+            data-slot="date-range-picker"
+            className={cn(
+              "border-2 rounded-md h-10 px-3 w-full justify-start gap-2 font-normal",
+              className
+            )}
+          />
+        }
+      >
+        <CalendarIcon className="size-4 text-muted-foreground" aria-hidden="true" />
+        {dateRange?.from ? (
+          <span>
+            {labels.formatDateShort(dateRange.from)}
+            {dateRange.to && ` – ${labels.formatDateShort(dateRange.to)}`}
+          </span>
+        ) : (
+          <span className="text-muted-foreground">{labels.rangePlaceholder}</span>
+        )}
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar

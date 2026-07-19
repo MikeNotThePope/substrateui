@@ -29,7 +29,6 @@ const meta: Meta<typeof Grid> = {
       options: ["none", "xs", "sm", "md", "lg", "xl", "2xl"],
     },
     minChildWidth: { control: "text" },
-    asChild: { control: "boolean" },
   },
   render: (args) => <Grid {...args}>{cells}</Grid>,
 }

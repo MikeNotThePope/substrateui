@@ -34,8 +34,8 @@ export default function AlertDialogPage() {
         <H3>Confirmation Dialog</H3>
         <ComponentPreview
           code={`<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="destructive">Delete Account</Button>
+  <AlertDialogTrigger render={<Button variant="destructive" />}>
+    Delete Account
   </AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
@@ -53,8 +53,8 @@ export default function AlertDialogPage() {
 </AlertDialog>`}
         >
           <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete Account</Button>
+            <AlertDialogTrigger render={<Button variant="destructive" />}>
+              Delete Account
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
