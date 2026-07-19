@@ -47,21 +47,24 @@ function Command({
   ...props
 }: React.ComponentPropsWithRef<"div">) {
   const [query, setQuery] = React.useState("")
-  const registry = React.useRef(new Map<string, string>())
-  const [, bump] = React.useReducer((x: number) => x + 1, 0)
+  const [entries, setEntries] = React.useState<ReadonlyMap<string, string>>(
+    () => new Map()
+  )
 
   const register = React.useCallback((id: string, text: string) => {
-    registry.current.set(id, text)
-    bump()
+    setEntries((prev) => new Map(prev).set(id, text))
     return () => {
-      registry.current.delete(id)
-      bump()
+      setEntries((prev) => {
+        const next = new Map(prev)
+        next.delete(id)
+        return next
+      })
     }
   }, [])
 
   const matchCount = query
-    ? [...registry.current.values()].filter((t) => matches(t, query)).length
-    : registry.current.size
+    ? [...entries.values()].filter((t) => matches(t, query)).length
+    : entries.size
 
   const context = React.useMemo(
     () => ({ query, matchCount, register }),
@@ -98,7 +101,9 @@ function Command({
 function CommandDialog({
   children,
   ...props
-}: React.ComponentProps<typeof Dialog>) {
+}: Omit<React.ComponentProps<typeof Dialog>, "children"> & {
+  children?: React.ReactNode
+}) {
   return (
     <Dialog {...props}>
       <DialogContent className="overflow-hidden p-0 shadow-hard-lg">
@@ -230,7 +235,7 @@ function CommandItem({
   ...props
 }: Omit<
   React.ComponentPropsWithRef<typeof AutocompletePrimitive.Item>,
-  "value"
+  "value" | "onSelect"
 > & {
   /** Value used for filtering and selection; derived from text content when omitted. */
   value?: string
@@ -260,7 +265,7 @@ function CommandItem({
       ref={ref}
       data-slot="command-item"
       value={derivedValue}
-      onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+      onClick={(event) => {
         onClick?.(event)
         onSelect?.(derivedValue)
       }}

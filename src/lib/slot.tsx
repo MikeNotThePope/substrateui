@@ -93,6 +93,7 @@ function Slot({ children, ref, ...slotProps }: SlotProps) {
 }
 
 function omitChildren<T extends object>(props: T): Omit<T, "children" | "ref"> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children: _children, ref: _ref, ...rest } = props as T & {
     children?: React.ReactNode
     ref?: React.Ref<unknown>

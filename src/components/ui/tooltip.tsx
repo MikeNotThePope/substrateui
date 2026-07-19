@@ -6,17 +6,8 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
-/** Global tooltip configuration provider (delay, skip-delay, etc.). */
-function TooltipProvider({
-  delay,
-  delayDuration,
-  ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Provider> & {
-  /** @deprecated Use `delay` instead. */
-  delayDuration?: number
-}) {
-  return <TooltipPrimitive.Provider delay={delay ?? delayDuration} {...props} />
-}
+/** Global tooltip configuration provider (delay, close-delay, etc.). */
+const TooltipProvider = TooltipPrimitive.Provider
 
 /** Root tooltip wrapper that manages open state. */
 const Tooltip = TooltipPrimitive.Root

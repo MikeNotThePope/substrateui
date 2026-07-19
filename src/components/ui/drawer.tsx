@@ -17,10 +17,11 @@ import { cn } from "@/lib/utils"
  * </Drawer>
  */
 function Drawer({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shouldScaleBackground: _shouldScaleBackground,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root> & {
-  /** @deprecated Vaul-era prop; background scaling is no longer applied. */
+  /** Vaul-era prop, accepted for compatibility; background scaling is no longer applied. */
   shouldScaleBackground?: boolean
 }) {
   return <DrawerPrimitive.Root swipeDirection="down" {...props} />
