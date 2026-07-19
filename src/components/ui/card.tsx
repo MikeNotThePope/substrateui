@@ -21,9 +21,9 @@ function Card({
       ref={ref}
       data-slot="card"
       className={cn(
-        "rounded-lg border-2 bg-card text-card-foreground shadow-sm",
+        "rounded-lg border-2 bg-card text-card-foreground shadow-hard",
         interactive &&
-          "cursor-pointer hover:border-ring hover:shadow-md transition-all active:translate-y-[1.5px]",
+          "cursor-pointer transition-[transform,box-shadow,border-color] motion-reduce:transition-none hover:border-ring hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-[3px] active:translate-y-[3px] active:shadow-none motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 motion-reduce:active:translate-x-0 motion-reduce:active:translate-y-0",
         className
       )}
       {...props}

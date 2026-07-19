@@ -21,13 +21,16 @@ export function ComponentPreview({ children, code, title }: ComponentPreviewProp
   }
 
   return (
-    <Stack gap="none">
+    <Stack gap="none" className="shadow-hard rounded-lg">
       {title && (
-        <div className="px-4 py-2 border-2 border-b-0 rounded-t-lg bg-muted font-mono text-sm text-muted-foreground">
-          {title}
+        <div className="flex items-center gap-1.5 px-4 py-2.5 border-2 border-b-0 rounded-t-lg bg-muted font-mono text-sm text-muted-foreground">
+          <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-primary" />
+          <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-secondary-fill" />
+          <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-background" />
+          <span className="ms-2">{title}</span>
         </div>
       )}
-      <div className={`border-2 ${title ? "rounded-b-lg border-t-0" : "rounded-t-lg"} p-6 bg-background flex flex-wrap items-start gap-4`}>
+      <div className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4`}>
         {children}
       </div>
       <div className="relative border-2 border-t-0 rounded-b-lg bg-warm-950 dark:bg-warm-900 overflow-hidden">
