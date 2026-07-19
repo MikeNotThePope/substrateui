@@ -32,9 +32,9 @@ export default meta
 type Story = StoryObj<typeof Accordion>
 
 export const Default: Story = {
-  args: { type: "single", collapsible: true, defaultValue: "item-1" },
+  args: { defaultValue: ["item-1"] },
 }
 
 export const Multiple: Story = {
-  args: { type: "multiple", defaultValue: ["item-1", "item-2"] },
+  args: { multiple: true, defaultValue: ["item-1", "item-2"] },
 }

@@ -25,9 +25,9 @@ function renderAccordion(props: React.ComponentProps<typeof Accordion>) {
 }
 
 describe('Accordion', () => {
-  it('expands and collapses an item in single collapsible mode', async () => {
+  it('expands and collapses an item', async () => {
     const user = userEvent.setup()
-    renderAccordion({ type: 'single', collapsible: true })
+    renderAccordion({})
 
     const trigger = screen.getByRole('button', { name: 'First section' })
     expect(trigger).toHaveAttribute('aria-expanded', 'false')
@@ -41,60 +41,35 @@ describe('Accordion', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('emits string values and closes the previous item in single mode', async () => {
+  it('closes the previous item by default and emits array values', async () => {
     const user = userEvent.setup()
     const onValueChange = vi.fn()
-    renderAccordion({
-      type: 'single',
-      collapsible: true,
-      defaultValue: 'item-1',
-      onValueChange,
-    })
+    renderAccordion({ defaultValue: ['item-1'], onValueChange })
 
     expect(screen.getByText('First content')).toBeVisible()
 
     await user.click(screen.getByRole('button', { name: 'Second section' }))
-    expect(onValueChange).toHaveBeenCalledWith('item-2')
+    expect(onValueChange).toHaveBeenCalledWith(['item-2'], expect.anything())
     expect(screen.getByText('Second content')).toBeVisible()
     expect(screen.queryByText('First content')).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Second section' }))
-    expect(onValueChange).toHaveBeenLastCalledWith('')
+    expect(onValueChange).toHaveBeenLastCalledWith([], expect.anything())
   })
 
-  it('allows multiple items open in multiple mode and emits array values', async () => {
+  it('allows several items open with the multiple prop', async () => {
     const user = userEvent.setup()
     const onValueChange = vi.fn()
-    renderAccordion({
-      type: 'multiple',
-      defaultValue: ['item-1'],
-      onValueChange,
-    })
+    renderAccordion({ multiple: true, defaultValue: ['item-1'], onValueChange })
 
     expect(screen.getByText('First content')).toBeVisible()
 
     await user.click(screen.getByRole('button', { name: 'Second section' }))
-    expect(onValueChange).toHaveBeenCalledWith(['item-1', 'item-2'])
+    expect(onValueChange).toHaveBeenCalledWith(
+      ['item-1', 'item-2'],
+      expect.anything()
+    )
     expect(screen.getByText('First content')).toBeVisible()
     expect(screen.getByText('Second content')).toBeVisible()
-  })
-
-  it('keeps the open item open when collapsible is false', async () => {
-    const user = userEvent.setup()
-    const onValueChange = vi.fn()
-    renderAccordion({
-      type: 'single',
-      collapsible: false,
-      defaultValue: 'item-1',
-      onValueChange,
-    })
-
-    const trigger = screen.getByRole('button', { name: 'First section' })
-    expect(trigger).toHaveAttribute('aria-expanded', 'true')
-
-    await user.click(trigger)
-    expect(trigger).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByText('First content')).toBeVisible()
-    expect(onValueChange).not.toHaveBeenCalled()
   })
 })

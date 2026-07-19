@@ -3,27 +3,13 @@
 import * as React from "react"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Root popover component that manages open/close state. */
 const Popover = PopoverPrimitive.Root
 
 /** Element that toggles the popover open and closed. */
-function PopoverTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof PopoverPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <PopoverPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const PopoverTrigger = PopoverPrimitive.Trigger
 
 /**
  * Animated floating content panel displayed when a popover is open.

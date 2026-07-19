@@ -14,13 +14,11 @@ import {
 import { Button } from '@/components/ui/button'
 
 describe('DropdownMenu', () => {
-  it('opens via an asChild trigger and shows items', async () => {
+  it('opens via a render-prop trigger and shows items', async () => {
     const user = userEvent.setup()
     render(
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button>Menu</Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger render={<Button />}>Menu</DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />

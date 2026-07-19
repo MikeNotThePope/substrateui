@@ -3,7 +3,6 @@
 import * as React from "react"
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
@@ -11,20 +10,7 @@ import { buttonVariants } from "@/components/ui/button"
 const AlertDialog = AlertDialogPrimitive.Root
 
 /** Button that opens the alert dialog. */
-function AlertDialogTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof AlertDialogPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <AlertDialogPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const AlertDialogTrigger = AlertDialogPrimitive.Trigger
 
 /** Portal that renders alert dialog content outside the DOM hierarchy. */
 const AlertDialogPortal = AlertDialogPrimitive.Portal
@@ -139,19 +125,14 @@ function AlertDialogDescription({
 /** Primary confirmation button that closes the dialog on click. */
 function AlertDialogAction({
   className,
-  asChild,
-  children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof AlertDialogPrimitive.Close> & {
-  asChild?: boolean
-}) {
+}: React.ComponentPropsWithRef<typeof AlertDialogPrimitive.Close>) {
   return (
     <AlertDialogPrimitive.Close
       ref={ref}
       data-slot="alert-dialog-action"
       className={cn(buttonVariants(), className)}
-      {...asChildRender(asChild, children, { button: true })}
       {...props}
     />
   )
@@ -160,13 +141,9 @@ function AlertDialogAction({
 /** Secondary cancel button that dismisses the dialog. */
 function AlertDialogCancel({
   className,
-  asChild,
-  children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof AlertDialogPrimitive.Close> & {
-  asChild?: boolean
-}) {
+}: React.ComponentPropsWithRef<typeof AlertDialogPrimitive.Close>) {
   return (
     <AlertDialogPrimitive.Close
       ref={ref}
@@ -176,7 +153,6 @@ function AlertDialogCancel({
         "mt-2 sm:mt-0",
         className
       )}
-      {...asChildRender(asChild, children, { button: true })}
       {...props}
     />
   )

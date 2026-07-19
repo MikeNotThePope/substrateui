@@ -2,25 +2,38 @@
 "@mikenotthepope/substrateui": major
 ---
 
-Migrate the entire component library from Radix UI to Base UI (`@base-ui/react` 1.6.0). All 26 `@radix-ui/*` packages plus `vaul` and `cmdk` are replaced by a single actively-maintained dependency built by the Radix/Floating UI team at MUI. Component names, exports, and markup-level APIs (including `asChild`) are preserved; upgrade notes below cover the breaking details.
+Migrate the entire component library from Radix UI to Base UI (`@base-ui/react` 1.6.0). All 26 `@radix-ui/*` packages plus `vaul` and `cmdk` are replaced by a single actively-maintained dependency built by the Radix/Floating UI team at MUI. Component names, exports, and part structure are unchanged; the library now exposes Base UI's APIs directly.
 
-**What stays the same**
+**Composition: `asChild` → `render`**
 
-- Every exported component name, part structure, and `data-slot` attribute.
-- The `asChild` prop keeps working everywhere it did (now translated internally to Base UI's `render` prop; the library ships its own Radix-compatible `Slot`).
-- Visual appearance and design tokens.
+The Radix `asChild` prop is gone everywhere. Composition uses Base UI's `render` prop, including on the library's own components (`Button`, `Stack`, `Grid`, `Cluster`, `Center`, `BreadcrumbLink`, `NavTabsLink`, sidebar parts):
 
-**Breaking changes**
+```tsx
+// before
+<DialogTrigger asChild><Button variant="outline">Open</Button></DialogTrigger>
+<Button asChild><Link href="/docs">Docs</Link></Button>
 
-- **Change callbacks gain a second argument.** `onCheckedChange`, `onValueChange`, `onOpenChange`, and `onPressedChange` now receive `(value, eventDetails)` per Base UI. Single-argument handlers keep working; TypeScript signatures widen.
-- **`Select`**: cleared value is `null` instead of `""`; `onValueChange` is typed `(value: string | null, eventDetails)`. `position="item-aligned"` now uses Base UI's `alignItemWithTrigger` behavior.
-- **`Checkbox`**: `checked="indeterminate"` is replaced by the separate `indeterminate` prop (`aria-checked="mixed"` unchanged).
-- **State attributes for styling**: `data-[state=open|closed|checked|on|active]` selectors on library components are now Base UI attributes (`data-[open]`, `data-[closed]`, `data-[checked]`, `data-[pressed]`, `data-[active]`, `data-[popup-open]`). Custom `className` overrides keyed to Radix attributes must be updated, as must `--radix-*` CSS variables (`--radix-*-trigger-width` → `--anchor-width`, `--radix-*-transform-origin` → `--transform-origin`, `--radix-*-available-height` → `--available-height`).
-- **`Switch`/`RadioGroup`/`Slider` roots render spans** with `data-disabled`/`aria-disabled` instead of native `disabled` buttons.
-- **`Separator`** no longer accepts `decorative` (renders `role="separator"`).
-- **`TooltipProvider`**: `delayDuration` → `delay` (Base UI prop names).
-- **`HoverCard`** is backed by Base UI PreviewCard; `openDelay` default is now 600 ms (was 700 ms).
-- **`Drawer`** is Base UI's Drawer instead of vaul; `shouldScaleBackground` is accepted but no longer applies background scaling.
-- **`Command`** is rebuilt on Base UI Autocomplete with the same composable API (`heading`, derived item values, `onSelect`); cmdk-specific props (`shouldFilter`, custom `filter`) are gone, and filtering is case-insensitive substring matching.
-- **Radix-only content props** (`onPointerDownOutside`, `onOpenAutoFocus`, etc.) no longer exist; use Base UI's equivalents on the corresponding parts.
-- **`useDirection`** takes no argument and always returns the ambient direction.
+// after
+<DialogTrigger render={<Button variant="outline" />}>Open</DialogTrigger>
+<Button render={<Link href="/docs" />}>Docs</Button>
+```
+
+**Value APIs follow Base UI**
+
+- `Accordion` and `ToggleGroup` drop `type="single" | "multiple"` and `collapsible`; values are always arrays, one item is open/pressed at a time by default, and the `multiple` prop allows several.
+- `Select`: cleared value is `null` instead of `""`; `SelectContent` drops `position` (popover anchoring is the default; `alignItemWithTrigger` opts into the macOS-style overlay).
+- `Checkbox`: `checked="indeterminate"` is replaced by the `indeterminate` prop.
+- Change callbacks (`onCheckedChange`, `onValueChange`, `onOpenChange`, `onPressedChange`) receive `(value, eventDetails)`.
+- `Combobox` drops the deprecated `placeholder`/`searchPlaceholder`/`emptyMessage` props in favor of `labels`.
+- `TooltipProvider` uses Base UI's `delay`/`closeDelay` (formerly `delayDuration`); `HoverCard` delays follow Base UI PreviewCard's API.
+- `Drawer` (now Base UI instead of vaul) drops `shouldScaleBackground`; `Separator` drops `decorative`; `useDirection` takes no argument.
+
+**Styling hooks follow Base UI**
+
+State selectors on library components are now Base UI data attributes: `data-[open]`, `data-[closed]`, `data-[checked]`, `data-[pressed]`, `data-[active]`, `data-[popup-open]`, `data-[highlighted]`, `data-[starting-style]`/`data-[ending-style]` — replacing Radix's `data-[state=…]`. CSS variables change accordingly: `--radix-*-trigger-width` → `--anchor-width`, `--radix-*-transform-origin` → `--transform-origin`, `--radix-*-available-height` → `--available-height`, `--radix-accordion-content-height` → `--accordion-panel-height`.
+
+**Behavioral notes**
+
+- `Switch`/`RadioGroup`/`Slider` roots render spans with `data-disabled`/`aria-disabled` instead of native disabled buttons.
+- `Command` is rebuilt on Base UI Autocomplete with the same composable API (`heading`, derived item values, `onSelect`); cmdk's `shouldFilter`/custom `filter` are gone and filtering is case-insensitive substring matching.
+- Radix-only content props (`onPointerDownOutside`, `onOpenAutoFocus`, …) no longer exist; use Base UI's equivalents on the corresponding parts.

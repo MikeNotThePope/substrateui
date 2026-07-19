@@ -3,7 +3,6 @@
 import * as React from "react"
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Root container for a tabbed interface built on Base UI Tabs.
@@ -35,13 +34,9 @@ function TabsList({
 /** Individual tab button that activates its associated content panel. */
 function TabsTrigger({
   className,
-  asChild,
-  children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof TabsPrimitive.Tab> & {
-  asChild?: boolean
-}) {
+}: React.ComponentPropsWithRef<typeof TabsPrimitive.Tab>) {
   return (
     <TabsPrimitive.Tab
       ref={ref}
@@ -50,7 +45,6 @@ function TabsTrigger({
         "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all active:translate-y-[1.5px] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-background data-[active]:text-foreground data-[active]:shadow-sm",
         className
       )}
-      {...asChildRender(asChild, children, { button: true })}
       {...props}
     />
   )

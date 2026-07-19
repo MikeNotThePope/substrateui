@@ -18,12 +18,12 @@ describe('Popover', () => {
     expect(await screen.findByText('Popover body')).toBeInTheDocument()
   })
 
-  it('supports asChild triggers, merging onto the child element', async () => {
+  it('supports render-prop triggers, merging onto the rendered element', async () => {
     const user = userEvent.setup()
     render(
       <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline">Custom trigger</Button>
+        <PopoverTrigger render={<Button variant="outline" />}>
+          Custom trigger
         </PopoverTrigger>
         <PopoverContent>Body</PopoverContent>
       </Popover>

@@ -13,7 +13,7 @@ type Story = StoryObj<typeof ToggleGroup>
 
 export const Default: Story = {
   render: () => (
-    <ToggleGroup type="single" defaultValue="bold">
+    <ToggleGroup defaultValue={["bold"]}>
       <ToggleGroupItem value="bold" aria-label="Bold">
         <Bold />
       </ToggleGroupItem>
@@ -29,7 +29,7 @@ export const Default: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <ToggleGroup type="multiple" variant="outline">
+    <ToggleGroup multiple variant="outline">
       <ToggleGroupItem value="bold" aria-label="Bold">
         <Bold />
       </ToggleGroupItem>

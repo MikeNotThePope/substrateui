@@ -4,27 +4,13 @@ import * as React from "react"
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Root component that manages context menu open/close state. */
 const ContextMenu = ContextMenuPrimitive.Root
 
 /** Area that opens the context menu on right-click. */
-function ContextMenuTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <ContextMenuPrimitive.Trigger
-      {...asChildRender(asChild, children)}
-      {...props}
-    />
-  )
-}
+const ContextMenuTrigger = ContextMenuPrimitive.Trigger
 
 /** Groups related context menu items together. */
 const ContextMenuGroup = ContextMenuPrimitive.Group

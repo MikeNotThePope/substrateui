@@ -3,7 +3,6 @@
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /**
@@ -16,51 +15,18 @@ import { cn } from "@/lib/utils"
  *   <DrawerContent><DrawerHeader><DrawerTitle>Title</DrawerTitle></DrawerHeader></DrawerContent>
  * </Drawer>
  */
-function Drawer({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  shouldScaleBackground: _shouldScaleBackground,
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root> & {
-  /** Vaul-era prop, accepted for compatibility; background scaling is no longer applied. */
-  shouldScaleBackground?: boolean
-}) {
+function Drawer(props: React.ComponentProps<typeof DrawerPrimitive.Root>) {
   return <DrawerPrimitive.Root swipeDirection="down" {...props} />
 }
 
 /** Button or element that opens the drawer when clicked. */
-function DrawerTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof DrawerPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <DrawerPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const DrawerTrigger = DrawerPrimitive.Trigger
 
 /** Portals drawer content into document body. */
 const DrawerPortal = DrawerPrimitive.Portal
 
 /** Button or element that closes the drawer when clicked. */
-function DrawerClose({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof DrawerPrimitive.Close> & {
-  asChild?: boolean
-}) {
-  return (
-    <DrawerPrimitive.Close
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const DrawerClose = DrawerPrimitive.Close
 
 /** Semi-transparent backdrop overlay behind the drawer. */
 function DrawerOverlay({

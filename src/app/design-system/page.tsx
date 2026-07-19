@@ -830,7 +830,7 @@ export default function DesignSystemPage() {
             <DataTable columns={dataTableColumns} data={people} />
 
             <H3>Accordion</H3>
-            <Accordion type="single" collapsible>
+            <Accordion>
               <AccordionItem value="item-1">
                 <AccordionTrigger>What is SubstrateUI?</AccordionTrigger>
                 <AccordionContent>

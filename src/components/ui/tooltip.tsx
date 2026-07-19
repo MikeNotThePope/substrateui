@@ -3,7 +3,6 @@
 import * as React from "react"
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Global tooltip configuration provider (delay, close-delay, etc.). */
@@ -13,20 +12,7 @@ const TooltipProvider = TooltipPrimitive.Provider
 const Tooltip = TooltipPrimitive.Root
 
 /** Element that triggers the tooltip on hover/focus. */
-function TooltipTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof TooltipPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <TooltipPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const TooltipTrigger = TooltipPrimitive.Trigger
 
 /** Animated popover content displayed when the tooltip is open.
  *

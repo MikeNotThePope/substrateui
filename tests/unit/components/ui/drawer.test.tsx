@@ -63,7 +63,7 @@ describe('Drawer', () => {
     const onOpenChange = vi.fn()
     render(<DrawerHarness initialOpen onOpenChange={onOpenChange} />)
     await screen.findByText('Title')
-    // vaul's drag handlers read a pointer gesture state that userEvent's
+    // the drawer's drag handlers read a pointer gesture state that userEvent's
     // synthesized pointer events don't populate in jsdom, so a plain click
     // event is used here instead.
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
@@ -103,5 +103,5 @@ describe('Drawer', () => {
   })
 
   // Drag-to-dismiss is covered by tests/visual/drawer.behavior.spec.ts —
-  // vaul's gesture physics need real pointer timestamps jsdom can't supply.
+  // the drawer's gesture physics need real pointer timestamps jsdom can't supply.
 })

@@ -4,7 +4,6 @@ import * as React from "react"
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Toggle button style variants (default, outline) and sizes. Use with cn(toggleVariants({...})) for non-Toggle elements. */
@@ -42,20 +41,15 @@ function Toggle({
   className,
   variant,
   size,
-  asChild,
-  children,
   ref,
   ...props
 }: React.ComponentPropsWithRef<typeof TogglePrimitive> &
-  VariantProps<typeof toggleVariants> & {
-    asChild?: boolean
-  }) {
+  VariantProps<typeof toggleVariants>) {
   return (
     <TogglePrimitive
       ref={ref}
       data-slot="toggle"
       className={cn(toggleVariants({ variant, size, className }))}
-      {...asChildRender(asChild, children, { button: true })}
       {...props}
     />
   )

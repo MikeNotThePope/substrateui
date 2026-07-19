@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-// Drag-to-dismiss is a vaul physics gesture driven by real pointer events
+// Drag-to-dismiss is a drawer physics gesture driven by real pointer events
 // (displacement, velocity, timing). jsdom can't reproduce that faithfully,
 // so the drawer's unit tests skip it — this spec covers it end-to-end.
 //
 // RTL projects are skipped: the vertical drag gesture is direction-independent,
-// and the Radix DirectionProvider + vaul portal interaction has timing issues
+// and the Base UI DirectionProvider + drawer portal interaction has timing issues
 // in headless RTL mode that prevent the drawer from opening reliably.
 test.describe('Drawer drag-to-dismiss', () => {
   test.beforeEach(async ({ page }, testInfo) => {
@@ -39,7 +39,7 @@ test.describe('Drawer drag-to-dismiss', () => {
     const startX = box.x + box.width / 2;
     const startY = box.y + 20; // ~mt-4 (16px) + middle of h-2 (4px)
 
-    // vaul computes drag velocity from timestamp deltas between pointer
+    // The drawer computes drag velocity from timestamp deltas between pointer
     // events, so we step the drag with real waits between moves — otherwise
     // Playwright fires the whole gesture on a single tick and velocity is 0.
     await page.mouse.move(startX, startY);
@@ -67,7 +67,7 @@ test.describe('Drawer drag-to-dismiss', () => {
     const startY = box.y + 20;
     await page.mouse.move(startX, startY);
     await page.mouse.down();
-    // Only ~30px of displacement — below vaul's dismiss threshold.
+    // Only ~30px of displacement — below the dismiss threshold.
     await page.mouse.move(startX, startY + 30, { steps: 6 });
     await page.mouse.up();
 

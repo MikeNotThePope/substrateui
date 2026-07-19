@@ -1,5 +1,7 @@
-import * as React from "react"
-import { Slot } from "@/lib/slot"
+"use client"
+
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
 
@@ -23,10 +25,9 @@ const alignMap = {
 type Gap = keyof typeof gapMap
 type Align = keyof typeof alignMap
 
-interface StackProps extends React.ComponentPropsWithRef<"div"> {
+interface StackProps extends useRender.ComponentProps<"div"> {
   gap?: Gap
   align?: Align
-  asChild?: boolean
 }
 
 /**
@@ -40,25 +41,26 @@ interface StackProps extends React.ComponentPropsWithRef<"div"> {
  *
  * @prop gap - The spacing between children (none, xs, sm, md, lg, xl, 2xl).
  * @prop align - Cross-axis alignment of children.
- * @prop asChild - Merge props onto the child element instead of rendering a div.
+ * @prop render - Render a different element instead of a div, e.g. render={<section />}.
  */
 function Stack({
   gap = "md",
   align = "stretch",
-  asChild = false,
   className,
-  ref,
+  render,
   ...props
 }: StackProps) {
-  const Comp = asChild ? Slot : "div"
-  return (
-    <Comp
-      data-slot="stack"
-      className={cn("flex flex-col", gapMap[gap], alignMap[align], className)}
-      ref={ref}
-      {...props}
-    />
-  )
+  return useRender({
+    defaultTagName: "div",
+    render,
+    props: mergeProps<"div">(
+      {
+        "data-slot": "stack",
+        className: cn("flex flex-col", gapMap[gap], alignMap[align], className),
+      },
+      props
+    ),
+  })
 }
 
 export { Stack, type StackProps }

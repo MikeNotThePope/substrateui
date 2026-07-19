@@ -136,33 +136,29 @@ function SelectScrollDownButton({
 }
 
 /**
- * The dropdown popover that contains selectable items.
- *
- * `position="popper"` (the default) anchors the popup below the trigger like
- * every other popover; `position="item-aligned"` overlays the selected item
- * on the trigger (macOS style, Base UI's native default).
+ * The dropdown popover that contains selectable items. Anchors below the
+ * trigger like every other popover; pass `alignItemWithTrigger` to use Base
+ * UI's macOS-style selected-item overlay instead.
  */
 function SelectContent({
   className,
   children,
-  position = "popper",
   side,
   sideOffset,
   align,
   alignOffset,
+  alignItemWithTrigger = false,
   ref,
   ...props
 }: React.ComponentPropsWithRef<typeof SelectPrimitive.Popup> &
   Pick<
     React.ComponentProps<typeof SelectPrimitive.Positioner>,
-    "align" | "alignOffset" | "side" | "sideOffset"
-  > & {
-    position?: "popper" | "item-aligned"
-  }) {
+    "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
+  >) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
-        alignItemWithTrigger={position === "item-aligned"}
+        alignItemWithTrigger={alignItemWithTrigger}
         side={side}
         sideOffset={sideOffset}
         align={align}
@@ -174,7 +170,7 @@ function SelectContent({
           data-slot="select-content"
           className={cn(
             "relative max-h-(--available-height) min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border-2 bg-popover text-popover-foreground shadow-hard data-[open]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[open]:fade-in-0 data-[closed]:zoom-out-95 data-[open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--transform-origin)",
-            position === "popper" &&
+            !alignItemWithTrigger &&
               "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
             className
           )}
@@ -184,7 +180,7 @@ function SelectContent({
           <SelectPrimitive.List
             className={cn(
               "p-1",
-              position === "popper" && "w-full min-w-(--anchor-width)"
+              !alignItemWithTrigger && "w-full min-w-(--anchor-width)"
             )}
           >
             {children}

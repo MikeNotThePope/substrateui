@@ -34,12 +34,6 @@ const defaultComboboxLabels: Required<ComboboxLabels> = {
 
 interface ComboboxBaseProps {
   options: ComboboxOption[]
-  /** @deprecated Use `labels.placeholder` instead. */
-  placeholder?: string
-  /** @deprecated Use `labels.searchPlaceholder` instead. */
-  searchPlaceholder?: string
-  /** @deprecated Use `labels.noResults` instead. */
-  emptyMessage?: string
   labels?: ComboboxLabels
   className?: string
   disabled?: boolean
@@ -72,26 +66,13 @@ type ComboboxProps = ComboboxSingleProps | ComboboxMultipleProps
  */
 function Combobox({
   options,
-  // These deprecated props are still accepted and forwarded into the labels
-  // API below for backward compatibility (see ComboboxBaseProps).
-  /* eslint-disable @typescript-eslint/no-deprecated */
-  placeholder,
-  searchPlaceholder,
-  emptyMessage,
-  /* eslint-enable @typescript-eslint/no-deprecated */
   labels: labelsProp,
   className,
   disabled,
   ...props
 }: ComboboxProps) {
   const ctx = useLabels()
-  const mergedProp: ComboboxLabels = {
-    ...labelsProp,
-    ...(placeholder != null && { placeholder }),
-    ...(searchPlaceholder != null && { searchPlaceholder }),
-    ...(emptyMessage != null && { noResults: emptyMessage }),
-  }
-  const labels = resolveLabels(defaultComboboxLabels, ctx.combobox, mergedProp)
+  const labels = resolveLabels(defaultComboboxLabels, ctx.combobox, labelsProp)
 
   const isMultiple = props.multiple === true
 

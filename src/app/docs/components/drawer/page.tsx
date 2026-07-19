@@ -84,8 +84,8 @@ export default function DrawerPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Built on Vaul, which implements focus trapping and restoration
-            and closes on Escape. The backdrop is marked{" "}
+            Built on Base UI&apos;s Drawer, which implements focus trapping
+            and restoration and closes on Escape. The backdrop is marked{" "}
             <Code>aria-hidden</Code>.
           </P>
           <P>

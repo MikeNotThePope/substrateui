@@ -1,5 +1,7 @@
-import * as React from "react"
-import { Slot } from "@/lib/slot"
+"use client"
+
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -42,10 +44,8 @@ const buttonVariants = cva(
 
 /** Props accepted by the Button component. */
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-}
+  extends useRender.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {}
 
 /**
  * Interactive button with multiple visual variants and sizes.
@@ -55,25 +55,20 @@ export interface ButtonProps
  *
  * @prop variant - Visual style: "default" | "destructive" | "outline" | "secondary" | "amber" | "ghost" | "link"
  * @prop size - Dimensions: "default" | "sm" | "lg" | "icon"
- * @prop asChild - Merge props onto child element instead of rendering a button
+ * @prop render - Render a different element instead of a button, e.g. render={<a href="…" />}
  */
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ref,
-  ...props
-}: ButtonProps & React.ComponentPropsWithRef<"button">) {
-  const Comp = asChild ? Slot : "button"
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
-      {...props}
-    />
-  )
+function Button({ className, variant, size, render, ...props }: ButtonProps) {
+  return useRender({
+    defaultTagName: "button",
+    render,
+    props: mergeProps<"button">(
+      {
+        className: cn(buttonVariants({ variant, size, className })),
+        "data-slot": "button",
+      },
+      props
+    ),
+  })
 }
 
 export { Button, buttonVariants }

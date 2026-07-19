@@ -4,7 +4,6 @@ import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { X } from "lucide-react"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
@@ -24,39 +23,13 @@ const defaultDialogLabels: Required<DialogLabels> = {
 const Dialog = DialogPrimitive.Root
 
 /** Button or element that opens the dialog when clicked. */
-function DialogTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof DialogPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <DialogPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const DialogTrigger = DialogPrimitive.Trigger
 
 /** Portals dialog content into document body. */
 const DialogPortal = DialogPrimitive.Portal
 
 /** Button or element that closes the dialog when clicked. */
-function DialogClose({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof DialogPrimitive.Close> & {
-  asChild?: boolean
-}) {
-  return (
-    <DialogPrimitive.Close
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const DialogClose = DialogPrimitive.Close
 
 /** Semi-transparent backdrop overlay behind the dialog. */
 function DialogOverlay({

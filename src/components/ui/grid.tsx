@@ -1,5 +1,8 @@
+"use client"
+
 import * as React from "react"
-import { Slot } from "@/lib/slot"
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
 
@@ -25,11 +28,10 @@ const colsMap = {
 type Gap = keyof typeof gapMap
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | "auto-fill" | "auto-fit"
 
-interface GridProps extends React.ComponentPropsWithRef<"div"> {
+interface GridProps extends useRender.ComponentProps<"div"> {
   columns?: Columns
   gap?: Gap
   minChildWidth?: string
-  asChild?: boolean
 }
 
 /**
@@ -42,20 +44,17 @@ interface GridProps extends React.ComponentPropsWithRef<"div"> {
  * @prop columns - Number of columns (1-6) or "auto-fill"/"auto-fit"
  * @prop gap - Gap size between grid items
  * @prop minChildWidth - Minimum child width for auto-fill/auto-fit columns
- * @prop asChild - Merge props onto child element via Slot
+ * @prop render - Render a different element instead of a div, e.g. render={<section />}
  */
 function Grid({
   columns = 1,
   gap = "md",
   minChildWidth,
-  asChild = false,
   className,
   style,
-  ref,
+  render,
   ...props
 }: GridProps) {
-  const Comp = asChild ? Slot : "div"
-
   const isAuto = columns === "auto-fill" || columns === "auto-fit"
   const colClass = isAuto
     ? columns === "auto-fill"
@@ -63,19 +62,21 @@ function Grid({
       : "grid-auto-fit"
     : colsMap[columns]
 
-  return (
-    <Comp
-      data-slot="grid"
-      className={cn("grid", colClass, gapMap[gap], className)}
-      style={
-        isAuto && minChildWidth
-          ? { "--grid-min": minChildWidth, ...style } as React.CSSProperties
-          : style
-      }
-      ref={ref}
-      {...props}
-    />
-  )
+  return useRender({
+    defaultTagName: "div",
+    render,
+    props: mergeProps<"div">(
+      {
+        "data-slot": "grid",
+        className: cn("grid", colClass, gapMap[gap], className),
+        style:
+          isAuto && minChildWidth
+            ? ({ "--grid-min": minChildWidth, ...style } as React.CSSProperties)
+            : style,
+      },
+      props
+    ),
+  })
 }
 
 export { Grid, type GridProps }

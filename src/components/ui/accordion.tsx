@@ -6,81 +6,12 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-type AccordionSingleProps = {
-  /** Only one item can be open at a time. */
-  type: "single"
-  /** When true, the open item can be collapsed by clicking its trigger again. */
-  collapsible?: boolean
-  value?: string
-  defaultValue?: string
-  onValueChange?: (value: string) => void
-}
-
-type AccordionMultipleProps = {
-  /** Multiple items can be open at the same time. */
-  type: "multiple"
-  collapsible?: never
-  value?: string[]
-  defaultValue?: string[]
-  onValueChange?: (value: string[]) => void
-}
-
-type AccordionProps = Omit<
-  React.ComponentPropsWithRef<typeof AccordionPrimitive.Root>,
-  "value" | "defaultValue" | "onValueChange" | "multiple"
-> &
-  (AccordionSingleProps | AccordionMultipleProps)
-
-function toArrayValue(
-  value: string | string[] | undefined
-): string[] | undefined {
-  if (value === undefined) return undefined
-  if (Array.isArray(value)) return value
-  return value === "" ? [] : [value]
-}
-
-/** Root accordion container that manages expand/collapse state for its items. */
-function Accordion({
-  type,
-  collapsible,
-  value,
-  defaultValue,
-  onValueChange,
-  ...props
-}: AccordionProps) {
-  const multiple = type === "multiple"
-
-  const handleValueChange:
-    | React.ComponentProps<typeof AccordionPrimitive.Root>["onValueChange"]
-    | undefined =
-    onValueChange === undefined && collapsible !== false
-      ? undefined
-      : (next, eventDetails) => {
-          if (!multiple && collapsible === false && next.length === 0) {
-            eventDetails.cancel()
-            return
-          }
-          if (multiple) {
-            ;(onValueChange as ((value: string[]) => void) | undefined)?.(
-              next as string[]
-            )
-          } else {
-            ;(onValueChange as ((value: string) => void) | undefined)?.(
-              (next[0] as string) ?? ""
-            )
-          }
-        }
-
-  return (
-    <AccordionPrimitive.Root
-      multiple={multiple}
-      value={toArrayValue(value)}
-      defaultValue={toArrayValue(defaultValue)}
-      onValueChange={handleValueChange}
-      {...props}
-    />
-  )
-}
+/**
+ * Root accordion container that manages expand/collapse state for its items.
+ * One item is open at a time by default; set `multiple` to allow several.
+ * `value`/`defaultValue` are arrays of open item values.
+ */
+const Accordion = AccordionPrimitive.Root
 
 /** A single collapsible section within an Accordion. */
 function AccordionItem({

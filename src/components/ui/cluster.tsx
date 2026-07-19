@@ -1,5 +1,7 @@
-import * as React from "react"
-import { Slot } from "@/lib/slot"
+"use client"
+
+import { useRender } from "@base-ui/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
 
@@ -32,12 +34,11 @@ type Align = keyof typeof alignMap
 type Justify = keyof typeof justifyMap
 
 /** Props accepted by the Cluster component. */
-interface ClusterProps extends React.ComponentPropsWithRef<"div"> {
+interface ClusterProps extends useRender.ComponentProps<"div"> {
   gap?: Gap
   align?: Align
   justify?: Justify
   wrap?: boolean
-  asChild?: boolean
 }
 
 /**
@@ -50,34 +51,35 @@ interface ClusterProps extends React.ComponentPropsWithRef<"div"> {
  * @prop align - Cross-axis alignment: "start" | "center" | "end" | "baseline"
  * @prop justify - Main-axis justification: "start" | "center" | "end" | "between"
  * @prop wrap - Enable flex-wrap (default true)
- * @prop asChild - Merge props onto child element instead of rendering a div
+ * @prop render - Render a different element instead of a div, e.g. render={<section />}
  */
 function Cluster({
   gap = "sm",
   align = "center",
   justify = "start",
   wrap = true,
-  asChild = false,
   className,
-  ref,
+  render,
   ...props
 }: ClusterProps) {
-  const Comp = asChild ? Slot : "div"
-  return (
-    <Comp
-      data-slot="cluster"
-      className={cn(
-        "flex",
-        gapMap[gap],
-        alignMap[align],
-        justifyMap[justify],
-        wrap && "flex-wrap",
-        className,
-      )}
-      ref={ref}
-      {...props}
-    />
-  )
+  return useRender({
+    defaultTagName: "div",
+    render,
+    props: mergeProps<"div">(
+      {
+        "data-slot": "cluster",
+        className: cn(
+          "flex",
+          gapMap[gap],
+          alignMap[align],
+          justifyMap[justify],
+          wrap && "flex-wrap",
+          className,
+        ),
+      },
+      props
+    ),
+  })
 }
 
 export { Cluster, type ClusterProps }

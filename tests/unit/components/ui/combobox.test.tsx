@@ -12,7 +12,7 @@ const OPTIONS = [
 
 describe('Combobox', () => {
   it('renders the trigger with placeholder when empty', () => {
-    render(<Combobox options={OPTIONS} placeholder="Pick a fruit" />)
+    render(<Combobox options={OPTIONS} labels={{ placeholder: "Pick a fruit" }} />)
     expect(screen.getByRole('combobox')).toHaveTextContent('Pick a fruit')
   })
 
@@ -27,7 +27,7 @@ describe('Combobox', () => {
 
   it('filters options as the user types', async () => {
     const user = userEvent.setup()
-    render(<Combobox options={OPTIONS} searchPlaceholder="Search" />)
+    render(<Combobox options={OPTIONS} labels={{ searchPlaceholder: "Search" }} />)
     await user.click(screen.getByRole('combobox'))
     const input = await screen.findByPlaceholderText('Search')
     await user.type(input, 'ban')
@@ -41,8 +41,7 @@ describe('Combobox', () => {
     render(
       <Combobox
         options={OPTIONS}
-        searchPlaceholder="Search"
-        emptyMessage="Nothing here"
+        labels={{ searchPlaceholder: "Search", noResults: "Nothing here" }}
       />
     )
     await user.click(screen.getByRole('combobox'))
@@ -68,7 +67,7 @@ describe('Combobox', () => {
 
   it('Escape closes the listbox', async () => {
     const user = userEvent.setup()
-    render(<Combobox options={OPTIONS} searchPlaceholder="Search" />)
+    render(<Combobox options={OPTIONS} labels={{ searchPlaceholder: "Search" }} />)
     await user.click(screen.getByRole('combobox'))
     await screen.findByPlaceholderText('Search')
     await user.keyboard('{Escape}')
@@ -77,7 +76,7 @@ describe('Combobox', () => {
 
   it('does not open when disabled', async () => {
     const user = userEvent.setup()
-    render(<Combobox options={OPTIONS} disabled searchPlaceholder="Search" />)
+    render(<Combobox options={OPTIONS} disabled labels={{ searchPlaceholder: "Search" }} />)
     const trigger = screen.getByRole('combobox')
     expect(trigger).toBeDisabled()
     await user.click(trigger).catch(() => {})

@@ -5,7 +5,6 @@ import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
@@ -25,36 +24,10 @@ const defaultSheetLabels: Required<SheetLabels> = {
 const Sheet = SheetPrimitive.Root
 
 /** A button or element that opens the sheet when clicked. */
-function SheetTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof SheetPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <SheetPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const SheetTrigger = SheetPrimitive.Trigger
 
 /** A button or element that closes the sheet when clicked. */
-function SheetClose({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof SheetPrimitive.Close> & {
-  asChild?: boolean
-}) {
-  return (
-    <SheetPrimitive.Close
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const SheetClose = SheetPrimitive.Close
 
 /** Portals sheet content into the document body. */
 const SheetPortal = SheetPrimitive.Portal

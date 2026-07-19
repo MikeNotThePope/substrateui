@@ -4,27 +4,13 @@ import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
-import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Root dropdown menu component that manages open/close state. */
 const DropdownMenu = MenuPrimitive.Root
 
 /** Button or element that toggles the dropdown menu. */
-function DropdownMenuTrigger({
-  asChild,
-  children,
-  ...props
-}: React.ComponentPropsWithRef<typeof MenuPrimitive.Trigger> & {
-  asChild?: boolean
-}) {
-  return (
-    <MenuPrimitive.Trigger
-      {...asChildRender(asChild, children, { button: true })}
-      {...props}
-    />
-  )
-}
+const DropdownMenuTrigger = MenuPrimitive.Trigger
 
 /** Groups related dropdown menu items together. */
 const DropdownMenuGroup = MenuPrimitive.Group
