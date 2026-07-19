@@ -38,7 +38,7 @@ export default function CheckboxPage() {
   return (
     <DocPage
       title="Checkbox"
-      description="A toggle control for boolean values. Built on Radix primitives with accessible keyboard support and animated check indicator."
+      description="A toggle control for boolean values. Built on Base UI primitives with accessible keyboard support and animated check indicator."
     >
       {/* Standalone */}
       <Stack gap="md">

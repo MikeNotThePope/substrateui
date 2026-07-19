@@ -83,7 +83,7 @@ export default function AlertDialogPage() {
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
-            Built on Radix primitives, so focus is trapped inside the alert
+            Built on Base UI primitives, so focus is trapped inside the alert
             dialog while open and restored to the trigger on close. Unlike
             regular Dialog, Escape does not dismiss — the user must choose
             Cancel or Action explicitly, which is appropriate for

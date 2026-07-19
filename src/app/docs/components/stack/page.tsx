@@ -220,7 +220,7 @@ export default function StackPage() {
                 type: "boolean",
                 default: "false",
                 description:
-                  "When true, merges props onto the child element via Radix Slot instead of rendering a wrapping div.",
+                  "When true, merges props onto the child element via Base UI Slot instead of rendering a wrapping div.",
               },
             ]}
           />

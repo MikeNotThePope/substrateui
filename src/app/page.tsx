@@ -122,7 +122,7 @@ export default function HomePage() {
               </H1>
               <Lead className="max-w-2xl text-lg md:text-xl">
                 A chunky, opinionated design system for Next.js. OKLCH color tokens,
-                Tailwind CSS v4, Radix UI primitives, and a personality that isn&apos;t afraid of borders.
+                Tailwind CSS v4, Base UI primitives, and a personality that isn&apos;t afraid of borders.
               </Lead>
               <Cluster gap="sm">
                 <Link href="/docs">
@@ -171,7 +171,7 @@ export default function HomePage() {
                 </CardFooter>
               </Card>
               <Badge className="absolute -top-3 -start-2 z-10 -rotate-6 shadow-hard-sm">
-                Radix under the hood
+                Base UI under the hood
               </Badge>
               <Badge
                 variant="outline"

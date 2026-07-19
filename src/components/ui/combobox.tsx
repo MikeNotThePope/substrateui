@@ -1,24 +1,12 @@
 "use client"
 
 import * as React from "react"
+import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox"
 import { Check, ChevronsUpDown, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { buttonVariants } from "@/components/ui/button"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
 
@@ -73,6 +61,7 @@ type ComboboxProps = ComboboxSingleProps | ComboboxMultipleProps
 
 /**
  * Searchable select dropdown supporting single or multi-select modes.
+ * Built on Base UI's Combobox with the search input inside the popup.
  *
  * @example
  * <Combobox options={[{ value: "a", label: "Alpha" }]} value={val} onValueChange={setVal} />
@@ -103,7 +92,6 @@ function Combobox({
     ...(emptyMessage != null && { noResults: emptyMessage }),
   }
   const labels = resolveLabels(defaultComboboxLabels, ctx.combobox, mergedProp)
-  const [open, setOpen] = React.useState(false)
 
   const isMultiple = props.multiple === true
 
@@ -113,17 +101,21 @@ function Combobox({
       ? [props.value]
       : []
 
-  const handleSelect = (optionValue: string) => {
+  const selected = isMultiple
+    ? options.filter((o) => selectedValues.includes(o.value))
+    : (options.find((o) => o.value === props.value) ?? null)
+
+  const handleValueChange = (next: ComboboxOption | ComboboxOption[] | null) => {
     if (isMultiple) {
-      const current = props.value ?? []
-      const next = current.includes(optionValue)
-        ? current.filter((v) => v !== optionValue)
-        : [...current, optionValue]
-      props.onValueChange?.(next)
+      const arr = Array.isArray(next) ? next : next ? [next] : []
+      ;(props.onValueChange as ((v: string[]) => void) | undefined)?.(
+        arr.map((o) => o.value)
+      )
     } else {
-      const next = optionValue === props.value ? "" : optionValue
-      props.onValueChange?.(next)
-      setOpen(false)
+      const one = Array.isArray(next) ? next[0] : next
+      ;(props.onValueChange as ((v: string) => void) | undefined)?.(
+        one?.value ?? ""
+      )
     }
   }
 
@@ -131,7 +123,9 @@ function Combobox({
     e.stopPropagation()
     if (isMultiple) {
       const current = props.value ?? []
-      props.onValueChange?.(current.filter((v) => v !== optionValue))
+      ;(props.onValueChange as ((v: string[]) => void) | undefined)?.(
+        current.filter((v) => v !== optionValue)
+      )
     }
   }
 
@@ -167,35 +161,46 @@ function Combobox({
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          disabled={disabled}
-          data-slot="combobox"
-          className={cn(
-            "border-2 rounded-md h-auto min-h-10 px-3 w-full justify-between font-normal",
-            className
-          )}
-        >
-          {displayLabel()}
-          <ChevronsUpDown className="ms-2 size-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
-        <Command>
-          <CommandInput placeholder={labels.searchPlaceholder} />
-          <CommandList>
-            <CommandEmpty>{labels.noResults}</CommandEmpty>
-            <CommandGroup>
-              {options.map((option) => (
-                <CommandItem
+    <ComboboxPrimitive.Root
+      items={options}
+      multiple={isMultiple}
+      value={selected}
+      onValueChange={handleValueChange}
+      disabled={disabled}
+      itemToStringLabel={(o: ComboboxOption) => o.label}
+    >
+      <ComboboxPrimitive.Trigger
+        aria-expanded={undefined}
+        data-slot="combobox"
+        className={cn(
+          buttonVariants({ variant: "outline" }),
+          "border-2 rounded-md h-auto min-h-10 px-3 w-full justify-between font-normal",
+          className
+        )}
+      >
+        {displayLabel()}
+        <ChevronsUpDown className="ms-2 size-4 shrink-0 opacity-50" />
+      </ComboboxPrimitive.Trigger>
+      <ComboboxPrimitive.Portal>
+        <ComboboxPrimitive.Positioner align="start" sideOffset={4} className="z-50">
+          <ComboboxPrimitive.Popup
+            className="w-(--anchor-width) rounded-lg border-2 bg-popover text-popover-foreground shadow-hard outline-none data-[open]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[open]:fade-in-0 data-[closed]:zoom-out-95 data-[open]:zoom-in-95 origin-(--transform-origin) overflow-hidden"
+          >
+            <div className="flex items-center border-b-2 px-3">
+              <ComboboxPrimitive.Input
+                placeholder={labels.searchPlaceholder}
+                className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground"
+              />
+            </div>
+            <ComboboxPrimitive.Empty className="py-6 text-center text-sm empty:hidden">
+              {labels.noResults}
+            </ComboboxPrimitive.Empty>
+            <ComboboxPrimitive.List className="max-h-[300px] overflow-y-auto overflow-x-hidden p-1 empty:p-0">
+              {(option: ComboboxOption) => (
+                <ComboboxPrimitive.Item
                   key={option.value}
-                  value={option.value}
-                  keywords={[option.label]}
-                  onSelect={() => handleSelect(option.value)}
+                  value={option}
+                  className="relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-surface-interactive data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                 >
                   <Check
                     className={cn(
@@ -206,13 +211,13 @@ function Combobox({
                     )}
                   />
                   {option.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+                </ComboboxPrimitive.Item>
+              )}
+            </ComboboxPrimitive.List>
+          </ComboboxPrimitive.Popup>
+        </ComboboxPrimitive.Positioner>
+      </ComboboxPrimitive.Portal>
+    </ComboboxPrimitive.Root>
   )
 }
 

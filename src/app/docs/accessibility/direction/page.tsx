@@ -41,7 +41,7 @@ export default function DirectionPage() {
         <H3>How to enable RTL in your app</H3>
         <P>
           Set <Code>dir</Code> on the <Code>&lt;html&gt;</Code> element and
-          wrap your app in <Code>DirectionProvider</Code> so Radix-based
+          wrap your app in <Code>DirectionProvider</Code> so Base UI-based
           primitives pick up the direction:
         </P>
         <pre className="p-4 bg-warm-950 dark:bg-warm-900 text-warm-200 text-sm overflow-x-auto rounded-md" dir="ltr">
@@ -50,9 +50,9 @@ export default function DirectionPage() {
         <P>
           Setting <Code>dir</Code> on <Code>&lt;html&gt;</Code> — rather than
           on a wrapper <Code>div</Code> — ensures that native HTML elements
-          and Radix portals (which render outside the React tree at the
+          and Base UI portals (which render outside the React tree at the
           document body) also inherit the direction. The{" "}
-          <Code>DirectionProvider</Code> is what Radix primitives read to
+          <Code>DirectionProvider</Code> is what Base UI primitives read to
           decide which arrow keys advance focus, which side a menu opens from,
           and so on.
         </P>
@@ -71,7 +71,7 @@ export default function DirectionPage() {
           component overrides.
         </P>
         <P>
-          Radix primitives (Dialog, Popover, DropdownMenu, Select, Tabs, and
+          Base UI primitives (Dialog, Popover, DropdownMenu, Select, Tabs, and
           the rest) consume the same <Code>DirectionProvider</Code>, so
           keyboard navigation, side positioning, and animation origins all
           follow direction. A physical-properties audit script

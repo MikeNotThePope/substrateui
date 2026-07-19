@@ -834,7 +834,7 @@ export default function DesignSystemPage() {
               <AccordionItem value="item-1">
                 <AccordionTrigger>What is SubstrateUI?</AccordionTrigger>
                 <AccordionContent>
-                  SubstrateUI is a design system built on Radix primitives with a bold, distinctive visual style.
+                  SubstrateUI is a design system built on Base UI primitives with a bold, distinctive visual style.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
@@ -846,7 +846,7 @@ export default function DesignSystemPage() {
               <AccordionItem value="item-3">
                 <AccordionTrigger>Is it accessible?</AccordionTrigger>
                 <AccordionContent>
-                  Yes. All interactive components are built on Radix UI primitives which provide full accessibility support.
+                  Yes. All interactive components are built on Base UI primitives which provide full accessibility support.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -1058,7 +1058,7 @@ export default function DesignSystemPage() {
                 <HoverCardContent>
                   <Stack gap="sm">
                     <H4>@substrateui</H4>
-                    <P>A bold design system built with Radix and Tailwind.</P>
+                    <P>A bold design system built with Base UI and Tailwind.</P>
                     <Muted>Joined March 2024</Muted>
                   </Stack>
                 </HoverCardContent>

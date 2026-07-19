@@ -14,7 +14,7 @@ const DirectionControllerContext = React.createContext<{
 
 /**
  * App-level direction provider. Reads initial direction from localStorage,
- * mirrors it onto <html dir> so Radix portals inherit it, and exposes a
+ * mirrors it onto <html dir> so Base UI portals inherit it, and exposes a
  * setter via useDirectionController(). Mounted at the root layout so every
  * page respects the toggle — not just /docs.
  */

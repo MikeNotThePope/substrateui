@@ -97,7 +97,7 @@ export default function ClusterPage() {
   <Tag>TypeScript</Tag>
   <Tag>Tailwind CSS</Tag>
   <Tag>Next.js</Tag>
-  <Tag>Radix UI</Tag>
+  <Tag>Base UI</Tag>
   <Tag>Node.js</Tag>
   <Tag>PostgreSQL</Tag>
   <Tag>GraphQL</Tag>
@@ -112,7 +112,7 @@ export default function ClusterPage() {
               <Tag>TypeScript</Tag>
               <Tag>Tailwind CSS</Tag>
               <Tag>Next.js</Tag>
-              <Tag>Radix UI</Tag>
+              <Tag>Base UI</Tag>
               <Tag>Node.js</Tag>
               <Tag>PostgreSQL</Tag>
               <Tag>GraphQL</Tag>
@@ -130,7 +130,7 @@ export default function ClusterPage() {
   <Tag>TypeScript</Tag>
   <Tag>Tailwind CSS</Tag>
   <Tag>Next.js</Tag>
-  <Tag>Radix UI</Tag>
+  <Tag>Base UI</Tag>
 </Cluster>`}
           >
             <Cluster gap="sm" wrap={false} className="w-full overflow-x-auto">
@@ -138,7 +138,7 @@ export default function ClusterPage() {
               <Tag>TypeScript</Tag>
               <Tag>Tailwind CSS</Tag>
               <Tag>Next.js</Tag>
-              <Tag>Radix UI</Tag>
+              <Tag>Base UI</Tag>
             </Cluster>
           </ComponentPreview>
         </Stack>
@@ -313,7 +313,7 @@ export default function ClusterPage() {
                 type: "boolean",
                 default: "false",
                 description:
-                  "When true, merges props onto the child element via Radix Slot instead of rendering a wrapping div.",
+                  "When true, merges props onto the child element via Base UI Slot instead of rendering a wrapping div.",
               },
             ]}
           />

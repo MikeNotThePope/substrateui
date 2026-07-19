@@ -91,7 +91,7 @@ export default function DrawerPage() {
           <P>
             Every drawer must have a DrawerTitle. If the title should be
             visually hidden, wrap it in <Code>VisuallyHidden</Code> from
-            Radix so the accessible name is still announced.
+            Base UI so the accessible name is still announced.
           </P>
         </Stack>
       </Stack>

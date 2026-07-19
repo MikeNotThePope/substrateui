@@ -18,9 +18,9 @@ const meta: Meta<typeof Collapsible> = {
           <Button variant="outline" size="sm">Toggle</Button>
         </CollapsibleTrigger>
       </div>
-      <div className="rounded border-2 px-3 py-2 font-mono text-xs">@radix-ui/primitives</div>
+      <div className="rounded border-2 px-3 py-2 font-mono text-xs">@base-ui/react</div>
       <CollapsibleContent className="space-y-2">
-        <div className="rounded border-2 px-3 py-2 font-mono text-xs">@radix-ui/colors</div>
+        <div className="rounded border-2 px-3 py-2 font-mono text-xs">@mui/material</div>
         <div className="rounded border-2 px-3 py-2 font-mono text-xs">@stitches/react</div>
       </CollapsibleContent>
     </Collapsible>
