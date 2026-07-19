@@ -2,6 +2,8 @@ name: Update Visual Baselines
 
 on:
   workflow_dispatch:
+  push:
+    branches: [claude/substrateui-visual-pop-uzn212]
 
 jobs:
   update:
