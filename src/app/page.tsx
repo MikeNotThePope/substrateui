@@ -192,7 +192,7 @@ export default function HomePage() {
               <H2 className="text-3xl font-bold tracking-tight md:text-4xl">Built Different</H2>
               <P className="mt-2 text-muted-foreground">Every decision is intentional. Every token is earned.</P>
             </div>
-            <Grid columns={3} gap="lg">
+            <Grid gap="lg" className="sm:grid-cols-2 lg:grid-cols-3">
               {features.map((feature) => (
                 <Card
                   key={feature.title}
