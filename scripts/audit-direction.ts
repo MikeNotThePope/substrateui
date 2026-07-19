@@ -14,6 +14,8 @@ const BANNED_PATTERNS: Array<{ regex: RegExp; name: string; fix: string }> = [
   { regex: /\bpr-\d+(?!\/\d)/g, name: "pr-*", fix: "pe-*" },
   { regex: /\bml-\d+(?!\/\d)/g, name: "ml-*", fix: "ms-*" },
   { regex: /\bmr-\d+(?!\/\d)/g, name: "mr-*", fix: "me-*" },
+  { regex: /\bml-auto\b/g, name: "ml-auto", fix: "ms-auto" },
+  { regex: /\bmr-auto\b/g, name: "mr-auto", fix: "me-auto" },
   { regex: /(?<!-from-)(?<!-to-)\bleft-\d+(?!\/\d)/g, name: "left-*", fix: "start-*" },
   { regex: /(?<!-from-)(?<!-to-)\bright-\d+(?!\/\d)/g, name: "right-*", fix: "end-*" },
   { regex: /\bborder-l\b(?!\w)/g, name: "border-l", fix: "border-s" },

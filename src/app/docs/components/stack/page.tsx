@@ -23,7 +23,7 @@ export default function StackPage() {
         {/* ── Gap Variants ────────────────────────────────── */}
         <Stack gap="md">
           <H3>Gap Variants</H3>
-          <Grid columns={2} gap="lg">
+          <Grid gap="lg" className="sm:grid-cols-2">
             <ComponentPreview
               title="gap=&quot;sm&quot;"
               code={`<Stack gap="sm">
@@ -89,7 +89,7 @@ export default function StackPage() {
         {/* ── Alignment ───────────────────────────────────── */}
         <Stack gap="md">
           <H3>Alignment</H3>
-          <Grid columns={2} gap="lg">
+          <Grid gap="lg" className="sm:grid-cols-2">
             <ComponentPreview
               title="align=&quot;start&quot;"
               code={`<Stack align="start">

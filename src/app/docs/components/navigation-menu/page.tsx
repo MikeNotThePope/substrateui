@@ -58,7 +58,7 @@ export default function NavigationMenuPage() {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="/about" className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
                   About
                 </NavigationMenuLink>
               </NavigationMenuItem>
