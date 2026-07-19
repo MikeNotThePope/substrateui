@@ -76,7 +76,7 @@ function Cluster({
           wrap && "flex-wrap",
           className,
         ),
-      },
+      } as useRender.ElementProps<"div">,
       props
     ),
   })

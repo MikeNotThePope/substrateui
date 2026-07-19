@@ -57,7 +57,7 @@ function Stack({
       {
         "data-slot": "stack",
         className: cn("flex flex-col", gapMap[gap], alignMap[align], className),
-      },
+      } as useRender.ElementProps<"div">,
       props
     ),
   })

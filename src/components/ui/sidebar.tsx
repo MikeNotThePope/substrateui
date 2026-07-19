@@ -528,7 +528,7 @@ function SidebarGroupLabel({
           "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
           className
         ),
-      },
+      } as useRender.ElementProps<"div">,
       props
     ),
   })
@@ -554,7 +554,7 @@ function SidebarGroupAction({
           "group-data-[collapsible=icon]:hidden",
           className
         ),
-      },
+      } as useRender.ElementProps<"button">,
       props
     ),
   })
@@ -664,7 +664,7 @@ function SidebarMenuButton({
         "data-size": size,
         "data-active": isActive,
         className: cn(sidebarMenuButtonVariants({ variant, size }), className),
-      },
+      } as useRender.ElementProps<"button">,
       props
     ),
   })
@@ -681,7 +681,7 @@ function SidebarMenuButton({
 
   return (
     <Tooltip>
-      <TooltipTrigger render={button ?? undefined} />
+      <TooltipTrigger render={button} />
       <TooltipContent
         side="right"
         align="center"
@@ -720,7 +720,7 @@ function SidebarMenuAction({
             "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground md:opacity-0",
           className
         ),
-      },
+      } as useRender.ElementProps<"button">,
       props
     ),
   })
@@ -850,7 +850,7 @@ function SidebarMenuSubButton({
           "group-data-[collapsible=icon]:hidden",
           className
         ),
-      },
+      } as useRender.ElementProps<"a">,
       props
     ),
   })

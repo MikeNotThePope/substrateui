@@ -65,7 +65,7 @@ function Button({ className, variant, size, render, ...props }: ButtonProps) {
       {
         className: cn(buttonVariants({ variant, size, className })),
         "data-slot": "button",
-      },
+      } as useRender.ElementProps<"button">,
       props
     ),
   })

@@ -91,7 +91,7 @@ function BreadcrumbLink({
       {
         "data-slot": "breadcrumb-link",
         className: cn("text-muted-foreground transition-colors hover:text-foreground", className),
-      },
+      } as useRender.ElementProps<"a">,
       props
     ),
   })

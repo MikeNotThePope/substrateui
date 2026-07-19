@@ -79,17 +79,22 @@ describe('Button', () => {
     expect(onClick).not.toHaveBeenCalled()
   })
 
-  it('renders children as the actual element when asChild is set', () => {
-    render(
-      <Button asChild>
-        <a href="/somewhere">Link text</a>
-      </Button>
-    )
+  it('renders the render-prop element as the actual element', () => {
+    render(<Button render={<a href="/somewhere" />}>Link text</Button>)
     const link = screen.getByRole('link', { name: 'Link text' })
     expect(link.tagName).toBe('A')
     expect(link).toHaveAttribute('href', '/somewhere')
-    // Button classes should still be merged onto the child
+    // Button classes should still be merged onto the rendered element
     expect(link.className).toContain('inline-flex')
+  })
+
+  it('merges className from the render-prop element with variant classes', () => {
+    render(
+      <Button render={<a href="/x" className="from-render" />}>Merge</Button>
+    )
+    const link = screen.getByRole('link', { name: 'Merge' })
+    expect(link.className).toContain('from-render')
+    expect(link.className).toContain('bg-primary')
   })
 
   it('forwards ref to the underlying button element', () => {

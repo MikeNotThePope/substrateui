@@ -73,7 +73,7 @@ function Grid({
           isAuto && minChildWidth
             ? ({ "--grid-min": minChildWidth, ...style } as React.CSSProperties)
             : style,
-      },
+      } as useRender.ElementProps<"div">,
       props
     ),
   })
