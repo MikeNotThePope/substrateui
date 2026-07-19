@@ -1,18 +1,41 @@
 "use client"
 
 import * as React from "react"
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 
+import { asChildRender } from "@/lib/as-child"
 import { cn } from "@/lib/utils"
 
 /** Global tooltip configuration provider (delay, skip-delay, etc.). */
-const TooltipProvider = TooltipPrimitive.Provider
+function TooltipProvider({
+  delay,
+  delayDuration,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Provider> & {
+  /** @deprecated Use `delay` instead. */
+  delayDuration?: number
+}) {
+  return <TooltipPrimitive.Provider delay={delay ?? delayDuration} {...props} />
+}
 
 /** Root tooltip wrapper that manages open state. */
 const Tooltip = TooltipPrimitive.Root
 
 /** Element that triggers the tooltip on hover/focus. */
-const TooltipTrigger = TooltipPrimitive.Trigger
+function TooltipTrigger({
+  asChild,
+  children,
+  ...props
+}: React.ComponentPropsWithRef<typeof TooltipPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  return (
+    <TooltipPrimitive.Trigger
+      {...asChildRender(asChild, children, { button: true })}
+      {...props}
+    />
+  )
+}
 
 /** Animated popover content displayed when the tooltip is open.
  *
@@ -21,21 +44,35 @@ const TooltipTrigger = TooltipPrimitive.Trigger
  */
 function TooltipContent({
   className,
+  align,
+  side,
   sideOffset = 4,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof TooltipPrimitive.Content>) {
+}: React.ComponentPropsWithRef<typeof TooltipPrimitive.Popup> &
+  Pick<
+    React.ComponentProps<typeof TooltipPrimitive.Positioner>,
+    "align" | "side" | "sideOffset"
+  >) {
   return (
-    <TooltipPrimitive.Content
-      ref={ref}
-      sideOffset={sideOffset}
-      data-slot="tooltip-content"
-      className={cn(
-        "z-50 overflow-hidden rounded-md border-2 border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-hard-sm animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-tooltip-content-transform-origin]",
-        className
-      )}
-      {...props}
-    />
+    <TooltipPrimitive.Portal>
+      <TooltipPrimitive.Positioner
+        align={align}
+        side={side}
+        sideOffset={sideOffset}
+        className="z-50"
+      >
+        <TooltipPrimitive.Popup
+          ref={ref}
+          data-slot="tooltip-content"
+          className={cn(
+            "overflow-hidden rounded-md border-2 border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-hard-sm animate-in fade-in-0 zoom-in-95 data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--transform-origin)",
+            className
+          )}
+          {...props}
+        />
+      </TooltipPrimitive.Positioner>
+    </TooltipPrimitive.Portal>
   )
 }
 
