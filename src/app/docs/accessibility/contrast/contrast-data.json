@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-19T00:28:16.302Z",
+  "generatedAt": "2026-07-19T02:03:13.331Z",
   "results": [
     {
       "name": "foreground on background",
@@ -212,7 +212,7 @@
       "type": "normal",
       "backdrop": "background",
       "required": 4.5,
-      "light": 6.77561958595113,
+      "light": 7.224971565820775,
       "dark": 11.509063918351613,
       "lightPass": true,
       "darkPass": true
@@ -703,7 +703,7 @@
           "name": "status-warning-text on status-warning-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.77561958595113,
+          "ratio": 7.224971565820775,
           "pass": true
         },
         {

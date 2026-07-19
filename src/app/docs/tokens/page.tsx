@@ -38,14 +38,14 @@ const themeColorData: Record<Theme, ThemeColorData> = {
         description:
           "CVD-safe secondary color. Used for call-to-action buttons and warm highlights.",
         prefix: "amber",
-        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800"],
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
       },
       {
         title: "Warm Neutrals",
         description:
           "The backbone of the system. Backgrounds, borders, text — all warm-toned for cohesion.",
         prefix: "warm",
-        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+        shades: ["50", "100", "200", "300", "350", "400", "450", "500", "600", "700", "800", "850", "900", "950", "975"],
       },
     ],
     status: [
@@ -55,12 +55,12 @@ const themeColorData: Record<Theme, ThemeColorData> = {
       { variable: "--raw-info", label: "info" },
     ],
     semantic: [
-      { name: "background", light: "warm-50", dark: "warm-950" },
+      { name: "background", light: "warm-100", dark: "warm-975" },
       { name: "foreground", light: "warm-900", dark: "warm-100" },
       { name: "primary", light: "plum-600", dark: "plum-500" },
       { name: "primary-foreground", light: "white", dark: "white" },
-      { name: "secondary", light: "warm-100", dark: "warm-800" },
-      { name: "muted", light: "warm-100", dark: "warm-800" },
+      { name: "secondary", light: "warm-200", dark: "warm-700" },
+      { name: "muted", light: "warm-200", dark: "warm-800" },
       { name: "muted-foreground", light: "warm-600", dark: "warm-400" },
       { name: "accent", light: "plum-100", dark: "plum @ 15%" },
       { name: "destructive", light: "error", dark: "error (lighter)" },
@@ -83,29 +83,29 @@ const themeColorData: Record<Theme, ThemeColorData> = {
         description:
           "Vent-crust yellow. Used for call-to-action buttons and warm highlights.",
         prefix: "sulfur",
-        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800"],
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
       },
       {
         title: "Basalt Neutrals",
         description:
           "Cooled-lava grays, warmed toward the magma hue. Backgrounds, borders, and text.",
         prefix: "basalt",
-        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "850", "900", "950"],
+        shades: ["50", "100", "200", "300", "350", "400", "450", "500", "600", "700", "800", "850", "900", "950", "975"],
       },
     ],
     status: [
       { variable: "--raw-olivine", label: "success" },
-      { variable: "--raw-sulfur-500", label: "warning" },
+      { variable: "--raw-sulfur-700", label: "warning" },
       { variable: "--raw-cherry", label: "error" },
       { variable: "--raw-ijen", label: "info" },
     ],
     semantic: [
-      { name: "background", light: "basalt-50", dark: "basalt-950" },
+      { name: "background", light: "basalt-100", dark: "basalt-975" },
       { name: "foreground", light: "basalt-900", dark: "basalt-100" },
       { name: "primary", light: "magma-700", dark: "magma-500" },
       { name: "primary-foreground", light: "white", dark: "basalt-950" },
-      { name: "secondary", light: "basalt-100", dark: "basalt-800" },
-      { name: "muted", light: "basalt-100", dark: "basalt-800" },
+      { name: "secondary", light: "basalt-200", dark: "basalt-700" },
+      { name: "muted", light: "basalt-200", dark: "basalt-800" },
       { name: "muted-foreground", light: "basalt-600", dark: "basalt-300" },
       { name: "accent", light: "magma-100", dark: "magma @ 15%" },
       { name: "destructive", light: "cherry", dark: "cherry (lighter)" },
