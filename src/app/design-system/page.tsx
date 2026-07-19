@@ -774,7 +774,7 @@ export default function DesignSystemPage() {
               </CardContent>
             </Card>
 
-            <Grid columns={3}>
+            <Grid className="sm:grid-cols-3">
               {[1, 2, 3].map((n) => (
                 <Card key={n}>
                   <CardHeader>
@@ -1137,7 +1137,7 @@ export default function DesignSystemPage() {
 
             <H3>Pagination</H3>
             <Pagination>
-              <PaginationContent>
+              <PaginationContent className="flex-wrap">
                 <PaginationItem>
                   <PaginationPrevious href="#" />
                 </PaginationItem>
