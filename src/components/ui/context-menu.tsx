@@ -1,16 +1,17 @@
 "use client"
 
 import * as React from "react"
-import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
+import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { withAsChild } from "@/lib/slot"
 
 /** Root component that manages context menu open/close state. */
 const ContextMenu = ContextMenuPrimitive.Root
 
 /** Area that opens the context menu on right-click. */
-const ContextMenuTrigger = ContextMenuPrimitive.Trigger
+const ContextMenuTrigger = withAsChild(ContextMenuPrimitive.Trigger)
 
 /** Groups related context menu items together. */
 const ContextMenuGroup = ContextMenuPrimitive.Group
@@ -19,7 +20,7 @@ const ContextMenuGroup = ContextMenuPrimitive.Group
 const ContextMenuPortal = ContextMenuPrimitive.Portal
 
 /** Root for a nested sub-menu within the context menu. */
-const ContextMenuSub = ContextMenuPrimitive.Sub
+const ContextMenuSub = ContextMenuPrimitive.SubmenuRoot
 
 /** Groups mutually exclusive radio items in the context menu. */
 const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup
@@ -31,15 +32,15 @@ function ContextMenuSubTrigger({
   children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.SubTrigger> & {
+}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.SubmenuTrigger> & {
   inset?: boolean
 }) {
   return (
-    <ContextMenuPrimitive.SubTrigger
+    <ContextMenuPrimitive.SubmenuTrigger
       ref={ref}
       data-slot="context-menu-sub-trigger"
       className={cn(
-        "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-popup-open:bg-accent data-popup-open:text-accent-foreground",
         inset && "ps-8",
         className
       )}
@@ -47,7 +48,7 @@ function ContextMenuSubTrigger({
     >
       {children}
       <ChevronRight className="ms-auto h-4 w-4" />
-    </ContextMenuPrimitive.SubTrigger>
+    </ContextMenuPrimitive.SubmenuTrigger>
   )
 }
 
@@ -56,17 +57,21 @@ function ContextMenuSubContent({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.SubContent>) {
+}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.Popup>) {
   return (
-    <ContextMenuPrimitive.SubContent
-      ref={ref}
-      data-slot="context-menu-sub-content"
-      className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-lg border-2 bg-popover p-1 text-popover-foreground shadow-hard data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-context-menu-content-transform-origin]",
-        className
-      )}
-      {...props}
-    />
+    <ContextMenuPrimitive.Portal>
+      <ContextMenuPrimitive.Positioner className="z-50">
+        <ContextMenuPrimitive.Popup
+          ref={ref}
+          data-slot="context-menu-sub-content"
+          className={cn(
+            "min-w-[8rem] overflow-hidden rounded-lg border-2 bg-popover p-1 text-popover-foreground shadow-hard data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--transform-origin)",
+            className
+          )}
+          {...props}
+        />
+      </ContextMenuPrimitive.Positioner>
+    </ContextMenuPrimitive.Portal>
   )
 }
 
@@ -75,18 +80,20 @@ function ContextMenuContent({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.Content>) {
+}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.Popup>) {
   return (
     <ContextMenuPrimitive.Portal>
-      <ContextMenuPrimitive.Content
-        ref={ref}
-        data-slot="context-menu-content"
-        className={cn(
-          "z-50 max-h-[--radix-context-menu-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-lg border-2 bg-popover p-1 text-popover-foreground shadow-hard animate-in fade-in-80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-context-menu-content-transform-origin]",
-          className
-        )}
-        {...props}
-      />
+      <ContextMenuPrimitive.Positioner className="z-50">
+        <ContextMenuPrimitive.Popup
+          ref={ref}
+          data-slot="context-menu-content"
+          className={cn(
+            "max-h-(--available-height) min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-lg border-2 bg-popover p-1 text-popover-foreground shadow-hard animate-in fade-in-80 data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--transform-origin)",
+            className
+          )}
+          {...props}
+        />
+      </ContextMenuPrimitive.Positioner>
     </ContextMenuPrimitive.Portal>
   )
 }
@@ -105,7 +112,7 @@ function ContextMenuItem({
       ref={ref}
       data-slot="context-menu-item"
       className={cn(
-        "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-surface-interactive focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-surface-interactive data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50",
         inset && "ps-8",
         className
       )}
@@ -127,16 +134,16 @@ function ContextMenuCheckboxItem({
       ref={ref}
       data-slot="context-menu-checkbox-item"
       className={cn(
-        "relative flex cursor-default select-none items-center rounded-sm py-1.5 ps-8 pe-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex cursor-default select-none items-center rounded-sm py-1.5 ps-8 pe-2 text-sm outline-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50",
         className
       )}
       checked={checked}
       {...props}
     >
       <span className="absolute start-2 flex h-3.5 w-3.5 items-center justify-center">
-        <ContextMenuPrimitive.ItemIndicator>
+        <ContextMenuPrimitive.CheckboxItemIndicator>
           <Check className="h-4 w-4" />
-        </ContextMenuPrimitive.ItemIndicator>
+        </ContextMenuPrimitive.CheckboxItemIndicator>
       </span>
       {children}
     </ContextMenuPrimitive.CheckboxItem>
@@ -155,15 +162,15 @@ function ContextMenuRadioItem({
       ref={ref}
       data-slot="context-menu-radio-item"
       className={cn(
-        "relative flex cursor-default select-none items-center rounded-sm py-1.5 ps-8 pe-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex cursor-default select-none items-center rounded-sm py-1.5 ps-8 pe-2 text-sm outline-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50",
         className
       )}
       {...props}
     >
       <span className="absolute start-2 flex h-3.5 w-3.5 items-center justify-center">
-        <ContextMenuPrimitive.ItemIndicator>
+        <ContextMenuPrimitive.RadioItemIndicator>
           <Circle className="h-2 w-2 fill-current" />
-        </ContextMenuPrimitive.ItemIndicator>
+        </ContextMenuPrimitive.RadioItemIndicator>
       </span>
       {children}
     </ContextMenuPrimitive.RadioItem>
@@ -176,11 +183,11 @@ function ContextMenuLabel({
   inset,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.Label> & {
+}: React.ComponentPropsWithRef<typeof ContextMenuPrimitive.GroupLabel> & {
   inset?: boolean
 }) {
   return (
-    <ContextMenuPrimitive.Label
+    <ContextMenuPrimitive.GroupLabel
       ref={ref}
       data-slot="context-menu-label"
       className={cn(
