@@ -1,9 +1,16 @@
 "use client"
 
 import * as React from "react"
-import * as SeparatorPrimitive from "@radix-ui/react-separator"
+import { Separator as SeparatorPrimitive } from "@base-ui/react/separator"
 
 import { cn } from "@/lib/utils"
+
+/** Props accepted by Separator. */
+export interface SeparatorProps
+  extends React.ComponentPropsWithRef<typeof SeparatorPrimitive> {
+  /** When true (default), removes the separator from the accessibility tree. */
+  decorative?: boolean
+}
 
 /**
  * A visual divider that separates content horizontally or vertically.
@@ -17,11 +24,11 @@ function Separator({
   decorative = true,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof SeparatorPrimitive.Root>) {
+}: SeparatorProps) {
   return (
-    <SeparatorPrimitive.Root
+    <SeparatorPrimitive
       ref={ref}
-      decorative={decorative}
+      role={decorative ? "presentation" : undefined}
       orientation={orientation}
       data-slot="separator"
       className={cn(
@@ -35,3 +42,4 @@ function Separator({
 }
 
 export { Separator }
+

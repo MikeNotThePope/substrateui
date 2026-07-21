@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import * as TabsPrimitive from "@radix-ui/react-tabs"
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
 
 import { cn } from "@/lib/utils"
 
-/** Root container for a tabbed interface built on Radix Tabs.
+/** Root container for a tabbed interface built on Base UI Tabs.
  *
  * @example
  * <Tabs defaultValue="tab1"><TabsList><TabsTrigger value="tab1">Tab</TabsTrigger></TabsList><TabsContent value="tab1">Content</TabsContent></Tabs>
@@ -36,13 +36,13 @@ function TabsTrigger({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof TabsPrimitive.Trigger>) {
+}: React.ComponentPropsWithRef<typeof TabsPrimitive.Tab>) {
   return (
-    <TabsPrimitive.Trigger
+    <TabsPrimitive.Tab
       ref={ref}
       data-slot="tabs-trigger"
       className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all active:translate-y-[1.5px] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+        "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all active:translate-y-[1.5px] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-active:bg-background data-active:text-foreground data-active:shadow-sm",
         className
       )}
       {...props}
@@ -55,9 +55,9 @@ function TabsContent({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof TabsPrimitive.Content>) {
+}: React.ComponentPropsWithRef<typeof TabsPrimitive.Panel>) {
   return (
-    <TabsPrimitive.Content
+    <TabsPrimitive.Panel
       ref={ref}
       data-slot="tabs-content"
       className={cn(
