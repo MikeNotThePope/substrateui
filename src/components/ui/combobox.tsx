@@ -184,7 +184,7 @@ function Combobox({
           <ChevronsUpDown className="ms-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+      <PopoverContent className="w-(--anchor-width) p-0">
         <Command>
           <CommandInput placeholder={labels.searchPlaceholder} />
           <CommandList>

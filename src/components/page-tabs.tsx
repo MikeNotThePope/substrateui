@@ -53,7 +53,7 @@ function PageTabsTrigger({
       ref={ref}
       data-slot="page-tabs-trigger"
       className={cn(
-        "rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 pb-3 pt-2",
+        "rounded-none border-b-2 border-transparent data-active:border-primary data-active:bg-transparent data-active:shadow-none px-4 pb-3 pt-2",
         className,
       )}
       {...props}
