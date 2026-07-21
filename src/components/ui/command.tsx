@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { type DialogProps } from "@radix-ui/react-dialog"
+import { type DialogRootProps as DialogProps } from "@base-ui/react/dialog"
 import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
 
@@ -33,7 +33,10 @@ function Command({
 }
 
 /** Command palette rendered inside a modal dialog. */
-function CommandDialog({ children, ...props }: DialogProps) {
+function CommandDialog({
+  children,
+  ...props
+}: Omit<DialogProps, "children"> & { children?: React.ReactNode }) {
   return (
     <Dialog {...props}>
       <DialogContent className="overflow-hidden p-0 shadow-hard-lg">

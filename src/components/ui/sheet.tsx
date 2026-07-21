@@ -1,11 +1,12 @@
 "use client"
 
 import * as React from "react"
-import * as SheetPrimitive from "@radix-ui/react-dialog"
+import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { withAsChild } from "@/lib/slot"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
 
@@ -24,10 +25,10 @@ const defaultSheetLabels: Required<SheetLabels> = {
 const Sheet = SheetPrimitive.Root
 
 /** A button or element that opens the sheet when clicked. */
-const SheetTrigger = SheetPrimitive.Trigger
+const SheetTrigger = withAsChild(SheetPrimitive.Trigger)
 
 /** A button or element that closes the sheet when clicked. */
-const SheetClose = SheetPrimitive.Close
+const SheetClose = withAsChild(SheetPrimitive.Close)
 
 /** Portals sheet content into the document body. */
 const SheetPortal = SheetPrimitive.Portal
@@ -37,11 +38,11 @@ function SheetOverlay({
   className,
   ref,
   ...props
-}: React.ComponentPropsWithRef<typeof SheetPrimitive.Overlay>) {
+}: React.ComponentPropsWithRef<typeof SheetPrimitive.Backdrop>) {
   return (
-    <SheetPrimitive.Overlay
+    <SheetPrimitive.Backdrop
       className={cn(
-        "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        "fixed inset-0 z-50 bg-black/80  data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0",
         className
       )}
       {...props}
@@ -53,16 +54,16 @@ function SheetOverlay({
 
 /** Sheet position variants for top/bottom/left/right sides. Use with cn(sheetVariants({...})) for non-sheet elements. */
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-open:animate-in data-closed:animate-out data-closed:duration-300 data-open:duration-500",
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b-2 data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        top: "inset-x-0 top-0 border-b-2 data-closed:slide-out-to-top data-open:slide-in-from-top",
         bottom:
-          "inset-x-0 bottom-0 border-t-2 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 start-0 h-full w-3/4 border-e-2 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+          "inset-x-0 bottom-0 border-t-2 data-closed:slide-out-to-bottom data-open:slide-in-from-bottom",
+        left: "inset-y-0 start-0 h-full w-3/4 border-e-2 data-closed:slide-out-to-left data-open:slide-in-from-left sm:max-w-sm",
         right:
-          "inset-y-0 end-0 h-full w-3/4 border-s-2 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+          "inset-y-0 end-0 h-full w-3/4 border-s-2 data-closed:slide-out-to-right data-open:slide-in-from-right sm:max-w-sm",
       },
     },
     defaultVariants: {
@@ -72,7 +73,7 @@ const sheetVariants = cva(
 )
 
 interface SheetContentProps
-  extends React.ComponentPropsWithRef<typeof SheetPrimitive.Content>,
+  extends React.ComponentPropsWithRef<typeof SheetPrimitive.Popup>,
     VariantProps<typeof sheetVariants> {}
 
 /**
@@ -100,18 +101,18 @@ function SheetContent({
   return (
     <SheetPortal>
       <SheetOverlay />
-      <SheetPrimitive.Content
+      <SheetPrimitive.Popup
         ref={ref}
         data-slot="sheet-content"
         className={cn(sheetVariants({ side }), className)}
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="absolute end-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+        <SheetPrimitive.Close className="absolute end-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
           <X className="h-4 w-4" />
           <span className="sr-only">{labels.close}</span>
         </SheetPrimitive.Close>
-      </SheetPrimitive.Content>
+      </SheetPrimitive.Popup>
     </SheetPortal>
   )
 }
