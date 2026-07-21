@@ -34,11 +34,12 @@ function Accordion({
   value,
   defaultValue,
   onValueChange,
-  // Swallowed: Base UI accordions are always collapsible.
-  collapsible: _collapsible,
+  collapsible,
   ref,
   ...props
 }: AccordionProps) {
+  // Swallowed: Base UI accordions are always collapsible.
+  void collapsible
   return (
     <AccordionPrimitive.Root
       ref={ref}

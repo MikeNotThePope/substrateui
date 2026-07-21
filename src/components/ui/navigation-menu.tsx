@@ -149,10 +149,11 @@ function NavigationMenuViewport({
  * Base UI positions its arrow inside the popup positioner instead, so this
  * component is kept only for API compatibility and renders nothing.
  */
-function NavigationMenuIndicator(_props: {
+function NavigationMenuIndicator(props: {
   className?: string
   children?: React.ReactNode
 }) {
+  void props
   return null
 }
 

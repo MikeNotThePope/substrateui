@@ -31,7 +31,7 @@ function composeRefs<T>(
   return (node: T | null) => {
     for (const ref of filtered) {
       if (typeof ref === "function") ref(node)
-      else (ref as React.MutableRefObject<T | null>).current = node
+      else (ref as React.RefObject<T | null>).current = node
     }
   }
 }
