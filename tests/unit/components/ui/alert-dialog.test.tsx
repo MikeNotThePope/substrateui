@@ -94,8 +94,8 @@ describe('AlertDialog', () => {
   })
 
   it('does NOT close on click outside (modal behavior)', async () => {
-    // Radix guards interactivity with pointer-events: none on ancestors, so we
-    // disable userEvent's pointer-events check for this click.
+    // The modal dialog guards interactivity with pointer-events: none on
+    // ancestors, so we disable userEvent's pointer-events check for this click.
     const user = userEvent.setup({ pointerEventsCheck: 0 })
     render(<AlertHarness initialOpen />)
     await screen.findByRole('alertdialog')
