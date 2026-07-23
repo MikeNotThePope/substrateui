@@ -133,6 +133,10 @@ Use semantic Tailwind utilities only:
 - ❌ \`rounded-none\` or pill-shaped buttons that fight the radius identity.
 - ❌ Use physical direction utilities (\`pl-*\`, \`ml-*\`, \`left-*\`) — the system is RTL-ready; use logical ones (\`ps-*\`, \`ms-*\`, \`start-*\`).
 
+## Textures (optional)
+
+Three pure-CSS utilities add tactile depth to large surfaces: \`texture-noise\` (paper grain), \`texture-lines\` (editorial hairlines), \`texture-grid\` (blueprint grid). They layer over the element's background color and derive their ink from the foreground token, so they are theme- and mode-correct automatically. Use at most one per section, only on large surfaces (heroes, section backgrounds, empty states), never behind dense text — and never hand-roll your own background patterns.
+
 ## Motion & accessibility
 
 Motion is subtle and mechanical: color transitions plus the hard-shadow press. Timing is themable — \`--motion-duration\` and \`--motion-ease\` re-time component transitions per theme — so use plain \`transition-*\` utilities and avoid hardcoding \`duration-*\`/\`ease-*\` unless the timing is intrinsic (an entrance animation, a progress bar). No parallax, no floating blobs. The token sheet globally respects \`prefers-reduced-motion\`. Contrast passes WCAG AA in both modes by construction — it stays that way as long as you stay on semantic tokens.
