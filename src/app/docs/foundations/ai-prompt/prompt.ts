@@ -13,6 +13,7 @@ interface ThemeDna {
   label: string
   enable: string
   philosophy: string
+  not: string[]
   success: string
 }
 
@@ -24,6 +25,12 @@ const themeDna: Record<ThemeId, ThemeDna> = {
     philosophy: `**Emotional keywords:** Warm, tactile, confident, grounded, friendly-but-serious.
 
 Plum primary with amber secondary (a colorblind-safe pair) over warm gray neutrals — no pure grays anywhere; every neutral carries a hint of warmth. The feel is quality stationery: cream paper, saturated ink, edges you can run a thumb over. Confident enough for a dashboard, warm enough for a marketing page.`,
+    not: [
+      "Cold or clinical — every neutral is warm; never introduce pure or blue-tinted grays",
+      "Glassy or floaty — no blur, no translucency, no soft elevation; depth is borders and hard offset shadows",
+      "Flat minimalism — nothing borderless; components wear their 2px borders proudly",
+      "Neon — plum is ink, not electricity; amber is the only accent that shouts, and it's used sparingly",
+    ],
     success:
       "warm print-quality stationery brought to the screen: chunky visible borders, plum-and-amber color, tactile presses",
   },
@@ -36,6 +43,12 @@ Plum primary with amber secondary (a colorblind-safe pair) over warm gray neutra
 A palette derived from lava at the moment of eruption: magma primary (the hue rotates yellow→red as it deepens, like cooling lava), sulfur-yellow secondary, and basalt neutrals. Status colors are geologically sourced — olivine green, cherry red, ijen blue. The feel is raw heat under a dark crust: darker, hotter, and more intense than the default theme, without losing legibility.
 
 Lava is also molten in structure, not just color: motion is slower and viscous (300ms with a heavy-tailed ease-out — movement front-loads, then flows to rest), every corner radius swells 1.5x, and hard shadows are tinted deep magma — embers under the crust — instead of gray. This all flows from theme tokens; write ordinary utilities and it happens automatically.`,
+    not: [
+      "A red re-skin of the default theme — lava changes structure (motion, corners, shadows), not just hue",
+      "Alarming — magma is heat, not danger; errors stay cherry red, so never use the primary for destructive actions",
+      "Cyberpunk or neon — the palette is geological (magma, sulfur, basalt), never electric or glitchy",
+      "Snappy — motion is deliberately slow and viscous; don't add fast durations to \"fix\" it",
+    ],
     success:
       "a volcanic landscape rendered as an interface: basalt surfaces, magma accents, sulfur highlights, softened corners, and slow, viscous motion",
   },
@@ -75,6 +88,10 @@ ${dna.enable}
 ## Design philosophy
 
 ${dna.philosophy}
+
+### What this theme is NOT
+
+${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 
 ## The DNA
 
