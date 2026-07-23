@@ -119,14 +119,25 @@ export default function ThemesPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>What themes should NOT vary</H3>
+        <H3>What themes may vary — and what they may not</H3>
         <P>
-          Semantic token names, the spacing scale, typography scale, radii,
-          and shadows all stay constant across themes. Those are structural
-          — part of the system&apos;s identity, not the brand&apos;s. If you
-          find yourself needing per-theme spacing or typography, you&apos;ve
-          conflated brand identity with system structure; rethink the
-          abstraction before forking it. Themes are color-only by design.
+          Beyond color, themes may override three <em>feel</em> tokens:{" "}
+          <Code>--motion-duration</Code> and <Code>--motion-ease</Code>{" "}
+          (re-time every component transition that doesn&apos;t set an
+          explicit duration/easing utility) and{" "}
+          <Code>--radius-factor</Code> (scales every corner radius from a
+          single multiplier). The lava theme uses all three to feel molten
+          rather than merely recolored: slower, viscous ease-out motion,
+          corners swollen 1.5x, and hard shadows tinted deep magma instead
+          of gray.
+        </P>
+        <P>
+          Semantic token names, the spacing scale, and the typography scale
+          stay constant across themes. Those are structural — part of the
+          system&apos;s identity, not the brand&apos;s. If you find yourself
+          needing per-theme spacing or typography, you&apos;ve conflated
+          brand identity with system structure; rethink the abstraction
+          before forking it.
         </P>
       </Stack>
     </DocPage>

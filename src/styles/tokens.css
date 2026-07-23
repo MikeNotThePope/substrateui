@@ -188,6 +188,15 @@
   /* ── SubstrateUI structural (shared across modes) ── */
   --border-width: 2px;
   --press-depth: 1.5px;
+
+  /* ── SubstrateUI feel tokens (themable structure) ──
+     Motion re-times every component transition that doesn't set an
+     explicit duration or easing utility (see BASE STYLES). Radius
+     factor multiplies the stock Tailwind radius scale. Defaults match
+     Tailwind's own values, so the default theme is unchanged. */
+  --motion-duration: 150ms;
+  --motion-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-factor: 1;
 }
 
 
@@ -414,8 +423,16 @@
   --secondary-surface: var(--raw-sulfur-100);
   --secondary-text: var(--raw-sulfur-800);
 
-  /* ── Hard shadows ── */
-  --hard-shadow-color: var(--raw-basalt-800);
+  /* ── Hard shadows: cooled crust with an ember tint ── */
+  --hard-shadow-color: var(--raw-magma-900);
+
+  /* ── Molten feel (shared across lava light/dark) ──
+     Viscous motion: slower, with a heavy-tailed ease-out — movement
+     front-loads (presses still feel responsive) then flows to rest.
+     Softer corners: the radius scale swells 1.5x, like rock gone soft. */
+  --motion-duration: 300ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius-factor: 1.5;
 
   /* ── Status ── */
   --status-success: var(--raw-olivine);
@@ -506,8 +523,8 @@
   --secondary-surface: oklch(0.82 0.175 95 / 0.12);
   --secondary-text: var(--raw-sulfur-300);
 
-  /* ── Hard shadows ── */
-  --hard-shadow-color: var(--raw-basalt-500);
+  /* ── Hard shadows: embers glowing under the crust ── */
+  --hard-shadow-color: var(--raw-magma-700);
 
   /* ── Status ── */
   --status-success: oklch(0.70 0.14 135);
@@ -535,6 +552,16 @@
 @theme inline {
   /* ── Shadcn core (required for components to work) ── */
   --radius: 0.625rem;
+
+  /* ── Radius scale × theme factor ──
+     Stock Tailwind values times --radius-factor. At the default
+     factor of 1 these render identically to stock; themes soften or
+     sharpen every corner by overriding the single factor. */
+  --radius-sm: calc(0.25rem * var(--radius-factor));
+  --radius-md: calc(0.375rem * var(--radius-factor));
+  --radius-lg: calc(0.5rem * var(--radius-factor));
+  --radius-xl: calc(0.75rem * var(--radius-factor));
+  --radius-2xl: calc(1rem * var(--radius-factor));
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -657,6 +684,19 @@
 
 * {
   border-color: var(--border);
+}
+
+/* ── Motion feel ──
+   Re-time component transitions from the motion tokens. Scoped to
+   elements that opted in via a transition-* utility; components that
+   set an explicit duration-* or ease-* utility keep their own timing
+   (class sniff — these rules are unlayered, so they'd win otherwise).
+   prefers-reduced-motion still zeroes everything below. */
+[data-slot][class*="transition"]:not([class*="duration-"]) {
+  transition-duration: var(--motion-duration);
+}
+[data-slot][class*="transition"]:not([class*="ease-"]) {
+  transition-timing-function: var(--motion-ease);
 }
 
 @keyframes sui-spin {
