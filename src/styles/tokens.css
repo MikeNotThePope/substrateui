@@ -726,6 +726,31 @@ body {
 }
 
 
+/* ── Texture utilities (optional tactile depth) ──
+   Pure-CSS background patterns, no dependencies, opt-in per section.
+   Line and grid inks derive from the foreground token via color-mix,
+   so they adapt to every theme and mode automatically; the noise tile
+   is a low-opacity SVG feTurbulence grain that reads on any surface.
+   Combine with a background color: class="bg-surface-page texture-noise". */
+.texture-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+.texture-lines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    color-mix(in oklab, var(--foreground) 5%, transparent) 0 1px,
+    transparent 1px 4px
+  );
+}
+.texture-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+
 /* ================================================================
    REDUCED MOTION
 
