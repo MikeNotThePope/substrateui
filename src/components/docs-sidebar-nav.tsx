@@ -28,6 +28,7 @@ export const navSections = [
       { label: "Typography", href: "/docs/tokens/typography" },
       { label: "Spacing", href: "/docs/tokens/spacing" },
       { label: "Themes", href: "/docs/foundations/themes" },
+      { label: "AI Prompt", href: "/docs/foundations/ai-prompt" },
     ],
   },
   {
