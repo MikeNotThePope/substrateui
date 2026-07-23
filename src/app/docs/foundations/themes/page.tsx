@@ -1,6 +1,43 @@
 import { DocPage } from "../../_components/doc-page"
 import { Stack } from "@/components/ui/stack"
-import { H3, P, Code } from "@/components/ui/typography"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { H3, H4, P, Code } from "@/components/ui/typography"
+
+const themeDna = [
+  {
+    name: "Default",
+    keywords: "Warm, tactile, confident, grounded, friendly-but-serious.",
+    feels: "Quality stationery — cream paper, saturated ink, edges you can run a thumb over.",
+    not: [
+      "Cold or clinical — every neutral is warm; never introduce pure or blue-tinted grays",
+      "Glassy or floaty — no blur, no translucency, no soft elevation; depth is borders and hard offset shadows",
+      "Flat minimalism — nothing borderless; components wear their 2px borders proudly",
+      "Neon — plum is ink, not electricity; amber is the only accent that shouts, and it's used sparingly",
+    ],
+  },
+  {
+    name: "Lava",
+    keywords: "Volcanic, energetic, elemental, high-contrast, molten.",
+    feels: "Raw heat under a dark crust — molten in structure, not just color.",
+    not: [
+      "A red re-skin of the default theme — lava changes structure (motion, corners, shadows), not just hue",
+      "Alarming — magma is heat, not danger; errors stay cherry red, so never use the primary for destructive actions",
+      "Cyberpunk or neon — the palette is geological (magma, sulfur, basalt), never electric or glitchy",
+      "Snappy — motion is deliberately slow and viscous; don't add fast durations to \"fix\" it",
+    ],
+  },
+]
+
+const themeDiff = [
+  ["Primary", "Plum ink", "Magma — yellow→red as it deepens"],
+  ["Secondary", "Amber", "Sulfur yellow"],
+  ["Neutrals", "Warm gray (cream)", "Basalt"],
+  ["Status hues", "Green · amber · red · blue", "Olivine · sulfur · cherry · ijen"],
+  ["Hard shadow", "Warm near-black", "Deep magma ember"],
+  ["Motion", "150ms, standard ease", "300ms, viscous ease-out"],
+  ["Radius", "Stock scale (factor 1)", "Swollen 1.5x"],
+  ["Feels like", "Quality stationery", "Molten rock under a crust"],
+]
 
 const cascadeExample = `:root { /* default light */ }
 .dark { /* default dark — overrides :root */ }
@@ -116,6 +153,50 @@ export default function ThemesPage() {
           and fails the build if any pairing drops below threshold. Adjust
           OKLCH lightness values in 0.05 increments until every row passes.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Theme DNA</H3>
+        <P>
+          Every theme is defined as much by what it refuses as by what it
+          uses. The NOT-lists below keep the two shipped themes from drifting
+          toward each other — and set the bar for any theme you add.
+        </P>
+        {themeDna.map((theme) => (
+          <Stack gap="sm" key={theme.name}>
+            <H4>{theme.name}</H4>
+            <P>
+              <strong>Emotional keywords:</strong> {theme.keywords}{" "}
+              <strong>Feels like:</strong> {theme.feels}
+            </P>
+            <P className="font-medium">This theme is NOT:</P>
+            <ul className="list-disc ps-6 space-y-1 text-sm">
+              {theme.not.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </Stack>
+        ))}
+        <div className="border-2 rounded-lg overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[20%]">Axis</TableHead>
+                <TableHead>Default</TableHead>
+                <TableHead>Lava</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {themeDiff.map(([axis, def, lava]) => (
+                <TableRow key={axis}>
+                  <TableCell className="font-medium">{axis}</TableCell>
+                  <TableCell className="text-sm">{def}</TableCell>
+                  <TableCell className="text-sm">{lava}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </Stack>
 
       <Stack gap="md">
