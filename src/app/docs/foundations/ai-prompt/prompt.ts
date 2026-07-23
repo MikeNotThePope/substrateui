@@ -33,9 +33,11 @@ Plum primary with amber secondary (a colorblind-safe pair) over warm gray neutra
       'Enable with `<html data-theme="lava">`. Dark mode toggles with the `.dark` class on `<html>`, orthogonal to the theme.',
     philosophy: `**Emotional keywords:** Volcanic, energetic, elemental, high-contrast, bold.
 
-A palette derived from lava at the moment of eruption: magma primary (the hue rotates yellow→red as it deepens, like cooling lava), sulfur-yellow secondary, and basalt neutrals. Status colors are geologically sourced — olivine green, cherry red, ijen blue. The feel is raw heat under a dark crust: darker, hotter, and more intense than the default theme, without losing legibility.`,
+A palette derived from lava at the moment of eruption: magma primary (the hue rotates yellow→red as it deepens, like cooling lava), sulfur-yellow secondary, and basalt neutrals. Status colors are geologically sourced — olivine green, cherry red, ijen blue. The feel is raw heat under a dark crust: darker, hotter, and more intense than the default theme, without losing legibility.
+
+Lava is also molten in structure, not just color: motion is slower and viscous (300ms with a heavy-tailed ease-out — movement front-loads, then flows to rest), every corner radius swells 1.5x, and hard shadows are tinted deep magma — embers under the crust — instead of gray. This all flows from theme tokens; write ordinary utilities and it happens automatically.`,
     success:
-      "a volcanic landscape rendered as an interface: basalt surfaces, magma accents, sulfur highlights, tactile presses",
+      "a volcanic landscape rendered as an interface: basalt surfaces, magma accents, sulfur highlights, softened corners, and slow, viscous motion",
   },
 }
 
@@ -77,9 +79,9 @@ ${dna.philosophy}
 ## The DNA
 
 1. **Chunky borders.** Components wear visible 2px borders (\`--border-width: 2px\`), darker than typical libraries. Don't thin them or fade them out.
-2. **Physical press.** Buttons depress 1.5px on \`:active\` (\`--press-depth\`). Interactions feel mechanical, not floaty.
+2. **Physical press.** Solid buttons rest on a hard offset shadow, lift toward the light on hover, and sink flush on press. Interactions feel mechanical, not floaty. For custom pressable surfaces use \`shadow-hard-sm\` / \`shadow-hard\` / \`shadow-hard-lg\`.
 3. **OKLCH color.** The entire palette is OKLCH with perceptually even ramps. You never touch raw values — semantic tokens only.
-4. **Soft-but-not-pill radius.** \`--radius: 0.625rem\`; components use \`rounded-md\`/\`rounded-lg\`. No sharp corners, no pill buttons.
+4. **Soft-but-not-pill radius.** Components use \`rounded-md\`/\`rounded-lg\`. The whole radius scale is themable via \`--radius-factor\` (lava softens every corner 1.5x) — so never hardcode pixel radii. No sharp corners, no pill buttons.
 5. **Light and dark are equal citizens.** Every token pairing passes WCAG AA in both modes. Never hand-tune a color for one mode.
 6. **Status is never color-only.** Success/warning/error/info always pair color with an icon — Alert does this for you; follow the same rule in custom UI.
 
@@ -109,14 +111,14 @@ Use semantic Tailwind utilities only:
 - ❌ Hardcode hex/oklch/rgb color literals, or use Tailwind's stock palette (\`bg-blue-500\`, \`text-gray-600\`, …). Every color goes through a semantic token.
 - ❌ Use the raw palette ramps in app code — they don't re-map when the theme changes.
 - ❌ Convey status with color alone, invent a fifth status color, or use \`destructive\` for warnings.
-- ❌ Add ad-hoc box-shadows for page-level depth — depth comes from surface layers and borders (overlays already ship with their own shadows).
+- ❌ Add soft blurred box-shadows — depth is hard offset shadows (\`shadow-hard-sm\`/\`shadow-hard\`/\`shadow-hard-lg\`) plus surface layers and borders. Never \`shadow-md\`-style blur for elevation.
 - ❌ Hand-roll focus styles — components ship \`focus-visible\` rings; keep them.
 - ❌ \`rounded-none\` or pill-shaped buttons that fight the radius identity.
 - ❌ Use physical direction utilities (\`pl-*\`, \`ml-*\`, \`left-*\`) — the system is RTL-ready; use logical ones (\`ps-*\`, \`ms-*\`, \`start-*\`).
 
 ## Motion & accessibility
 
-Motion is subtle and mechanical: color transitions plus the 1.5px press. No parallax, no floating blobs, no slow eases. The token sheet globally respects \`prefers-reduced-motion\`. Contrast passes WCAG AA in both modes by construction — it stays that way as long as you stay on semantic tokens.
+Motion is subtle and mechanical: color transitions plus the hard-shadow press. Timing is themable — \`--motion-duration\` and \`--motion-ease\` re-time component transitions per theme — so use plain \`transition-*\` utilities and avoid hardcoding \`duration-*\`/\`ease-*\` unless the timing is intrinsic (an entrance animation, a progress bar). No parallax, no floating blobs. The token sheet globally respects \`prefers-reduced-motion\`. Contrast passes WCAG AA in both modes by construction — it stays that way as long as you stay on semantic tokens.
 
 ## What success looks like
 
