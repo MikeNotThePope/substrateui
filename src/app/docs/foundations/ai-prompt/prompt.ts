@@ -50,7 +50,7 @@ Before writing code, study the existing codebase: the framework (Next.js App Rou
 <design-system>
 # SubstrateUI — ${dna.label} theme
 
-A chunky, OKLCH-powered React design system built on Tailwind CSS v4 and Radix UI primitives. Token names are shadcn-compatible, so shadcn knowledge transfers — but all styling flows from CSS variables, so the same components render correctly in every theme and in light and dark mode with zero code changes.
+A chunky, OKLCH-powered React design system built on Tailwind CSS v4 and Base UI primitives. Token names are shadcn-compatible, so shadcn knowledge transfers — but all styling flows from CSS variables, so the same components render correctly in every theme and in light and dark mode with zero code changes.
 
 ## Setup (skip if already installed)
 
