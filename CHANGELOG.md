@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- [#31](https://github.com/MikeNotThePope/substrateui/pull/31) [`81f99f5`](https://github.com/MikeNotThePope/substrateui/commit/81f99f509fdf02f28f70a12df718e51789644501) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add themable "feel" tokens and make the lava theme molten. New structural tokens `--motion-duration`, `--motion-ease`, and `--radius-factor` let themes vary motion timing and corner softness, not just color. Defaults are identical to previous rendering. Lava now overrides all three — slower viscous ease-out motion (300ms), corners scaled 1.5x, and hard shadows tinted deep magma instead of gray — so it feels molten rather than merely recolored.
+
+- [#34](https://github.com/MikeNotThePope/substrateui/pull/34) [`b4d60a5`](https://github.com/MikeNotThePope/substrateui/commit/b4d60a5085293d84365fe7bbaa467e7470b027d6) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add optional texture utilities: `texture-noise`, `texture-lines`, and `texture-grid`. Pure-CSS background patterns (SVG grain, hairlines, blueprint grid) with zero dependencies. Line and grid inks derive from the foreground token via color-mix, so they adapt to every theme and mode automatically. Opt-in per element; nothing renders differently unless a class is applied.
+
 ## 1.0.0
 
 ### Major Changes
