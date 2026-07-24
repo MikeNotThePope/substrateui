@@ -57,7 +57,7 @@ export const navSections = [
     ],
   },
   {
-    title: "Layout",
+    title: "Layout Primitives",
     items: [
       { label: "Stack", href: "/docs/components/stack" },
       { label: "Cluster", href: "/docs/components/cluster" },
@@ -139,15 +139,23 @@ export const navSections = [
       { label: "Pagination", href: "/docs/components/pagination" },
       { label: "NavigationMenu", href: "/docs/components/navigation-menu" },
       { label: "Menubar", href: "/docs/components/menubar" },
+      { label: "Sidebar", href: "/docs/components/sidebar" },
+    ],
+  },
+  {
+    title: "Layouts",
+    items: [
+      { label: "App Shell", href: "/docs/layouts/app-shell" },
+      { label: "Dashboard Shell", href: "/docs/layouts/dashboard-shell" },
+      { label: "Nav Shell", href: "/docs/layouts/nav-shell" },
+      { label: "Auth Shell", href: "/docs/layouts/auth-shell" },
+      { label: "Page Layout", href: "/docs/layouts/page-layout" },
     ],
   },
   {
     title: "Patterns",
     items: [
-      { label: "App Shell", href: "/docs/patterns/app-shell" },
-      { label: "Auth Shell", href: "/docs/patterns/auth-shell" },
       { label: "Forms", href: "/docs/patterns/forms" },
-      { label: "Page Layout", href: "/docs/patterns/page-layout" },
     ],
   },
 ]
