@@ -21,10 +21,27 @@ const sidebarProps: PropDef[] = [
     description: "Whether the sidebar is in collapsed state.",
   },
   {
+    name: "mobileTitle",
+    type: "string",
+    default: '"Navigation"',
+    description:
+      "Accessible title for the mobile drawer, announced to screen readers.",
+  },
+  {
     name: "className",
     type: "string",
     default: undefined,
     description: "Additional CSS classes to apply to the sidebar.",
+  },
+]
+
+const sidebarTriggerProps: PropDef[] = [
+  {
+    name: "className",
+    type: "string",
+    default: undefined,
+    description:
+      "Additional classes. The trigger is hidden on md+ by default (md:hidden).",
   },
 ]
 
@@ -53,7 +70,7 @@ export default function AppShellPage() {
   return (
     <DocPage
       title="App Shell"
-      description="A full-page layout organism that provides a sidebar, navigation, logo area, and scrollable main content region. Use as the root layout for dashboard-style applications."
+      description="A full-page side-navigation layout: a fixed sidebar with logo, navigation, and footer beside a scrollable main region. On mobile the sidebar collapses into a drawer opened by AppShellSidebarTrigger. Use as the root layout for dashboard-style applications."
     >
       <Stack gap="md">
         <H3>Structure Diagram</H3>
@@ -61,6 +78,7 @@ export default function AppShellPage() {
           code={`import {
   AppShell,
   AppShellSidebar,
+  AppShellSidebarTrigger,
   AppShellLogo,
   AppShellNav,
   AppShellNavItem,
@@ -86,6 +104,8 @@ import { PageBody } from "@/components/page-body"
   <AppShellMain>
     <PageHeader>
       <PageHeaderContent>
+        {/* Hidden on md+, opens the sidebar drawer on mobile */}
+        <AppShellSidebarTrigger />
         <PageHeaderTitle>Dashboard</PageHeaderTitle>
       </PageHeaderContent>
     </PageHeader>
@@ -142,6 +162,19 @@ import { PageBody } from "@/components/page-body"
       <Stack gap="md">
         <H3>AppShellNavItem Props</H3>
         <PropsTable props={navItemProps} />
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Responsive Behavior</H3>
+        <Muted>
+          On <Code>md</Code> and larger the sidebar is a fixed column. Below{" "}
+          <Code>md</Code> it is hidden and its contents are mirrored into a
+          drawer. Render an <Code>AppShellSidebarTrigger</Code> somewhere
+          always-visible on mobile (typically inside your{" "}
+          <Code>PageHeader</Code>) to open it. The trigger is itself hidden on{" "}
+          <Code>md</Code>+, so it never shows on desktop.
+        </Muted>
+        <PropsTable props={sidebarTriggerProps} />
       </Stack>
     </DocPage>
   )
