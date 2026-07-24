@@ -106,13 +106,13 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 
 \`\`\`tsx
 import { Button, Card, Stack, Input } from "@mikenotthepope/substrateui"
-import { AppShell, PageHeader, StatCard } from "@mikenotthepope/substrateui/organisms"
+import { AppShell, DashboardShell, NavShell, AuthShell, PageHeader, StatCard } from "@mikenotthepope/substrateui/organisms"
 import { cn } from "@mikenotthepope/substrateui/utils"
 \`\`\`
 
 75 primitives are available — layout (Stack, Cluster, Grid, Center, Divider, Spacer), typography (H1–H4, P, Code, Kbd), forms (Input, Textarea, Select, Checkbox, RadioGroup, Switch, Slider, Combobox, DatePicker, InputOTP, SearchField, PasswordInput, plus Field/Fieldset/FormSection/FormActions/Form), data display (Table, DataTable, Card, Avatar, Calendar, Chart), feedback (Alert, Badge, Progress, Toast, Empty, Spinner, Skeleton), overlays (Dialog, Sheet, Drawer, AlertDialog, Popover, Tooltip, HoverCard, DropdownMenu, ContextMenu, Command, Menubar), and navigation (Tabs, NavTabs, Breadcrumb, Pagination, NavigationMenu).
 
-Compose these before writing custom markup. Use Stack/Cluster/Grid/Center for layout instead of ad-hoc flex divs. Use component variants (e.g. \`<Button variant="outline">\`) before reaching for className overrides.
+For full-page layouts, reach for a shell organism: \`AppShell\` (side nav), \`NavShell\` (top nav), \`DashboardShell\` (top + side nav), or \`AuthShell\` (centered auth card) — all responsive, collapsing navigation into a drawer on mobile. Compose these before writing custom markup. Use Stack/Cluster/Grid/Center for layout instead of ad-hoc flex divs. Use component variants (e.g. \`<Button variant="outline">\`) before reaching for className overrides.
 
 ## Token rules (critical)
 

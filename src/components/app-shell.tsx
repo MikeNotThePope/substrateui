@@ -1,49 +1,151 @@
+"use client"
+
 import * as React from "react"
+import { Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Button, type ButtonProps } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet"
+
+// ─── Mobile drawer context ──────────────────────────────────────────
+
+/** Shared open-state for the sidebar's mobile drawer. */
+interface AppShellContextValue {
+  mobileOpen: boolean
+  setMobileOpen: (open: boolean) => void
+}
+
+/** Context wiring the mobile hamburger trigger to the sidebar drawer.
+ *
+ * Exported so sibling shells (e.g. DashboardShell) can provide their own
+ * state while reusing AppShellSidebar / AppShellSidebarTrigger. Falls back to
+ * a no-op so the parts still render (desktop-only) outside a provider.
+ */
+const AppShellContext = React.createContext<AppShellContextValue>({
+  mobileOpen: false,
+  setMobileOpen: () => {},
+})
+
+/** Read the AppShell mobile-drawer context. */
+function useAppShellContext() {
+  return React.useContext(AppShellContext)
+}
 
 /** Full-height application shell container with horizontal flex layout.
+ *
+ * Provides the mobile-drawer context consumed by AppShellSidebar and
+ * AppShellSidebarTrigger. Desktop layout is unchanged from a plain flex row.
  *
  * @example
  * <AppShell><AppShellSidebar>...</AppShellSidebar><AppShellMain>...</AppShellMain></AppShell>
  */
 function AppShell({
   className,
+  children,
   ref,
   ...props
 }: React.ComponentPropsWithRef<"div">) {
+  const [mobileOpen, setMobileOpen] = React.useState(false)
   return (
-    <div
-      ref={ref}
-      data-slot="app-shell"
-      className={cn("flex h-screen overflow-hidden bg-background", className)}
-      {...props}
-    />
+    <AppShellContext.Provider value={{ mobileOpen, setMobileOpen }}>
+      <div
+        ref={ref}
+        data-slot="app-shell"
+        className={cn("flex h-screen overflow-hidden bg-background", className)}
+        {...props}
+      >
+        {children}
+      </div>
+    </AppShellContext.Provider>
   )
 }
 
-/** Fixed-width sidebar panel hidden on mobile, visible on md+ screens.
+/** Props for AppShellSidebar. */
+interface AppShellSidebarProps extends React.ComponentPropsWithRef<"aside"> {
+  /** Whether the sidebar is in collapsed state. */
+  collapsed?: boolean
+  /** Accessible title for the mobile drawer (screen-reader only). */
+  mobileTitle?: string
+}
+
+/** Sidebar panel: a fixed-width column on md+ screens, and an off-canvas
+ * drawer on mobile.
+ *
+ * On mobile the sidebar is hidden and its contents are mirrored into a Sheet
+ * drawer opened by AppShellSidebarTrigger. Render the trigger somewhere always
+ * visible on mobile (e.g. inside your PageHeader).
  *
  * @prop collapsed - Whether the sidebar is in collapsed state.
+ * @prop mobileTitle - Accessible title for the mobile drawer (screen-reader only).
  */
 function AppShellSidebar({
   collapsed = false,
+  mobileTitle = "Navigation",
   className,
+  children,
   ref,
   ...props
-}: React.ComponentPropsWithRef<"aside"> & { collapsed?: boolean }) {
+}: AppShellSidebarProps) {
+  const { mobileOpen, setMobileOpen } = useAppShellContext()
+  void collapsed
   return (
-    <aside
+    <>
+      <aside
+        ref={ref}
+        data-slot="app-shell-sidebar"
+        className={cn(
+          "hidden md:flex flex-col w-64 shrink-0 border-e-2 bg-card",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </aside>
+      <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+        <SheetContent
+          side="left"
+          data-slot="app-shell-sidebar-mobile"
+          className="flex w-64 flex-col p-0 md:hidden"
+        >
+          <SheetTitle className="sr-only">{mobileTitle}</SheetTitle>
+          {children}
+        </SheetContent>
+      </Sheet>
+    </>
+  )
+}
+
+/** Hamburger button that opens the sidebar drawer on mobile. Hidden on md+.
+ *
+ * @example
+ * <PageHeader><AppShellSidebarTrigger /><PageHeaderTitle>...</PageHeaderTitle></PageHeader>
+ */
+function AppShellSidebarTrigger({
+  className,
+  onClick,
+  children,
+  ref,
+  ...props
+}: ButtonProps) {
+  const { setMobileOpen } = useAppShellContext()
+  return (
+    <Button
       ref={ref}
-      data-slot="app-shell-sidebar"
-      className={cn(
-        "flex-col w-64 shrink-0 border-e-2 bg-card",
-        collapsed ? "hidden md:flex" : "hidden md:flex",
-        className,
-      )}
+      type="button"
+      variant="ghost"
+      size="icon"
+      data-slot="app-shell-sidebar-trigger"
+      aria-label="Open navigation menu"
+      className={cn("md:hidden", className)}
+      onClick={(event) => {
+        onClick?.(event)
+        setMobileOpen(true)
+      }}
       {...props}
-    />
+    >
+      {children ?? <Menu className="h-5 w-5" />}
+    </Button>
   )
 }
 
@@ -159,11 +261,16 @@ function AppShellMain({
 
 export {
   AppShell,
+  AppShellContext,
+  useAppShellContext,
   AppShellSidebar,
+  AppShellSidebarTrigger,
   AppShellLogo,
   AppShellNav,
   AppShellNavItem,
   AppShellFooter,
   AppShellMain,
+  type AppShellContextValue,
+  type AppShellSidebarProps,
   type AppShellNavItemProps,
 }

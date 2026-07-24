@@ -11,6 +11,27 @@ const nextConfig: NextConfig = {
       { source: "/storybook/", destination: "/storybook/index.html" },
     ]
   },
+  async redirects() {
+    // The layout shells moved from /docs/patterns/* to their own
+    // /docs/layouts/* section. Keep old links working.
+    return [
+      {
+        source: "/docs/patterns/app-shell",
+        destination: "/docs/layouts/app-shell",
+        permanent: true,
+      },
+      {
+        source: "/docs/patterns/auth-shell",
+        destination: "/docs/layouts/auth-shell",
+        permanent: true,
+      },
+      {
+        source: "/docs/patterns/page-layout",
+        destination: "/docs/layouts/page-layout",
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;
