@@ -31,14 +31,22 @@
       "types": "./dist/organisms.d.ts",
       "import": "./dist/organisms.js"
     },
+    "./blocks": {
+      "types": "./dist/blocks.d.ts",
+      "import": "./dist/blocks.js"
+    },
     "./utils": {
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
     },
     "./styles.css": "./dist/styles.css"
   },
+  "bin": {
+    "substrateui": "bin/substrateui.mjs"
+  },
   "files": [
     "dist",
+    "bin",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
