@@ -35,6 +35,12 @@ npm install substrateui
 
 ### CSS Setup
 
+Run the init command to wire the imports in automatically, or add them by hand:
+
+```bash
+npx substrateui init
+```
+
 ```css
 /* globals.css */
 @import "tailwindcss";
@@ -77,17 +83,34 @@ import { ThemeProvider } from "next-themes"
 ```tsx
 import { Button, Stack, Card, CardHeader, CardTitle, CardContent } from "substrateui"
 import { AppShell, AppShellSidebar, AppShellMain } from "substrateui/organisms"
+import { SignInBlock, HeroBlock, StatsBlock } from "substrateui/blocks"
 import { cn } from "substrateui/utils"
+```
+
+### Framework-agnostic links
+
+Blocks and any navigation you build stay router-agnostic. Wrap your app once
+with your framework's link and every SubstrateUI `Link` uses it; with no
+provider, links fall back to a plain `<a>`.
+
+```tsx
+import NextLink from "next/link"
+import { LinkProvider } from "substrateui"
+
+<LinkProvider component={NextLink}>{children}</LinkProvider>
 ```
 
 ## Exports
 
 | Import path | Contents |
 |---|---|
-| `substrateui` | All 75 UI primitives (Button, Card, Input, Table, etc.) |
+| `substrateui` | All UI primitives (Button, Card, Input, Table, etc.) plus the `LinkProvider` adapter |
 | `substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
+| `substrateui/blocks` | Full compositions (SignInBlock, SignUpBlock, StatsBlock, HeroBlock, FeatureGridBlock) |
 | `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
 | `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
+
+Set up a project with the CLI: `npx substrateui init`.
 
 ## Requirements
 
@@ -116,6 +139,7 @@ SubstrateUI uses a 3-layer OKLCH color system:
 - **Overlays** — Sheet, Drawer, Popover, Tooltip, ContextMenu, DropdownMenu, Command
 - **Navigation** — Tabs, Breadcrumb, NavigationMenu, Menubar, Pagination, ScrollArea, Sidebar, Collapsible, Accordion
 - **Patterns** — AppShell, PageHeader, PageBody, PageTabs, StatCard
+- **Blocks** — SignInBlock, SignUpBlock, StatsBlock, HeroBlock, FeatureGridBlock
 
 ## Customization
 

@@ -158,6 +158,19 @@ export const navSections = [
       { label: "Forms", href: "/docs/patterns/forms" },
     ],
   },
+  {
+    title: "Blocks",
+    items: [
+      { label: "Overview", href: "/docs/blocks" },
+    ],
+  },
+  {
+    title: "Tools",
+    items: [
+      { label: "Theme Generator", href: "/docs/foundations/theme-generator" },
+      { label: "CLI", href: "/docs/foundations/cli" },
+    ],
+  },
 ]
 
 // ─── Sidebar Nav ──────────────────────────────────────────────────────

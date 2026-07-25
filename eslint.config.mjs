@@ -28,6 +28,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Built Storybook (gitignored, but present locally after `bun run build`).
     "public/storybook/**",
+    // Zero-dependency Node CLI script — not part of the app/source lint scope.
+    "bin/**",
   ]),
 ]);
 
