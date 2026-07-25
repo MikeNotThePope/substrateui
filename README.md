@@ -106,7 +106,8 @@ import { LinkProvider } from "substrateui"
 |---|---|
 | `substrateui` | All UI primitives (Button, Card, Input, Table, etc.) plus the `LinkProvider` adapter |
 | `substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
-| `substrateui/blocks` | Full compositions (SignInBlock, SignUpBlock, StatsBlock, HeroBlock, FeatureGridBlock) |
+| `substrateui/blocks` | Full compositions across Marketing, Application, Auth & E-commerce (Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid) |
+| `substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
 | `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
 | `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
 
@@ -134,12 +135,13 @@ SubstrateUI uses a 3-layer OKLCH color system:
 - **Typography** — H1-H4, P, Lead, Large, Small, Muted, Code, Mono
 - **Layout** — Stack, Cluster, Grid, Center, Divider, Spacer, Separator, AspectRatio, ResizablePanels
 - **Forms** — Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, DatePicker, Combobox, InputGroup, InputOTP, SearchField, Field, Fieldset, FormSection, FormActions
-- **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item
-- **Feedback** — Alert, AlertDialog, Dialog, Progress, Skeleton, Sonner (toast)
+- **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item, Timeline, Rating, ListGroup
+- **Feedback** — Alert, Banner, AlertDialog, Dialog, Progress, Skeleton, Sonner (toast)
 - **Overlays** — Sheet, Drawer, Popover, Tooltip, ContextMenu, DropdownMenu, Command
-- **Navigation** — Tabs, Breadcrumb, NavigationMenu, Menubar, Pagination, ScrollArea, Sidebar, Collapsible, Accordion
+- **Navigation** — Tabs, Breadcrumb, NavigationMenu, Menubar, Pagination, ScrollArea, Sidebar, Collapsible, Accordion, Stepper
 - **Patterns** — AppShell, PageHeader, PageBody, PageTabs, StatCard
-- **Blocks** — SignInBlock, SignUpBlock, StatsBlock, HeroBlock, FeatureGridBlock
+- **Blocks** — Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid
+- **Templates** — DashboardTemplate, PricingTemplate
 
 ## Customization
 

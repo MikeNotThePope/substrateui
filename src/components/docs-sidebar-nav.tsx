@@ -104,12 +104,16 @@ export const navSections = [
       { label: "Avatar", href: "/docs/components/avatar" },
       { label: "AspectRatio", href: "/docs/components/aspect-ratio" },
       { label: "Calendar", href: "/docs/components/calendar" },
+      { label: "Timeline", href: "/docs/components/timeline" },
+      { label: "Rating", href: "/docs/components/rating" },
+      { label: "ListGroup", href: "/docs/components/list-group" },
     ],
   },
   {
     title: "Feedback",
     items: [
       { label: "Alert", href: "/docs/components/alert" },
+      { label: "Banner", href: "/docs/components/banner" },
       { label: "Progress", href: "/docs/components/progress" },
       { label: "Toast", href: "/docs/components/toast" },
       { label: "Empty", href: "/docs/components/empty" },
@@ -140,6 +144,7 @@ export const navSections = [
       { label: "NavigationMenu", href: "/docs/components/navigation-menu" },
       { label: "Menubar", href: "/docs/components/menubar" },
       { label: "Sidebar", href: "/docs/components/sidebar" },
+      { label: "Stepper", href: "/docs/components/stepper" },
     ],
   },
   {
@@ -162,6 +167,12 @@ export const navSections = [
     title: "Blocks",
     items: [
       { label: "Overview", href: "/docs/blocks" },
+    ],
+  },
+  {
+    title: "Templates",
+    items: [
+      { label: "Overview", href: "/docs/templates" },
     ],
   },
   {
