@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.0
+
+### Minor Changes
+
+- [#43](https://github.com/MikeNotThePope/substrateui/pull/43) [`d7a5b71`](https://github.com/MikeNotThePope/substrateui/commit/d7a5b71869fec37a3501d51a7a66ab3b42d15d93) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add a `Tree` component (steal from Ant Design).
+
+  A hierarchical tree view for file explorers, nested navigation, and category pickers — Ant Design's signature data-dense strength. Expand/collapse, single selection, and per-node icons, with expanded and selected state controllable or uncontrolled.
+
+  Fully keyboard-navigable following the WAI-ARIA tree pattern (`role="tree"` / `treeitem`, `aria-expanded` / `aria-selected` / `aria-level`, roving `tabindex`): arrows move/expand/collapse, Enter/Space select, Home/End jump. Exported from the main entry with a story, unit tests, and docs.
+
 ## 1.5.0
 
 ### Minor Changes
