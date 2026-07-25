@@ -28,6 +28,7 @@ const hooks: PropDef[] = [
   { name: "useMounted", type: "() => boolean", default: undefined, description: "True after client mount — gate browser-only UI." },
   { name: "useMergedRef", type: "(...refs) => refCallback", default: undefined, description: "Merge several refs onto one element." },
   { name: "useIsMobile", type: "() => boolean", default: undefined, description: "True below the mobile breakpoint (768px)." },
+  { name: "useAnnouncer", type: "() => { announce, clear }", default: undefined, description: "Imperatively announce messages to screen readers via a shared ARIA live region (also exported as announce/clearAnnouncer)." },
 ]
 
 export default function HooksPage() {

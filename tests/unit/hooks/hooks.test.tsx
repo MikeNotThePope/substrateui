@@ -7,6 +7,12 @@ import { useCounter, usePrevious } from "@/hooks/use-misc"
 import { useDebouncedValue } from "@/hooks/use-debounced-value"
 import { useLocalStorage } from "@/hooks/use-local-storage"
 import { useClipboard } from "@/hooks/use-clipboard"
+import {
+  useAnnouncer,
+  announce,
+  clearAnnouncer,
+  destroyAnnouncer,
+} from "@/hooks/use-announcer"
 
 describe("useDisclosure", () => {
   it("opens, closes, and toggles", () => {
@@ -126,5 +132,54 @@ describe("useClipboard", () => {
     })
     expect(writeText).toHaveBeenCalledWith("hello")
     expect(result.current.copied).toBe(true)
+  })
+})
+
+describe("useAnnouncer / announce", () => {
+  afterEach(() => {
+    destroyAnnouncer()
+  })
+
+  function region(assertiveness: "assertive" | "polite") {
+    return document.querySelector<HTMLElement>(
+      `[data-substrateui-announcer] [aria-live="${assertiveness}"]`,
+    )
+  }
+
+  it("creates one shared visually-hidden live region on first announce", () => {
+    expect(document.querySelector("[data-substrateui-announcer]")).toBeNull()
+    announce("hello")
+    announce("again")
+    expect(document.querySelectorAll("[data-substrateui-announcer]")).toHaveLength(1)
+  })
+
+  it("routes messages to the polite region by default and assertive on request", () => {
+    announce("polite message")
+    announce("urgent message", "assertive")
+    expect(region("polite")?.textContent).toContain("polite message")
+    expect(region("assertive")?.textContent).toContain("urgent message")
+  })
+
+  it("appends a fresh node per call so identical messages re-announce", () => {
+    announce("saved", "polite")
+    announce("saved", "polite")
+    expect(region("polite")?.childElementCount).toBe(2)
+  })
+
+  it("clears a region on demand", () => {
+    announce("keep me", "assertive")
+    announce("clear me", "polite")
+    clearAnnouncer("polite")
+    expect(region("polite")?.childElementCount).toBe(0)
+    expect(region("assertive")?.childElementCount).toBe(1)
+  })
+
+  it("exposes a stable { announce, clear } from useAnnouncer", () => {
+    const { result, rerender } = renderHook(() => useAnnouncer())
+    const first = result.current
+    rerender()
+    expect(result.current).toBe(first)
+    expect(result.current.announce).toBe(announce)
+    expect(result.current.clear).toBe(clearAnnouncer)
   })
 })
