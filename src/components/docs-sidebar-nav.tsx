@@ -176,6 +176,12 @@ export const navSections = [
     ],
   },
   {
+    title: "Hooks",
+    items: [
+      { label: "Overview", href: "/docs/hooks" },
+    ],
+  },
+  {
     title: "Tools",
     items: [
       { label: "Theme Generator", href: "/docs/foundations/theme-generator" },

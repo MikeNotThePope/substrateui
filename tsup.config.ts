@@ -6,6 +6,7 @@ export default defineConfig({
     organisms: "src/components/index.ts",
     blocks: "src/components/blocks/index.ts",
     templates: "src/components/templates/index.ts",
+    hooks: "src/hooks/index.ts",
     utils: "src/lib/utils.ts",
   },
   format: ["esm"],

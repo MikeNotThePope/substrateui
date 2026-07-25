@@ -108,6 +108,7 @@ import { LinkProvider } from "substrateui"
 | `substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
 | `substrateui/blocks` | Full compositions across Marketing, Application, Auth & E-commerce (Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid) |
 | `substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
+| `substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, …) |
 | `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
 | `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
 
