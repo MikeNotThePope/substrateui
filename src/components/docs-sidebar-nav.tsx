@@ -107,6 +107,7 @@ export const navSections = [
       { label: "Timeline", href: "/docs/components/timeline" },
       { label: "Rating", href: "/docs/components/rating" },
       { label: "ListGroup", href: "/docs/components/list-group" },
+      { label: "Tree", href: "/docs/components/tree" },
     ],
   },
   {
