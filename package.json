@@ -35,6 +35,10 @@
       "types": "./dist/blocks.d.ts",
       "import": "./dist/blocks.js"
     },
+    "./templates": {
+      "types": "./dist/templates.d.ts",
+      "import": "./dist/templates.js"
+    },
     "./utils": {
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
