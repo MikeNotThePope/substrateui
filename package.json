@@ -39,6 +39,10 @@
       "types": "./dist/templates.d.ts",
       "import": "./dist/templates.js"
     },
+    "./hooks": {
+      "types": "./dist/hooks.d.ts",
+      "import": "./dist/hooks.js"
+    },
     "./utils": {
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
