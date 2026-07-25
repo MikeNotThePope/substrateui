@@ -135,7 +135,7 @@ SubstrateUI uses a 3-layer OKLCH color system:
 - **General** — Button, ButtonGroup, Badge, Kbd, Spinner, Empty
 - **Typography** — H1-H4, P, Lead, Large, Small, Muted, Code, Mono
 - **Layout** — Stack, Cluster, Grid, Center, Divider, Spacer, Separator, AspectRatio, ResizablePanels
-- **Forms** — Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, DatePicker, Combobox, InputGroup, InputOTP, SearchField, Field, Fieldset, FormSection, FormActions
+- **Forms** — Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, DatePicker, Combobox, Cascader, InputGroup, InputOTP, SearchField, Field, Fieldset, FormSection, FormActions
 - **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer
 - **Feedback** — Alert, Banner, AlertDialog, Dialog, Progress, Skeleton, Sonner (toast)
 - **Overlays** — Sheet, Drawer, Popover, Tooltip, ContextMenu, DropdownMenu, Command
