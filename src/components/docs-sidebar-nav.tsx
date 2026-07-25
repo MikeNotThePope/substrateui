@@ -38,6 +38,7 @@ export const navSections = [
       { label: "Overview", href: "/docs/accessibility" },
       { label: "Contrast Matrix", href: "/docs/accessibility/contrast" },
       { label: "Direction (RTL)", href: "/docs/accessibility/direction" },
+      { label: "Announcer", href: "/docs/accessibility/announcer" },
     ],
   },
   {
