@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.5.0
+
+### Minor Changes
+
+- [#41](https://github.com/MikeNotThePope/substrateui/pull/41) [`9efcce1`](https://github.com/MikeNotThePope/substrateui/commit/9efcce1d49a0176a58f8cbe78886d5fcfdffea2e) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add a hooks library (`@mikenotthepope/substrateui/hooks`).
+
+  Borrowing the idea Mantine is best known for: a curated, SSR-safe, tree-shakeable set of React hooks for the state and browser plumbing every app needs — so the monolith ships the logic layer, not just the components.
+
+  - **State** — `useDisclosure`, `useToggle`, `useCounter`, `usePrevious`
+  - **Browser/DOM** — `useClipboard`, `useLocalStorage`, `useMediaQuery`, `useClickOutside`, `useHotkeys` (with platform-aware `mod`), `useElementSize`, `useIntersection`, `useIsMobile`
+  - **Timing/refs** — `useDebouncedValue`, `useInterval`, `useMounted`, `useMergedRef`
+
+  All are unit-tested and exported from the new `/hooks` entry point.
+
 ## 1.4.0
 
 ### Minor Changes
