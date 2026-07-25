@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.11.0
+
+### Minor Changes
+
+- [#53](https://github.com/MikeNotThePope/substrateui/pull/53) [`717514a`](https://github.com/MikeNotThePope/substrateui/commit/717514a2c87c566c29763018fd9954ae01d6dcc4) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add a `Cascader` component (steal from Ant Design).
+
+  Ant Design's `Cascader` is the control for choosing a path through a tree — country → region → city, category → subcategory → item — and it is the last genuinely-missing data-entry primitive. This ports it in the chunky house style.
+
+  - Multi-column drill-down: clicking a branch opens the next column, clicking a leaf commits the whole path and closes.
+  - Controlled (`value` + `onChange`) or uncontrolled (`defaultValue`); `onChange` also hands back the options along the path so you have the labels without re-walking the tree.
+  - `showSearch` filters against the whole joined path, `clearable` resets the selection, and `changeOnSelect` makes branches selectable too.
+  - Full keyboard nav — arrows within and across columns, `Home`/`End`, `Escape` to close — with the forward/back arrows and chevrons mirrored in RTL. Columns are labelled listboxes with `aria-expanded`/`aria-haspopup` on branches. Unit-tested, with stories and docs.
+
 ## 1.10.0
 
 ### Minor Changes
