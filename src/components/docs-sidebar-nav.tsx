@@ -177,6 +177,12 @@ export const navSections = [
     ],
   },
   {
+    title: "Utilities",
+    items: [
+      { label: "FocusTrap", href: "/docs/components/focus-trap" },
+    ],
+  },
+  {
     title: "Hooks",
     items: [
       { label: "Overview", href: "/docs/hooks" },
