@@ -155,6 +155,32 @@ Override tokens after importing the stylesheet:
 }
 ```
 
+### Named themes
+
+Define themes in TypeScript and swap between them at runtime. A theme is a map
+of semantic tokens, so every component re-colours itself with no other changes.
+
+```tsx
+import { ThemeRegistry, ThemeSelect, createTheme } from "substrateui"
+
+const ocean = createTheme({
+  name: "ocean",
+  tokens: { ring: "oklch(0.62 0.13 232)" },
+  light: { primary: "oklch(0.45 0.12 232)" },
+  dark: { primary: "oklch(0.72 0.13 232)" },
+})
+
+<ThemeRegistry themes={[ocean]}>
+  <ThemeSelect />
+  {children}
+</ThemeRegistry>
+```
+
+`themeToCss()` emits the same tokens as static CSS for build-time themes,
+`themeInitScript()` prevents a flash of the default palette on first load, and
+`scoped` themes a subtree instead of the whole document. See the
+[Theming API docs](https://substrateui.dev/docs/foundations/theming).
+
 ## Accessibility
 
 SubstrateUI meets WCAG AA contrast requirements (verified by automated audit) and is built on Base UI primitives for robust keyboard and screen reader support.
