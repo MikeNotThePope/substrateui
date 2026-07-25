@@ -80,6 +80,7 @@ export const navSections = [
       { label: "Switch", href: "/docs/components/switch" },
       { label: "Slider", href: "/docs/components/slider" },
       { label: "Combobox", href: "/docs/components/combobox" },
+      { label: "Cascader", href: "/docs/components/cascader" },
       { label: "DatePicker", href: "/docs/components/date-picker" },
       { label: "InputOTP", href: "/docs/components/input-otp" },
       { label: "SearchField", href: "/docs/components/search-field" },
