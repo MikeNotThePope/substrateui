@@ -105,10 +105,18 @@ export default defineConfig({
       },
     },
   ],
+  // Snapshot a production build, not `next dev`. The dev server compiles
+  // routes on demand and never releases them — it settles around 4.4GB RSS
+  // after a full pass, which OOM-kills it on an 8GB Docker VM and leaves
+  // every remaining test with ERR_CONNECTION_REFUSED. `next start` serves
+  // prebuilt output at a flat couple hundred MB, and drops the HMR
+  // websocket that forces the 'load'-instead-of-'networkidle' workaround
+  // in components.spec.ts. `bunx next build` skips the `prebuild` hook so
+  // this doesn't drag the Storybook build along.
   webServer: {
-    command: 'bun run dev',
+    command: 'bunx next build && bunx next start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 300_000,
   },
 });

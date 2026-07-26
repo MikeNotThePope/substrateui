@@ -58,3 +58,7 @@ tests/visual/**/*.tar.gz
 # generated
 package-lock.json
 audit-contrast-report.md
+
+# Claude Code — machine-local state, not project config
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
