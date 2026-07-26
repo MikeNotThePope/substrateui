@@ -47,7 +47,7 @@ the new baselines to R2.
 If you need to run the steps separately, the Docker command is:
 
 ```
-docker run --rm --network host \
+docker run --rm --network host --ipc=host \
   -v "$(pwd):/work" \
   -v /work/node_modules \
   -v /work/.next \
@@ -55,6 +55,9 @@ docker run --rm --network host \
   mcr.microsoft.com/playwright:v<VERSION>-jammy \
   bash -c "apt-get update && apt-get install -y unzip && curl -fsSL https://bun.sh/install | bash && export PATH=\$HOME/.bun/bin:\$PATH && bun install --frozen-lockfile && bun run test:visual:update"
 ```
+
+Keep `--ipc=host` — Chromium outgrows Docker's default 64MB `/dev/shm`
+and crashes instead of degrading.
 
 Then upload from your host machine:
 
