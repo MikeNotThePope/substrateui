@@ -12,7 +12,10 @@ IMAGE="mcr.microsoft.com/playwright:v${PW_VERSION}-jammy"
 echo "Using Playwright Docker image: $IMAGE"
 echo "Regenerating baselines..."
 
-docker run --rm --network host \
+# --ipc=host is Playwright's documented requirement for Chromium: the
+# default 64MB /dev/shm is too small for its shared-memory allocations,
+# and Chromium crashes rather than degrading once it runs out.
+docker run --rm --network host --ipc=host \
   -v "$(pwd):/work" \
   -v /work/node_modules \
   -v /work/.next \

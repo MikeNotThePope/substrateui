@@ -55,9 +55,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 async function preparePage(page: import('@playwright/test').Page) {
-  // Next.js dev server keeps HMR websockets open, so 'networkidle' never
-  // resolves. 'load' fires once the main resources have settled, which is
-  // enough for a deterministic snapshot when combined with document.fonts.ready.
   await page.waitForLoadState('load');
   await page.evaluate(() => document.fonts.ready);
   // Wait for DirectionController to apply dir from localStorage so the
