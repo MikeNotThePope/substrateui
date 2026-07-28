@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.13.0
+
+### Minor Changes
+
+- [#57](https://github.com/MikeNotThePope/substrateui/pull/57) [`5a25241`](https://github.com/MikeNotThePope/substrateui/commit/5a25241684a6c1c1322ca5031e96de7b62551967) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Upgrade `Combobox` with MUI Autocomplete's niceties.
+
+  `Combobox` handled a static, client-filtered option list. Everything MUI's `Autocomplete` adds around that — async sources, values that aren't in the list, grouping, chip overflow — was missing. All of it is additive and opt-in; existing usage is unchanged.
+
+  - **Async**: `onInputChange` reports the query so you can fetch for it, `loading` shows a spinner row, and `manualFilter` stops the built-in filter from re-filtering results you already filtered server-side.
+  - **Free solo**: `freeSolo` offers an "Add …" row when the query matches no option. The value is emitted as typed and still renders in the trigger despite not being in `options`.
+  - **Grouping**: `groupBy(option)` returns a heading; groups filter down and disappear with their heading when empty.
+  - **Chips**: `limitTags` collapses a long multi-selection into a count badge instead of growing the trigger, and `clearable` adds a reset button.
+  - Chip remove buttons now carry an accessible name (`Remove React`) — the docs claimed this and it was not true. Override via `labels.remove`, alongside new `loading`, `clear`, `create`, and `more` label keys.
+
 ## 1.12.0
 
 ### Minor Changes
