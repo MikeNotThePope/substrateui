@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.14.0
+
+### Minor Changes
+
+- [#61](https://github.com/MikeNotThePope/substrateui/pull/61) [`80448e0`](https://github.com/MikeNotThePope/substrateui/commit/80448e0fb119e47e42d31cfc3f4cda404e91392c) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add a `Countdown` component and `useCountdown` hook, stealing the live half of Ant Design's `Statistic`.
+
+  `StatCard` already covered the static metric — a title, a value, a change indicator. What it could not do was count down, so anything time-bound (a sale ending, a token expiring, doors opening) needed a hand-rolled timer. Ant Design's `Statistic.Countdown` is the missing piece; its static `Statistic` sibling is not, and was deliberately skipped rather than duplicated.
+
+  - **`<Countdown deadline={...} />`** ticks once a second and stops at zero. `onFinish` fires exactly once per deadline, not on every subsequent render.
+  - **No format-string DSL.** The default output comes from `Intl.DurationFormat`, so it follows the locale and drops units that are still zero — `04:05`, then `3:04:05`, then `2 days, 3:04:05`. Where Ant takes `format="HH:mm:ss"`, this takes a render prop: `children` receives `{ total, days, hours, minutes, seconds, formatted, finished, ready }` and you lay it out yourself.
+  - **`useCountdown(deadline, options?)`** is the same logic without the markup, exported from `@mikenotthepope/substrateui/hooks`.
+  - **Accessibility**: renders as `role="timer"`, whose implicit `aria-live` is off — a polite live region would read the clock aloud once a second. The timer carries an accessible name instead (`"Time remaining"`, overridable via `labels.remaining`).
+  - **SSR**: reports `ready: false` and an empty string until measured in the browser, so hydration cannot mismatch on a value that is different by the time it reaches the client.
+
+  `StatCard`'s `value` prop widens from `string` to `React.ReactNode`, so a countdown drops straight into a metric card without a third component in between. Existing string values are unaffected.
+
+### Patch Changes
+
+- [#64](https://github.com/MikeNotThePope/substrateui/pull/64) [`21e4d83`](https://github.com/MikeNotThePope/substrateui/commit/21e4d83d4dba88a110f734285b459b24878c6ffa) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Make the built-in themes work when they are scoped to a subtree, not just set on the document element. `[data-theme="default"]` now selects the base palette by name (previously the base palette was only "the absence of an attribute", so a default-themed element nested inside another theme inherited that theme), and the lava dark tokens gained the `.dark [data-theme="lava"]` selector that `themeToCss()` already emits for user themes. Nothing changes for a theme applied to `<html>`.
+
 ## 1.13.0
 
 ### Minor Changes
