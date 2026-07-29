@@ -139,3 +139,16 @@ gradients, one display size per section.
 | 15 | Mix ink tints in `oklch` for the density bar | rejected | oklch interpolates hue on the shortest arc, so yellow (h 94) tinted toward cool stock (h 264) swings through green. A tint is less ink on the same paper — `oklab` gives that, no hue rotation. |
 | 16 | `--ds-muted` / `--ds-primary-ink` for text on the dark code block | rejected | Both are tuned against light stock; on ink they measured 2.59:1 and 3.47:1 (plum). The block inverts, so its dim colours are mixed from `--ds-stock` toward `--ds-ink` instead — works in every theme without new tokens. |
 | 17 | `design/audit.mjs` — contrast check over every pair the mockups use | accepted | 70 pairs × 5 themes, run against `design/tokens.css` directly. Caught #16, which eyeballing did not. Mirrors what `scripts/audit-contrast.ts` will enforce once these become real themes. |
+
+## Port deviations
+
+Recorded when `design/mockups/home.html` was ported to `src/app/page.tsx`. Each is a place the
+shipped page knowingly differs from the mockup, with the reason — so the next session doesn't "fix"
+them back.
+
+| # | Mockup | Shipped | Why |
+|---|---|---|---|
+| P1 | Archivo / Inter / Barlow Condensed / Martian Mono | The site's existing DM Sans + DM Mono; the utility-caps role is played by DM Mono uppercase at wide tracking | Swapping the typeface stack is site-wide — it touches every docs page and every visual baseline. It is a separate PR, not part of a home-page redesign. The substitution reads correctly for the eyebrows and chip codes. |
+| P2 | Process magenta for registration marks and focus rings | `--primary` | No theme exposes a *third* brand token — themes ship `--primary` and `--secondary-fill` only. `press` defines `--raw-magenta`, but promoting it to a semantic token would give one theme a slot the others lack and break the uniform contract the audit relies on. |
+| P3 | Hairline trim, paper-lift shadows | The components' own `border-2` and `shadow-hard` | The agreed "website first" split: component internals are untouched so no consumer breaks. **Finding: it works.** Heavy borders around process inks read as letterpress/risograph rather than as neo-brutalism — the structural language and the palette turn out to be doing different jobs. This weakens, rather than strengthens, the case for a `--border-factor` v2 track. |
+| P4 | Ink-density bar shows three process inks | Two brand inks plus the neutral ramp | Follows from P2. Showing the neutral ramp is arguably the better demo anyway: neutrals are the axis people miss, and they genuinely differ per theme (warm cream vs basalt vs cool proof vs graphite vs frost). |
