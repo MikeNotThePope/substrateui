@@ -13,6 +13,26 @@
   --font-utility: var(--font-barlow), "Arial Narrow", Arial, sans-serif;
 }
 
+/* Headlines and section openers take the display face. Done here rather than
+   in typography.tsx because H1–H4 are shipped components: putting Archivo in
+   them would send a font-family every installation has no font file for.
+   h4 is excluded on purpose — it renders at 20px and the display face has a
+   24px floor (DESIGN-SYSTEM.md, Type).
+   `@apply`, not `font-family: var(--font-display)` — the theme entry above is
+   `inline`, so it produces the utility but never a :root variable to read. */
+body :is([data-slot="h1"], [data-slot="h2"], [data-slot="h3"]) {
+  @apply font-display;
+  letter-spacing: -0.03em;
+}
+
+/* Except where a heading IS the exhibit. Inside a preview or a type specimen
+   the heading is library output, and a consumer's app renders it in
+   --font-sans — showing it in Archivo would misreport what they get. */
+[data-specimen] :is([data-slot="h1"], [data-slot="h2"], [data-slot="h3"]) {
+  @apply font-sans;
+  letter-spacing: inherit;
+}
+
 /* ── Marketing-site entrance animations ──────────────────────────────
    Docs/site only — the published library ships tokens.css untouched.
    Everything below is gated on prefers-reduced-motion. */

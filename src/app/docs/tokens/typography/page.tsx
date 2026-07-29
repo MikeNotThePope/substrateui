@@ -55,7 +55,7 @@ export default function TypographyTokensPage() {
           <H2>Type Scale</H2>
           <Stack gap="md" className="mt-4">
             {specimens.map((specimen) => (
-              <Card key={specimen.label} className="border-2">
+              <Card key={specimen.label} data-specimen className="border-2">
                 <CardContent className="pt-6">
                   <Stack gap="sm">
                     <div className="flex items-baseline justify-between">

@@ -442,7 +442,7 @@ export default function DesignSystemPage() {
               <H2>Typography</H2>
               <Muted>Every typographic component with sample text.</Muted>
             </div>
-            <Stack gap="md">
+            <Stack gap="md" data-specimen>
               {([
                 ["H1", <H1 key="h1">Heading One</H1>],
                 ["H2", <H2 key="h2">Heading Two</H2>],
