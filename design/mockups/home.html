@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en" data-ds-theme="press">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SubstrateUI — a design system for Next.js</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   HOME — direction: Press
+   Every value traces to design/tokens.css. No literal hex, no px
+   font-size, no one-off radius.
+
+   Structure is press furniture, not the template skeleton:
+     masthead → thesis + fan deck → ink-density bar → proof
+     (live UI beside the token map that produced it) → job docket
+     → colophon.
+   There is deliberately no 3×2 icon-card grid anywhere.
+   ───────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--ds-stock);
+  color: var(--ds-ink);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-body);
+  transition: background var(--ds-duration-slow) var(--ds-ease),
+              color var(--ds-duration-slow) var(--ds-ease);
+}
+
+.wrap { max-width: var(--ds-page-max); margin: 0 auto; padding-inline: var(--ds-gutter); }
+
+/* ── Shared press furniture ──────────────────────────────────── */
+
+.reg { width: 16px; height: 16px; flex: none; color: var(--ds-mark); }
+.reg svg { display: block; width: 100%; height: 100%; }
+
+.code {
+  font-family: var(--ds-font-utility);
+  font-weight: var(--ds-weight-utility);
+  font-size: var(--ds-text-2xs);
+  letter-spacing: var(--ds-tracking-utility);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.eyebrow {
+  font-family: var(--ds-font-utility);
+  font-weight: var(--ds-weight-utility);
+  font-size: var(--ds-text-xs);
+  letter-spacing: var(--ds-tracking-utility);
+  text-transform: uppercase;
+  color: var(--ds-muted);
+  display: flex; align-items: center; gap: var(--ds-space-2);
+  margin: 0;
+}
+.data {
+  font-family: var(--ds-font-data);
+  font-size: var(--ds-text-2xs);
+  letter-spacing: var(--ds-tracking-data);
+  color: var(--ds-muted);
+}
+.muted { color: var(--ds-muted); }
+
+h1, h2, h3 {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-display);
+  letter-spacing: var(--ds-tracking-display);
+  line-height: var(--ds-leading-tight);
+  margin: 0;
+}
+h1 { font-size: clamp(2.25rem, 6vw, var(--ds-text-4xl)); }
+h2 { font-size: var(--ds-text-2xl); }
+h3 { font-size: var(--ds-text-lg); letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+
+:where(a, button, input, select, summary):focus-visible {
+  outline: 2px solid var(--ds-mark);
+  outline-offset: 2px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  line-height: 1;
+  padding: var(--ds-space-3) var(--ds-space-5);
+  border-radius: var(--ds-r-md);
+  border: var(--ds-hairline) solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--ds-lift-1);
+  transition: background var(--ds-duration) var(--ds-ease),
+              transform var(--ds-duration) var(--ds-ease),
+              box-shadow var(--ds-duration) var(--ds-ease);
+}
+.btn:hover { transform: translateY(-1px); box-shadow: var(--ds-lift-2); }
+.btn:active { transform: translateY(0); box-shadow: var(--ds-lift-1); }
+.btn-primary { background: var(--ds-primary); color: var(--ds-on-primary); }
+.btn-primary:hover { background: var(--ds-primary-hover); }
+.btn-outline { background: transparent; color: var(--ds-ink); border-color: var(--ds-rule); }
+.btn-outline:hover { background: var(--ds-interactive); }
+
+/* ── Masthead ────────────────────────────────────────────────── */
+
+.masthead {
+  border-bottom: var(--ds-hairline) solid var(--ds-rule);
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in oklch, var(--ds-stock) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+.masthead .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--ds-space-4); padding-block: var(--ds-space-3);
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: var(--ds-space-3); }
+.wordmark {
+  font-family: var(--ds-font-display); font-weight: var(--ds-weight-display);
+  font-size: var(--ds-text-lg); letter-spacing: -0.04em;
+}
+.mast-nav { display: flex; align-items: center; gap: var(--ds-space-5); flex-wrap: wrap; }
+/* Below 640px the nav wraps to three rows and a sticky header eats 215px of
+   viewport. Drop the section links — every one of them is reachable from the
+   page body — and keep the wordmark and Install on a single row. */
+@media (max-width: 639px) { .mast-nav a:not(.btn) { display: none; } }
+/* :not(.btn) matters — a bare `.mast-nav a` rule (0,1,1) outranks `.btn-primary`
+   (0,1,0) and repaints the Install button's label muted-on-cyan at 1.2:1. */
+.mast-nav a:not(.btn) { font-size: var(--ds-text-sm); color: var(--ds-muted); text-decoration: none; }
+.mast-nav a:not(.btn):hover { color: var(--ds-ink); }
+
+/* ── Hero: thesis on the left, the fan deck as the hero object ── */
+
+/* Single column on purpose: the deck is the hero object, so it gets the full
+   measure rather than being squeezed into a sidebar. Five chips need 784px. */
+.hero .wrap {
+  display: grid; gap: var(--ds-space-7);
+  padding-block: var(--ds-space-8) var(--ds-space-7);
+}
+.thesis { display: grid; gap: var(--ds-space-5); align-content: start; max-width: 20ch; }
+.thesis > :not(h1) { max-width: var(--ds-measure); }
+/* No cap on the headline at desktop: the <br> is the only break it should
+   take, and an 18ch cap forced "change." onto an orphan third line. */
+@media (min-width: 900px) { .thesis { max-width: none; } }
+.thesis .lead { font-size: var(--ds-text-lg); color: var(--ds-muted); max-width: var(--ds-measure); }
+.thesis h1 .rule-under {
+  /* the highlighter is a token, so it re-inks with the theme */
+  background: linear-gradient(var(--ds-secondary), var(--ds-secondary)) no-repeat;
+  background-size: 100% 0.28em;
+  background-position: 0 88%;
+}
+
+.install {
+  display: flex; align-items: center; gap: var(--ds-space-3);
+  background: var(--ds-raised);
+  border: var(--ds-hairline) solid var(--ds-rule);
+  border-radius: var(--ds-r-md);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-family: var(--ds-font-data);
+  font-size: var(--ds-text-xs);
+  max-width: max-content;
+}
+.install .prompt { color: var(--ds-mark); }
+.install button {
+  margin-inline-start: var(--ds-space-3);
+  font: inherit; font-family: var(--ds-font-utility);
+  font-size: var(--ds-text-2xs); font-weight: var(--ds-weight-utility);
+  letter-spacing: var(--ds-tracking-utility); text-transform: uppercase;
+  background: none; border: 0; color: var(--ds-muted); cursor: pointer;
+}
+.install button:hover { color: var(--ds-ink); }
+
+.cta-row { display: flex; gap: var(--ds-space-3); flex-wrap: wrap; }
+
+/* ── The signature: fan deck ─────────────────────────────────── */
+
+.deck-block { display: grid; gap: var(--ds-space-4); justify-items: start; }
+/* The lift is a transform, so the strip needs vertical room and its own
+   horizontal scroll rather than clipping the fan on narrow viewports. */
+.deck {
+  display: flex; align-items: flex-end;
+  padding-block: var(--ds-space-5) var(--ds-space-3);
+  max-width: 100%; overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: thin;
+}
+.chip {
+  --chip-lift: 0px;
+  --chip-overlap: 34px;
+  position: relative; flex: none;
+  width: calc(150px + var(--chip-overlap));
+  margin-inline-end: calc(-1 * var(--chip-overlap));
+  padding: var(--ds-space-3) var(--ds-space-3) var(--ds-space-3)
+           calc(var(--ds-space-3) + var(--chip-overlap));
+  display: grid; gap: var(--ds-space-3);
+  background: var(--ds-raised); color: var(--ds-ink);
+  border: var(--ds-hairline) solid var(--ds-rule);
+  border-radius: var(--ds-r-md);
+  box-shadow: var(--ds-lift-2);
+  cursor: pointer; text-align: start; font: inherit;
+  transform: translateY(var(--chip-lift));
+  transition: transform var(--ds-duration) var(--ds-ease),
+              box-shadow var(--ds-duration) var(--ds-ease);
+}
+.chip:nth-child(1) { z-index: 5; } .chip:nth-child(2) { z-index: 4; }
+.chip:nth-child(3) { z-index: 3; } .chip:nth-child(4) { z-index: 2; }
+.chip:nth-child(5) { z-index: 1; }
+.chip:hover, .chip:focus-visible { --chip-lift: -10px; box-shadow: var(--ds-lift-3); z-index: 6; }
+.chip[aria-pressed="true"] { --chip-lift: -18px; box-shadow: var(--ds-lift-3); z-index: 7; }
+.chip:last-child { margin-inline-end: 0; }
+.chip-inks { display: flex; height: 46px; border-radius: var(--ds-r-sm); overflow: hidden; }
+.chip-inks span { flex: 1; }
+.chip-name { display: flex; align-items: baseline; justify-content: space-between; gap: var(--ds-space-2); }
+@media (max-width: 640px) {
+  .chip { --chip-overlap: 22px; width: calc(112px + var(--chip-overlap)); }
+  .chip-inks { height: 34px; }
+}
+
+/* ── Ink density bar ─────────────────────────────────────────── */
+
+.density { border-block: var(--ds-hairline) solid var(--ds-rule); background: var(--ds-raised); }
+.density .wrap { padding-block: var(--ds-space-5); display: grid; gap: var(--ds-space-4); }
+.density-head { display: flex; justify-content: space-between; gap: var(--ds-space-4); flex-wrap: wrap; }
+.bars { display: grid; gap: var(--ds-space-4); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.bar { display: grid; gap: var(--ds-space-2); }
+.bar-strip { display: flex; height: 40px; border: var(--ds-hairline) solid var(--ds-rule-subtle); border-radius: var(--ds-r-sm); overflow: hidden; }
+.bar-strip span { flex: 1; }
+.bar-foot { display: flex; justify-content: space-between; }
+
+/* ── Proof: live UI beside the token map that produced it ────── */
+
+.proof .wrap { padding-block: var(--ds-space-8); display: grid; gap: var(--ds-space-6); }
+.proof-grid { display: grid; gap: var(--ds-space-6); align-items: start; }
+@media (min-width: 900px) { .proof-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* Trim marks: four corner brackets around the printed matter. */
+.trimmed { position: relative; padding: var(--ds-space-5); }
+.trimmed::before, .trimmed::after,
+.trimmed > .tm::before, .trimmed > .tm::after {
+  content: ""; position: absolute; width: 14px; height: 14px;
+  border: var(--ds-hairline) solid var(--ds-rule);
+}
+.trimmed::before { inset-block-start: 0; inset-inline-start: 0; border-width: var(--ds-hairline) 0 0 var(--ds-hairline); }
+.trimmed::after { inset-block-start: 0; inset-inline-end: 0; border-width: var(--ds-hairline) var(--ds-hairline) 0 0; }
+.trimmed > .tm::before { inset-block-end: 0; inset-inline-start: 0; border-width: 0 0 var(--ds-hairline) var(--ds-hairline); }
+.trimmed > .tm::after { inset-block-end: 0; inset-inline-end: 0; border-width: 0 var(--ds-hairline) var(--ds-hairline) 0; }
+
+.panel {
+  background: var(--ds-raised);
+  border: var(--ds-hairline) solid var(--ds-rule-subtle);
+  border-radius: var(--ds-r-lg);
+  box-shadow: var(--ds-lift-2);
+  overflow: hidden;
+}
+.panel-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-bottom: var(--ds-hairline) solid var(--ds-rule-subtle);
+  background: var(--ds-interactive);
+}
+.panel-body { padding: var(--ds-space-5); display: grid; gap: var(--ds-space-4); }
+.field { display: grid; gap: var(--ds-space-2); }
+.field label { font-size: var(--ds-text-xs); font-weight: var(--ds-weight-medium); }
+.field input, .field select {
+  font-family: var(--ds-font-body); font-size: var(--ds-text-sm); color: var(--ds-ink);
+  background: var(--ds-raised);
+  border: var(--ds-hairline) solid var(--ds-rule);
+  border-radius: var(--ds-r-md);
+  padding: var(--ds-space-3);
+  width: 100%;
+}
+.field .hint { font-size: var(--ds-text-2xs); color: var(--ds-muted); }
+.badge {
+  display: inline-block; padding: 2px var(--ds-space-2);
+  border-radius: var(--ds-r-sm);
+  background: var(--ds-primary-surface); color: var(--ds-primary-hover);
+  border: var(--ds-hairline) solid var(--ds-primary);
+}
+.switch-row { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-4); }
+.switch {
+  width: 40px; height: 22px; flex: none;
+  border-radius: var(--ds-r-lg);
+  background: var(--ds-primary);
+  border: var(--ds-hairline) solid var(--ds-primary-hover);
+  position: relative; cursor: pointer; padding: 0;
+}
+.switch::after {
+  content: ""; position: absolute; inset-block-start: 2px; inset-inline-end: 2px;
+  width: 16px; height: 16px; border-radius: var(--ds-r-lg);
+  background: var(--ds-on-primary);
+}
+.switch[aria-checked="false"] { background: var(--ds-interactive); border-color: var(--ds-rule); }
+.switch[aria-checked="false"]::after { inset-inline-end: auto; inset-inline-start: 2px; background: var(--ds-rule); }
+
+/* Code block — the token map that produced the panel beside it. */
+.source { display: grid; gap: var(--ds-space-3); }
+.source pre {
+  margin: 0; padding: var(--ds-space-4);
+  background: var(--ds-ink); color: var(--ds-stock);
+  border-radius: var(--ds-r-md);
+  font-family: var(--ds-font-data); font-size: var(--ds-text-2xs);
+  line-height: 1.9; overflow-x: auto;
+}
+.source .k { color: var(--ds-secondary); }
+/* Same inversion problem as .c — primary-ink is tuned to sit on light stock
+   and only reaches 3.47:1 on ink in the plum theme. Lift it toward stock. */
+.source .v { color: color-mix(in oklab, var(--ds-primary-ink) 55%, var(--ds-stock)); }
+/* The block inverts (stock on ink), so --ds-muted is the wrong dim: it is
+   tuned against stock and lands at 2.59:1 here. Dim the stock colour toward
+   ink instead — that stays legible in every theme without a new token. */
+.source .c { color: color-mix(in oklab, var(--ds-stock) 60%, var(--ds-ink)); }
+
+/* ── Job docket ──────────────────────────────────────────────── */
+
+.docket { border-top: var(--ds-hairline) solid var(--ds-rule); }
+.docket .wrap { padding-block: var(--ds-space-8); display: grid; gap: var(--ds-space-5); }
+.docket dl { margin: 0; display: grid; gap: 0; }
+.docket .row {
+  display: grid; grid-template-columns: minmax(140px, 220px) minmax(0, 1fr);
+  gap: var(--ds-space-4);
+  padding-block: var(--ds-space-3);
+  border-bottom: var(--ds-hairline) solid var(--ds-rule-subtle);
+  align-items: baseline;
+}
+.docket dt { color: var(--ds-muted); }
+.docket dd { margin: 0; }
+.docket dd b {
+  font-family: var(--ds-font-display); font-weight: var(--ds-weight-display);
+  letter-spacing: var(--ds-tracking-display); font-size: var(--ds-text-lg);
+}
+
+/* ── Colophon ────────────────────────────────────────────────── */
+
+.colophon { border-top: var(--ds-hairline) solid var(--ds-rule); }
+.colophon .wrap {
+  padding-block: var(--ds-space-6);
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--ds-space-4); flex-wrap: wrap;
+}
+.colophon nav { display: flex; gap: var(--ds-space-5); flex-wrap: wrap; }
+.colophon a { color: var(--ds-muted); text-decoration: none; font-size: var(--ds-text-sm); }
+.colophon a:hover { color: var(--ds-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0ms !important; }
+  .btn:hover, .chip:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Masthead ──────────────────────────────────────────────── -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="brand">
+      <span class="reg" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="9" r="5.5"/><path d="M9 0v18M0 9h18"/></svg></span>
+      <span class="wordmark">SubstrateUI</span>
+    </div>
+    <nav class="mast-nav" aria-label="Primary">
+      <a href="#proof">Docs</a>
+      <a href="#proof">Components</a>
+      <a href="#density">Themes</a>
+      <a href="#docket">Tokens</a>
+      <a href="#" class="btn btn-primary">Install</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="thesis">
+      <p class="eyebrow"><span class="reg" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="9" r="5.5"/><path d="M9 0v18M0 9h18"/></svg></span>v1.14 · MIT · React 18+</p>
+      <h1>Swap <span class="rule-under">the ink</span>.<br>The press doesn't change.</h1>
+      <p class="lead">A design system for Next.js built on OKLCH, Tailwind CSS v4 and Base UI. A theme
+        is a token map — change it and every component repaints, including the ones you wrote.</p>
+      <div class="install">
+        <span class="prompt" aria-hidden="true">$</span>
+        <span id="install-cmd">bun add @mikenotthepope/substrateui</span>
+        <button type="button" id="copy">Copy</button>
+      </div>
+      <div class="cta-row">
+        <a href="#proof" class="btn btn-primary">Read the docs</a>
+        <a href="#docket" class="btn btn-outline">See the tokens</a>
+      </div>
+    </div>
+
+    <div class="deck-block">
+      <div class="deck" role="group" aria-label="Theme"></div>
+      <p class="code muted">Pick an ink — the whole page follows</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Ink density bar ───────────────────────────────────────── -->
+<section class="density" id="density">
+  <div class="wrap">
+    <div class="density-head">
+      <p class="eyebrow">Ink density — <span id="density-theme">press</span></p>
+      <p class="data">tints mixed in oklab · 25 / 50 / 75 / 100%</p>
+    </div>
+    <div class="bars" id="bars"></div>
+  </div>
+</section>
+
+<!-- ── Proof ─────────────────────────────────────────────────── -->
+<section class="proof" id="proof">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Proof</p>
+      <h2>Same markup. Current ink.</h2>
+      <p class="muted" style="max-width: var(--ds-measure); margin-top: var(--ds-space-3);">
+        Nothing on the left knows which theme it is in. The map on the right is the only thing that
+        changed — and it is the whole theme, not an excerpt.</p>
+    </div>
+
+    <div class="proof-grid">
+      <div class="trimmed">
+        <span class="tm" aria-hidden="true"></span>
+        <div class="panel">
+          <div class="panel-bar">
+            <span class="code">Project settings</span>
+            <span class="badge code">Draft</span>
+          </div>
+          <div class="panel-body">
+            <div class="field">
+              <label for="p-name">Repository name</label>
+              <input id="p-name" type="text" value="storefront">
+              <span class="hint">Lowercase, no spaces.</span>
+            </div>
+            <div class="field">
+              <label for="p-region">Region</label>
+              <select id="p-region">
+                <option>us-east-1</option>
+                <option>eu-west-2</option>
+              </select>
+            </div>
+            <div class="switch-row">
+              <div>
+                <div style="font-size: var(--ds-text-sm); font-weight: var(--ds-weight-medium)">Preview deployments</div>
+                <div class="hint muted" style="font-size: var(--ds-text-2xs)">Build every pull request.</div>
+              </div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Preview deployments"></button>
+            </div>
+            <div class="cta-row">
+              <button class="btn btn-primary" type="button">Save changes</button>
+              <button class="btn btn-outline" type="button">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="source">
+        <p class="code muted">theme.ts — live values for the ink you picked</p>
+        <pre><code id="source-code"></code></pre>
+        <p class="data">Wrap once in <span style="color: var(--ds-ink)">&lt;ThemeRegistry&gt;</span>. Every component below re-inks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Job docket ────────────────────────────────────────────── -->
+<section class="docket" id="docket">
+  <div class="wrap">
+    <p class="eyebrow">Job docket</p>
+    <dl>
+      <div class="row"><dt class="code">Components</dt><dd><b>75</b> <span class="muted">atomic Button through organism App Shell</span></dd></div>
+      <div class="row"><dt class="code">Themes</dt><dd><b>5</b> <span class="muted">press · substrate · lava · tundra · plum</span></dd></div>
+      <div class="row"><dt class="code">Audited pairs</dt><dd><b>31</b> <span class="muted">per theme, light and dark. A failing ratio fails the build.</span></dd></div>
+      <div class="row"><dt class="code">Colour</dt><dd>OKLCH throughout <span class="muted">— perceptually uniform ramps, so contrast is computed, not eyeballed</span></dd></div>
+      <div class="row"><dt class="code">Primitives</dt><dd>Base UI <span class="muted">— focus management, dismissal and ARIA are handled</span></dd></div>
+      <div class="row"><dt class="code">CSS</dt><dd>Tailwind v4, <span class="data" style="color: var(--ds-ink)">@theme inline</span> <span class="muted">— no config file</span></dd></div>
+      <div class="row"><dt class="code">Peer deps</dt><dd>react ≥ 18 · tailwindcss ≥ 4 <span class="muted">· next and next-themes optional</span></dd></div>
+      <div class="row"><dt class="code">Licence</dt><dd>MIT</dd></div>
+    </dl>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Read the docs</a>
+      <a href="#" class="btn btn-outline">Theming guide</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Colophon ──────────────────────────────────────────────── -->
+<footer class="colophon">
+  <div class="wrap">
+    <div class="brand">
+      <span class="reg" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="9" r="5.5"/><path d="M9 0v18M0 9h18"/></svg></span>
+      <span class="code muted">SubstrateUI · set in Archivo, Inter and Barlow Condensed</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#">GitHub</a>
+      <a href="#">Issues</a>
+      <a href="#">Changelog</a>
+      <a href="#">npm</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// ── Themes ─────────────────────────────────────────────────────
+// One list drives the deck, the density bars and the code block.
+const THEMES = [
+  { id: "press",     name: "Press",     lch: "0.51 0.110 232" },
+  { id: "substrate", name: "Substrate", lch: "0.52 0.095 172" },
+  { id: "lava",      name: "Lava",      lch: "0.52 0.195 035" },
+  { id: "tundra",    name: "Tundra",    lch: "0.47 0.105 238" },
+  { id: "plum",      name: "Plum",      lch: "0.48 0.145 314" },
+];
+
+const root = document.documentElement;
+const el = (t, cls, txt) => { const n = document.createElement(t); if (cls) n.className = cls; if (txt) n.textContent = txt; return n; };
+
+// ── Fan deck ───────────────────────────────────────────────────
+const deck = document.querySelector(".deck");
+THEMES.forEach((t, i) => {
+  const b = el("button", "chip");
+  b.type = "button";
+  b.dataset.theme = t.id;
+  b.setAttribute("data-ds-theme", t.id);   // paints itself in its own tokens
+  b.setAttribute("aria-label", t.name + " theme");
+  b.setAttribute("aria-pressed", String(i === 0));
+
+  const inks = el("span", "chip-inks");
+  inks.setAttribute("aria-hidden", "true");
+  for (const v of ["--ds-primary-ink", "--ds-mark", "--ds-secondary"]) {
+    const s = el("span"); s.style.background = `var(${v})`; inks.append(s);
+  }
+  const nameRow = el("span", "chip-name");
+  nameRow.append(el("span", "code", t.name), el("span", "code muted", String(i + 1).padStart(2, "0")));
+
+  b.append(inks, nameRow, el("span", "data", t.lch));
+  b.addEventListener("click", () => select(t.id));
+  deck.append(b);
+});
+
+// ── Ink density bars ───────────────────────────────────────────
+// Real proof sheets print tint steps so the press operator can check ink
+// density. These are mixed in OKLCH, which is the whole point of the library.
+const INKS = [
+  ["--ds-primary", "Primary"],
+  ["--ds-secondary", "Secondary"],
+  ["--ds-mark", "Mark"],
+];
+const bars = document.getElementById("bars");
+bars.replaceChildren(...INKS.map(([v, label]) => {
+  const wrap = el("div", "bar");
+  const strip = el("div", "bar-strip");
+  strip.setAttribute("aria-hidden", "true");
+  for (const pct of [25, 50, 75, 100]) {
+    const s = el("span");
+    // oklab, NOT oklch: oklch interpolates hue on the shortest arc, so a
+    // yellow ink (h 94) tinted toward cool stock (h 264) swings through green
+    // on the way. A real tint is less ink on the same paper — no hue rotation.
+    s.style.background = `color-mix(in oklab, var(${v}) ${pct}%, var(--ds-stock))`;
+    strip.append(s);
+  }
+  const foot = el("div", "bar-foot");
+  foot.append(el("span", "code", label), el("span", "data", v));
+  wrap.append(strip, foot);
+  return wrap;
+}));
+
+// ── Code block ─────────────────────────────────────────────────
+// Shows the ACTUAL resolved tokens for the selected theme, so the panel on
+// the left and the map on the right can never disagree.
+const codeHost = document.getElementById("source-code");
+function paintSource(id) {
+  const cs = getComputedStyle(root);
+  const get = (v) => cs.getPropertyValue(v).trim();
+  const line = (k, v) => `    <span class="k">${k}</span>: <span class="v">'${v}'</span>,\n`;
+  codeHost.innerHTML =
+    `<span class="c">import</span> { createTheme } <span class="c">from</span> 'substrateui'\n\n` +
+    `createTheme({\n` +
+    `  <span class="k">name</span>: <span class="v">'${id}'</span>,\n` +
+    `  <span class="k">light</span>: {\n` +
+    line("primary", get("--ds-primary")) +
+    line("secondary", get("--ds-secondary")) +
+    line("background", get("--ds-stock")) +
+    `  },\n})`;
+}
+
+// ── Selection ──────────────────────────────────────────────────
+function select(id) {
+  root.setAttribute("data-ds-theme", id);
+  deck.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.theme === id)));
+  document.getElementById("density-theme").textContent = id;
+  paintSource(id);
+}
+select("press");
+
+// ── Install copy ───────────────────────────────────────────────
+const copy = document.getElementById("copy");
+copy.addEventListener("click", async () => {
+  await navigator.clipboard?.writeText(document.getElementById("install-cmd").textContent);
+  copy.textContent = "Copied";
+  setTimeout(() => { copy.textContent = "Copy"; }, 1600);
+});
+
+// ── Switch demo ────────────────────────────────────────────────
+document.querySelector(".switch").addEventListener("click", (e) => {
+  const on = e.currentTarget.getAttribute("aria-checked") === "true";
+  e.currentTarget.setAttribute("aria-checked", String(!on));
+});
+</script>
+</body>
+</html>

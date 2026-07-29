@@ -26,25 +26,39 @@ const defaultThemePickerLabels: Required<ThemePickerLabels> = {
  *  needs on the UI side — the picker, the home page strip, and anything else
  *  that offers a choice all read this list. */
 export const SITE_THEMES = [
-  { value: "default", label: "Default" },
+  { value: "plum", label: "Plum" },
+  { value: "press", label: "Press" },
+  { value: "substrate", label: "Substrate" },
   { value: "lava", label: "Lava" },
+  { value: "tundra", label: "Tundra" },
 ] as const
 
 type Theme = (typeof SITE_THEMES)[number]["value"]
+
+/** Which theme you get with no attribute set. A role, not a palette name —
+ *  moving it is a one-line change because no palette is called "default". */
+const DEFAULT_THEME: Theme = "plum"
 
 const STORAGE_KEY = "substrateui-theme"
 
 const ThemeContext = React.createContext<{
   theme: Theme
   setTheme: (t: Theme) => void
-}>({ theme: "default", setTheme: () => {} })
+}>({ theme: DEFAULT_THEME, setTheme: () => {} })
 
 function applyTheme(t: Theme) {
-  if (t === "default") {
+  if (t === DEFAULT_THEME) {
     document.documentElement.removeAttribute("data-theme")
   } else {
     document.documentElement.setAttribute("data-theme", t)
   }
+}
+
+/** Visitors who chose a theme before the plum rename have "default" in
+ *  localStorage. It names the same palette, so read it as plum. */
+function readStored(raw: string | null): Theme | null {
+  const value = raw === "default" ? DEFAULT_THEME : raw
+  return SITE_THEMES.some((t) => t.value === value) ? (value as Theme) : null
 }
 
 export function SiteThemeProvider({
@@ -52,11 +66,11 @@ export function SiteThemeProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [theme, setThemeState] = React.useState<Theme>("default")
+  const [theme, setThemeState] = React.useState<Theme>(DEFAULT_THEME)
 
   React.useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
-    if (stored && SITE_THEMES.some((t) => t.value === stored)) {
+    const stored = readStored(localStorage.getItem(STORAGE_KEY))
+    if (stored) {
       setThemeState(stored)
       applyTheme(stored)
     }

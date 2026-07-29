@@ -5,7 +5,7 @@ import { H3, H4, P, Code } from "@/components/ui/typography"
 
 const themeDna = [
   {
-    name: "Default",
+    name: "Plum",
     keywords: "Warm, tactile, confident, grounded, friendly-but-serious.",
     feels: "Quality stationery — cream paper, saturated ink, edges you can run a thumb over.",
     not: [
@@ -20,27 +20,59 @@ const themeDna = [
     keywords: "Volcanic, energetic, elemental, high-contrast, molten.",
     feels: "Raw heat under a dark crust — molten in structure, not just color.",
     not: [
-      "A red re-skin of the default theme — lava changes structure (motion, corners, shadows), not just hue",
+      "A red re-skin of plum — lava changes structure (motion, corners, shadows), not just hue",
       "Alarming — magma is heat, not danger; errors stay cherry red, so never use the primary for destructive actions",
       "Cyberpunk or neon — the palette is geological (magma, sulfur, basalt), never electric or glitchy",
       "Snappy — motion is deliberately slow and viscous; don't add fast durations to \"fix\" it",
     ],
   },
+  {
+    name: "Press",
+    keywords: "Industrial, exact, printed, registered, legible.",
+    feels: "A proof pulled off the press — process inks on cool stock, trim marks in the margin.",
+    not: [
+      "Corporate SaaS — cyan is a process ink, not a brand gradient; never fade it into anything",
+      "Warm — the stock is deliberately cool (hue 264); cream paper belongs to plum",
+      "Soft — corners are cut rather than rounded and motion stops hard; never add easing that floats",
+      "Alarming — process magenta is brand furniture (marks, charts) and is never a status colour",
+    ],
+  },
+  {
+    name: "Substrate",
+    keywords: "Measured, cold, instrumental, precise, quiet.",
+    feels: "The instrument rather than the print — a dial settling on a reading.",
+    not: [
+      "Decorative — jade earns its place by marking state, not by looking pleasant",
+      "Warm — graphite neutrals carry no cream; amber signals rather than decorates",
+      "Bouncy — motion is a dial settling, never an overshoot",
+      "Lava in green — the structure is cool and exact, not molten",
+    ],
+  },
+  {
+    name: "Tundra",
+    keywords: "Cold, brittle, bright, sparse, quick.",
+    feels: "Full daylight on ice — pale ground, hard edges, nothing lingering.",
+    not: [
+      "Cosy — frost neutrals stay blue; never warm them toward gray-beige",
+      "Slow — motion is the quickest of the set; don't soften it to feel premium",
+      "Rounded — corners are near-square (factor 0.15); rounding them erases the theme",
+      "Pastel — rose is a cold signal, not a soft accent",
+    ],
+  },
 ]
 
+/** One row per theme so the table scales as themes are added — the previous
+ *  shape put each theme in its own column and only fitted two. */
 const themeDiff = [
-  ["Primary", "Plum ink", "Magma — yellow→red as it deepens"],
-  ["Secondary", "Amber", "Sulfur yellow"],
-  ["Neutrals", "Warm gray (cream)", "Basalt"],
-  ["Status hues", "Green · amber · red · blue", "Olivine · sulfur · cherry · ijen"],
-  ["Hard shadow", "Warm near-black", "Deep magma ember"],
-  ["Motion", "150ms, standard ease", "300ms, viscous ease-out"],
-  ["Radius", "Stock scale (factor 1)", "Swollen 1.5x"],
-  ["Feels like", "Quality stationery", "Molten rock under a crust"],
+  ["Plum", "Plum ink", "Amber", "Warm gray (cream)", "150ms, standard", "Stock (1x)"],
+  ["Press", "Process cyan", "Process yellow", "Cool proof stock", "140ms, hard stop", "Cut (0.25x)"],
+  ["Substrate", "Jade", "Instrument amber", "Graphite", "160ms, settling", "Softened (0.4x)"],
+  ["Lava", "Magma — yellow→red as it deepens", "Sulfur yellow", "Basalt", "300ms, viscous", "Swollen (1.5x)"],
+  ["Tundra", "Steel blue", "Cold rose", "Frost", "120ms, brittle", "Square (0.15x)"],
 ]
 
-const cascadeExample = `:root { /* default light */ }
-.dark { /* default dark — overrides :root */ }
+const cascadeExample = `:root { /* plum light — the default role */ }
+.dark { /* plum dark — overrides :root */ }
 [data-theme="ocean"] { /* ocean light */ }
 [data-theme="ocean"].dark { /* ocean dark */ }`
 
@@ -159,8 +191,8 @@ export default function ThemesPage() {
         <H3>Theme DNA</H3>
         <P>
           Every theme is defined as much by what it refuses as by what it
-          uses. The NOT-lists below keep the two shipped themes from drifting
-          toward each other — and set the bar for any theme you add.
+          uses. The NOT-lists below keep the shipped themes from drifting
+          from drifting toward each other — and set the bar for any theme you add.
         </P>
         {themeDna.map((theme) => (
           <Stack gap="sm" key={theme.name}>
@@ -181,17 +213,23 @@ export default function ThemesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[20%]">Axis</TableHead>
-                <TableHead>Default</TableHead>
-                <TableHead>Lava</TableHead>
+                <TableHead className="w-[14%]">Theme</TableHead>
+                <TableHead>Primary</TableHead>
+                <TableHead>Secondary</TableHead>
+                <TableHead>Neutrals</TableHead>
+                <TableHead>Motion</TableHead>
+                <TableHead>Radius</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {themeDiff.map(([axis, def, lava]) => (
-                <TableRow key={axis}>
-                  <TableCell className="font-medium">{axis}</TableCell>
-                  <TableCell className="text-sm">{def}</TableCell>
-                  <TableCell className="text-sm">{lava}</TableCell>
+              {themeDiff.map(([name, ...cells]) => (
+                <TableRow key={name}>
+                  <TableCell className="font-medium">{name}</TableCell>
+                  {cells.map((cell) => (
+                    <TableCell key={cell} className="text-sm">
+                      {cell}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
