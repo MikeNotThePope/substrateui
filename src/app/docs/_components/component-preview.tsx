@@ -21,7 +21,7 @@ export function ComponentPreview({ children, code, title }: ComponentPreviewProp
   }
 
   return (
-    <Stack gap="none" className="shadow-hard rounded-lg">
+    <Stack gap="none" data-specimen className="shadow-hard rounded-lg">
       {title && (
         <div className="flex items-center gap-1.5 px-4 py-2.5 border-2 border-b-0 rounded-t-lg bg-muted font-mono text-sm text-muted-foreground">
           <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-primary" />

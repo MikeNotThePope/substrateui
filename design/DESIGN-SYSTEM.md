@@ -164,3 +164,15 @@ they are not re-proposed: the evidence that killed them is not visible in the co
 | S2 | Rework `ThemeStrip` so adding a theme stops moving the landing page's height | **rejected — premise expired** | Measured at the visual-test viewport after #67: 5 chips occupy **673px of 1216px available, 543px of headroom** — room for four more themes before any wrap. The original problem came from the old two-column hero squeezing the strip into a narrow column; the Press hero is full-width and fixed it incidentally. Fixing it now would cost a baseline regeneration to solve a problem that does not exist. Revisit at ~9 themes. |
 
 Both were tempting because they sound like diligence. Neither survived a measurement.
+
+| # | Proposal | Verdict | Evidence |
+|---|---|---|---|
+| S3 | Put the display face on `H1`–`H4` in `src/components/ui/typography.tsx` so the whole site inherits it | **rejected** | `typography.tsx` ships. Consumers have no Archivo file, so they would get the fallback stack — a font-family change to every installation, which is exactly what P1 refused. Delivered site-side instead: one `body :is([data-slot=h1|h2|h3])` rule in `src/app/globals.css`, which is site-only by the same convention. |
+| S4 | Include `h4` in the display rule | **rejected** | `H4` renders at `text-xl` = 20px, below the system's 24px display floor. Set in Archivo it stops reading as a headline and starts reading as bolded body. |
+| S5 | Scope the display rule to `main` (i.e. docs only) | **rejected** | `/design-system` is in the top nav and its `Center` wrapper is a `div`, so it would have been the one page left in DM Sans. Scoped to `body` instead, with `[data-specimen]` as the opt-out. |
+
+`[data-specimen]` marks a container whose headings are *library output on display* rather than site
+chrome — component previews, and the two type-specimen lists on `/docs/tokens/typography` and
+`/design-system`. Headings inside it keep `--font-sans`, because that is what a consumer's app
+renders; showing them in Archivo would misreport the product. Any new specimen surface needs the
+attribute.
