@@ -10,6 +10,9 @@ export default defineConfig({
     globals: true,
     css: true,
     include: ['tests/unit/**/*.test.{ts,tsx}'],
+    // Node's own localStorage/sessionStorage globals throw without --localstorage-file
+    // and shadow jsdom's (vitest skips window keys that already exist on globalThis).
+    execArgv: ['--no-experimental-webstorage'],
   },
   resolve: {
     alias: {
