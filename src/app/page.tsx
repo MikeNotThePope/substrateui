@@ -19,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { cn } from "@/lib/utils"
 import pkg from "../../package.json"
 
 const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
@@ -40,6 +41,23 @@ function RegMark({ className }: { className?: string }) {
       <circle cx="9" cy="9" r="5.5" />
       <path d="M9 0v18M0 9h18" />
     </svg>
+  )
+}
+
+// ─── Utility caps ─────────────────────────────────────────────────────
+// The tiny type printed on the edge of a swatch card. Condensed, 600,
+// uppercase, wide-tracked — and deliberately never larger than 13px.
+
+function Caps({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span
+      className={cn(
+        "font-utility text-xs font-semibold uppercase tracking-widest",
+        className
+      )}
+    >
+      {children}
+    </span>
   )
 }
 
@@ -70,7 +88,7 @@ function InkBar({ token, label }: { token: string; label: string }) {
         ))}
       </div>
       <div className="flex items-baseline justify-between gap-2">
-        <Mono className="text-xs">{label}</Mono>
+        <Caps>{label}</Caps>
         <Mono className="text-xs text-muted-foreground">{token}</Mono>
       </div>
     </Stack>
@@ -104,12 +122,10 @@ export default function HomePage() {
             <Stack gap="lg" className="sui-enter items-start text-left">
               <Cluster gap="sm" className="items-center">
                 <RegMark className="h-4 w-4 text-primary" />
-                <Mono className="text-xs uppercase tracking-widest text-muted-foreground">
-                  {version} · MIT · React 18+
-                </Mono>
+                <Caps className="text-muted-foreground">{version} · MIT · React 18+</Caps>
               </Cluster>
 
-              <H1 className="text-5xl font-bold tracking-tight md:text-7xl">
+              <H1 className="font-display text-5xl font-extrabold tracking-tight md:text-7xl">
                 Swap{" "}
                 <span className="relative isolate inline-block">
                   the ink
@@ -161,9 +177,7 @@ export default function HomePage() {
         <Center max="2xl" className="px-4">
           <Stack gap="lg">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <Mono className="text-xs uppercase tracking-widest text-muted-foreground">
-                Ink density
-              </Mono>
+              <Caps className="text-muted-foreground">Ink density</Caps>
               <Mono className="text-xs text-muted-foreground">
                 tints mixed in oklab · 25 / 50 / 75 / 100%
               </Mono>
@@ -182,8 +196,8 @@ export default function HomePage() {
         <Center max="2xl" className="px-4">
           <Stack gap="xl">
             <Stack gap="sm">
-              <Mono className="text-xs uppercase tracking-widest text-muted-foreground">Proof</Mono>
-              <H2 className="text-3xl font-bold tracking-tight md:text-4xl">
+              <Caps className="text-muted-foreground">Proof</Caps>
+              <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
                 Same markup. Current ink.
               </H2>
               <P className="max-w-2xl text-muted-foreground">
@@ -225,9 +239,7 @@ export default function HomePage() {
               </Card>
 
               <Stack gap="sm" className="sui-reveal">
-                <Mono className="text-xs uppercase tracking-widest text-muted-foreground">
-                  theme.ts
-                </Mono>
+                <Caps className="text-muted-foreground">theme.ts</Caps>
                 <div className="overflow-hidden rounded-lg border-2 shadow-hard">
                   <pre className="overflow-x-auto bg-warm-950 p-4 text-sm text-warm-200 dark:bg-warm-900">
                     <code>{`import { createTheme, ThemeRegistry } from 'substrateui'
@@ -258,10 +270,8 @@ const press = createTheme({
         <Center max="2xl" className="px-4">
           <Stack gap="xl">
             <Stack gap="sm">
-              <Mono className="text-xs uppercase tracking-widest text-muted-foreground">
-                Job docket
-              </Mono>
-              <H2 className="text-3xl font-bold tracking-tight md:text-4xl">What you get</H2>
+              <Caps className="text-muted-foreground">Job docket</Caps>
+              <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">What you get</H2>
             </Stack>
 
             <div className="overflow-hidden rounded-lg border-2">
@@ -277,7 +287,7 @@ const press = createTheme({
                   {docket.map(([item, value, detail]) => (
                     <TableRow key={item}>
                       <TableCell>
-                        <Mono className="text-xs uppercase tracking-widest">{item}</Mono>
+                        <Caps>{item}</Caps>
                       </TableCell>
                       <TableCell className="font-semibold">{value}</TableCell>
                       <TableCell className="text-sm text-muted-foreground">{detail}</TableCell>
@@ -288,7 +298,7 @@ const press = createTheme({
             </div>
 
             <Stack gap="md">
-              <H3 className="text-lg font-semibold">Bring your own ink</H3>
+              <H3 className="font-display text-lg font-bold">Bring your own ink</H3>
               <P className="max-w-2xl text-muted-foreground">
                 Five themes ship, but the set is open. A theme is a token map — no component ever
                 learns its name.

@@ -2,6 +2,17 @@
 @import "tw-animate-css";
 @import "../styles/tokens.css";
 
+/* ── Site typography: display + utility faces ────────────────────────
+   Registers `font-display` and `font-utility` utilities from the faces
+   loaded in layout.tsx. Site-only by design: --font-sans and --font-mono
+   live in tokens.css and ship to consumers, so those are left alone —
+   swapping them would restyle every installation of the package. */
+
+@theme inline {
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-utility: var(--font-barlow), "Arial Narrow", Arial, sans-serif;
+}
+
 /* ── Marketing-site entrance animations ──────────────────────────────
    Docs/site only — the published library ships tokens.css untouched.
    Everything below is gated on prefers-reduced-motion. */
