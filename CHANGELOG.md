@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.15.1
+
+### Patch Changes
+
+- [#68](https://github.com/MikeNotThePope/substrateui/pull/68) [`3486a99`](https://github.com/MikeNotThePope/substrateui/commit/3486a996db26edf49284a24701d8dea72c081371) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add the Press direction's display and utility typefaces to substrateui.dev.
+
+  Archivo carries the headings and Barlow Condensed carries the small uppercase
+  labels — the eyebrows, docket items and swatch codes that give the direction its
+  fingerprint.
+
+  Site-only. `--font-sans` and `--font-mono` live in the published `tokens.css` and
+  are deliberately untouched, so nothing changes for consumers of the package.
+
 ## 1.15.0
 
 ### Minor Changes
