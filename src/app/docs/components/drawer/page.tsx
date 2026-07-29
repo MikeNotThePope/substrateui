@@ -27,7 +27,7 @@ export default function DrawerPage() {
   return (
     <DocPage
       title="Drawer"
-      description="A bottom sheet that slides up from the bottom of the viewport. Great for mobile-friendly interactions and supplementary content."
+      description="A sheet that slides up from the bottom edge and can be dragged back down. Built for touch."
     >
       {/* Basic Drawer */}
       <Stack gap="md">

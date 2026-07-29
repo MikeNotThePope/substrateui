@@ -35,7 +35,7 @@ export default function DatePickerPage() {
   return (
     <DocPage
       title="Date Picker"
-      description="A calendar-based date selection control. Combines a trigger button with a popover calendar for intuitive date picking."
+      description="A trigger button paired with a popover calendar. Selects a single date."
     >
       {/* Basic */}
       <Stack gap="md">

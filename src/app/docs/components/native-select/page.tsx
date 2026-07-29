@@ -24,7 +24,7 @@ export default function NativeSelectPage() {
   return (
     <DocPage
       title="Native Select"
-      description="A styled wrapper around the browser's native select element. Ideal for mobile-friendly forms where native OS pickers are preferred."
+      description="A styled wrapper around the browser's own select element. The picker is the operating system's, which is what makes it the right control on mobile."
     >
       {/* Basic */}
       <Stack gap="md">

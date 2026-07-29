@@ -71,7 +71,7 @@ export default function DataTablePage() {
   return (
     <DocPage
       title="DataTable"
-      description="A full-featured table component built on TanStack Table with sorting, filtering, pagination, row selection, and column visibility controls."
+      description="A table built on TanStack Table: sorting, filtering, pagination, row selection, and column visibility."
     >
       <Stack gap="xl">
         {/* ── Full Example ──────────────────────────────── */}

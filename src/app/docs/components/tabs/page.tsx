@@ -33,7 +33,7 @@ export default function TabsPage() {
   return (
     <DocPage
       title="Tabs"
-      description="A set of layered panels where only one panel is visible at a time. Ideal for organizing related content into switchable sections."
+      description="Layered panels, one visible at a time. The URL does not change, so reach for NavTabs when the tab needs to be linkable."
     >
       <Stack gap="md">
         <H3>Basic Tabs</H3>

@@ -27,7 +27,7 @@ export default function DialogPage() {
   return (
     <DocPage
       title="Dialog"
-      description="A modal overlay that focuses user attention on a specific task or piece of content. Renders above the page with a backdrop overlay."
+      description="A modal overlay rendered above the page with a backdrop. Focus stays inside it while it is open."
     >
       {/* Basic Dialog */}
       <Stack gap="md">

@@ -14,7 +14,7 @@ export default function TemplatesPage() {
   return (
     <DocPage
       title="Templates"
-      description="Complete, assembled pages built from blocks and shells — the castle on top. Pass data props for a ready-to-ship page, or drop in your own content. Every link routes through LinkProvider, so templates work with any router."
+      description="Assembled pages built from blocks and shells. Pass data props for a ready-to-ship page, or drop in your own content. Every link routes through LinkProvider, so templates work with any router."
     >
       <Stack gap="md">
         <H3>Installation</H3>

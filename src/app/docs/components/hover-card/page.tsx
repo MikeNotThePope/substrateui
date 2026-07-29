@@ -26,7 +26,7 @@ export default function HoverCardPage() {
   return (
     <DocPage
       title="Hover Card"
-      description="A card that appears when hovering over a trigger element. Useful for showing preview information like user profiles or link details."
+      description="A card that opens on hover over its trigger — profile previews, link details. Anything essential belongs somewhere a touch device can also reach."
     >
       {/* Basic Hover Card */}
       <Stack gap="md">

@@ -26,7 +26,7 @@ export default function AlertPage() {
   return (
     <DocPage
       title="Alert"
-      description="Displays a callout message to attract user attention. Supports icons and semantic variants for informational, success, warning, and error states."
+      description="A callout message. Four semantic variants — informational, success, warning, error — each with its own colour and icon."
     >
       {/* Alert Types */}
       <Stack gap="md">

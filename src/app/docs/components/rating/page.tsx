@@ -32,7 +32,7 @@ export default function RatingPage() {
   return (
     <DocPage
       title="Rating"
-      description="A star rating — a fractional-fill display for aggregate scores, or an interactive input when you pass a change handler. Filled stars use the amber secondary fill."
+      description="A star rating — a fractional-fill display for aggregate scores, or an interactive input when you pass a change handler. Filled stars take the theme's secondary fill."
     >
       <Stack gap="md">
         <H3>Display</H3>

@@ -25,7 +25,7 @@ export default function BreadcrumbDocsPage() {
   return (
     <DocPage
       title="Breadcrumb"
-      description="A navigational aid that shows the user their current location within a hierarchy. Helps users understand context and navigate back up."
+      description="Shows where the current page sits in the hierarchy, and links back up it."
     >
       <Stack gap="md">
         <H3>Three-Level Breadcrumb</H3>

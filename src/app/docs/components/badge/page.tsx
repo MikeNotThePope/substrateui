@@ -28,7 +28,7 @@ export default function BadgePage() {
   return (
     <DocPage
       title="Badge"
-      description="A compact label for displaying status, category, or metadata. Supports semantic color variants for clear visual communication."
+      description="A compact label for status, category, or metadata. Semantic colour variants, sized to sit inline with text."
     >
       {/* Variants */}
       <Stack gap="md">

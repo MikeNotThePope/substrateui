@@ -54,7 +54,7 @@ export default function ToastPage() {
   return (
     <DocPage
       title="Toast"
-      description="A non-intrusive notification that appears temporarily. Powered by Sonner. The <Toaster /> component must be placed in your root layout."
+      description="A notification that appears at the edge of the viewport and dismisses itself. Built on Sonner. The <Toaster /> component has to be in your root layout or nothing renders."
     >
       {/* Toast Examples */}
       <Stack gap="md">

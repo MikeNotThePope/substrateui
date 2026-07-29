@@ -18,7 +18,7 @@ export default function SpacerPage() {
   return (
     <DocPage
       title="Spacer"
-      description="A flexible whitespace element that adds fixed-size gaps or fills available flex space between siblings. Use Spacer for precise spacing control outside of gap-based layouts."
+      description="A whitespace element: a fixed gap, or a flex fill. For space between siblings where a gap on the parent will not reach."
     >
       <Stack gap="xl">
         {/* ── Vertical Size Variants ──────────────────────── */}

@@ -25,7 +25,7 @@ export default function NavigationMenuPage() {
   return (
     <DocPage
       title="Navigation Menu"
-      description="A horizontal navigation bar with styled link items. Use for top-level site navigation with a clean, consistent appearance."
+      description="A horizontal bar of navigation links, for the top level of a site."
     >
       <Stack gap="md">
         <H3>Horizontal Navigation</H3>

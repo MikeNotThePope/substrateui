@@ -19,7 +19,7 @@ export default function AspectRatioPage() {
   return (
     <DocPage
       title="AspectRatio"
-      description="Constrains its child content to a given width-to-height ratio. Useful for images, videos, and embedded media that need consistent proportions."
+      description="Constrains its child to a fixed width-to-height ratio. For images, video, and embeds that would otherwise resize the page as they load."
     >
       {/* 16:9 Ratio */}
       <Stack gap="md">

@@ -23,7 +23,7 @@ export default function TypographyPage() {
   return (
     <DocPage
       title="Typography"
-      description="A complete set of semantic typography components for headings, body text, and inline elements. Each renders the correct HTML tag with consistent styling."
+      description="Semantic typography components for headings, body text, and inline elements. Each renders the correct HTML tag."
     >
       <Stack gap="md">
         <H3>Headings</H3>

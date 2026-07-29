@@ -36,7 +36,7 @@ export default function HooksPage() {
   return (
     <DocPage
       title="Hooks"
-      description="A batteries-included set of React hooks for the state and browser plumbing every app needs — disclosure, clipboard, storage, media queries, hotkeys, debouncing, and more. Import from @mikenotthepope/substrateui/hooks. SSR-safe and tree-shakeable."
+      description="React hooks for the state and browser plumbing every app rewrites — disclosure, clipboard, storage, media queries, hotkeys, debouncing, and more. Import from @mikenotthepope/substrateui/hooks. SSR-safe and tree-shakeable."
     >
       <Stack gap="md">
         <H3>Installation</H3>

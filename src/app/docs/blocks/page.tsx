@@ -28,7 +28,7 @@ export default function BlocksPage() {
   return (
     <DocPage
       title="Blocks"
-      description="Full, opinionated compositions you paste in and wire up — sign-in and sign-up pages, dashboard stat rows, marketing heroes, and feature grids. Blocks are built from the same primitives you already have, and every link routes through LinkProvider so they work with any router."
+      description="Assembled compositions you paste in and wire up — sign-in and sign-up pages, dashboard stat rows, marketing heroes, and feature grids. Blocks are built from the same primitives you already have, and every link routes through LinkProvider so they work with any router."
     >
       <Stack gap="md">
         <H3>Installation</H3>
@@ -140,7 +140,7 @@ import { DollarSign, Users, Zap } from "lucide-react"
             className="w-full py-8 px-0 md:py-10 md:px-0"
             eyebrow="Now in beta"
             title="The design system that does everything"
-            description="72 components, ready-made blocks, and an OKLCH token engine — batteries fully included."
+            description="72 components, ready-made blocks, and an OKLCH token engine."
             primaryAction={{ label: "Get started", href: "#" }}
             secondaryAction={{ label: "View on GitHub", href: "#" }}
           />
@@ -220,7 +220,7 @@ import { Boxes, Palette, Zap } from "lucide-react"
           <div className="w-full overflow-hidden rounded-md">
             <CtaBlock
               title="Ready to build?"
-              description="Ship your next app on SubstrateUI — batteries fully included."
+              description="Ship your next app on SubstrateUI."
               primaryAction={{ label: "Get started", href: "#" }}
               secondaryAction={{ label: "Read the docs", href: "#" }}
               inverted
