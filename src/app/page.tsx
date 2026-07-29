@@ -1,6 +1,7 @@
 import Link from "next/link"
-import { ArrowRight, Box, Palette, Layers, Moon, Blocks, Puzzle } from "lucide-react"
+import { ArrowRight, Box, Palette, Layers, SwatchBook, Blocks, Puzzle } from "lucide-react"
 
+import { ThemeStrip } from "@/components/theme-strip"
 import { H1, H2, H3, P, Lead, Mono } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -19,62 +20,53 @@ const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
 
 // ─── Feature Data ─────────────────────────────────────────────────────
 
+// Named for the token each one uses, not for the colour it happens to be —
+// every one of these re-paints itself when the theme changes.
 const iconAccents = {
-  plum: "bg-primary text-primary-foreground border-primary-border",
-  amber: "bg-secondary-fill text-secondary-fill-foreground border-secondary-fill-border",
-  plumSoft: "bg-accent text-accent-foreground border-primary",
-  amberSoft: "bg-secondary-surface text-secondary-text border-secondary-fill",
+  primary: "bg-primary text-primary-foreground border-primary-border",
+  secondary: "bg-secondary-fill text-secondary-fill-foreground border-secondary-fill-border",
+  primarySoft: "bg-accent text-accent-foreground border-primary",
+  secondarySoft: "bg-secondary-surface text-secondary-text border-secondary-fill",
 } as const
 
 const features = [
   {
     icon: Box,
-    accent: "plum",
+    accent: "primary",
     title: "Chunky Borders",
     description: "border-2 everywhere. Intentional, tactile, unapologetic.",
   },
   {
     icon: Palette,
-    accent: "amber",
-    title: "OKLCH Color System",
-    description: "Perceptually uniform. CVD-safe plum + amber pairing.",
+    accent: "secondary",
+    title: "OKLCH Token System",
+    description: "Perceptually uniform ramps. Contrast is audited in CI, not eyeballed.",
+  },
+  {
+    icon: SwatchBook,
+    accent: "primarySoft",
+    title: "Themes, Not Skins",
+    description:
+      "A theme swaps palette, motion, corner radius and shadow. Light and dark come free with each one.",
   },
   {
     icon: Layers,
-    accent: "plumSoft",
+    accent: "secondarySoft",
     title: "Tailwind CSS v4 Native",
     description: "@theme inline, no config file, CSS-first tokens.",
   },
   {
-    icon: Moon,
-    accent: "amberSoft",
-    title: "Dark Mode as Token Swap",
-    description: "Flip .dark and the whole system follows. Zero component changes.",
-  },
-  {
     icon: Blocks,
-    accent: "amber",
-    title: "70+ Components",
+    accent: "secondary",
+    title: "75 Components",
     description: "From atomic Button to organism App Shell. Batteries included.",
   },
   {
     icon: Puzzle,
-    accent: "plum",
+    accent: "primary",
     title: "Composition Over Configuration",
     description: "Field context, sub-component patterns, slot-based APIs.",
   },
-] as const
-
-// ─── Token swatch strip ───────────────────────────────────────────────
-
-const swatches = [
-  "bg-plum-300",
-  "bg-plum-500",
-  "bg-plum-700",
-  "bg-plum-900",
-  "bg-amber-500",
-  "bg-amber-300",
-  "bg-amber-100",
 ] as const
 
 // ─── Chunky code block ────────────────────────────────────────────────
@@ -122,7 +114,8 @@ export default function HomePage() {
               </H1>
               <Lead className="max-w-2xl text-lg md:text-xl">
                 A chunky, opinionated design system for Next.js. OKLCH color tokens,
-                Tailwind CSS v4, Base UI primitives, and a personality that isn&apos;t afraid of borders.
+                Tailwind CSS v4, Base UI primitives, and a theming layer that re-skins
+                every one of them without touching a component.
               </Lead>
               <Cluster gap="sm">
                 <Link href="/docs">
@@ -134,11 +127,11 @@ export default function HomePage() {
                   <Button variant="amber" size="lg">Browse Components</Button>
                 </Link>
               </Cluster>
-              <div className="flex items-center gap-1.5 pt-2" aria-hidden>
-                {swatches.map((swatch) => (
-                  <span key={swatch} className={cn("h-5 w-5 rounded-sm border-2", swatch)} />
-                ))}
-                <Mono className="ms-2 text-xs text-muted-foreground">--raw-plum · --raw-amber</Mono>
+              <div className="pt-2">
+                <ThemeStrip />
+                <Mono className="mt-2 block text-xs text-muted-foreground">
+                  pick one — every page follows
+                </Mono>
               </div>
             </Stack>
 
@@ -177,7 +170,7 @@ export default function HomePage() {
                 variant="outline"
                 className="absolute -bottom-2 end-8 z-10 rotate-3 border-secondary-fill-border bg-secondary-fill text-secondary-fill-foreground shadow-hard-sm"
               >
-                dark mode ready
+                same markup, any theme
               </Badge>
             </div>
           </div>
@@ -249,18 +242,49 @@ export default function App() {
         <FieldLabel>Email</FieldLabel>
         <Input type="email" placeholder="you@example.com" />
       </Field>
-      <Button variant="amber">Subscribe</Button>
+      <Button>Subscribe</Button>
     </Stack>
   )
 }`}
             />
 
             <div className="text-center">
-              <Link href="/docs">
-                <Button size="lg">
-                  Read the Docs <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+              <P className="text-muted-foreground">
+                Want your own palette? A theme is a token map — no component ever
+                learns its name.
+              </P>
+            </div>
+
+            <CodeBlock
+              className="sui-reveal"
+              title="theme.ts"
+              code={`import { createTheme, ThemeRegistry } from 'substrateui'
+
+const ocean = createTheme({
+  name: 'ocean',
+  light: { primary: 'oklch(0.45 0.12 232)' },
+  dark:  { primary: 'oklch(0.72 0.13 232)' },
+})
+
+// Wrap once — every component below re-colours.
+<ThemeRegistry themes={[ocean]} defaultTheme="ocean">
+  <App />
+</ThemeRegistry>`}
+            />
+
+            <div className="text-center">
+              <Cluster gap="sm" className="justify-center">
+                <Link href="/docs">
+                  <Button size="lg">
+                    Read the Docs <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/docs/foundations/theming">
+                  <Button variant="outline" size="lg">
+                    Theming Guide
+                  </Button>
+                </Link>
+              </Cluster>
             </div>
           </Stack>
         </Center>
