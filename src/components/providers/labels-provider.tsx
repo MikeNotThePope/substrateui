@@ -5,6 +5,7 @@ import * as React from "react"
 import type { BreadcrumbLabels } from "@/components/ui/breadcrumb"
 import type { CarouselLabels } from "@/components/ui/carousel"
 import type { ComboboxLabels } from "@/components/ui/combobox"
+import type { CountdownLabels } from "@/components/ui/countdown"
 import type { DataTableLabels } from "@/components/ui/data-table"
 import type { DatePickerLabels } from "@/components/ui/date-picker"
 import type { DialogLabels } from "@/components/ui/dialog"
@@ -27,6 +28,7 @@ interface SubstrateUILabels {
   breadcrumb?: Partial<BreadcrumbLabels>
   carousel?: Partial<CarouselLabels>
   combobox?: Partial<ComboboxLabels>
+  countdown?: Partial<CountdownLabels>
   dataTable?: Partial<DataTableLabels>
   datePicker?: Partial<DatePickerLabels>
   dialog?: Partial<DialogLabels>
