@@ -152,3 +152,15 @@ them back.
 | P2 | Process magenta for registration marks and focus rings | `--primary` | No theme exposes a *third* brand token — themes ship `--primary` and `--secondary-fill` only. `press` defines `--raw-magenta`, but promoting it to a semantic token would give one theme a slot the others lack and break the uniform contract the audit relies on. |
 | P3 | Hairline trim, paper-lift shadows | The components' own `border-2` and `shadow-hard` | The agreed "website first" split: component internals are untouched so no consumer breaks. **Finding: it works.** Heavy borders around process inks read as letterpress/risograph rather than as neo-brutalism — the structural language and the palette turn out to be doing different jobs. This weakens, rather than strengthens, the case for a `--border-factor` v2 track. |
 | P4 | Ink-density bar shows three process inks | Two brand inks plus the neutral ramp | Follows from P2. Showing the neutral ramp is arguably the better demo anyway: neutrals are the axis people miss, and they genuinely differ per theme (warm cream vs basalt vs cool proof vs graphite vs frost). |
+
+## Post-ship decisions
+
+Made 2026-07-29 after the direction shipped (PRs #65, #67, #68). Both are refusals, recorded so
+they are not re-proposed: the evidence that killed them is not visible in the code.
+
+| # | Proposal | Verdict | Evidence |
+|---|---|---|---|
+| S1 | A `--border-factor` token so themes can thin the components' `border-2`, retiring neo-brutalism inside the library (the "v2 track") | **rejected** | The home page was deliberately built from shipped components with *zero* per-instance overrides, so this question could be answered rather than dodged. Heavy borders around process cyan and yellow read as **letterpress**, not as neo-brutalism — the structural language and the palette turn out to be doing different jobs. The premise that Press needs thin borders is simply wrong. Revisit only if a future theme actually fights the borders; it would touch `border-2` in 59 of 85 components. |
+| S2 | Rework `ThemeStrip` so adding a theme stops moving the landing page's height | **rejected — premise expired** | Measured at the visual-test viewport after #67: 5 chips occupy **673px of 1216px available, 543px of headroom** — room for four more themes before any wrap. The original problem came from the old two-column hero squeezing the strip into a narrow column; the Press hero is full-width and fixed it incidentally. Fixing it now would cost a baseline regeneration to solve a problem that does not exist. Revisit at ~9 themes. |
+
+Both were tempting because they sound like diligence. Neither survived a measurement.
