@@ -66,7 +66,7 @@ function InkBar({ token, label }: { token: string; label: string }) {
 const docket: Array<[string, string, string]> = [
   ["Components", "75", "atomic Button through organism App Shell"],
   ["Themes", "5", "press · substrate · lava · tundra · plum"],
-  ["Audited pairs", "31", "per theme, light and dark. A failing ratio fails the build."],
+  ["Audited pairs", "35", "per theme, light and dark. A failing ratio fails the build."],
   ["Colour", "OKLCH", "perceptually uniform ramps, so contrast is computed, not eyeballed"],
   ["Primitives", "Base UI", "focus management, dismissal and ARIA are handled"],
   ["CSS", "Tailwind v4", "@theme inline — no config file"],

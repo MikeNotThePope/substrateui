@@ -30,13 +30,24 @@ describe('Button', () => {
     ['destructive', 'bg-destructive'],
     ['outline', 'border-input'],
     ['secondary', 'bg-secondary'],
-    ['amber', 'bg-secondary-fill'],
+    ['secondary-fill', 'bg-secondary-fill'],
     ['ghost', 'hover:bg-accent'],
     ['link', 'underline-offset-4'],
   ] as const)('applies variant=%s classes', (variant, expectedClass) => {
     render(<Button variant={variant}>V</Button>)
     const btn = screen.getByRole('button', { name: 'V' })
     expect(btn.className).toContain(expectedClass)
+  })
+
+  // "amber" shipped in 1.x and stays as an alias. It must keep resolving to
+  // exactly the same classes as secondary-fill, or the deprecation silently
+  // changes how existing consumers' buttons look.
+  it('treats the deprecated amber variant as an alias of secondary-fill', () => {
+    render(<Button variant="amber">Old</Button>)
+    render(<Button variant="secondary-fill">New</Button>)
+    const old = screen.getByRole('button', { name: 'Old' })
+    const next = screen.getByRole('button', { name: 'New' })
+    expect(old.className).toBe(next.className)
   })
 
   it.each([

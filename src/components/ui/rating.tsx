@@ -29,7 +29,7 @@ export interface RatingProps extends Omit<React.ComponentPropsWithRef<"div">, "o
 
 /**
  * A star rating — a fractional-fill display, or an interactive input when
- * `onValueChange` is provided. Filled stars use the amber secondary fill.
+ * `onValueChange` is provided. Filled stars take the theme's secondary fill.
  *
  * @example
  * // display

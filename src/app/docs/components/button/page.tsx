@@ -10,10 +10,10 @@ import { PropsTable, type PropDef } from "../../_components/props-table"
 const buttonProps: PropDef[] = [
   {
     name: "variant",
-    type: '"default" | "destructive" | "outline" | "secondary" | "amber" | "ghost" | "link"',
+    type: '"default" | "destructive" | "outline" | "secondary" | "secondary-fill" | "ghost" | "link"',
     default: '"default"',
     description:
-      "The visual style of the button. Each variant has a distinct color scheme and border treatment.",
+      "Which token family paints the button. secondary is the tinted surface; secondary-fill is the saturated one. amber still works as an alias for secondary-fill but is deprecated — it named the colour plum happens to use, and every theme colours that slot differently.",
   },
   {
     name: "size",
@@ -58,7 +58,7 @@ export default function ButtonPage() {
 <Button variant="destructive">Destructive</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="secondary">Secondary</Button>
-<Button variant="amber">Amber</Button>
+<Button variant="secondary-fill">Secondary fill</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="link">Link</Button>`}
         >
@@ -67,7 +67,7 @@ export default function ButtonPage() {
             <Button variant="destructive">Destructive</Button>
             <Button variant="outline">Outline</Button>
             <Button variant="secondary">Secondary</Button>
-            <Button variant="amber">Amber</Button>
+            <Button variant="secondary-fill">Secondary fill</Button>
             <Button variant="ghost">Ghost</Button>
             <Button variant="link">Link</Button>
           </Cluster>

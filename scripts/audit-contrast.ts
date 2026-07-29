@@ -178,13 +178,19 @@ const pairings: Pairing[] = [
 
   // Destructive (Button/Badge pair destructive-foreground with the destructive fill)
   { name: "destructive-foreground on destructive", fg: "destructive-foreground", bg: "destructive", type: "normal" },
+
+  // Secondary fill (Button variant="secondary-fill"). Every theme paints this
+  // from its own ramp, so it needs auditing per theme — the raw amber pairings
+  // below only ever covered plum.
+  { name: "secondary-fill-foreground on secondary-fill", fg: "secondary-fill-foreground", bg: "secondary-fill", type: "normal" },
+  { name: "secondary-fill-border on background", fg: "secondary-fill-border", bg: "background", type: "ui" },
 ]
 
 // Pairings that only apply to the default theme (reference raw palette tokens
 // that other themes don't consume directly).
 const defaultOnlyPairings: Pairing[] = [
-  { name: "warm-900 on amber-500 (light amber button)", fg: "raw-warm-900", bg: "raw-amber-500", type: "normal" },
-  { name: "warm-950 on amber-400 (dark amber button)", fg: "raw-warm-950", bg: "raw-amber-400", type: "normal" },
+  { name: "warm-900 on amber-500 (plum secondary fill, light)", fg: "raw-warm-900", bg: "raw-amber-500", type: "normal" },
+  { name: "warm-950 on amber-400 (plum secondary fill, dark)", fg: "raw-warm-950", bg: "raw-amber-400", type: "normal" },
 ]
 
 // ─── Audit runner ─────────────────────────────────────────────────────
