@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Check, Copy } from "lucide-react"
 import { Caps } from "@/components/caps"
+import { RegMark } from "@/components/reg-mark"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 
@@ -24,11 +25,13 @@ export function ComponentPreview({ children, code, title }: ComponentPreviewProp
   return (
     <Stack gap="none" data-specimen className="shadow-hard rounded-lg">
       {title && (
-        <div className="flex items-center gap-1.5 px-4 py-2.5 border-2 border-b-0 rounded-t-lg bg-muted font-mono text-sm text-muted-foreground">
-          <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-primary" />
-          <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-secondary-fill" />
-          <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-background" />
-          <Caps className="ms-2">{title}</Caps>
+        /* A proof's slug line names the plate. The three dots this replaces
+           were a macOS title bar — window-chrome pastiche that said nothing
+           about the component, and part of the templated look the direction
+           rules out. */
+        <div className="flex items-center gap-2 px-4 py-2.5 border-2 border-b-0 rounded-t-lg bg-muted text-muted-foreground">
+          <RegMark className="h-3.5 w-3.5 shrink-0 text-primary" />
+          <Caps>{title}</Caps>
         </div>
       )}
       <div className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4`}>

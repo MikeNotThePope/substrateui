@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { Caps } from "@/components/caps"
+import { RegMark } from "@/components/reg-mark"
 import { ThemeStrip } from "@/components/theme-strip"
 import { H1, H2, H3, P, Lead, Mono } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button"
@@ -23,26 +24,6 @@ import {
 import pkg from "../../package.json"
 
 const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
-
-// ─── Registration mark ────────────────────────────────────────────────
-// The crosshair a printer aligns plates by. Structural, not decorative:
-// it marks where the sheet's own furniture starts.
-
-function RegMark({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 18 18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1"
-      className={className}
-    >
-      <circle cx="9" cy="9" r="5.5" />
-      <path d="M9 0v18M0 9h18" />
-    </svg>
-  )
-}
 
 // ─── Ink density bar ──────────────────────────────────────────────────
 // A press proof prints tint steps so the operator can check ink density.
