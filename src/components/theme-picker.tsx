@@ -22,13 +22,17 @@ const defaultThemePickerLabels: Required<ThemePickerLabels> = {
   theme: "Theme",
 }
 
-type Theme = "default" | "lava"
-
-const STORAGE_KEY = "substrateui-theme"
-const THEMES: Array<{ value: Theme; label: string }> = [
+/** Every theme the site ships. Adding one here is the only edit a new theme
+ *  needs on the UI side — the picker, the home page strip, and anything else
+ *  that offers a choice all read this list. */
+export const SITE_THEMES = [
   { value: "default", label: "Default" },
   { value: "lava", label: "Lava" },
-]
+] as const
+
+type Theme = (typeof SITE_THEMES)[number]["value"]
+
+const STORAGE_KEY = "substrateui-theme"
 
 const ThemeContext = React.createContext<{
   theme: Theme
@@ -52,7 +56,7 @@ export function SiteThemeProvider({
 
   React.useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
-    if (stored && THEMES.some((t) => t.value === stored)) {
+    if (stored && SITE_THEMES.some((t) => t.value === stored)) {
       setThemeState(stored)
       applyTheme(stored)
     }
@@ -91,7 +95,7 @@ export function ThemePicker({ labels: labelsProp }: { labels?: ThemePickerLabels
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        {THEMES.map((t) => (
+        {SITE_THEMES.map((t) => (
           <SelectItem key={t.value} value={t.value}>
             {t.label}
           </SelectItem>

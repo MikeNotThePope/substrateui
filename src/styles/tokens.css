@@ -88,9 +88,15 @@
    SubstrateUI extended names: --surface-*, --border-*, --status-*, etc.
 
    Dark mode (.dark) redefines ONLY this layer.
+
+   `[data-theme="default"]` is listed alongside `:root` so the base palette
+   is addressable by name, not just by the absence of an attribute — that is
+   what makes it survive nesting inside another theme (a default-themed
+   preview sitting on a lava page).
 ================================================================ */
 
-:root {
+:root,
+[data-theme="default"] {
   --radius: 0.625rem;
 
   /* ── Shadcn core tokens ── */
@@ -202,7 +208,8 @@
 
 /* ── DARK MODE ── */
 
-.dark {
+.dark,
+.dark [data-theme="default"] {
   /* ── Shadcn core ── */
   --background: var(--raw-warm-975);
   --foreground: var(--raw-warm-100);
@@ -453,7 +460,11 @@
 
 /* ── LAVA DARK ── */
 
-[data-theme="lava"].dark {
+/* Two selectors, matching what `themeToCss()` emits for user themes: the
+   attribute on the same element as `.dark` (the document element), and a
+   lava-themed element nested inside a dark root. */
+[data-theme="lava"].dark,
+.dark [data-theme="lava"] {
   /* ── Shadcn core ── */
   --background: var(--raw-basalt-975);
   --foreground: var(--raw-basalt-100);

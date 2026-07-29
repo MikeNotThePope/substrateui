@@ -78,7 +78,9 @@ function parseBlocks(css: string): CssBlock[] {
 function mergeMatchingBlocks(blocks: CssBlock[], target: string): TokenMap {
   const out: TokenMap = {}
   for (const b of blocks) {
-    if (b.selector === target) Object.assign(out, b.decls)
+    // A selector list applies to every branch: `:root, [data-theme="default"]`
+    // is a `:root` block as much as a bare `:root {` is.
+    if (b.selector.split(",").some((s) => s.trim() === target)) Object.assign(out, b.decls)
   }
   return out
 }
