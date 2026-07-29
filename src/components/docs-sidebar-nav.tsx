@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { capsClass } from "@/components/caps"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -212,7 +213,11 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
     <nav aria-label="Documentation" className="flex flex-col">
       {navSections.map((section) => (
         <SidebarGroup key={section.title}>
-          <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
+          {/* Section labels are registration marks, not headings — the type
+              printed on the edge of the sheet to say which plate you're on. */}
+          <SidebarGroupLabel className={capsClass}>
+            {section.title}
+          </SidebarGroupLabel>
           <SidebarMenu>
             {section.items.map((item) => {
               const isActive = pathname === item.href
