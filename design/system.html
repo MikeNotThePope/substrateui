@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en" data-ds-theme="press">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SubstrateUI — Press specimen sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   SPECIMEN SHEET — every value below traces to design/tokens.css
+   ───────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ds-stock);
+  color: var(--ds-ink);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-body);
+  transition: background var(--ds-duration-slow) var(--ds-ease),
+              color var(--ds-duration-slow) var(--ds-ease);
+}
+
+/* ── Press furniture ─────────────────────────────────────────── */
+
+.sheet {
+  max-width: var(--ds-page-max);
+  margin: 0 auto;
+  padding: var(--ds-space-6) var(--ds-gutter) var(--ds-space-9);
+}
+
+/* Registration mark — the crosshair a printer aligns plates by. */
+.reg {
+  width: 18px; height: 18px;
+  flex: none;
+  color: var(--ds-mark);
+}
+.reg svg { display: block; width: 100%; height: 100%; }
+
+.trim {
+  border: 0;
+  border-top: var(--ds-hairline) solid var(--ds-rule-subtle);
+  margin: var(--ds-space-8) 0 var(--ds-space-6);
+}
+
+/* Utility caps — the tiny type on the edge of a swatch card. */
+.code {
+  font-family: var(--ds-font-utility);
+  font-weight: var(--ds-weight-utility);
+  font-size: var(--ds-text-2xs);
+  letter-spacing: var(--ds-tracking-utility);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.eyebrow {
+  font-family: var(--ds-font-utility);
+  font-weight: var(--ds-weight-utility);
+  font-size: var(--ds-text-xs);
+  letter-spacing: var(--ds-tracking-utility);
+  text-transform: uppercase;
+  color: var(--ds-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.data {
+  font-family: var(--ds-font-data);
+  font-size: var(--ds-text-2xs);
+  letter-spacing: var(--ds-tracking-data);
+  color: var(--ds-muted);
+}
+
+h1, h2, h3 {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-display);
+  letter-spacing: var(--ds-tracking-display);
+  line-height: var(--ds-leading-tight);
+  margin: 0;
+}
+h1 { font-size: var(--ds-text-3xl); }
+h2 { font-size: var(--ds-text-2xl); }
+h3 { font-size: var(--ds-text-lg); letter-spacing: -0.01em; }
+p { margin: 0; max-width: var(--ds-measure); }
+.muted { color: var(--ds-muted); }
+
+section { margin-top: var(--ds-space-7); }
+.section-head { margin-bottom: var(--ds-space-5); display: grid; gap: var(--ds-space-2); }
+
+/* ── Masthead + fan deck ─────────────────────────────────────── */
+
+.masthead {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--ds-space-4);
+  padding-bottom: var(--ds-space-4);
+  border-bottom: var(--ds-hairline) solid var(--ds-rule);
+  flex-wrap: wrap;
+}
+.wordmark {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-display);
+  font-size: var(--ds-text-lg);
+  letter-spacing: -0.04em;
+}
+.masthead-meta { display: flex; align-items: center; gap: var(--ds-space-4); }
+
+/* The signature. Chips overlap like a fan of swatch cards; each paints
+   itself in its own theme's tokens and pulls forward on hover/focus. */
+.deck {
+  display: flex;
+  padding: var(--ds-space-4) 0 var(--ds-space-5);
+  align-items: flex-end;
+}
+.chip {
+  --chip-lift: 0px;
+  --chip-overlap: 30px;
+  position: relative;
+  flex: none;
+  width: calc(148px + var(--chip-overlap));
+  margin-inline-end: calc(-1 * var(--chip-overlap));
+  /* Content clears the overlapped edge, so every code stays legible —
+     the same reason a real swatch card prints its number on the tab. */
+  padding: var(--ds-space-3) var(--ds-space-3) var(--ds-space-3)
+           calc(var(--ds-space-3) + var(--chip-overlap));
+  display: grid;
+  gap: var(--ds-space-3);
+  background: var(--ds-raised);
+  color: var(--ds-ink);
+  border: var(--ds-hairline) solid var(--ds-rule);
+  border-radius: var(--ds-r-md);
+  box-shadow: var(--ds-lift-2);
+  cursor: pointer;
+  text-align: start;
+  font: inherit;
+  transform: translateY(var(--chip-lift));
+  transition: transform var(--ds-duration) var(--ds-ease),
+              box-shadow var(--ds-duration) var(--ds-ease);
+}
+/* A fan reads left-over-right: the first card sits on top of the next. */
+.chip:nth-child(1) { z-index: 5; }
+.chip:nth-child(2) { z-index: 4; }
+.chip:nth-child(3) { z-index: 3; }
+.chip:nth-child(4) { z-index: 2; }
+.chip:nth-child(5) { z-index: 1; }
+.chip:hover, .chip:focus-visible { --chip-lift: -10px; box-shadow: var(--ds-lift-3); z-index: 6; }
+.chip[aria-pressed="true"] { --chip-lift: -18px; box-shadow: var(--ds-lift-3); z-index: 7; }
+.chip:last-child { margin-inline-end: 0; }
+.chip-inks { display: flex; height: 44px; border-radius: var(--ds-r-sm); overflow: hidden; }
+.chip-inks span { flex: 1; }
+.chip-name { display: flex; align-items: baseline; justify-content: space-between; gap: var(--ds-space-2); }
+
+/* ── Swatches ────────────────────────────────────────────────── */
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--ds-space-3);
+}
+.swatch {
+  border: var(--ds-hairline) solid var(--ds-rule-subtle);
+  border-radius: var(--ds-r-md);
+  overflow: hidden;
+  background: var(--ds-raised);
+}
+/* Outlined on all sides: in dark, stock and sunken are the page colour, and
+   without a boundary they read as a hole rather than a swatch. */
+.swatch-field { height: 76px; border-bottom: var(--ds-hairline) solid var(--ds-rule-subtle); box-shadow: inset 0 0 0 var(--ds-hairline) var(--ds-rule-subtle); }
+.swatch-meta { padding: var(--ds-space-2) var(--ds-space-3) var(--ds-space-3); display: grid; gap: 2px; }
+
+/* ── Type scale ──────────────────────────────────────────────── */
+
+.type-row {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: var(--ds-space-4);
+  align-items: baseline;
+  padding: var(--ds-space-3) 0;
+  border-bottom: var(--ds-hairline) solid var(--ds-rule-subtle);
+}
+.type-sample { font-family: var(--ds-font-display); font-weight: var(--ds-weight-display); letter-spacing: var(--ds-tracking-display); line-height: var(--ds-leading-tight); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+
+.btn-grid { display: flex; flex-wrap: wrap; gap: var(--ds-space-3); align-items: center; }
+.btn {
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  line-height: 1;
+  padding: var(--ds-space-3) var(--ds-space-5);
+  border-radius: var(--ds-r-md);
+  border: var(--ds-hairline) solid transparent;
+  cursor: pointer;
+  box-shadow: var(--ds-lift-1);
+  transition: background var(--ds-duration) var(--ds-ease),
+              transform var(--ds-duration) var(--ds-ease),
+              box-shadow var(--ds-duration) var(--ds-ease);
+}
+.btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--ds-lift-2); }
+.btn:active:not(:disabled) { transform: translateY(0); box-shadow: var(--ds-lift-1); }
+.btn:disabled { opacity: 0.42; cursor: not-allowed; box-shadow: none; }
+
+.btn-primary { background: var(--ds-primary); color: var(--ds-on-primary); }
+.btn-primary:hover:not(:disabled) { background: var(--ds-primary-hover); }
+.btn-secondary { background: var(--ds-secondary); color: var(--ds-on-secondary); }
+.btn-outline { background: transparent; color: var(--ds-ink); border-color: var(--ds-rule); }
+/* Hover uses --ds-interactive, never --ds-sunken: sunken aliases ground in
+   dark mode, so a sunken hover would be invisible there. */
+.btn-outline:hover:not(:disabled) { background: var(--ds-interactive); }
+.btn-ghost { background: transparent; color: var(--ds-primary); box-shadow: none; }
+.btn-ghost:hover:not(:disabled) { background: var(--ds-primary-surface); }
+.btn-danger { background: var(--ds-error); color: oklch(1 0 0); }
+
+/* One focus treatment, everywhere. */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--ds-mark);
+  outline-offset: 2px;
+}
+
+/* ── Cards ───────────────────────────────────────────────────── */
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); gap: var(--ds-space-4); }
+.card {
+  background: var(--ds-raised);
+  border: var(--ds-hairline) solid var(--ds-rule-subtle);
+  border-radius: var(--ds-r-lg);
+  padding: var(--ds-space-5);
+  display: grid;
+  gap: var(--ds-space-3);
+  box-shadow: var(--ds-lift-1);
+}
+.card-accent { border-top: 3px solid var(--ds-primary); }
+.card-mark { border-top: 3px solid var(--ds-mark); }
+.card-secondary { border-top: 3px solid var(--ds-secondary); }
+
+/* ── Form fields ─────────────────────────────────────────────── */
+
+.fields { display: grid; gap: var(--ds-space-4); max-width: 420px; }
+.field { display: grid; gap: var(--ds-space-2); }
+.field label { font-size: var(--ds-text-xs); font-weight: var(--ds-weight-medium); }
+.field input, .field select {
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-ink);
+  background: var(--ds-raised);
+  border: var(--ds-hairline) solid var(--ds-rule);
+  border-radius: var(--ds-r-md);
+  padding: var(--ds-space-3);
+}
+.field input::placeholder { color: var(--ds-muted); }
+.field .hint { font-size: var(--ds-text-2xs); color: var(--ds-muted); }
+.field-error input { border-color: var(--ds-error); }
+.field-error .hint { color: var(--ds-error); }
+
+/* ── Nav ─────────────────────────────────────────────────────── */
+
+.nav {
+  display: flex; align-items: center; gap: var(--ds-space-5);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  background: var(--ds-raised);
+  border: var(--ds-hairline) solid var(--ds-rule-subtle);
+  border-radius: var(--ds-r-md);
+  flex-wrap: wrap;
+}
+.nav a { color: var(--ds-muted); text-decoration: none; font-size: var(--ds-text-sm); }
+.nav a:hover { color: var(--ds-ink); }
+.nav a[aria-current="page"] { color: var(--ds-ink); font-weight: var(--ds-weight-medium); box-shadow: inset 0 -2px 0 var(--ds-mark); }
+
+/* ── Assembled layout ────────────────────────────────────────── */
+
+.assembled {
+  border: var(--ds-hairline) solid var(--ds-rule);
+  border-radius: var(--ds-r-lg);
+  overflow: hidden;
+  background: var(--ds-stock);
+}
+.assembled-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-4);
+  padding: var(--ds-space-3) var(--ds-space-5);
+  border-bottom: var(--ds-hairline) solid var(--ds-rule-subtle);
+  background: var(--ds-raised);
+  flex-wrap: wrap;
+}
+.assembled-body { padding: var(--ds-space-7) var(--ds-space-5); display: grid; gap: var(--ds-space-5); }
+.assembled-body h2 { max-width: 16ch; }
+.stats { display: flex; flex-wrap: wrap; gap: var(--ds-space-6); padding-top: var(--ds-space-3); border-top: var(--ds-hairline) solid var(--ds-rule-subtle); }
+.stat { display: grid; gap: 2px; }
+.stat b { font-family: var(--ds-font-display); font-size: var(--ds-text-xl); font-weight: var(--ds-weight-display); letter-spacing: var(--ds-tracking-display); }
+
+@media (max-width: 640px) {
+  h1 { font-size: var(--ds-text-2xl); }
+  .type-row { grid-template-columns: 84px 1fr; }
+  .chip { --chip-overlap: 20px; width: calc(112px + var(--chip-overlap)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0ms !important; }
+  .btn:hover:not(:disabled) { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span class="reg" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="9" r="5.5"/><path d="M9 0v18M0 9h18"/></svg></span>
+      <span class="wordmark">SubstrateUI</span>
+    </div>
+    <div class="masthead-meta">
+      <span class="code muted">Specimen sheet · direction: press</span>
+      <button class="btn btn-outline" id="mode" type="button" aria-pressed="false">Dark</button>
+    </div>
+  </header>
+
+  <!-- ── SIGNATURE: the fan deck ────────────────────────────── -->
+  <section aria-labelledby="deck-h">
+    <div class="section-head">
+      <p class="eyebrow"><span class="reg" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="9" r="5.5"/><path d="M9 0v18M0 9h18"/></svg></span>Signature</p>
+      <h2 id="deck-h">Swap the ink.<br>The press doesn't change.</h2>
+      <p class="muted">Pull a chip forward. Stock, inks, corner radius and easing curve all change — no
+        component below is told which theme it is in.</p>
+    </div>
+    <div class="deck" role="group" aria-label="Theme">
+      <button class="chip" type="button" data-theme="press" aria-pressed="true" aria-label="Press theme" data-ds-theme="press">
+        <span class="chip-inks" aria-hidden="true">
+          <span style="background: var(--ds-primary-ink)"></span>
+          <span style="background: var(--ds-mark)"></span>
+          <span style="background: var(--ds-secondary)"></span>
+        </span>
+        <span class="chip-name"><span class="code">Press</span><span class="code muted">01</span></span>
+        <span class="data">0.51 0.110 232</span>
+      </button>
+      <button class="chip" type="button" data-theme="substrate" aria-pressed="false" aria-label="Substrate theme" data-ds-theme="substrate">
+        <span class="chip-inks" aria-hidden="true">
+          <span style="background: var(--ds-primary-ink)"></span>
+          <span style="background: var(--ds-mark)"></span>
+          <span style="background: var(--ds-secondary)"></span>
+        </span>
+        <span class="chip-name"><span class="code">Substrate</span><span class="code muted">02</span></span>
+        <span class="data">0.52 0.095 172</span>
+      </button>
+      <button class="chip" type="button" data-theme="lava" aria-pressed="false" aria-label="Lava theme" data-ds-theme="lava">
+        <span class="chip-inks" aria-hidden="true">
+          <span style="background: var(--ds-primary-ink)"></span>
+          <span style="background: var(--ds-mark)"></span>
+          <span style="background: var(--ds-secondary)"></span>
+        </span>
+        <span class="chip-name"><span class="code">Lava</span><span class="code muted">03</span></span>
+        <span class="data">0.52 0.195 035</span>
+      </button>
+      <button class="chip" type="button" data-theme="tundra" aria-pressed="false" aria-label="Tundra theme" data-ds-theme="tundra">
+        <span class="chip-inks" aria-hidden="true">
+          <span style="background: var(--ds-primary-ink)"></span>
+          <span style="background: var(--ds-mark)"></span>
+          <span style="background: var(--ds-secondary)"></span>
+        </span>
+        <span class="chip-name"><span class="code">Tundra</span><span class="code muted">04</span></span>
+        <span class="data">0.47 0.105 238</span>
+      </button>
+      <button class="chip" type="button" data-theme="plum" aria-pressed="false" aria-label="Plum theme" data-ds-theme="plum">
+        <span class="chip-inks" aria-hidden="true">
+          <span style="background: var(--ds-primary-ink)"></span>
+          <span style="background: var(--ds-mark)"></span>
+          <span style="background: var(--ds-secondary)"></span>
+        </span>
+        <span class="chip-name"><span class="code">Plum</span><span class="code muted">05</span></span>
+        <span class="data">0.48 0.145 314</span>
+      </button>
+    </div>
+  </section>
+
+  <hr class="trim">
+
+  <!-- ── Swatches ───────────────────────────────────────────── -->
+  <section aria-labelledby="sw-h">
+    <div class="section-head">
+      <p class="eyebrow">Inks &amp; stock</p>
+      <h2 id="sw-h">Palette</h2>
+    </div>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <hr class="trim">
+
+  <!-- ── Type ───────────────────────────────────────────────── -->
+  <section aria-labelledby="ty-h">
+    <div class="section-head">
+      <p class="eyebrow">Archivo · Inter · Barlow Condensed · Martian Mono</p>
+      <h2 id="ty-h">Type scale</h2>
+    </div>
+    <div id="typescale"></div>
+    <div style="margin-top: var(--ds-space-5); display: grid; gap: var(--ds-space-3);">
+      <p class="code">Utility caps — chip codes, eyebrows, registration labels</p>
+      <p class="data">--ds-data · oklch(0.505 0.110 232) · 7.02:1</p>
+      <p>Body copy is Inter at 16px with a 1.6 line-height, held to a 62-character measure. It is the
+        only thing on the page you are meant to read for longer than a second, so nothing competes
+        with it: no serif, no drop cap, no pull quote.</p>
+    </div>
+  </section>
+
+  <hr class="trim">
+
+  <!-- ── Buttons ────────────────────────────────────────────── -->
+  <section aria-labelledby="bt-h">
+    <div class="section-head">
+      <p class="eyebrow">Every state</p>
+      <h2 id="bt-h">Buttons</h2>
+    </div>
+    <div class="btn-grid">
+      <button class="btn btn-primary" type="button">Install</button>
+      <button class="btn btn-secondary" type="button">Read the docs</button>
+      <button class="btn btn-outline" type="button">Copy token map</button>
+      <button class="btn btn-ghost" type="button">View source</button>
+      <button class="btn btn-danger" type="button">Remove theme</button>
+      <button class="btn btn-primary" type="button" disabled>Publishing</button>
+    </div>
+    <p class="data" style="margin-top: var(--ds-space-4);">hover −1px · active 0px · focus 2px mark outline, 2px offset</p>
+  </section>
+
+  <hr class="trim">
+
+  <!-- ── Cards ──────────────────────────────────────────────── -->
+  <section aria-labelledby="cd-h">
+    <div class="section-head">
+      <p class="eyebrow">Surfaces</p>
+      <h2 id="cd-h">Cards</h2>
+    </div>
+    <div class="cards">
+      <article class="card card-accent">
+        <p class="code muted">01 · Tokens</p>
+        <h3>Contrast is audited in CI</h3>
+        <p class="muted">31 pairings per theme, light and dark. A failing ratio fails the build.</p>
+      </article>
+      <article class="card card-mark">
+        <p class="code muted">02 · Themes</p>
+        <h3>A theme is a token map</h3>
+        <p class="muted">Palette, motion curve, corner radius and shadow. No component learns its name.</p>
+      </article>
+      <article class="card card-secondary">
+        <p class="code muted">03 · Primitives</p>
+        <h3>Base UI underneath</h3>
+        <p class="muted">Focus management, dismissal and ARIA are handled. You write markup.</p>
+      </article>
+    </div>
+  </section>
+
+  <hr class="trim">
+
+  <!-- ── Fields + nav ───────────────────────────────────────── -->
+  <section aria-labelledby="fm-h">
+    <div class="section-head">
+      <p class="eyebrow">Input</p>
+      <h2 id="fm-h">Fields &amp; nav</h2>
+    </div>
+    <nav class="nav" aria-label="Docs" style="margin-bottom: var(--ds-space-5);">
+      <a href="#" aria-current="page">Tokens</a>
+      <a href="#">Components</a>
+      <a href="#">Themes</a>
+      <a href="#">Accessibility</a>
+    </nav>
+    <div class="fields">
+      <div class="field">
+        <label for="f1">Theme name</label>
+        <input id="f1" type="text" placeholder="tundra">
+        <span class="hint">Lowercase. Becomes the <code>data-theme</code> value.</span>
+      </div>
+      <div class="field">
+        <label for="f2">Base hue</label>
+        <select id="f2">
+          <option>232 — process cyan</option>
+          <option>004 — process magenta</option>
+          <option>094 — process yellow</option>
+        </select>
+      </div>
+      <div class="field field-error">
+        <label for="f3">Primary lightness</label>
+        <input id="f3" type="text" value="0.72">
+        <span class="hint"><code>primary-foreground</code> on <code>primary</code> is 3.1:1. Needs 4.5:1.</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="trim">
+
+  <!-- ── Assembled ──────────────────────────────────────────── -->
+  <section aria-labelledby="as-h">
+    <div class="section-head">
+      <p class="eyebrow">Assembled</p>
+      <h2 id="as-h">One small layout</h2>
+    </div>
+    <div class="assembled">
+      <div class="assembled-bar">
+        <div class="masthead-meta">
+          <span class="reg" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="9" r="5.5"/><path d="M9 0v18M0 9h18"/></svg></span>
+          <span class="wordmark" style="font-size: var(--ds-text-md)">SubstrateUI</span>
+        </div>
+        <nav class="masthead-meta" aria-label="Primary">
+          <a href="#" style="color: var(--ds-muted); text-decoration: none; font-size: var(--ds-text-sm)">Docs</a>
+          <a href="#" style="color: var(--ds-muted); text-decoration: none; font-size: var(--ds-text-sm)">Components</a>
+          <button class="btn btn-primary" type="button" style="padding: var(--ds-space-2) var(--ds-space-4)">Install</button>
+        </nav>
+      </div>
+      <div class="assembled-body">
+        <p class="eyebrow">v1.14 · MIT</p>
+        <h2>Swap the ink. The press doesn't change.</h2>
+        <p class="muted">A design system for Next.js built on OKLCH, Tailwind CSS v4 and Base UI. Themes
+          are token maps: change one and every component repaints, including the ones you wrote.</p>
+        <div class="btn-grid">
+          <button class="btn btn-primary" type="button">Install</button>
+          <button class="btn btn-outline" type="button">Read the docs</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>4</b><span class="code muted">Themes</span></div>
+          <div class="stat"><b>75</b><span class="code muted">Components</span></div>
+          <div class="stat"><b>31</b><span class="code muted">Audited pairs</span></div>
+          <div class="stat"><b>0</b><span class="code muted">Config files</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ── Swatches + type scale are generated from the tokens themselves, so
+//    the sheet can never drift from design/tokens.css.
+const SWATCHES = [
+  ["--ds-stock", "Stock", "page ground"],
+  ["--ds-raised", "Raised", "chips, cards"],
+  ["--ds-sunken", "Sunken", "wells · = ground in dark"],
+  ["--ds-interactive", "Interactive", "hover, pressed"],
+  ["--ds-ink", "Ink", "body + display"],
+  ["--ds-muted", "Muted", "captions, data"],
+  ["--ds-rule", "Rule", "trim, borders"],
+  ["--ds-primary", "Primary", "carries white text"],
+  ["--ds-primary-ink", "Primary ink", "swatches only"],
+  ["--ds-secondary", "Secondary", "takes ink, never white"],
+  ["--ds-mark", "Mark", "brand only, never status"],
+  ["--ds-error", "Error", "semantic red"],
+];
+
+const SCALE = [
+  ["--ds-text-4xl", "5rem"], ["--ds-text-3xl", "3.25rem"], ["--ds-text-2xl", "2.25rem"],
+  ["--ds-text-xl", "1.625rem"], ["--ds-text-lg", "1.25rem"], ["--ds-text-md", "1rem"],
+  ["--ds-text-sm", "0.9375rem"], ["--ds-text-xs", "0.8125rem"], ["--ds-text-2xs", "0.6875rem"],
+];
+
+const el = (t, cls, txt) => { const n = document.createElement(t); if (cls) n.className = cls; if (txt) n.textContent = txt; return n; };
+
+const swatchHost = document.getElementById("swatches");
+function paintSwatches() {
+  const cs = getComputedStyle(document.documentElement);
+  swatchHost.replaceChildren(...SWATCHES.map(([v, name, role]) => {
+    const card = el("div", "swatch");
+    const field = el("div", "swatch-field");
+    field.style.background = `var(${v})`;
+    const meta = el("div", "swatch-meta");
+    meta.append(el("span", "code", name), el("span", "data", cs.getPropertyValue(v).trim()), el("span", "code muted", role));
+    card.append(field, meta);
+    return card;
+  }));
+}
+paintSwatches();
+
+document.getElementById("typescale").replaceChildren(...SCALE.map(([v, size]) => {
+  const row = el("div", "type-row");
+  const label = el("div", "data", `${v.replace("--ds-text-", "")} · ${size}`);
+  const sample = el("div", "type-sample", "Swap the ink");
+  sample.style.fontSize = `var(${v})`;
+  row.append(label, sample);
+  return row;
+}));
+
+// ── Fan deck ───────────────────────────────────────────────────
+const chips = [...document.querySelectorAll(".chip")];
+chips.forEach((chip) => chip.addEventListener("click", () => {
+  document.documentElement.setAttribute("data-ds-theme", chip.dataset.theme);
+  chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+  paintSwatches();
+}));
+
+// ── Light / dark ───────────────────────────────────────────────
+const mode = document.getElementById("mode");
+mode.addEventListener("click", () => {
+  const dark = document.documentElement.classList.toggle("ds-dark");
+  mode.setAttribute("aria-pressed", String(dark));
+  mode.textContent = dark ? "Light" : "Dark";
+  paintSwatches();
+});
+
+// Review aid, applied last so it can't strip a container the code above
+// writes into: ?only=bt-h,cd-h shows just those sections, which lets any
+// part of the sheet be captured from the top of the page.
+const only = new URLSearchParams(location.search).get("only");
+if (only) document.querySelectorAll("section").forEach((s) => {
+  if (!only.split(",").includes(s.getAttribute("aria-labelledby"))) s.remove();
+});
+</script>
+</body>
+</html>

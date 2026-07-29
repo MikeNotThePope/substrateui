@@ -89,13 +89,19 @@
 
    Dark mode (.dark) redefines ONLY this layer.
 
-   `[data-theme="default"]` is listed alongside `:root` so the base palette
-   is addressable by name, not just by the absence of an attribute — that is
-   what makes it survive nesting inside another theme (a default-themed
-   preview sitting on a lava page).
+   This palette's NAME is `plum`. "default" is a ROLE — the theme you get
+   when no attribute is set — and it is kept as an alias so every consumer
+   already using `data-theme="default"` keeps working. Naming the palette
+   separately from the role is what lets the default move to another theme
+   later without renaming anything.
+
+   Both are listed alongside `:root` so the palette is addressable by name,
+   not just by the absence of an attribute — that is what makes it survive
+   nesting inside another theme (a plum-themed preview on a lava page).
 ================================================================ */
 
 :root,
+[data-theme="plum"],
 [data-theme="default"] {
   --radius: 0.625rem;
 
@@ -209,6 +215,8 @@
 /* ── DARK MODE ── */
 
 .dark,
+[data-theme="plum"].dark,
+.dark [data-theme="plum"],
 .dark [data-theme="default"] {
   /* ── Shadcn core ── */
   --background: var(--raw-warm-975);
@@ -550,6 +558,736 @@
   --status-info: oklch(0.70 0.14 240);
   --status-info-surface: oklch(0.65 0.170 240 / 0.15);
   --status-info-text: oklch(0.78 0.10 240);
+}
+
+
+/* ================================================================
+   PRESS THEME — enable with <html data-theme="press">
+
+   Palette taken from a printer's proof sheet: the three process inks
+   (cyan, magenta, yellow) laid on cool proof stock. Magenta is brand
+   furniture — registration marks and charts — never a status.
+================================================================ */
+
+:root {
+  /* ── proof (neutrals) ── */
+  --raw-proof-50: oklch(0.970 0.003 264);
+  --raw-proof-100: oklch(0.930 0.004 265);
+  --raw-proof-200: oklch(0.870 0.004 265);
+  --raw-proof-300: oklch(0.780 0.005 266);
+  --raw-proof-350: oklch(0.720 0.005 266);
+  --raw-proof-400: oklch(0.660 0.005 267);
+  --raw-proof-450: oklch(0.605 0.005 267);
+  --raw-proof-500: oklch(0.550 0.006 268);
+  --raw-proof-600: oklch(0.460 0.006 268);
+  --raw-proof-700: oklch(0.380 0.007 269);
+  --raw-proof-800: oklch(0.300 0.007 269);
+  --raw-proof-850: oklch(0.260 0.007 270);
+  --raw-proof-900: oklch(0.220 0.007 270);
+  --raw-proof-950: oklch(0.160 0.006 271);
+  --raw-proof-975: oklch(0.125 0.005 271);
+
+  /* ── cyan (primary) ── */
+  --raw-cyan-50: oklch(0.970 0.022 227);
+  --raw-cyan-100: oklch(0.930 0.053 228);
+  --raw-cyan-200: oklch(0.880 0.077 229);
+  --raw-cyan-300: oklch(0.820 0.096 230);
+  --raw-cyan-400: oklch(0.750 0.115 231);
+  --raw-cyan-500: oklch(0.680 0.130 233);
+  --raw-cyan-600: oklch(0.600 0.133 234);
+  --raw-cyan-700: oklch(0.520 0.121 235);
+  --raw-cyan-800: oklch(0.420 0.096 236);
+  --raw-cyan-900: oklch(0.320 0.062 237);
+  --raw-cyan-950: oklch(0.220 0.031 238);
+
+  /* ── yellow (secondary) ── */
+  --raw-yellow-50: oklch(0.980 0.041 96);
+  --raw-yellow-100: oklch(0.950 0.093 94);
+  --raw-yellow-200: oklch(0.910 0.144 92);
+  --raw-yellow-300: oklch(0.870 0.170 90);
+  --raw-yellow-400: oklch(0.820 0.180 88);
+  --raw-yellow-500: oklch(0.760 0.175 86);
+  --raw-yellow-600: oklch(0.660 0.154 84);
+  --raw-yellow-700: oklch(0.550 0.124 82);
+  --raw-yellow-800: oklch(0.440 0.093 80);
+  --raw-yellow-900: oklch(0.350 0.072 78);
+
+  /* Process magenta — brand furniture only (reg marks, chart-2). Kept
+     off the status roles so it can never be read as an error. */
+  --raw-magenta: oklch(0.593 0.239 4);
+  --raw-magenta-light: oklch(0.685 0.205 4);
+}
+
+
+/* ── PRESS LIGHT ── */
+
+[data-theme="press"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-proof-100);
+  --foreground: var(--raw-proof-900);
+  --card: var(--raw-proof-50);
+  --card-foreground: var(--raw-proof-900);
+  --popover: var(--raw-proof-50);
+  --popover-foreground: var(--raw-proof-900);
+  --primary: var(--raw-cyan-700);
+  --primary-foreground: oklch(1 0 0);
+  --primary-border: var(--raw-cyan-900);
+  --secondary: var(--raw-proof-200);
+  --secondary-foreground: var(--raw-proof-900);
+  --muted: var(--raw-proof-200);
+  --muted-foreground: var(--raw-proof-600);
+  --accent: var(--raw-cyan-100);
+  --accent-foreground: var(--raw-cyan-800);
+  --destructive: oklch(0.545 0.2 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: var(--raw-proof-500);
+  --input: var(--raw-proof-500);
+  --ring: var(--raw-cyan-600);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-cyan-600);
+  --chart-2: var(--raw-yellow-500);
+  --chart-3: var(--raw-cyan-400);
+  --chart-4: var(--raw-yellow-300);
+  --chart-5: var(--raw-cyan-200);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-proof-50);
+  --sidebar-foreground: var(--raw-proof-900);
+  --sidebar-primary: var(--raw-cyan-700);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--raw-cyan-100);
+  --sidebar-accent-foreground: var(--raw-cyan-800);
+  --sidebar-border: var(--raw-proof-200);
+  --sidebar-ring: var(--raw-cyan-600);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-proof-100);
+  --surface-page: var(--raw-proof-50);
+  --surface-raised: var(--raw-proof-50);
+  --surface-sunken: var(--raw-proof-200);
+  --surface-interactive: var(--raw-proof-200);
+  --surface-interactive-hover: var(--raw-proof-300);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-proof-500);
+  --border-strong: var(--raw-proof-700);
+  --border-subtle: var(--raw-proof-200);
+  --border-accent: var(--raw-cyan-600);
+
+  --spinner-track: var(--raw-proof-300);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-cyan-700);
+  --accent-fill-hover: var(--raw-cyan-800);
+  --accent-surface: var(--raw-cyan-100);
+
+  /* ── Secondary ── */
+  --secondary-fill: var(--raw-yellow-500);
+  --secondary-fill-hover: var(--raw-yellow-400);
+  --secondary-fill-foreground: var(--raw-proof-900);
+  --secondary-fill-border: var(--raw-yellow-700);
+  --secondary-surface: var(--raw-yellow-100);
+  --secondary-text: var(--raw-yellow-800);
+
+  --hard-shadow-color: var(--raw-proof-700);
+
+  /* Mechanical: fast in, hard stop — a press plate seating. Corners are
+     cut rather than rounded, so the radius scale shrinks to a quarter. */
+  --motion-duration: 140ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --radius-factor: 0.25;
+
+  /* ── Status ── */
+  --status-success: oklch(0.58 0.13 150);
+  --status-success-surface: oklch(0.92 0.06 150);
+  --status-success-text: oklch(0.43 0.10 150);
+  /* secondary-500 is far too light to carry a 3:1 border — 700 is the first
+     step on the ramp that clears it. */
+  --status-warning: var(--raw-yellow-700);
+  --status-warning-surface: var(--raw-yellow-100);
+  --status-warning-text: var(--raw-yellow-800);
+  --status-error: oklch(0.545 0.2 27);
+  --status-error-surface: oklch(0.93 0.04 27);
+  --status-error-text: oklch(0.45 0.15 27);
+  --status-info: oklch(0.58 0.14 245);
+  --status-info-surface: oklch(0.92 0.05 245);
+  --status-info-text: oklch(0.45 0.10 245);
+}
+
+
+/* ── PRESS DARK ── */
+
+[data-theme="press"].dark,
+.dark [data-theme="press"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-proof-975);
+  --foreground: var(--raw-proof-100);
+  --card: var(--raw-proof-850);
+  --card-foreground: var(--raw-proof-100);
+  --popover: var(--raw-proof-800);
+  --popover-foreground: var(--raw-proof-100);
+  --primary: var(--raw-cyan-400);
+  --primary-foreground: var(--raw-proof-950);
+  --primary-border: var(--raw-cyan-200);
+  --secondary: var(--raw-proof-700);
+  --secondary-foreground: var(--raw-proof-100);
+  --muted: var(--raw-proof-800);
+  --muted-foreground: var(--raw-proof-300);
+  --accent: oklch(0.750 0.115 231 / 0.15);
+  --accent-foreground: var(--raw-cyan-200);
+  --destructive: oklch(0.65 0.190 27);
+  /* white on this lighter fill lands under 4.5:1 — near-black clears it */
+  --destructive-foreground: var(--raw-proof-950);
+  --border: var(--raw-proof-400);
+  --input: var(--raw-proof-400);
+  --ring: var(--raw-cyan-400);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-cyan-400);
+  --chart-2: var(--raw-yellow-400);
+  --chart-3: var(--raw-cyan-300);
+  --chart-4: var(--raw-yellow-300);
+  --chart-5: var(--raw-cyan-600);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-proof-900);
+  --sidebar-foreground: var(--raw-proof-100);
+  --sidebar-primary: var(--raw-cyan-400);
+  --sidebar-primary-foreground: var(--raw-proof-950);
+  --sidebar-accent: oklch(0.750 0.115 231 / 0.15);
+  --sidebar-accent-foreground: var(--raw-cyan-200);
+  --sidebar-border: var(--raw-proof-700);
+  --sidebar-ring: var(--raw-cyan-400);
+
+  /* ── Surfaces ──
+     sunken aliases ground: below near-black there is no perceptual headroom,
+     so recession is expressed by NOT raising. */
+  --surface-ground: var(--raw-proof-975);
+  --surface-page: var(--raw-proof-900);
+  --surface-raised: var(--raw-proof-850);
+  --surface-sunken: var(--raw-proof-975);
+  --surface-interactive: var(--raw-proof-800);
+  --surface-interactive-hover: var(--raw-proof-700);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-proof-400);
+  --border-strong: var(--raw-proof-400);
+  --border-subtle: var(--raw-proof-800);
+  --border-accent: var(--raw-cyan-400);
+
+  --spinner-track: var(--raw-proof-400);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-cyan-400);
+  --accent-fill-hover: var(--raw-cyan-300);
+  --accent-surface: oklch(0.750 0.115 231 / 0.15);
+
+  /* ── Secondary ── */
+  --secondary-fill: var(--raw-yellow-400);
+  --secondary-fill-hover: var(--raw-yellow-300);
+  --secondary-fill-foreground: var(--raw-proof-950);
+  --secondary-fill-border: var(--raw-yellow-600);
+  --secondary-surface: oklch(0.820 0.180 88 / 0.12);
+  --secondary-text: var(--raw-yellow-300);
+
+  --hard-shadow-color: var(--raw-cyan-900);
+
+  /* ── Status ── */
+  --status-success: oklch(0.70 0.14 150);
+  --status-success-surface: oklch(0.62 0.150 150 / 0.15);
+  --status-success-text: oklch(0.78 0.11 150);
+  --status-warning: var(--raw-yellow-400);
+  --status-warning-surface: oklch(0.820 0.180 88 / 0.15);
+  --status-warning-text: var(--raw-yellow-300);
+  --status-error: oklch(0.65 0.190 27);
+  --status-error-surface: oklch(0.55 0.210 27 / 0.15);
+  --status-error-text: oklch(0.78 0.12 27);
+  --status-info: oklch(0.70 0.14 245);
+  --status-info-surface: oklch(0.65 0.170 245 / 0.15);
+  --status-info-text: oklch(0.78 0.10 245);
+}
+
+
+/* ================================================================
+   SUBSTRATE THEME — enable with <html data-theme="substrate">
+
+   The measuring instrument rather than the print: cold graphite neutrals,
+   a jade primary and an instrument-amber secondary.
+================================================================ */
+
+:root {
+  /* ── graphite (neutrals) ── */
+  --raw-graphite-50: oklch(0.970 0.003 200);
+  --raw-graphite-100: oklch(0.930 0.003 200);
+  --raw-graphite-200: oklch(0.870 0.004 201);
+  --raw-graphite-300: oklch(0.780 0.004 201);
+  --raw-graphite-350: oklch(0.720 0.004 201);
+  --raw-graphite-400: oklch(0.660 0.004 202);
+  --raw-graphite-450: oklch(0.605 0.004 202);
+  --raw-graphite-500: oklch(0.550 0.005 203);
+  --raw-graphite-600: oklch(0.460 0.005 203);
+  --raw-graphite-700: oklch(0.380 0.005 203);
+  --raw-graphite-800: oklch(0.300 0.006 204);
+  --raw-graphite-850: oklch(0.260 0.006 204);
+  --raw-graphite-900: oklch(0.220 0.006 204);
+  --raw-graphite-950: oklch(0.160 0.005 205);
+  --raw-graphite-975: oklch(0.125 0.004 205);
+
+  /* ── jade (primary) ── */
+  --raw-jade-50: oklch(0.970 0.022 168);
+  --raw-jade-100: oklch(0.930 0.053 169);
+  --raw-jade-200: oklch(0.880 0.077 170);
+  --raw-jade-300: oklch(0.820 0.096 171);
+  --raw-jade-400: oklch(0.750 0.115 172);
+  --raw-jade-500: oklch(0.680 0.130 173);
+  --raw-jade-600: oklch(0.600 0.133 174);
+  --raw-jade-700: oklch(0.520 0.121 175);
+  --raw-jade-800: oklch(0.420 0.096 176);
+  --raw-jade-900: oklch(0.320 0.062 177);
+  --raw-jade-950: oklch(0.220 0.031 178);
+
+  /* ── instrument (secondary) ── */
+  --raw-instrument-50: oklch(0.980 0.037 95);
+  --raw-instrument-100: oklch(0.950 0.083 93);
+  --raw-instrument-200: oklch(0.910 0.129 91);
+  --raw-instrument-300: oklch(0.870 0.152 88);
+  --raw-instrument-400: oklch(0.820 0.161 86);
+  --raw-instrument-500: oklch(0.760 0.156 84);
+  --raw-instrument-600: oklch(0.660 0.138 82);
+  --raw-instrument-700: oklch(0.550 0.110 79);
+  --raw-instrument-800: oklch(0.440 0.083 77);
+  --raw-instrument-900: oklch(0.350 0.064 75);
+}
+
+
+/* ── SUBSTRATE LIGHT ── */
+
+[data-theme="substrate"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-graphite-100);
+  --foreground: var(--raw-graphite-900);
+  --card: var(--raw-graphite-50);
+  --card-foreground: var(--raw-graphite-900);
+  --popover: var(--raw-graphite-50);
+  --popover-foreground: var(--raw-graphite-900);
+  --primary: var(--raw-jade-700);
+  --primary-foreground: oklch(1 0 0);
+  --primary-border: var(--raw-jade-900);
+  --secondary: var(--raw-graphite-200);
+  --secondary-foreground: var(--raw-graphite-900);
+  --muted: var(--raw-graphite-200);
+  --muted-foreground: var(--raw-graphite-600);
+  --accent: var(--raw-jade-100);
+  --accent-foreground: var(--raw-jade-800);
+  --destructive: oklch(0.545 0.2 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: var(--raw-graphite-500);
+  --input: var(--raw-graphite-500);
+  --ring: var(--raw-jade-600);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-jade-600);
+  --chart-2: var(--raw-instrument-500);
+  --chart-3: var(--raw-jade-400);
+  --chart-4: var(--raw-instrument-300);
+  --chart-5: var(--raw-jade-200);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-graphite-50);
+  --sidebar-foreground: var(--raw-graphite-900);
+  --sidebar-primary: var(--raw-jade-700);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--raw-jade-100);
+  --sidebar-accent-foreground: var(--raw-jade-800);
+  --sidebar-border: var(--raw-graphite-200);
+  --sidebar-ring: var(--raw-jade-600);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-graphite-100);
+  --surface-page: var(--raw-graphite-50);
+  --surface-raised: var(--raw-graphite-50);
+  --surface-sunken: var(--raw-graphite-200);
+  --surface-interactive: var(--raw-graphite-200);
+  --surface-interactive-hover: var(--raw-graphite-300);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-graphite-500);
+  --border-strong: var(--raw-graphite-700);
+  --border-subtle: var(--raw-graphite-200);
+  --border-accent: var(--raw-jade-600);
+
+  --spinner-track: var(--raw-graphite-300);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-jade-700);
+  --accent-fill-hover: var(--raw-jade-800);
+  --accent-surface: var(--raw-jade-100);
+
+  /* ── Secondary ── */
+  --secondary-fill: var(--raw-instrument-500);
+  --secondary-fill-hover: var(--raw-instrument-400);
+  --secondary-fill-foreground: var(--raw-graphite-900);
+  --secondary-fill-border: var(--raw-instrument-700);
+  --secondary-surface: var(--raw-instrument-100);
+  --secondary-text: var(--raw-instrument-800);
+
+  --hard-shadow-color: var(--raw-graphite-800);
+
+  /* Precise and unhurried — a dial settling rather than a switch. */
+  --motion-duration: 160ms;
+  --motion-ease: cubic-bezier(0.3, 0, 0.1, 1);
+  --radius-factor: 0.4;
+
+  /* ── Status ── */
+  --status-success: oklch(0.58 0.13 148);
+  --status-success-surface: oklch(0.92 0.06 148);
+  --status-success-text: oklch(0.43 0.10 148);
+  /* secondary-500 is far too light to carry a 3:1 border — 700 is the first
+     step on the ramp that clears it. */
+  --status-warning: var(--raw-instrument-700);
+  --status-warning-surface: var(--raw-instrument-100);
+  --status-warning-text: var(--raw-instrument-800);
+  --status-error: oklch(0.545 0.2 27);
+  --status-error-surface: oklch(0.93 0.04 27);
+  --status-error-text: oklch(0.45 0.15 27);
+  --status-info: oklch(0.58 0.14 245);
+  --status-info-surface: oklch(0.92 0.05 245);
+  --status-info-text: oklch(0.45 0.10 245);
+}
+
+
+/* ── SUBSTRATE DARK ── */
+
+[data-theme="substrate"].dark,
+.dark [data-theme="substrate"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-graphite-975);
+  --foreground: var(--raw-graphite-100);
+  --card: var(--raw-graphite-850);
+  --card-foreground: var(--raw-graphite-100);
+  --popover: var(--raw-graphite-800);
+  --popover-foreground: var(--raw-graphite-100);
+  --primary: var(--raw-jade-400);
+  --primary-foreground: var(--raw-graphite-950);
+  --primary-border: var(--raw-jade-200);
+  --secondary: var(--raw-graphite-700);
+  --secondary-foreground: var(--raw-graphite-100);
+  --muted: var(--raw-graphite-800);
+  --muted-foreground: var(--raw-graphite-300);
+  --accent: oklch(0.750 0.115 172 / 0.15);
+  --accent-foreground: var(--raw-jade-200);
+  --destructive: oklch(0.65 0.190 27);
+  /* white on this lighter fill lands under 4.5:1 — near-black clears it */
+  --destructive-foreground: var(--raw-graphite-950);
+  --border: var(--raw-graphite-400);
+  --input: var(--raw-graphite-400);
+  --ring: var(--raw-jade-400);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-jade-400);
+  --chart-2: var(--raw-instrument-400);
+  --chart-3: var(--raw-jade-300);
+  --chart-4: var(--raw-instrument-300);
+  --chart-5: var(--raw-jade-600);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-graphite-900);
+  --sidebar-foreground: var(--raw-graphite-100);
+  --sidebar-primary: var(--raw-jade-400);
+  --sidebar-primary-foreground: var(--raw-graphite-950);
+  --sidebar-accent: oklch(0.750 0.115 172 / 0.15);
+  --sidebar-accent-foreground: var(--raw-jade-200);
+  --sidebar-border: var(--raw-graphite-700);
+  --sidebar-ring: var(--raw-jade-400);
+
+  /* ── Surfaces ──
+     sunken aliases ground: below near-black there is no perceptual headroom,
+     so recession is expressed by NOT raising. */
+  --surface-ground: var(--raw-graphite-975);
+  --surface-page: var(--raw-graphite-900);
+  --surface-raised: var(--raw-graphite-850);
+  --surface-sunken: var(--raw-graphite-975);
+  --surface-interactive: var(--raw-graphite-800);
+  --surface-interactive-hover: var(--raw-graphite-700);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-graphite-400);
+  --border-strong: var(--raw-graphite-400);
+  --border-subtle: var(--raw-graphite-800);
+  --border-accent: var(--raw-jade-400);
+
+  --spinner-track: var(--raw-graphite-400);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-jade-400);
+  --accent-fill-hover: var(--raw-jade-300);
+  --accent-surface: oklch(0.750 0.115 172 / 0.15);
+
+  /* ── Secondary ── */
+  --secondary-fill: var(--raw-instrument-400);
+  --secondary-fill-hover: var(--raw-instrument-300);
+  --secondary-fill-foreground: var(--raw-graphite-950);
+  --secondary-fill-border: var(--raw-instrument-600);
+  --secondary-surface: oklch(0.820 0.161 86 / 0.12);
+  --secondary-text: var(--raw-instrument-300);
+
+  --hard-shadow-color: var(--raw-jade-900);
+
+  /* ── Status ── */
+  --status-success: oklch(0.70 0.14 148);
+  --status-success-surface: oklch(0.62 0.150 148 / 0.15);
+  --status-success-text: oklch(0.78 0.11 148);
+  --status-warning: var(--raw-instrument-400);
+  --status-warning-surface: oklch(0.820 0.161 86 / 0.15);
+  --status-warning-text: var(--raw-instrument-300);
+  --status-error: oklch(0.65 0.190 27);
+  --status-error-surface: oklch(0.55 0.210 27 / 0.15);
+  --status-error-text: oklch(0.78 0.12 27);
+  --status-info: oklch(0.70 0.14 245);
+  --status-info-surface: oklch(0.65 0.170 245 / 0.15);
+  --status-info-text: oklch(0.78 0.10 245);
+}
+
+
+/* ================================================================
+   TUNDRA THEME — enable with <html data-theme="tundra">
+
+   Ice: pale frost neutrals, a steel-blue primary and a cold rose
+   secondary. Everything is cut square and moves quickly.
+================================================================ */
+
+:root {
+  /* ── frost (neutrals) ── */
+  --raw-frost-50: oklch(0.970 0.004 232);
+  --raw-frost-100: oklch(0.930 0.005 233);
+  --raw-frost-200: oklch(0.870 0.006 235);
+  --raw-frost-300: oklch(0.780 0.006 236);
+  --raw-frost-350: oklch(0.720 0.006 237);
+  --raw-frost-400: oklch(0.660 0.007 238);
+  --raw-frost-450: oklch(0.605 0.007 240);
+  --raw-frost-500: oklch(0.550 0.008 241);
+  --raw-frost-600: oklch(0.460 0.008 242);
+  --raw-frost-700: oklch(0.380 0.009 244);
+  --raw-frost-800: oklch(0.300 0.010 245);
+  --raw-frost-850: oklch(0.260 0.010 246);
+  --raw-frost-900: oklch(0.220 0.010 247);
+  --raw-frost-950: oklch(0.160 0.008 249);
+  --raw-frost-975: oklch(0.125 0.007 250);
+
+  /* ── steel (primary) ── */
+  --raw-steel-50: oklch(0.970 0.021 232);
+  --raw-steel-100: oklch(0.930 0.051 234);
+  --raw-steel-200: oklch(0.880 0.075 236);
+  --raw-steel-300: oklch(0.820 0.093 237);
+  --raw-steel-400: oklch(0.750 0.111 239);
+  --raw-steel-500: oklch(0.680 0.126 241);
+  --raw-steel-600: oklch(0.600 0.129 243);
+  --raw-steel-700: oklch(0.520 0.117 245);
+  --raw-steel-800: oklch(0.420 0.093 246);
+  --raw-steel-900: oklch(0.320 0.060 248);
+  --raw-steel-950: oklch(0.220 0.030 250);
+
+  /* ── rose (secondary) ── */
+  --raw-rose-50: oklch(0.980 0.025 2);
+  --raw-rose-100: oklch(0.950 0.056 41);
+  --raw-rose-200: oklch(0.910 0.087 79);
+  --raw-rose-300: oklch(0.870 0.102 118);
+  --raw-rose-400: oklch(0.820 0.108 157);
+  --raw-rose-500: oklch(0.760 0.105 195);
+  --raw-rose-600: oklch(0.660 0.093 234);
+  --raw-rose-700: oklch(0.550 0.074 273);
+  --raw-rose-800: oklch(0.440 0.056 311);
+  --raw-rose-900: oklch(0.350 0.043 350);
+}
+
+
+/* ── TUNDRA LIGHT ── */
+
+[data-theme="tundra"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-frost-100);
+  --foreground: var(--raw-frost-900);
+  --card: var(--raw-frost-50);
+  --card-foreground: var(--raw-frost-900);
+  --popover: var(--raw-frost-50);
+  --popover-foreground: var(--raw-frost-900);
+  --primary: var(--raw-steel-700);
+  --primary-foreground: oklch(1 0 0);
+  --primary-border: var(--raw-steel-900);
+  --secondary: var(--raw-frost-200);
+  --secondary-foreground: var(--raw-frost-900);
+  --muted: var(--raw-frost-200);
+  --muted-foreground: var(--raw-frost-600);
+  --accent: var(--raw-steel-100);
+  --accent-foreground: var(--raw-steel-800);
+  --destructive: oklch(0.545 0.2 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: var(--raw-frost-500);
+  --input: var(--raw-frost-500);
+  --ring: var(--raw-steel-600);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-steel-600);
+  --chart-2: var(--raw-rose-500);
+  --chart-3: var(--raw-steel-400);
+  --chart-4: var(--raw-rose-300);
+  --chart-5: var(--raw-steel-200);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-frost-50);
+  --sidebar-foreground: var(--raw-frost-900);
+  --sidebar-primary: var(--raw-steel-700);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--raw-steel-100);
+  --sidebar-accent-foreground: var(--raw-steel-800);
+  --sidebar-border: var(--raw-frost-200);
+  --sidebar-ring: var(--raw-steel-600);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-frost-100);
+  --surface-page: var(--raw-frost-50);
+  --surface-raised: var(--raw-frost-50);
+  --surface-sunken: var(--raw-frost-200);
+  --surface-interactive: var(--raw-frost-200);
+  --surface-interactive-hover: var(--raw-frost-300);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-frost-500);
+  --border-strong: var(--raw-frost-700);
+  --border-subtle: var(--raw-frost-200);
+  --border-accent: var(--raw-steel-600);
+
+  --spinner-track: var(--raw-frost-300);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-steel-700);
+  --accent-fill-hover: var(--raw-steel-800);
+  --accent-surface: var(--raw-steel-100);
+
+  /* ── Secondary ── */
+  --secondary-fill: var(--raw-rose-500);
+  --secondary-fill-hover: var(--raw-rose-400);
+  --secondary-fill-foreground: var(--raw-frost-900);
+  --secondary-fill-border: var(--raw-rose-700);
+  --secondary-surface: var(--raw-rose-100);
+  --secondary-text: var(--raw-rose-800);
+
+  --hard-shadow-color: var(--raw-frost-700);
+
+  /* Brittle: quick, near-linear, and square-cornered. */
+  --motion-duration: 120ms;
+  --motion-ease: cubic-bezier(0.16, 0, 0.1, 1);
+  --radius-factor: 0.15;
+
+  /* ── Status ── */
+  --status-success: oklch(0.58 0.125 155);
+  --status-success-surface: oklch(0.92 0.06 155);
+  --status-success-text: oklch(0.43 0.10 155);
+  /* secondary-500 is far too light to carry a 3:1 border — 700 is the first
+     step on the ramp that clears it. */
+  --status-warning: var(--raw-rose-700);
+  --status-warning-surface: var(--raw-rose-100);
+  --status-warning-text: var(--raw-rose-800);
+  --status-error: oklch(0.545 0.2 27);
+  --status-error-surface: oklch(0.93 0.04 27);
+  --status-error-text: oklch(0.45 0.15 27);
+  --status-info: oklch(0.58 0.14 245);
+  --status-info-surface: oklch(0.92 0.05 245);
+  --status-info-text: oklch(0.45 0.10 245);
+}
+
+
+/* ── TUNDRA DARK ── */
+
+[data-theme="tundra"].dark,
+.dark [data-theme="tundra"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-frost-975);
+  --foreground: var(--raw-frost-100);
+  --card: var(--raw-frost-850);
+  --card-foreground: var(--raw-frost-100);
+  --popover: var(--raw-frost-800);
+  --popover-foreground: var(--raw-frost-100);
+  --primary: var(--raw-steel-400);
+  --primary-foreground: var(--raw-frost-950);
+  --primary-border: var(--raw-steel-200);
+  --secondary: var(--raw-frost-700);
+  --secondary-foreground: var(--raw-frost-100);
+  --muted: var(--raw-frost-800);
+  --muted-foreground: var(--raw-frost-300);
+  --accent: oklch(0.750 0.111 239 / 0.15);
+  --accent-foreground: var(--raw-steel-200);
+  --destructive: oklch(0.65 0.190 27);
+  /* white on this lighter fill lands under 4.5:1 — near-black clears it */
+  --destructive-foreground: var(--raw-frost-950);
+  --border: var(--raw-frost-400);
+  --input: var(--raw-frost-400);
+  --ring: var(--raw-steel-400);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-steel-400);
+  --chart-2: var(--raw-rose-400);
+  --chart-3: var(--raw-steel-300);
+  --chart-4: var(--raw-rose-300);
+  --chart-5: var(--raw-steel-600);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-frost-900);
+  --sidebar-foreground: var(--raw-frost-100);
+  --sidebar-primary: var(--raw-steel-400);
+  --sidebar-primary-foreground: var(--raw-frost-950);
+  --sidebar-accent: oklch(0.750 0.111 239 / 0.15);
+  --sidebar-accent-foreground: var(--raw-steel-200);
+  --sidebar-border: var(--raw-frost-700);
+  --sidebar-ring: var(--raw-steel-400);
+
+  /* ── Surfaces ──
+     sunken aliases ground: below near-black there is no perceptual headroom,
+     so recession is expressed by NOT raising. */
+  --surface-ground: var(--raw-frost-975);
+  --surface-page: var(--raw-frost-900);
+  --surface-raised: var(--raw-frost-850);
+  --surface-sunken: var(--raw-frost-975);
+  --surface-interactive: var(--raw-frost-800);
+  --surface-interactive-hover: var(--raw-frost-700);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-frost-400);
+  --border-strong: var(--raw-frost-400);
+  --border-subtle: var(--raw-frost-800);
+  --border-accent: var(--raw-steel-400);
+
+  --spinner-track: var(--raw-frost-400);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-steel-400);
+  --accent-fill-hover: var(--raw-steel-300);
+  --accent-surface: oklch(0.750 0.111 239 / 0.15);
+
+  /* ── Secondary ── */
+  --secondary-fill: var(--raw-rose-400);
+  --secondary-fill-hover: var(--raw-rose-300);
+  --secondary-fill-foreground: var(--raw-frost-950);
+  --secondary-fill-border: var(--raw-rose-600);
+  --secondary-surface: oklch(0.820 0.108 157 / 0.12);
+  --secondary-text: var(--raw-rose-300);
+
+  --hard-shadow-color: var(--raw-steel-900);
+
+  /* ── Status ── */
+  --status-success: oklch(0.70 0.14 155);
+  --status-success-surface: oklch(0.62 0.150 155 / 0.15);
+  --status-success-text: oklch(0.78 0.11 155);
+  --status-warning: var(--raw-rose-400);
+  --status-warning-surface: oklch(0.820 0.108 157 / 0.15);
+  --status-warning-text: var(--raw-rose-300);
+  --status-error: oklch(0.65 0.190 27);
+  --status-error-surface: oklch(0.55 0.210 27 / 0.15);
+  --status-error-text: oklch(0.78 0.12 27);
+  --status-info: oklch(0.70 0.14 245);
+  --status-info-surface: oklch(0.65 0.170 245 / 0.15);
+  --status-info-text: oklch(0.78 0.10 245);
 }
 
 

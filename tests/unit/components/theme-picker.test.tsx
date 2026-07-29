@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { ThemePicker } from '@/components/theme-picker'
+import { ThemePicker, SiteThemeProvider, useSiteTheme } from '@/components/theme-picker'
 import { LabelsProvider } from '@/components/providers/labels-provider'
 
 describe('ThemePicker', () => {
@@ -10,7 +10,7 @@ describe('ThemePicker', () => {
     render(<ThemePicker />)
     const trigger = screen.getByLabelText('Theme')
     expect(trigger).toBeInTheDocument()
-    expect(trigger).toHaveTextContent('Default')
+    expect(trigger).toHaveTextContent('Plum')
   })
 
   it('opens the listbox on click and renders the theme options', async () => {
@@ -18,7 +18,11 @@ describe('ThemePicker', () => {
     render(<ThemePicker />)
     await user.click(screen.getByLabelText('Theme'))
     expect(await screen.findByRole('listbox')).toBeInTheDocument()
-    expect(screen.getByRole('option', { name: 'Default' })).toBeInTheDocument()
+    // Every entry in SITE_THEMES should be offered, including the ones added
+    // after the plum rename.
+    for (const name of ['Plum', 'Press', 'Substrate', 'Lava', 'Tundra']) {
+      expect(screen.getByRole('option', { name })).toBeInTheDocument()
+    }
   })
 
   it('overrides the aria-label via the labels prop', () => {
@@ -34,5 +38,34 @@ describe('ThemePicker', () => {
       </LabelsProvider>
     )
     expect(screen.getByLabelText('Thème')).toBeInTheDocument()
+  })
+})
+
+describe('SiteThemeProvider', () => {
+  function Probe() {
+    return <span data-testid="theme">{useSiteTheme().theme}</span>
+  }
+
+  it('reads a stored theme back', async () => {
+    localStorage.setItem('substrateui-theme', 'press')
+    render(
+      <SiteThemeProvider>
+        <Probe />
+      </SiteThemeProvider>
+    )
+    expect(await screen.findByTestId('theme')).toHaveTextContent('press')
+  })
+
+  it('migrates the pre-rename "default" value to plum', async () => {
+    // "default" named this palette before it became a role. Visitors who chose
+    // it still have that string in localStorage; it must not fall back silently.
+    localStorage.setItem('substrateui-theme', 'default')
+    render(
+      <SiteThemeProvider>
+        <Probe />
+      </SiteThemeProvider>
+    )
+    expect(await screen.findByTestId('theme')).toHaveTextContent('plum')
+    expect(document.documentElement.hasAttribute('data-theme')).toBe(false)
   })
 })

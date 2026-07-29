@@ -24,7 +24,7 @@ interface ThemeColorData {
 }
 
 const themeColorData: Record<Theme, ThemeColorData> = {
-  default: {
+  plum: {
     ramps: [
       {
         title: "Plum (Primary)",
@@ -67,6 +67,141 @@ const themeColorData: Record<Theme, ThemeColorData> = {
       { name: "border", light: "warm-500", dark: "warm-400" },
       { name: "card", light: "warm-white", dark: "warm-850" },
       { name: "ring", light: "plum-500", dark: "plum-400" },
+    ],
+  },
+  press: {
+    ramps: [
+      {
+        title: "Process Cyan (Primary)",
+        description:
+          "The first process ink. Darkened through the ramp so mid steps carry white text.",
+        prefix: "cyan",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+      {
+        title: "Process Yellow (Secondary)",
+        description:
+          "The third process ink. Always takes dark text, never white.",
+        prefix: "yellow",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+      },
+      {
+        title: "Proof Stock (Neutrals)",
+        description:
+          "Cool press-room paper. Backgrounds, borders, and text. Process magenta lives outside this set as brand furniture (--raw-magenta).",
+        prefix: "proof",
+        shades: ["50", "100", "200", "300", "350", "400", "450", "500", "600", "700", "800", "850", "900", "950", "975"],
+      },
+    ],
+    status: [
+      { variable: "--status-success", label: "success" },
+      { variable: "--status-warning", label: "warning" },
+      { variable: "--status-error", label: "error" },
+      { variable: "--status-info", label: "info" },
+    ],
+    semantic: [
+      { name: "background", light: "proof-100", dark: "proof-975" },
+      { name: "foreground", light: "proof-900", dark: "proof-100" },
+      { name: "primary", light: "cyan-700", dark: "cyan-400" },
+      { name: "primary-foreground", light: "white", dark: "proof-950" },
+      { name: "secondary", light: "proof-200", dark: "proof-700" },
+      { name: "muted", light: "proof-200", dark: "proof-800" },
+      { name: "muted-foreground", light: "proof-600", dark: "proof-300" },
+      { name: "accent", light: "cyan-100", dark: "cyan @ 15%" },
+      { name: "destructive", light: "error", dark: "error (lighter)" },
+      { name: "border", light: "proof-500", dark: "proof-400" },
+      { name: "card", light: "proof-50", dark: "proof-850" },
+      { name: "ring", light: "cyan-600", dark: "cyan-400" },
+    ],
+  },
+  substrate: {
+    ramps: [
+      {
+        title: "Jade (Primary)",
+        description:
+          "A cold instrument green. Interactive elements, focus rings, and brand presence.",
+        prefix: "jade",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+      {
+        title: "Instrument Amber (Secondary)",
+        description:
+          "Signal amber, CVD-safe against jade. Call-to-action buttons and highlights.",
+        prefix: "instrument",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+      },
+      {
+        title: "Graphite Neutrals",
+        description:
+          "Cold, near-neutral grays for a measuring instrument. Backgrounds, borders, and text.",
+        prefix: "graphite",
+        shades: ["50", "100", "200", "300", "350", "400", "450", "500", "600", "700", "800", "850", "900", "950", "975"],
+      },
+    ],
+    status: [
+      { variable: "--status-success", label: "success" },
+      { variable: "--status-warning", label: "warning" },
+      { variable: "--status-error", label: "error" },
+      { variable: "--status-info", label: "info" },
+    ],
+    semantic: [
+      { name: "background", light: "graphite-100", dark: "graphite-975" },
+      { name: "foreground", light: "graphite-900", dark: "graphite-100" },
+      { name: "primary", light: "jade-700", dark: "jade-400" },
+      { name: "primary-foreground", light: "white", dark: "graphite-950" },
+      { name: "secondary", light: "graphite-200", dark: "graphite-700" },
+      { name: "muted", light: "graphite-200", dark: "graphite-800" },
+      { name: "muted-foreground", light: "graphite-600", dark: "graphite-300" },
+      { name: "accent", light: "jade-100", dark: "jade @ 15%" },
+      { name: "destructive", light: "error", dark: "error (lighter)" },
+      { name: "border", light: "graphite-500", dark: "graphite-400" },
+      { name: "card", light: "graphite-50", dark: "graphite-850" },
+      { name: "ring", light: "jade-600", dark: "jade-400" },
+    ],
+  },
+  tundra: {
+    ramps: [
+      {
+        title: "Steel (Primary)",
+        description:
+          "Glacial blue, hue drifting colder as lightness falls.",
+        prefix: "steel",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+      {
+        title: "Cold Rose (Secondary)",
+        description:
+          "A low-temperature pink. Call-to-action buttons and highlights.",
+        prefix: "rose",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+      },
+      {
+        title: "Frost Neutrals",
+        description:
+          "Pale ice grays carrying a blue cast. Backgrounds, borders, and text.",
+        prefix: "frost",
+        shades: ["50", "100", "200", "300", "350", "400", "450", "500", "600", "700", "800", "850", "900", "950", "975"],
+      },
+    ],
+    status: [
+      { variable: "--status-success", label: "success" },
+      { variable: "--status-warning", label: "warning" },
+      { variable: "--status-error", label: "error" },
+      { variable: "--status-info", label: "info" },
+    ],
+    semantic: [
+      { name: "background", light: "frost-100", dark: "frost-975" },
+      { name: "foreground", light: "frost-900", dark: "frost-100" },
+      { name: "primary", light: "steel-700", dark: "steel-400" },
+      { name: "primary-foreground", light: "white", dark: "frost-950" },
+      { name: "secondary", light: "frost-200", dark: "frost-700" },
+      { name: "muted", light: "frost-200", dark: "frost-800" },
+      { name: "muted-foreground", light: "frost-600", dark: "frost-300" },
+      { name: "accent", light: "steel-100", dark: "steel @ 15%" },
+      { name: "destructive", light: "error", dark: "error (lighter)" },
+      { name: "border", light: "frost-500", dark: "frost-400" },
+      { name: "card", light: "frost-50", dark: "frost-850" },
+      { name: "ring", light: "steel-600", dark: "steel-400" },
     ],
   },
   lava: {
