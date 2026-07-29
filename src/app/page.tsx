@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { Caps } from "@/components/caps"
 import { ThemeStrip } from "@/components/theme-strip"
 import { H1, H2, H3, P, Lead, Mono } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button"
@@ -19,7 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { cn } from "@/lib/utils"
 import pkg from "../../package.json"
 
 const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
@@ -41,23 +41,6 @@ function RegMark({ className }: { className?: string }) {
       <circle cx="9" cy="9" r="5.5" />
       <path d="M9 0v18M0 9h18" />
     </svg>
-  )
-}
-
-// ─── Utility caps ─────────────────────────────────────────────────────
-// The tiny type printed on the edge of a swatch card. Condensed, 600,
-// uppercase, wide-tracked — and deliberately never larger than 13px.
-
-function Caps({ children, className }: { children: React.ReactNode; className?: string }) {
-  return (
-    <span
-      className={cn(
-        "font-utility text-xs font-semibold uppercase tracking-widest",
-        className
-      )}
-    >
-      {children}
-    </span>
   )
 }
 

@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Check, Copy } from "lucide-react"
+import { Caps } from "@/components/caps"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 
@@ -27,7 +28,7 @@ export function ComponentPreview({ children, code, title }: ComponentPreviewProp
           <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-primary" />
           <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-secondary-fill" />
           <span aria-hidden className="h-3 w-3 rounded-full border-2 border-border bg-background" />
-          <span className="ms-2">{title}</span>
+          <Caps className="ms-2">{title}</Caps>
         </div>
       )}
       <div className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4`}>

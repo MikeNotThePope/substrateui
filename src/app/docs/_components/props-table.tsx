@@ -1,6 +1,8 @@
+import { capsClass } from "@/components/caps"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Code } from "@/components/ui/typography"
+import { cn } from "@/lib/utils"
 
 export interface PropDef {
   name: string
@@ -18,12 +20,14 @@ export function PropsTable({ props }: PropsTableProps) {
   return (
     <div className="border-2 rounded-lg overflow-hidden">
       <Table>
+        {/* Column headers are spec marks: they label the sheet, they aren't
+            content on it. Caps keeps them subordinate to the props. */}
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[25%]">Prop</TableHead>
-            <TableHead className="w-[20%]">Type</TableHead>
-            <TableHead className="w-[10%]">Default</TableHead>
-            <TableHead>Description</TableHead>
+            <TableHead className={cn(capsClass, "w-[25%]")}>Prop</TableHead>
+            <TableHead className={cn(capsClass, "w-[20%]")}>Type</TableHead>
+            <TableHead className={cn(capsClass, "w-[10%]")}>Default</TableHead>
+            <TableHead className={capsClass}>Description</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
