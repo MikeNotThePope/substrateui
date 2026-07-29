@@ -100,7 +100,7 @@ export default function FormSectionPage() {
   return (
     <DocPage
       title="FormSection"
-      description="A fieldset-based section for grouping related form fields with a header containing a title and description. Ideal for organizing long forms into logical groups."
+      description="A fieldset with a title and description, for splitting a long form into groups."
     >
       {/* Basic Form Section */}
       <Stack gap="md">

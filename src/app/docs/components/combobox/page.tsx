@@ -123,7 +123,7 @@ export default function ComboboxPage() {
   return (
     <DocPage
       title="Combobox"
-      description="A searchable dropdown that combines a text input with a listbox. Useful for long option lists where filtering is beneficial."
+      description="A text input bound to a listbox: type to filter, select to commit. Use it when the option list is long enough that a plain select becomes a scroll."
     >
       {/* Basic */}
       <Stack gap="md">

@@ -30,7 +30,7 @@ export default function InputOtpPage() {
   return (
     <DocPage
       title="Input OTP"
-      description="A one-time password input with individual character slots. Supports auto-advancing focus, paste handling, and flexible grouping with separators."
+      description="A one-time-code input with one slot per character. Focus advances as you type, a paste fills every slot, and separators are yours to place."
     >
       {/* 6-Digit OTP */}
       <Stack gap="md">

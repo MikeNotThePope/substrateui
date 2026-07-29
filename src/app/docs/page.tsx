@@ -13,7 +13,7 @@ export default function DocsPage() {
   return (
     <DocPage
       title="Getting Started"
-      description="Everything you need to install SubstrateUI and render your first component."
+      description="Install the package, wire up the stylesheet, render your first component."
     >
       <Stack gap="xl">
         {/* Installation */}

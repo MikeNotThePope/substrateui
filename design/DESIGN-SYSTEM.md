@@ -171,6 +171,18 @@ Both were tempting because they sound like diligence. Neither survived a measure
 | S4 | Include `h4` in the display rule | **rejected** | `H4` renders at `text-xl` = 20px, below the system's 24px display floor. Set in Archivo it stops reading as a headline and starts reading as bolded body. |
 | S5 | Scope the display rule to `main` (i.e. docs only) | **rejected** | `/design-system` is in the top nav and its `Center` wrapper is a `div`, so it would have been the one page left in DM Sans. Scoped to `body` instead, with `[data-specimen]` as the opt-out. |
 
+| # | Proposal | Verdict | Evidence |
+|---|---|---|---|
+| S6 | Rewrite all 91 docs descriptions into the Press voice | **rejected — scoped down** | 60 of them already comply: they are declarative, name what the thing is, and carry no unmeasurable adjective. Rewriting compliant copy is churn that reads as a voice pass without being one, and it puts 91 strings up for review instead of the 31 that were actually wrong. Only the violations were rewritten. |
+| S7 | Leave the sample copy inside the blocks demo alone as "consumer content" | **rejected** | It said "batteries fully included", a phrase the anti-patterns strike by name, and it renders on our page in our chrome. A reader does not know which strings we consider example data. |
+
+The voice test used: does the sentence state what the thing **is** or what it **costs**, in words that can
+be checked? "Seven variants, four sizes, a 3px press offset" passes. "A versatile button with a
+satisfying press animation" does not — neither adjective can be verified, and together they say
+nothing the reader could not see. Where a component has a real cost, the description now names it:
+`Tabs` says the URL does not change, `HoverCard` says hover-only content needs a touch-reachable
+home.
+
 `[data-specimen]` marks a container whose headings are *library output on display* rather than site
 chrome — component previews, and the two type-specimen lists on `/docs/tokens/typography` and
 `/design-system`. Headings inside it keep `--font-sans`, because that is what a consumer's app

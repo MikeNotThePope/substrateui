@@ -28,7 +28,7 @@ export default function TexturesPage() {
   return (
     <DocPage
       title="Textures"
-      description="Optional pure-CSS background patterns for tactile depth. Zero dependencies, token-driven, theme- and mode-aware."
+      description="Optional pure-CSS background patterns. No dependencies, token-driven, and they follow the theme and the mode."
     >
       <Stack gap="md">
         <H3>The utilities</H3>

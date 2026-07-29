@@ -48,7 +48,7 @@ export default function ButtonPage() {
   return (
     <DocPage
       title="Button"
-      description="A versatile button component for triggering actions and events. Features a satisfying press animation and multiple visual variants."
+      description="Triggers an action. Seven variants, four sizes, and a 3px press offset that collapses under prefers-reduced-motion."
     >
       {/* Variants */}
       <Stack gap="md">

@@ -18,7 +18,7 @@ export default function DividerPage() {
   return (
     <DocPage
       title="Divider"
-      description="A visual separator that creates clear boundaries between content sections. Supports horizontal rules, vertical lines, and labeled dividers for logical grouping."
+      description="A separator between sections. Horizontal, vertical, or with a centred label."
     >
       <Stack gap="xl">
         {/* ── Horizontal Divider ──────────────────────────── */}

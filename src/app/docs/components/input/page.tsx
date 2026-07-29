@@ -39,7 +39,7 @@ export default function InputPage() {
   return (
     <DocPage
       title="Input"
-      description="A styled text input for capturing user data. Features border-2 styling, focus ring, and seamless integration with Field for labels, hints, and validation."
+      description="A single-line text input. Pair it with Field to get the label, hint, and error wiring."
     >
       {/* Default */}
       <Stack gap="md">

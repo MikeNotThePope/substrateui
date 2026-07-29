@@ -24,7 +24,7 @@ export default function ProgressPage() {
   return (
     <DocPage
       title="Progress"
-      description="A horizontal bar that indicates the completion progress of a task. Animates smoothly between values."
+      description="A horizontal bar showing how far a task has run. Transitions between values rather than jumping."
     >
       {/* Progress Values */}
       <Stack gap="md">

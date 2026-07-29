@@ -33,7 +33,7 @@ export default function SheetPage() {
   return (
     <DocPage
       title="Sheet"
-      description="A panel that slides in from the edge of the screen. Ideal for navigation menus, filters, or detail views that don't require a full page."
+      description="A panel that slides in from an edge of the viewport — navigation, filters, detail views that do not need a route of their own."
     >
       {/* Basic Sheet */}
       <Stack gap="md">
