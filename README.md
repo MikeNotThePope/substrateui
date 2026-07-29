@@ -108,7 +108,7 @@ import { LinkProvider } from "substrateui"
 | `substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
 | `substrateui/blocks` | Full compositions across Marketing, Application, Auth & E-commerce (Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid) |
 | `substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
-| `substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, useFocusTrap, useAnnouncer, …) |
+| `substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, useFocusTrap, useAnnouncer, useCountdown, …) |
 | `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
 | `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
 
@@ -136,7 +136,7 @@ SubstrateUI uses a 3-layer OKLCH color system:
 - **Typography** — H1-H4, P, Lead, Large, Small, Muted, Code, Mono
 - **Layout** — Stack, Cluster, Grid, Center, Divider, Spacer, Separator, AspectRatio, ResizablePanels
 - **Forms** — Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, DatePicker, Combobox, Cascader, InputGroup, InputOTP, SearchField, Field, Fieldset, FormSection, FormActions
-- **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer
+- **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer, Countdown
 - **Feedback** — Alert, Banner, AlertDialog, Dialog, Progress, Skeleton, Sonner (toast)
 - **Overlays** — Sheet, Drawer, Popover, Tooltip, ContextMenu, DropdownMenu, Command
 - **Navigation** — Tabs, Breadcrumb, NavigationMenu, Menubar, Pagination, ScrollArea, Sidebar, Collapsible, Accordion, Stepper

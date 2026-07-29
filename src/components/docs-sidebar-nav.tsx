@@ -113,6 +113,7 @@ export const navSections = [
       { label: "Tree", href: "/docs/components/tree" },
       { label: "Descriptions", href: "/docs/components/descriptions" },
       { label: "Transfer", href: "/docs/components/transfer" },
+      { label: "Countdown", href: "/docs/components/countdown" },
     ],
   },
   {

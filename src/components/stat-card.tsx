@@ -25,7 +25,7 @@ const defaultStatCardLabels: Required<StatCardLabels> = {
 /** Props for StatCard including title, value, and optional change indicator. */
 interface StatCardProps extends Omit<React.ComponentPropsWithRef<"div">, "title"> {
   title: string
-  value: string
+  value: React.ReactNode
   change?: string
   changeType?: "positive" | "negative" | "neutral"
   icon?: React.ComponentType<{ className?: string }>
@@ -58,8 +58,11 @@ const changeTypeLabelKeys = {
  * @example
  * <StatCard title="Revenue" value="$12,345" change="+12%" changeType="positive" />
  *
+ * @example
+ * <StatCard title="Sale ends" value={<Countdown deadline={endsAt} />} />
+ *
  * @prop title - Metric label displayed in uppercase monospace.
- * @prop value - Primary numeric or text value.
+ * @prop value - Primary value: text, a formatted number, or a node such as a Countdown.
  * @prop change - Optional change indicator text (e.g. "+5%").
  * @prop changeType - Color coding: "positive", "negative", or "neutral".
  * @prop icon - Optional icon component displayed at top-right.

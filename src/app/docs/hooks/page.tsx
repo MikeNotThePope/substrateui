@@ -25,6 +25,7 @@ const hooks: PropDef[] = [
   { name: "useCounter", type: "(initial?, { min?, max? }) => [count, handlers]", default: undefined, description: "A bounded integer counter (increment/decrement/set/reset)." },
   { name: "usePrevious", type: "(value) => value | undefined", default: undefined, description: "The value from the previous render." },
   { name: "useInterval", type: "(callback, delay, active?) => void", default: undefined, description: "Run a callback on an interval; latest callback without resetting the timer." },
+  { name: "useCountdown", type: "(deadline, options?) => CountdownState", default: undefined, description: "Count down to a deadline — units, a locale-formatted string, and a once-only onFinish." },
   { name: "useMounted", type: "() => boolean", default: undefined, description: "True after client mount — gate browser-only UI." },
   { name: "useMergedRef", type: "(...refs) => refCallback", default: undefined, description: "Merge several refs onto one element." },
   { name: "useIsMobile", type: "() => boolean", default: undefined, description: "True below the mobile breakpoint (768px)." },
