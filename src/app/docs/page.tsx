@@ -159,7 +159,7 @@ export function CreateProject() {
         </Stack>
       </CardContent>
       <CardFooter>
-        <Button variant="amber">Create</Button>
+        <Button variant="secondary-fill">Create</Button>
       </CardFooter>
     </Card>
   )
@@ -186,7 +186,7 @@ export function CreateProject() {
                 </CardContent>
                 <CardFooter>
                   <Cluster gap="sm">
-                    <Button variant="amber">Create Project</Button>
+                    <Button variant="secondary-fill">Create Project</Button>
                     <Button variant="outline">Cancel</Button>
                   </Cluster>
                 </CardFooter>

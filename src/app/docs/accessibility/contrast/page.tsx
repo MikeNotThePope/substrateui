@@ -31,6 +31,11 @@ const results = contrastData.results as PairingResult[]
 
 // ─── Grouping ─────────────────────────────────────────────────────────
 
+// Matches both the theme-generic secondary-fill pairings and the plum-only raw
+// ramp ones, which are labelled "(plum secondary fill, light|dark)".
+const isSecondaryFill = (r: PairingResult) =>
+  r.name.includes("secondary-fill") || r.name.includes("secondary fill")
+
 const groups: { title: string; match: (r: PairingResult) => boolean }[] = [
   {
     title: "Core",
@@ -38,14 +43,14 @@ const groups: { title: string; match: (r: PairingResult) => boolean }[] = [
       !r.name.includes("sidebar") &&
       !r.name.includes("surface-") &&
       !r.name.includes("status-") &&
-      !r.name.includes("amber button") &&
+      !isSecondaryFill(r) &&
       r.type !== "ui",
   },
   { title: "Sidebar", match: (r) => r.name.includes("sidebar") },
   { title: "Surfaces", match: (r) => r.name.includes("surface-") },
   { title: "Status", match: (r) => r.name.includes("status-") },
-  { title: "Amber Button", match: (r) => r.name.includes("amber button") },
-  { title: "UI Elements", match: (r) => r.type === "ui" },
+  { title: "Secondary Fill", match: isSecondaryFill },
+  { title: "UI Elements", match: (r) => r.type === "ui" && !isSecondaryFill(r) },
 ]
 
 // ─── Sample renderer ──────────────────────────────────────────────────

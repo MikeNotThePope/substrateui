@@ -261,7 +261,7 @@ export default function DesignSystemPage() {
 
             <Stack gap="xl">
               <PropsTable name="Button" props={[
-                { prop: "variant", type: '"default" | "destructive" | "outline" | "secondary" | "amber" | "ghost" | "link"', default: '"default"', description: "Visual style of the button" },
+                { prop: "variant", type: '"default" | "destructive" | "outline" | "secondary" | "secondary-fill" | "ghost" | "link"', default: '"default"', description: "Visual style of the button" },
                 { prop: "size", type: '"default" | "sm" | "lg" | "icon"', default: '"default"', description: "Button size" },
                 { prop: "render", type: "ReactElement", description: "Render a different element instead of a <button>, e.g. render={<a href=\"…\" />}" },
               ]} />
@@ -477,7 +477,7 @@ export default function DesignSystemPage() {
 
             <H3>Variants</H3>
             <Cluster gap="sm" wrap>
-              {(["default","destructive","outline","secondary","amber","ghost","link"] as const).map((v) => (
+              {(["default","destructive","outline","secondary","secondary-fill","ghost","link"] as const).map((v) => (
                 <Button key={v} variant={v}>{v.charAt(0).toUpperCase() + v.slice(1)}</Button>
               ))}
             </Cluster>

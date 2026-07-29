@@ -38,7 +38,8 @@ The default theme is `press`: proof stock (cool neutral, hue 264) carrying the t
 Contrast pairs verified ≥ 4.5:1: ink on surface (16.6:1) · ink on surface-raised (18.4:1) ·
 white on primary (7.0:1) · ink on secondary (13.2:1) · muted on surface (5.1:1).
 UI pairs ≥ 3:1: rule on surface · primary on surface.
-CI enforces all 31 pairings per theme, light **and** dark, via `bun run audit:contrast`.
+CI enforces all 35 pairings per theme, light **and** dark, via `bun run audit:contrast`
+(plum adds 2 more that reference its raw ramp directly).
 
 CVD note: cyan / yellow / magenta span the blue–yellow axis, so the triad separates under
 protanopia and deuteranopia — same reasoning that put amber (not green) next to plum in `default`.
@@ -175,6 +176,8 @@ Both were tempting because they sound like diligence. Neither survived a measure
 |---|---|---|---|
 | S6 | Rewrite all 91 docs descriptions into the Press voice | **rejected — scoped down** | 60 of them already comply: they are declarative, name what the thing is, and carry no unmeasurable adjective. Rewriting compliant copy is churn that reads as a voice pass without being one, and it puts 91 strings up for review instead of the 31 that were actually wrong. Only the violations were rewritten. |
 | S7 | Leave the sample copy inside the blocks demo alone as "consumer content" | **rejected** | It said "batteries fully included", a phrase the anti-patterns strike by name, and it renders on our page in our chrome. A reader does not know which strings we consider example data. |
+| S8 | Rename `Button variant="amber"` to `"secondary-fill"`, keeping `amber` as an alias | **accepted** | Decision #10 applied to the component API. `amber` named the colour *plum* puts in that slot; press paints it yellow from its own `--raw-yellow-*` ramp, so the API was asserting a colour the theme system exists to change. `secondary-fill` names the token family that actually paints it, and distinguishes it from `secondary` (the tinted surface). `amber` stays as an alias because it shipped in 1.x, and a unit test asserts the two resolve to identical classes so the deprecation can't quietly restyle anyone's buttons. |
+| S9 | Audit the secondary-fill button per theme, not just under plum | **accepted** | The only pairings covering that button were `raw-warm-900 on raw-amber-500` and its dark twin, both in `defaultOnlyPairings` — so the variant's contrast was unverified in press, substrate, lava and tundra, the four themes that repaint it. Added `secondary-fill-foreground on secondary-fill` (normal) and `secondary-fill-border on background` (ui) to the generic set. All five themes pass, light and dark, so this cost nothing and closed a real gap. Pair count per theme: 33 → 35. |
 
 The voice test used: does the sentence state what the thing **is** or what it **costs**, in words that can
 be checked? "Seven variants, four sizes, a 3px press offset" passes. "A versatile button with a
