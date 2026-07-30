@@ -6,6 +6,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const dialogProps: PropDef[] = [
@@ -29,11 +31,8 @@ export default function DialogPage() {
       title="Dialog"
       description="A modal overlay rendered above the page with a backdrop. Focus stays inside it while it is open."
     >
-      {/* Basic Dialog */}
-      <Stack gap="md">
-        <H3>Basic Dialog</H3>
-        <ComponentPreview
-          code={`<Dialog>
+      <ComponentPreview
+        code={`<Dialog>
   <DialogTrigger render={<Button variant="outline" />}>
     Edit Profile
   </DialogTrigger>
@@ -53,37 +52,80 @@ export default function DialogPage() {
     </DialogFooter>
   </DialogContent>
 </Dialog>`}
-        >
-          <Dialog>
-            <DialogTrigger render={<Button variant="outline" />}>
-              Edit Profile
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Edit Profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when done.
-                </DialogDescription>
-              </DialogHeader>
-              <p className="text-sm text-muted-foreground">
-                Dialog body content goes here.
-              </p>
-              <DialogFooter>
-                <Button variant="outline">Cancel</Button>
-                <Button>Save Changes</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </ComponentPreview>
-      </Stack>
+      >
+        <Dialog>
+          <DialogTrigger render={<Button variant="outline" />}>
+            Edit Profile
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Profile</DialogTitle>
+              <DialogDescription>
+                Make changes to your profile here. Click save when done.
+              </DialogDescription>
+            </DialogHeader>
+            <p className="text-sm text-muted-foreground">
+              Dialog body content goes here.
+            </p>
+            <DialogFooter>
+              <Button variant="outline">Cancel</Button>
+              <Button>Save Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </ComponentPreview>
 
-      {/* API Reference */}
+      <ImportLine
+        names={[
+          "Dialog",
+          "DialogContent",
+          "DialogDescription",
+          "DialogFooter",
+          "DialogHeader",
+          "DialogTitle",
+          "DialogTrigger",
+        ]}
+      />
+
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={dialogProps} />
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Dialog"
+          nodes={[
+            { name: "DialogTrigger" },
+            {
+              name: "DialogContent",
+              children: [
+                {
+                  name: "DialogHeader",
+                  children: [
+                    { name: "DialogTitle" },
+                    { name: "DialogDescription" },
+                  ],
+                },
+                { name: "DialogFooter" },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          The close button is an icon, so this string is its entire accessible name. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>dialog</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "close", type: "string", default: "\"Close\"", description: "Accessible name for the corner close button." },
+          ]}
+        />
+      </Stack>
+
       <Stack gap="md">
         <H3>Accessibility</H3>
         <Stack gap="sm">
@@ -100,6 +142,12 @@ export default function DialogPage() {
             doesn&apos;t show it.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={dialogProps} />
       </Stack>
     </DocPage>
   )

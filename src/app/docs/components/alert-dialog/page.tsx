@@ -6,6 +6,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const alertDialogProps: PropDef[] = [
@@ -72,10 +74,47 @@ export default function AlertDialogPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
+      <ImportLine
+        names={[
+          "AlertDialog",
+          "AlertDialogAction",
+          "AlertDialogCancel",
+          "AlertDialogContent",
+          "AlertDialogDescription",
+          "AlertDialogFooter",
+          "AlertDialogHeader",
+          "AlertDialogTitle",
+          "AlertDialogTrigger",
+        ]}
+      />
+
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={alertDialogProps} />
+        <H3>Composition</H3>
+        <CompositionTree
+          root="AlertDialog"
+          nodes={[
+            { name: "AlertDialogTrigger" },
+            {
+              name: "AlertDialogContent",
+              children: [
+                {
+                  name: "AlertDialogHeader",
+                  children: [
+                    { name: "AlertDialogTitle" },
+                    { name: "AlertDialogDescription" },
+                  ],
+                },
+                {
+                  name: "AlertDialogFooter",
+                  children: [
+                    { name: "AlertDialogCancel" },
+                    { name: "AlertDialogAction" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* Accessibility */}
@@ -96,6 +135,12 @@ export default function AlertDialogPage() {
             <Code>aria-describedby</Code> automatically.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={alertDialogProps} />
       </Stack>
     </DocPage>
   )

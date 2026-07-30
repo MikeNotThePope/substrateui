@@ -7,9 +7,11 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { Stack } from "@/components/ui/stack"
-import { H3, P } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const paginationProps: PropDef[] = [
@@ -72,6 +74,39 @@ export default function PaginationPage() {
         </ComponentPreview>
       </Stack>
 
+      <ImportLine
+        names={[
+          "Pagination",
+          "PaginationContent",
+          "PaginationItem",
+          "PaginationLink",
+          "PaginationNext",
+          "PaginationPrevious",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Pagination"
+          nodes={[
+            {
+              name: "PaginationContent",
+              children: [
+                {
+                  name: "PaginationItem",
+                  children: [
+                    { name: "PaginationPrevious" },
+                    { name: "PaginationLink" },
+                    { name: "PaginationNext" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
+      </Stack>
+
       <Stack gap="md">
         <H3>Direction</H3>
         <P>
@@ -80,6 +115,23 @@ export default function PaginationPage() {
           rotate to point in reading direction. Order within the list
           follows the DOM, so logical ordering is preserved.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          Three of the four strings are accessible names for controls that show only an icon or an ellipsis. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>pagination</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "pagination", type: "string", default: "\"pagination\"", description: "aria-label on the nav element." },
+          { name: "previous / next", type: "string", default: "\"Previous\" / \"Next\"", description: "The step buttons, whose visible content is a chevron." },
+          { name: "morePages", type: "string", default: "\"More pages\"", description: "Accessible name for the ellipsis between page ranges." },
+          ]}
+        />
       </Stack>
 
       <Stack gap="md">

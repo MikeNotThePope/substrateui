@@ -4,6 +4,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const fieldProps: PropDef[] = [
@@ -81,24 +83,41 @@ export default function FieldPage() {
       title="Field"
       description="A composable form field system that links labels, hints, and error messages to inputs through shared context. Handles accessibility attributes automatically."
     >
-      {/* Basic Field */}
-      <Stack gap="md">
-        <H3>Basic Field</H3>
-        <ComponentPreview
-          code={`<Field>
+      <ComponentPreview
+        code={`<Field>
   <FieldLabel>Display name</FieldLabel>
   <Input placeholder="Enter your display name" />
   <FieldHint>This is how others will see you.</FieldHint>
 </Field>`}
-        >
-          <Stack gap="md" className="w-full max-w-sm">
-            <Field>
-              <FieldLabel>Display name</FieldLabel>
-              <Input placeholder="Enter your display name" />
-              <FieldHint>This is how others will see you.</FieldHint>
-            </Field>
-          </Stack>
-        </ComponentPreview>
+      >
+        <Stack gap="md" className="w-full max-w-sm">
+          <Field>
+            <FieldLabel>Display name</FieldLabel>
+            <Input placeholder="Enter your display name" />
+            <FieldHint>This is how others will see you.</FieldHint>
+          </Field>
+        </Stack>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Field",
+          "FieldLabel",
+          "FieldHint",
+          "FieldError",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Field"
+          nodes={[
+            { name: "FieldLabel" },
+            { name: "FieldHint" },
+            { name: "FieldError" },
+          ]}
+        />
       </Stack>
 
       {/* Error State */}
@@ -165,23 +184,6 @@ export default function FieldPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
-      <Stack gap="md">
-        <H3>API Reference</H3>
-
-        <H3>Field</H3>
-        <PropsTable props={fieldProps} />
-
-        <H3>FieldLabel</H3>
-        <PropsTable props={fieldLabelProps} />
-
-        <H3>FieldHint</H3>
-        <PropsTable props={fieldHintProps} />
-
-        <H3>FieldError</H3>
-        <PropsTable props={fieldErrorProps} />
-      </Stack>
-
       {/* Accessibility */}
       <Stack gap="md">
         <H3>Accessibility</H3>
@@ -203,6 +205,23 @@ export default function FieldPage() {
             and is often low-contrast.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+
+        <H3>Field</H3>
+        <PropsTable props={fieldProps} />
+
+        <H3>FieldLabel</H3>
+        <PropsTable props={fieldLabelProps} />
+
+        <H3>FieldHint</H3>
+        <PropsTable props={fieldHintProps} />
+
+        <H3>FieldError</H3>
+        <PropsTable props={fieldErrorProps} />
       </Stack>
     </DocPage>
   )

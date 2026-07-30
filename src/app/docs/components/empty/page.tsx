@@ -5,6 +5,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const emptyProps: PropDef[] = [
@@ -40,11 +42,8 @@ export default function EmptyPage() {
       title="Empty"
       description="A placeholder for empty states. Combines an icon, title, description, and optional action to guide users when no content is available."
     >
-      {/* Empty State */}
-      <Stack gap="md">
-        <H3>Default Empty State</H3>
-        <ComponentPreview
-          code={`<Empty>
+      <ComponentPreview
+        code={`<Empty>
   <EmptyIcon>
     <Inbox className="h-10 w-10" />
   </EmptyIcon>
@@ -56,20 +55,42 @@ export default function EmptyPage() {
     <Button>Compose Message</Button>
   </EmptyAction>
 </Empty>`}
-        >
-          <Empty>
-            <EmptyIcon>
-              <Inbox className="h-10 w-10" />
-            </EmptyIcon>
-            <EmptyTitle>No messages yet</EmptyTitle>
-            <EmptyDescription>
-              When you receive messages, they will appear here.
-            </EmptyDescription>
-            <EmptyAction>
-              <Button>Compose Message</Button>
-            </EmptyAction>
-          </Empty>
-        </ComponentPreview>
+      >
+        <Empty>
+          <EmptyIcon>
+            <Inbox className="h-10 w-10" />
+          </EmptyIcon>
+          <EmptyTitle>No messages yet</EmptyTitle>
+          <EmptyDescription>
+            When you receive messages, they will appear here.
+          </EmptyDescription>
+          <EmptyAction>
+            <Button>Compose Message</Button>
+          </EmptyAction>
+        </Empty>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Empty",
+          "EmptyIcon",
+          "EmptyTitle",
+          "EmptyDescription",
+          "EmptyAction",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Empty"
+          nodes={[
+            { name: "EmptyIcon" },
+            { name: "EmptyTitle" },
+            { name: "EmptyDescription" },
+            { name: "EmptyAction" },
+          ]}
+        />
       </Stack>
 
       {/* API Reference */}

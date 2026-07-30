@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { FocusTrapDemo } from "./focus-trap-demo"
 
@@ -17,13 +18,11 @@ export default function FocusTrapPage() {
       title="Focus Trap"
       description="Traps keyboard focus within a region while active — the reusable focus-management primitive behind modals, menus, and any custom overlay. On activation it moves focus inside; Tab / Shift+Tab cycle within; on deactivation it restores focus to wherever it was. Also available as the useFocusTrap hook."
     >
-      <Stack gap="md">
-        <H3>Example</H3>
-        <P className="text-sm text-muted-foreground">
-          Activate the trap, then press Tab repeatedly — focus stays inside the box.
-        </P>
-        <ComponentPreview
-          code={`import { FocusTrap } from "@mikenotthepope/substrateui"
+      <P className="text-sm text-muted-foreground">
+        Activate the trap, then press Tab repeatedly — focus stays inside the box.
+      </P>
+      <ComponentPreview
+        code={`import { FocusTrap } from "@mikenotthepope/substrateui"
 
 <FocusTrap active={open}>
   <div role="dialog">
@@ -31,10 +30,11 @@ export default function FocusTrapPage() {
     <button onClick={close}>Close</button>
   </div>
 </FocusTrap>`}
-        >
-          <FocusTrapDemo />
-        </ComponentPreview>
-      </Stack>
+      >
+        <FocusTrapDemo />
+      </ComponentPreview>
+
+      <ImportLine names={["FocusTrap"]} />
 
       <Stack gap="md">
         <H3>Hook</H3>
@@ -55,11 +55,6 @@ return <div ref={ref} hidden={!open}>…</div>`}
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           Focus trapping is essential for modal dialogs: keyboard and screen-reader
@@ -68,6 +63,11 @@ return <div ref={ref} hidden={!open}>…</div>`}
           container and remember to restore focus to the trigger on close —{" "}
           <Code>restoreFocus</Code> does this for you.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
       </Stack>
     </DocPage>
   )

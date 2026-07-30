@@ -3,6 +3,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const selectProps: PropDef[] = [
@@ -44,11 +46,8 @@ export default function SelectPage() {
       title="Select"
       description="A dropdown select built on Base UI primitives. Provides a styled trigger, animated content panel, and accessible keyboard navigation."
     >
-      {/* Basic */}
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <ComponentPreview
-          code={`<Select>
+      <ComponentPreview
+        code={`<Select>
   <SelectTrigger className="w-[200px]">
     <SelectValue placeholder="Pick a fruit" />
   </SelectTrigger>
@@ -58,18 +57,48 @@ export default function SelectPage() {
     <SelectItem value="cherry">Cherry</SelectItem>
   </SelectContent>
 </Select>`}
-        >
-          <Select>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Pick a fruit" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="cherry">Cherry</SelectItem>
-            </SelectContent>
-          </Select>
-        </ComponentPreview>
+      >
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Pick a fruit" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+            <SelectItem value="cherry">Cherry</SelectItem>
+          </SelectContent>
+        </Select>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Select",
+          "SelectContent",
+          "SelectItem",
+          "SelectTrigger",
+          "SelectValue",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Select"
+          nodes={[
+            {
+              name: "SelectTrigger",
+              children: [
+                { name: "SelectValue" },
+              ],
+            },
+            {
+              name: "SelectContent",
+              children: [
+                { name: "SelectItem" },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* Disabled */}

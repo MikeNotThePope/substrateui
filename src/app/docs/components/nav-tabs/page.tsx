@@ -3,6 +3,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const navTabsLinkProps: PropDef[] = [
@@ -40,29 +42,43 @@ export default function NavTabsPage() {
       title="NavTabs"
       description="A link-based tab bar for page-level navigation. Each tab is a real anchor, so pair it with server-driven routing (e.g. a ?tab= query param) to keep tabs bookmarkable and the back button working."
     >
-      <Stack gap="md">
-        <H3>Basic NavTabs</H3>
-        <ComponentPreview
-          code={`<NavTabs>
+      <ComponentPreview
+        code={`<NavTabs>
   <NavTabsLink href="?tab=applications" active>Applications</NavTabsLink>
   <NavTabsLink href="?tab=questionnaire" badge={2}>Questionnaire</NavTabsLink>
   <NavTabsLink href="?tab=faq" disabled>FAQ</NavTabsLink>
 </NavTabs>`}
-        >
-          <div className="w-full">
-            <NavTabs>
-              <NavTabsLink href="#applications" active>
-                Applications
-              </NavTabsLink>
-              <NavTabsLink href="#questionnaire" badge={2}>
-                Questionnaire
-              </NavTabsLink>
-              <NavTabsLink href="#faq" disabled>
-                FAQ
-              </NavTabsLink>
-            </NavTabs>
-          </div>
-        </ComponentPreview>
+      >
+        <div className="w-full">
+          <NavTabs>
+            <NavTabsLink href="#applications" active>
+              Applications
+            </NavTabsLink>
+            <NavTabsLink href="#questionnaire" badge={2}>
+              Questionnaire
+            </NavTabsLink>
+            <NavTabsLink href="#faq" disabled>
+              FAQ
+            </NavTabsLink>
+          </NavTabs>
+        </div>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "NavTabs",
+          "NavTabsLink",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="NavTabs"
+          nodes={[
+            { name: "NavTabsLink" },
+          ]}
+        />
       </Stack>
 
       <Stack gap="md">

@@ -1,5 +1,6 @@
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable } from "../../_components/props-table"
 import { H3 } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
@@ -184,6 +185,8 @@ export default function GridPage() {
           />
         </Stack>
       </Stack>
+
+      <ImportLine names={["Grid"]} />
     </DocPage>
   )
 }

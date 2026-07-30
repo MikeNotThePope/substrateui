@@ -6,6 +6,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const sheetProps: PropDef[] = [
@@ -71,13 +73,55 @@ export default function SheetPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
+      <ImportLine
+        names={[
+          "Sheet",
+          "SheetContent",
+          "SheetDescription",
+          "SheetHeader",
+          "SheetTitle",
+          "SheetTrigger",
+        ]}
+      />
+
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={sheetProps} />
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Sheet"
+          nodes={[
+            { name: "SheetTrigger" },
+            {
+              name: "SheetContent",
+              children: [
+                {
+                  name: "SheetHeader",
+                  children: [
+                    { name: "SheetTitle" },
+                    { name: "SheetDescription" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* Accessibility */}
+      <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          The close button is an icon, so this string is its entire accessible name. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>sheet</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "close", type: "string", default: "\"Close\"", description: "Accessible name for the corner close button." },
+          ]}
+        />
+      </Stack>
+
       <Stack gap="md">
         <H3>Accessibility</H3>
         <Stack gap="sm">
@@ -92,6 +136,12 @@ export default function SheetPage() {
             Base UI.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={sheetProps} />
       </Stack>
     </DocPage>
   )

@@ -7,9 +7,11 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const menubarProps: PropDef[] = [
@@ -96,6 +98,63 @@ export default function MenubarPage() {
             </MenubarMenu>
           </Menubar>
         </ComponentPreview>
+      </Stack>
+
+      <ImportLine
+        names={[
+          "Menubar",
+          "MenubarContent",
+          "MenubarItem",
+          "MenubarMenu",
+          "MenubarSeparator",
+          "MenubarTrigger",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Menubar"
+          nodes={[
+            {
+              name: "MenubarMenu",
+              children: [
+                { name: "MenubarTrigger" },
+                {
+                  name: "MenubarContent",
+                  children: [
+                    { name: "MenubarItem" },
+                    { name: "MenubarSeparator" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <Stack gap="sm">
+          <P>
+            The bar is a flex row, so the menus reverse with the line and the
+            first one sits on the right in RTL. Submenu indicators are{" "}
+            <Code>ChevronRight</Code> glyphs and mirror with the direction, since a
+            submenu opens toward the end of the line — the{" "}
+            <a
+              href="/docs/accessibility/direction"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              RTL icon audit
+            </a>{" "}
+            classifies them <strong>flip in RTL</strong>.
+          </P>
+          <P>
+            Arrow keys follow the visual order rather than the source order, so
+            Left moves to the next menu in RTL. That comes from Base UI and needs
+            nothing from you.
+          </P>
+        </Stack>
       </Stack>
 
       <Stack gap="md">

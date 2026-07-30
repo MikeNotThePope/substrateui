@@ -10,6 +10,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const tableProps: PropDef[] = [
@@ -79,11 +81,8 @@ export default function TablePage() {
       title="Table"
       description="A composable table built from semantic HTML elements with consistent styling. Use the sub-components to build tables of any shape."
     >
-      {/* Basic Table */}
-      <Stack gap="md">
-        <H3>Basic Table</H3>
-        <ComponentPreview
-          code={`<Table>
+      <ComponentPreview
+        code={`<Table>
   <TableHeader>
     <TableRow>
       <TableHead>Invoice</TableHead>
@@ -102,32 +101,73 @@ export default function TablePage() {
     {/* ...more rows */}
   </TableBody>
 </Table>`}
-        >
-          <div className="w-full">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Invoice</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Method</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
+      >
+        <div className="w-full">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Invoice</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Method</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {invoices.map((invoice) => (
+                <TableRow key={invoice.id}>
+                  <TableCell className="font-medium">{invoice.id}</TableCell>
+                  <TableCell>{invoice.status}</TableCell>
+                  <TableCell>{invoice.method}</TableCell>
+                  <TableCell className="text-right">
+                    {invoice.amount}
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {invoices.map((invoice) => (
-                  <TableRow key={invoice.id}>
-                    <TableCell className="font-medium">{invoice.id}</TableCell>
-                    <TableCell>{invoice.status}</TableCell>
-                    <TableCell>{invoice.method}</TableCell>
-                    <TableCell className="text-right">
-                      {invoice.amount}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </ComponentPreview>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Table",
+          "TableBody",
+          "TableCell",
+          "TableHead",
+          "TableHeader",
+          "TableRow",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Table"
+          nodes={[
+            {
+              name: "TableHeader",
+              children: [
+                {
+                  name: "TableRow",
+                  children: [
+                    { name: "TableHead" },
+                  ],
+                },
+              ],
+            },
+            {
+              name: "TableBody",
+              children: [
+                {
+                  name: "TableRow",
+                  children: [
+                    { name: "TableCell" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* API Reference */}

@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { TransferDemo, ControlledTransferDemo } from "./transfer-demo"
 
@@ -31,15 +32,13 @@ export default function TransferPage() {
       title="Transfer"
       description="A dual-list picker: move items between a source and a target list with checkboxes, per-panel search, and select-all. The classic pattern for assigning permissions, columns, tags, or members."
     >
-      <Stack gap="md">
-        <H3>Example</H3>
-        <P>
-          Check rows in either panel, then use the arrows to move them. The
-          select-all checkbox in a panel header toggles everything currently
-          visible in that panel.
-        </P>
-        <ComponentPreview
-          code={`const permissions = [
+      <P>
+        Check rows in either panel, then use the arrows to move them. The
+        select-all checkbox in a panel header toggles everything currently
+        visible in that panel.
+      </P>
+      <ComponentPreview
+        code={`const permissions = [
   { key: "read", label: "Read records" },
   { key: "write", label: "Write records" },
   { key: "owner", label: "Transfer ownership", disabled: true },
@@ -50,10 +49,11 @@ export default function TransferPage() {
   defaultTargetKeys={["read"]}
   titles={["Available", "Granted"]}
 />`}
-        >
-          <TransferDemo />
-        </ComponentPreview>
-      </Stack>
+      >
+        <TransferDemo />
+      </ComponentPreview>
+
+      <ImportLine names={["Transfer"]} />
 
       <Stack gap="md">
         <H3>With search</H3>
@@ -89,10 +89,21 @@ export default function TransferPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-        <P className="text-sm text-muted-foreground">TransferItem</P>
-        <PropsTable props={itemProps} />
+        <H3>Labels</H3>
+        <P>
+          Both move buttons are icon-only, and the per-panel count is assembled from numbers. Override with the <Code>labels</Code> prop. This is one of the few label sets
+            with no <Code>LabelsProvider</Code> key, so it is per instance only;
+            wrap it in a component of your own if you use it in more than one place.
+        </P>
+        <PropsTable
+          props={[
+          { name: "searchPlaceholder", type: "string", default: "\"Search...\"", description: "Placeholder for each panel's search input." },
+          { name: "empty", type: "string", default: "\"No items\"", description: "Shown when a panel has nothing in it." },
+          { name: "moveToTarget", type: "string", default: "\"Move to target\"", description: "Accessible name for the button that moves the selection across." },
+          { name: "moveToSource", type: "string", default: "\"Move to source\"", description: "Accessible name for the button that moves it back." },
+          { name: "itemCount", type: "(selected, total) => string", default: "\"n/m\"", description: "The per-panel count. A function so the separator and order are the caller's." },
+          ]}
+        />
       </Stack>
 
       <Stack gap="md">
@@ -106,6 +117,13 @@ export default function TransferPage() {
           themselves when nothing movable is selected. Items marked{" "}
           <Code>disabled</Code> are skipped by select-all and can never be moved.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
+        <P className="text-sm text-muted-foreground">TransferItem</P>
+        <PropsTable props={itemProps} />
       </Stack>
     </DocPage>
   )

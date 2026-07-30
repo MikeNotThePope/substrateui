@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { TreeDemo } from "./tree-demo"
 
@@ -21,13 +22,11 @@ export default function TreePage() {
       title="Tree"
       description="A hierarchical tree view for file explorers, nested navigation, and category pickers. Expand/collapse, single selection, icons, and full keyboard support following the ARIA tree pattern. Expanded and selected state can be controlled or uncontrolled."
     >
-      <Stack gap="md">
-        <H3>Example</H3>
-        <P className="text-sm text-muted-foreground">
-          Click to select and expand; focus the tree and use the arrow keys to navigate.
-        </P>
-        <ComponentPreview
-          code={`import { Tree, type TreeNode } from "@mikenotthepope/substrateui"
+      <P className="text-sm text-muted-foreground">
+        Click to select and expand; focus the tree and use the arrow keys to navigate.
+      </P>
+      <ComponentPreview
+        code={`import { Tree, type TreeNode } from "@mikenotthepope/substrateui"
 import { Folder, FileCode } from "lucide-react"
 
 const files: TreeNode[] = [
@@ -49,10 +48,11 @@ const files: TreeNode[] = [
   selectedId={selected}
   onSelect={setSelected}
 />`}
-        >
-          <TreeDemo />
-        </ComponentPreview>
-      </Stack>
+      >
+        <TreeDemo />
+      </ComponentPreview>
+
+      <ImportLine names={["Tree"]} />
 
       <Stack gap="md">
         <H3>Keyboard</H3>
@@ -66,11 +66,6 @@ const files: TreeNode[] = [
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           The tree implements the WAI-ARIA tree pattern: <Code>role=&quot;tree&quot;</Code>{" "}
@@ -79,6 +74,11 @@ const files: TreeNode[] = [
           <Code>tabindex</Code> keeps a single stop in the tab order, and full
           arrow-key navigation is provided.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
       </Stack>
     </DocPage>
   )

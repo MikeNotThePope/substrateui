@@ -4,6 +4,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const items: DescriptionsItem[] = [
@@ -61,6 +62,8 @@ export default function DescriptionsPage() {
           </div>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine names={["Descriptions"]} />
 
       <Stack gap="md">
         <H3>Plain</H3>
@@ -126,13 +129,6 @@ export default function DescriptionsPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-        <P className="text-sm text-muted-foreground">DescriptionsItem</P>
-        <PropsTable props={itemProps} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           Descriptions renders a semantic <Code>&lt;dl&gt;</Code> with{" "}
@@ -140,6 +136,13 @@ export default function DescriptionsPage() {
           announces each value with its label. It&apos;s read-only by design — put
           interactive controls in the <Code>extra</Code> slot or alongside the grid.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
+        <P className="text-sm text-muted-foreground">DescriptionsItem</P>
+        <PropsTable props={itemProps} />
       </Stack>
     </DocPage>
   )

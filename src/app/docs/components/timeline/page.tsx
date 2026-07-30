@@ -11,6 +11,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const props: PropDef[] = [
@@ -46,10 +48,8 @@ export default function TimelinePage() {
       title="Timeline"
       description="Displays a series of events in chronological order — activity feeds, changelogs, order tracking, and audit logs. Compose items from time, title, and body slots, with an optional icon marker."
     >
-      <Stack gap="md">
-        <H3>Default</H3>
-        <ComponentPreview
-          code={`<Timeline>
+      <ComponentPreview
+        code={`<Timeline>
   <TimelineItem>
     <TimelineDot />
     <TimelineTime>March 2026</TimelineTime>
@@ -63,22 +63,50 @@ export default function TimelinePage() {
     <TimelineBody>Swapped the primitive layer from Radix to Base UI 1.6.</TimelineBody>
   </TimelineItem>
 </Timeline>`}
-        >
-          <Timeline>
-            <TimelineItem>
-              <TimelineDot />
-              <TimelineTime>March 2026</TimelineTime>
-              <TimelineTitle>Shipped v1.3</TimelineTitle>
-              <TimelineBody>Blocks, the init CLI, and the theme generator landed.</TimelineBody>
-            </TimelineItem>
-            <TimelineItem>
-              <TimelineDot />
-              <TimelineTime>February 2026</TimelineTime>
-              <TimelineTitle>Migrated to Base UI</TimelineTitle>
-              <TimelineBody>Swapped the primitive layer from Radix to Base UI 1.6.</TimelineBody>
-            </TimelineItem>
-          </Timeline>
-        </ComponentPreview>
+      >
+        <Timeline>
+          <TimelineItem>
+            <TimelineDot />
+            <TimelineTime>March 2026</TimelineTime>
+            <TimelineTitle>Shipped v1.3</TimelineTitle>
+            <TimelineBody>Blocks, the init CLI, and the theme generator landed.</TimelineBody>
+          </TimelineItem>
+          <TimelineItem>
+            <TimelineDot />
+            <TimelineTime>February 2026</TimelineTime>
+            <TimelineTitle>Migrated to Base UI</TimelineTitle>
+            <TimelineBody>Swapped the primitive layer from Radix to Base UI 1.6.</TimelineBody>
+          </TimelineItem>
+        </Timeline>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Timeline",
+          "TimelineItem",
+          "TimelineDot",
+          "TimelineTime",
+          "TimelineTitle",
+          "TimelineBody",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Timeline"
+          nodes={[
+            {
+              name: "TimelineItem",
+              children: [
+                { name: "TimelineDot" },
+                { name: "TimelineTime" },
+                { name: "TimelineTitle" },
+                { name: "TimelineBody" },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       <Stack gap="md">
@@ -113,11 +141,6 @@ export default function TimelinePage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           The timeline renders as an ordered list (<code>&lt;ol&gt;</code>/<code>&lt;li&gt;</code>),
@@ -125,6 +148,11 @@ export default function TimelinePage() {
           decorative and hidden from screen readers; keep the meaning in the
           title and body text.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
       </Stack>
     </DocPage>
   )

@@ -4,6 +4,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const kbdProps: PropDef[] = [
@@ -49,6 +50,8 @@ export default function KbdPage() {
           </Cluster>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine names={["Kbd"]} />
 
       <Stack gap="md">
         <H3>Modifier Combinations</H3>

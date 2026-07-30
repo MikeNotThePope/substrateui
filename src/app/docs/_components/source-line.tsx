@@ -41,6 +41,25 @@ const REPO =
   "https://github.com/MikeNotThePope/substrateui"
 
 /**
+ * Which tree the paths resolve against.
+ *
+ * Not `main`. A page describes the code it was built from, and `main` moves on
+ * without it — a link to a line that has since been renamed away sends the
+ * reader somewhere the page never described. Vercel exposes the built commit as
+ * `NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA`, which is frozen into the bundle at
+ * `next build` and so stays pinned to exactly the tree the page documents.
+ *
+ * `||` rather than `??`: an env var that is declared but empty is unset here,
+ * and Vercel hands over `""` when the system variables are switched off.
+ * Failing to `main` in that case is the old behaviour, which is wrong-ish but
+ * never broken.
+ */
+const REF =
+  process.env.NEXT_PUBLIC_SOURCE_REF ||
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ||
+  "main"
+
+/**
  * Routes whose source is not `src/components/ui/<slug>.tsx`. Every
  * /docs/components/* page derives from its slug, so only the rest are listed.
  *
@@ -55,6 +74,9 @@ const SOURCES: Record<string, string[]> = {
   "/docs/accessibility/contrast": ["scripts/audit-contrast.ts"],
   "/docs/accessibility/direction": ["src/components/ui/direction.tsx"],
   "/docs/blocks": ["src/components/blocks/"],
+  // An organism, so it sits a level above src/components/ui and the slug
+  // derivation would miss it.
+  "/docs/components/stat-card": ["src/components/stat-card.tsx"],
   "/docs/foundations/ai-prompt": ["src/app/docs/foundations/ai-prompt/prompt.ts"],
   "/docs/foundations/cli": ["bin/substrateui.mjs"],
   "/docs/foundations/theme-generator": ["src/components/ui/theme.tsx"],
@@ -80,17 +102,24 @@ const SOURCES: Record<string, string[]> = {
 const COMPONENTS_PREFIX = "/docs/components/"
 
 export function sourcesFor(pathname: string): string[] {
-  if (pathname.startsWith(COMPONENTS_PREFIX)) {
-    const slug = pathname.slice(COMPONENTS_PREFIX.length).replace(/\/$/, "")
+  const route = pathname.replace(/\/$/, "")
+
+  // The map wins over the derivation. Most /docs/components/* pages document a
+  // file in src/components/ui, but not all — StatCard is an organism a level up
+  // — and a derived path that doesn't exist renders as a confident link to a 404.
+  if (SOURCES[route]) return SOURCES[route]
+
+  if (route.startsWith(COMPONENTS_PREFIX)) {
+    const slug = route.slice(COMPONENTS_PREFIX.length)
     // Nested routes under a component page have no source file of their own.
     if (slug && !slug.includes("/")) return [`src/components/ui/${slug}.tsx`]
   }
-  return SOURCES[pathname.replace(/\/$/, "")] ?? []
+  return []
 }
 
-function hrefFor(path: string): string {
+export function hrefFor(path: string): string {
   const isDir = path.endsWith("/")
-  return `${REPO}/${isDir ? "tree" : "blob"}/main/${isDir ? path.slice(0, -1) : path}`
+  return `${REPO}/${isDir ? "tree" : "blob"}/${REF}/${isDir ? path.slice(0, -1) : path}`
 }
 
 export function SourceLine() {

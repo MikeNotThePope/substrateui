@@ -3,6 +3,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const props: PropDef[] = [
@@ -43,6 +44,8 @@ export default function StepperPage() {
         </ComponentPreview>
       </Stack>
 
+      <ImportLine names={["Stepper"]} />
+
       <Stack gap="md">
         <H3>Vertical</H3>
         <ComponentPreview
@@ -55,11 +58,6 @@ export default function StepperPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           The stepper is an ordered list; the active step carries{" "}
@@ -68,6 +66,11 @@ export default function StepperPage() {
           <code>upcoming</code> for styling hooks. State is conveyed by the check
           glyph and text weight, not color alone.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
       </Stack>
     </DocPage>
   )

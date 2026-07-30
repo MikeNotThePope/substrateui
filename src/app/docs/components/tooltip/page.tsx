@@ -6,6 +6,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const tooltipProps: PropDef[] = [
@@ -36,11 +38,8 @@ export default function TooltipPage() {
       title="Tooltip"
       description="A small popup that appears on hover to provide additional context. Must be wrapped in a TooltipProvider."
     >
-      {/* Basic Tooltip */}
-      <Stack gap="md">
-        <H3>Basic Tooltip</H3>
-        <ComponentPreview
-          code={`<TooltipProvider>
+      <ComponentPreview
+        code={`<TooltipProvider>
   <Tooltip>
     <TooltipTrigger render={<Button variant="outline" />}>Hover me</TooltipTrigger>
     <TooltipContent>
@@ -48,16 +47,40 @@ export default function TooltipPage() {
     </TooltipContent>
   </Tooltip>
 </TooltipProvider>`}
-        >
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger render={<Button variant="outline" />}>Hover me</TooltipTrigger>
-              <TooltipContent>
-                <p>This is a tooltip</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </ComponentPreview>
+      >
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger render={<Button variant="outline" />}>Hover me</TooltipTrigger>
+            <TooltipContent>
+              <p>This is a tooltip</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Tooltip",
+          "TooltipContent",
+          "TooltipProvider",
+          "TooltipTrigger",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="TooltipProvider"
+          nodes={[
+            {
+              name: "Tooltip",
+              children: [
+                { name: "TooltipTrigger" },
+                { name: "TooltipContent" },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* API Reference */}

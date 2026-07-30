@@ -4,6 +4,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const radioGroupProps: PropDef[] = [
@@ -39,11 +41,8 @@ export default function RadioGroupPage() {
       title="Radio Group"
       description="A set of mutually exclusive options. Built on Base UI primitives with keyboard navigation and focus management."
     >
-      {/* Basic */}
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <ComponentPreview
-          code={`<RadioGroup defaultValue="medium">
+      <ComponentPreview
+        code={`<RadioGroup defaultValue="medium">
   <div className="flex items-center gap-2">
     <RadioGroupItem value="small" id="small" />
     <Label htmlFor="small">Small</Label>
@@ -57,22 +56,38 @@ export default function RadioGroupPage() {
     <Label htmlFor="large">Large</Label>
   </div>
 </RadioGroup>`}
-        >
-          <RadioGroup defaultValue="medium">
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="small" id="small" />
-              <Label htmlFor="small">Small</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="medium" id="medium" />
-              <Label htmlFor="medium">Medium</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="large" id="large" />
-              <Label htmlFor="large">Large</Label>
-            </div>
-          </RadioGroup>
-        </ComponentPreview>
+      >
+        <RadioGroup defaultValue="medium">
+          <div className="flex items-center gap-2">
+            <RadioGroupItem value="small" id="small" />
+            <Label htmlFor="small">Small</Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <RadioGroupItem value="medium" id="medium" />
+            <Label htmlFor="medium">Medium</Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <RadioGroupItem value="large" id="large" />
+            <Label htmlFor="large">Large</Label>
+          </div>
+        </RadioGroup>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "RadioGroup",
+          "RadioGroupItem",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="RadioGroup"
+          nodes={[
+            { name: "RadioGroupItem" },
+          ]}
+        />
       </Stack>
 
       {/* API Reference */}

@@ -6,6 +6,8 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const drawerProps: PropDef[] = [
@@ -69,10 +71,37 @@ export default function DrawerPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
+      <ImportLine
+        names={[
+          "Drawer",
+          "DrawerContent",
+          "DrawerDescription",
+          "DrawerHeader",
+          "DrawerTitle",
+          "DrawerTrigger",
+        ]}
+      />
+
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={drawerProps} />
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Drawer"
+          nodes={[
+            { name: "DrawerTrigger" },
+            {
+              name: "DrawerContent",
+              children: [
+                {
+                  name: "DrawerHeader",
+                  children: [
+                    { name: "DrawerTitle" },
+                    { name: "DrawerDescription" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
       </Stack>
 
       {/* Accessibility */}
@@ -90,6 +119,12 @@ export default function DrawerPage() {
             Base UI so the accessible name is still announced.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={drawerProps} />
       </Stack>
     </DocPage>
   )

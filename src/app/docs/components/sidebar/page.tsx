@@ -1,7 +1,9 @@
 import { Stack } from "@/components/ui/stack"
-import { H3, Code, Muted } from "@/components/ui/typography"
+import { H3, P, Code, Muted } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const providerProps: PropDef[] = [
@@ -136,6 +138,68 @@ export default function SidebarPage() {
         </Muted>
       </Stack>
 
+      <ImportLine
+        names={[
+          "SidebarProvider",
+          "Sidebar",
+          "SidebarHeader",
+          "SidebarContent",
+          "SidebarFooter",
+          "SidebarGroup",
+          "SidebarGroupLabel",
+          "SidebarMenu",
+          "SidebarMenuItem",
+          "SidebarMenuButton",
+          "SidebarTrigger",
+          "SidebarInset",
+          "useSidebar",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="SidebarProvider"
+          nodes={[
+            {
+              name: "Sidebar",
+              children: [
+                { name: "SidebarHeader" },
+                {
+                  name: "SidebarContent",
+                  children: [
+                    {
+                      name: "SidebarGroup",
+                      children: [
+                        { name: "SidebarGroupLabel" },
+                        {
+                          name: "SidebarMenu",
+                          children: [
+                            {
+                              name: "SidebarMenuItem",
+                              children: [
+                                { name: "SidebarMenuButton" },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                { name: "SidebarFooter" },
+              ],
+            },
+            {
+              name: "SidebarInset",
+              children: [
+                { name: "SidebarTrigger" },
+              ],
+            },
+          ]}
+        />
+      </Stack>
+
       <Stack gap="md">
         <H3>When to use this vs. App Shell</H3>
         <Muted>
@@ -147,12 +211,85 @@ export default function SidebarPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>SidebarProvider Props</H3>
-        <PropsTable props={providerProps} />
+        <H3>Labels</H3>
+        <P>
+          The trigger is an icon button, and the mobile sheet needs a title and
+          description whether or not the design shows them. Override one instance
+          with the <Code>labels</Code> prop, or every instance at once through{" "}
+          <Code>LabelsProvider</Code>&apos;s <Code>sidebar</Code> key — the
+          provider is how you translate the set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+            { name: "toggleSidebar", type: "string", default: '"Toggle Sidebar"', description: "Accessible name for SidebarTrigger, whose visible content is an icon." },
+            { name: "mobileTitle", type: "string", default: '"Sidebar"', description: "Title of the mobile sheet. Required by the dialog underneath, and visually hidden." },
+            { name: "mobileDescription", type: "string", default: '"Displays the mobile sidebar."', description: "Description of the mobile sheet, also visually hidden." },
+          ]}
+        />
       </Stack>
 
       <Stack gap="md">
-        <H3>Sidebar Props</H3>
+        <H3>Direction</H3>
+        <Stack gap="sm">
+          <P>
+            <Code>side=&quot;left&quot;</Code> and{" "}
+            <Code>side=&quot;right&quot;</Code> are physical, not logical: a
+            left-side sidebar stays on the left in an RTL locale. That is
+            deliberate — some products anchor navigation to a physical edge — but it
+            means an RTL layout usually wants <Code>side=&quot;right&quot;</Code>{" "}
+            so the nav sits at the start of the line.
+          </P>
+          <P>
+            <Code>SidebarTrigger</Code> draws a <Code>PanelLeft</Code> glyph, which
+            the{" "}
+            <a
+              href="/docs/accessibility/direction"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              RTL icon audit
+            </a>{" "}
+            classifies as conditional for exactly this reason. Mirror it with{" "}
+            <Code>rtl:-scale-x-100</Code> when the sidebar follows reading
+            direction; leave it alone when it is pinned to a physical side.
+          </P>
+        </Stack>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            <Code>⌘/Ctrl+B</Code> toggles the sidebar from anywhere in the page.
+            That is a global binding: if your app already uses it, override or
+            remove it rather than shipping two handlers on one chord.
+          </P>
+          <P>
+            Below the mobile breakpoint the sidebar becomes a sheet, which traps
+            focus and closes on Escape. Above it, the sidebar is ordinary page
+            content and does not trap focus — a collapsed-to-icon sidebar still has
+            its links in the tab order.
+          </P>
+          <P>
+            Wrap the nav items in a <Code>nav</Code> with an{" "}
+            <Code>aria-label</Code>, and mark the current page with{" "}
+            <Code>aria-current=&quot;page&quot;</Code>.{" "}
+            <Code>SidebarMenuButton</Code> has an <Code>isActive</Code> prop, but
+            that is styling — it sets a data attribute and no ARIA.
+          </P>
+        </Stack>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <P>
+          <Code>SidebarProvider</Code> owns the open state; everything else reads
+          it from context. The remaining parts — groups, menus, badges, skeletons,
+          the rail — take plain element props and are best read from the anatomy
+          above.
+        </P>
+        <PropsTable props={providerProps} />
+
+        <H3>Sidebar</H3>
         <PropsTable props={sidebarProps} />
       </Stack>
     </DocPage>
