@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
-import { act, renderHook } from "@testing-library/react"
+import { act, render, renderHook, screen } from "@testing-library/react"
 
 import { useDisclosure } from "@/hooks/use-disclosure"
 import { useToggle } from "@/hooks/use-toggle"
@@ -118,6 +118,81 @@ describe("useLocalStorage", () => {
     act(() => result.current[1]("next"))
     expect(result.current[0]).toBe("next")
     expect(JSON.parse(window.localStorage.getItem("k") as string)).toBe("next")
+  })
+
+  it("accepts an updater function", () => {
+    const { result } = renderHook(() => useLocalStorage("n", 1))
+    act(() => result.current[1]((prev) => prev + 1))
+    expect(result.current[0]).toBe(2)
+    expect(JSON.parse(window.localStorage.getItem("n") as string)).toBe(2)
+  })
+
+  it("hydrates from what is already stored instead of overwriting it", () => {
+    window.localStorage.setItem("k", JSON.stringify("stored"))
+    const { result } = renderHook(() => useLocalStorage("k", "default"))
+    expect(result.current[0]).toBe("stored")
+    expect(JSON.parse(window.localStorage.getItem("k") as string)).toBe("stored")
+  })
+
+  /**
+   * Two *separate components* on one key — the documented cross-instance sync,
+   * and the shape that broke. Both hooks inside a single renderHook callback
+   * would not catch it: the warning is "update a component while rendering a
+   * *different* component", so one component holding both instances stays
+   * silent however wrong the hook is.
+   */
+  function Probe<T>({ id, next }: { id: string; next: T }) {
+    const [value, setValue] = useLocalStorage<T>("shared", null as T)
+    return (
+      <button data-testid={id} onClick={() => setValue(next)}>
+        {JSON.stringify(value)}
+      </button>
+    )
+  }
+
+  it("moves every instance on the key without setting state during render", () => {
+    // The write and its storage event used to run inside the state updater,
+    // which React may call during the render phase — so instance A's update set
+    // state on instance B mid-render.
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {})
+    try {
+      render(
+        <>
+          <Probe id="one" next="b" />
+          <Probe id="two" next="b" />
+        </>
+      )
+
+      act(() => screen.getByTestId("one").click())
+
+      expect(screen.getByTestId("one")).toHaveTextContent('"b"')
+      expect(screen.getByTestId("two")).toHaveTextContent('"b"')
+      expect(spy).not.toHaveBeenCalled()
+    } finally {
+      spy.mockRestore()
+    }
+  })
+
+  it("settles instead of bouncing when the value is an object", () => {
+    // JSON.parse returns a fresh object each time, so Object.is can never end
+    // an echo between two instances — only the stored-value check can.
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {})
+    try {
+      render(
+        <>
+          <Probe id="one" next={{ n: 1 }} />
+          <Probe id="two" next={{ n: 1 }} />
+        </>
+      )
+
+      act(() => screen.getByTestId("one").click())
+
+      expect(screen.getByTestId("one")).toHaveTextContent('{"n":1}')
+      expect(screen.getByTestId("two")).toHaveTextContent('{"n":1}')
+      expect(spy).not.toHaveBeenCalled()
+    } finally {
+      spy.mockRestore()
+    }
   })
 })
 

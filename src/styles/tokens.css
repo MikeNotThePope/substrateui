@@ -5,8 +5,8 @@
  * Import this file into your Tailwind CSS v4 pipeline:
  *   @import "tailwindcss";
  *   @import "tw-animate-css";
- *   @import "substrateui/styles.css";
- *   @source "../node_modules/substrateui";
+ *   @import "@mikenotthepope/substrateui/styles.css";
+ *   @source "../node_modules/@mikenotthepope/substrateui";
  *
  * Architecture:
  *   1. CSS variables in :root / .dark (the token values)
