@@ -25,21 +25,21 @@ import pkg from "../../package.json"
 
 const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
 
-// ─── Ink density bar ──────────────────────────────────────────────────
-// A press proof prints tint steps so the operator can check ink density.
+// ─── Tint ramp ────────────────────────────────────────────────────────
+// Each token stepped down against the background at 25/50/75/100%.
 // Mixed in oklab, NOT oklch: oklch interpolates hue on the shortest arc,
-// so a yellow ink tinted toward a cool background swings through green on
-// the way. A tint is less ink on the same paper — no hue rotation.
+// so yellow stepped toward a cool background swings through green on the
+// way. A tint is the same colour at lower strength — no hue rotation.
 
 const TINTS = [25, 50, 75, 100] as const
 
-const inks = [
-  { token: "--primary", label: "Primary ink" },
-  { token: "--secondary-fill", label: "Secondary ink" },
+const tintRamps = [
+  { token: "--primary", label: "Primary" },
+  { token: "--secondary-fill", label: "Secondary" },
   { token: "--foreground", label: "Neutral" },
 ] as const
 
-function InkBar({ token, label }: { token: string; label: string }) {
+function TintRamp({ token, label }: { token: string; label: string }) {
   return (
     <Stack gap="sm">
       <div aria-hidden className="flex h-10 overflow-hidden rounded-md border-2">
@@ -135,33 +135,33 @@ export default function HomePage() {
         </Center>
       </section>
 
-      {/* ── Ink density ───────────────────────────────────────── */}
+      {/* ── Tint ramps ────────────────────────────────────────── */}
       <section className="border-b-2 bg-surface-page py-12">
         <Center max="2xl" className="px-4">
           <Stack gap="lg">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <Caps className="text-muted-foreground">Ink density</Caps>
+              <Caps className="text-muted-foreground">Tint ramps</Caps>
               <Mono className="text-xs text-muted-foreground">
                 tints mixed in oklab · 25 / 50 / 75 / 100%
               </Mono>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {inks.map((ink) => (
-                <InkBar key={ink.token} {...ink} />
+              {tintRamps.map((ramp) => (
+                <TintRamp key={ramp.token} {...ramp} />
               ))}
             </div>
           </Stack>
         </Center>
       </section>
 
-      {/* ── Proof: live UI beside the map that produced it ────── */}
+      {/* ── Live UI beside the map that produced it ───────────── */}
       <section className="border-b-2 py-20">
         <Center max="2xl" className="px-4">
           <Stack gap="xl">
             <Stack gap="sm">
-              <Caps className="text-muted-foreground">Proof</Caps>
+              <Caps className="text-muted-foreground">Live</Caps>
               <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
-                Same markup. Current ink.
+                The same markup in every theme.
               </H2>
               <P className="max-w-2xl text-muted-foreground">
                 Nothing on the left knows which theme it is in. The map on the right is the only
@@ -213,7 +213,7 @@ const proof = createTheme({
   dark:  { primary: 'oklch(0.750 0.115 233)' },
 })
 
-// Wrap once — every component below re-inks.
+// Wrap once — every component below repaints.
 <ThemeRegistry themes={[proof]} defaultTheme="proof">
   <App />
 </ThemeRegistry>`}</code>
@@ -261,7 +261,7 @@ const proof = createTheme({
             </div>
 
             <Stack gap="md">
-              <H3 className="font-display text-lg font-bold">Bring your own ink</H3>
+              <H3 className="font-display text-lg font-bold">Bring your own theme</H3>
               <P className="max-w-2xl text-muted-foreground">
                 Five themes ship, but the set is open. A theme is a token map — no component ever
                 learns its name.
