@@ -42,15 +42,15 @@ Plum primary with amber secondary (a colorblind-safe pair) over warm gray neutra
 
 A palette derived from lava at the moment of eruption: magma primary (the hue rotates yellow→red as it deepens, like cooling lava), sulfur-yellow secondary, and basalt neutrals. Status colors are geologically sourced — olivine green, cherry red, ijen blue. The feel is raw heat under a dark crust: darker, hotter, and more intense than the default theme, without losing legibility.
 
-Lava is also molten in structure, not just color: motion is slower and viscous (300ms with a heavy-tailed ease-out — movement front-loads, then flows to rest), every corner radius swells 1.5x, and hard shadows are tinted deep magma — embers under the crust — instead of gray. This all flows from theme tokens; write ordinary utilities and it happens automatically.`,
+Lava's geometry is the house baseline, same as every other theme — cut corners and a 140ms transition that stops hard. Its one structural tell is the hard shadow, tinted deep magma — embers under the crust — instead of gray. This all flows from theme tokens; write ordinary utilities and it happens automatically.`,
     not: [
-      "A red re-skin of the default theme — lava changes structure (motion, corners, shadows), not just hue",
+      "Soft or floaty — lava is hot, not molten; corners stay cut and motion stops hard, exactly as in the default theme",
       "Alarming — magma is heat, not danger; errors stay cherry red, so never use the primary for destructive actions",
       "Cyberpunk or neon — the palette is geological (magma, sulfur, basalt), never electric or glitchy",
-      "Snappy — motion is deliberately slow and viscous; don't add fast durations to \"fix\" it",
+      "Gray-shadowed — the hard shadow carries a deep magma tint; don't neutralise it",
     ],
     success:
-      "a volcanic landscape rendered as an interface: basalt surfaces, magma accents, sulfur highlights, softened corners, and slow, viscous motion",
+      "a volcanic landscape rendered as an interface: basalt surfaces, magma accents, sulfur highlights, cut corners, and ember-tinted shadows",
   },
 }
 
@@ -98,7 +98,7 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 1. **Chunky borders.** Components wear visible 2px borders (\`--border-width: 2px\`), darker than typical libraries. Don't thin them or fade them out.
 2. **Physical press.** Solid buttons rest on a hard offset shadow, lift toward the light on hover, and sink flush on press. Interactions feel mechanical, not floaty. For custom pressable surfaces use \`shadow-hard-sm\` / \`shadow-hard\` / \`shadow-hard-lg\`.
 3. **OKLCH color.** The entire palette is OKLCH with perceptually even ramps. You never touch raw values — semantic tokens only.
-4. **Soft-but-not-pill radius.** Components use \`rounded-md\`/\`rounded-lg\`. The whole radius scale is themable via \`--radius-factor\` (lava softens every corner 1.5x) — so never hardcode pixel radii. No sharp corners, no pill buttons.
+4. **Cut, not rounded.** Components use \`rounded-md\`/\`rounded-lg\`, but the whole radius scale is themable via \`--radius-factor\` and the baseline is 0.25x — corners read as cut rather than soft. Substrate and tundra retune it. Never hardcode pixel radii, and no pill buttons.
 5. **Light and dark are equal citizens.** Every token pairing passes WCAG AA in both modes. Never hand-tune a color for one mode.
 6. **Status is never color-only.** Success/warning/error/info always pair color with an icon — Alert does this for you; follow the same rule in custom UI.
 

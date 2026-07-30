@@ -204,11 +204,14 @@
   /* ── SubstrateUI feel tokens (themable structure) ──
      Motion re-times every component transition that doesn't set an
      explicit duration or easing utility (see BASE STYLES). Radius
-     factor multiplies the stock Tailwind radius scale. Defaults match
-     Tailwind's own values, so the default theme is unchanged. */
-  --motion-duration: 150ms;
-  --motion-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --radius-factor: 1;
+     factor multiplies the stock Tailwind radius scale. These are the
+     house baseline every theme starts from: a cut corner and a short
+     transition that stops hard rather than floating to rest. Themes
+     may retune them — substrate and tundra do — but a theme that says
+     nothing gets this, and plum/lava deliberately say nothing. */
+  --motion-duration: 140ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --radius-factor: 0.25;
 }
 
 
@@ -441,13 +444,8 @@
   /* ── Hard shadows: cooled crust with an ember tint ── */
   --hard-shadow-color: var(--raw-magma-900);
 
-  /* ── Molten feel (shared across lava light/dark) ──
-     Viscous motion: slower, with a heavy-tailed ease-out — movement
-     front-loads (presses still feel responsive) then flows to rest.
-     Softer corners: the radius scale swells 1.5x, like rock gone soft. */
-  --motion-duration: 300ms;
-  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --radius-factor: 1.5;
+  /* Lava sets no feel tokens: motion and radius come from the house
+     baseline on :root. The heat is in the palette, not the geometry. */
 
   /* ── Status ── */
   --status-success: var(--raw-olivine);
