@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const comboboxProps: PropDef[] = [
@@ -125,11 +126,8 @@ export default function ComboboxPage() {
       title="Combobox"
       description="A text input bound to a listbox: type to filter, select to commit. Use it when the option list is long enough that a plain select becomes a scroll."
     >
-      {/* Basic */}
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <ComponentPreview
-          code={`const frameworks = [
+      <ComponentPreview
+        code={`const frameworks = [
   { value: "react", label: "React" },
   { value: "vue", label: "Vue" },
   { value: "svelte", label: "Svelte" },
@@ -144,18 +142,19 @@ export default function ComboboxPage() {
     noResults: "No framework found.",
   }}
 />`}
-        >
-          <Combobox
-            options={frameworks}
-            value={value}
-            onValueChange={setValue}
-            labels={{
-              placeholder: "Select a framework...",
-              noResults: "No framework found.",
-            }}
-          />
-        </ComponentPreview>
-      </Stack>
+      >
+        <Combobox
+          options={frameworks}
+          value={value}
+          onValueChange={setValue}
+          labels={{
+            placeholder: "Select a framework...",
+            noResults: "No framework found.",
+          }}
+        />
+      </ComponentPreview>
+
+      <ImportLine names={["Combobox"]} />
 
       {/* Async */}
       <Stack gap="md">
@@ -253,10 +252,37 @@ export default function ComboboxPage() {
         </P>
       </Stack>
 
-      {/* API Reference */}
+      {/* Labels */}
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={comboboxProps} />
+        <H3>Labels</H3>
+        <P>
+          Every string the component renders itself comes from{" "}
+          <Code>ComboboxLabels</Code>, so nothing user-visible is hard-coded
+          English. Override one key or all eight; anything you leave out keeps its
+          default. <Code>remove</Code> and <Code>more</Code> take the item label
+          and the overflow count, so they are functions rather than strings.
+        </P>
+        <ComponentPreview
+          defaultOpen
+          code={`<Combobox
+  options={frameworks}
+  labels={{
+    placeholder: "Framework auswählen...",
+    searchPlaceholder: "Suchen...",
+    noResults: "Kein Framework gefunden.",
+    loading: "Wird geladen...",
+    clear: "Auswahl löschen",
+    create: (query) => \`"\${query}" hinzufügen\`,
+    more: (count) => \`+\${count} weitere\`,
+    remove: (label) => \`\${label} entfernen\`,
+  }}
+/>`}
+        >
+          <P className="text-sm text-muted-foreground">
+            Set them per instance, or once for the whole app through{" "}
+            <Code>LabelsProvider</Code>.
+          </P>
+        </ComponentPreview>
       </Stack>
 
       {/* Accessibility */}
@@ -282,6 +308,26 @@ export default function ComboboxPage() {
             <Code>labels.clear</Code>.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <P>
+          The props below are ours. Combobox wraps Base UI&apos;s Combobox, so
+          anything not listed here — the open-state props, positioning, and the
+          rest of the primitive&apos;s surface — is documented in the{" "}
+          <a
+            href="https://base-ui.com/react/components/combobox"
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-from-font hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            Base UI Combobox reference
+          </a>
+          .
+        </P>
+        <PropsTable props={comboboxProps} />
       </Stack>
     </DocPage>
   )

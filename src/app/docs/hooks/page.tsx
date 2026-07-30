@@ -41,6 +41,7 @@ export default function HooksPage() {
       <Stack gap="md">
         <H3>Installation</H3>
         <ComponentPreview
+          defaultOpen
           code={`import { useDisclosure, useClipboard, useLocalStorage } from "@mikenotthepope/substrateui/hooks"`}
         >
           <P className="text-sm text-muted-foreground">

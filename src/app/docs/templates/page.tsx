@@ -22,6 +22,7 @@ export default function TemplatesPage() {
           Templates ship in their own entry so they tree-shake independently:
         </P>
         <ComponentPreview
+          defaultOpen
           code={`import { DashboardTemplate, PricingTemplate } from "@mikenotthepope/substrateui/templates"`}
         >
           <P className="text-sm text-muted-foreground">

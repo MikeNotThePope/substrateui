@@ -200,41 +200,55 @@ function Combobox({
     }
   }
 
-  const displayLabel = () => {
-    if (isMultiple && selectedValues.length > 0) {
-      const shown =
-        limitTags != null && limitTags >= 0
-          ? selectedValues.slice(0, limitTags)
-          : selectedValues
-      const hidden = selectedValues.length - shown.length
+  const labelFor = (v: string) => knownOptions.find((o) => o.value === v)?.label ?? v
 
-      return (
-        <div className="flex flex-wrap gap-1">
-          {shown.map((v) => {
-            const opt = knownOptions.find((o) => o.value === v)
-            const text = opt?.label ?? v
-            return (
-              <Badge key={v} variant="secondary" className="text-xs px-1.5 py-0">
-                {text}
-                <button
-                  type="button"
-                  aria-label={labels.remove(text)}
-                  className="ms-1 rounded-full hover:bg-muted"
-                  onClick={(e) => handleRemove(v, e)}
-                >
-                  <X className="size-3" />
-                </button>
-              </Badge>
-            )
-          })}
-          {hidden > 0 && (
-            <Badge variant="outline" className="text-xs px-1.5 py-0">
-              {labels.more(hidden)}
-            </Badge>
-          )}
-        </div>
-      )
-    }
+  // Chips carry their own remove buttons, so they cannot render inside the
+  // trigger — a <button> may not contain another <button>. Invalid nesting
+  // throws a hydration error and leaves the remove control unreachable by
+  // keyboard, because the trigger swallows the interaction. They are rendered
+  // as a sibling laid over the trigger instead (see `chipsOverlay` below).
+  const showChips = isMultiple && selectedValues.length > 0
+
+  const shownValues = showChips
+    ? limitTags != null && limitTags >= 0
+      ? selectedValues.slice(0, limitTags)
+      : selectedValues
+    : []
+  const hiddenCount = selectedValues.length - shownValues.length
+
+  const chipsOverlay = showChips ? (
+    // Same grid cell as the trigger, so wrapping chips still drive its height
+    // the way they did when they were inside it. Pointer events pass through
+    // to the trigger everywhere except the remove buttons themselves.
+    <div
+      data-slot="combobox-chips"
+      className="pointer-events-none z-10 flex min-h-10 flex-wrap items-center gap-1 px-3 py-2 [grid-area:1/1]"
+    >
+      {shownValues.map((v) => (
+        <Badge key={v} variant="secondary" className="text-xs px-1.5 py-0">
+          {labelFor(v)}
+          <button
+            type="button"
+            aria-label={labels.remove(labelFor(v))}
+            className="pointer-events-auto ms-1 rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            onClick={(e) => handleRemove(v, e)}
+          >
+            <X className="size-3" />
+          </button>
+        </Badge>
+      ))}
+      {hiddenCount > 0 && (
+        <Badge variant="outline" className="text-xs px-1.5 py-0">
+          {labels.more(hiddenCount)}
+        </Badge>
+      )}
+    </div>
+  ) : null
+
+  const displayLabel = () => {
+    // With chips overlaid, the trigger keeps only its placeholder slot so it
+    // still reserves the right height; the chips sit on top of it.
+    if (showChips) return <span className="sr-only">{selectedValues.map(labelFor).join(", ")}</span>
 
     if (!isMultiple && props.value) {
       const opt = knownOptions.find((o) => o.value === props.value)
@@ -274,11 +288,18 @@ function Combobox({
         buttonVariants({ variant: "outline" }),
         "border-2 rounded-md h-auto min-h-10 px-3 w-full justify-between font-normal",
         clearable && hasSelection && "pe-16",
+        // Chips overlay this cell; the trigger stretches to whatever height
+        // they need rather than sizing itself.
+        showChips && "[grid-area:1/1] items-start",
         className
       )}
     >
       {displayLabel()}
-      <ChevronsUpDown className="ms-2 size-4 shrink-0 opacity-50" />
+      {/* ms-auto, not justify-between: with chips the label slot is sr-only and
+          therefore out of flow, leaving the chevron as the only in-flow child.
+          justify-between would park it at the start, behind the chips. The gap
+          comes from buttonVariants' own gap-2. */}
+      <ChevronsUpDown className="ms-auto size-4 shrink-0 self-center opacity-50" />
     </ComboboxPrimitive.Trigger>
   )
 
@@ -299,16 +320,20 @@ function Combobox({
         a?.value === b?.value
       }
     >
-      {clearable ? (
-        <div data-slot="combobox-field" className="relative w-full">
+      {clearable || showChips ? (
+        <div
+          data-slot="combobox-field"
+          className={cn("relative w-full", showChips && "grid")}
+        >
           {trigger}
-          {hasSelection && !disabled && (
+          {chipsOverlay}
+          {clearable && hasSelection && !disabled && (
             <button
               type="button"
               data-slot="combobox-clear"
               aria-label={labels.clear}
               onClick={() => emit([])}
-              className="absolute end-9 top-1/2 -translate-y-1/2 rounded-sm p-1 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="absolute end-9 top-1/2 z-20 -translate-y-1/2 rounded-sm p-1 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <X className="size-4" />
             </button>
