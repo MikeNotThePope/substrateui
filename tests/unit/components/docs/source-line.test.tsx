@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { existsSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
 
-import { sourcesFor } from '@/app/docs/_components/source-line'
+import { sourcesFor, hrefFor } from '@/app/docs/_components/source-line'
 
 /**
  * The source line builds a GitHub URL out of a repo-relative path, and nothing
@@ -72,5 +72,47 @@ describe('source line', () => {
 
   it('ignores a trailing slash on the route', () => {
     expect(sourcesFor('/docs/components/kbd/')).toEqual(sourcesFor('/docs/components/kbd'))
+  })
+})
+
+describe('source line — which tree it links into', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs()
+    vi.resetModules()
+  })
+
+  /** The ref is read once at module load, so each case needs a fresh import. */
+  async function freshHrefFor() {
+    vi.resetModules()
+    return (await import('@/app/docs/_components/source-line')).hrefFor
+  }
+
+  it('links a file as a blob and a directory as a tree', () => {
+    expect(hrefFor('src/components/ui/kbd.tsx')).toContain('/blob/')
+    expect(hrefFor('src/hooks/')).toContain('/tree/')
+    // The trailing slash marks the directory; it must not survive into the URL.
+    expect(hrefFor('src/hooks/')).toMatch(/\/src\/hooks$/)
+  })
+
+  it('pins to the commit the site was built from', async () => {
+    // Vercel freezes this into the client bundle at `next build`, so the link
+    // describes the tree the page was generated from rather than whatever main
+    // has become since.
+    vi.stubEnv('NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA', 'abc1234')
+    const href = (await freshHrefFor())('src/components/ui/kbd.tsx')
+    expect(href).toContain('/blob/abc1234/')
+    expect(href).not.toContain('/blob/main/')
+  })
+
+  it('lets an explicit ref win over the build commit', async () => {
+    vi.stubEnv('NEXT_PUBLIC_SOURCE_REF', 'v1.2.3')
+    vi.stubEnv('NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA', 'abc1234')
+    expect((await freshHrefFor())('src/components/ui/kbd.tsx')).toContain('/blob/v1.2.3/')
+  })
+
+  it('falls back to main when the build commit is unset or empty', async () => {
+    // Vercel hands over "" rather than undefined when system env vars are off.
+    vi.stubEnv('NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA', '')
+    expect((await freshHrefFor())('src/components/ui/kbd.tsx')).toContain('/blob/main/')
   })
 })
