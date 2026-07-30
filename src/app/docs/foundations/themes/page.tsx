@@ -27,7 +27,7 @@ const themeDna = [
     ],
   },
   {
-    name: "Press",
+    name: "Proof",
     keywords: "Industrial, exact, printed, registered, legible.",
     feels: "A proof pulled off the press — process inks on cool stock, trim marks in the margin.",
     not: [
@@ -65,7 +65,7 @@ const themeDna = [
  *  shape put each theme in its own column and only fitted two. */
 const themeDiff = [
   ["Plum", "Plum ink", "Amber", "Warm gray (cream)", "140ms, hard stop", "Cut (0.25x)"],
-  ["Press", "Process cyan", "Process yellow", "Cool proof stock", "140ms, hard stop", "Cut (0.25x)"],
+  ["Proof", "Process cyan", "Process yellow", "Cool proof stock", "140ms, hard stop", "Cut (0.25x)"],
   ["Substrate", "Jade", "Instrument amber", "Graphite", "160ms, settling", "Softened (0.4x)"],
   ["Lava", "Magma — yellow→red as it deepens", "Sulfur yellow", "Basalt", "140ms, hard stop", "Cut (0.25x)"],
   ["Tundra", "Steel blue", "Cold rose", "Frost", "120ms, brittle", "Square (0.15x)"],
@@ -245,7 +245,7 @@ export default function ThemesPage() {
           (re-time every component transition that doesn&apos;t set an
           explicit duration/easing utility) and{" "}
           <Code>--radius-factor</Code> (scales every corner radius from a
-          single multiplier). Use them sparingly. Plum, press and lava all
+          single multiplier). Use them sparingly. Plum, proof and lava all
           sit on the house baseline — a cut corner and a 140ms stop —
           because a theme should be recognisable across a room by its
           color; substrate slows and softens slightly, tundra goes quicker

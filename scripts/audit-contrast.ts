@@ -113,7 +113,7 @@ const THEMES: ThemeSpec[] = [
   // "default" is the role (no attribute set); "plum" is that palette's name.
   { name: "default", lightSelector: ":root", darkSelector: ".dark" },
   { name: "plum", lightSelector: '[data-theme="plum"]', darkSelector: '[data-theme="plum"].dark' },
-  { name: "press", lightSelector: '[data-theme="press"]', darkSelector: '[data-theme="press"].dark' },
+  { name: "proof", lightSelector: '[data-theme="proof"]', darkSelector: '[data-theme="proof"].dark' },
   { name: "substrate", lightSelector: '[data-theme="substrate"]', darkSelector: '[data-theme="substrate"].dark' },
   { name: "lava", lightSelector: '[data-theme="lava"]', darkSelector: '[data-theme="lava"].dark' },
   { name: "tundra", lightSelector: '[data-theme="tundra"]', darkSelector: '[data-theme="tundra"].dark' },

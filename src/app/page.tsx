@@ -25,21 +25,21 @@ import pkg from "../../package.json"
 
 const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
 
-// ─── Ink density bar ──────────────────────────────────────────────────
-// A press proof prints tint steps so the operator can check ink density.
+// ─── Tint ramp ────────────────────────────────────────────────────────
+// Each token stepped down against the background at 25/50/75/100%.
 // Mixed in oklab, NOT oklch: oklch interpolates hue on the shortest arc,
-// so a yellow ink tinted toward a cool background swings through green on
-// the way. A tint is less ink on the same paper — no hue rotation.
+// so yellow stepped toward a cool background swings through green on the
+// way. A tint is the same colour at lower strength — no hue rotation.
 
 const TINTS = [25, 50, 75, 100] as const
 
-const inks = [
-  { token: "--primary", label: "Primary ink" },
-  { token: "--secondary-fill", label: "Secondary ink" },
+const tintRamps = [
+  { token: "--primary", label: "Primary" },
+  { token: "--secondary-fill", label: "Secondary" },
   { token: "--foreground", label: "Neutral" },
 ] as const
 
-function InkBar({ token, label }: { token: string; label: string }) {
+function TintRamp({ token, label }: { token: string; label: string }) {
   return (
     <Stack gap="sm">
       <div aria-hidden className="flex h-10 overflow-hidden rounded-md border-2">
@@ -65,7 +65,7 @@ function InkBar({ token, label }: { token: string; label: string }) {
 
 const docket: Array<[string, string, string]> = [
   ["Components", "75", "atomic Button through organism App Shell"],
-  ["Themes", "5", "press · substrate · lava · tundra · plum"],
+  ["Themes", "5", "proof · substrate · lava · tundra · plum"],
   ["Audited pairs", "35", "per theme, light and dark. A failing ratio fails the build."],
   ["Colour", "OKLCH", "perceptually uniform ramps, so contrast is computed, not eyeballed"],
   ["Primitives", "Base UI", "focus management, dismissal and ARIA are handled"],
@@ -90,22 +90,21 @@ export default function HomePage() {
               </Cluster>
 
               <H1 className="font-display text-5xl font-extrabold tracking-tight md:text-7xl">
-                Swap{" "}
+                A themeable{" "}
                 <span className="relative isolate inline-block">
-                  the ink
+                  React
                   <span
                     aria-hidden
                     className="absolute inset-x-0 bottom-1 -z-10 h-3 bg-secondary-fill md:bottom-2 md:h-5"
                   />
-                </span>
-                .
-                <br />
-                The press doesn&apos;t change.
+                </span>{" "}
+                design system.
               </H1>
 
               <Lead className="max-w-2xl text-lg md:text-xl">
-                A design system for Next.js built on OKLCH, Tailwind CSS v4 and Base UI. A theme is
-                a token map — change it and every component repaints, including the ones you wrote.
+                75 components built on OKLCH, Tailwind CSS v4 and Base UI. Five themes, light and
+                dark, with every colour pairing audited against WCAG AA. Set one attribute and
+                every component repaints, including the ones you wrote.
               </Lead>
 
               <Mono className="inline-block rounded-md border-2 bg-card px-4 py-3 text-sm shadow-hard-sm">
@@ -129,40 +128,40 @@ export default function HomePage() {
             <div className="sui-enter sui-enter-2">
               <ThemeStrip />
               <Mono className="mt-3 block text-xs text-muted-foreground">
-                pick an ink — the whole page follows
+                pick a theme — this page is the demo
               </Mono>
             </div>
           </Stack>
         </Center>
       </section>
 
-      {/* ── Ink density ───────────────────────────────────────── */}
+      {/* ── Tint ramps ────────────────────────────────────────── */}
       <section className="border-b-2 bg-surface-page py-12">
         <Center max="2xl" className="px-4">
           <Stack gap="lg">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <Caps className="text-muted-foreground">Ink density</Caps>
+              <Caps className="text-muted-foreground">Tint ramps</Caps>
               <Mono className="text-xs text-muted-foreground">
                 tints mixed in oklab · 25 / 50 / 75 / 100%
               </Mono>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {inks.map((ink) => (
-                <InkBar key={ink.token} {...ink} />
+              {tintRamps.map((ramp) => (
+                <TintRamp key={ramp.token} {...ramp} />
               ))}
             </div>
           </Stack>
         </Center>
       </section>
 
-      {/* ── Proof: live UI beside the map that produced it ────── */}
+      {/* ── Live UI beside the map that produced it ───────────── */}
       <section className="border-b-2 py-20">
         <Center max="2xl" className="px-4">
           <Stack gap="xl">
             <Stack gap="sm">
-              <Caps className="text-muted-foreground">Proof</Caps>
+              <Caps className="text-muted-foreground">Live</Caps>
               <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
-                Same markup. Current ink.
+                The same markup in every theme.
               </H2>
               <P className="max-w-2xl text-muted-foreground">
                 Nothing on the left knows which theme it is in. The map on the right is the only
@@ -208,14 +207,14 @@ export default function HomePage() {
                   <pre className="overflow-x-auto bg-warm-950 p-4 text-sm text-warm-200 dark:bg-warm-900">
                     <code>{`import { createTheme, ThemeRegistry } from 'substrateui'
 
-const press = createTheme({
-  name: 'press',
+const proof = createTheme({
+  name: 'proof',
   light: { primary: 'oklch(0.520 0.133 232)' },
   dark:  { primary: 'oklch(0.750 0.115 233)' },
 })
 
-// Wrap once — every component below re-inks.
-<ThemeRegistry themes={[press]} defaultTheme="press">
+// Wrap once — every component below repaints.
+<ThemeRegistry themes={[proof]} defaultTheme="proof">
   <App />
 </ThemeRegistry>`}</code>
                   </pre>
@@ -262,7 +261,7 @@ const press = createTheme({
             </div>
 
             <Stack gap="md">
-              <H3 className="font-display text-lg font-bold">Bring your own ink</H3>
+              <H3 className="font-display text-lg font-bold">Bring your own theme</H3>
               <P className="max-w-2xl text-muted-foreground">
                 Five themes ship, but the set is open. A theme is a token map — no component ever
                 learns its name.

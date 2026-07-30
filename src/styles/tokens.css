@@ -560,11 +560,17 @@
 
 
 /* ================================================================
-   PRESS THEME — enable with <html data-theme="press">
+   PROOF THEME — enable with <html data-theme="proof">
 
    Palette taken from a printer's proof sheet: the three process inks
    (cyan, magenta, yellow) laid on cool proof stock. Magenta is brand
    furniture — registration marks and charts — never a status.
+
+   Shipped as "press" in v1.15. The press is the machine — the components
+   and the geometry, the part that doesn't change when you swap themes —
+   so naming a palette after it was a category error. A proof is one ink
+   run on one stock, which is what a theme actually is. `data-theme="press"`
+   still resolves here and always will; it's public API.
 ================================================================ */
 
 :root {
@@ -617,8 +623,9 @@
 }
 
 
-/* ── PRESS LIGHT ── */
+/* ── PROOF LIGHT ── */
 
+[data-theme="proof"],
 [data-theme="press"] {
   /* ── Shadcn core ── */
   --background: var(--raw-proof-100);
@@ -714,8 +721,10 @@
 }
 
 
-/* ── PRESS DARK ── */
+/* ── PROOF DARK ── */
 
+[data-theme="proof"].dark,
+.dark [data-theme="proof"],
 [data-theme="press"].dark,
 .dark [data-theme="press"] {
   /* ── Shadcn core ── */
