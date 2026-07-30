@@ -5,6 +5,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const fieldsetProps: PropDef[] = [
@@ -42,11 +43,8 @@ export default function FieldsetPage() {
       title="Fieldset"
       description="An accessible fieldset wrapper with a visible legend label. Groups related form fields together with semantic HTML."
     >
-      {/* Basic Fieldset */}
-      <Stack gap="md">
-        <H3>Basic Fieldset</H3>
-        <ComponentPreview
-          code={`<Fieldset legend="Personal Information">
+      <ComponentPreview
+        code={`<Fieldset legend="Personal Information">
   <Field>
     <FieldLabel>First name</FieldLabel>
     <Input placeholder="Jane" />
@@ -56,21 +54,22 @@ export default function FieldsetPage() {
     <Input placeholder="Doe" />
   </Field>
 </Fieldset>`}
-        >
-          <Stack gap="md" className="w-full max-w-sm">
-            <Fieldset legend="Personal Information">
-              <Field>
-                <FieldLabel>First name</FieldLabel>
-                <Input placeholder="Jane" />
-              </Field>
-              <Field>
-                <FieldLabel>Last name</FieldLabel>
-                <Input placeholder="Doe" />
-              </Field>
-            </Fieldset>
-          </Stack>
-        </ComponentPreview>
-      </Stack>
+      >
+        <Stack gap="md" className="w-full max-w-sm">
+          <Fieldset legend="Personal Information">
+            <Field>
+              <FieldLabel>First name</FieldLabel>
+              <Input placeholder="Jane" />
+            </Field>
+            <Field>
+              <FieldLabel>Last name</FieldLabel>
+              <Input placeholder="Doe" />
+            </Field>
+          </Fieldset>
+        </Stack>
+      </ComponentPreview>
+
+      <ImportLine names={["Fieldset"]} />
 
       {/* Disabled Fieldset */}
       <Stack gap="md">

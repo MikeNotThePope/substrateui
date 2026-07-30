@@ -4,6 +4,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const passwordInputProps: PropDef[] = [
@@ -42,15 +43,13 @@ export default function PasswordInputPage() {
       title="PasswordInput"
       description="A password input with a show/hide visibility toggle. A drop-in replacement for Input on password fields — all native input props (name, required, autoComplete, etc.) are forwarded to the underlying input."
     >
-      {/* Default */}
-      <Stack gap="md">
-        <H3>Default</H3>
-        <ComponentPreview
-          code={`<PasswordInput placeholder="••••••••" />`}
-        >
-          <PasswordInput placeholder="••••••••" />
-        </ComponentPreview>
-      </Stack>
+      <ComponentPreview
+        code={`<PasswordInput placeholder="••••••••" />`}
+      >
+        <PasswordInput placeholder="••••••••" />
+      </ComponentPreview>
+
+      <ImportLine names={["PasswordInput"]} />
 
       {/* Disabled */}
       <Stack gap="md">

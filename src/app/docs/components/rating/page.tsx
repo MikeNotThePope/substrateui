@@ -7,6 +7,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const props: PropDef[] = [
@@ -47,6 +48,8 @@ export default function RatingPage() {
         </ComponentPreview>
       </Stack>
 
+      <ImportLine names={["Rating"]} />
+
       <Stack gap="md">
         <H3>Sizes</H3>
         <ComponentPreview
@@ -74,11 +77,6 @@ export default function RatingPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           The display variant exposes an <code>img</code> role with a label like
@@ -86,6 +84,11 @@ export default function RatingPage() {
           <code>radiogroup</code> of star buttons — each is keyboard focusable and
           labelled, and hover/focus preview the value before selection.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
       </Stack>
     </DocPage>
   )

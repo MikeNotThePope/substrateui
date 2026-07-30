@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const sheetProps: PropDef[] = [
@@ -71,11 +72,16 @@ export default function SheetPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={sheetProps} />
-      </Stack>
+      <ImportLine
+        names={[
+          "Sheet",
+          "SheetContent",
+          "SheetDescription",
+          "SheetHeader",
+          "SheetTitle",
+          "SheetTrigger",
+        ]}
+      />
 
       {/* Accessibility */}
       <Stack gap="md">
@@ -92,6 +98,12 @@ export default function SheetPage() {
             Base UI.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={sheetProps} />
       </Stack>
     </DocPage>
   )

@@ -3,6 +3,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const skeletonProps: PropDef[] = [
@@ -48,6 +49,8 @@ export default function SkeletonPage() {
           </Stack>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine names={["Skeleton"]} />
 
       <Stack gap="md">
         <H3>API Reference</H3>

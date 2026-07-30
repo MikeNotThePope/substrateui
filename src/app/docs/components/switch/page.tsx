@@ -5,6 +5,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const switchProps: PropDef[] = [
@@ -34,15 +35,13 @@ export default function SwitchPage() {
       title="Switch"
       description="A toggle for a boolean. Built on Base UI, with the thumb animated between states and the label wired for screen readers."
     >
-      {/* Standalone */}
-      <Stack gap="md">
-        <H3>Standalone</H3>
-        <ComponentPreview
-          code={`<Switch />`}
-        >
-          <Switch />
-        </ComponentPreview>
-      </Stack>
+      <ComponentPreview
+        code={`<Switch />`}
+      >
+        <Switch />
+      </ComponentPreview>
+
+      <ImportLine names={["Switch"]} />
 
       {/* With Label */}
       <Stack gap="md">

@@ -10,6 +10,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const breadcrumbProps: PropDef[] = [
@@ -63,6 +64,17 @@ export default function BreadcrumbDocsPage() {
           </Breadcrumb>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine
+        names={[
+          "Breadcrumb",
+          "BreadcrumbItem",
+          "BreadcrumbLink",
+          "BreadcrumbList",
+          "BreadcrumbPage",
+          "BreadcrumbSeparator",
+        ]}
+      />
 
       <Stack gap="md">
         <H3>Direction</H3>

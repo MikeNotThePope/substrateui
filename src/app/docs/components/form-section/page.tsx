@@ -11,6 +11,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const formSectionProps: PropDef[] = [
@@ -102,11 +103,8 @@ export default function FormSectionPage() {
       title="FormSection"
       description="A fieldset with a title and description, for splitting a long form into groups."
     >
-      {/* Basic Form Section */}
-      <Stack gap="md">
-        <H3>Basic Form Section</H3>
-        <ComponentPreview
-          code={`<FormSection>
+      <ComponentPreview
+        code={`<FormSection>
   <FormSectionHeader>
     <FormSectionTitle>Profile</FormSectionTitle>
     <FormSectionDescription>
@@ -124,29 +122,38 @@ export default function FormSectionPage() {
     </Field>
   </FormSectionContent>
 </FormSection>`}
-        >
-          <div className="w-full max-w-lg">
-            <FormSection>
-              <FormSectionHeader>
-                <FormSectionTitle>Profile</FormSectionTitle>
-                <FormSectionDescription>
-                  Update your personal information.
-                </FormSectionDescription>
-              </FormSectionHeader>
-              <FormSectionContent>
-                <Field>
-                  <FieldLabel>Display name</FieldLabel>
-                  <Input placeholder="Jane Doe" />
-                </Field>
-                <Field>
-                  <FieldLabel>Bio</FieldLabel>
-                  <Input placeholder="A short description about you" />
-                </Field>
-              </FormSectionContent>
-            </FormSection>
-          </div>
-        </ComponentPreview>
-      </Stack>
+      >
+        <div className="w-full max-w-lg">
+          <FormSection>
+            <FormSectionHeader>
+              <FormSectionTitle>Profile</FormSectionTitle>
+              <FormSectionDescription>
+                Update your personal information.
+              </FormSectionDescription>
+            </FormSectionHeader>
+            <FormSectionContent>
+              <Field>
+                <FieldLabel>Display name</FieldLabel>
+                <Input placeholder="Jane Doe" />
+              </Field>
+              <Field>
+                <FieldLabel>Bio</FieldLabel>
+                <Input placeholder="A short description about you" />
+              </Field>
+            </FormSectionContent>
+          </FormSection>
+        </div>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "FormSection",
+          "FormSectionHeader",
+          "FormSectionTitle",
+          "FormSectionDescription",
+          "FormSectionContent",
+        ]}
+      />
 
       {/* Grid Layout */}
       <Stack gap="md">

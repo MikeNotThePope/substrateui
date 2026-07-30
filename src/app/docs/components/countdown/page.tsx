@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import {
   CountdownDemo,
@@ -32,20 +33,19 @@ export default function CountdownPage() {
       title="Countdown"
       description="A live countdown to a deadline. Formats itself for the current locale, announces itself as a timer rather than shouting every tick at screen readers, and hands you the raw units when you want to lay them out yourself."
     >
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <P>
-          Pass a <Code>deadline</Code> and it ticks once a second until it
-          reaches zero. Seed the deadline in state rather than computing it
-          inline — <Code>Date.now() + n</Code> in JSX is recomputed on every
-          render, which resets the countdown instead of advancing it.
-        </P>
-        <ComponentPreview
-          code={`<Countdown deadline={saleEndsAt} onFinish={() => refetch()} />`}
-        >
-          <CountdownDemo />
-        </ComponentPreview>
-      </Stack>
+      <P>
+        Pass a <Code>deadline</Code> and it ticks once a second until it
+        reaches zero. Seed the deadline in state rather than computing it
+        inline — <Code>Date.now() + n</Code> in JSX is recomputed on every
+        render, which resets the countdown instead of advancing it.
+      </P>
+      <ComponentPreview
+        code={`<Countdown deadline={saleEndsAt} onFinish={() => refetch()} />`}
+      >
+        <CountdownDemo />
+      </ComponentPreview>
+
+      <ImportLine names={["Countdown"]} />
 
       <Stack gap="md">
         <H3>Formatting</H3>

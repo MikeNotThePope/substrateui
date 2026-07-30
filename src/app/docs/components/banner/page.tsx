@@ -5,6 +5,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const props: PropDef[] = [
@@ -51,10 +52,7 @@ export default function BannerPage() {
         </ComponentPreview>
       </Stack>
 
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-      </Stack>
+      <ImportLine names={["Banner"]} />
 
       <Stack gap="md">
         <H3>Accessibility</H3>
@@ -64,6 +62,11 @@ export default function BannerPage() {
           accessible label; once dismissed, the banner unmounts and returns focus
           to the normal flow.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
       </Stack>
     </DocPage>
   )

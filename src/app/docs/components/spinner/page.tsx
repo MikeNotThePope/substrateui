@@ -4,6 +4,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3, P, Code, Muted } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const spinnerProps: PropDef[] = [
@@ -51,10 +52,7 @@ export default function SpinnerPage() {
         </ComponentPreview>
       </Stack>
 
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={spinnerProps} />
-      </Stack>
+      <ImportLine names={["Spinner"]} />
 
       <Stack gap="md">
         <H3>Accessibility</H3>
@@ -71,6 +69,11 @@ export default function SpinnerPage() {
             reduced motion.
           </P>
         </Stack>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={spinnerProps} />
       </Stack>
     </DocPage>
   )

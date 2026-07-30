@@ -3,6 +3,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const tabsProps: PropDef[] = [
@@ -35,10 +36,8 @@ export default function TabsPage() {
       title="Tabs"
       description="Layered panels, one visible at a time. The URL does not change, so reach for NavTabs when the tab needs to be linkable."
     >
-      <Stack gap="md">
-        <H3>Basic Tabs</H3>
-        <ComponentPreview
-          code={`<Tabs defaultValue="account">
+      <ComponentPreview
+        code={`<Tabs defaultValue="account">
   <TabsList>
     <TabsTrigger value="account">Account</TabsTrigger>
     <TabsTrigger value="password">Password</TabsTrigger>
@@ -54,27 +53,35 @@ export default function TabsPage() {
     Configure how you receive notifications.
   </TabsContent>
 </Tabs>`}
-        >
-          <div className="w-full">
-            <Tabs defaultValue="account">
-              <TabsList>
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
-                <TabsTrigger value="notifications">Notifications</TabsTrigger>
-              </TabsList>
-              <TabsContent value="account" className="p-4 text-sm text-muted-foreground">
-                Manage your account settings and preferences.
-              </TabsContent>
-              <TabsContent value="password" className="p-4 text-sm text-muted-foreground">
-                Update your password and security options.
-              </TabsContent>
-              <TabsContent value="notifications" className="p-4 text-sm text-muted-foreground">
-                Configure how you receive notifications.
-              </TabsContent>
-            </Tabs>
-          </div>
-        </ComponentPreview>
-      </Stack>
+      >
+        <div className="w-full">
+          <Tabs defaultValue="account">
+            <TabsList>
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="password">Password</TabsTrigger>
+              <TabsTrigger value="notifications">Notifications</TabsTrigger>
+            </TabsList>
+            <TabsContent value="account" className="p-4 text-sm text-muted-foreground">
+              Manage your account settings and preferences.
+            </TabsContent>
+            <TabsContent value="password" className="p-4 text-sm text-muted-foreground">
+              Update your password and security options.
+            </TabsContent>
+            <TabsContent value="notifications" className="p-4 text-sm text-muted-foreground">
+              Configure how you receive notifications.
+            </TabsContent>
+          </Tabs>
+        </div>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Tabs",
+          "TabsContent",
+          "TabsList",
+          "TabsTrigger",
+        ]}
+      />
 
       <Stack gap="md">
         <H3>API Reference</H3>

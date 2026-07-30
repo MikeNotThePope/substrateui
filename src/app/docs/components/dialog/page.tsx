@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const dialogProps: PropDef[] = [
@@ -29,11 +30,8 @@ export default function DialogPage() {
       title="Dialog"
       description="A modal overlay rendered above the page with a backdrop. Focus stays inside it while it is open."
     >
-      {/* Basic Dialog */}
-      <Stack gap="md">
-        <H3>Basic Dialog</H3>
-        <ComponentPreview
-          code={`<Dialog>
+      <ComponentPreview
+        code={`<Dialog>
   <DialogTrigger render={<Button variant="outline" />}>
     Edit Profile
   </DialogTrigger>
@@ -53,35 +51,40 @@ export default function DialogPage() {
     </DialogFooter>
   </DialogContent>
 </Dialog>`}
-        >
-          <Dialog>
-            <DialogTrigger render={<Button variant="outline" />}>
-              Edit Profile
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Edit Profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when done.
-                </DialogDescription>
-              </DialogHeader>
-              <p className="text-sm text-muted-foreground">
-                Dialog body content goes here.
-              </p>
-              <DialogFooter>
-                <Button variant="outline">Cancel</Button>
-                <Button>Save Changes</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </ComponentPreview>
-      </Stack>
+      >
+        <Dialog>
+          <DialogTrigger render={<Button variant="outline" />}>
+            Edit Profile
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Profile</DialogTitle>
+              <DialogDescription>
+                Make changes to your profile here. Click save when done.
+              </DialogDescription>
+            </DialogHeader>
+            <p className="text-sm text-muted-foreground">
+              Dialog body content goes here.
+            </p>
+            <DialogFooter>
+              <Button variant="outline">Cancel</Button>
+              <Button>Save Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </ComponentPreview>
 
-      {/* API Reference */}
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={dialogProps} />
-      </Stack>
+      <ImportLine
+        names={[
+          "Dialog",
+          "DialogContent",
+          "DialogDescription",
+          "DialogFooter",
+          "DialogHeader",
+          "DialogTitle",
+          "DialogTrigger",
+        ]}
+      />
 
       {/* Accessibility */}
       <Stack gap="md">
@@ -100,6 +103,12 @@ export default function DialogPage() {
             doesn&apos;t show it.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={dialogProps} />
       </Stack>
     </DocPage>
   )

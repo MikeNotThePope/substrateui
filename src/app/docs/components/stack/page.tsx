@@ -3,6 +3,7 @@ import { Grid } from "@/components/ui/grid"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable } from "../../_components/props-table"
 
 function PlaceholderBox({ children }: { children?: React.ReactNode }) {
@@ -226,6 +227,8 @@ export default function StackPage() {
           />
         </Stack>
       </Stack>
+
+      <ImportLine names={["Stack"]} />
     </DocPage>
   )
 }

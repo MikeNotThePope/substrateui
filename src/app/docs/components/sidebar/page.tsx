@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, Code, Muted } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const providerProps: PropDef[] = [
@@ -135,6 +136,24 @@ export default function SidebarPage() {
           <Code>useSidebar()</Code>.
         </Muted>
       </Stack>
+
+      <ImportLine
+        names={[
+          "SidebarProvider",
+          "Sidebar",
+          "SidebarHeader",
+          "SidebarContent",
+          "SidebarFooter",
+          "SidebarGroup",
+          "SidebarGroupLabel",
+          "SidebarMenu",
+          "SidebarMenuItem",
+          "SidebarMenuButton",
+          "SidebarTrigger",
+          "SidebarInset",
+          "useSidebar",
+        ]}
+      />
 
       <Stack gap="md">
         <H3>When to use this vs. App Shell</H3>

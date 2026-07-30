@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { CascaderDemo, ControlledCascaderDemo } from "./cascader-demo"
 
@@ -36,15 +37,13 @@ export default function CascaderPage() {
       title="Cascader"
       description="A nested-path select: drill through columns of options and commit the path you land on. The standard control for category → subcategory → item pickers."
     >
-      <Stack gap="md">
-        <H3>Example</H3>
-        <P>
-          Clicking a branch opens the next column; clicking a leaf commits the
-          whole path and closes the popup. Reopening resumes on the committed
-          path.
-        </P>
-        <ComponentPreview
-          code={`const places = [
+      <P>
+        Clicking a branch opens the next column; clicking a leaf commits the
+        whole path and closes the popup. Reopening resumes on the committed
+        path.
+      </P>
+      <ComponentPreview
+        code={`const places = [
   {
     value: "asia",
     label: "Asia",
@@ -55,10 +54,11 @@ export default function CascaderPage() {
 ]
 
 <Cascader options={places} placeholder="Pick a city" />`}
-        >
-          <CascaderDemo />
-        </ComponentPreview>
-      </Stack>
+      >
+        <CascaderDemo />
+      </ComponentPreview>
+
+      <ImportLine names={["Cascader"]} />
 
       <Stack gap="md">
         <H3>Search and clear</H3>
@@ -105,13 +105,6 @@ export default function CascaderPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={props} />
-        <P className="text-sm text-muted-foreground">CascaderOption</P>
-        <PropsTable props={optionProps} />
-      </Stack>
-
-      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           Each column is a listbox named after the option that opened it, and
@@ -125,6 +118,13 @@ export default function CascaderPage() {
           returns focus to the trigger. Disabled options can neither be selected
           nor expanded.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={props} />
+        <P className="text-sm text-muted-foreground">CascaderOption</P>
+        <PropsTable props={optionProps} />
       </Stack>
     </DocPage>
   )

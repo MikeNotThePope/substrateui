@@ -2,6 +2,7 @@ import { H1, H2, H3, H4, P, Lead, Large, Small, Muted, Code, Mono } from "@/comp
 import { Stack } from "@/components/ui/stack"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const typographyProps: PropDef[] = [
@@ -41,6 +42,22 @@ export default function TypographyPage() {
           </Stack>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine
+        names={[
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "P",
+          "Lead",
+          "Large",
+          "Small",
+          "Muted",
+          "Code",
+          "Mono",
+        ]}
+      />
 
       <Stack gap="md">
         <H3>Body Text</H3>

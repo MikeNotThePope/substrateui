@@ -4,6 +4,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const props: PropDef[] = [
@@ -39,6 +40,13 @@ export default function ListGroupPage() {
           </div>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine
+        names={[
+          "ListGroup",
+          "ListGroupItem",
+        ]}
+      />
 
       <Stack gap="md">
         <H3>Interactive rows</H3>

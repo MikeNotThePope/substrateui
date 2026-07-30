@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const searchFieldProps: PropDef[] = [
@@ -52,26 +53,25 @@ export default function SearchFieldPage() {
       title="Search Field"
       description="A text input with a search icon, clearable value, and optional keyboard shortcut hint."
     >
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <ComponentPreview
-          code={`<SearchField
+      <ComponentPreview
+        code={`<SearchField
   value={query}
   onChange={setQuery}
   placeholder="Search components..."
   shortcut="/"
 />`}
-        >
-          <div className="w-full max-w-sm">
-            <SearchField
-              value={query}
-              onChange={setQuery}
-              placeholder="Search components..."
-              shortcut="/"
-            />
-          </div>
-        </ComponentPreview>
-      </Stack>
+      >
+        <div className="w-full max-w-sm">
+          <SearchField
+            value={query}
+            onChange={setQuery}
+            placeholder="Search components..."
+            shortcut="/"
+          />
+        </div>
+      </ComponentPreview>
+
+      <ImportLine names={["SearchField"]} />
 
       <Stack gap="md">
         <H3>API Reference</H3>

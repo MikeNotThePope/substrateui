@@ -4,6 +4,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const inputProps: PropDef[] = [
@@ -41,15 +42,13 @@ export default function InputPage() {
       title="Input"
       description="A single-line text input. Pair it with Field to get the label, hint, and error wiring."
     >
-      {/* Default */}
-      <Stack gap="md">
-        <H3>Default</H3>
-        <ComponentPreview
-          code={`<Input placeholder="Enter your name" />`}
-        >
-          <Input placeholder="Enter your name" />
-        </ComponentPreview>
-      </Stack>
+      <ComponentPreview
+        code={`<Input placeholder="Enter your name" />`}
+      >
+        <Input placeholder="Enter your name" />
+      </ComponentPreview>
+
+      <ImportLine names={["Input"]} />
 
       {/* Disabled */}
       <Stack gap="md">

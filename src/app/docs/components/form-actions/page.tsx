@@ -8,6 +8,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const formActionsProps: PropDef[] = [
@@ -64,23 +65,27 @@ export default function FormActionsPage() {
       title="FormActions"
       description="A horizontal action bar for form submit and cancel buttons, separated by a top border. Supports simple right-aligned buttons or split primary/secondary layout."
     >
-      {/* Simple Actions */}
-      <Stack gap="md">
-        <H3>Simple Actions</H3>
-        <ComponentPreview
-          code={`<FormActions>
+      <ComponentPreview
+        code={`<FormActions>
   <Button variant="outline">Cancel</Button>
   <Button>Save changes</Button>
 </FormActions>`}
-        >
-          <div className="w-full max-w-lg">
-            <FormActions>
-              <Button variant="outline">Cancel</Button>
-              <Button>Save changes</Button>
-            </FormActions>
-          </div>
-        </ComponentPreview>
-      </Stack>
+      >
+        <div className="w-full max-w-lg">
+          <FormActions>
+            <Button variant="outline">Cancel</Button>
+            <Button>Save changes</Button>
+          </FormActions>
+        </div>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "FormActions",
+          "FormActionsPrimary",
+          "FormActionsSecondary",
+        ]}
+      />
 
       {/* Split Layout */}
       <Stack gap="md">

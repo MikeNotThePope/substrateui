@@ -11,6 +11,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable } from "../../_components/props-table"
 
 // ── Example data ────────────────────────────────────────────────────
@@ -235,6 +236,14 @@ const columns: ColumnDef<Person>[] = [
           </Stack>
         </Stack>
       </Stack>
+
+      <ImportLine
+        names={[
+          "DataTable",
+          "DataTableColumnHeader",
+          "createSelectColumn",
+        ]}
+      />
 
       {/* Accessibility */}
       <Stack gap="md">

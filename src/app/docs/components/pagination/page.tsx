@@ -10,6 +10,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const paginationProps: PropDef[] = [
@@ -71,6 +72,17 @@ export default function PaginationPage() {
           </Pagination>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine
+        names={[
+          "Pagination",
+          "PaginationContent",
+          "PaginationItem",
+          "PaginationLink",
+          "PaginationNext",
+          "PaginationPrevious",
+        ]}
+      />
 
       <Stack gap="md">
         <H3>Direction</H3>

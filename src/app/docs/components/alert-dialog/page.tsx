@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const alertDialogProps: PropDef[] = [
@@ -72,11 +73,19 @@ export default function AlertDialogPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={alertDialogProps} />
-      </Stack>
+      <ImportLine
+        names={[
+          "AlertDialog",
+          "AlertDialogAction",
+          "AlertDialogCancel",
+          "AlertDialogContent",
+          "AlertDialogDescription",
+          "AlertDialogFooter",
+          "AlertDialogHeader",
+          "AlertDialogTitle",
+          "AlertDialogTrigger",
+        ]}
+      />
 
       {/* Accessibility */}
       <Stack gap="md">
@@ -96,6 +105,12 @@ export default function AlertDialogPage() {
             <Code>aria-describedby</Code> automatically.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={alertDialogProps} />
       </Stack>
     </DocPage>
   )

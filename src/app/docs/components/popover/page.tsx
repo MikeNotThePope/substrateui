@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const popoverProps: PropDef[] = [
@@ -41,11 +42,8 @@ export default function PopoverPage() {
       title="Popover"
       description="A floating panel anchored to a trigger element. Use for rich content like forms, menus, or additional details without leaving the current context."
     >
-      {/* Basic Popover */}
-      <Stack gap="md">
-        <H3>Basic Popover</H3>
-        <ComponentPreview
-          code={`<Popover>
+      <ComponentPreview
+        code={`<Popover>
   <PopoverTrigger render={<Button variant="outline" />}>Open Popover</PopoverTrigger>
   <PopoverContent>
     <div className="space-y-2">
@@ -56,20 +54,27 @@ export default function PopoverPage() {
     </div>
   </PopoverContent>
 </Popover>`}
-        >
-          <Popover>
-            <PopoverTrigger render={<Button variant="outline" />}>Open Popover</PopoverTrigger>
-            <PopoverContent>
-              <div className="space-y-2">
-                <h4 className="font-medium text-sm">Dimensions</h4>
-                <p className="text-sm text-muted-foreground">
-                  Set the dimensions for the layer.
-                </p>
-              </div>
-            </PopoverContent>
-          </Popover>
-        </ComponentPreview>
-      </Stack>
+      >
+        <Popover>
+          <PopoverTrigger render={<Button variant="outline" />}>Open Popover</PopoverTrigger>
+          <PopoverContent>
+            <div className="space-y-2">
+              <h4 className="font-medium text-sm">Dimensions</h4>
+              <p className="text-sm text-muted-foreground">
+                Set the dimensions for the layer.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Popover",
+          "PopoverContent",
+          "PopoverTrigger",
+        ]}
+      />
 
       {/* API Reference */}
       <Stack gap="md">

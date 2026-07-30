@@ -5,6 +5,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const buttonProps: PropDef[] = [
@@ -74,6 +75,8 @@ export default function ButtonPage() {
         </ComponentPreview>
       </Stack>
 
+      <ImportLine names={["Button"]} />
+
       {/* Sizes */}
       <Stack gap="md">
         <H3>Sizes</H3>
@@ -132,12 +135,6 @@ export default function ButtonPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={buttonProps} />
-      </Stack>
-
       {/* Accessibility */}
       <Stack gap="md">
         <H3>Accessibility</H3>
@@ -166,6 +163,12 @@ export default function ButtonPage() {
             request reduced motion.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={buttonProps} />
       </Stack>
     </DocPage>
   )

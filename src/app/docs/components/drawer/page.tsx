@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const drawerProps: PropDef[] = [
@@ -69,11 +70,16 @@ export default function DrawerPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
-      <Stack gap="md">
-        <H3>API Reference</H3>
-        <PropsTable props={drawerProps} />
-      </Stack>
+      <ImportLine
+        names={[
+          "Drawer",
+          "DrawerContent",
+          "DrawerDescription",
+          "DrawerHeader",
+          "DrawerTitle",
+          "DrawerTrigger",
+        ]}
+      />
 
       {/* Accessibility */}
       <Stack gap="md">
@@ -90,6 +96,12 @@ export default function DrawerPage() {
             Base UI so the accessible name is still announced.
           </P>
         </Stack>
+      </Stack>
+
+      {/* API Reference */}
+      <Stack gap="md">
+        <H3>API Reference</H3>
+        <PropsTable props={drawerProps} />
       </Stack>
     </DocPage>
   )

@@ -3,6 +3,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const nativeSelectProps: PropDef[] = [
@@ -26,25 +27,23 @@ export default function NativeSelectPage() {
       title="Native Select"
       description="A styled wrapper around the browser's own select element. The picker is the operating system's, which is what makes it the right control on mobile."
     >
-      {/* Basic */}
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <ComponentPreview
-          code={`<NativeSelect>
+      <ComponentPreview
+        code={`<NativeSelect>
   <option value="">Choose a color</option>
   <option value="red">Red</option>
   <option value="green">Green</option>
   <option value="blue">Blue</option>
 </NativeSelect>`}
-        >
-          <NativeSelect>
-            <option value="">Choose a color</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-          </NativeSelect>
-        </ComponentPreview>
-      </Stack>
+      >
+        <NativeSelect>
+          <option value="">Choose a color</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+        </NativeSelect>
+      </ComponentPreview>
+
+      <ImportLine names={["NativeSelect"]} />
 
       {/* Disabled */}
       <Stack gap="md">

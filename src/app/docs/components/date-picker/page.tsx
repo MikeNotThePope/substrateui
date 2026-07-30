@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const datePickerProps: PropDef[] = [
@@ -37,25 +38,23 @@ export default function DatePickerPage() {
       title="Date Picker"
       description="A trigger button paired with a popover calendar. Selects a single date."
     >
-      {/* Basic */}
-      <Stack gap="md">
-        <H3>Basic</H3>
-        <ComponentPreview
-          code={`const [date, setDate] = useState<Date | undefined>(undefined)
+      <ComponentPreview
+        code={`const [date, setDate] = useState<Date | undefined>(undefined)
 
 <DatePicker
   date={date}
   onDateChange={setDate}
   labels={{ placeholder: "Select a date..." }}
 />`}
-        >
-          <DatePicker
-            date={date}
-            onDateChange={setDate}
-            labels={{ placeholder: "Select a date..." }}
-          />
-        </ComponentPreview>
-      </Stack>
+      >
+        <DatePicker
+          date={date}
+          onDateChange={setDate}
+          labels={{ placeholder: "Select a date..." }}
+        />
+      </ComponentPreview>
+
+      <ImportLine names={["DatePicker"]} />
 
       {/* Direction */}
       <Stack gap="md">

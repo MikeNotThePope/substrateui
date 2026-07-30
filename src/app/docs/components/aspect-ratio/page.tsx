@@ -3,6 +3,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const aspectRatioProps: PropDef[] = [
@@ -40,6 +41,8 @@ export default function AspectRatioPage() {
           </div>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine names={["AspectRatio"]} />
 
       {/* 1:1 Ratio */}
       <Stack gap="md">

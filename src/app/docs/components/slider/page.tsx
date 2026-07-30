@@ -3,6 +3,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const sliderProps: PropDef[] = [
@@ -44,17 +45,15 @@ export default function SliderPage() {
       title="Slider"
       description="A draggable input for a numeric value. Built on Base UI, with the track filled to the current position."
     >
-      {/* Default */}
-      <Stack gap="md">
-        <H3>Default</H3>
-        <ComponentPreview
-          code={`<Slider defaultValue={[50]} max={100} step={1} />`}
-        >
-          <div className="w-full max-w-sm">
-            <Slider defaultValue={[50]} max={100} step={1} />
-          </div>
-        </ComponentPreview>
-      </Stack>
+      <ComponentPreview
+        code={`<Slider defaultValue={[50]} max={100} step={1} />`}
+      >
+        <div className="w-full max-w-sm">
+          <Slider defaultValue={[50]} max={100} step={1} />
+        </div>
+      </ComponentPreview>
+
+      <ImportLine names={["Slider"]} />
 
       {/* Custom Range */}
       <Stack gap="md">

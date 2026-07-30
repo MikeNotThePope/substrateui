@@ -4,6 +4,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const avatarProps: PropDef[] = [
@@ -80,6 +81,14 @@ export default function AvatarPage() {
           </Avatar>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine
+        names={[
+          "Avatar",
+          "AvatarFallback",
+          "AvatarImage",
+        ]}
+      />
 
       {/* Fallback Only */}
       <Stack gap="md">

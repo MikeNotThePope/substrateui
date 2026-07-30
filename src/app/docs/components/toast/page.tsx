@@ -8,6 +8,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const toastProps: PropDef[] = [
@@ -87,6 +88,13 @@ toast.info("A new version is available")`}
           </Cluster>
         </ComponentPreview>
       </Stack>
+
+      <ImportLine
+        names={[
+          "Toaster",
+          "toast",
+        ]}
+      />
 
       {/* API Reference */}
       <Stack gap="md">

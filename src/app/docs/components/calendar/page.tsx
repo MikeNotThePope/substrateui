@@ -6,6 +6,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const calendarProps: PropDef[] = [
@@ -73,6 +74,8 @@ export default function CalendarPage() {
           />
         </ComponentPreview>
       </Stack>
+
+      <ImportLine names={["Calendar"]} />
 
       {/* Static Display */}
       <Stack gap="md">

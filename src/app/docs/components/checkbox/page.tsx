@@ -5,6 +5,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const checkboxProps: PropDef[] = [
@@ -40,15 +41,13 @@ export default function CheckboxPage() {
       title="Checkbox"
       description="A toggle control for boolean values. Built on Base UI primitives with accessible keyboard support and animated check indicator."
     >
-      {/* Standalone */}
-      <Stack gap="md">
-        <H3>Standalone</H3>
-        <ComponentPreview
-          code={`<Checkbox />`}
-        >
-          <Checkbox />
-        </ComponentPreview>
-      </Stack>
+      <ComponentPreview
+        code={`<Checkbox />`}
+      >
+        <Checkbox />
+      </ComponentPreview>
+
+      <ImportLine names={["Checkbox"]} />
 
       {/* With Label */}
       <Stack gap="md">

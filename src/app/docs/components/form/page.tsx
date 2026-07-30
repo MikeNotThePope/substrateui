@@ -14,6 +14,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
 const formProps: PropDef[] = [
@@ -51,11 +52,8 @@ export default function FormPage() {
       title="Form"
       description="A form element wrapper with built-in vertical stack layout and configurable gap spacing. Provides consistent structure for form pages."
     >
-      {/* Usage Pattern */}
-      <Stack gap="md">
-        <H3>Usage Pattern</H3>
-        <ComponentPreview
-          code={`import { Form } from "@/components/ui/form"
+      <ComponentPreview
+        code={`import { Form } from "@/components/ui/form"
 import { FormSection, FormSectionHeader, FormSectionTitle,
   FormSectionDescription, FormSectionContent } from "@/components/ui/form-section"
 import { FormActions } from "@/components/ui/form-actions"
@@ -88,34 +86,35 @@ import { Button } from "@/components/ui/button"
     <Button type="submit">Save</Button>
   </FormActions>
 </Form>`}
-        >
-          <Form gap="xl" className="w-full">
-            <FormSection>
-              <FormSectionHeader>
-                <FormSectionTitle>Profile</FormSectionTitle>
-                <FormSectionDescription>
-                  Basic information about your account.
-                </FormSectionDescription>
-              </FormSectionHeader>
-              <FormSectionContent>
-                <Field>
-                  <FieldLabel>Name</FieldLabel>
-                  <Input placeholder="Jane Doe" />
-                </Field>
-                <Field>
-                  <FieldLabel>Email</FieldLabel>
-                  <Input type="email" placeholder="jane@example.com" />
-                </Field>
-              </FormSectionContent>
-            </FormSection>
+      >
+        <Form gap="xl" className="w-full">
+          <FormSection>
+            <FormSectionHeader>
+              <FormSectionTitle>Profile</FormSectionTitle>
+              <FormSectionDescription>
+                Basic information about your account.
+              </FormSectionDescription>
+            </FormSectionHeader>
+            <FormSectionContent>
+              <Field>
+                <FieldLabel>Name</FieldLabel>
+                <Input placeholder="Jane Doe" />
+              </Field>
+              <Field>
+                <FieldLabel>Email</FieldLabel>
+                <Input type="email" placeholder="jane@example.com" />
+              </Field>
+            </FormSectionContent>
+          </FormSection>
 
-            <FormActions>
-              <Button variant="outline">Cancel</Button>
-              <Button type="submit">Save</Button>
-            </FormActions>
-          </Form>
-        </ComponentPreview>
-      </Stack>
+          <FormActions>
+            <Button variant="outline">Cancel</Button>
+            <Button type="submit">Save</Button>
+          </FormActions>
+        </Form>
+      </ComponentPreview>
+
+      <ImportLine names={["Form"]} />
 
       {/* Gap Variants */}
       <Stack gap="md">
