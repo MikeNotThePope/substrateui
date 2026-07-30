@@ -101,7 +101,7 @@
 
 /* ── PRESS — process inks on proof stock (the site's default) ───── */
 :root,
-[data-ds-theme="press"] {
+[data-ds-theme="proof"] {
   --ds-stock:        oklch(0.949 0.003 264.5);
   --ds-surface:      var(--ds-stock);
   --ds-raised:       oklch(0.995 0.001 264);
@@ -131,8 +131,8 @@
 
 /* Scoped to press explicitly (plus the no-attribute fallback) so a dark
    selector can never out-specify another theme's light block. */
-[data-ds-theme="press"].ds-dark,
-.ds-dark [data-ds-theme="press"],
+[data-ds-theme="proof"].ds-dark,
+.ds-dark [data-ds-theme="proof"],
 :root.ds-dark:not([data-ds-theme]) {
   --ds-stock:        oklch(0.175 0.006 271);
   --ds-surface:      var(--ds-stock);

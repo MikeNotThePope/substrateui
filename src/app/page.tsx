@@ -65,7 +65,7 @@ function InkBar({ token, label }: { token: string; label: string }) {
 
 const docket: Array<[string, string, string]> = [
   ["Components", "75", "atomic Button through organism App Shell"],
-  ["Themes", "5", "press · substrate · lava · tundra · plum"],
+  ["Themes", "5", "proof · substrate · lava · tundra · plum"],
   ["Audited pairs", "35", "per theme, light and dark. A failing ratio fails the build."],
   ["Colour", "OKLCH", "perceptually uniform ramps, so contrast is computed, not eyeballed"],
   ["Primitives", "Base UI", "focus management, dismissal and ARIA are handled"],
@@ -90,22 +90,21 @@ export default function HomePage() {
               </Cluster>
 
               <H1 className="font-display text-5xl font-extrabold tracking-tight md:text-7xl">
-                Swap{" "}
+                A themeable{" "}
                 <span className="relative isolate inline-block">
-                  the ink
+                  React
                   <span
                     aria-hidden
                     className="absolute inset-x-0 bottom-1 -z-10 h-3 bg-secondary-fill md:bottom-2 md:h-5"
                   />
-                </span>
-                .
-                <br />
-                The press doesn&apos;t change.
+                </span>{" "}
+                design system.
               </H1>
 
               <Lead className="max-w-2xl text-lg md:text-xl">
-                A design system for Next.js built on OKLCH, Tailwind CSS v4 and Base UI. A theme is
-                a token map — change it and every component repaints, including the ones you wrote.
+                75 components built on OKLCH, Tailwind CSS v4 and Base UI. Five themes, light and
+                dark, with every colour pairing audited against WCAG AA. Set one attribute and
+                every component repaints, including the ones you wrote.
               </Lead>
 
               <Mono className="inline-block rounded-md border-2 bg-card px-4 py-3 text-sm shadow-hard-sm">
@@ -129,7 +128,7 @@ export default function HomePage() {
             <div className="sui-enter sui-enter-2">
               <ThemeStrip />
               <Mono className="mt-3 block text-xs text-muted-foreground">
-                pick an ink — the whole page follows
+                pick a theme — this page is the demo
               </Mono>
             </div>
           </Stack>
@@ -208,14 +207,14 @@ export default function HomePage() {
                   <pre className="overflow-x-auto bg-warm-950 p-4 text-sm text-warm-200 dark:bg-warm-900">
                     <code>{`import { createTheme, ThemeRegistry } from 'substrateui'
 
-const press = createTheme({
-  name: 'press',
+const proof = createTheme({
+  name: 'proof',
   light: { primary: 'oklch(0.520 0.133 232)' },
   dark:  { primary: 'oklch(0.750 0.115 233)' },
 })
 
 // Wrap once — every component below re-inks.
-<ThemeRegistry themes={[press]} defaultTheme="press">
+<ThemeRegistry themes={[proof]} defaultTheme="proof">
   <App />
 </ThemeRegistry>`}</code>
                   </pre>

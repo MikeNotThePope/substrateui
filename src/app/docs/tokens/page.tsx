@@ -69,7 +69,7 @@ const themeColorData: Record<Theme, ThemeColorData> = {
       { name: "ring", light: "plum-500", dark: "plum-400" },
     ],
   },
-  press: {
+  proof: {
     ramps: [
       {
         title: "Process Cyan (Primary)",

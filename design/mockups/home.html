@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ds-theme="press">
+<html lang="en" data-ds-theme="proof">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -473,7 +473,7 @@ a { color: inherit; }
     <p class="eyebrow">Job docket</p>
     <dl>
       <div class="row"><dt class="code">Components</dt><dd><b>75</b> <span class="muted">atomic Button through organism App Shell</span></dd></div>
-      <div class="row"><dt class="code">Themes</dt><dd><b>5</b> <span class="muted">press · substrate · lava · tundra · plum</span></dd></div>
+      <div class="row"><dt class="code">Themes</dt><dd><b>5</b> <span class="muted">proof · substrate · lava · tundra · plum</span></dd></div>
       <div class="row"><dt class="code">Audited pairs</dt><dd><b>31</b> <span class="muted">per theme, light and dark. A failing ratio fails the build.</span></dd></div>
       <div class="row"><dt class="code">Colour</dt><dd>OKLCH throughout <span class="muted">— perceptually uniform ramps, so contrast is computed, not eyeballed</span></dd></div>
       <div class="row"><dt class="code">Primitives</dt><dd>Base UI <span class="muted">— focus management, dismissal and ARIA are handled</span></dd></div>
@@ -508,7 +508,7 @@ a { color: inherit; }
 // ── Themes ─────────────────────────────────────────────────────
 // One list drives the deck, the density bars and the code block.
 const THEMES = [
-  { id: "press",     name: "Press",     lch: "0.51 0.110 232" },
+  { id: "proof",     name: "Proof",     lch: "0.51 0.110 232" },
   { id: "substrate", name: "Substrate", lch: "0.52 0.095 172" },
   { id: "lava",      name: "Lava",      lch: "0.52 0.195 035" },
   { id: "tundra",    name: "Tundra",    lch: "0.47 0.105 238" },
@@ -594,7 +594,7 @@ function select(id) {
   document.getElementById("density-theme").textContent = id;
   paintSource(id);
 }
-select("press");
+select("proof");
 
 // ── Install copy ───────────────────────────────────────────────
 const copy = document.getElementById("copy");

@@ -4,6 +4,12 @@
 **One-line thesis:** The site is a printer's proof sheet — process inks on proof stock, registration
 marks, chips that overlap and bleed — because a theme in SubstrateUI *is* an ink: you swap it and the
 press underneath doesn't change.
+
+**Press vs Proof — the two levels.** *Press* names this **direction**: the house style, the machine,
+the part that survives a theme swap. *Proof* names the **theme** the direction ships as — one ink run
+on one stock. The theme was called `press` in v1.15, which put an ink and the machine under one word
+and made the old hero ("the press doesn't change") false the moment you clicked the chip labelled
+Press. Renamed in v1.16; `data-theme="press"` still resolves and is kept as public API.
 **Client:** SubstrateUI (`@mikenotthepope/substrateui`, v1.14, published to npm) ·
 **Job of the interface:** convince a React/Next developer in one screen that the theming layer is
 real — that one token map repaints every component — and make them want the themes.
@@ -124,10 +130,10 @@ gradients, one display size per section.
 | # | Decision | Verdict | Why |
 |---|---|---|---|
 | 1 | Replace neo-brutalism inside the shipped components now | rejected | v1.14 is published; `border-2`/`shadow-hard` are in consumers' UIs. Client chose "website first, library follows later" — the site proves the language, a v2 track ports it. |
-| 2 | Replace the shipped default palette with Press | rejected | Would be a silent breaking visual change for every existing consumer. `press` is added as a new theme and the site opts into it via `data-theme`; the plum palette stays untouched. One attribute reverses this. |
+| 2 | Replace the shipped default palette with Proof | rejected | Would be a silent breaking visual change for every existing consumer. `proof` is added as a new theme and the site opts into it via `data-theme`; the plum palette stays untouched. One attribute reverses this. |
 | 3 | Warm cream stock + editorial serif for the swatch-card feel | rejected | Lands squarely on AI default #1 (cream + serif + terracotta). Press proofs are all-grotesque on cool stock anyway — the truer reference is also the less generic one. |
 | 4 | Process magenta as the `destructive`/error token | rejected | Magenta sits at hue 4, a hair off true red; using it semantically makes "delete" and "brand accent" confusable. Magenta is brand-only; error is a distinct hue-27 red. |
-| 5 | Three process inks (cyan/magenta/yellow) on cool proof stock | accepted | Genuinely pops, is nowhere near AI's palette, and is honest to the subject — process inks are literally what "swap the ink" means. |
+| 5 | Three process inks (cyan/magenta/yellow) on cool proof stock | accepted | Genuinely pops, is nowhere near AI's palette, and is honest to the subject — process inks are literally what a theme swap is. |
 | 6 | Fan-deck theme switcher as the signature | accepted | The one object that means "same press, different ink". Directly demos the product's actual differentiator. |
 | 7 | Depth from overlap + paper lift instead of offset hard shadows | accepted | Retires neo-brutalism without flattening the page, and needs no component changes. |
 | 8 | Barlow Condensed caps for chip codes | accepted | The fingerprint of a real swatch card. Constrained to 10–13px so it stays a spec mark, not a headline. |
@@ -161,7 +167,7 @@ they are not re-proposed: the evidence that killed them is not visible in the co
 
 | # | Proposal | Verdict | Evidence |
 |---|---|---|---|
-| S1 | A `--border-factor` token so themes can thin the components' `border-2`, retiring neo-brutalism inside the library (the "v2 track") | **rejected** | The home page was deliberately built from shipped components with *zero* per-instance overrides, so this question could be answered rather than dodged. Heavy borders around process cyan and yellow read as **letterpress**, not as neo-brutalism — the structural language and the palette turn out to be doing different jobs. The premise that Press needs thin borders is simply wrong. Revisit only if a future theme actually fights the borders; it would touch `border-2` in 59 of 85 components. |
+| S1 | A `--border-factor` token so themes can thin the components' `border-2`, retiring neo-brutalism inside the library (the "v2 track") | **rejected** | The home page was deliberately built from shipped components with *zero* per-instance overrides, so this question could be answered rather than dodged. Heavy borders around process cyan and yellow read as **letterpress**, not as neo-brutalism — the structural language and the palette turn out to be doing different jobs. The premise that Proof needs thin borders is simply wrong. Revisit only if a future theme actually fights the borders; it would touch `border-2` in 59 of 85 components. |
 | S2 | Rework `ThemeStrip` so adding a theme stops moving the landing page's height | **rejected — premise expired** | Measured at the visual-test viewport after #67: 5 chips occupy **673px of 1216px available, 543px of headroom** — room for four more themes before any wrap. The original problem came from the old two-column hero squeezing the strip into a narrow column; the Press hero is full-width and fixed it incidentally. Fixing it now would cost a baseline regeneration to solve a problem that does not exist. Revisit at ~9 themes. |
 
 Both were tempting because they sound like diligence. Neither survived a measurement.

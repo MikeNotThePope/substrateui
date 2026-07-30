@@ -20,7 +20,7 @@ describe('ThemePicker', () => {
     expect(await screen.findByRole('listbox')).toBeInTheDocument()
     // Every entry in SITE_THEMES should be offered, including the ones added
     // after the plum rename.
-    for (const name of ['Plum', 'Press', 'Substrate', 'Lava', 'Tundra']) {
+    for (const name of ['Plum', 'Proof', 'Substrate', 'Lava', 'Tundra']) {
       expect(screen.getByRole('option', { name })).toBeInTheDocument()
     }
   })
@@ -47,13 +47,23 @@ describe('SiteThemeProvider', () => {
   }
 
   it('reads a stored theme back', async () => {
+    localStorage.setItem('substrateui-theme', 'substrate')
+    render(
+      <SiteThemeProvider>
+        <Probe />
+      </SiteThemeProvider>
+    )
+    expect(await screen.findByTestId('theme')).toHaveTextContent('substrate')
+  })
+
+  it('migrates the pre-rename "press" value to proof', async () => {
     localStorage.setItem('substrateui-theme', 'press')
     render(
       <SiteThemeProvider>
         <Probe />
       </SiteThemeProvider>
     )
-    expect(await screen.findByTestId('theme')).toHaveTextContent('press')
+    expect(await screen.findByTestId('theme')).toHaveTextContent('proof')
   })
 
   it('migrates the pre-rename "default" value to plum', async () => {

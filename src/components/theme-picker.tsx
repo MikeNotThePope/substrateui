@@ -27,7 +27,7 @@ const defaultThemePickerLabels: Required<ThemePickerLabels> = {
  *  that offers a choice all read this list. */
 export const SITE_THEMES = [
   { value: "plum", label: "Plum" },
-  { value: "press", label: "Press" },
+  { value: "proof", label: "Proof" },
   { value: "substrate", label: "Substrate" },
   { value: "lava", label: "Lava" },
   { value: "tundra", label: "Tundra" },
@@ -54,10 +54,13 @@ function applyTheme(t: Theme) {
   }
 }
 
-/** Visitors who chose a theme before the plum rename have "default" in
- *  localStorage. It names the same palette, so read it as plum. */
+/** Stored values from before a rename still name a live palette, so map
+ *  them forward rather than dropping the visitor back to the default:
+ *  "default" → plum, "press" → proof. */
+const RENAMED: Record<string, Theme> = { default: DEFAULT_THEME, press: "proof" }
+
 function readStored(raw: string | null): Theme | null {
-  const value = raw === "default" ? DEFAULT_THEME : raw
+  const value = raw === null ? null : (RENAMED[raw] ?? raw)
   return SITE_THEMES.some((t) => t.value === value) ? (value as Theme) : null
 }
 
