@@ -6,6 +6,11 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # actions: write is for the re-run at the end; nothing else here needs more
+    # than a read of the repo.
+    permissions:
+      actions: write
+      contents: read
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
@@ -24,3 +29,49 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
+
+      # CI starts on push, this workflow is dispatched by hand afterwards, and
+      # there is exactly one baseline archive in R2. So the branch's `verify`
+      # has always already downloaded the *old* baselines and is doomed to fail
+      # on every snapshot this run just replaced. Re-running it is the fix, and
+      # doing it by hand means noticing the ordering every time — which is three
+      # wasted 8-minute runs so far.
+      #
+      # A `workflow_run` trigger on CI would not do: it runs detached from the
+      # pull request, so the `verify` that the branch protection requires would
+      # stay stuck on the doomed attempt. Re-running the existing run keeps the
+      # check's identity, so the PR's own `verify` turns green.
+      - name: Re-run the branch's CI against the new baselines
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          id=$(gh run list --workflow CI --branch "$BRANCH" --limit 1 \
+                 --json databaseId --jq '.[0].databaseId // empty')
+          if [ -z "$id" ]; then
+            echo "No CI run on $BRANCH yet — the next push will pick these up."
+            exit 0
+          fi
+
+          # `gh run rerun` refuses a run that hasn't finished, and an in-flight
+          # one is reading the baselines this job just replaced. Stop it first.
+          status=$(gh run view "$id" --json status --jq .status)
+          if [ "$status" != "completed" ]; then
+            echo "Cancelling in-flight CI run $id (built on the old baselines)."
+            gh run cancel "$id" || true
+            for _ in $(seq 1 30); do
+              status=$(gh run view "$id" --json status --jq .status)
+              [ "$status" = "completed" ] && break
+              sleep 10
+            done
+          fi
+
+          if [ "$status" != "completed" ]; then
+            echo "::warning::CI run $id did not settle; re-run it by hand."
+            exit 0
+          fi
+
+          echo "Re-running CI run $id against the freshly uploaded baselines."
+          gh run rerun "$id"
