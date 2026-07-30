@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { Caps } from "@/components/caps"
+import { InstallCommand } from "@/components/install-command"
 import { RegMark } from "@/components/reg-mark"
 import { ThemeStrip } from "@/components/theme-strip"
 import { H1, H2, H3, P, Lead, Mono } from "@/components/ui/typography"
@@ -107,9 +108,7 @@ export default function HomePage() {
                 every component repaints, including the ones you wrote.
               </Lead>
 
-              <Mono className="inline-block rounded-md border-2 bg-card px-4 py-3 text-sm shadow-hard-sm">
-                <span className="text-primary">$</span> bun add @mikenotthepope/substrateui
-              </Mono>
+              <InstallCommand className="max-w-xl" />
 
               <Cluster gap="sm">
                 <Link href="/docs">

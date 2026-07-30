@@ -14,7 +14,7 @@ const specimens = [
   { label: "Large", description: "Emphasized text. text-lg font-semibold", component: <Large>The quick brown fox</Large> },
   { label: "Small", description: "Captions and metadata. text-sm font-medium", component: <Small>The quick brown fox</Small> },
   { label: "Muted", description: "Secondary text. text-sm text-muted-foreground", component: <Muted>The quick brown fox</Muted> },
-  { label: "Code", description: "Inline code. font-mono bg-muted rounded px-1", component: <span>Run <Code>npm install substrateui</Code> to get started.</span> },
+  { label: "Code", description: "Inline code. font-mono bg-muted rounded px-1", component: <span>Run <Code>npm install @mikenotthepope/substrateui</Code> to get started.</span> },
   { label: "Mono", description: "Monospace labels. font-mono tracking-tight", component: <Mono>--color-primary: oklch(0.480 0.145 314)</Mono> },
 ]
 

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel, FieldHint } from "@/components/ui/field"
 import { Cluster } from "@/components/ui/cluster"
+import { InstallCommand } from "@/components/install-command"
 
 export default function DocsPage() {
   return (
@@ -20,14 +21,7 @@ export default function DocsPage() {
         <section>
           <H2>Installation</H2>
           <Stack gap="md" className="mt-4">
-            <div className="border-2 rounded-lg overflow-hidden">
-              <div className="px-4 py-2 bg-muted border-b-2">
-                <Mono className="text-xs text-muted-foreground">Terminal</Mono>
-              </div>
-              <pre className="p-4 bg-warm-950 dark:bg-warm-900 text-warm-200 text-sm overflow-x-auto">
-                <code>npm install substrateui</code>
-              </pre>
-            </div>
+            <InstallCommand />
           </Stack>
         </section>
 
@@ -35,14 +29,14 @@ export default function DocsPage() {
         <section>
           <H2>Peer Dependencies</H2>
           <Stack gap="md" className="mt-4">
-            <div className="border-2 rounded-lg overflow-hidden">
-              <div className="px-4 py-2 bg-muted border-b-2">
-                <Mono className="text-xs text-muted-foreground">Terminal</Mono>
-              </div>
-              <pre className="p-4 bg-warm-950 dark:bg-warm-900 text-warm-200 text-sm overflow-x-auto">
-                <code>npm install tailwindcss@latest @tailwindcss/postcss tw-animate-css next-themes</code>
-              </pre>
-            </div>
+            <InstallCommand
+              packages={[
+                "tailwindcss@latest",
+                "@tailwindcss/postcss",
+                "tw-animate-css",
+                "next-themes",
+              ]}
+            />
           </Stack>
         </section>
 
@@ -60,8 +54,8 @@ export default function DocsPage() {
               <pre className="p-4 bg-warm-950 dark:bg-warm-900 text-warm-200 text-sm overflow-x-auto">
                 <code>{`@import "tailwindcss";
 @import "tw-animate-css";
-@import "substrateui/styles.css";
-@source "../node_modules/substrateui";`}</code>
+@import "@mikenotthepope/substrateui/styles.css";
+@source "../node_modules/@mikenotthepope/substrateui";`}</code>
               </pre>
             </div>
           </Stack>

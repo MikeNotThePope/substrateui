@@ -1,6 +1,6 @@
 import { H3 } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
-import { CodeBlock } from "./code-block"
+import { CodeBlock } from "@/components/code-block"
 
 /**
  * The Import section: the one line you actually need to paste.

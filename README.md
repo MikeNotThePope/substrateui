@@ -30,7 +30,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 ## Quick Start
 
 ```bash
-npm install substrateui
+npm install @mikenotthepope/substrateui
 ```
 
 ### CSS Setup
@@ -45,8 +45,8 @@ npx substrateui init
 /* globals.css */
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "substrateui/styles.css";
-@source "../node_modules/substrateui";
+@import "@mikenotthepope/substrateui/styles.css";
+@source "../node_modules/@mikenotthepope/substrateui";
 ```
 
 ### Font Setup (recommended)

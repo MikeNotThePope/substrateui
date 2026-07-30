@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-react"
 import { Caps } from "@/components/caps"
 import { RegMark } from "@/components/reg-mark"
 import { Stack } from "@/components/ui/stack"
-import { CodeBlock } from "./code-block"
+import { CodeBlock } from "@/components/code-block"
 
 interface ComponentPreviewProps {
   children: React.ReactNode
