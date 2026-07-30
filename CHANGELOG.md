@@ -1,5 +1,107 @@
 # Changelog
 
+## 1.16.0
+
+### Minor Changes
+
+- [#76](https://github.com/MikeNotThePope/substrateui/pull/76) [`2a5f8a4`](https://github.com/MikeNotThePope/substrateui/commit/2a5f8a4d9c50063bd66ab27fdc8724d971ae5b2b) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Rename `Button variant="amber"` to `variant="secondary-fill"`. `amber` still works.
+
+  "Amber" was the plum palette's name for that slot. Every theme colours it differently — press paints
+  it yellow from its own ramp — so the API was asserting a colour the theme system exists to change.
+  `secondary-fill` names the token family that actually paints it, and reads against `secondary`, which
+  is the tinted surface rather than the saturated fill.
+
+  `amber` is kept as a deprecated alias, resolving to identical classes. A unit test asserts that, so
+  the deprecation can't quietly restyle an existing consumer's buttons. Nothing to change on upgrade.
+
+  Also closes a gap in the contrast audit: the secondary-fill button was only ever checked under plum,
+  via two raw-ramp pairings. `secondary-fill-foreground on secondary-fill` and
+  `secondary-fill-border on background` are now audited for every theme, light and dark. All five pass;
+  the per-theme pair count goes 33 → 35.
+
+- [#77](https://github.com/MikeNotThePope/substrateui/pull/77) [`a578712`](https://github.com/MikeNotThePope/substrateui/commit/a578712a6e5e7fa53e0aba48e8b418fc5ab8ce52) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Align plum and lava with the rest of the set on geometry and motion. Both now
+  inherit the house baseline — `--radius-factor: 0.25` and a 140ms
+  `cubic-bezier(0.2, 0, 0, 1)` transition — instead of plum's stock 1x/150ms and
+  lava's swollen 1.5x/300ms. Corners across the default theme go from 6px to
+  1.5px at `rounded-md`, and lava is now a palette rather than a structural
+  variant; its magma-tinted hard shadow is the only geometry it still owns.
+  Substrate (0.4x/160ms) and tundra (0.15x/120ms) are unchanged.
+
+- [#78](https://github.com/MikeNotThePope/substrateui/pull/78) [`de5dc77`](https://github.com/MikeNotThePope/substrateui/commit/de5dc7723df31fffab2008d458c4dcccf2d05dee) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Rename the `press` theme to `proof`. The press is the machine — the components
+  and the geometry, the part that survives a theme swap — so naming a palette
+  after it put an ink and the machine under one word. A proof is one ink run on
+  one stock, which is what a theme actually is.
+
+  `data-theme="press"` still resolves to the same palette and is kept as public
+  API, so nothing breaks for existing consumers. Sites using the docs' theme
+  picker migrate a stored `press` value to `proof` on read.
+
+### Patch Changes
+
+- [#79](https://github.com/MikeNotThePope/substrateui/pull/79) [`36bbaef`](https://github.com/MikeNotThePope/substrateui/commit/36bbaeff46a4553c2aa7e22abd14fc740aa3b945) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Fix invalid nested buttons in multi-select `Combobox`
+
+  Selection chips rendered their remove button inside the trigger button. A
+  `<button>` cannot contain another `<button>`, so React threw a hydration error
+  on every page with a multi-select Combobox, and the remove control was
+  effectively unreachable — the trigger swallowed the interaction.
+
+  Chips now render in a sibling `[data-slot="combobox-chips"]` container that
+  shares a grid cell with the trigger, so wrapping chips still drive its height
+  and clicks anywhere else still open the listbox. Each remove button is a real,
+  focusable button again.
+
+  No API change. `limitTags`, `clearable`, and the `labels.remove` / `labels.more`
+  overrides all behave as before.
+
+- [#71](https://github.com/MikeNotThePope/substrateui/pull/71) [`1a675a0`](https://github.com/MikeNotThePope/substrateui/commit/1a675a0c9b117fed4e3965197ea0dd780a03a170) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Put the Press display face on headings across the whole site, not just the home page.
+
+  `h1`–`h3` rendered as site chrome now take Archivo with the system's -0.03em tracking. `h4` is
+  excluded: it renders at 20px and the display face has a 24px floor.
+
+  The rule lives in `src/app/globals.css` rather than in `typography.tsx`, because `typography.tsx`
+  ships — consumers have no Archivo file and would have received a font-family change they can't
+  serve. No published component's styling changes.
+
+  Headings that are _specimens_ rather than chrome keep `--font-sans`, which is what a consumer's app
+  actually renders: component previews and the two type-specimen lists are marked `data-specimen` and
+  opt out.
+
+- [#74](https://github.com/MikeNotThePope/substrateui/pull/74) [`7328b79`](https://github.com/MikeNotThePope/substrateui/commit/7328b79c31b5968f3873cf9a108b8ca9e6c769e3) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Give the docs pages press furniture instead of a generic docs header.
+
+  Every docs page now opens with a slug line — registration mark plus the section it belongs to,
+  read from the sidebar's own nav data — then the title, then a hairline trim rule marking where the
+  sheet's margin ends.
+
+  Component previews lose the three macOS traffic-light dots. They were window-chrome pastiche that
+  said nothing about the component; the slug line that replaces them names the plate.
+
+  `RegMark` moves out of `src/app/page.tsx` into `src/components/reg-mark.tsx`. Site-only, like
+  `Caps` — not exported from the package.
+
+- [#75](https://github.com/MikeNotThePope/substrateui/pull/75) [`b4bae81`](https://github.com/MikeNotThePope/substrateui/commit/b4bae81fe39e027d0011c56ebbab69153465e81f) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Rewrite the docs descriptions that broke the Press voice.
+
+  31 of the 91 page descriptions leaned on adjectives that can't be checked — "versatile", "satisfying",
+  "seamless", "batteries-included", "ideal for", "great for". Those are rewritten to state what the
+  component is and what it costs: Button now reads "Seven variants, four sizes, and a 3px press offset
+  that collapses under prefers-reduced-motion."
+
+  The other 60 already complied and are untouched.
+
+  Two accuracy fixes ride along: Rating no longer describes its fill as "amber" (that is the plum
+  palette's name for a colour every theme sets differently), and the blocks demo copy drops "batteries
+  fully included", a phrase the direction strikes by name.
+
+- [#73](https://github.com/MikeNotThePope/substrateui/pull/73) [`a05a2e1`](https://github.com/MikeNotThePope/substrateui/commit/a05a2e1bd0ca603820155e618dad174a82b31339) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Put the Press utility face on the docs' spec marks.
+
+  Sidebar section labels, props-table column headers and component-preview slug lines now use Barlow
+  Condensed caps at 12px — the type printed on the edge of a swatch card, and the direction's
+  fingerprint. Previously only the home page had it.
+
+  `Caps` moves out of `src/app/page.tsx` into `src/components/caps.tsx`, which also exports the
+  treatment as a class string for elements that already exist. Site-only: `--font-utility` is
+  registered in `src/app/globals.css`, not in `tokens.css`, so it is deliberately absent from the
+  `organisms` export barrel.
+
 ## 1.15.1
 
 ### Patch Changes
