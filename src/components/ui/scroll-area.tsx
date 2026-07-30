@@ -29,7 +29,12 @@ function ScrollArea({
       <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar />
+      {/* Both axes. A caller cannot add the second one themselves — anything
+          passed as children lands inside the viewport, where it would scroll
+          along with the content instead of framing it. Base UI drops the bar
+          for an axis that doesn't overflow, so the unused one costs nothing. */}
+      <ScrollBar orientation="vertical" />
+      <ScrollBar orientation="horizontal" />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   )
