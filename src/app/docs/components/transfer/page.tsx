@@ -89,6 +89,24 @@ export default function TransferPage() {
       </Stack>
 
       <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          Both move buttons are icon-only, and the per-panel count is assembled from numbers. Override with the <Code>labels</Code> prop. This is one of the few label sets
+            with no <Code>LabelsProvider</Code> key, so it is per instance only;
+            wrap it in a component of your own if you use it in more than one place.
+        </P>
+        <PropsTable
+          props={[
+          { name: "searchPlaceholder", type: "string", default: "\"Search...\"", description: "Placeholder for each panel's search input." },
+          { name: "empty", type: "string", default: "\"No items\"", description: "Shown when a panel has nothing in it." },
+          { name: "moveToTarget", type: "string", default: "\"Move to target\"", description: "Accessible name for the button that moves the selection across." },
+          { name: "moveToSource", type: "string", default: "\"Move to source\"", description: "Accessible name for the button that moves it back." },
+          { name: "itemCount", type: "(selected, total) => string", default: "\"n/m\"", description: "The per-panel count. A function so the separator and order are the caller's." },
+          ]}
+        />
+      </Stack>
+
+      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           Each row is a <Code>&lt;label&gt;</Code> wrapping its checkbox, so the

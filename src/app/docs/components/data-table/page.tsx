@@ -247,6 +247,30 @@ const columns: ColumnDef<Person>[] = [
 
       {/* Accessibility */}
       <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          The largest label set in the set, because a data table is mostly furniture — sort state, selection counts, and pagination are all announced text. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>dataTable</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "previous / next", type: "string", default: "\"Previous\" / \"Next\"", description: "The pagination buttons." },
+          { name: "noResults", type: "string", default: "\"No results.\"", description: "Empty-state row." },
+          { name: "view", type: "string", default: "\"View\"", description: "The column-visibility trigger." },
+          { name: "toggleColumns", type: "string", default: "\"Toggle columns\"", description: "Accessible name for that trigger." },
+          { name: "selectAll / selectRow", type: "string", default: "\"Select all\" / \"Select row\"", description: "The header and row checkboxes, which have no visible label." },
+          { name: "rowsSelected", type: "(selected, total) => string", default: "\"n of m row(s) selected.\"", description: "Selection summary. A function because the plural rule is the caller's language's, not English's." },
+          { name: "pageOf", type: "(page, total) => string", default: "\"Page n of m\"", description: "Page indicator." },
+          { name: "sortedAscending", type: "(title) => string", default: "\"…, sorted ascending. Click to sort descending.\"", description: "Announced sort state, and what a click will do next." },
+          { name: "sortedDescending", type: "(title) => string", default: "\"…, sorted descending. Click to remove sort.\"", description: "As above, one step round the cycle." },
+          { name: "notSorted", type: "(title) => string", default: "\"…, not sorted. Click to sort ascending.\"", description: "The unsorted case." },
+          ]}
+        />
+      </Stack>
+
+      <Stack gap="md">
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>

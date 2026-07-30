@@ -7,7 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Stack } from "@/components/ui/stack"
-import { H3, P } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { CompositionTree } from "../../_components/composition-tree"
@@ -107,6 +107,22 @@ export default function BreadcrumbDocsPage() {
           sure its glyph also respects direction — a &quot;/&quot; is
           direction-neutral, but an arrow is not.
         </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          The nav&apos;s own accessible name and the ellipsis both live here, and neither has visible text to fall back on. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>breadcrumb</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "breadcrumb", type: "string", default: "\"breadcrumb\"", description: "aria-label on the nav element — how a screen reader names the trail." },
+          { name: "more", type: "string", default: "\"More\"", description: "Accessible name for the collapsed-items ellipsis." },
+          ]}
+        />
       </Stack>
 
       <Stack gap="md">

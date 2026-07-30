@@ -114,6 +114,21 @@ export default function CountdownPage() {
       </Stack>
 
       <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          The timer&apos;s digits are announced without context unless this names what is counting down. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>countdown</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "remaining", type: "string", default: "\"Time remaining\"", description: "Accessible name for the timer region." },
+          ]}
+        />
+      </Stack>
+
+      <Stack gap="md">
         <H3>Accessibility</H3>
         <P>
           The element is a <Code>role=&quot;timer&quot;</Code>, whose implicit{" "}

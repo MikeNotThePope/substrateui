@@ -112,6 +112,21 @@ export default function DialogPage() {
 
       {/* Accessibility */}
       <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          The close button is an icon, so this string is its entire accessible name. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>dialog</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "close", type: "string", default: "\"Close\"", description: "Accessible name for the corner close button." },
+          ]}
+        />
+      </Stack>
+
+      <Stack gap="md">
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>

@@ -2,7 +2,7 @@
 
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { CompositionTree } from "../../_components/composition-tree"
@@ -81,6 +81,30 @@ export default function ContextMenuPage() {
       </Stack>
 
       {/* API Reference */}
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <Stack gap="sm">
+          <P>
+            A submenu opens toward the end of the line, so in RTL it opens
+            leftward and its trigger&apos;s <Code>ChevronRight</Code> should point
+            that way too. The{" "}
+            <a
+              href="/docs/accessibility/direction"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              RTL icon audit
+            </a>{" "}
+            classifies it <strong>flip in RTL</strong>; the indicator carries{" "}
+            <Code>rtl:-scale-x-100</Code> for that reason.
+          </P>
+          <P>
+            Positioning and padding are logical throughout, so the menu itself
+            needs nothing configured — flip the site&apos;s direction and the
+            alignment follows.
+          </P>
+        </Stack>
+      </Stack>
+
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={contextMenuProps} />

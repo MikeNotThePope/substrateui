@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Stack } from "@/components/ui/stack"
-import { H3, P } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
@@ -69,6 +69,25 @@ export default function DatePickerPage() {
       </Stack>
 
       {/* API Reference */}
+      <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          This one carries formatting as well as text — a date rendered US-style in a French locale is wrong even when every string around it is translated. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>datePicker</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "placeholder", type: "string", default: "\"Pick a date\"", description: "Trigger text with no date selected." },
+          { name: "rangePlaceholder", type: "string", default: "\"Pick a date range\"", description: "Trigger text in range mode." },
+          { name: "locale", type: "string", default: "\"en-US\"", description: "BCP 47 tag the default formatters use, and the calendar's own locale." },
+          { name: "formatDate", type: "(date: Date) => string", default: "Intl, per locale", description: "Full date in the trigger. Replace for a format Intl doesn't produce." },
+          { name: "formatDateShort", type: "(date: Date) => string", default: "Intl, per locale", description: "Compact date, used for each end of a range." },
+          ]}
+        />
+      </Stack>
+
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={datePickerProps} />

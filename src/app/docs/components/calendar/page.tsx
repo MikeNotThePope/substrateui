@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Calendar } from "@/components/ui/calendar"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
@@ -88,6 +88,31 @@ export default function CalendarPage() {
       </Stack>
 
       {/* API Reference */}
+      <Stack gap="md">
+        <H3>Direction</H3>
+        <Stack gap="sm">
+          <P>
+            The month-navigation chevrons are already handled: the calendar root
+            carries <Code>rtl:**:[.rdp-button_previous&gt;svg]:rotate-180</Code>{" "}
+            and its next-button twin, so &quot;previous month&quot; points to the
+            start of the line in either direction. Nothing to add at the call site.
+          </P>
+          <P>
+            The grid itself runs the way the locale does, and the weekday order
+            comes from the locale rather than from the direction — set{" "}
+            <Code>locale</Code> as well as flipping direction, or you get an RTL
+            calendar that still starts its week on Sunday. See{" "}
+            <a
+              href="/docs/accessibility/direction"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              Direction (RTL)
+            </a>
+            .
+          </P>
+        </Stack>
+      </Stack>
+
       <Stack gap="md">
         <H3>API Reference</H3>
         <PropsTable props={calendarProps} />

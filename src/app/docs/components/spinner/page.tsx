@@ -55,6 +55,21 @@ export default function SpinnerPage() {
       <ImportLine names={["Spinner"]} />
 
       <Stack gap="md">
+        <H3>Labels</H3>
+        <P>
+          A spinner has no text at all — this string is the whole of what a screen reader gets. Override one instance with the <Code>labels</Code> prop on the component, or every
+            instance at once through <Code>LabelsProvider</Code>&apos;s{" "}
+            <Code>spinner</Code> key — the provider is how you translate the
+            set once instead of at each call site.
+        </P>
+        <PropsTable
+          props={[
+          { name: "loading", type: "string", default: "\"Loading…\"", description: "Accessible name for the spinner." },
+          ]}
+        />
+      </Stack>
+
+      <Stack gap="md">
         <H3>Accessibility</H3>
         <Stack gap="sm">
           <P>
