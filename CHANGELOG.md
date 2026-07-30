@@ -1,5 +1,59 @@
 # Changelog
 
+## 1.16.1
+
+### Patch Changes
+
+- [#80](https://github.com/MikeNotThePope/substrateui/pull/80) [`489969f`](https://github.com/MikeNotThePope/substrateui/commit/489969f8fdeab893932675e5b5c8f8f1de5bb960) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Fix `Resizable` against react-resizable-panels 4
+
+  The component was written for the v2 API and never updated, so two things were
+  wrong once v4 was installed:
+
+  - The vertical layout was unstyled. Both `ResizablePanelGroup` and
+    `ResizableHandle` keyed their vertical variants off
+    `data-panel-group-direction`, an attribute v4 no longer emits. A handle in a
+    vertical group came out 1px wide and full height — a vertical rule where a
+    horizontal one belonged — and its widened drag target ran the wrong way too.
+    Both now read the separator's own `aria-orientation`, which v4 does set, and
+    the grip pill turns to lie along the rule.
+  - `ResizablePanelGroup` restated `flex` and `flex-direction` in classes. v4 sets
+    both inline from `orientation`, so the class was dead and the group's real
+    axis could disagree with the one being styled for.
+
+  `ResizablePanelGroup` also no longer applies `h-full w-full`. The library writes
+  `height: 100%; width: 100%` inline, which beats any class — so a `className` of
+  `h-48` never worked here, and keeping a class that tailwind-merge would happily
+  replace made it look as though it should. Size the group by sizing its parent.
+
+  Callers on the v4 API are unaffected. If you are still passing v2 prop names —
+  `direction`, `autoSaveId`, `onLayout`, or a percentage `className` height — those
+  were already being ignored; the new docs page covers what replaces them.
+
+- [#80](https://github.com/MikeNotThePope/substrateui/pull/80) [`489969f`](https://github.com/MikeNotThePope/substrateui/commit/489969f8fdeab893932675e5b5c8f8f1de5bb960) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - `ScrollArea` now renders a horizontal scrollbar as well as a vertical one
+
+  Horizontally overflowing content scrolled, but with no styled bar — the root is
+  `overflow-hidden`, so the native one was clipped and the themed one was never
+  rendered. There was also no way for a caller to add it: `ScrollArea` puts its
+  children inside the viewport, so a `<ScrollBar orientation="horizontal" />`
+  passed in would have scrolled along with the content rather than framing it.
+
+  Both bars are now assembled inside the component. Base UI drops the bar for an
+  axis that doesn't overflow, so a vertical-only scroll area is unchanged and the
+  unused bar costs nothing.
+
+  `ScrollBar` stays exported for composing Base UI's primitives directly.
+
+- [#80](https://github.com/MikeNotThePope/substrateui/pull/80) [`489969f`](https://github.com/MikeNotThePope/substrateui/commit/489969f8fdeab893932675e5b5c8f8f1de5bb960) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Mirror the submenu chevrons in RTL
+
+  `ContextMenuSubTrigger`, `DropdownMenuSubTrigger`, and `MenubarSubTrigger` each
+  draw a `ChevronRight` to say a submenu opens that way. The submenu itself is
+  positioned logically and opens leftward in an RTL locale, but the chevron kept
+  pointing right — the indicator contradicted the thing it indicates.
+
+  All three now carry `rtl:-scale-x-100`, which is what
+  `docs/rtl-icon-audit.md` has classified them as needing since it was written.
+  The chevrons were already positioned with `ms-auto`, so nothing else moves.
+
 ## 1.16.0
 
 ### Minor Changes

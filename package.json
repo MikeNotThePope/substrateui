@@ -1,6 +1,6 @@
 {
   "name": "@mikenotthepope/substrateui",
-  "version": "1.16.0",
+  "version": "1.16.1",
   "description": "A chunky, OKLCH-powered design system for Next.js — built on Tailwind CSS v4, Base UI, and Atomic Design principles.",
   "license": "MIT",
   "author": "SubstrateUI",
@@ -73,7 +73,7 @@
     "audit:contrast": "tsx scripts/audit-contrast.ts",
     "audit:direction": "tsx scripts/audit-direction.ts",
     "audit:docs": "tsx scripts/audit-docs.ts",
-  "audit:stories": "tsx scripts/audit-stories.ts",
+    "audit:stories": "tsx scripts/audit-stories.ts",
     "test": "NODE_OPTIONS='--throw-deprecation' vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
