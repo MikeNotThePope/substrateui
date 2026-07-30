@@ -27,6 +27,10 @@ export function useLocalStorage<T>(
 
   const [value, setValue] = React.useState<T>(defaultValue)
 
+  // Nothing may be written to storage until the first read has happened, or
+  // mounting would persist `defaultValue` over whatever was already stored.
+  const hydrated = React.useRef(false)
+
   // Hydrate from storage after mount to avoid an SSR/client mismatch.
   React.useEffect(() => {
     try {
@@ -35,25 +39,34 @@ export function useLocalStorage<T>(
     } catch {
       /* ignore malformed / unavailable storage */
     }
+    hydrated.current = true
   }, [key])
 
-  const set = React.useCallback(
-    (next: T | ((prev: T) => T)) => {
-      setValue((prev) => {
-        const resolved = next instanceof Function ? next(prev) : next
-        try {
-          window.localStorage.setItem(key, JSON.stringify(resolved))
-          window.dispatchEvent(
-            new StorageEvent("storage", { key, newValue: JSON.stringify(resolved) })
-          )
-        } catch {
-          /* ignore write errors (private mode, quota) */
-        }
-        return resolved
-      })
-    },
-    [key]
-  )
+  // Persist in an effect rather than inside the state updater. React may run an
+  // updater during the render phase, and these two lines are side effects: with
+  // two hooks on one key, the dispatch below reached the other instance's
+  // listener mid-render and set state on a component that was not the one
+  // rendering — React's "Cannot update a component while rendering a different
+  // component" warning. Updaters have to stay pure; effects are where writes go.
+  React.useEffect(() => {
+    if (!hydrated.current) return
+    try {
+      const json = JSON.stringify(value)
+      // Also the echo guard. A value that arrived *from* a storage event is
+      // already the stored one, so re-announcing it would bounce between
+      // instances forever — Object.is can't stop it, since JSON.parse hands
+      // back a fresh object every time.
+      if (window.localStorage.getItem(key) === json) return
+      window.localStorage.setItem(key, json)
+      window.dispatchEvent(new StorageEvent("storage", { key, newValue: json }))
+    } catch {
+      /* ignore write errors (private mode, quota) */
+    }
+  }, [key, value])
+
+  const set = React.useCallback((next: T | ((prev: T) => T)) => {
+    setValue(next)
+  }, [])
 
   // Keep instances in sync across tabs and within the same document.
   React.useEffect(() => {
