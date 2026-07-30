@@ -6,28 +6,39 @@ import { usePathname } from "next/navigation"
 import { Caps } from "@/components/caps"
 
 /**
- * Where a source path resolves in the built site. Overridable so a fork, or a
- * preview deploy built from a branch, can point the plate line at its own tree
- * instead of at main here.
- */
-const REPO =
-  process.env.NEXT_PUBLIC_SOURCE_BASE_URL ??
-  "https://github.com/MikeNotThePope/substrateui"
-
-const IS_DEV = process.env.NODE_ENV === "development"
-
-/**
- * The plate line: which file on GitHub prints this page's specimens.
+ * The source line: which file on GitHub this page documents.
  *
  * Derived from the pathname rather than passed in as a prop, for the reason
  * DocEyebrow already documents — none of the 92 pages should have to repeat
  * something the route already knows, and a prop on 92 pages is 92 chances to
  * point at the wrong file.
  *
- * No reg mark here. The direction allows one beside a slug line, but
- * DocEyebrow sets one four lines above; two crosshairs that close together
- * read as noise rather than as registration.
+ * Labelled SOURCE, not PLATE. "Plate" is the press metaphor — a plate is what
+ * prints a sheet — and it sits well in the internal vocabulary beside slug lines
+ * and registration marks. As a user-facing label it failed the direction's own
+ * voice test: say what the thing *is*, in words that can be checked. A reader
+ * who has to ask what a plate is has been charged for the metaphor without being
+ * given the answer.
+ *
+ * The link always navigates to GitHub, in dev as well as production. An earlier
+ * version intercepted the click in dev to open the file in the local editor via
+ * Next's launch-editor endpoint. It worked — and it was wrong: the trailing ↗
+ * promises navigation, so a click that silently pokes an editor somewhere behind
+ * the browser reads as a dead link. Don't reclaim the primary click of something
+ * that looks like a link.
+ *
+ * No reg mark here. The direction allows one beside a slug line, but DocEyebrow
+ * sets one four lines above; two crosshairs that close together read as noise
+ * rather than as registration.
  */
+
+/**
+ * Where a source path resolves. Overridable so a fork, or a preview deploy built
+ * from a branch, can point at its own tree instead of at main here.
+ */
+const REPO =
+  process.env.NEXT_PUBLIC_SOURCE_BASE_URL ??
+  "https://github.com/MikeNotThePope/substrateui"
 
 /**
  * Routes whose source is not `src/components/ui/<slug>.tsx`. Every
@@ -82,30 +93,7 @@ function hrefFor(path: string): string {
   return `${REPO}/${isDir ? "tree" : "blob"}/main/${isDir ? path.slice(0, -1) : path}`
 }
 
-/**
- * The path is the real content of this link; the host is an environment.
- * In production that host is GitHub. Running locally, the file is right there
- * on disk, and the useful destination is the editor rather than a web view of
- * a possibly-stale main — so a plain left-click opens it via Next's dev
- * endpoint (GET /__nextjs_launch-editor, which 204s and launches).
- *
- * href stays the GitHub URL in both environments, so copy-link and
- * modified-clicks still give the canonical shareable address. Only an
- * unmodified primary click on a file is intercepted; directories have no
- * editor equivalent and always go to the tree view.
- */
-function editorLaunchHandler(path: string) {
-  if (!IS_DEV || path.endsWith("/")) return undefined
-
-  return (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-    event.preventDefault()
-    const params = new URLSearchParams({ file: path, line1: "1", column1: "1" })
-    void fetch(`/__nextjs_launch-editor?${params}`)
-  }
-}
-
-export function PlateLine() {
+export function SourceLine() {
   const pathname = usePathname()
   const sources = sourcesFor(pathname)
 
@@ -117,27 +105,20 @@ export function PlateLine() {
 
   return (
     <div className="mt-3 flex flex-wrap items-center justify-end gap-x-3 gap-y-1">
-      <Caps className="text-muted-foreground">Plate</Caps>
-      {sources.map((path) => {
-        const launch = editorLaunchHandler(path)
-        return (
-          <a
-            key={path}
-            href={hrefFor(path)}
-            target="_blank"
-            rel="noreferrer"
-            onClick={launch}
-            aria-label={
-              launch ? `Open ${path} in your editor` : `View ${path} on GitHub`
-            }
-            title={launch ? "Opens in your editor — ⌘-click for GitHub" : undefined}
-            className="inline-flex items-center gap-1 rounded-sm font-mono text-xs text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          >
-            {terse ? path.split("/").filter(Boolean).pop() : path}
-            <ArrowUpRight aria-hidden className="h-3 w-3 shrink-0" />
-          </a>
-        )
-      })}
+      <Caps className="text-muted-foreground">Source</Caps>
+      {sources.map((path) => (
+        <a
+          key={path}
+          href={hrefFor(path)}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`View ${path} on GitHub`}
+          className="inline-flex items-center gap-1 rounded-sm font-mono text-xs text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          {terse ? path.split("/").filter(Boolean).pop() : path}
+          <ArrowUpRight aria-hidden className="h-3 w-3 shrink-0" />
+        </a>
+      ))}
     </div>
   )
 }
