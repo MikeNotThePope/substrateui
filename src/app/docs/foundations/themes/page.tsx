@@ -17,13 +17,13 @@ const themeDna = [
   },
   {
     name: "Lava",
-    keywords: "Volcanic, energetic, elemental, high-contrast, molten.",
-    feels: "Raw heat under a dark crust — molten in structure, not just color.",
+    keywords: "Volcanic, energetic, elemental, high-contrast.",
+    feels: "Raw heat under a dark crust — cooled to the same hard edge as the rest of the set.",
     not: [
-      "A red re-skin of plum — lava changes structure (motion, corners, shadows), not just hue",
+      "Soft — lava is hot, not molten; the geometry is the house cut corner and hard stop, same as every other theme",
       "Alarming — magma is heat, not danger; errors stay cherry red, so never use the primary for destructive actions",
       "Cyberpunk or neon — the palette is geological (magma, sulfur, basalt), never electric or glitchy",
-      "Snappy — motion is deliberately slow and viscous; don't add fast durations to \"fix\" it",
+      "Gray-shadowed — the hard shadow is tinted deep magma, embers under the crust; that tint is lava's one structural tell",
     ],
   },
   {
@@ -45,7 +45,7 @@ const themeDna = [
       "Decorative — jade earns its place by marking state, not by looking pleasant",
       "Warm — graphite neutrals carry no cream; amber signals rather than decorates",
       "Bouncy — motion is a dial settling, never an overshoot",
-      "Lava in green — the structure is cool and exact, not molten",
+      "Lava in green — the palette is cool and exact, never hot",
     ],
   },
   {
@@ -64,10 +64,10 @@ const themeDna = [
 /** One row per theme so the table scales as themes are added — the previous
  *  shape put each theme in its own column and only fitted two. */
 const themeDiff = [
-  ["Plum", "Plum ink", "Amber", "Warm gray (cream)", "150ms, standard", "Stock (1x)"],
+  ["Plum", "Plum ink", "Amber", "Warm gray (cream)", "140ms, hard stop", "Cut (0.25x)"],
   ["Press", "Process cyan", "Process yellow", "Cool proof stock", "140ms, hard stop", "Cut (0.25x)"],
   ["Substrate", "Jade", "Instrument amber", "Graphite", "160ms, settling", "Softened (0.4x)"],
-  ["Lava", "Magma — yellow→red as it deepens", "Sulfur yellow", "Basalt", "300ms, viscous", "Swollen (1.5x)"],
+  ["Lava", "Magma — yellow→red as it deepens", "Sulfur yellow", "Basalt", "140ms, hard stop", "Cut (0.25x)"],
   ["Tundra", "Steel blue", "Cold rose", "Frost", "120ms, brittle", "Square (0.15x)"],
 ]
 
@@ -245,10 +245,12 @@ export default function ThemesPage() {
           (re-time every component transition that doesn&apos;t set an
           explicit duration/easing utility) and{" "}
           <Code>--radius-factor</Code> (scales every corner radius from a
-          single multiplier). The lava theme uses all three to feel molten
-          rather than merely recolored: slower, viscous ease-out motion,
-          corners swollen 1.5x, and hard shadows tinted deep magma instead
-          of gray.
+          single multiplier). Use them sparingly. Plum, press and lava all
+          sit on the house baseline — a cut corner and a 140ms stop —
+          because a theme should be recognisable across a room by its
+          color; substrate slows and softens slightly, tundra goes quicker
+          and squarer, and that spread is about as far as the feel tokens
+          should travel.
         </P>
         <P>
           Semantic token names, the spacing scale, and the typography scale
