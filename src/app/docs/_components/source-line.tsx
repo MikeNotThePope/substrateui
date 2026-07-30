@@ -74,6 +74,9 @@ const SOURCES: Record<string, string[]> = {
   "/docs/accessibility/contrast": ["scripts/audit-contrast.ts"],
   "/docs/accessibility/direction": ["src/components/ui/direction.tsx"],
   "/docs/blocks": ["src/components/blocks/"],
+  // An organism, so it sits a level above src/components/ui and the slug
+  // derivation would miss it.
+  "/docs/components/stat-card": ["src/components/stat-card.tsx"],
   "/docs/foundations/ai-prompt": ["src/app/docs/foundations/ai-prompt/prompt.ts"],
   "/docs/foundations/cli": ["bin/substrateui.mjs"],
   "/docs/foundations/theme-generator": ["src/components/ui/theme.tsx"],
@@ -99,12 +102,19 @@ const SOURCES: Record<string, string[]> = {
 const COMPONENTS_PREFIX = "/docs/components/"
 
 export function sourcesFor(pathname: string): string[] {
-  if (pathname.startsWith(COMPONENTS_PREFIX)) {
-    const slug = pathname.slice(COMPONENTS_PREFIX.length).replace(/\/$/, "")
+  const route = pathname.replace(/\/$/, "")
+
+  // The map wins over the derivation. Most /docs/components/* pages document a
+  // file in src/components/ui, but not all — StatCard is an organism a level up
+  // — and a derived path that doesn't exist renders as a confident link to a 404.
+  if (SOURCES[route]) return SOURCES[route]
+
+  if (route.startsWith(COMPONENTS_PREFIX)) {
+    const slug = route.slice(COMPONENTS_PREFIX.length)
     // Nested routes under a component page have no source file of their own.
     if (slug && !slug.includes("/")) return [`src/components/ui/${slug}.tsx`]
   }
-  return SOURCES[pathname.replace(/\/$/, "")] ?? []
+  return []
 }
 
 export function hrefFor(path: string): string {

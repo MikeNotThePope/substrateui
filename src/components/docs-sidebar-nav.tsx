@@ -123,6 +123,7 @@ export const navSections = [
       { label: "Descriptions", href: "/docs/components/descriptions" },
       { label: "Transfer", href: "/docs/components/transfer" },
       { label: "Countdown", href: "/docs/components/countdown" },
+      { label: "StatCard", href: "/docs/components/stat-card" },
       { label: "Chart", href: "/docs/components/chart" },
       { label: "Carousel", href: "/docs/components/carousel" },
       { label: "Accordion", href: "/docs/components/accordion" },
