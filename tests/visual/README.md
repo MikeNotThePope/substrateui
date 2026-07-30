@@ -71,6 +71,15 @@ that no longer exist locally (e.g. removed components).
 Alternatively, trigger the **Update Visual Baselines** workflow from
 the GitHub Actions tab — it regenerates and uploads in one step.
 
+Its last step then re-runs the branch's CI for you. That matters
+because there is one baseline archive in R2 and CI starts on push:
+a `verify` that began before the upload downloaded the *old*
+baselines, so it is guaranteed to fail on every snapshot the
+regeneration just replaced. The workflow cancels that doomed run if
+it is still going and re-runs it, which keeps the same `verify`
+check — the one branch protection requires — rather than reporting a
+detached second one. Nothing to sequence by hand.
+
 ## When tests fail in CI
 
 Download the `playwright-report` artifact from the failed Actions run,
