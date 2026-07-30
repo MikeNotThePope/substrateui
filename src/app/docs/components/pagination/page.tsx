@@ -10,6 +10,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
@@ -83,6 +84,28 @@ export default function PaginationPage() {
           "PaginationPrevious",
         ]}
       />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Pagination"
+          nodes={[
+            {
+              name: "PaginationContent",
+              children: [
+                {
+                  name: "PaginationItem",
+                  children: [
+                    { name: "PaginationPrevious" },
+                    { name: "PaginationLink" },
+                    { name: "PaginationNext" },
+                  ],
+                },
+              ],
+            },
+          ]}
+        />
+      </Stack>
 
       <Stack gap="md">
         <H3>Direction</H3>

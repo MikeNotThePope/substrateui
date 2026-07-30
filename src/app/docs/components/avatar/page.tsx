@@ -4,6 +4,7 @@ import { Cluster } from "@/components/ui/cluster"
 import { H3 } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
@@ -89,6 +90,17 @@ export default function AvatarPage() {
           "AvatarImage",
         ]}
       />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Avatar"
+          nodes={[
+            { name: "AvatarImage" },
+            { name: "AvatarFallback" },
+          ]}
+        />
+      </Stack>
 
       {/* Fallback Only */}
       <Stack gap="md">

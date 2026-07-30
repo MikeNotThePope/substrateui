@@ -4,6 +4,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
@@ -106,6 +107,18 @@ export default function FieldPage() {
           "FieldError",
         ]}
       />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="Field"
+          nodes={[
+            { name: "FieldLabel" },
+            { name: "FieldHint" },
+            { name: "FieldError" },
+          ]}
+        />
+      </Stack>
 
       {/* Error State */}
       <Stack gap="md">

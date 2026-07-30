@@ -2,6 +2,7 @@ import { Stack } from "@/components/ui/stack"
 import { H3, Code, Muted } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
@@ -154,6 +155,50 @@ export default function SidebarPage() {
           "useSidebar",
         ]}
       />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <CompositionTree
+          root="SidebarProvider"
+          nodes={[
+            {
+              name: "Sidebar",
+              children: [
+                { name: "SidebarHeader" },
+                {
+                  name: "SidebarContent",
+                  children: [
+                    {
+                      name: "SidebarGroup",
+                      children: [
+                        { name: "SidebarGroupLabel" },
+                        {
+                          name: "SidebarMenu",
+                          children: [
+                            {
+                              name: "SidebarMenuItem",
+                              children: [
+                                { name: "SidebarMenuButton" },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                { name: "SidebarFooter" },
+              ],
+            },
+            {
+              name: "SidebarInset",
+              children: [
+                { name: "SidebarTrigger" },
+              ],
+            },
+          ]}
+        />
+      </Stack>
 
       <Stack gap="md">
         <H3>When to use this vs. App Shell</H3>
