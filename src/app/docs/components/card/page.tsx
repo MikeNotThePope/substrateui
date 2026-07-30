@@ -9,25 +9,23 @@ import {
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
+import { CompositionTree } from "../../_components/composition-tree"
+import { ImportLine } from "../../_components/import-line"
 import { PropsTable } from "../../_components/props-table"
 
 export default function CardPage() {
   return (
     <DocPage
       title="Card"
-      description="A bordered container for grouping related content into distinct sections with optional header, body, and footer areas."
+      description="A bordered container that groups related content. Six parts, one prop. The parts are layout only — they carry padding and rhythm, not behaviour."
     >
-      {/* Basic Card */}
-      <Stack gap="md">
-        <H3>Basic Card</H3>
-        <ComponentPreview
-          title="Basic Card"
-          code={`<Card>
+      <ComponentPreview
+        code={`<Card>
   <CardHeader>
     <CardTitle>Project Update</CardTitle>
     <CardDescription>Latest status on the design system rollout.</CardDescription>
@@ -39,40 +37,75 @@ export default function CardPage() {
     <Button>View Details</Button>
   </CardFooter>
 </Card>`}
-        >
-          <Card className="w-full max-w-md">
-            <CardHeader>
-              <CardTitle>Project Update</CardTitle>
-              <CardDescription>
-                Latest status on the design system rollout.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>
-                All core components have been implemented and tested. The team is
-                now focused on documentation and integration guides for consuming
-                applications.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button>View Details</Button>
-            </CardFooter>
-          </Card>
-        </ComponentPreview>
+      >
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle>Project Update</CardTitle>
+            <CardDescription>
+              Latest status on the design system rollout.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              All core components have been implemented and tested. The team is
+              now focused on documentation and integration guides for consuming
+              applications.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Button>View Details</Button>
+          </CardFooter>
+        </Card>
+      </ComponentPreview>
+
+      <ImportLine
+        names={[
+          "Card",
+          "CardHeader",
+          "CardTitle",
+          "CardDescription",
+          "CardContent",
+          "CardFooter",
+        ]}
+      />
+
+      <Stack gap="md">
+        <H3>Composition</H3>
+        <P>
+          Every part is optional and order is yours. <Code>CardContent</Code> and{" "}
+          <Code>CardFooter</Code> both drop their top padding so a stack of parts
+          keeps one rhythm instead of doubling the gap at each seam.
+        </P>
+        <CompositionTree
+          root="Card"
+          nodes={[
+            {
+              name: "CardHeader",
+              children: [{ name: "CardTitle" }, { name: "CardDescription" }],
+            },
+            { name: "CardContent" },
+            { name: "CardFooter" },
+          ]}
+        />
       </Stack>
 
-      {/* Interactive Card */}
       <Stack gap="md">
-        <H3>Interactive Card</H3>
+        <H3>Interactive</H3>
+        <P>
+          <Code>interactive</Code> adds the affordances of a pressable surface:
+          the border takes the ring colour, the card lifts 2px into a larger hard
+          shadow, and a click seats it 3px down with the shadow removed. All of it
+          collapses under <Code>prefers-reduced-motion</Code>.
+        </P>
         <ComponentPreview
-          title="Interactive Card"
           code={`<Card interactive>
   <CardHeader>
-    <CardTitle>Clickable Card</CardTitle>
-    <CardDescription>This card has hover and active states.</CardDescription>
+    <CardTitle>Analytics</CardTitle>
+    <CardDescription>View traffic and engagement.</CardDescription>
   </CardHeader>
   <CardContent>
-    <p>Use the interactive prop to add cursor, border, and shadow transitions on hover, plus a subtle press effect on click.</p>
+    <p className="text-2xl font-bold">12,340</p>
+    <p className="text-sm text-muted-foreground">visits this month</p>
   </CardContent>
 </Card>`}
         >
@@ -105,11 +138,14 @@ export default function CardPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* Card with Form */}
       <Stack gap="md">
-        <H3>Card with Form</H3>
+        <H3>Holding a form</H3>
+        <P>
+          A card is a plain container, so a form inside it needs no special
+          handling — <Code>CardContent</Code> takes the fields and{" "}
+          <Code>CardFooter</Code> takes the submit.
+        </P>
         <ComponentPreview
-          title="Card with Form"
           code={`<Card>
   <CardHeader>
     <CardTitle>Create Account</CardTitle>
@@ -158,136 +194,55 @@ export default function CardPage() {
         </ComponentPreview>
       </Stack>
 
-      {/* API Reference */}
+      <Stack gap="md">
+        <H3>Accessibility</H3>
+        <Stack gap="sm">
+          <P>
+            <Code>interactive</Code> is styling and nothing else. It does not add{" "}
+            <Code>tabIndex</Code>, a role, or a key handler, so a card carrying
+            only an <Code>onClick</Code> is unreachable by keyboard and invisible
+            to screen readers — it looks pressable to a mouse user and does not
+            exist for anyone else.
+          </P>
+          <P>
+            Put a real control inside instead. Wrap the title in a link, or give
+            the card a button in its footer, and let the whole surface be
+            decoration around it. Where the entire card must be one target, render
+            it <Code>render=&lt;a&gt;</Code>-style as an anchor or button so the
+            browser supplies focus, activation, and the announced role.
+          </P>
+          <P>
+            <Code>CardTitle</Code> is a <Code>div</Code>, not a heading, so it adds
+            no document outline. In a list of cards where the titles are the
+            structure, pass a heading element to <Code>render</Code> or nest one
+            inside — otherwise a screen-reader user cannot navigate between them.
+          </P>
+        </Stack>
+      </Stack>
+
       <Stack gap="md">
         <H3>API Reference</H3>
-
-        <Stack gap="sm">
-          <p className="font-semibold text-sm text-muted-foreground">Card</p>
-          <PropsTable
-            props={[
-              {
-                name: "interactive",
-                type: "boolean",
-                default: "false",
-                description:
-                  "Adds hover border highlight, shadow lift, and active press effect.",
-              },
-              {
-                name: "className",
-                type: "string",
-                description: "Additional CSS classes to apply to the card.",
-              },
-              {
-                name: "children",
-                type: "React.ReactNode",
-                description: "Card content, typically CardHeader, CardContent, and CardFooter.",
-              },
-            ]}
-          />
-        </Stack>
-
-        <Stack gap="sm">
-          <p className="font-semibold text-sm text-muted-foreground">
-            CardHeader
-          </p>
-          <PropsTable
-            props={[
-              {
-                name: "className",
-                type: "string",
-                description: "Additional CSS classes for the header section.",
-              },
-              {
-                name: "children",
-                type: "React.ReactNode",
-                description:
-                  "Header content, typically CardTitle and CardDescription.",
-              },
-            ]}
-          />
-        </Stack>
-
-        <Stack gap="sm">
-          <p className="font-semibold text-sm text-muted-foreground">
-            CardTitle
-          </p>
-          <PropsTable
-            props={[
-              {
-                name: "className",
-                type: "string",
-                description: "Additional CSS classes for the title.",
-              },
-              {
-                name: "children",
-                type: "React.ReactNode",
-                description: "Title text content.",
-              },
-            ]}
-          />
-        </Stack>
-
-        <Stack gap="sm">
-          <p className="font-semibold text-sm text-muted-foreground">
-            CardDescription
-          </p>
-          <PropsTable
-            props={[
-              {
-                name: "className",
-                type: "string",
-                description: "Additional CSS classes for the description.",
-              },
-              {
-                name: "children",
-                type: "React.ReactNode",
-                description: "Description text content.",
-              },
-            ]}
-          />
-        </Stack>
-
-        <Stack gap="sm">
-          <p className="font-semibold text-sm text-muted-foreground">
-            CardContent
-          </p>
-          <PropsTable
-            props={[
-              {
-                name: "className",
-                type: "string",
-                description: "Additional CSS classes for the content area.",
-              },
-              {
-                name: "children",
-                type: "React.ReactNode",
-                description: "Main body content of the card.",
-              },
-            ]}
-          />
-        </Stack>
-
-        <Stack gap="sm">
-          <p className="font-semibold text-sm text-muted-foreground">
-            CardFooter
-          </p>
-          <PropsTable
-            props={[
-              {
-                name: "className",
-                type: "string",
-                description: "Additional CSS classes for the footer.",
-              },
-              {
-                name: "children",
-                type: "React.ReactNode",
-                description:
-                  "Footer content, typically action buttons.",
-              },
-            ]}
-          />
-        </Stack>
+        <P>
+          <Code>Card</Code> owns one prop. The other five parts add padding and
+          rhythm and take no props of their own — every prop you pass, including{" "}
+          <Code>className</Code>, <Code>ref</Code>, and any{" "}
+          <Code>data-*</Code> attribute, goes straight to the underlying{" "}
+          <Code>div</Code>. See{" "}
+          <Code>React.ComponentPropsWithRef&lt;&quot;div&quot;&gt;</Code> for that
+          surface; the composition tree above is the more useful map of what goes
+          where.
+        </P>
+        <PropsTable
+          props={[
+            {
+              name: "interactive",
+              type: "boolean",
+              default: "false",
+              description:
+                "Hover border highlight, 2px shadow lift, and a 3px press offset on click. Styling only — it does not make the card focusable or operable.",
+            },
+          ]}
+        />
       </Stack>
     </DocPage>
   )

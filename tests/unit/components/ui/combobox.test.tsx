@@ -210,7 +210,7 @@ describe('Combobox — grouping', () => {
 
 describe('Combobox — chips and clearing', () => {
   it('collapses chips past limitTags into a count badge', () => {
-    render(
+    const { container } = render(
       <Combobox
         options={OPTIONS}
         multiple
@@ -218,11 +218,33 @@ describe('Combobox — chips and clearing', () => {
         value={['apple', 'banana', 'cherry']}
       />
     )
-    const trigger = screen.getByRole('combobox')
-    expect(trigger).toHaveTextContent('Apple')
-    expect(trigger).toHaveTextContent('Banana')
-    expect(trigger).not.toHaveTextContent('Cherry')
-    expect(trigger).toHaveTextContent('+1')
+    // Asserted on the chips container, not the trigger: chips are siblings of
+    // the trigger button, because a button cannot contain the remove buttons.
+    const chips = container.querySelector('[data-slot="combobox-chips"]')!
+    expect(chips).toHaveTextContent('Apple')
+    expect(chips).toHaveTextContent('Banana')
+    expect(chips).not.toHaveTextContent('Cherry')
+    expect(chips).toHaveTextContent('+1')
+  })
+
+  it('renders no button inside the trigger button', () => {
+    // Nested buttons are invalid HTML: React throws a hydration error and the
+    // remove control becomes unreachable, since the trigger takes the click.
+    const { container } = render(
+      <Combobox options={OPTIONS} multiple clearable value={['apple', 'banana']} />
+    )
+    const trigger = container.querySelector('[data-slot="combobox"]')!
+    expect(trigger.tagName).toBe('BUTTON')
+    expect(trigger.querySelector('button')).toBeNull()
+  })
+
+  it('keeps every chip remove button reachable and named', () => {
+    render(
+      <Combobox options={OPTIONS} multiple value={['apple', 'banana']} />
+    )
+    for (const name of ['Remove Apple', 'Remove Banana']) {
+      expect(screen.getByRole('button', { name })).toBeVisible()
+    }
   })
 
   it('clears a single selection', async () => {

@@ -18,6 +18,7 @@ export default function CliPage() {
           and prints the font, dark-mode, and router setup.
         </P>
         <ComponentPreview
+          defaultOpen
           code={`# with the package installed
 npx substrateui init
 
@@ -41,6 +42,7 @@ npx substrateui init --yes`}
           requires:
         </P>
         <ComponentPreview
+          defaultOpen
           code={`@import "tailwindcss";
 @import "tw-animate-css";
 @import "@mikenotthepope/substrateui/styles.css";

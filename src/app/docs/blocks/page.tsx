@@ -37,6 +37,7 @@ export default function BlocksPage() {
           of the primitives:
         </P>
         <ComponentPreview
+          defaultOpen
           code={`import { SignInBlock, HeroBlock, StatsBlock } from "@mikenotthepope/substrateui/blocks"
 
 // Make links router-aware once, at the root:
