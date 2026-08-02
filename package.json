@@ -92,19 +92,9 @@
     "release": "changeset publish"
   },
   "peerDependencies": {
-    "next": ">=15",
-    "next-themes": ">=0.4",
     "react": ">=18",
     "react-dom": ">=18",
     "tailwindcss": ">=4"
-  },
-  "peerDependenciesMeta": {
-    "next": {
-      "optional": true
-    },
-    "next-themes": {
-      "optional": true
-    }
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

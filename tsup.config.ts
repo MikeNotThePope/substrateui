@@ -14,14 +14,12 @@ export default defineConfig({
   sourcemap: true,
   splitting: true,
   treeshake: true,
-  external: [
-    "react",
-    "react-dom",
-    "react/jsx-runtime",
-    "next",
-    "next/link",
-    "next-themes",
-  ],
+  // No Next externals: nothing under the published entrypoints imports `next`,
+  // `next/link`, or `next-themes`. Listing them here is what let a stray
+  // top-level `next-themes` import survive into dist/index.js and break every
+  // consumer that didn't happen to have it installed. Leaving the list bare
+  // means a reintroduced framework import fails the build here instead.
+  external: ["react", "react-dom", "react/jsx-runtime"],
   // Not banner: {js}: treeshake's rollup pass strips module-level directives,
   // so "use client" must be prepended after the build instead.
   onSuccess: async () => {

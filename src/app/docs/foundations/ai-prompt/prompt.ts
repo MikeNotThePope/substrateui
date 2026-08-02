@@ -100,7 +100,7 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 3. **OKLCH color.** The entire palette is OKLCH with perceptually even ramps. You never touch raw values — semantic tokens only.
 4. **Cut, not rounded.** Components use \`rounded-md\`/\`rounded-lg\`, but the whole radius scale is themable via \`--radius-factor\` and the baseline is 0.25x — corners read as cut rather than soft. Substrate and tundra retune it. Never hardcode pixel radii, and no pill buttons.
 5. **Light and dark are equal citizens.** Every token pairing passes WCAG AA in both modes. Never hand-tune a color for one mode.
-6. **Status is never color-only.** Success/warning/error/info always pair color with an icon — Alert does this for you; follow the same rule in custom UI.
+6. **Status is never color-only.** Success/warning/error/info always pair color with an icon. Alert positions and colors the icon for you, but you pass it — put the \`<svg>\` as a *direct* child of \`<Alert>\`, before AlertTitle, and it is placed absolutely with the text indented around it. Wrapping it in a layout element opts out of that. Follow the same rule in custom UI.
 
 ## Components
 

@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import {
   CircleCheck,
   Info,
@@ -7,11 +8,43 @@ import {
   OctagonX,
   TriangleAlert,
 } from "lucide-react"
-import { useTheme } from "next-themes"
 import { Toaster as Sonner } from "sonner"
 
 /** Props for the Toaster component. */
 type ToasterProps = React.ComponentProps<typeof Sonner>
+
+const subscribeToTheme = (onChange: () => void) => {
+  if (typeof MutationObserver === "undefined") return () => {}
+  const observer = new MutationObserver(onChange)
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  })
+  return () => observer.disconnect()
+}
+
+const getTheme = (): "light" | "dark" =>
+  document.documentElement.classList.contains("dark") ? "dark" : "light"
+
+const getServerTheme = (): "light" | "dark" => "light"
+
+/**
+ * Resolves light/dark from the `.dark` class on `<html>` — the same signal
+ * every other component in the system reads.
+ *
+ * This deliberately avoids `next-themes`. That package is declared an optional
+ * peer dependency, but this file's import of it was top-level and tsup marks it
+ * external, so it survived into `dist/index.js` as a bare import and any app
+ * without next-themes installed failed to build:
+ *
+ *   [MISSING_EXPORT] "useTheme" is not exported by
+ *   "__vite-optional-peer-dep:next-themes:@mikenotthepope/substrateui"
+ *
+ * Reading the class keeps behaviour identical for next-themes users (it sets
+ * that class) while making the package genuinely framework-agnostic.
+ */
+const useResolvedTheme = (): "light" | "dark" =>
+  React.useSyncExternalStore(subscribeToTheme, getTheme, getServerTheme)
 
 /**
  * A theme-aware toast notification container powered by Sonner.
@@ -20,7 +53,7 @@ type ToasterProps = React.ComponentProps<typeof Sonner>
  * <Toaster />
  */
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+  const theme = useResolvedTheme()
 
   return (
     <Sonner

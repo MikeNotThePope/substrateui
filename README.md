@@ -119,8 +119,13 @@ Set up a project with the CLI: `npx substrateui init`.
 - React 18+
 - Tailwind CSS 4+
 - `tw-animate-css` (for animations)
-- `next-themes` (optional, for dark mode toggle)
-- `next` 15+ (optional, only for `substrateui/organisms` which use `next/link`)
+No framework peer dependencies. The library is plain React — it runs under Next.js,
+Vite, Remix, or anything else that renders React.
+
+- Dark mode is driven by the `.dark` class on `<html>`. Set it however you like:
+  `next-themes`, this package's own `ThemeRegistry`, or three lines of your own.
+- Routing goes through `LinkProvider`, so `Link` and the navigation organisms use
+  your router without the library importing one.
 
 ## Token Architecture
 
