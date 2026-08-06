@@ -7,6 +7,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Tabs",
+  description: "Layered panels, one visible at a time. The URL does not change, so reach for NavTabs when the tab needs to be linkable.",
+  route: "/docs/components/tabs",
+})
+
 const tabsProps: PropDef[] = [
   {
     name: "defaultValue",

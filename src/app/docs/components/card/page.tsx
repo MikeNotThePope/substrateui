@@ -18,6 +18,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Card",
+  description: "A bordered container that groups related content. Six parts, one prop. The parts are layout only — they carry padding and rhythm, not behaviour.",
+  route: "/docs/components/card",
+})
+
 export default function CardPage() {
   return (
     <DocPage

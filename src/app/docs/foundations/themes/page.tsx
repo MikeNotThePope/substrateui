@@ -3,6 +3,14 @@ import { Stack } from "@/components/ui/stack"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { H3, H4, P, Code } from "@/components/ui/typography"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Themes",
+  description: "SubstrateUI's token architecture supports multiple brand themes that layer on top of light/dark mode. Same components, same behaviors, different colors.",
+  route: "/docs/foundations/themes",
+})
+
 const themeDna = [
   {
     name: "Plum",

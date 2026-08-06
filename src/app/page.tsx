@@ -22,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { softwareJsonLd } from "@/lib/site"
 import pkg from "../../package.json"
 
 const version = "v" + pkg.version.split(".").slice(0, 2).join(".")
@@ -75,11 +76,39 @@ const docket: Array<[string, string, string]> = [
   ["Licence", "MIT", "free to fork, ship and sell"],
 ]
 
+// ─── Who it's for ─────────────────────────────────────────────────────
+// Deliberately no competitor named. Each claim maps to something in the
+// repo — the contrast audit, the token indirection, the peer-dep list —
+// so none of it goes stale without a build failing first.
+
+const audience: Array<{ heading: string; body: string }> = [
+  {
+    heading: "You ship more than one brand",
+    body: "A theme is a token map, and no component ever learns its name. Adding the sixth palette costs a file, not a refactor — and light and dark come with it.",
+  },
+  {
+    heading: "Accessibility is a requirement, not a wish",
+    body: "35 colour pairings per theme are checked against WCAG AA on every commit, and a failing ratio fails the build. Base UI handles focus, dismissal and ARIA underneath.",
+  },
+  {
+    heading: "You want to own your stack",
+    body: "MIT, no runtime service, no account. React 18+ and Tailwind v4 are the only hard peers — Next and next-themes are optional, so it is not a Next.js-only system.",
+  },
+]
+
 // ─── Page ─────────────────────────────────────────────────────────────
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-background outline-none">
+      {/* Structured data. Next does not emit this from `metadata`, so it goes
+          in the body as a script tag — which is valid and what Google's own
+          guidance shows. */}
+      <script
+        type="application/ld+json"
+        // The payload is built from constants in this repo, not user input.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd({ version: pkg.version })) }}
+      />
       {/* ── Thesis + the fan deck ─────────────────────────────── */}
       <section className="border-b-2 py-16 md:py-24">
         <Center max="2xl" className="px-4">
@@ -227,6 +256,32 @@ const proof = createTheme({
         </Center>
       </section>
 
+      {/* ── Who it's for ──────────────────────────────────────── */}
+      <section className="border-b-2 bg-surface-page py-20">
+        <Center max="2xl" className="px-4">
+          <Stack gap="xl">
+            <Stack gap="sm">
+              <Caps className="text-muted-foreground">Fit</Caps>
+              <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
+                Who it&apos;s for
+              </H2>
+              <P className="max-w-2xl text-muted-foreground">
+                Every claim below is checked by the build, not by us.
+              </P>
+            </Stack>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {audience.map(({ heading, body }) => (
+                <Stack key={heading} gap="sm" className="border-t-2 pt-4">
+                  <H3 className="font-display text-lg font-bold">{heading}</H3>
+                  <P className="text-sm text-muted-foreground">{body}</P>
+                </Stack>
+              ))}
+            </div>
+          </Stack>
+        </Center>
+      </section>
+
       {/* ── Job docket ────────────────────────────────────────── */}
       <section className="py-20">
         <Center max="2xl" className="px-4">
@@ -279,6 +334,6 @@ const proof = createTheme({
           </Stack>
         </Center>
       </section>
-    </div>
+    </main>
   )
 }

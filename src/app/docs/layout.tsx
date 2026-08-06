@@ -1,11 +1,17 @@
 import * as React from "react"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { DocsSearch } from "@/components/docs-search"
 import { SidebarNav } from "@/components/docs-sidebar-nav"
+import { docsIndex } from "@/lib/docs-index"
 
 // ─── Layout ───────────────────────────────────────────────────────────
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
+  // Read at build time — this layout is statically prerendered — so the
+  // palette opens with the index already in hand and no request to wait on.
+  const entries = docsIndex()
+
   return (
     <div className="flex">
       {/* Desktop sidebar — sticky beneath the global SiteHeader.
@@ -17,8 +23,19 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </ScrollArea>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 min-w-0">{children}</main>
+      {/* Main content. The sidebar stays outside this element so it is
+          exposed as its own landmark rather than buried inside main —
+          which is also what makes the skip link worth having here. */}
+      <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 outline-none">
+        {/* Deliberately one instance, in the column that exists at every
+            breakpoint. Putting a copy in the desktop-only sidebar would mount
+            two Cmd+K handlers and serialise the index into the payload twice,
+            and leave mobile — where the sidebar is hidden — with no search. */}
+        <div className="border-b-2 border-border px-4 py-3 md:px-8">
+          <DocsSearch entries={entries} className="md:max-w-sm" />
+        </div>
+        {children}
+      </main>
     </div>
   )
 }

@@ -14,6 +14,14 @@ import { Badge } from "@/components/ui/badge"
 
 import contrastData from "./contrast-data.json"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Contrast Matrix",
+  description: "Every meaningful foreground/background pairing in SubstrateUI, audited against WCAG AA thresholds in both light and dark mode.",
+  route: "/docs/accessibility/contrast",
+})
+
 interface PairingResult {
   name: string
   fg: string

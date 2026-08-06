@@ -14,6 +14,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Table",
+  description: "A composable table built from semantic HTML elements with consistent styling. Use the sub-components to build tables of any shape.",
+  route: "/docs/components/table",
+})
+
 const tableProps: PropDef[] = [
   {
     name: "className",

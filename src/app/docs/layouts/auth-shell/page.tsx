@@ -10,6 +10,14 @@ import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Auth Shell",
+  description: "A centered single-column layout organism for authentication pages (sign in, sign up, password reset, email verification).",
+  route: "/docs/layouts/auth-shell",
+})
+
 const authShellProps: PropDef[] = [
   {
     name: "title",

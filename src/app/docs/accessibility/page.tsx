@@ -3,6 +3,14 @@ import { DocPage } from "../_components/doc-page"
 import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Accessibility",
+  description: "How SubstrateUI approaches accessibility, what the system handles for you, and what you are still responsible for when you build on top of it.",
+  route: "/docs/accessibility",
+})
+
 export default function AccessibilityPage() {
   return (
     <DocPage

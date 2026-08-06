@@ -7,6 +7,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "NavTabs",
+  description: "A link-based tab bar for page-level navigation. g. tab= query param) to keep tabs bookmarkable and the back button working.",
+  route: "/docs/components/nav-tabs",
+})
+
 const navTabsLinkProps: PropDef[] = [
   {
     name: "active",

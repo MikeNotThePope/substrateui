@@ -3,6 +3,14 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { PromptViewer } from "./prompt-viewer"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "AI Prompt",
+  description: "A drop-in prompt that teaches AI coding assistants to build with SubstrateUI — semantic tokens, component conventions, and the anti-patterns that keep…",
+  route: "/docs/foundations/ai-prompt",
+})
+
 export default function AiPromptPage() {
   return (
     <DocPage

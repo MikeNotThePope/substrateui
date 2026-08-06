@@ -9,6 +9,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Item",
+  description: "One row of a menu or list: an icon slot, a truncating label, and hover, active, and disabled states.",
+  route: "/docs/components/item",
+})
+
 const itemProps: PropDef[] = [
   {
     name: "active",

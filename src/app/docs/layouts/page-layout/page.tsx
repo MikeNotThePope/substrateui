@@ -23,6 +23,14 @@ import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Page Layout",
+  description: "Page-level layout patterns for composing headers, bodies, and tabbed content. These organisms sit inside AppShellMain and provide consistent page structure.",
+  route: "/docs/layouts/page-layout",
+})
+
 const pageHeaderProps: PropDef[] = [
   {
     name: "className",

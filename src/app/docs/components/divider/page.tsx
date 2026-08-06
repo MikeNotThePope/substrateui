@@ -7,6 +7,14 @@ import { Stack } from "@/components/ui/stack"
 import { Divider } from "@/components/ui/divider"
 import { Cluster } from "@/components/ui/cluster"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Divider",
+  description: "A separator between sections. Horizontal, vertical, or with a centred label.",
+  route: "/docs/components/divider",
+})
+
 function PlaceholderBox({ children }: { children?: React.ReactNode }) {
   return (
     <div className="h-16 rounded-lg bg-surface-sunken border-2 border-dashed border-border flex items-center justify-center text-muted-foreground text-sm font-mono">

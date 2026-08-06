@@ -15,6 +15,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Input Group",
+  description: "An input and its addons inside one border.",
+  route: "/docs/components/input-group",
+})
+
 const groupProps: PropDef[] = [
   {
     name: "children",

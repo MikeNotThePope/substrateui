@@ -6,6 +6,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Native Select",
+  description: "A styled wrapper around the browser's own select element. The picker is the operating system's, which is what makes it the right control on mobile.",
+  route: "/docs/components/native-select",
+})
+
 const nativeSelectProps: PropDef[] = [
   {
     name: "className",

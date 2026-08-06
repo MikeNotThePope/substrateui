@@ -6,6 +6,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Progress",
+  description: "A horizontal bar showing how far a task has run. Transitions between values rather than jumping.",
+  route: "/docs/components/progress",
+})
+
 const progressProps: PropDef[] = [
   {
     name: "value",

@@ -6,6 +6,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Sidebar",
+  description: "A composable, stateful sidebar system with collapse modes, a built-in mobile drawer, keyboard toggle (⌘/Ctrl+B), and cookie-persisted state.",
+  route: "/docs/components/sidebar",
+})
+
 const providerProps: PropDef[] = [
   {
     name: "defaultOpen",

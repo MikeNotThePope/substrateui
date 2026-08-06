@@ -12,6 +12,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Accordion",
+  description: "A stack of headings that each reveal a panel. One panel is open at a time unless you set multiple.",
+  route: "/docs/components/accordion",
+})
+
 const accordionProps: PropDef[] = [
   { name: "multiple", type: "boolean", default: "false", description: "Allow more than one item to be open at once. Off, opening an item closes the last one." },
   { name: "value", type: "string[]", default: undefined, description: "The controlled list of open item values — an array in both modes." },

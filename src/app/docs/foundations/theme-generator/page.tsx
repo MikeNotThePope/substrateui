@@ -3,6 +3,14 @@ import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ThemeGeneratorClient } from "./theme-generator-client"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Theme Generator",
+  description: "Dial in a primary hue and chroma, watch the components recolor live, and copy a drop-in CSS override.",
+  route: "/docs/foundations/theme-generator",
+})
+
 export default function ThemeGeneratorPage() {
   return (
     <DocPage

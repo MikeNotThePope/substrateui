@@ -10,6 +10,14 @@ import { Field, FieldLabel, FieldHint } from "@/components/ui/field"
 import { Cluster } from "@/components/ui/cluster"
 import { InstallCommand } from "@/components/install-command"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Getting Started",
+  description: "Install the package, wire up the stylesheet, render your first component.",
+  route: "/docs",
+})
+
 export default function DocsPage() {
   return (
     <DocPage

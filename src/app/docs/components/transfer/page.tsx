@@ -6,6 +6,14 @@ import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { TransferDemo, ControlledTransferDemo } from "./transfer-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Transfer",
+  description: "A dual-list picker: move items between a source and a target list with checkboxes, per-panel search, and select-all.",
+  route: "/docs/components/transfer",
+})
+
 const props: PropDef[] = [
   { name: "dataSource", type: "TransferItem[]", default: undefined, description: "Every item, across both lists. Each has key, label, and optional disabled." },
   { name: "targetKeys", type: "string[]", default: undefined, description: "Keys in the target (right) list — controlled." },

@@ -8,6 +8,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Fieldset",
+  description: "An accessible fieldset wrapper with a visible legend label. Groups related form fields together with semantic HTML.",
+  route: "/docs/components/fieldset",
+})
+
 const fieldsetProps: PropDef[] = [
   {
     name: "legend",

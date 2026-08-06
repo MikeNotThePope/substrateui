@@ -6,6 +6,14 @@ import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { CascaderDemo, ControlledCascaderDemo } from "./cascader-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Cascader",
+  description: "A nested-path select: drill through columns of options and commit the path you land on. The standard control for category → subcategory → item pickers.",
+  route: "/docs/components/cascader",
+})
+
 const props: PropDef[] = [
   { name: "options", type: "CascaderOption[]", default: undefined, description: "The option tree to choose a path through." },
   { name: "value", type: "string[]", default: undefined, description: "Selected path, root first — controlled." },

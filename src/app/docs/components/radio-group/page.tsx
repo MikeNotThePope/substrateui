@@ -8,6 +8,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Radio Group",
+  description: "A set of mutually exclusive options. Built on Base UI primitives with keyboard navigation and focus management.",
+  route: "/docs/components/radio-group",
+})
+
 const radioGroupProps: PropDef[] = [
   {
     name: "value",

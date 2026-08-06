@@ -6,6 +6,14 @@ import { H3 } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
 import { Grid } from "@/components/ui/grid"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Grid",
+  description: "A CSS Grid layout component with configurable columns, gap, and auto-fill/auto-fit modes.",
+  route: "/docs/components/grid",
+})
+
 function PlaceholderBox({ children }: { children?: React.ReactNode }) {
   return (
     <div className="h-16 rounded-lg bg-surface-sunken border-2 border-dashed border-border flex items-center justify-center text-muted-foreground text-sm font-mono">

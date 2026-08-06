@@ -7,6 +7,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Link",
+  description: "A link that routes through your framework instead of reloading the page.",
+  route: "/docs/components/link",
+})
+
 const linkProps: PropDef[] = [
   {
     name: "href",

@@ -6,6 +6,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Skeleton",
+  description: "A placeholder element that pulses to indicate content is loading. Compose multiple skeletons to match the shape of your real content.",
+  route: "/docs/components/skeleton",
+})
+
 const skeletonProps: PropDef[] = [
   {
     name: "className",

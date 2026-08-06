@@ -6,6 +6,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Stack",
+  description: "A vertical flex layout component that distributes children along the block axis with configurable gap and alignment.",
+  route: "/docs/components/stack",
+})
+
 function PlaceholderBox({ children }: { children?: React.ReactNode }) {
   return (
     <div className="h-16 rounded-lg bg-surface-sunken border-2 border-dashed border-border flex items-center justify-center text-muted-foreground text-sm font-mono">

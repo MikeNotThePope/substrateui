@@ -9,6 +9,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Button Group",
+  description: "Buttons welded into one unit: the seams collapse to a single 2px rule and only the outer corners stay rounded.",
+  route: "/docs/components/button-group",
+})
+
 const groupProps: PropDef[] = [
   {
     name: "children",

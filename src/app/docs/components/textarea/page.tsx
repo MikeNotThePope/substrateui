@@ -7,6 +7,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Textarea",
+  description: "A multi-line text input for longer form content. Supports all native textarea attributes with consistent styling.",
+  route: "/docs/components/textarea",
+})
+
 const textareaProps: PropDef[] = [
   {
     name: "placeholder",

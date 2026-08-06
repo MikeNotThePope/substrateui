@@ -9,6 +9,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Badge",
+  description: "A compact label for status, category, or metadata. Semantic colour variants, sized to sit inline with text.",
+  route: "/docs/components/badge",
+})
+
 const badgeProps: PropDef[] = [
   {
     name: "variant",
