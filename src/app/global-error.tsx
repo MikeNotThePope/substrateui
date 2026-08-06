@@ -23,7 +23,11 @@ export default function GlobalError({
     <html lang="en">
       <body className="bg-background text-foreground antialiased">
         <title>Something went wrong · SubstrateUI</title>
-        <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-start justify-center gap-6 px-6">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="mx-auto flex min-h-screen max-w-2xl flex-col items-start justify-center gap-6 px-6 outline-none"
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             Error
           </p>

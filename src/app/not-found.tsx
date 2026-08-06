@@ -18,7 +18,11 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Center max="2xl" className="px-4 py-24">
+    <Center
+      max="2xl"
+      className="px-4 py-24 outline-none"
+      render={<main id="main-content" tabIndex={-1} />}
+    >
       <Stack gap="lg" className="items-start">
         <Caps className="text-muted-foreground">Error 404</Caps>
         <H1 className="font-display text-4xl font-extrabold tracking-tight md:text-6xl">

@@ -25,6 +25,31 @@ export const SITE_DESCRIPTION =
   "A themeable React design system: 75 components on OKLCH, Tailwind CSS v4 and Base UI, with every colour pairing audited against WCAG AA."
 
 /**
+ * Schema.org description of the package, emitted as JSON-LD on the home page.
+ *
+ * SoftwareSourceCode rather than SoftwareApplication: this is a library you
+ * install, not an app you run. Every field is a fact already stated in
+ * package.json or on the page — structured data that claims more than the
+ * page shows is the kind that gets a site's rich results turned off.
+ */
+export function softwareJsonLd({ version }: { version: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    codeRepository: "https://github.com/MikeNotThePope/substrateui",
+    programmingLanguage: "TypeScript",
+    runtimePlatform: "React",
+    license: "https://opensource.org/licenses/MIT",
+    version,
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    keywords: "design system, react, tailwind css, base ui, oklch, accessibility",
+  }
+}
+
+/**
  * Build the metadata for a single page.
  *
  * Exists because `openGraph` does not deep-merge: a page that declares its own

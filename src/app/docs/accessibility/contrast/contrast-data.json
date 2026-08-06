@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-06T12:39:00.651Z",
+  "generatedAt": "2026-07-30T04:25:06.111Z",
   "results": [
     {
       "name": "foreground on background",
@@ -8,8 +8,8 @@
       "type": "normal",
       "backdrop": null,
       "required": 4.5,
-      "light": 15.455224970832033,
-      "dark": 17.496044008531353,
+      "light": 15.455224970832035,
+      "dark": 17.496044008531356,
       "lightPass": true,
       "darkPass": true
     },
@@ -21,7 +21,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 17.38498890152808,
-      "dark": 14.534923511761454,
+      "dark": 14.534923511761455,
       "lightPass": true,
       "darkPass": true
     },
@@ -33,7 +33,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 17.38498890152808,
-      "dark": 12.969381871144716,
+      "dark": 12.969381871144718,
       "lightPass": true,
       "darkPass": true
     },
@@ -69,7 +69,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 5.515571873021269,
-      "dark": 5.753559313157315,
+      "dark": 5.753559313157316,
       "lightPass": true,
       "darkPass": true
     },
@@ -80,8 +80,8 @@
       "type": "normal",
       "backdrop": null,
       "required": 4.5,
-      "light": 6.321195993167089,
-      "dark": 7.76170583523815,
+      "light": 6.32119599316709,
+      "dark": 7.761705835238151,
       "lightPass": true,
       "darkPass": true
     },
@@ -92,8 +92,8 @@
       "type": "normal",
       "backdrop": "background",
       "required": 4.5,
-      "light": 7.546189891848669,
-      "dark": 8.441591180165107,
+      "light": 7.5461898918486705,
+      "dark": 8.441591180165108,
       "lightPass": true,
       "darkPass": true
     },
@@ -105,7 +105,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 17.38498890152808,
-      "dark": 15.455224970832033,
+      "dark": 15.455224970832035,
       "lightPass": true,
       "darkPass": true
     },
@@ -128,7 +128,7 @@
       "type": "normal",
       "backdrop": "sidebar",
       "required": 4.5,
-      "light": 7.546189891848669,
+      "light": 7.5461898918486705,
       "dark": 7.2436470684679195,
       "lightPass": true,
       "darkPass": true
@@ -140,8 +140,8 @@
       "type": "normal",
       "backdrop": null,
       "required": 4.5,
-      "light": 15.455224970832033,
-      "dark": 17.496044008531353,
+      "light": 15.455224970832035,
+      "dark": 17.496044008531356,
       "lightPass": true,
       "darkPass": true
     },
@@ -153,7 +153,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 16.690043287047263,
-      "dark": 15.455224970832033,
+      "dark": 15.455224970832035,
       "lightPass": true,
       "darkPass": true
     },
@@ -165,7 +165,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 17.38498890152808,
-      "dark": 14.534923511761454,
+      "dark": 14.534923511761455,
       "lightPass": true,
       "darkPass": true
     },
@@ -177,7 +177,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 13.485486644059485,
-      "dark": 17.496044008531353,
+      "dark": 17.496044008531356,
       "lightPass": true,
       "darkPass": true
     },
@@ -189,7 +189,7 @@
       "backdrop": null,
       "required": 4.5,
       "light": 13.485486644059485,
-      "dark": 12.969381871144716,
+      "dark": 12.969381871144718,
       "lightPass": true,
       "darkPass": true
     },
@@ -200,8 +200,8 @@
       "type": "normal",
       "backdrop": "background",
       "required": 4.5,
-      "light": 5.6968250849313975,
-      "dark": 8.082866679594032,
+      "light": 5.696825084931399,
+      "dark": 8.08286667959403,
       "lightPass": true,
       "darkPass": true
     },
@@ -224,8 +224,8 @@
       "type": "normal",
       "backdrop": "background",
       "required": 4.5,
-      "light": 6.419782045874077,
-      "dark": 7.713185263124679,
+      "light": 6.419782045874076,
+      "dark": 7.7131852631246804,
       "lightPass": true,
       "darkPass": true
     },
@@ -248,8 +248,8 @@
       "type": "ui",
       "backdrop": null,
       "required": 3,
-      "light": 3.9090720791819358,
-      "dark": 7.76170583523815,
+      "light": 3.909072079181936,
+      "dark": 7.761705835238151,
       "lightPass": true,
       "darkPass": true
     },
@@ -261,7 +261,7 @@
       "backdrop": null,
       "required": 3,
       "light": 9.541083820561088,
-      "dark": 7.76170583523815,
+      "dark": 7.761705835238151,
       "lightPass": true,
       "darkPass": true
     },
@@ -285,7 +285,7 @@
       "backdrop": null,
       "required": 3,
       "light": 4.397165026074199,
-      "dark": 6.448074809423676,
+      "dark": 6.448074809423677,
       "lightPass": true,
       "darkPass": true
     },
@@ -297,7 +297,7 @@
       "backdrop": "background",
       "required": 3,
       "light": 3.2429668206454547,
-      "dark": 6.82545467811534,
+      "dark": 6.825454678115338,
       "lightPass": true,
       "darkPass": true
     },
@@ -308,7 +308,7 @@
       "type": "ui",
       "backdrop": "background",
       "required": 3,
-      "light": 3.192999911529957,
+      "light": 3.1929999115299577,
       "dark": 9.935427000356425,
       "lightPass": true,
       "darkPass": true
@@ -320,8 +320,8 @@
       "type": "ui",
       "backdrop": "background",
       "required": 3,
-      "light": 3.9222247339361744,
-      "dark": 5.125699332943849,
+      "light": 3.922224733936174,
+      "dark": 5.12569933294385,
       "lightPass": true,
       "darkPass": true
     },
@@ -333,7 +333,7 @@
       "backdrop": "background",
       "required": 3,
       "light": 3.3671390473561704,
-      "dark": 6.215552957332993,
+      "dark": 6.215552957332994,
       "lightPass": true,
       "darkPass": true
     },
@@ -344,8 +344,8 @@
       "type": "ui",
       "backdrop": null,
       "required": 3,
-      "light": 3.527321757631373,
-      "dark": 7.913137055668264,
+      "light": 3.5273217576313733,
+      "dark": 7.913137055668262,
       "lightPass": true,
       "darkPass": true
     },
@@ -356,7 +356,7 @@
       "type": "ui",
       "backdrop": null,
       "required": 3,
-      "light": 3.1055819129032134,
+      "light": 3.1055819129032143,
       "dark": 11.993625325110735,
       "lightPass": true,
       "darkPass": true
@@ -368,8 +368,8 @@
       "type": "ui",
       "backdrop": null,
       "required": 3,
-      "light": 4.269764799422096,
-      "dark": 5.689634741002101,
+      "light": 4.269764799422097,
+      "dark": 5.689634741002102,
       "lightPass": true,
       "darkPass": true
     },
@@ -380,8 +380,8 @@
       "type": "ui",
       "backdrop": null,
       "required": 3,
-      "light": 3.7091633736086624,
-      "dark": 7.024172972663997,
+      "light": 3.709163373608663,
+      "dark": 7.024172972663998,
       "lightPass": true,
       "darkPass": true
     },
@@ -416,8 +416,8 @@
       "type": "ui",
       "backdrop": null,
       "required": 3,
-      "light": 4.93777915085914,
-      "dark": 5.633740953937808,
+      "light": 4.937779150859143,
+      "dark": 5.633740953937807,
       "lightPass": true,
       "darkPass": true
     },
@@ -455,7 +455,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -463,7 +463,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 17.496044008531353,
+          "ratio": 17.496044008531356,
           "pass": true
         },
         {
@@ -479,7 +479,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.534923511761454,
+          "ratio": 14.534923511761455,
           "pass": true
         },
         {
@@ -495,7 +495,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.969381871144716,
+          "ratio": 12.969381871144718,
           "pass": true
         },
         {
@@ -543,7 +543,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.753559313157315,
+          "ratio": 5.753559313157316,
           "pass": true
         },
         {
@@ -551,7 +551,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.321195993167089,
+          "ratio": 6.32119599316709,
           "pass": true
         },
         {
@@ -559,7 +559,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.76170583523815,
+          "ratio": 7.761705835238151,
           "pass": true
         },
         {
@@ -567,7 +567,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.546189891848669,
+          "ratio": 7.5461898918486705,
           "pass": true
         },
         {
@@ -575,7 +575,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.441591180165107,
+          "ratio": 8.441591180165108,
           "pass": true
         },
         {
@@ -591,7 +591,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -615,7 +615,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.546189891848669,
+          "ratio": 7.5461898918486705,
           "pass": true
         },
         {
@@ -631,7 +631,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -639,7 +639,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 17.496044008531353,
+          "ratio": 17.496044008531356,
           "pass": true
         },
         {
@@ -655,7 +655,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -671,7 +671,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.534923511761454,
+          "ratio": 14.534923511761455,
           "pass": true
         },
         {
@@ -687,7 +687,7 @@
           "name": "foreground on surface-sunken",
           "type": "normal",
           "required": 4.5,
-          "ratio": 17.496044008531353,
+          "ratio": 17.496044008531356,
           "pass": true
         },
         {
@@ -703,7 +703,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.969381871144716,
+          "ratio": 12.969381871144718,
           "pass": true
         },
         {
@@ -711,7 +711,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.6968250849313975,
+          "ratio": 5.696825084931399,
           "pass": true
         },
         {
@@ -719,7 +719,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.082866679594032,
+          "ratio": 8.08286667959403,
           "pass": true
         },
         {
@@ -743,7 +743,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.419782045874077,
+          "ratio": 6.419782045874076,
           "pass": true
         },
         {
@@ -751,7 +751,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.713185263124679,
+          "ratio": 7.7131852631246804,
           "pass": true
         },
         {
@@ -775,7 +775,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.9090720791819358,
+          "ratio": 3.909072079181936,
           "pass": true
         },
         {
@@ -783,7 +783,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.76170583523815,
+          "ratio": 7.761705835238151,
           "pass": true
         },
         {
@@ -799,7 +799,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.76170583523815,
+          "ratio": 7.761705835238151,
           "pass": true
         },
         {
@@ -831,7 +831,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 6.448074809423676,
+          "ratio": 6.448074809423677,
           "pass": true
         },
         {
@@ -847,7 +847,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.82545467811534,
+          "ratio": 6.825454678115338,
           "pass": true
         },
         {
@@ -855,7 +855,7 @@
           "name": "status-warning on status-warning-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.192999911529957,
+          "ratio": 3.1929999115299577,
           "pass": true
         },
         {
@@ -871,7 +871,7 @@
           "name": "status-error on status-error-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.9222247339361744,
+          "ratio": 3.922224733936174,
           "pass": true
         },
         {
@@ -879,7 +879,7 @@
           "name": "status-error on status-error-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 5.125699332943849,
+          "ratio": 5.12569933294385,
           "pass": true
         },
         {
@@ -895,7 +895,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.215552957332993,
+          "ratio": 6.215552957332994,
           "pass": true
         },
         {
@@ -903,7 +903,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.527321757631373,
+          "ratio": 3.5273217576313733,
           "pass": true
         },
         {
@@ -911,7 +911,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.913137055668264,
+          "ratio": 7.913137055668262,
           "pass": true
         },
         {
@@ -919,7 +919,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.1055819129032134,
+          "ratio": 3.1055819129032143,
           "pass": true
         },
         {
@@ -935,7 +935,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.269764799422096,
+          "ratio": 4.269764799422097,
           "pass": true
         },
         {
@@ -943,7 +943,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 5.689634741002101,
+          "ratio": 5.689634741002102,
           "pass": true
         },
         {
@@ -951,7 +951,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.7091633736086624,
+          "ratio": 3.709163373608663,
           "pass": true
         },
         {
@@ -959,7 +959,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.024172972663997,
+          "ratio": 7.024172972663998,
           "pass": true
         },
         {
@@ -999,7 +999,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.93777915085914,
+          "ratio": 4.937779150859143,
           "pass": true
         },
         {
@@ -1007,7 +1007,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 5.633740953937808,
+          "ratio": 5.633740953937807,
           "pass": true
         },
         {
@@ -1052,7 +1052,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -1060,7 +1060,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 17.496044008531353,
+          "ratio": 17.496044008531356,
           "pass": true
         },
         {
@@ -1076,7 +1076,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.534923511761454,
+          "ratio": 14.534923511761455,
           "pass": true
         },
         {
@@ -1092,7 +1092,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.969381871144716,
+          "ratio": 12.969381871144718,
           "pass": true
         },
         {
@@ -1140,7 +1140,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.753559313157315,
+          "ratio": 5.753559313157316,
           "pass": true
         },
         {
@@ -1148,7 +1148,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.321195993167089,
+          "ratio": 6.32119599316709,
           "pass": true
         },
         {
@@ -1156,7 +1156,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.76170583523815,
+          "ratio": 7.761705835238151,
           "pass": true
         },
         {
@@ -1164,7 +1164,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.546189891848669,
+          "ratio": 7.5461898918486705,
           "pass": true
         },
         {
@@ -1172,7 +1172,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.441591180165107,
+          "ratio": 8.441591180165108,
           "pass": true
         },
         {
@@ -1188,7 +1188,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -1212,7 +1212,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.546189891848669,
+          "ratio": 7.5461898918486705,
           "pass": true
         },
         {
@@ -1228,7 +1228,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -1236,7 +1236,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 17.496044008531353,
+          "ratio": 17.496044008531356,
           "pass": true
         },
         {
@@ -1252,7 +1252,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.455224970832033,
+          "ratio": 15.455224970832035,
           "pass": true
         },
         {
@@ -1268,7 +1268,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.534923511761454,
+          "ratio": 14.534923511761455,
           "pass": true
         },
         {
@@ -1284,7 +1284,7 @@
           "name": "foreground on surface-sunken",
           "type": "normal",
           "required": 4.5,
-          "ratio": 17.496044008531353,
+          "ratio": 17.496044008531356,
           "pass": true
         },
         {
@@ -1300,7 +1300,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.969381871144716,
+          "ratio": 12.969381871144718,
           "pass": true
         },
         {
@@ -1308,7 +1308,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.6968250849313975,
+          "ratio": 5.696825084931399,
           "pass": true
         },
         {
@@ -1316,7 +1316,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.082866679594032,
+          "ratio": 8.08286667959403,
           "pass": true
         },
         {
@@ -1340,7 +1340,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.419782045874077,
+          "ratio": 6.419782045874076,
           "pass": true
         },
         {
@@ -1348,7 +1348,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.713185263124679,
+          "ratio": 7.7131852631246804,
           "pass": true
         },
         {
@@ -1372,7 +1372,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.9090720791819358,
+          "ratio": 3.909072079181936,
           "pass": true
         },
         {
@@ -1380,7 +1380,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.76170583523815,
+          "ratio": 7.761705835238151,
           "pass": true
         },
         {
@@ -1396,7 +1396,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.76170583523815,
+          "ratio": 7.761705835238151,
           "pass": true
         },
         {
@@ -1428,7 +1428,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 6.448074809423676,
+          "ratio": 6.448074809423677,
           "pass": true
         },
         {
@@ -1444,7 +1444,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.82545467811534,
+          "ratio": 6.825454678115338,
           "pass": true
         },
         {
@@ -1452,7 +1452,7 @@
           "name": "status-warning on status-warning-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.192999911529957,
+          "ratio": 3.1929999115299577,
           "pass": true
         },
         {
@@ -1468,7 +1468,7 @@
           "name": "status-error on status-error-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.9222247339361744,
+          "ratio": 3.922224733936174,
           "pass": true
         },
         {
@@ -1476,7 +1476,7 @@
           "name": "status-error on status-error-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 5.125699332943849,
+          "ratio": 5.12569933294385,
           "pass": true
         },
         {
@@ -1492,7 +1492,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.215552957332993,
+          "ratio": 6.215552957332994,
           "pass": true
         },
         {
@@ -1500,7 +1500,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.527321757631373,
+          "ratio": 3.5273217576313733,
           "pass": true
         },
         {
@@ -1508,7 +1508,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.913137055668264,
+          "ratio": 7.913137055668262,
           "pass": true
         },
         {
@@ -1516,7 +1516,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.1055819129032134,
+          "ratio": 3.1055819129032143,
           "pass": true
         },
         {
@@ -1532,7 +1532,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.269764799422096,
+          "ratio": 4.269764799422097,
           "pass": true
         },
         {
@@ -1540,7 +1540,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 5.689634741002101,
+          "ratio": 5.689634741002102,
           "pass": true
         },
         {
@@ -1548,7 +1548,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.7091633736086624,
+          "ratio": 3.709163373608663,
           "pass": true
         },
         {
@@ -1556,7 +1556,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.024172972663997,
+          "ratio": 7.024172972663998,
           "pass": true
         },
         {
@@ -1596,7 +1596,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.93777915085914,
+          "ratio": 4.937779150859143,
           "pass": true
         },
         {
@@ -1604,7 +1604,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 5.633740953937808,
+          "ratio": 5.633740953937807,
           "pass": true
         }
       ]
@@ -1633,7 +1633,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.877557068838781,
+          "ratio": 15.877557068838776,
           "pass": true
         },
         {
@@ -1649,7 +1649,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.877557068838781,
+          "ratio": 15.877557068838776,
           "pass": true
         },
         {
@@ -1697,7 +1697,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 4.809849786433309,
+          "ratio": 4.809849786433308,
           "pass": true
         },
         {
@@ -1705,7 +1705,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.814042852955786,
+          "ratio": 6.8140428529557875,
           "pass": true
         },
         {
@@ -1713,7 +1713,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.800027123132908,
+          "ratio": 5.800027123132907,
           "pass": true
         },
         {
@@ -1721,7 +1721,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 10.096725730622872,
+          "ratio": 10.096725730622873,
           "pass": true
         },
         {
@@ -1729,7 +1729,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.852549177267262,
+          "ratio": 6.852549177267265,
           "pass": true
         },
         {
@@ -1737,7 +1737,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.604472312823159,
+          "ratio": 11.604472312823157,
           "pass": true
         },
         {
@@ -1745,7 +1745,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.877557068838781,
+          "ratio": 15.877557068838776,
           "pass": true
         },
         {
@@ -1777,7 +1777,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.852549177267262,
+          "ratio": 6.852549177267265,
           "pass": true
         },
         {
@@ -1785,7 +1785,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 9.291712132592583,
+          "ratio": 9.29171213259258,
           "pass": true
         },
         {
@@ -1809,7 +1809,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.877557068838781,
+          "ratio": 15.877557068838776,
           "pass": true
         },
         {
@@ -1825,7 +1825,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.877557068838781,
+          "ratio": 15.877557068838776,
           "pass": true
         },
         {
@@ -1873,7 +1873,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.235682567007386,
+          "ratio": 6.235682567007388,
           "pass": true
         },
         {
@@ -1889,7 +1889,7 @@
           "name": "status-warning-text on status-warning-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.818001973361816,
+          "ratio": 6.818001973361817,
           "pass": true
         },
         {
@@ -1897,7 +1897,7 @@
           "name": "status-warning-text on status-warning-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 10.688740232655963,
+          "ratio": 10.688740232655961,
           "pass": true
         },
         {
@@ -1905,7 +1905,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.451951592496645,
+          "ratio": 6.451951592496646,
           "pass": true
         },
         {
@@ -1913,7 +1913,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.903927857635965,
+          "ratio": 8.903927857635969,
           "pass": true
         },
         {
@@ -1921,7 +1921,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.858960428478824,
+          "ratio": 5.858960428478822,
           "pass": true
         },
         {
@@ -1929,7 +1929,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.818313312916516,
+          "ratio": 8.818313312916521,
           "pass": true
         },
         {
@@ -1945,7 +1945,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 6.495861930847245,
+          "ratio": 6.495861930847246,
           "pass": true
         },
         {
@@ -1961,7 +1961,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 6.495861930847245,
+          "ratio": 6.495861930847246,
           "pass": true
         },
         {
@@ -1969,7 +1969,7 @@
           "name": "ring on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.134811794244273,
+          "ratio": 3.1348117942442713,
           "pass": true
         },
         {
@@ -1985,7 +1985,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 4.450181519464098,
+          "ratio": 4.450181519464097,
           "pass": true
         },
         {
@@ -1993,7 +1993,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 4.9953165874023675,
+          "ratio": 4.995316587402368,
           "pass": true
         },
         {
@@ -2001,7 +2001,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.2572468107993826,
+          "ratio": 3.257246810799384,
           "pass": true
         },
         {
@@ -2009,7 +2009,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.919704716027559,
+          "ratio": 6.9197047160275575,
           "pass": true
         },
         {
@@ -2017,7 +2017,7 @@
           "name": "status-warning on status-warning-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 4.269457608575651,
+          "ratio": 4.26945760857565,
           "pass": true
         },
         {
@@ -2049,7 +2049,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.3687644752005745,
+          "ratio": 3.368764475200573,
           "pass": true
         },
         {
@@ -2057,7 +2057,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.612438381346357,
+          "ratio": 6.612438381346359,
           "pass": true
         },
         {
@@ -2073,7 +2073,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 8.010562613378791,
+          "ratio": 8.01056261337879,
           "pass": true
         },
         {
@@ -2081,7 +2081,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.007906938133058,
+          "ratio": 4.007906938133057,
           "pass": true
         },
         {
@@ -2121,7 +2121,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.647729258236199,
+          "ratio": 7.6477292582362,
           "pass": true
         },
         {
@@ -2145,7 +2145,7 @@
           "name": "secondary-fill-foreground on secondary-fill",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.963128930672636,
+          "ratio": 7.963128930672635,
           "pass": true
         },
         {
@@ -2161,7 +2161,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.007906938133058,
+          "ratio": 4.007906938133057,
           "pass": true
         },
         {
@@ -2182,7 +2182,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.079568322822016,
+          "ratio": 14.079568322822013,
           "pass": true
         },
         {
@@ -2198,7 +2198,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.86401253336619,
+          "ratio": 15.864012533366187,
           "pass": true
         },
         {
@@ -2206,7 +2206,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.631016992054457,
+          "ratio": 12.631016992054455,
           "pass": true
         },
         {
@@ -2214,7 +2214,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.86401253336619,
+          "ratio": 15.864012533366187,
           "pass": true
         },
         {
@@ -2222,7 +2222,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.081390548459206,
+          "ratio": 11.081390548459204,
           "pass": true
         },
         {
@@ -2238,7 +2238,7 @@
           "name": "primary-foreground on primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 9.176392626600084,
+          "ratio": 9.17639262660008,
           "pass": true
         },
         {
@@ -2246,7 +2246,7 @@
           "name": "secondary-foreground on secondary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.680762373770886,
+          "ratio": 11.680762373770884,
           "pass": true
         },
         {
@@ -2254,7 +2254,7 @@
           "name": "secondary-foreground on secondary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.136410304262055,
+          "ratio": 8.136410304262053,
           "pass": true
         },
         {
@@ -2270,7 +2270,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.807337234292661,
+          "ratio": 6.807337234292663,
           "pass": true
         },
         {
@@ -2278,7 +2278,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.790820299445169,
+          "ratio": 5.790820299445168,
           "pass": true
         },
         {
@@ -2286,7 +2286,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 10.108686819350197,
+          "ratio": 10.108686819350199,
           "pass": true
         },
         {
@@ -2310,7 +2310,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.86401253336619,
+          "ratio": 15.864012533366187,
           "pass": true
         },
         {
@@ -2318,7 +2318,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.079568322822016,
+          "ratio": 14.079568322822013,
           "pass": true
         },
         {
@@ -2334,7 +2334,7 @@
           "name": "sidebar-primary-foreground on sidebar-primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 9.176392626600084,
+          "ratio": 9.17639262660008,
           "pass": true
         },
         {
@@ -2358,7 +2358,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.079568322822016,
+          "ratio": 14.079568322822013,
           "pass": true
         },
         {
@@ -2374,7 +2374,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.86401253336619,
+          "ratio": 15.864012533366187,
           "pass": true
         },
         {
@@ -2382,7 +2382,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.079568322822016,
+          "ratio": 14.079568322822013,
           "pass": true
         },
         {
@@ -2390,7 +2390,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.86401253336619,
+          "ratio": 15.864012533366187,
           "pass": true
         },
         {
@@ -2398,7 +2398,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.631016992054457,
+          "ratio": 12.631016992054455,
           "pass": true
         },
         {
@@ -2406,7 +2406,7 @@
           "name": "foreground on surface-sunken",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.680762373770886,
+          "ratio": 11.680762373770884,
           "pass": true
         },
         {
@@ -2422,7 +2422,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.680762373770886,
+          "ratio": 11.680762373770884,
           "pass": true
         },
         {
@@ -2430,7 +2430,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.081390548459206,
+          "ratio": 11.081390548459204,
           "pass": true
         },
         {
@@ -2438,7 +2438,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.240162019868069,
+          "ratio": 6.240162019868068,
           "pass": true
         },
         {
@@ -2470,7 +2470,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.451951592496645,
+          "ratio": 6.451951592496646,
           "pass": true
         },
         {
@@ -2478,7 +2478,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.911830432856744,
+          "ratio": 8.911830432856748,
           "pass": true
         },
         {
@@ -2486,7 +2486,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.858960428478824,
+          "ratio": 5.858960428478822,
           "pass": true
         },
         {
@@ -2494,7 +2494,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.808047215655517,
+          "ratio": 8.80804721565552,
           "pass": true
         },
         {
@@ -2502,7 +2502,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.9433865491474602,
+          "ratio": 3.943386549147461,
           "pass": true
         },
         {
@@ -2518,7 +2518,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 8.136410304262055,
+          "ratio": 8.136410304262053,
           "pass": true
         },
         {
@@ -2534,7 +2534,7 @@
           "name": "ring on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.005891567791677,
+          "ratio": 3.0058915677916778,
           "pass": true
         },
         {
@@ -2542,7 +2542,7 @@
           "name": "ring on background",
           "type": "ui",
           "required": 3,
-          "ratio": 9.558526310456008,
+          "ratio": 9.558526310456005,
           "pass": true
         },
         {
@@ -2550,7 +2550,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 4.443171282331209,
+          "ratio": 4.4431712823312095,
           "pass": true
         },
         {
@@ -2566,7 +2566,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.2603894488838696,
+          "ratio": 3.2603894488838687,
           "pass": true
         },
         {
@@ -2574,7 +2574,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.895325316266109,
+          "ratio": 6.89532531626611,
           "pass": true
         },
         {
@@ -2614,7 +2614,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.3687644752005745,
+          "ratio": 3.368764475200573,
           "pass": true
         },
         {
@@ -2622,7 +2622,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.604740317879295,
+          "ratio": 6.604740317879297,
           "pass": true
         },
         {
@@ -2630,7 +2630,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.2964149506649276,
+          "ratio": 3.296414950664927,
           "pass": true
         },
         {
@@ -2646,7 +2646,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.012875854439921,
+          "ratio": 4.01287585443992,
           "pass": true
         },
         {
@@ -2662,7 +2662,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.470289620676681,
+          "ratio": 4.47028962067668,
           "pass": true
         },
         {
@@ -2678,7 +2678,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.457321003882141,
+          "ratio": 3.4573210038821407,
           "pass": true
         },
         {
@@ -2686,7 +2686,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.6440343853743915,
+          "ratio": 7.644034385374394,
           "pass": true
         },
         {
@@ -2710,7 +2710,7 @@
           "name": "secondary-fill-foreground on secondary-fill",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.950362978950385,
+          "ratio": 7.950362978950384,
           "pass": true
         },
         {
@@ -2726,7 +2726,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.012875854439921,
+          "ratio": 4.01287585443992,
           "pass": true
         },
         {
@@ -2771,7 +2771,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.667945113552738,
+          "ratio": 12.667945113552742,
           "pass": true
         },
         {
@@ -2787,7 +2787,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.122124062959891,
+          "ratio": 11.12212406295989,
           "pass": true
         },
         {
@@ -2795,7 +2795,7 @@
           "name": "primary-foreground on primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.061407103107653,
+          "ratio": 6.061407103107651,
           "pass": true
         },
         {
@@ -2803,7 +2803,7 @@
           "name": "primary-foreground on primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.253909275072485,
+          "ratio": 6.253909275072487,
           "pass": true
         },
         {
@@ -2811,7 +2811,7 @@
           "name": "secondary-foreground on secondary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.695050244970462,
+          "ratio": 11.69505024497046,
           "pass": true
         },
         {
@@ -2819,7 +2819,7 @@
           "name": "secondary-foreground on secondary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.166569743354657,
+          "ratio": 8.166569743354655,
           "pass": true
         },
         {
@@ -2851,7 +2851,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 10.084369083488125,
+          "ratio": 10.084369083488127,
           "pass": true
         },
         {
@@ -2859,7 +2859,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.448089429215747,
+          "ratio": 7.448089429215749,
           "pass": true
         },
         {
@@ -2891,7 +2891,7 @@
           "name": "sidebar-primary-foreground on sidebar-primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.061407103107653,
+          "ratio": 6.061407103107651,
           "pass": true
         },
         {
@@ -2899,7 +2899,7 @@
           "name": "sidebar-primary-foreground on sidebar-primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.253909275072485,
+          "ratio": 6.253909275072487,
           "pass": true
         },
         {
@@ -2907,7 +2907,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.448089429215747,
+          "ratio": 7.448089429215749,
           "pass": true
         },
         {
@@ -2915,7 +2915,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.933646450322778,
+          "ratio": 7.9336464503227795,
           "pass": true
         },
         {
@@ -2963,7 +2963,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 12.667945113552738,
+          "ratio": 12.667945113552742,
           "pass": true
         },
         {
@@ -2971,7 +2971,7 @@
           "name": "foreground on surface-sunken",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.695050244970462,
+          "ratio": 11.69505024497046,
           "pass": true
         },
         {
@@ -2987,7 +2987,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.695050244970462,
+          "ratio": 11.69505024497046,
           "pass": true
         },
         {
@@ -2995,7 +2995,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.122124062959891,
+          "ratio": 11.12212406295989,
           "pass": true
         },
         {
@@ -3003,7 +3003,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.27537920792702,
+          "ratio": 6.275379207927018,
           "pass": true
         },
         {
@@ -3011,7 +3011,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 9.037066192909139,
+          "ratio": 9.037066192909137,
           "pass": true
         },
         {
@@ -3035,7 +3035,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.449799167573104,
+          "ratio": 6.449799167573103,
           "pass": true
         },
         {
@@ -3043,7 +3043,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.853073827756505,
+          "ratio": 8.853073827756507,
           "pass": true
         },
         {
@@ -3051,7 +3051,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.837609825417126,
+          "ratio": 5.837609825417125,
           "pass": true
         },
         {
@@ -3075,7 +3075,7 @@
           "name": "border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 6.484901704557776,
+          "ratio": 6.484901704557775,
           "pass": true
         },
         {
@@ -3083,7 +3083,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 8.166569743354657,
+          "ratio": 8.166569743354655,
           "pass": true
         },
         {
@@ -3091,7 +3091,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 6.484901704557776,
+          "ratio": 6.484901704557775,
           "pass": true
         },
         {
@@ -3131,7 +3131,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.2655968365783985,
+          "ratio": 3.2655968365783967,
           "pass": true
         },
         {
@@ -3139,7 +3139,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.8460668336766455,
+          "ratio": 6.846066833676644,
           "pass": true
         },
         {
@@ -3155,7 +3155,7 @@
           "name": "status-warning on status-warning-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 9.400647634218085,
+          "ratio": 9.400647634218082,
           "pass": true
         },
         {
@@ -3163,7 +3163,7 @@
           "name": "status-error on status-error-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 4.336367237416219,
+          "ratio": 4.336367237416221,
           "pass": true
         },
         {
@@ -3171,7 +3171,7 @@
           "name": "status-error on status-error-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 5.260636829043456,
+          "ratio": 5.260636829043455,
           "pass": true
         },
         {
@@ -3179,7 +3179,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.350512630487994,
+          "ratio": 3.3505126304879935,
           "pass": true
         },
         {
@@ -3195,7 +3195,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.3041895284600584,
+          "ratio": 3.3041895284600575,
           "pass": true
         },
         {
@@ -3203,7 +3203,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.924492075456695,
+          "ratio": 7.924492075456693,
           "pass": true
         },
         {
@@ -3219,7 +3219,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 11.59465613752421,
+          "ratio": 11.594656137524206,
           "pass": true
         },
         {
@@ -3227,7 +3227,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.387872564399066,
+          "ratio": 4.387872564399069,
           "pass": true
         },
         {
@@ -3235,7 +3235,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 5.728615119396985,
+          "ratio": 5.728615119396984,
           "pass": true
         },
         {
@@ -3259,7 +3259,7 @@
           "name": "destructive-foreground on destructive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.399795732496436,
+          "ratio": 5.39979573249644,
           "pass": true
         },
         {
@@ -3267,7 +3267,7 @@
           "name": "destructive-foreground on destructive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.5049969602544,
+          "ratio": 5.504996960254399,
           "pass": true
         },
         {
@@ -3275,7 +3275,7 @@
           "name": "secondary-fill-foreground on secondary-fill",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.05381762732523,
+          "ratio": 8.053817627325229,
           "pass": true
         },
         {
@@ -3283,7 +3283,7 @@
           "name": "secondary-fill-foreground on secondary-fill",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.142055359268861,
+          "ratio": 11.142055359268857,
           "pass": true
         },
         {
@@ -3312,7 +3312,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.090033394234345,
+          "ratio": 14.090033394234343,
           "pass": true
         },
         {
@@ -3320,7 +3320,7 @@
           "name": "foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 16.458581681856316,
+          "ratio": 16.458581681856312,
           "pass": true
         },
         {
@@ -3328,7 +3328,7 @@
           "name": "card-foreground on card",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.873136888422422,
+          "ratio": 15.873136888422428,
           "pass": true
         },
         {
@@ -3344,7 +3344,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.873136888422422,
+          "ratio": 15.873136888422428,
           "pass": true
         },
         {
@@ -3352,7 +3352,7 @@
           "name": "popover-foreground on popover",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.091547252161371,
+          "ratio": 11.09154725216137,
           "pass": true
         },
         {
@@ -3368,7 +3368,7 @@
           "name": "primary-foreground on primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.86099814780687,
+          "ratio": 8.860998147806868,
           "pass": true
         },
         {
@@ -3376,7 +3376,7 @@
           "name": "secondary-foreground on secondary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.686827345327343,
+          "ratio": 11.686827345327345,
           "pass": true
         },
         {
@@ -3384,7 +3384,7 @@
           "name": "secondary-foreground on secondary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.14212220671789,
+          "ratio": 8.142122206717888,
           "pass": true
         },
         {
@@ -3392,7 +3392,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 4.806731822669069,
+          "ratio": 4.806731822669071,
           "pass": true
         },
         {
@@ -3400,7 +3400,7 @@
           "name": "muted-foreground on muted",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.811604336601008,
+          "ratio": 6.81160433660101,
           "pass": true
         },
         {
@@ -3408,7 +3408,7 @@
           "name": "muted-foreground on background",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.795158078177212,
+          "ratio": 5.795158078177213,
           "pass": true
         },
         {
@@ -3424,7 +3424,7 @@
           "name": "accent-foreground on accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.905621160417181,
+          "ratio": 6.90562116041718,
           "pass": true
         },
         {
@@ -3440,7 +3440,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.873136888422422,
+          "ratio": 15.873136888422428,
           "pass": true
         },
         {
@@ -3448,7 +3448,7 @@
           "name": "sidebar-foreground on sidebar",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.090033394234345,
+          "ratio": 14.090033394234343,
           "pass": true
         },
         {
@@ -3464,7 +3464,7 @@
           "name": "sidebar-primary-foreground on sidebar-primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.86099814780687,
+          "ratio": 8.860998147806868,
           "pass": true
         },
         {
@@ -3472,7 +3472,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.905621160417181,
+          "ratio": 6.90562116041718,
           "pass": true
         },
         {
@@ -3488,7 +3488,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.090033394234345,
+          "ratio": 14.090033394234343,
           "pass": true
         },
         {
@@ -3496,7 +3496,7 @@
           "name": "foreground on surface-ground",
           "type": "normal",
           "required": 4.5,
-          "ratio": 16.458581681856316,
+          "ratio": 16.458581681856312,
           "pass": true
         },
         {
@@ -3504,7 +3504,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.873136888422422,
+          "ratio": 15.873136888422428,
           "pass": true
         },
         {
@@ -3512,7 +3512,7 @@
           "name": "foreground on surface-page",
           "type": "normal",
           "required": 4.5,
-          "ratio": 14.090033394234345,
+          "ratio": 14.090033394234343,
           "pass": true
         },
         {
@@ -3520,7 +3520,7 @@
           "name": "foreground on surface-raised",
           "type": "normal",
           "required": 4.5,
-          "ratio": 15.873136888422422,
+          "ratio": 15.873136888422428,
           "pass": true
         },
         {
@@ -3536,7 +3536,7 @@
           "name": "foreground on surface-sunken",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.686827345327343,
+          "ratio": 11.686827345327345,
           "pass": true
         },
         {
@@ -3544,7 +3544,7 @@
           "name": "foreground on surface-sunken",
           "type": "normal",
           "required": 4.5,
-          "ratio": 16.458581681856316,
+          "ratio": 16.458581681856312,
           "pass": true
         },
         {
@@ -3552,7 +3552,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.686827345327343,
+          "ratio": 11.686827345327345,
           "pass": true
         },
         {
@@ -3560,7 +3560,7 @@
           "name": "foreground on surface-interactive",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.091547252161371,
+          "ratio": 11.09154725216137,
           "pass": true
         },
         {
@@ -3568,7 +3568,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.225741300759537,
+          "ratio": 6.225741300759538,
           "pass": true
         },
         {
@@ -3576,7 +3576,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 9.131424082933217,
+          "ratio": 9.131424082933215,
           "pass": true
         },
         {
@@ -3584,7 +3584,7 @@
           "name": "status-warning-text on status-warning-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.775249571052534,
+          "ratio": 6.775249571052529,
           "pass": true
         },
         {
@@ -3600,7 +3600,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.451951592496645,
+          "ratio": 6.451951592496646,
           "pass": true
         },
         {
@@ -3608,7 +3608,7 @@
           "name": "status-error-text on status-error-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.91595324168073,
+          "ratio": 8.915953241680732,
           "pass": true
         },
         {
@@ -3616,7 +3616,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 5.858960428478824,
+          "ratio": 5.858960428478822,
           "pass": true
         },
         {
@@ -3624,7 +3624,7 @@
           "name": "status-info-text on status-info-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.804120907570029,
+          "ratio": 8.804120907570033,
           "pass": true
         },
         {
@@ -3648,7 +3648,7 @@
           "name": "border-strong on background",
           "type": "ui",
           "required": 3,
-          "ratio": 8.14212220671789,
+          "ratio": 8.142122206717888,
           "pass": true
         },
         {
@@ -3664,7 +3664,7 @@
           "name": "ring on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.1750750442268285,
+          "ratio": 3.1750750442268276,
           "pass": true
         },
         {
@@ -3672,7 +3672,7 @@
           "name": "ring on background",
           "type": "ui",
           "required": 3,
-          "ratio": 9.227967072252635,
+          "ratio": 9.227967072252634,
           "pass": true
         },
         {
@@ -3680,7 +3680,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 4.445311188998239,
+          "ratio": 4.44531118899824,
           "pass": true
         },
         {
@@ -3688,7 +3688,7 @@
           "name": "border on card",
           "type": "ui",
           "required": 3,
-          "ratio": 4.9964286090767915,
+          "ratio": 4.996428609076792,
           "pass": true
         },
         {
@@ -3696,7 +3696,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.257567304633617,
+          "ratio": 3.2575673046336187,
           "pass": true
         },
         {
@@ -3704,7 +3704,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.948496934689551,
+          "ratio": 6.948496934689552,
           "pass": true
         },
         {
@@ -3712,7 +3712,7 @@
           "name": "status-warning on status-warning-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 4.176694816411409,
+          "ratio": 4.176694816411408,
           "pass": true
         },
         {
@@ -3720,7 +3720,7 @@
           "name": "status-warning on status-warning-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 9.352676928974619,
+          "ratio": 9.35267692897462,
           "pass": true
         },
         {
@@ -3744,7 +3744,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.3687644752005745,
+          "ratio": 3.368764475200573,
           "pass": true
         },
         {
@@ -3752,7 +3752,7 @@
           "name": "status-info on status-info-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 6.601796164121065,
+          "ratio": 6.601796164121067,
           "pass": true
         },
         {
@@ -3760,7 +3760,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.2893733329685504,
+          "ratio": 3.28937333296855,
           "pass": true
         },
         {
@@ -3776,7 +3776,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.997080689468189,
+          "ratio": 3.997080689468188,
           "pass": true
         },
         {
@@ -3784,7 +3784,7 @@
           "name": "status-warning on background",
           "type": "ui",
           "required": 3,
-          "ratio": 12.079656240984185,
+          "ratio": 12.079656240984187,
           "pass": true
         },
         {
@@ -3792,7 +3792,7 @@
           "name": "status-error on background",
           "type": "ui",
           "required": 3,
-          "ratio": 4.470076315106836,
+          "ratio": 4.470076315106835,
           "pass": true
         },
         {
@@ -3808,7 +3808,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.4571560334016027,
+          "ratio": 3.457156033401602,
           "pass": true
         },
         {
@@ -3816,7 +3816,7 @@
           "name": "status-info on background",
           "type": "ui",
           "required": 3,
-          "ratio": 7.645819226396958,
+          "ratio": 7.64581922639696,
           "pass": true
         },
         {
@@ -3848,7 +3848,7 @@
           "name": "secondary-fill-foreground on secondary-fill",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.599284082769879,
+          "ratio": 11.59928408276988,
           "pass": true
         },
         {
@@ -3856,7 +3856,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.997080689468189,
+          "ratio": 3.997080689468188,
           "pass": true
         },
         {
@@ -3864,7 +3864,7 @@
           "name": "secondary-fill-border on background",
           "type": "ui",
           "required": 3,
-          "ratio": 6.618411388194412,
+          "ratio": 6.618411388194411,
           "pass": true
         }
       ]

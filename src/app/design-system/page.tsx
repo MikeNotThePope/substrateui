@@ -225,7 +225,11 @@ export default function DesignSystemPage() {
   const [dropdownChecked, setDropdownChecked] = React.useState(true)
 
   return (
-    <Center max="xl" className="py-12">
+    <Center
+      max="xl"
+      className="py-12 outline-none"
+      render={<main id="main-content" tabIndex={-1} />}
+    >
       <Stack gap="2xl">
 
         {/* ── Header ─────────────────────────────────────────── */}

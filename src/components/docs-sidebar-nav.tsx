@@ -202,6 +202,7 @@ export const navSections = [
     title: "Utilities",
     items: [
       { label: "FocusTrap", href: "/docs/components/focus-trap" },
+      { label: "SkipLink", href: "/docs/components/skip-link" },
     ],
   },
   {

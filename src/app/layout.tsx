@@ -5,6 +5,7 @@ import { DirectionController } from "@/components/providers/direction-controller
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteThemeProvider } from "@/components/theme-picker";
+import { SkipLink } from "@/components/ui/skip-link";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -101,6 +102,10 @@ export default function RootLayout({
           <SiteThemeProvider>
             <DirectionController>
               <div className="flex min-h-screen flex-col">
+                {/* First focusable element in the document, so Tab from the
+                    address bar reaches it before the header and the docs
+                    sidebar. Each route supplies the #main-content target. */}
+                <SkipLink />
                 <SiteHeader />
                 <div className="flex-1">{children}</div>
                 <SiteFooter />
