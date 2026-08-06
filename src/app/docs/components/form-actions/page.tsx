@@ -12,6 +12,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "FormActions",
+  description: "A horizontal action bar for form submit and cancel buttons, separated by a top border. Supports simple right-aligned buttons or split primary/secondary layout.",
+  route: "/docs/components/form-actions",
+})
+
 const formActionsProps: PropDef[] = [
   {
     name: "className",

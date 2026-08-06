@@ -11,6 +11,14 @@ import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Form Patterns",
+  description: "Compose Field components into logical sections with Card wrappers, then add a FormActions row at the bottom.",
+  route: "/docs/patterns/forms",
+})
+
 const formPatternProps: PropDef[] = [
   {
     name: "Field",

@@ -4,6 +4,14 @@ import { Stack } from "@/components/ui/stack"
 import { Card, CardContent } from "@/components/ui/card"
 import { ComponentPreview } from "../../_components/component-preview"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Spacing",
+  description: "A 4px base unit system with named scale steps from xs to 2xl.",
+  route: "/docs/tokens/spacing",
+})
+
 const spacingScale = [
   { name: "xs", value: "0.25rem", px: "4px" },
   { name: "sm", value: "0.5rem", px: "8px" },

@@ -7,6 +7,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Input",
+  description: "A single-line text input. Pair it with Field to get the label, hint, and error wiring.",
+  route: "/docs/components/input",
+})
+
 const inputProps: PropDef[] = [
   {
     name: "type",

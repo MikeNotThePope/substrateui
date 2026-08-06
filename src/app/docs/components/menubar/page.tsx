@@ -14,6 +14,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Menubar",
+  description: "A horizontal menu bar with dropdown menus, modeled after desktop application menus. Supports keyboard navigation and grouped items.",
+  route: "/docs/components/menubar",
+})
+
 const menubarProps: PropDef[] = [
   {
     name: "className",

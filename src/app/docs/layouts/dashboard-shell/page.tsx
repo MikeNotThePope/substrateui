@@ -4,6 +4,14 @@ import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Dashboard Shell",
+  description: "A full-page top + side navigation layout: a full-width header bar above a fixed sidebar and scrollable main region — the classic admin dashboard.",
+  route: "/docs/layouts/dashboard-shell",
+})
+
 const shellProps: PropDef[] = [
   {
     name: "className",

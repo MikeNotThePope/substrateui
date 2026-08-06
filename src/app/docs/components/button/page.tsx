@@ -8,6 +8,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Button",
+  description: "Triggers an action. Seven variants, four sizes, and a 3px press offset that collapses under prefers-reduced-motion.",
+  route: "/docs/components/button",
+})
+
 const buttonProps: PropDef[] = [
   {
     name: "variant",

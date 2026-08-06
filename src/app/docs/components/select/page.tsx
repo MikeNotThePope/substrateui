@@ -7,6 +7,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Select",
+  description: "A dropdown select built on Base UI primitives. Provides a styled trigger, animated content panel, and accessible keyboard navigation.",
+  route: "/docs/components/select",
+})
+
 const selectProps: PropDef[] = [
   {
     name: "value",

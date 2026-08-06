@@ -4,6 +4,14 @@ import { Stack } from "@/components/ui/stack"
 import { Card, CardContent } from "@/components/ui/card"
 import { PropsTable } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Typography",
+  description: "DM Sans for prose, DM Mono for code and labels. A modular scale built for readability.",
+  route: "/docs/tokens/typography",
+})
+
 const specimens = [
   { label: "H1", description: "Page titles. text-4xl font-bold tracking-tight", component: <H1>The quick brown fox</H1> },
   { label: "H2", description: "Section headers. text-3xl font-semibold tracking-tight", component: <H2>The quick brown fox</H2> },

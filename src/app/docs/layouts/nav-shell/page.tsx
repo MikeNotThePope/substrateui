@@ -4,6 +4,14 @@ import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Nav Shell",
+  description: "A full-page top-navigation layout: a sticky header bar with brand, inline navigation, and actions above a scrollable content region.",
+  route: "/docs/layouts/nav-shell",
+})
+
 const navShellProps: PropDef[] = [
   {
     name: "className",

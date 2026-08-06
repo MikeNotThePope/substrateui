@@ -5,6 +5,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Typography",
+  description: "Semantic typography components for headings, body text, and inline elements. Each renders the correct HTML tag.",
+  route: "/docs/components/typography",
+})
+
 const typographyProps: PropDef[] = [
   {
     name: "className",

@@ -14,6 +14,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Pagination",
+  description: "Navigation controls for moving between pages of content. Provides numbered links plus previous and next shortcuts.",
+  route: "/docs/components/pagination",
+})
+
 const paginationProps: PropDef[] = [
   {
     name: "className",

@@ -13,6 +13,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Navigation Menu",
+  description: "A horizontal bar of navigation links, for the top level of a site.",
+  route: "/docs/components/navigation-menu",
+})
+
 const navigationMenuProps: PropDef[] = [
   {
     name: "className",

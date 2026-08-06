@@ -6,6 +6,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Stepper",
+  description: "A numbered progress indicator for multi-step flows like checkout, onboarding, and form wizards.",
+  route: "/docs/components/stepper",
+})
+
 const props: PropDef[] = [
   { name: "steps", type: "{ label: ReactNode; description?: ReactNode }[]", default: undefined, description: "The ordered steps to render." },
   { name: "activeStep", type: "number", default: undefined, description: "Zero-based index of the current step. Earlier steps render as completed." },

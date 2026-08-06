@@ -8,6 +8,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Switch",
+  description: "A toggle for a boolean. Built on Base UI, with the thumb animated between states and the label wired for screen readers.",
+  route: "/docs/components/switch",
+})
+
 const switchProps: PropDef[] = [
   {
     name: "checked",

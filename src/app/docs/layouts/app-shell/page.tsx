@@ -4,6 +4,14 @@ import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "App Shell",
+  description: "A full-page side-navigation layout: a fixed sidebar with logo, navigation, and footer beside a scrollable main region.",
+  route: "/docs/layouts/app-shell",
+})
+
 const appShellProps: PropDef[] = [
   {
     name: "className",

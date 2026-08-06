@@ -6,6 +6,14 @@ import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { FocusTrapDemo } from "./focus-trap-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Focus Trap",
+  description: "Traps keyboard focus within a region while active — the reusable focus-management primitive behind modals, menus, and any custom overlay.",
+  route: "/docs/components/focus-trap",
+})
+
 const props: PropDef[] = [
   { name: "active", type: "boolean", default: "true", description: "Whether focus is trapped inside the children." },
   { name: "restoreFocus", type: "boolean", default: "true", description: "Return focus to the previously focused element when the trap deactivates." },

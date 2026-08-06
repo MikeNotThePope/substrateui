@@ -6,6 +6,14 @@ import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { TreeDemo } from "./tree-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Tree",
+  description: "A hierarchical tree view for file explorers, nested navigation, and category pickers.",
+  route: "/docs/components/tree",
+})
+
 const props: PropDef[] = [
   { name: "data", type: "TreeNode[]", default: undefined, description: "Hierarchical nodes: { id, label, icon?, children?, disabled? }." },
   { name: "defaultExpandedIds", type: "string[]", default: "[]", description: "Ids expanded initially (uncontrolled)." },

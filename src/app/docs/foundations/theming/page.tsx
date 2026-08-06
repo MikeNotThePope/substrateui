@@ -5,6 +5,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { ThemingDemo, GeneratedCssDemo } from "./theming-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Theming API",
+  description: "Define named themes in TypeScript, register them, and swap between them at runtime.",
+  route: "/docs/foundations/theming",
+})
+
 const registryProps: PropDef[] = [
   { name: "themes", type: "Theme[]", default: "[]", description: "Themes made available to useTheme and ThemeSelect." },
   { name: "defaultTheme", type: "string", default: '"default"', description: "Applied when nothing is stored. \"default\" means the stylesheet's built-in palette." },

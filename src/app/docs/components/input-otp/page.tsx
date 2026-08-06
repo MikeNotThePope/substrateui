@@ -7,6 +7,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Input OTP",
+  description: "A one-time-code input with one slot per character. Focus advances as you type, a paste fills every slot, and separators are yours to place.",
+  route: "/docs/components/input-otp",
+})
+
 const inputOtpProps: PropDef[] = [
   {
     name: "maxLength",

@@ -17,6 +17,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Form",
+  description: "A form element wrapper with built-in vertical stack layout and configurable gap spacing. Provides consistent structure for form pages.",
+  route: "/docs/components/form",
+})
+
 const formProps: PropDef[] = [
   {
     name: "gap",

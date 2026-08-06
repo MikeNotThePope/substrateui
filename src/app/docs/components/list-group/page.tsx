@@ -8,6 +8,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "List Group",
+  description: "A bordered, divided list of items, links, or buttons inside a single element.",
+  route: "/docs/components/list-group",
+})
+
 const props: PropDef[] = [
   { name: "ListGroup", type: "React.ComponentProps<'div'>", default: undefined, description: "The bordered, divided container." },
   { name: "ListGroupItem.active", type: "boolean", default: undefined, description: "Marks the row as the current selection." },

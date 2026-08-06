@@ -8,6 +8,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Alert",
+  description: "A callout message. Four semantic variants — informational, success, warning, error — each with its own colour and icon.",
+  route: "/docs/components/alert",
+})
+
 const alertProps: PropDef[] = [
   {
     name: "variant",

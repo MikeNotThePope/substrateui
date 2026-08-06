@@ -7,6 +7,14 @@ import { Stack } from "@/components/ui/stack"
 import { Spacer } from "@/components/ui/spacer"
 import { Cluster } from "@/components/ui/cluster"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Spacer",
+  description: "A whitespace element: a fixed gap, or a flex fill. For space between siblings where a gap on the parent will not reach.",
+  route: "/docs/components/spacer",
+})
+
 function PlaceholderBox({ children }: { children?: React.ReactNode }) {
   return (
     <div className="h-16 rounded-lg bg-surface-sunken border-2 border-dashed border-border flex items-center justify-center text-muted-foreground text-sm font-mono">

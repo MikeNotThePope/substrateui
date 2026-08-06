@@ -7,6 +7,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Spinner",
+  description: "An animated loading indicator for asynchronous operations. Renders as a spinning circle with a primary-colored arc.",
+  route: "/docs/components/spinner",
+})
+
 const spinnerProps: PropDef[] = [
   {
     name: "size",

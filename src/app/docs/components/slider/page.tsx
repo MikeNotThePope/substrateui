@@ -6,6 +6,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Slider",
+  description: "A draggable input for a numeric value. Built on Base UI, with the track filled to the current position.",
+  route: "/docs/components/slider",
+})
+
 const sliderProps: PropDef[] = [
   {
     name: "defaultValue",

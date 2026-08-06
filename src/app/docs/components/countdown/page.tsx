@@ -10,6 +10,14 @@ import {
   CountdownStatCardDemo,
 } from "./countdown-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Countdown",
+  description: "A live countdown to a deadline.",
+  route: "/docs/components/countdown",
+})
+
 const props: PropDef[] = [
   { name: "deadline", type: "Date | number", default: undefined, description: "When the countdown reaches zero — a Date or epoch milliseconds." },
   { name: "interval", type: "number", default: "1000", description: "Tick rate in milliseconds." },

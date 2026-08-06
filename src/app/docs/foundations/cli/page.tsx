@@ -3,6 +3,14 @@ import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "CLI",
+  description: "A zero-dependency init helper. It wires the stylesheet imports into your global CSS and prints the remaining setup.",
+  route: "/docs/foundations/cli",
+})
+
 export default function CliPage() {
   return (
     <DocPage

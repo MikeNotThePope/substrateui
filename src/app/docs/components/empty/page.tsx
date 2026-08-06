@@ -9,6 +9,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Empty",
+  description: "A placeholder for empty states. Combines an icon, title, description, and optional action to guide users when no content is available.",
+  route: "/docs/components/empty",
+})
+
 const emptyProps: PropDef[] = [
   {
     name: "EmptyIcon",

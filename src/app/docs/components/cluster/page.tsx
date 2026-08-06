@@ -7,6 +7,14 @@ import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
 import { Grid } from "@/components/ui/grid"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Cluster",
+  description: "A horizontal flex layout component that distributes children along the inline axis with configurable gap, alignment, justification, and wrapping.",
+  route: "/docs/components/cluster",
+})
+
 function Tag({ children }: { children: React.ReactNode }) {
   return (
     <div className="px-4 py-2 rounded-lg bg-surface-sunken border-2 border-dashed border-border text-muted-foreground text-sm font-mono whitespace-nowrap">

@@ -15,6 +15,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Timeline",
+  description: "Displays a series of events in chronological order — activity feeds, changelogs, order tracking, and audit logs.",
+  route: "/docs/components/timeline",
+})
+
 const props: PropDef[] = [
   {
     name: "Timeline",

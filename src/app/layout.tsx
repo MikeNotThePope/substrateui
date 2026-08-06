@@ -5,6 +5,7 @@ import { DirectionController } from "@/components/providers/direction-controller
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteThemeProvider } from "@/components/theme-picker";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -40,9 +41,50 @@ const barlowCondensed = Barlow_Condensed({
   display: "swap",
 });
 
+// `title.template` applies to child segments only, which is why `default` is
+// required — it is what the home page itself renders. Every other page exports
+// its own `title` string and gets the suffix appended.
 export const metadata: Metadata = {
-  title: "SubstrateUI",
-  description: "SubstrateUI Design System",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — A themeable React design system`,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "design system",
+    "react components",
+    "tailwind css v4",
+    "base ui",
+    "oklch",
+    "theming",
+    "accessible components",
+    "wcag aa",
+    "next.js",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/",
+    title: `${SITE_NAME} — A themeable React design system`,
+    description: SITE_DESCRIPTION,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — A themeable React design system`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 export default function RootLayout({

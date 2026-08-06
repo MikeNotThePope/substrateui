@@ -4,6 +4,14 @@ import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Direction (RTL)",
+  description: "How SubstrateUI supports right-to-left layout, what is handled automatically, and where consumers still need to make choices per usage.",
+  route: "/docs/accessibility/direction",
+})
+
 const codeExample = `import { DirectionProvider } from "@substrateui/core"
 
 export default function App({ children }: { children: React.ReactNode }) {

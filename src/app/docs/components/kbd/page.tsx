@@ -7,6 +7,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Kbd",
+  description: "Displays a keyboard key or key combination. Renders with a sunken border style to mimic physical keyboard keys.",
+  route: "/docs/components/kbd",
+})
+
 const kbdProps: PropDef[] = [
   {
     name: "keys",

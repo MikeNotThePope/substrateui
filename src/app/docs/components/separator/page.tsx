@@ -8,6 +8,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Separator",
+  description: "A one-pixel rule between groups of content. Built on Base UI's Separator, so it is announced or ignored correctly rather than being a styled div.",
+  route: "/docs/components/separator",
+})
+
 const separatorProps: PropDef[] = [
   {
     name: "orientation",

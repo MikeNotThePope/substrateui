@@ -2,6 +2,14 @@ import { DocPage } from "../../_components/doc-page"
 import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Textures",
+  description: "Optional pure-CSS background patterns. No dependencies, token-driven, and they follow the theme and the mode.",
+  route: "/docs/foundations/textures",
+})
+
 const textures = [
   {
     cls: "texture-noise",

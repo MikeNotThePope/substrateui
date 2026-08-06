@@ -25,6 +25,14 @@ import {
   AnnouncerDemo,
 } from "./hooks-demos"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Hooks",
+  description: "React hooks for the state and browser plumbing every app rewrites — disclosure, clipboard, storage, media queries, hotkeys, debouncing, and more.",
+  route: "/docs/hooks",
+})
+
 const hooks: PropDef[] = [
   { name: "useDisclosure", type: "(initial?) => [boolean, { open, close, toggle }]", default: undefined, description: "Open/closed state for dialogs, drawers, and popovers, with onOpen/onClose callbacks." },
   { name: "useToggle", type: "(options?) => [value, toggle]", default: undefined, description: "Cycle through a list of values (defaults to [false, true]); jump to a value by passing it." },

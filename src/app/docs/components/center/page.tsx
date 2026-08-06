@@ -6,6 +6,14 @@ import { H3 } from "@/components/ui/typography"
 import { Stack } from "@/components/ui/stack"
 import { Center } from "@/components/ui/center"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Center",
+  description: "A centering layout component that constrains content to a maximum width and centers it horizontally with optional responsive padding.",
+  route: "/docs/components/center",
+})
+
 export default function CenterPage() {
   return (
     <DocPage

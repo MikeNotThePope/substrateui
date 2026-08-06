@@ -12,6 +12,14 @@ import { CompositionTree } from "../../_components/composition-tree"
 import { ImportLine } from "../../_components/import-line"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Collapsible",
+  description: "One trigger, one panel.",
+  route: "/docs/components/collapsible",
+})
+
 const collapsibleProps: PropDef[] = [
   { name: "open", type: "boolean", default: undefined, description: "The controlled open state." },
   { name: "defaultOpen", type: "boolean", default: "false", description: "Open on first render, when uncontrolled." },

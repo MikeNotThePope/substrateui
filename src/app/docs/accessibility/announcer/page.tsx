@@ -5,6 +5,14 @@ import { ComponentPreview } from "../../_components/component-preview"
 import { PropsTable, type PropDef } from "../../_components/props-table"
 import { AnnouncerDemo } from "./announcer-demo"
 
+import { pageMetadata } from "@/lib/site"
+
+export const metadata = pageMetadata({
+  title: "Announcer",
+  description: "Imperatively announce messages to screen readers for feedback that has no visual anchor — async results, background updates, undo confirmations.",
+  route: "/docs/accessibility/announcer",
+})
+
 const api: PropDef[] = [
   { name: "useAnnouncer()", type: "() => { announce, clear }", default: undefined, description: "React hook returning a stable announce/clear pair for use in effects and handlers." },
   { name: "announce(message, assertiveness?, timeout?)", type: "(string, 'assertive' | 'polite', number) => void", default: "'polite', 7000", description: "Imperatively announce a message. Empty string clears without announcing." },
