@@ -23,7 +23,7 @@ import type { StatCardLabels } from "@/components/stat-card"
 import type { ThemePickerLabels } from "@/components/theme-picker"
 import type { ThemeToggleLabels } from "@/components/theme-toggle"
 
-/** All translatable strings for SubstrateUI components, keyed by component. */
+/** All translatable strings for published SubstrateUI components, keyed by component. */
 interface SubstrateUILabels {
   breadcrumb?: Partial<BreadcrumbLabels>
   carousel?: Partial<CarouselLabels>
@@ -38,16 +38,27 @@ interface SubstrateUILabels {
   sheet?: Partial<SheetLabels>
   sidebar?: Partial<SidebarLabels>
   spinner?: Partial<SpinnerLabels>
+  statCard?: Partial<StatCardLabels>
+}
+
+/**
+ * Docs-site chrome. These components don't ship. tsup's dts rollup inlines any
+ * type reachable from an export, so this must stay out of both
+ * `SubstrateUILabels` and `LabelsProvider`'s signature — not exporting it isn't
+ * enough on its own.
+ */
+interface SiteChromeLabels extends SubstrateUILabels {
   directionToggle?: Partial<DirectionToggleLabels>
   siteHeader?: Partial<SiteHeaderLabels>
   siteHeaderNav?: Partial<SiteHeaderNavLabels>
   sitePreferences?: Partial<SitePreferencesLabels>
-  statCard?: Partial<StatCardLabels>
   themePicker?: Partial<ThemePickerLabels>
   themeToggle?: Partial<ThemeToggleLabels>
 }
 
-const LabelsContext = React.createContext<SubstrateUILabels>({})
+const LabelsContext = React.createContext<SubstrateUILabels & SiteChromeLabels>(
+  {}
+)
 
 /**
  * Provides translated labels to all SubstrateUI components.
@@ -55,6 +66,10 @@ const LabelsContext = React.createContext<SubstrateUILabels>({})
  * Wrap your app (or a subtree) in this provider to set translations once
  * rather than passing `labels` to every component instance. Per-instance
  * `labels` props still override the provider value.
+ *
+ * The prop names only what this package ships. The docs site passes a wider
+ * type of its own for its chrome, which keeps those types out of the published
+ * .d.ts.
  *
  * @example
  * <LabelsProvider labels={{ dialog: { close: "Fermer" }, spinner: { loading: "Chargement…" } }}>
@@ -69,7 +84,11 @@ function LabelsProvider({
   children: React.ReactNode
 }) {
   return (
-    <LabelsContext.Provider value={labels}>{children}</LabelsContext.Provider>
+    <LabelsContext.Provider
+      value={labels as SubstrateUILabels & SiteChromeLabels}
+    >
+      {children}
+    </LabelsContext.Provider>
   )
 }
 
@@ -78,4 +97,11 @@ function useLabels() {
   return React.useContext(LabelsContext)
 }
 
-export { LabelsProvider, useLabels, type SubstrateUILabels }
+// SiteChromeLabels is exported for the docs site's own use. It is deliberately
+// absent from src/components/ui/index.ts, so it never reaches the built .d.ts.
+export {
+  LabelsProvider,
+  useLabels,
+  type SubstrateUILabels,
+  type SiteChromeLabels,
+}

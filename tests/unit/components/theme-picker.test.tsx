@@ -3,7 +3,10 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { ThemePicker, SiteThemeProvider, useSiteTheme } from '@/components/theme-picker'
-import { LabelsProvider } from '@/components/providers/labels-provider'
+import {
+  LabelsProvider,
+  type SiteChromeLabels,
+} from '@/components/providers/labels-provider'
 
 describe('ThemePicker', () => {
   it('renders a select trigger labelled "Theme" showing the current theme', () => {
@@ -32,8 +35,11 @@ describe('ThemePicker', () => {
   })
 
   it('reads the aria-label from the LabelsProvider context', () => {
+    // Site chrome isn't part of the published label surface, so it goes in as
+    // a typed variable rather than a literal.
+    const labels: SiteChromeLabels = { themePicker: { theme: 'Thème' } }
     render(
-      <LabelsProvider labels={{ themePicker: { theme: 'Thème' } }}>
+      <LabelsProvider labels={labels}>
         <ThemePicker />
       </LabelsProvider>
     )

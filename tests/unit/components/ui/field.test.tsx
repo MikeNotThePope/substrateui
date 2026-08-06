@@ -8,6 +8,8 @@ import {
   FieldError,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { NativeSelect } from '@/components/ui/native-select'
 
 describe('Field', () => {
   it('renders label, input, and hint together', () => {
@@ -145,5 +147,110 @@ describe('Field', () => {
     const wrapper = container.querySelector('[data-slot="field"]')
     expect(wrapper?.className).toContain('my-extra-class')
     expect(wrapper?.className).toContain('space-y-2')
+  })
+})
+
+describe('Field control association', () => {
+  it('gives the control the field id, with no id passed', () => {
+    render(
+      <Field>
+        <FieldLabel>Email</FieldLabel>
+        <Input />
+      </Field>
+    )
+    expect(screen.getByLabelText('Email')).toBeInstanceOf(HTMLInputElement)
+  })
+
+  it('describes the control by its hint', () => {
+    render(
+      <Field id="hinted">
+        <FieldLabel>Email</FieldLabel>
+        <Input />
+        <FieldHint>We never share it.</FieldHint>
+      </Field>
+    )
+    expect(screen.getByLabelText('Email')).toHaveAttribute(
+      'aria-describedby',
+      'hinted-hint'
+    )
+  })
+
+  it('adds the error id and aria-invalid only in an error state', () => {
+    const { rerender } = render(
+      <Field id="e">
+        <FieldLabel>Email</FieldLabel>
+        <Input />
+        <FieldError>{null}</FieldError>
+      </Field>
+    )
+    expect(screen.getByLabelText('Email')).not.toHaveAttribute(
+      'aria-describedby'
+    )
+
+    rerender(
+      <Field id="e" error>
+        <FieldLabel>Email</FieldLabel>
+        <Input />
+        <FieldError>Enter an email.</FieldError>
+      </Field>
+    )
+    const input = screen.getByLabelText('Email')
+    expect(input).toHaveAttribute('aria-invalid', 'true')
+    expect(input).toHaveAttribute('aria-describedby', 'e-error')
+  })
+
+  it('never describes an id that is not on the page', () => {
+    // error is true, but no FieldError rendered — nothing to point at.
+    render(
+      <Field error>
+        <FieldLabel>Email</FieldLabel>
+        <Input />
+      </Field>
+    )
+    const described = screen
+      .getByLabelText('Email')
+      .getAttribute('aria-describedby')
+    for (const id of described?.split(' ') ?? []) {
+      expect(document.getElementById(id)).not.toBeNull()
+    }
+  })
+
+  it("lets a caller's own id win, so two controls can share a Field", () => {
+    render(
+      <Field>
+        <FieldLabel>Base salary range</FieldLabel>
+        <Input id="low" />
+        <Input id="high" />
+      </Field>
+    )
+    const ids = [...document.querySelectorAll('input')].map((el) => el.id)
+    expect(ids).toEqual(['low', 'high'])
+  })
+
+  it('associates Textarea and NativeSelect too', () => {
+    render(
+      <>
+        <Field>
+          <FieldLabel>Notes</FieldLabel>
+          <Textarea />
+        </Field>
+        <Field>
+          <FieldLabel>Country</FieldLabel>
+          <NativeSelect>
+            <option value="us">US</option>
+          </NativeSelect>
+        </Field>
+      </>
+    )
+    expect(screen.getByLabelText('Notes').tagName).toBe('TEXTAREA')
+    expect(screen.getByLabelText('Country').tagName).toBe('SELECT')
+  })
+
+  it('leaves standalone controls alone', () => {
+    render(<Input placeholder="loose" />)
+    const input = screen.getByPlaceholderText('loose')
+    expect(input.id).toBe('')
+    expect(input).not.toHaveAttribute('aria-describedby')
+    expect(input).not.toHaveAttribute('aria-invalid')
   })
 })
