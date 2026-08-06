@@ -10,6 +10,9 @@ interface FieldContextValue {
   hintId: string
   errorId: string
   error: boolean
+  /** Which of hintId / errorId are actually rendered right now. */
+  described: { hint: boolean; error: boolean }
+  setDescribed: (part: "hint" | "error", present: boolean) => void
 }
 
 const FieldContext = React.createContext<FieldContextValue | null>(null)
@@ -17,6 +20,36 @@ const FieldContext = React.createContext<FieldContextValue | null>(null)
 /** Hook that returns the current Field context (id, error state, aria IDs). */
 function useFieldContext() {
   return React.useContext(FieldContext)
+}
+
+/**
+ * Props a form control spreads to join its parent Field. Returns nothing
+ * outside one, so controls still work standalone.
+ *
+ * `aria-describedby` names only ids that are actually on the page. `FieldHint`
+ * and `FieldError` register themselves when they render — `error` alone isn't
+ * enough, since a field can be in error with no message rendered, and pointing
+ * at a missing id fails axe's aria-valid-attr-value.
+ *
+ * @example
+ * <input {...useFieldControl()} {...props} />
+ */
+function useFieldControl(): React.AriaAttributes & { id?: string } {
+  const ctx = useFieldContext()
+  if (!ctx) return {}
+
+  const describedBy = [
+    ctx.described.hint && ctx.hintId,
+    ctx.described.error && ctx.errorId,
+  ]
+    .filter(Boolean)
+    .join(" ")
+
+  return {
+    id: ctx.id,
+    "aria-describedby": describedBy || undefined,
+    "aria-invalid": ctx.error || undefined,
+  }
 }
 
 interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -39,6 +72,18 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
 function Field({ className, error = false, id: idProp, children, ...props }: FieldProps) {
   const generatedId = React.useId()
   const id = idProp ?? generatedId
+  const [described, setDescribedState] = React.useState({
+    hint: false,
+    error: false,
+  })
+
+  const setDescribed = React.useCallback(
+    (part: "hint" | "error", present: boolean) =>
+      setDescribedState((prev) =>
+        prev[part] === present ? prev : { ...prev, [part]: present }
+      ),
+    []
+  )
 
   const ctx = React.useMemo<FieldContextValue>(
     () => ({
@@ -46,8 +91,10 @@ function Field({ className, error = false, id: idProp, children, ...props }: Fie
       hintId: `${id}-hint`,
       errorId: `${id}-error`,
       error,
+      described,
+      setDescribed,
     }),
-    [id, error]
+    [id, error, described, setDescribed]
   )
 
   return (
@@ -95,6 +142,12 @@ function FieldHint({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   const ctx = useFieldContext()
+  const setDescribed = ctx?.setDescribed
+
+  React.useEffect(() => {
+    setDescribed?.("hint", true)
+    return () => setDescribed?.("hint", false)
+  }, [setDescribed])
 
   return (
     <p
@@ -113,8 +166,17 @@ function FieldError({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   const ctx = useFieldContext()
+  const setDescribed = ctx?.setDescribed
+  const present = Boolean(children)
 
-  if (!children) return null
+  // Registered before the early return, so the hook order stays stable when
+  // an error message appears or clears.
+  React.useEffect(() => {
+    setDescribed?.("error", present)
+    return () => setDescribed?.("error", false)
+  }, [setDescribed, present])
+
+  if (!present) return null
 
   return (
     <p
@@ -132,4 +194,11 @@ function FieldError({
   )
 }
 
-export { Field, FieldLabel, FieldHint, FieldError, useFieldContext }
+export {
+  Field,
+  FieldLabel,
+  FieldHint,
+  FieldError,
+  useFieldContext,
+  useFieldControl,
+}

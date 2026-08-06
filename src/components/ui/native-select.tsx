@@ -1,8 +1,11 @@
+"use client"
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useFieldControl } from "@/components/ui/field"
 
 /** Size variants for the native select element. Use with cn(nativeSelectVariants({...})) for non-select elements. */
 const nativeSelectVariants = cva(
@@ -28,6 +31,9 @@ interface NativeSelectProps
 /**
  * Styled native HTML select element with a custom chevron indicator.
  *
+ * Inside a `Field` it picks up that field's `id`, `aria-describedby` and
+ * `aria-invalid`. Anything you pass yourself still wins.
+ *
  * @example
  * <NativeSelect size="default">
  *   <option value="a">Option A</option>
@@ -45,6 +51,7 @@ function NativeSelect({
     <div data-slot="native-select" className="relative">
       <select
         className={cn(nativeSelectVariants({ size }), "pe-8", className)}
+        {...useFieldControl()}
         {...props}
       >
         {children}

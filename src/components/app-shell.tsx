@@ -76,6 +76,10 @@ interface AppShellSidebarProps extends React.ComponentPropsWithRef<"aside"> {
  * drawer opened by AppShellSidebarTrigger. Render the trigger somewhere always
  * visible on mobile (e.g. inside your PageHeader).
  *
+ * Collapsing narrows the desktop column to an icon rail and sets
+ * `data-collapsed`, so labels can hide with `group-data-[collapsed]:hidden`.
+ * The mobile drawer ignores it — a collapsed off-canvas panel means nothing.
+ *
  * @prop collapsed - Whether the sidebar is in collapsed state.
  * @prop mobileTitle - Accessible title for the mobile drawer (screen-reader only).
  */
@@ -88,14 +92,15 @@ function AppShellSidebar({
   ...props
 }: AppShellSidebarProps) {
   const { mobileOpen, setMobileOpen } = useAppShellContext()
-  void collapsed
   return (
     <>
       <aside
         ref={ref}
         data-slot="app-shell-sidebar"
+        data-collapsed={collapsed || undefined}
         className={cn(
-          "hidden md:flex flex-col w-64 shrink-0 border-e-2 bg-card",
+          "group hidden md:flex flex-col shrink-0 border-e-2 bg-card transition-[width]",
+          collapsed ? "w-16" : "w-64",
           className,
         )}
         {...props}

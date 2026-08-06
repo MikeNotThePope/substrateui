@@ -83,3 +83,10 @@ export * from "./toggle"
 export * from "./toggle-group"
 export * from "./tooltip"
 export * from "./typography"
+
+// Provider lives outside ui/ on purpose: audit:stories and audit:docs scan that
+// directory and would demand a story and a docs page for a context provider.
+export {
+  LabelsProvider,
+  type SubstrateUILabels,
+} from "@/components/providers/labels-provider"
