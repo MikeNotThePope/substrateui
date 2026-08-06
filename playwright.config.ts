@@ -5,7 +5,13 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  // Workers per machine, not total: CI shards this suite across four runners,
+  // so the real parallelism is 4 × this. Two is what a standard GitHub runner
+  // sustains without the CPU contention that makes pixel-exact screenshots
+  // flake, and raising it trades that risk for a few seconds now that each
+  // shard only carries a quarter of the tests. Overridable so a larger runner
+  // can be tried without editing this file.
+  workers: process.env.CI ? Number(process.env.PLAYWRIGHT_WORKERS ?? 2) : undefined,
   reporter: [['html', { open: 'never' }]],
   expect: {
     toHaveScreenshot: {

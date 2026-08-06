@@ -9,8 +9,16 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# One serial job used to run everything end to end: 8m13s, of which the visual
+# suite was 4m08s pinned at two workers on a single machine. These jobs are
+# independent of each other, so they run side by side, and the visual suite is
+# sharded across four runners. Standard runners are free on public repositories,
+# so the parallelism costs nothing — only the per-job setup is duplicated, and
+# `bun install --frozen-lockfile` here takes about three seconds.
+
 jobs:
-  verify:
+  # ── Static analysis ──────────────────────────────────────────────────
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -27,29 +35,114 @@ jobs:
       - run: bun run audit:docs
       - run: bun run lint
       - run: bunx tsc --noEmit
-      - run: bun run build:lib
-      - run: bun run build
+
+  # ── Unit tests ───────────────────────────────────────────────────────
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: bun install --frozen-lockfile
       - run: bun run test
+
+  # ── Builds ───────────────────────────────────────────────────────────
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: bun install --frozen-lockfile
+      - run: bun run build:lib
+
+      # This is also what proves `bun run build` succeeds. scan-deprecations
+      # shells out to `bun run build` itself and exits non-zero with the output
+      # when it fails, so a separate build step here would be a second
+      # 51-second run of the same thing — which is exactly what it used to be.
+      # If this script ever stops building the site, put `bun run build` back.
       - run: bun run scan:deprecations
-      - run: bunx playwright install --with-deps chromium
+
+  # ── Visual regression ────────────────────────────────────────────────
+  visual:
+    runs-on: ubuntu-latest
+    strategy:
+      # Report every shard's failures rather than cancelling the rest on the
+      # first one. A stale-baseline change usually spans all four.
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    # Declared at job level so the `if:` guards below can read it — the `env`
+    # context in a step's `if:` does not see that step's own `env:` block.
+    # Pull requests from forks get no secrets, so R2_ACCESS_KEY_ID is empty
+    # there and the snapshot steps skip: outside contributors get the rest of
+    # CI without needing access to the baseline bucket.
+    env:
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: bun install --frozen-lockfile
+
+      - name: Install Chromium
+        if: env.R2_ACCESS_KEY_ID != ''
+        run: bunx playwright install --with-deps chromium
+
       - name: Download visual baselines
         if: env.R2_ACCESS_KEY_ID != ''
         timeout-minutes: 2
         run: bun run snapshots:download
-        env:
-          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_BUCKET: ${{ secrets.R2_BUCKET }}
-      - name: Run visual tests
+
+      # The denominator is the matrix size, so adding a shard to the list above
+      # is the only edit needed. Each shard builds the app itself through the
+      # config's webServer, and that is the only build in this job.
+      - name: Run visual tests (shard ${{ matrix.shard }} of ${{ strategy.job-total }})
         if: env.R2_ACCESS_KEY_ID != ''
         timeout-minutes: 12
-        run: bun run test:visual
-        env:
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+        run: bunx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-report
+          # Unique per shard — a shared name collides and all but one is dropped.
+          name: playwright-report-shard-${{ matrix.shard }}
           path: playwright-report/
           retention-days: 7
+
+  # ── Required check ───────────────────────────────────────────────────
+  # Branch protection requires a check named `verify`, and none of the jobs
+  # above is called that. This gate keeps the name pointing at all of them, so
+  # the protection rule does not have to change.
+  #
+  # `if: always()` is load-bearing. Without it, a failing dependency leaves this
+  # job *skipped* rather than failed — and a skipped required check does not
+  # block a merge, so a red build would become mergeable.
+  verify:
+    needs: [lint, unit, build, visual]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if any job failed or was cancelled
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: |
+          echo "lint=${{ needs.lint.result }}"
+          echo "unit=${{ needs.unit.result }}"
+          echo "build=${{ needs.build.result }}"
+          echo "visual=${{ needs.visual.result }}"
+          exit 1
