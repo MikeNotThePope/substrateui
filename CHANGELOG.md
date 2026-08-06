@@ -1,5 +1,96 @@
 # Changelog
 
+## 1.17.0
+
+### Minor Changes
+
+- [#87](https://github.com/MikeNotThePope/substrateui/pull/87) [`70d8bd6`](https://github.com/MikeNotThePope/substrateui/commit/70d8bd614c7836961369d27142ab195f6e159dc2) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Export `LabelsProvider`, so translations can be set once
+
+  Eighteen components read labels from `LabelsProvider`, but it was exported from
+  no entrypoint. The only way to translate anything was a `labels` prop on every
+  instance. It is now exported from the root barrel along with the
+  `SubstrateUILabels` type.
+
+  The interface also named six docs-site components (`site-header`, `theme-picker`,
+  `direction-toggle`, and friends) that this package doesn't ship. tsup's dts
+  rollup inlines every reachable type, so those interfaces were landing in the
+  published `.d.ts`. They now live in a separate, unexported type.
+
+  `useLabels` stays unexported — it's for component authors inside the package.
+
+### Patch Changes
+
+- [#87](https://github.com/MikeNotThePope/substrateui/pull/87) [`70d8bd6`](https://github.com/MikeNotThePope/substrateui/commit/70d8bd614c7836961369d27142ab195f6e159dc2) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Make `Field` actually associate with its control
+
+  `Field` generated `id`, `hintId` and `errorId` and stamped them on `FieldLabel`,
+  `FieldHint` and `FieldError` — but nothing outside `field.tsx` ever read the
+  context. So `FieldLabel`'s `htmlFor` pointed at an id no element had, and no
+  input was ever described by its hint or error. Clicking a label did nothing and
+  screen readers announced neither.
+
+  `Input`, `Textarea` and `NativeSelect` now spread a new `useFieldControl()` hook,
+  which returns the parent `Field`'s `id`, `aria-describedby` and `aria-invalid`.
+  Outside a `Field` it returns nothing, so standalone use is unchanged.
+  `aria-describedby` names only ids that are on the page: the hint id appears only
+  when a `FieldHint` is rendered, and the error id only when the field is in
+  error.
+
+  Rejected: patching `aria-describedby` alone. That leaves the dangling `htmlFor`,
+  which is the same bug.
+
+  **If you put two controls in one `Field`, give each an explicit `id`** — they
+  now share the field's id otherwise. Anything you pass yourself still wins, since
+  the hook's props are spread before yours.
+
+- [#85](https://github.com/MikeNotThePope/substrateui/pull/85) [`c623efd`](https://github.com/MikeNotThePope/substrateui/commit/c623efdb117e46ca14601a2c1df9b2f65fa6d005) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Fix the package failing to build for consumers without `next-themes` installed
+
+  `next` and `next-themes` were declared optional peer dependencies, but the built
+  package did not honour that. `Toaster` imported `useTheme` from `next-themes` at
+  the top level, and tsup listed `next-themes` as external, so the import survived
+  into `dist/index.js` as a bare specifier. Because that is the main entry, every
+  app without `next-themes` failed at build time:
+
+  ```
+  [MISSING_EXPORT] "useTheme" is not exported by
+  "__vite-optional-peer-dep:next-themes:@mikenotthepope/substrateui"
+  ```
+
+  `Toaster` needed it only to hand sonner a `"light" | "dark"` string. It now reads
+  the `.dark` class on `<html>` through `useSyncExternalStore` — the same signal
+  every other component in the system already responds to, and the one this
+  library documents as the dark-mode switch. Behaviour is unchanged for
+  `next-themes` users, since `next-themes` sets that class; the package simply no
+  longer requires it.
+
+  With that import gone, nothing under any published entrypoint imports a
+  framework, so both peer dependencies are removed rather than made required.
+  `next/link` and `next/navigation` were never imported by the library at all —
+  the matches under `src/components/` belong to `theme-toggle` and the `site-*`
+  files, which are docs-site components and are not re-exported by the organisms
+  entry. The Next entries also come out of tsup's `external` list: listing them is
+  what let the stray import through silently, and without them a reintroduced
+  framework import fails the library build instead of a consumer's.
+
+  No API change. `Toaster` takes the same props and renders the same output.
+
+- [#87](https://github.com/MikeNotThePope/substrateui/pull/87) [`70d8bd6`](https://github.com/MikeNotThePope/substrateui/commit/70d8bd614c7836961369d27142ab195f6e159dc2) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Fix Sidebar rendering with no width, and make `AppShellSidebar`'s `collapsed` do something
+
+  Three v3-era leftovers, all silent under v4:
+
+  `Sidebar` and `Chart` used `w-[--sidebar-width]`. Tailwind v4 dropped the
+  implicit `var()` in square brackets, so that compiles to `width: --sidebar-width`
+  — invalid, discarded, and the desktop sidebar rendered with no width at all. The
+  v4 spelling is `w-(--sidebar-width)`. Same for `--sidebar-width-icon`,
+  `--skeleton-width`, and Chart's `--color-border` / `--color-bg`.
+
+  `Sidebar`'s `floating` and `inset` variants called `theme(spacing.4)` inside
+  `calc()`, deprecated in v4. Now `var(--spacing)*4`.
+
+  `AppShellSidebar` accepted `collapsed` and threw it away. It now narrows the
+  desktop column to an icon rail and sets `data-collapsed`, so labels can hide with
+  `group-data-[collapsed]:hidden`. The mobile drawer still ignores it. Rejected:
+  deleting the prop, which breaks types for anyone already passing it.
+
 ## 1.16.2
 
 ### Patch Changes
