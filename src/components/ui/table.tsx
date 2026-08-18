@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { overlineVariants } from "./overline"
 
 /** Scrollable data table wrapper that renders a full-width HTML table.
  *
@@ -100,7 +101,8 @@ function TableHead({
       ref={ref}
       data-slot="table-head"
       className={cn(
-        "h-12 px-4 text-start align-middle bg-surface-sunken font-mono text-xs uppercase tracking-wider text-muted-foreground [&:has([role=checkbox])]:pe-0",
+        "h-12 px-4 text-start align-middle bg-surface-sunken [&:has([role=checkbox])]:pe-0",
+        overlineVariants(),
         className
       )}
       {...props}

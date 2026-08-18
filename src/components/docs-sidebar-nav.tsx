@@ -60,6 +60,7 @@ export const navSections = [
     title: "Typography",
     items: [
       { label: "Typography", href: "/docs/components/typography" },
+      { label: "Overline", href: "/docs/components/overline" },
     ],
   },
   {

@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { Overline } from "./overline"
 
 interface DividerProps extends React.ComponentPropsWithRef<"div"> {
   orientation?: "horizontal" | "vertical"
@@ -49,9 +50,7 @@ function Divider({
         {...props}
       >
         <div className="flex-1 border-t-2 border-border" />
-        <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider px-3">
-          {label}
-        </span>
+        <Overline className="px-3">{label}</Overline>
         <div className="flex-1 border-t-2 border-border" />
       </div>
     )

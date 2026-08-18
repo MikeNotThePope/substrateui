@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { Overline } from "@/components/ui/overline"
 import { Card, CardContent } from "@/components/ui/card"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
@@ -86,9 +87,9 @@ function StatCard({
       <CardContent className="p-6">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm font-medium text-muted-foreground font-mono uppercase tracking-wider">
+            <Overline size="sm" className="font-medium" render={<p />}>
               {title}
-            </p>
+            </Overline>
             <p className="text-3xl font-bold tracking-tight mt-1">{value}</p>
             {change && (
               <p className={cn("text-xs font-mono mt-1", changeTypeStyles[changeType])}>

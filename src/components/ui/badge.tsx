@@ -4,6 +4,12 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 /** Badge style variants (default, secondary, destructive, outline, success, warning, error, info). Use with cn(badgeVariants({...})) for non-div elements. */
+// text-[11px] rather than the text-2xs step it inspired, deliberately. The
+// arbitrary value sets font-size and nothing else, so the badge's line box
+// comes from whatever it sits inside; text-2xs pairs a line-height, which
+// makes the badge a deterministic 24px instead of 28px in a text-sm
+// context. That is the better behaviour and it is a visual change, so it
+// wants its own PR and its own baselines rather than riding along here.
 const badgeVariants = cva(
   "inline-flex items-center rounded-full border-2 px-2.5 py-0.5 font-mono uppercase tracking-wider text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {

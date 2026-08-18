@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { overlineVariants } from "./overline"
 
 /**
  * Vertical timeline for chronological data — activity feeds, changelogs, order
@@ -75,7 +76,8 @@ function TimelineTime({ className, ref, ...props }: React.ComponentPropsWithRef<
       ref={ref}
       data-slot="timeline-time"
       className={cn(
-        "mb-1 block font-mono text-xs uppercase tracking-wider text-muted-foreground",
+        "mb-1 block",
+        overlineVariants(),
         className
       )}
       {...props}
