@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.22.0
+
+### Minor Changes
+
+- [#99](https://github.com/MikeNotThePope/substrateui/pull/99) [`7f11bee`](https://github.com/MikeNotThePope/substrateui/commit/7f11beec8b44da16018ecf596b7e2363b92d2d06) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - `EmptyTitle` takes `level={1 | 2 | 3 | 4}` for its heading level. Default is 3, unchanged.
+
+  `render={<h1 />}` already did this and still does. The problem is the source it leaves behind: a childless `<h1 />`, which `jsx-a11y/heading-has-content` reports as an empty heading — at every call site, in both the element and function forms of `render`. The rule is wrong about it, and has no option that can be told otherwise. `level` removes the element the rule is wrong about.
+
+  Reach for `render` when the title should be something that is not a heading; reach for `level` when it is one.
+
 ## 1.21.0
 
 ### Minor Changes
