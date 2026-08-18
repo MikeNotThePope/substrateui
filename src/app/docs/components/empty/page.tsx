@@ -2,7 +2,7 @@ import { Inbox } from "lucide-react"
 import { Empty, EmptyIcon, EmptyTitle, EmptyDescription, EmptyAction } from "@/components/ui/empty"
 import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { CompositionTree } from "../../_components/composition-tree"
@@ -28,7 +28,8 @@ const emptyProps: PropDef[] = [
     name: "EmptyTitle",
     type: "React.ReactNode",
     default: undefined,
-    description: "The heading text for the empty state.",
+    description:
+      "The heading text for the empty state. Renders an h3; pass render={<h1 />} when the empty state is the page's whole content.",
   },
   {
     name: "EmptyDescription",
@@ -87,6 +88,39 @@ export default function EmptyPage() {
           "EmptyAction",
         ]}
       />
+
+      <Stack gap="md">
+        <H3>Pick the right heading level</H3>
+        <P>
+          <Code>EmptyTitle</Code> renders an <Code>h3</Code>, which is right when the empty
+          state sits inside a page that already has a heading above it — an empty table on a
+          dashboard, a filtered list with no matches.
+        </P>
+        <P>
+          It often isn&apos;t. A 404, an error screen, or a &quot;nothing here yet&quot; page has
+          the empty state as its entire content, and its title is that document&apos;s{" "}
+          <Code>h1</Code>. Use <Code>render</Code> to move it. The styling comes along, so what
+          changes is the outline, not the look.
+        </P>
+        <ComponentPreview
+          code={`<Empty>
+  <EmptyIcon><CircleAlert /></EmptyIcon>
+  <EmptyTitle render={<h1 />}>This page isn&apos;t available</EmptyTitle>
+  <EmptyDescription>The link may be out of date.</EmptyDescription>
+</Empty>`}
+        >
+          <Empty>
+            <EmptyTitle render={<h1 />}>This page isn&apos;t available</EmptyTitle>
+            <EmptyDescription>The link may be out of date.</EmptyDescription>
+          </Empty>
+        </ComponentPreview>
+        <P>
+          Skipping this is easy to miss and costly: a page whose only heading is an{" "}
+          <Code>h3</Code> reads to a screen-reader user as though two levels went missing, and
+          the alternative — copying <Code>EmptyTitle</Code>&apos;s classes onto your own heading
+          — drifts the moment those classes change.
+        </P>
+      </Stack>
 
       <Stack gap="md">
         <H3>Composition</H3>
