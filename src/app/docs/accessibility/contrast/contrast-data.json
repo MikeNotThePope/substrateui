@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T09:45:22.967Z",
+  "generatedAt": "2026-08-18T10:03:35.304Z",
   "results": [
     {
       "name": "foreground on background",
@@ -2803,7 +2803,7 @@
           "name": "primary-foreground on primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.253909275072483,
+          "ratio": 6.7414797227964,
           "pass": true
         },
         {
@@ -2899,7 +2899,7 @@
           "name": "sidebar-primary-foreground on sidebar-primary",
           "type": "normal",
           "required": 4.5,
-          "ratio": 6.253909275072483,
+          "ratio": 6.7414797227964,
           "pass": true
         },
         {
@@ -2907,7 +2907,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 7.448089429215747,
+          "ratio": 7.928398738106462,
           "pass": true
         },
         {
@@ -2915,7 +2915,7 @@
           "name": "sidebar-accent-foreground on sidebar-accent",
           "type": "normal",
           "required": 4.5,
-          "ratio": 8.632051093450103,
+          "ratio": 8.108333262018562,
           "pass": true
         },
         {
@@ -3011,7 +3011,7 @@
           "name": "status-success-text on status-success-surface",
           "type": "normal",
           "required": 4.5,
-          "ratio": 11.47194065216832,
+          "ratio": 10.71170277521714,
           "pass": true
         },
         {
@@ -3131,7 +3131,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 3.265596836578397,
+          "ratio": 3.6863894565928366,
           "pass": true
         },
         {
@@ -3139,7 +3139,7 @@
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
-          "ratio": 7.08534547919444,
+          "ratio": 7.140289239638538,
           "pass": true
         },
         {
@@ -3195,7 +3195,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 3.159563436701895,
+          "ratio": 3.566692988561901,
           "pass": true
         },
         {
@@ -3203,7 +3203,7 @@
           "name": "status-success on background",
           "type": "ui",
           "required": 3,
-          "ratio": 8.128831154220169,
+          "ratio": 8.773265135838196,
           "pass": true
         },
         {
