@@ -1,3 +1,5 @@
+import { ArrowLeft } from "lucide-react"
+
 import {
   PageHeader,
   PageHeaderContent,
@@ -8,6 +10,7 @@ import {
 } from "@/components/page-header"
 import { PageBody } from "@/components/page-body"
 import { PageTabs, PageTabsList, PageTabsTrigger, PageTabsContent } from "@/components/page-tabs"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Breadcrumb,
@@ -32,6 +35,13 @@ export const metadata = pageMetadata({
 })
 
 const pageHeaderProps: PropDef[] = [
+  {
+    name: "size",
+    type: '"default" | "sm"',
+    default: '"default"',
+    description:
+      'Layout of the header. "default" is a full band with a card background and stacked children. "sm" is a compact single-row bar with no background, for a page inside an app shell. The size reaches PageHeaderTitle and PageHeaderActions too.',
+  },
   {
     name: "className",
     type: "string",
@@ -174,6 +184,46 @@ export default function PageLayoutPage() {
                 </PageBody>
               </PageTabsContent>
             </PageTabs>
+          </div>
+        </ComponentPreview>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Compact header</H3>
+        <Muted>
+          <code>size=&quot;sm&quot;</code> is the bar a working page wants above it: one
+          row, no background of its own, a title beside its status rather than over
+          it. Children are laid out inline, so a back button, the title and a badge
+          are siblings. <code>PageHeaderActions</code> moves itself to the far end.
+        </Muted>
+        <ComponentPreview
+          code={`<PageHeader size="sm">
+  <Button variant="outline" size="icon" aria-label="Back to jobs">
+    <ArrowLeft />
+  </Button>
+  <PageHeaderTitle>Senior engineer</PageHeaderTitle>
+  <Badge variant="success">Published</Badge>
+  <PageHeaderActions>
+    <Button variant="outline" size="sm">Edit</Button>
+  </PageHeaderActions>
+</PageHeader>`}
+        >
+          <div className="w-full border-2 rounded-lg overflow-hidden">
+            <PageHeader size="sm">
+              <Button variant="outline" size="icon" aria-label="Back to jobs">
+                <ArrowLeft />
+              </Button>
+              <PageHeaderTitle>Senior engineer</PageHeaderTitle>
+              <Badge variant="success">Published</Badge>
+              <PageHeaderActions>
+                <Button variant="outline" size="sm">
+                  Edit
+                </Button>
+              </PageHeaderActions>
+            </PageHeader>
+            <PageBody>
+              <Muted>PageBody content goes here.</Muted>
+            </PageBody>
           </div>
         </ComponentPreview>
       </Stack>
