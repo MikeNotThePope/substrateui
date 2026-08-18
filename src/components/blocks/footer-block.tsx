@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { Overline } from "@/components/ui/overline"
 import { Center } from "@/components/ui/center"
 import { Divider } from "@/components/ui/divider"
 import { Grid } from "@/components/ui/grid"
@@ -69,9 +70,9 @@ function FooterBlock({
               <Grid columns="auto-fit" minChildWidth="140px" gap="lg">
                 {sections.map((section) => (
                   <Stack key={section.id ?? String(section.title)} gap="sm">
-                    <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    <Overline className="font-semibold" render={<h3 />}>
                       {section.title}
-                    </h3>
+                    </Overline>
                     <ul className="flex flex-col gap-2">
                       {section.links.map((link, i) => (
                         <li key={i}>

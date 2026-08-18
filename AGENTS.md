@@ -19,9 +19,10 @@ For every code change, follow this flow:
 1. Branch off `main`: `git checkout -b <type>/<short-description>` (e.g. `fix/spinner-contrast`).
 2. Make the change and commit.
 3. Add a changeset: `bunx changeset` (pick patch/minor/major and write a summary). This is required — CI's `check` job blocks any PR without one. The package name in the changeset frontmatter must be the full scoped name, `@mikenotthepope/substrateui` (not `substrateui`, which fails with "not in the workspace"). For changes that should not trigger a release (docs, CI/infra, chores), apply the `skip-changeset` label to the PR instead. Verify locally with `bunx changeset status --since=origin/main`.
-4. Push the branch and open a PR: `git push -u origin <branch>` then `gh pr create`.
-5. Wait for the required checks to pass: `verify` (CI: lint, tsc, tests, builds, audits, visual regression) and `check` (changeset present).
-6. Merge once green (0 approvals required on this solo repo). Squash-merge is fine.
+4. Run `bun run build` before pushing, on top of `lint`, `tsc --noEmit`, `test` and the four audits. It is slower than all of those put together, and it is the only one that prerenders the docs site — which is where the server/client boundary is actually enforced. A `"use client"` module marks *every* export as a client reference, not just the component, so a server component calling an exported helper from one (a `cva` recipe, say) fails here and nowhere else. Lint, types, tests and all four audits pass clean on that bug.
+5. Push the branch and open a PR: `git push -u origin <branch>` then `gh pr create`.
+6. Wait for the required checks to pass: `verify` (CI: lint, tsc, tests, builds, audits, visual regression) and `check` (changeset present).
+7. Merge once green (0 approvals required on this solo repo). Squash-merge is fine.
 
 Do not push commits straight to `main` — branch protection will reject them.
 
