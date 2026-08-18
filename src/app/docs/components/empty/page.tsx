@@ -29,7 +29,7 @@ const emptyProps: PropDef[] = [
     type: "React.ReactNode",
     default: undefined,
     description:
-      "The heading text for the empty state. Renders an h3; pass render={<h1 />} when the empty state is the page's whole content.",
+      "The heading text for the empty state. Renders an h3; pass level={1} when the empty state is the page's whole content.",
   },
   {
     name: "EmptyDescription",
@@ -99,18 +99,18 @@ export default function EmptyPage() {
         <P>
           It often isn&apos;t. A 404, an error screen, or a &quot;nothing here yet&quot; page has
           the empty state as its entire content, and its title is that document&apos;s{" "}
-          <Code>h1</Code>. Use <Code>render</Code> to move it. The styling comes along, so what
+          <Code>h1</Code>. Use <Code>level</Code> to move it. The styling comes along, so what
           changes is the outline, not the look.
         </P>
         <ComponentPreview
           code={`<Empty>
   <EmptyIcon><CircleAlert /></EmptyIcon>
-  <EmptyTitle render={<h1 />}>This page isn&apos;t available</EmptyTitle>
+  <EmptyTitle level={1}>This page isn&apos;t available</EmptyTitle>
   <EmptyDescription>The link may be out of date.</EmptyDescription>
 </Empty>`}
         >
           <Empty>
-            <EmptyTitle render={<h1 />}>This page isn&apos;t available</EmptyTitle>
+            <EmptyTitle level={1}>This page isn&apos;t available</EmptyTitle>
             <EmptyDescription>The link may be out of date.</EmptyDescription>
           </Empty>
         </ComponentPreview>
@@ -119,6 +119,14 @@ export default function EmptyPage() {
           <Code>h3</Code> reads to a screen-reader user as though two levels went missing, and
           the alternative — copying <Code>EmptyTitle</Code>&apos;s classes onto your own heading
           — drifts the moment those classes change.
+        </P>
+        <P>
+          <Code>render={"{"}&lt;h1 /&gt;{"}"}</Code> renders the same thing, and is what to reach
+          for when the title should be something that is <em>not</em> a heading — a{" "}
+          <Code>p</Code> in a card that has its own title above. Prefer <Code>level</Code> for a
+          heading: <Code>render</Code> puts a childless <Code>&lt;h1 /&gt;</Code> in your source,
+          which <Code>jsx-a11y/heading-has-content</Code> reads as an empty heading and reports
+          at every call site. The rule is wrong about it and has no option that can be told so.
         </P>
       </Stack>
 
