@@ -109,3 +109,47 @@ describe('EmptyTitle', () => {
     expect(cls).not.toContain('text-lg')
   })
 })
+
+describe('Empty fill', () => {
+  it('is only as tall as its content by default', () => {
+    // Right for an empty table or a filtered list: the state sits where the
+    // rows would have been, not in the middle of the viewport.
+    render(<Empty data-testid="e">Nothing</Empty>)
+    expect(screen.getByTestId('e').className).not.toContain('flex-1')
+  })
+
+  it('claims the parent height when asked', () => {
+    render(
+      <Empty fill data-testid="e">
+        Nothing
+      </Empty>
+    )
+    expect(screen.getByTestId('e').className).toContain('flex-1')
+  })
+
+  it('centres itself when it also has a max width', () => {
+    // A stretch-aligned child of a flex column pins to the start edge once it
+    // stops filling the width, so `flex-1` alone would left-align a `max-w-lg`
+    // empty state rather than centring it.
+    render(
+      <Empty fill className="max-w-lg" data-testid="e">
+        Nothing
+      </Empty>
+    )
+    expect(screen.getByTestId('e').className).toContain('mx-auto')
+  })
+
+  it('keeps centring its own content either way', () => {
+    const { rerender } = render(<Empty data-testid="e">Nothing</Empty>)
+    expect(screen.getByTestId('e').className).toContain('items-center')
+
+    rerender(
+      <Empty fill data-testid="e">
+        Nothing
+      </Empty>
+    )
+    const cls = screen.getByTestId('e').className
+    expect(cls).toContain('items-center')
+    expect(cls).toContain('justify-center')
+  })
+})

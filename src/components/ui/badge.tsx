@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 // context. That is the better behaviour and it is a visual change, so it
 // wants its own PR and its own baselines rather than riding along here.
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border-2 px-2.5 py-0.5 font-mono uppercase tracking-wider text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border-2 px-2.5 py-0.5 font-mono uppercase tracking-wider text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {
       variant: {

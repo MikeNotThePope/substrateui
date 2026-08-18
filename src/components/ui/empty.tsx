@@ -6,8 +6,25 @@ import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
 
+/** Props accepted by the Empty component. */
+export interface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Claim the height the parent offers, so the state sits in the middle of it. */
+  fill?: boolean
+}
+
 /**
  * Centered empty state container for when no content is available.
+ *
+ * By default it is only as tall as its own content, which is right for an empty
+ * table or a filtered list with nothing in it — the state sits where the rows
+ * would have been.
+ *
+ * `fill` is for the other case: a 404, an error screen, or a "nothing here yet"
+ * page where the empty state *is* the page and belongs in the middle of it.
+ * Without it, consumers wrap this in `flex flex-1 items-center justify-center`
+ * to get the same result, which is a five-class incantation repeated once per
+ * such page. Needs a parent that offers height — a flex column, or anything
+ * with a height of its own.
  *
  * @example
  * <Empty>
@@ -16,16 +33,25 @@ import { cn } from "@/lib/utils"
  *   <EmptyDescription>Try adjusting your filters.</EmptyDescription>
  *   <EmptyAction><Button>Reset</Button></EmptyAction>
  * </Empty>
+ *
+ * @example
+ * <Empty fill className="max-w-lg">
+ *   <EmptyIcon><CircleAlert /></EmptyIcon>
+ *   <EmptyTitle level={1}>This page isn&apos;t available</EmptyTitle>
+ * </Empty>
+ *
+ * @prop fill - Grow to the parent's height and centre within it.
  */
-function Empty({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+function Empty({ className, fill, ...props }: EmptyProps) {
   return (
     <div
       data-slot="empty"
       className={cn(
         "flex w-full flex-col items-center justify-center py-12 px-6 text-center",
+        // `mx-auto` as well as `flex-1`: a caller that also sets a max-width is
+        // a stretch-aligned child of a flex column, which pins it to the start
+        // edge rather than centring it.
+        fill && "mx-auto flex-1",
         className
       )}
       {...props}

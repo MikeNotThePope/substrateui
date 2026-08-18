@@ -19,6 +19,13 @@ export const metadata = pageMetadata({
 
 const emptyProps: PropDef[] = [
   {
+    name: "fill",
+    type: "boolean",
+    default: "false",
+    description:
+      "Grow to the parent's height and centre within it. For a 404, an error screen, or any page where the empty state is the whole page. Needs a parent that offers height.",
+  },
+  {
     name: "EmptyIcon",
     type: "React.ReactNode",
     default: undefined,
@@ -88,6 +95,36 @@ export default function EmptyPage() {
           "EmptyAction",
         ]}
       />
+
+      <Stack gap="md">
+        <H3>When the empty state is the page</H3>
+        <P>
+          By default <Code>Empty</Code> is only as tall as its own content, which is right
+          for an empty table or a filtered list with nothing in it — the state sits where
+          the rows would have been.
+        </P>
+        <P>
+          A 404, an error screen, or a &quot;nothing here yet&quot; page is the other case:
+          the empty state <em>is</em> the page and belongs in the middle of it.{" "}
+          <Code>fill</Code> claims the height the parent offers. Without it the wrapper is
+          five classes — <Code>flex flex-1 items-center justify-center</Code> plus padding —
+          repeated once per such page.
+        </P>
+        <ComponentPreview
+          code={`<Empty fill className="max-w-lg">
+  <EmptyIcon><CircleAlert /></EmptyIcon>
+  <EmptyTitle level={1}>This page isn&apos;t available</EmptyTitle>
+  <EmptyDescription>The link may be out of date.</EmptyDescription>
+</Empty>`}
+        >
+          <div className="flex h-64 w-full flex-col rounded-lg border-2">
+            <Empty fill className="max-w-lg">
+              <EmptyTitle level={1}>This page isn&apos;t available</EmptyTitle>
+              <EmptyDescription>The link may be out of date.</EmptyDescription>
+            </Empty>
+          </div>
+        </ComponentPreview>
+      </Stack>
 
       <Stack gap="md">
         <H3>Pick the right heading level</H3>

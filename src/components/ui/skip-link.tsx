@@ -43,6 +43,12 @@ function SkipLink({
         // match :focus-visible on anchors it has moved focus to.
         "sr-only rounded-md border-2 border-primary-border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground",
         "focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50",
+        // `focus:`, not `focus-visible:`, and it is the only ring in the package
+        // that should be — which is why it says so here. The link is `sr-only`
+        // until focused and reveals itself on the line above; a ring on a
+        // different condition from the reveal would draw on a link nobody can
+        // see. Reaching it at all requires Tab, so there is no mouse-click case
+        // for `focus-visible:` to suppress.
         "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
         className,
       )}
