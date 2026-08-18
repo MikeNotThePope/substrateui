@@ -1,5 +1,80 @@
 # Changelog
 
+## 1.20.0
+
+### Minor Changes
+
+- [#93](https://github.com/MikeNotThePope/substrateui/pull/93) [`411b71f`](https://github.com/MikeNotThePope/substrateui/commit/411b71f994a5299ba52ce4469f4a5681888a5d99) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add `Overline`, and a `text-2xs` step for it to sit on
+
+  Six components were writing the same eyebrow treatment by hand —
+  `font-mono uppercase tracking-wider text-muted-foreground` — and had drifted
+  into four sizes and three weights between them. `Divider`, `Timeline` and
+  `Table` at `text-xs`, `FooterBlock` at `text-xs font-semibold`, `StatCard` at
+  `text-sm font-medium`, `Badge` at a raw `text-[11px]`. A table header and a
+  timeline label are the same thing on the page and were not the same thing in
+  the code.
+
+  `Overline` is that treatment with a name and three sizes. It carries no
+  semantics of its own — it renders a `span` by default and takes `render` for
+  whatever the surrounding document actually needs, which is how `FooterBlock`
+  keeps its `h3` and `StatCard` keeps its `p`.
+
+  ```tsx
+  <Overline>Section label</Overline>
+  <Overline size="2xs">Draft</Overline>
+  <Overline render={<h3 />}>Resources</Overline>
+  ```
+
+  `--text-2xs` (11px) is new, one step below where Tailwind's scale stops. It
+  pairs a line-height the way every stock step does, so leading arrives with the
+  size instead of being inherited from whatever the label sits inside.
+
+  **Nothing changes visually.** Every migrated site keeps the exact class set it
+  had — verified by rendering each one and comparing the resulting class sets to
+  the strings they carried before, not by reading the diff.
+
+  **`Badge` deliberately keeps its `text-[11px]`.** It is the reason the 11px step
+  exists, but it cannot simply swap onto it: an arbitrary font size sets font-size
+  and nothing else, so the badge's line box comes from its parent, while
+  `text-2xs` brings its own. Moving it makes the badge a deterministic 24px rather
+  than 28px inside a `text-sm` context. That is the better behaviour and it is a
+  real visual change, so it wants its own PR and its own baselines. The reason is
+  recorded next to the value so the next reader doesn't "fix" it.
+
+  Also corrects a stale comment on the radius ladder, which claimed a default
+  `--radius-factor` of 1. It is 0.25.
+
+### Patch Changes
+
+- [#95](https://github.com/MikeNotThePope/substrateui/pull/95) [`a5a0e22`](https://github.com/MikeNotThePope/substrateui/commit/a5a0e221c7dd3cc218e4b0b3edf8aa16f2428e03) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Finish promoting the lava palette
+
+  [#91](https://github.com/MikeNotThePope/substrateui/issues/91) moved LavaHire's palette overrides upstream and skipped the ones whose delta
+  looked like rounding noise. That filter was too coarse. Running the app's smoke
+  suite before and after the migration and diffing all twelve screenshots pixel by
+  pixel showed several of the skipped values were plainly visible — the primary
+  button, the active sidebar item and the success badge all shifted.
+
+  Five values, all of them the ones a person would notice:
+
+  - `--raw-magma-500` 0.68 → 0.70 lightness. It is lava dark's accent fill:
+    `--primary`, `--sidebar-primary` and `--accent-fill` all resolve to it, so one
+    step brings the whole accent back.
+  - `--raw-olivine` 0.58 → 0.55. Used once, for `--status-success` in lava light.
+    Darker, so the 3:1 its comment pins is cleared with more room, not less.
+  - `--sidebar-accent` in light is a translucent wash over the sidebar rather than
+    an opaque magma-100 fill, which is what the active nav item was drawn with.
+  - `--sidebar-accent` and `--status-success` in dark, plus the success surface's
+    alpha, follow the same brighter accent.
+
+  Two deltas are deliberately left alone: `--primary-foreground` (0.16 vs 0.14) and
+  `--sidebar-accent-foreground` (0.42 vs 0.40) are near-black and near-white text
+  sitting on saturated fills, where two points of lightness are not visible, and
+  both are ramp steps rather than one-off literals.
+
+  The border correction from [#91](https://github.com/MikeNotThePope/substrateui/issues/91) stands — `--border` and `--input` stay at
+  basalt-500 rather than returning to the value that measured 2.08:1 against the
+  page. That one was the point of the exercise.
+
 ## 1.19.0
 
 ### Minor Changes
