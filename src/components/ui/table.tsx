@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { overlineVariants } from "./overline"
+import { overlineVariants } from "./overline-variants"
 
 /** Scrollable data table wrapper that renders a full-width HTML table.
  *

@@ -25,6 +25,7 @@ const DOCS_DIR = "src/app/docs/components"
 /** Modules that export no renderable component, so there is nothing to document. */
 const NOT_COMPONENTS = new Set<string>([
   "index.ts", // barrel export
+  "overline-variants.ts", // the Overline class recipe; Overline's page documents it
 ])
 
 /**

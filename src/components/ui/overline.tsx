@@ -2,30 +2,14 @@
 
 import { useRender } from "@base-ui/react/use-render"
 import { mergeProps } from "@base-ui/react/merge-props"
-import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-
-const overlineVariants = cva(
-  "font-mono uppercase tracking-wider text-muted-foreground",
-  {
-    variants: {
-      size: {
-        "2xs": "text-2xs",
-        xs: "text-xs",
-        sm: "text-sm",
-      },
-    },
-    defaultVariants: {
-      size: "xs",
-    },
-  }
-)
+import { overlineVariants, type OverlineVariants } from "./overline-variants"
 
 /** Props accepted by the Overline component. */
 export interface OverlineProps
   extends useRender.ComponentProps<"span">,
-    VariantProps<typeof overlineVariants> {}
+    OverlineVariants {}
 
 /**
  * A short label set above or beside the thing it names — a section caption, a
@@ -36,6 +20,11 @@ export interface OverlineProps
  * It carries no semantics of its own. Render it as whatever the surrounding
  * document needs: a `<span>` by default, an `<h3>` when it is genuinely a
  * heading, a `<p>` in a card.
+ *
+ * The class recipe lives in `./overline-variants`, which has no `"use client"`,
+ * so server components can call it without crossing the boundary. Do not
+ * re-export it from here — a re-export through a client module is still a
+ * client reference.
  *
  * @example
  * <Overline>Section</Overline>
@@ -59,4 +48,4 @@ function Overline({ className, size, render, ...props }: OverlineProps) {
   })
 }
 
-export { Overline, overlineVariants }
+export { Overline }

@@ -17,6 +17,7 @@ const COMPONENT_DIR = "src/components/ui"
 const IGNORE = new Set<string>([
   "index.ts",       // barrel export
   "direction.tsx",  // DirectionProvider — exercised via the global toolbar
+  "overline-variants.ts", // the Overline class recipe, kept out of the client module
 ])
 
 function listComponentFiles(dir: string): string[] {

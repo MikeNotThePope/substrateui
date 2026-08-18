@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { overlineVariants } from "./overline"
+import { overlineVariants } from "./overline-variants"
 
 /**
  * Vertical timeline for chronological data — activity feeds, changelogs, order
