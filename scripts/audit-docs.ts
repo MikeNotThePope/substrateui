@@ -25,7 +25,8 @@ const DOCS_DIR = "src/app/docs/components"
 /** Modules that export no renderable component, so there is nothing to document. */
 const NOT_COMPONENTS = new Set<string>([
   "index.ts", // barrel export
-  "overline-variants.ts", // the Overline class recipe; Overline's page documents it
+  // *-variants.ts is a class recipe, published from `/variants` so server code
+  // can call it. The component's own page documents the variants it accepts.
 ])
 
 /**
@@ -50,6 +51,7 @@ function componentFiles(): string[] {
     .filter((entry) => statSync(join(COMPONENT_DIR, entry)).isFile())
     .filter((entry) => !NOT_COMPONENTS.has(entry))
     .filter((entry) => !entry.endsWith(".stories.tsx"))
+    .filter((entry) => !entry.endsWith("-variants.ts"))
     .filter((entry) => entry.endsWith(".ts") || entry.endsWith(".tsx"))
     .sort()
 }

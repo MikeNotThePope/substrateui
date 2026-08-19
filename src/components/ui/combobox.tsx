@@ -6,7 +6,7 @@ import { Check, ChevronsUpDown, Plus, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import { buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button-variants"
 import { Spinner } from "@/components/ui/spinner"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"

@@ -110,7 +110,15 @@ import { LinkProvider } from "substrateui"
 | `substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
 | `substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, useFocusTrap, useAnnouncer, useCountdown, …) |
 | `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
+| `substrateui/variants` | The `cva` class recipes (`buttonVariants`, `badgeVariants`, …) |
 | `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
+
+`substrateui/variants` and `substrateui/utils` are the two entrypoints with no
+`"use client"` boundary, so a **server component** can call `cn()` or a class
+recipe from them. The same recipes are exported from the package root for
+convenience, and that copy is a client reference — calling it while rendering on
+the server throws at request time, which no build or type check catches. When in
+doubt, import from `/variants`.
 
 Set up a project with the CLI: `npx substrateui init`.
 

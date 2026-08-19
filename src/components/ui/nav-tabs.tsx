@@ -5,7 +5,7 @@ import { useRender } from "@base-ui/react/use-render"
 import { mergeProps } from "@base-ui/react/merge-props"
 
 import { cn } from "@/lib/utils"
-import { badgeVariants } from "./badge"
+import { badgeVariants } from "./badge-variants"
 
 /** Horizontal, link-based tab bar for page-level navigation.
  *

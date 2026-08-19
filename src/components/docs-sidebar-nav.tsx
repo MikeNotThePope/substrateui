@@ -9,8 +9,8 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuItem,
-  sidebarMenuButtonVariants,
 } from "@/components/ui/sidebar"
+import { sidebarMenuButtonVariants } from "@/components/ui/sidebar-menu-button-variants"
 import { cn } from "@/lib/utils"
 
 // ─── Navigation Data ──────────────────────────────────────────────────
