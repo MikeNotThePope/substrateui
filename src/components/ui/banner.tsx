@@ -1,28 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-
-/** Banner style variants keyed by intent. */
-const bannerVariants = cva(
-  "flex w-full items-center gap-3 border-b-2 px-4 py-2.5 text-sm",
-  {
-    variants: {
-      variant: {
-        default: "border-border bg-surface-raised text-foreground",
-        primary: "border-primary-border bg-primary text-primary-foreground",
-        info: "border-status-info bg-status-info-surface text-status-info-text",
-        warning: "border-status-warning bg-status-warning-surface text-status-warning-text",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
+import { bannerVariants } from "./banner-variants"
 
 /** Props for the Banner component. */
 export interface BannerProps
@@ -92,4 +75,4 @@ function Banner({
   )
 }
 
-export { Banner, bannerVariants }
+export { Banner }

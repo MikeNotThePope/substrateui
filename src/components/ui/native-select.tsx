@@ -1,28 +1,12 @@
 "use client"
 
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { nativeSelectVariants } from "./native-select-variants"
 import { useFieldControl } from "@/components/ui/field"
-
-/** Size variants for the native select element. Use with cn(nativeSelectVariants({...})) for non-select elements. */
-const nativeSelectVariants = cva(
-  "w-full border-2 rounded-md bg-background px-3 text-sm appearance-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-  {
-    variants: {
-      size: {
-        sm: "h-9",
-        default: "h-10",
-        lg: "h-11",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  }
-)
 
 interface NativeSelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size">,
@@ -61,4 +45,4 @@ function NativeSelect({
   )
 }
 
-export { NativeSelect, nativeSelectVariants }
+export { NativeSelect }

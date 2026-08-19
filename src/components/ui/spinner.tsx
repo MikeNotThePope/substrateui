@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { spinnerVariants } from "./spinner-variants"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
 
@@ -17,23 +18,6 @@ interface SpinnerLabels {
 const defaultSpinnerLabels: Required<SpinnerLabels> = {
   loading: "Loading…",
 }
-
-/** Spinner size variants. Use with cn(spinnerVariants({...})) for non-spinner elements. */
-const spinnerVariants = cva(
-  "rounded-full border-2",
-  {
-    variants: {
-      size: {
-        sm: "size-4",
-        default: "size-6",
-        lg: "size-8",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  }
-)
 
 /**
  * An animated loading spinner indicator.
@@ -65,4 +49,4 @@ function Spinner({
   )
 }
 
-export { Spinner, spinnerVariants, type SpinnerLabels }
+export { Spinner, type SpinnerLabels }

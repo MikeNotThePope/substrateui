@@ -6,7 +6,8 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { ButtonProps } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button-variants"
 
 // ─── i18n labels ────────────────────────────────────────────────────
 

@@ -17,7 +17,6 @@ const COMPONENT_DIR = "src/components/ui"
 const IGNORE = new Set<string>([
   "index.ts",       // barrel export
   "direction.tsx",  // DirectionProvider — exercised via the global toolbar
-  "overline-variants.ts", // the Overline class recipe, kept out of the client module
 ])
 
 function listComponentFiles(dir: string): string[] {
@@ -27,6 +26,9 @@ function listComponentFiles(dir: string): string[] {
     if (!statSync(full).isFile()) continue
     if (IGNORE.has(entry)) continue
     if (entry.endsWith(".stories.tsx")) continue
+    // *-variants.ts is a class recipe, not a component — it exists so server
+    // code can call it (src/variants.ts). Nothing to story.
+    if (entry.endsWith("-variants.ts")) continue
     if (entry.endsWith(".tsx") || entry.endsWith(".ts")) {
       out.push(entry)
     }

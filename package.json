@@ -47,6 +47,10 @@
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
     },
+    "./variants": {
+      "types": "./dist/variants.d.ts",
+      "import": "./dist/variants.js"
+    },
     "./styles.css": "./dist/styles.css"
   },
   "bin": {
@@ -68,8 +72,10 @@
     "build": "next build",
     "prebuild:lib": "bun run audit:contrast && bun run audit:direction",
     "build:lib": "tsup && cp src/styles/tokens.css dist/styles.css",
+    "postbuild:lib": "bun run audit:boundary",
     "start": "next start",
     "lint": "eslint",
+    "audit:boundary": "tsx scripts/audit-boundary.ts",
     "audit:contrast": "tsx scripts/audit-contrast.ts",
     "audit:direction": "tsx scripts/audit-direction.ts",
     "audit:docs": "tsx scripts/audit-docs.ts",
