@@ -15,7 +15,7 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -23,7 +23,7 @@ jobs:
         with:
           bun-version: latest
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
@@ -36,10 +36,36 @@ jobs:
       - run: bun run audit:contrast
       - run: bun run build:lib
 
+      # `changeset publish` decides what to publish by asking npm what is
+      # already there, and here it cannot: setup-node writes an .npmrc pointing
+      # at NODE_AUTH_TOKEN, which is a placeholder because publishing
+      # authenticates over OIDC instead. The lookup comes back empty, so it
+      # tries to publish whatever is in package.json. On a Version Packages
+      # merge that is right. On every other push to main it retries the version
+      # already on npm, npm answers "cannot publish over the previously
+      # published versions", and the job goes red for no reason — which is what
+      # every docs-only merge did until this guard. Ask npm ourselves, with the
+      # generated .npmrc out of the way, and hand the action an empty `publish`
+      # when there is nothing to publish. Empty means "open the version PR
+      # only", which is exactly the other half of its job.
+      - name: Is this version already on npm?
+        id: probe
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          versions=$(NPM_CONFIG_USERCONFIG=/dev/null npm view "$name" versions --json 2>/dev/null || echo '[]')
+          if node -e 'process.exit([].concat(JSON.parse(process.argv[1])).includes(process.argv[2]) ? 0 : 1)' "$versions" "$version"; then
+            echo "$name@$version is on npm already; version PR only."
+            echo "publish=" >> "$GITHUB_OUTPUT"
+          else
+            echo "$name@$version is not on npm; publishing."
+            echo "publish=bun run release" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create Release PR or Publish
         uses: changesets/action@v1
         with:
-          publish: bun run release
+          publish: ${{ steps.probe.outputs.publish }}
           version: bun run version
         env:
           # GITHUB_TOKEN would work here, but a PR it opens raises no
