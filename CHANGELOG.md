@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.25.3
+
+### Patch Changes
+
+- [#116](https://github.com/MikeNotThePope/substrateui/pull/116) [`3e2f6a9`](https://github.com/MikeNotThePope/substrateui/commit/3e2f6a9027246dee106c864e93f5a3651bd5317c) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Docs site: stop RTL mangling the English copy. With `dir="rtl"` on `<html>`, the bidi algorithm handed every Latin sentence to an RTL paragraph, so trailing punctuation jumped to the wrong end — the hero read ".or don't" and FAQ questions rendered their question mark on the left. Site CSS now sets `unicode-bidi: plaintext`, so each block takes its base direction from its own content while the layout still mirrors.
+
 ## 1.25.2
 
 ### Patch Changes
