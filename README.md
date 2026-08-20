@@ -143,17 +143,25 @@ SubstrateUI uses a 3-layer OKLCH color system:
 
 ## Component Categories
 
-- **General** — Button, ButtonGroup, Badge, Kbd, Spinner, Empty
-- **Typography** — H1-H4, P, Lead, Large, Small, Muted, Code, Mono
-- **Layout** — Stack, Cluster, Grid, Center, Divider, Spacer, Separator, AspectRatio, ResizablePanels
-- **Forms** — Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, DatePicker, Combobox, Cascader, InputGroup, InputOTP, SearchField, Field, Fieldset, FormSection, FormActions
-- **Data Display** — Card, Table, DataTable, Avatar, Calendar, Carousel, Chart, HoverCard, Item, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer, Countdown
-- **Feedback** — Alert, Banner, AlertDialog, Dialog, Progress, Skeleton, Sonner (toast)
-- **Overlays** — Sheet, Drawer, Popover, Tooltip, ContextMenu, DropdownMenu, Command
-- **Navigation** — Tabs, Breadcrumb, NavigationMenu, Menubar, Pagination, ScrollArea, Sidebar, Collapsible, Accordion, Stepper
-- **Patterns** — AppShell, PageHeader, PageBody, PageTabs, StatCard
-- **Blocks** — Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid
-- **Templates** — DashboardTemplate, PricingTemplate
+The 90 above, grouped the way the docs sidebar groups them — that list is where
+the count comes from, so start there when either goes stale.
+
+- **General** (8) — Button, Badge, ButtonGroup, Toggle, ToggleGroup, Kbd, Spinner, Skeleton
+- **Typography** (2) — Typography (H1–H4, P, Lead, Large, Small, Muted, Code, Mono), Overline
+- **Layout Primitives** (9) — Stack, Cluster, Grid, Center, Divider, Separator, ScrollArea, Resizable, Spacer
+- **Forms** (16) — Label, Input, InputGroup, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, Combobox, Cascader, DatePicker, InputOTP, SearchField, PasswordInput
+- **Form Patterns** (5) — Field, Fieldset, FormSection, FormActions, Form
+- **Data Display** (19) — Table, DataTable, Card, Avatar, AspectRatio, Calendar, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer, Countdown, StatCard, Chart, Carousel, Accordion, Collapsible, Item
+- **Feedback** (5) — Alert, Banner, Progress, Toast, Empty
+- **Overlays** (10) — Dialog, Sheet, Drawer, AlertDialog, Popover, Tooltip, HoverCard, ContextMenu, DropdownMenu, Command
+- **Navigation** (9) — Tabs, NavTabs, Link, Breadcrumb, Pagination, NavigationMenu, Menubar, Sidebar, Stepper
+- **Layouts** (5) — App Shell, Dashboard Shell, Nav Shell, Auth Shell, Page Layout
+- **Utilities** (2) — FocusTrap, SkipLink
+
+Two export paths hold things built *from* those, and are not counted among the 90:
+
+- **Blocks** (10) — Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid
+- **Templates** (2) — DashboardTemplate, PricingTemplate
 
 ## Customization
 

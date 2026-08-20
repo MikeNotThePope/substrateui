@@ -14,18 +14,21 @@ This project uses `bun` as its package manager. Vercel supports bun natively.
 6. Build command: `bun run build` (override the default).
 7. Output directory: `.next` (default).
 8. Install command: `bun install --frozen-lockfile` (override the default `npm install` to use bun with the committed `bun.lock`).
-9. Node version: 20.x (set in Project Settings → General → Node.js Version).
+9. Node version: 22.x (set in Project Settings → General → Node.js Version —
+   a dashboard setting, not something this repo pins). Next's own floor is
+   `>=20.9.0`; 22 is what all four `ci.yml` jobs prove the build against.
 10. Click **Deploy**.
 
 ### After the first deploy
 
 - Production branch: `main` (Settings → Git → Production Branch).
 - Preview deployments: enabled by default for all non-main branches and all PRs.
-- Copy the production URL into `README.md` under the Status block.
+- The production URL goes in `README.md` under the Status block. It is
+  <https://www.substrateui.dev/>.
 
 ### Environment variables
 
-None required for the docs site as of v0.1.0. Add future env vars in Project Settings → Environment Variables, scoped to Production/Preview/Development as appropriate.
+None required for the docs site. Add future env vars in Project Settings → Environment Variables, scoped to Production/Preview/Development as appropriate.
 
 ### Ignoring unnecessary builds (optional)
 
@@ -47,9 +50,12 @@ If a custom domain is desired, add it under Settings → Domains and follow the 
 
 Releases are automated via [changesets](https://github.com/changesets/changesets) and the `release.yml` GitHub Actions workflow. Authentication uses **OIDC trusted publishing** — there is no long-lived `NPM_TOKEN` in repo secrets.
 
-### One-time bootstrap: publish v0.1.0 manually
+### One-time bootstrap: publish v0.1.0 manually — **done**
 
-Before OIDC can be configured, the package name must exist on npm. This single publish is done by hand from a maintainer's laptop:
+Kept because it is why the OIDC setup below was possible at all, not as a step
+to take. OIDC cannot be configured until the package name exists on npm, and
+nothing can publish it the first time but a human. That single publish was done
+by hand from a maintainer's laptop:
 
 ```bash
 bun run audit:contrast
@@ -60,15 +66,15 @@ npm login                  # passkey challenge
 npm publish --access public
 ```
 
-Verify:
+Verified at the time by:
 
 1. Package appears at https://www.npmjs.com/package/@mikenotthepope/substrateui
 2. `bun add @mikenotthepope/substrateui` in a throwaway project works
 3. You can import and use a component
 
-### One-time OIDC trusted publisher setup
+### One-time OIDC trusted publisher setup — **done**
 
-After the manual v0.1.0 is live:
+Once the manual v0.1.0 was live:
 
 1. Go to https://www.npmjs.com/package/@mikenotthepope/substrateui/access
 2. Scroll to **Trusted Publishers**
@@ -83,9 +89,10 @@ After the manual v0.1.0 is live:
 
 All future releases publish automatically from `.github/workflows/release.yml` with no stored credentials and with npm provenance attestation enabled.
 
-### One-time `RELEASE_PAT` setup
+### One-time `RELEASE_PAT` setup — **done**
 
-Without this, every **Version Packages** PR needs an admin bypass to merge.
+Without this, every **Version Packages** PR needs an admin bypass to merge. The
+steps are kept for the day the token expires and has to be re-minted.
 
 GitHub will not let a workflow trigger a workflow: a PR opened with the
 built-in `GITHUB_TOKEN` raises no `pull_request` event, so `verify` never runs
@@ -110,8 +117,8 @@ npm credential anywhere.
 
 1. Merge feature PRs that include `.changeset/*.md` files to `main`.
 2. `release.yml` opens a **Version Packages** PR that bumps the version and updates `CHANGELOG.md`.
-3. Review and merge the Version Packages PR. `verify` and `check` both run on
-   it once `RELEASE_PAT` is set (see above).
+3. Review and merge the Version Packages PR. `verify` and `check` run on it like
+   any other, because `RELEASE_PAT` opens it (see above).
 4. `release.yml` runs again and publishes to npm.
 
 Multiple changesets can be stacked before merging the Version PR — they're consumed together into one release.
