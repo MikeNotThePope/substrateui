@@ -69,3 +69,20 @@ body :is([data-slot="h1"], [data-slot="h2"], [data-slot="h3"]) {
     }
   }
 }
+
+/* ── RTL: mirror the layout, not the sentences ───────────────────────
+   Every string on this site is English, and the direction toggle exists
+   to prove components mirror — not to fake Arabic. Under a bare
+   `dir="rtl"` the bidi algorithm hands each English run to an RTL
+   paragraph, so trailing neutrals jump the line: "or don't." renders
+   ".or don't" and "How long does delivery take?" renders with the
+   question mark on the left.
+
+   `unicode-bidi: plaintext` resolves each element's base direction from
+   its own first strong character, so Latin copy reads left-to-right
+   while `direction: rtl` still flips flex order, logical properties and
+   Base UI positioning. Site-only: the shipped tokens.css leaves this
+   alone, because an app with real Arabic copy wants the default. */
+[dir="rtl"] body * {
+  unicode-bidi: plaintext;
+}
