@@ -94,6 +94,11 @@ What never moves: display type, registration marks, trim lines, page layout.
 A printer's spec sheet: terse, declarative, numeric. It states what a thing *is* and what it *costs*,
 never how you'll feel about it. Sentence case, active verbs, no adjectives that can't be measured.
 
+The home page runs this voice deadpan. It is a one-person system built for one person's projects,
+and the page says so: it undersells itself, never oversells. The numbers stay exact and unhedged --
+they are the straight man. Self-deprecation is not marketing-speak and does not violate the
+anti-patterns below; jokes, emoji and winks still do.
+
 Samples:
 1. Primary CTA — "Install"
 2. Hero thesis — "Swap the ink. The press doesn't change."
