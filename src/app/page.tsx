@@ -65,8 +65,13 @@ function TintRamp({ token, label }: { token: string; label: string }) {
 // Replaces the feature-card grid. A docket is real press furniture and
 // carries more information per pixel than six icons in rounded squares.
 
+// Counts here are inventory and go stale silently. "Components" is the 85
+// pages under src/app/docs/components plus the 5 under src/app/docs/layouts,
+// which is the span the caption claims — App Shell is one of the layouts.
+// "Audited pairs" is `pairings` in scripts/audit-contrast.ts; "Themes" counts
+// the named ones, so THEMES there is one longer for the default.
 const docket: Array<[string, string, string]> = [
-  ["Components", "75", "atomic Button through organism App Shell"],
+  ["Components", "90", "atomic Button through organism App Shell"],
   ["Themes", "5", "proof · substrate · lava · tundra · plum"],
   ["Audited pairs", "35", "per theme, light and dark. A failing ratio fails the build."],
   ["Colour", "OKLCH", "perceptually uniform ramps, so contrast is computed, not eyeballed"],
@@ -134,7 +139,7 @@ export default function HomePage() {
               </H1>
 
               <Lead className="max-w-2xl text-lg md:text-xl">
-                I built it for my own projects. 75 components, five themes, every colour pairing
+                I built it for my own projects. 90 components, five themes, every colour pairing
                 audited against WCAG AA &mdash; because I&rsquo;m the one who has to look at it. Set one
                 attribute and everything repaints, including the components you wrote.
               </Lead>

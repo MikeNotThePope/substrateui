@@ -15,7 +15,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 
 ## Features
 
-- 75 components from atomic Button to organism App Shell
+- 90 components from atomic Button to organism App Shell
 - 3-layer OKLCH color system: raw palette → semantic tokens → Tailwind utilities
 - Dark mode as a token swap — zero component changes
 - Chunky 2px borders and press-down animations

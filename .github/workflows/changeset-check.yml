@@ -7,17 +7,29 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: ${{ github.head_ref != 'changeset-release/main' && !contains(github.event.pull_request.labels.*.name, 'skip-changeset') }}
+    # Two kinds of PR are exempt: a Version Packages PR consumes changesets
+    # rather than adding one, and `skip-changeset` is the opt-out for a change
+    # that ships nothing. Both used to be a job-level `if:`, which skipped the
+    # whole job — and a skipped job reports no conclusion at all, so a required
+    # check sits "expected" forever and the PR cannot merge. Every Version
+    # Packages PR needed an admin bypass because of it. Guarding the steps
+    # instead lets the job start, do nothing, and report success.
+    env:
+      NEEDED: ${{ github.head_ref != 'changeset-release/main' && !contains(github.event.pull_request.labels.*.name, 'skip-changeset') }}
     steps:
-      - uses: actions/checkout@v4
+      - if: env.NEEDED == 'true'
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: oven-sh/setup-bun@v2
+      - if: env.NEEDED == 'true'
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - run: bun install --frozen-lockfile
+      - if: env.NEEDED == 'true'
+        run: bun install --frozen-lockfile
 
       - name: Verify changeset present
+        if: env.NEEDED == 'true'
         run: bunx changeset status --since=origin/${{ github.base_ref }}
