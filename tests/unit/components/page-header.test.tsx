@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
+import { AppShellLogo } from '@/components/app-shell'
 import {
   PageHeader,
   PageHeaderContent,
@@ -8,6 +9,9 @@ import {
   PageHeaderDescription,
   PageHeaderActions,
 } from '@/components/page-header'
+
+/** Classes as a set, so a `toContain` on `h-16` never reads `min-h-16`. */
+const classes = (el: HTMLElement) => el.className.split(/\s+/)
 
 describe('PageHeader', () => {
   it('composes a band by default', () => {
@@ -54,6 +58,29 @@ describe('PageHeader', () => {
 
     rerender(<PageHeader size="sm" data-testid="h" />)
     expect(screen.getByTestId('h').className).not.toContain('bg-card')
+  })
+
+  it('stands as tall as the sidebar logo block at size sm', () => {
+    // The two are either side of the sidebar's border, so their bottom edges
+    // are one line. The bar sized to its content before this, which put a step
+    // in that corner — and a different one on every page, since a bar holding
+    // an icon button is taller than one holding a small one. `min-h-`, not
+    // `h-`, so a wrapping bar can still grow.
+    render(
+      <>
+        <AppShellLogo data-testid="logo" />
+        <PageHeader size="sm" data-testid="h" />
+      </>
+    )
+    expect(classes(screen.getByTestId('logo'))).toContain('h-16')
+    expect(classes(screen.getByTestId('h'))).toContain('min-h-16')
+  })
+
+  it('leaves the band to be sized by its content', () => {
+    // A band is the surface, not a bar beside a sidebar: nothing has to line
+    // up with it, and its padding is what gives it its size.
+    render(<PageHeader data-testid="h" />)
+    expect(classes(screen.getByTestId('h'))).not.toContain('min-h-16')
   })
 
   it('keeps the house border at both sizes', () => {

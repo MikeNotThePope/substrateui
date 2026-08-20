@@ -29,7 +29,9 @@ interface PageHeaderProps extends React.ComponentPropsWithRef<"header"> {
  * `size="sm"` is the bar an app shell wants above a working page — one row, no
  * background of its own, a title that sits beside its status rather than over
  * it. Children lay out inline, so a back button, the title and a badge are
- * siblings; `PageHeaderActions` moves itself to the far end.
+ * siblings; `PageHeaderActions` moves itself to the far end. It stands 64px
+ * tall, the same as `AppShellLogo`, so the two bottom borders meet across the
+ * sidebar's edge rather than stepping over it; a bar that wraps grows past that.
  *
  * @example
  * <PageHeader><PageHeaderContent><PageHeaderTitle>Dashboard</PageHeaderTitle></PageHeaderContent></PageHeader>
@@ -59,7 +61,15 @@ function PageHeader({
         className={cn(
           "border-b-2",
           size === "sm"
-            ? "flex items-center gap-3 px-6 py-3"
+            ? // `min-h-16` is the shell's bar height — the same one AppShellLogo
+              // sets. The two sit either side of the sidebar's border and their
+              // bottom edges have to meet; without it the bar sized to whatever
+              // the page put in it, so that line stepped across the corner by a
+              // different amount on every screen. `py-2` rather than `py-3` so
+              // the floor is what decides: a `size="default"` button is the
+              // tallest thing a bar normally holds, and 8px leaves it the 46px
+              // it needs. `min-h-` so a bar that wraps can still grow.
+              "flex items-center gap-3 px-6 py-2 min-h-16"
             : "bg-card px-6 py-6",
           className
         )}

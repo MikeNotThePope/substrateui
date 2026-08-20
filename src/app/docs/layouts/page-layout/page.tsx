@@ -195,6 +195,9 @@ export default function PageLayoutPage() {
           row, no background of its own, a title beside its status rather than over
           it. Children are laid out inline, so a back button, the title and a badge
           are siblings. <code>PageHeaderActions</code> moves itself to the far end.
+          It stands as tall as <code>AppShellLogo</code>, so inside an app shell
+          the two bottom borders meet at the sidebar&apos;s edge instead of
+          stepping across it. A bar that wraps grows past that height.
         </Muted>
         <ComponentPreview
           code={`<PageHeader size="sm">
