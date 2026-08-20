@@ -154,7 +154,13 @@ function AppShellSidebarTrigger({
   )
 }
 
-/** Logo area at the top of the sidebar with a bottom border. */
+/** Logo area at the top of the sidebar with a bottom border.
+ *
+ * `h-16` is the shell's bar height, and it is shared: `PageHeader size="sm"`
+ * matches it so the two bottom borders meet at the sidebar's edge. Changing it
+ * here alone puts a step back in that corner — page-header.test.ts holds the
+ * pair together.
+ */
 function AppShellLogo({
   className,
   ref,

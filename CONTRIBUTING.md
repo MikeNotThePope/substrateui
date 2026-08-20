@@ -140,7 +140,10 @@ bunx changeset
 
 You'll be prompted to:
 
-1. Select which packages changed (just `substrateui` for now)
+1. Select which packages changed (just `@mikenotthepope/substrateui` for
+   now). Write the scoped name, the one in `package.json` — a changeset
+   whose front matter says `substrateui` fails the `check` job with
+   "not in the workspace".
 2. Select the bump type — patch (bug fix), minor (new feature), major
    (breaking change)
 3. Write a short summary of the change
