@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.25.2
+
+### Patch Changes
+
+- [#113](https://github.com/MikeNotThePope/substrateui/pull/113) [`0c8db81`](https://github.com/MikeNotThePope/substrateui/commit/0c8db81e1a148c745f1797cda4bd5e1ec6a806f6) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Correct the component count and category list in the README.
+
+  The package page said 75 components and listed them in categories that counted
+  `H1`–`H4`, `P`, `Lead` and five more typography exports separately, and folded
+  ten blocks and two templates in among them. It is 90, grouped the way the docs
+  sidebar groups them. No code changed; the README ships in the tarball, so this
+  is the only way the npm page gets it.
+
 ## 1.25.1
 
 ### Patch Changes
