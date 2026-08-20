@@ -73,7 +73,9 @@ const docket: Array<[string, string, string]> = [
   ["Primitives", "Base UI", "focus management, dismissal and ARIA are handled"],
   ["CSS", "Tailwind v4", "@theme inline — no config file"],
   ["Peer deps", "react ≥ 18", "tailwindcss ≥ 4 · next and next-themes optional"],
-  ["Licence", "MIT", "free to fork, ship and sell"],
+  ["Licence", "MIT", "fork it, ship it, sell it"],
+  ["Support", "None", "issues welcome, replies not promised"],
+  ["Users", "1", "hi"],
 ]
 
 // ─── Who it's for ─────────────────────────────────────────────────────
@@ -83,15 +85,15 @@ const docket: Array<[string, string, string]> = [
 
 const audience: Array<{ heading: string; body: string }> = [
   {
-    heading: "You ship more than one brand",
+    heading: "More than one brand",
     body: "A theme is a token map, and no component ever learns its name. Adding the sixth palette costs a file, not a refactor — and light and dark come with it.",
   },
   {
-    heading: "Accessibility is a requirement, not a wish",
+    heading: "Accessibility as a requirement",
     body: "35 colour pairings per theme are checked against WCAG AA on every commit, and a failing ratio fails the build. Base UI handles focus, dismissal and ARIA underneath.",
   },
   {
-    heading: "You want to own your stack",
+    heading: "Owning your own stack",
     body: "MIT, no runtime service, no account. React 18+ and Tailwind v4 are the only hard peers — Next and next-themes are optional, so it is not a Next.js-only system.",
   },
 ]
@@ -116,25 +118,25 @@ export default function HomePage() {
             <Stack gap="lg" className="sui-enter items-start text-left">
               <Cluster gap="sm" className="items-center">
                 <RegMark className="h-4 w-4 text-primary" />
-                <Caps className="text-muted-foreground">{version} · MIT · React 18+</Caps>
+                <Caps className="text-muted-foreground">{version} · MIT · React 18+ · no roadmap</Caps>
               </Cluster>
 
               <H1 className="font-display text-5xl font-extrabold tracking-tight md:text-7xl">
-                A themeable{" "}
+                A themeable React design system. Use it{" "}
                 <span className="relative isolate inline-block">
-                  React
+                  or don&rsquo;t
                   <span
                     aria-hidden
                     className="absolute inset-x-0 bottom-1 -z-10 h-3 bg-secondary-fill md:bottom-2 md:h-5"
                   />
-                </span>{" "}
-                design system.
+                </span>
+                .
               </H1>
 
               <Lead className="max-w-2xl text-lg md:text-xl">
-                75 components built on OKLCH, Tailwind CSS v4 and Base UI. Five themes, light and
-                dark, with every colour pairing audited against WCAG AA. Set one attribute and
-                every component repaints, including the ones you wrote.
+                I built it for my own projects. 75 components, five themes, every colour pairing
+                audited against WCAG AA &mdash; because I&rsquo;m the one who has to look at it. Set one
+                attribute and everything repaints, including the components you wrote.
               </Lead>
 
               <InstallCommand className="max-w-xl" />
@@ -156,7 +158,7 @@ export default function HomePage() {
             <div className="sui-enter sui-enter-2">
               <ThemeStrip />
               <Mono className="mt-3 block text-xs text-muted-foreground">
-                pick a theme — this page is the demo
+                pick a theme. this page is the demo. yes, that&rsquo;s a lot of themes for one person.
               </Mono>
             </div>
           </Stack>
@@ -266,7 +268,8 @@ const proof = createTheme({
                 Who it&apos;s for
               </H2>
               <P className="max-w-2xl text-muted-foreground">
-                Every claim below is checked by the build, not by us.
+                Me, mostly. If you recognise yourself below, help yourself &mdash; every claim is
+                checked by the build, not by me.
               </P>
             </Stack>
 
@@ -288,7 +291,7 @@ const proof = createTheme({
           <Stack gap="xl">
             <Stack gap="sm">
               <Caps className="text-muted-foreground">Job docket</Caps>
-              <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">What you get</H2>
+              <H2 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">What you get, roughly</H2>
             </Stack>
 
             <div className="overflow-hidden rounded-lg border-2">
