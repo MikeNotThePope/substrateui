@@ -8,7 +8,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Snapshots are stored in Cloudflare R2, not in the git repo. Run `bun run snapshots:download` to fetch baselines before running visual tests. To update baselines, regenerate them in Docker (see `tests/visual/README.md` for the `docker run` command) then run `bun run snapshots:upload`. Do not run `bun run test:visual:update` on macOS — it produces `-darwin.png` files CI won't use.
 
-On a branch, prefer the **Update Visual Baselines** workflow: `gh workflow run "Update Visual Baselines" --ref <branch>`. It regenerates, uploads, and then re-runs the branch's CI itself. Don't sequence that by hand — there is a single baseline archive and CI starts on push, so any `verify` that began before the upload is reading the old baselines and will fail on exactly the snapshots you just replaced.
+On a branch, prefer the **Update Visual Baselines** workflow. Dispatch it with `gh workflow run "Update Visual Baselines" --ref <branch>` where `gh` exists — it does not in a Claude Code web container, so from there use the GitHub MCP `actions_run_trigger` tool, or the Actions tab in a browser. It regenerates, uploads, and then re-runs the branch's CI itself. Don't sequence that by hand — there is a single baseline archive and CI starts on push, so any `verify` that began before the upload is reading the old baselines and will fail on exactly the snapshots you just replaced.
 
 # The home page's numbers are inventory
 
@@ -25,7 +25,7 @@ Touching that page means re-deriving them first. Each is one command:
   counts *named* themes, and `default` is the absence of a name.
 - **Audited pairs** — `pairings` in that same file.
 
-`README.md` repeats the component count. Change one, change the other.
+`README.md` repeats the component count, and its **Component Categories** list is that same inventory broken out by the sidebar's own groups. Change one, change all three.
 
 # Making code changes
 
@@ -40,7 +40,7 @@ For every code change, follow this flow:
 
    The same boundary in the *published* package is a separate question, and the docs site cannot answer it — it imports from `src/`, not `dist/`. `build:lib` runs `audit:boundary` after every build to answer it: which built file carries `"use client"` is decided from the real chunk graph (`scripts/client-boundary.ts`), and a recipe that never reaches `dist/variants.js` fails the build. A new `cva` recipe therefore needs a `*-variants.ts` module and a line in `src/variants.ts`, or the build says so.
 
-5. Push the branch and open a PR: `git push -u origin <branch>` then `gh pr create`.
+5. Push the branch and open a PR: `git push -u origin <branch>`, then `gh pr create` — or the GitHub MCP `create_pull_request` tool, since a Claude Code web container has no `gh`.
 6. Wait for the required checks to pass: `verify` (CI: lint, tsc, tests, builds, audits, visual regression) and `check` (changeset present).
 7. Merge once green (0 approvals required on this solo repo). Squash-merge is fine.
 
