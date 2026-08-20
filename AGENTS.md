@@ -10,6 +10,23 @@ Snapshots are stored in Cloudflare R2, not in the git repo. Run `bun run snapsho
 
 On a branch, prefer the **Update Visual Baselines** workflow: `gh workflow run "Update Visual Baselines" --ref <branch>`. It regenerates, uploads, and then re-runs the branch's CI itself. Don't sequence that by hand — there is a single baseline archive and CI starts on push, so any `verify` that began before the upload is reading the old baselines and will fail on exactly the snapshots you just replaced.
 
+# The home page's numbers are inventory
+
+`src/app/page.tsx` states counts as fact — the docket table and the lead
+paragraph both do — and nothing checks them. The component count read 75 for
+long enough that nobody could say what it had ever counted.
+
+Touching that page means re-deriving them first. Each is one command:
+
+- **Components** — `ls -d src/app/docs/components/*/ src/app/docs/layouts/*/ | wc -l`.
+  The caption says "atomic Button through organism App Shell", so the layouts
+  count: App Shell is one of them. `bun run audit:docs` prints the first half too.
+- **Themes** — `THEMES` in `scripts/audit-contrast.ts`, minus one. The docket
+  counts *named* themes, and `default` is the absence of a name.
+- **Audited pairs** — `pairings` in that same file.
+
+`README.md` repeats the component count. Change one, change the other.
+
 # Making code changes
 
 `main` is protected — direct pushes are rejected for everyone, including admins. All changes land through a pull request. Never commit to `main` locally or attempt to push to it.
@@ -35,6 +52,8 @@ Releases are driven by Changesets and `.github/workflows/release.yml`, which run
 
 1. When PRs with changesets land on `main`, the release workflow opens (or updates) an auto-generated **"Version Packages"** PR. It consumes the pending `.changeset/*.md` files, bumps `package.json` (highest bump among them wins — three patches still make one patch), and writes `CHANGELOG.md`.
 2. **Merging the Version Packages PR is the only manual step** — the "yes, cut this release" checkpoint. Review the computed version and changelog before merging.
+
+   That PR needs the `RELEASE_PAT` secret to be mergeable without an admin bypass. Without it the release workflow opens the PR as `github-actions[bot]`, which raises no `pull_request` event, so `verify` never runs and branch protection waits on a check that cannot arrive. `docs/deployment.md` says how to mint the token.
 3. That merge leaves `main` with no pending changesets, so the same workflow takes its other branch and runs `changeset publish` automatically: `npm publish` (via OIDC trusted publishing — no token), git tag, and a GitHub Release.
 
 So: changeset in your PR → merge → Version Packages PR appears → you merge it → npm publish is automatic. Do not bump `package.json` or tag releases by hand; Changesets owns that.

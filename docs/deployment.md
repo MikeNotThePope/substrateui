@@ -62,15 +62,15 @@ npm publish --access public
 
 Verify:
 
-1. Package appears at https://www.npmjs.com/package/substrateui
-2. `bun add substrateui` in a throwaway project works
+1. Package appears at https://www.npmjs.com/package/@mikenotthepope/substrateui
+2. `bun add @mikenotthepope/substrateui` in a throwaway project works
 3. You can import and use a component
 
 ### One-time OIDC trusted publisher setup
 
 After the manual v0.1.0 is live:
 
-1. Go to https://www.npmjs.com/package/substrateui/access
+1. Go to https://www.npmjs.com/package/@mikenotthepope/substrateui/access
 2. Scroll to **Trusted Publishers**
 3. Click **Add trusted publisher**
 4. Select **GitHub Actions**
@@ -83,11 +83,35 @@ After the manual v0.1.0 is live:
 
 All future releases publish automatically from `.github/workflows/release.yml` with no stored credentials and with npm provenance attestation enabled.
 
+### One-time `RELEASE_PAT` setup
+
+Without this, every **Version Packages** PR needs an admin bypass to merge.
+
+GitHub will not let a workflow trigger a workflow: a PR opened with the
+built-in `GITHUB_TOKEN` raises no `pull_request` event, so `verify` never runs
+on it and branch protection blocks the merge on a check that can never arrive.
+Giving `changesets/action` a real token makes that PR an ordinary one.
+
+1. Go to https://github.com/settings/personal-access-tokens/new
+2. Fine-grained token, **Resource owner** `MikeNotThePope`, **Repository access**
+   → only `substrateui`
+3. Repository permissions: **Contents** read/write, **Pull requests** read/write.
+   Nothing else.
+4. Expiry: whatever you will actually rotate. The release still works when it
+   lapses — the workflow falls back to `GITHUB_TOKEN` — you just get the admin
+   bypass back until you renew it.
+5. Save the value as repo secret `RELEASE_PAT`
+   (Settings → Secrets and variables → Actions).
+
+This is only about who opens the release PR. Publishing stays on OIDC, with no
+npm credential anywhere.
+
 ### Automated release flow
 
 1. Merge feature PRs that include `.changeset/*.md` files to `main`.
 2. `release.yml` opens a **Version Packages** PR that bumps the version and updates `CHANGELOG.md`.
-3. Review and merge the Version Packages PR.
+3. Review and merge the Version Packages PR. `verify` and `check` both run on
+   it once `RELEASE_PAT` is set (see above).
 4. `release.yml` runs again and publishes to npm.
 
 Multiple changesets can be stacked before merging the Version PR — they're consumed together into one release.
