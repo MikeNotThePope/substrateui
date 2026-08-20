@@ -1,5 +1,5 @@
 ---
-"substrateui": minor
+"@mikenotthepope/substrateui": minor
 ---
 
 `PageHeader size="sm"` stands as tall as `AppShellLogo`, so the shell's top bar is one line.
