@@ -2,18 +2,16 @@
 
 A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v4, Base UI primitives.
 
-[![npm version](https://img.shields.io/npm/v/substrateui.svg)](https://www.npmjs.com/package/substrateui)
-[![license](https://img.shields.io/npm/l/substrateui.svg)](https://github.com/substrateui/substrateui/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/%40mikenotthepope%2Fsubstrateui.svg)](https://www.npmjs.com/package/@mikenotthepope/substrateui)
+[![license](https://img.shields.io/npm/l/%40mikenotthepope%2Fsubstrateui.svg)](https://github.com/MikeNotThePope/substrateui/blob/main/LICENSE)
 
-<!-- Replace <OWNER>/<REPO> with the GitHub owner/repo once the repo is pushed,
-     and <VERCEL-PRODUCTION-URL> with the production URL after Vercel deploys. -->
 ## Status
 
-[![CI](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml)
+[![CI](https://github.com/MikeNotThePope/substrateui/actions/workflows/ci.yml/badge.svg)](https://github.com/MikeNotThePope/substrateui/actions/workflows/ci.yml)
 
-- **Docs:** <VERCEL-PRODUCTION-URL>
-- **Storybook:** https://substrateui.dev/storybook/ — run locally with `bun run storybook`
-- **npm:** `@substrateui/core` (not yet published)
+- **Docs:** https://www.substrateui.dev/
+- **Storybook:** https://www.substrateui.dev/storybook/ — run locally with `bun run storybook`
+- **npm:** [`@mikenotthepope/substrateui`](https://www.npmjs.com/package/@mikenotthepope/substrateui)
 
 ## Features
 
@@ -22,7 +20,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 - Dark mode as a token swap — zero component changes
 - Chunky 2px borders and press-down animations
 - CVD-safe plum + amber color pairing
-- WCAG AA contrast verified on every token pairing — see [contrast report](./audit-contrast-report.md)
+- WCAG AA contrast verified on every token pairing — see the [contrast matrix](https://www.substrateui.dev/docs/accessibility/contrast)
 - Built for Tailwind CSS v4 (`@theme inline`, CSS-first config)
 - Full TypeScript support with exported types
 - Tree-shakeable ESM exports
@@ -38,7 +36,7 @@ npm install @mikenotthepope/substrateui
 Run the init command to wire the imports in automatically, or add them by hand:
 
 ```bash
-npx substrateui init
+npx @mikenotthepope/substrateui init
 ```
 
 ```css
@@ -81,10 +79,10 @@ import { ThemeProvider } from "next-themes"
 ### Use Components
 
 ```tsx
-import { Button, Stack, Card, CardHeader, CardTitle, CardContent } from "substrateui"
-import { AppShell, AppShellSidebar, AppShellMain } from "substrateui/organisms"
-import { SignInBlock, HeroBlock, StatsBlock } from "substrateui/blocks"
-import { cn } from "substrateui/utils"
+import { Button, Stack, Card, CardHeader, CardTitle, CardContent } from "@mikenotthepope/substrateui"
+import { AppShell, AppShellSidebar, AppShellMain } from "@mikenotthepope/substrateui/organisms"
+import { SignInBlock, HeroBlock, StatsBlock } from "@mikenotthepope/substrateui/blocks"
+import { cn } from "@mikenotthepope/substrateui/utils"
 ```
 
 ### Framework-agnostic links
@@ -95,7 +93,7 @@ provider, links fall back to a plain `<a>`.
 
 ```tsx
 import NextLink from "next/link"
-import { LinkProvider } from "substrateui"
+import { LinkProvider } from "@mikenotthepope/substrateui"
 
 <LinkProvider component={NextLink}>{children}</LinkProvider>
 ```
@@ -104,23 +102,23 @@ import { LinkProvider } from "substrateui"
 
 | Import path | Contents |
 |---|---|
-| `substrateui` | All UI primitives (Button, Card, Input, Table, etc.) plus the `LinkProvider` adapter |
-| `substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
-| `substrateui/blocks` | Full compositions across Marketing, Application, Auth & E-commerce (Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid) |
-| `substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
-| `substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, useFocusTrap, useAnnouncer, useCountdown, …) |
-| `substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
-| `substrateui/variants` | The `cva` class recipes (`buttonVariants`, `badgeVariants`, …) |
-| `substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
+| `@mikenotthepope/substrateui` | All UI primitives (Button, Card, Input, Table, etc.) plus the `LinkProvider` adapter |
+| `@mikenotthepope/substrateui/organisms` | App-level patterns (AppShell, PageHeader, PageBody, PageTabs, StatCard) |
+| `@mikenotthepope/substrateui/blocks` | Full compositions across Marketing, Application, Auth & E-commerce (Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid) |
+| `@mikenotthepope/substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
+| `@mikenotthepope/substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, useFocusTrap, useAnnouncer, useCountdown, …) |
+| `@mikenotthepope/substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
+| `@mikenotthepope/substrateui/variants` | The `cva` class recipes (`buttonVariants`, `badgeVariants`, …) |
+| `@mikenotthepope/substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
 
-`substrateui/variants` and `substrateui/utils` are the two entrypoints with no
-`"use client"` boundary, so a **server component** can call `cn()` or a class
-recipe from them. The same recipes are exported from the package root for
+The `/variants` and `/utils` entrypoints are the two with no `"use client"`
+boundary, so a **server component** can call `cn()` or a class recipe from
+them. The same recipes are exported from the package root for
 convenience, and that copy is a client reference — calling it while rendering on
 the server throws at request time, which no build or type check catches. When in
 doubt, import from `/variants`.
 
-Set up a project with the CLI: `npx substrateui init`.
+Set up a project with the CLI: `npx @mikenotthepope/substrateui init`.
 
 ## Requirements
 
@@ -162,7 +160,7 @@ SubstrateUI uses a 3-layer OKLCH color system:
 Override tokens after importing the stylesheet:
 
 ```css
-/* After importing substrateui/styles.css */
+/* After importing @mikenotthepope/substrateui/styles.css */
 :root {
   --primary: oklch(0.55 0.15 250);  /* Change primary to blue */
 }
@@ -174,7 +172,7 @@ Define themes in TypeScript and swap between them at runtime. A theme is a map
 of semantic tokens, so every component re-colours itself with no other changes.
 
 ```tsx
-import { ThemeRegistry, ThemeSelect, createTheme } from "substrateui"
+import { ThemeRegistry, ThemeSelect, createTheme } from "@mikenotthepope/substrateui"
 
 const ocean = createTheme({
   name: "ocean",
@@ -192,14 +190,14 @@ const ocean = createTheme({
 `themeToCss()` emits the same tokens as static CSS for build-time themes,
 `themeInitScript()` prevents a flash of the default palette on first load, and
 `scoped` themes a subtree instead of the whole document. See the
-[Theming API docs](https://substrateui.dev/docs/foundations/theming).
+[Theming API docs](https://www.substrateui.dev/docs/foundations/theming).
 
 ## Accessibility
 
 SubstrateUI meets WCAG AA contrast requirements (verified by automated audit) and is built on Base UI primitives for robust keyboard and screen reader support.
 
-- [Accessibility documentation](https://substrateui.dev/docs/accessibility)
-- [Contrast audit report](./audit-contrast-report.md)
+- [Accessibility documentation](https://www.substrateui.dev/docs/accessibility)
+- [Contrast matrix](https://www.substrateui.dev/docs/accessibility/contrast)
 
 Every component ships with accessible defaults. For guidance on specific components, see the "Accessibility" section on each component's documentation page.
 
@@ -212,13 +210,13 @@ bun run storybook        # dev server on http://localhost:6006
 bun run build-storybook  # static bundle in ./storybook-static
 ```
 
-Hosted build: https://substrateui.dev/storybook/
+Hosted build: https://www.substrateui.dev/storybook/
 
 ## Links
 
-- [GitHub](https://github.com/substrateui/substrateui)
-- [npm](https://www.npmjs.com/package/substrateui)
-- [Storybook](https://substrateui.dev/storybook/)
+- [GitHub](https://github.com/MikeNotThePope/substrateui)
+- [npm](https://www.npmjs.com/package/@mikenotthepope/substrateui)
+- [Storybook](https://www.substrateui.dev/storybook/)
 
 ## License
 
