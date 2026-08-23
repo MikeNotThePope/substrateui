@@ -15,7 +15,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 
 ## Features
 
-- 90 components from atomic Button to organism App Shell
+- 91 components from atomic Button to organism App Shell
 - 3-layer OKLCH color system: raw palette → semantic tokens → Tailwind utilities
 - Dark mode as a token swap — zero component changes
 - Chunky 2px borders and press-down animations
@@ -143,7 +143,7 @@ SubstrateUI uses a 3-layer OKLCH color system:
 
 ## Component Categories
 
-The 90 above, grouped the way the docs sidebar groups them — that list is where
+The 91 above, grouped the way the docs sidebar groups them — that list is where
 the count comes from, so start there when either goes stale.
 
 - **General** (8) — Button, Badge, ButtonGroup, Toggle, ToggleGroup, Kbd, Spinner, Skeleton
@@ -151,14 +151,14 @@ the count comes from, so start there when either goes stale.
 - **Layout Primitives** (9) — Stack, Cluster, Grid, Center, Divider, Separator, ScrollArea, Resizable, Spacer
 - **Forms** (16) — Label, Input, InputGroup, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch, Slider, Combobox, Cascader, DatePicker, InputOTP, SearchField, PasswordInput
 - **Form Patterns** (5) — Field, Fieldset, FormSection, FormActions, Form
-- **Data Display** (19) — Table, DataTable, Card, Avatar, AspectRatio, Calendar, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer, Countdown, StatCard, Chart, Carousel, Accordion, Collapsible, Item
+- **Data Display** (20) — Table, DataTable, Card, Avatar, AspectRatio, Calendar, Timeline, Rating, ListGroup, Tree, Descriptions, Transfer, Sortable, Countdown, StatCard, Chart, Carousel, Accordion, Collapsible, Item
 - **Feedback** (5) — Alert, Banner, Progress, Toast, Empty
 - **Overlays** (10) — Dialog, Sheet, Drawer, AlertDialog, Popover, Tooltip, HoverCard, ContextMenu, DropdownMenu, Command
 - **Navigation** (9) — Tabs, NavTabs, Link, Breadcrumb, Pagination, NavigationMenu, Menubar, Sidebar, Stepper
 - **Layouts** (5) — App Shell, Dashboard Shell, Nav Shell, Auth Shell, Page Layout
 - **Utilities** (2) — FocusTrap, SkipLink
 
-Two export paths hold things built *from* those, and are not counted among the 90:
+Two export paths hold things built *from* those, and are not counted among the 91:
 
 - **Blocks** (10) — Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid
 - **Templates** (2) — DashboardTemplate, PricingTemplate
