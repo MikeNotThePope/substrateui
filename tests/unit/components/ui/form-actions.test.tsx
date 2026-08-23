@@ -6,6 +6,14 @@ import {
   FormActionsSecondary,
 } from '@/components/ui/form-actions'
 
+/** Renames a function to `""`, which is what a minifier does to these. */
+function anonymise(fn: unknown) {
+  const original = (fn as { name: string }).name
+  Object.defineProperty(fn, 'name', { value: '', configurable: true })
+  return () =>
+    Object.defineProperty(fn, 'name', { value: original, configurable: true })
+}
+
 describe('FormActions', () => {
   it('renders children (typically buttons)', () => {
     render(
@@ -39,6 +47,16 @@ describe('FormActions', () => {
     expect(el?.className).toContain('custom-extra')
   })
 
+  it('clusters bare children to the end', () => {
+    const { container } = render(
+      <FormActions>
+        <button>Save</button>
+      </FormActions>
+    )
+    const bar = container.querySelector('[data-slot="form-actions"]')
+    expect(bar?.firstElementChild?.getAttribute('data-slot')).toBe('cluster')
+  })
+
   it('renders primary/secondary sub-components when used', () => {
     render(
       <FormActions>
@@ -52,5 +70,32 @@ describe('FormActions', () => {
     )
     expect(screen.getByRole('button', { name: 'Delete' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Save' })).toBeInTheDocument()
+  })
+
+  // The bug this guards: detection used to read `child.type.name`, which a
+  // minified build sets to `""`. The split then never matched, and a bar
+  // written left/right shipped as one end-aligned pile — correct in
+  // `next dev`, wrong in every production build, and silent in both.
+  it('splits the bar even when the sub-components have no name', () => {
+    const restore = [anonymise(FormActionsPrimary), anonymise(FormActionsSecondary)]
+    try {
+      const { container } = render(
+        <FormActions>
+          <FormActionsSecondary>
+            <button>Delete</button>
+          </FormActionsSecondary>
+          <FormActionsPrimary>
+            <button>Save</button>
+          </FormActionsPrimary>
+        </FormActions>
+      )
+      const bar = container.querySelector('[data-slot="form-actions"]')
+      expect([...(bar?.children ?? [])].map((c) => c.getAttribute('data-slot'))).toEqual([
+        'form-actions-secondary',
+        'form-actions-primary',
+      ])
+    } finally {
+      restore.forEach((r) => r())
+    }
   })
 })
