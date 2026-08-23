@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.26.0
+
+### Minor Changes
+
+- [#118](https://github.com/MikeNotThePope/substrateui/pull/118) [`097a287`](https://github.com/MikeNotThePope/substrateui/commit/097a2877f2a7be1195d47d7f79a6bbaacffffce5) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Add `Sortable` and `SortableItem`: a vertical list whose items reorder by button
+  or by drag, plus the `reorder` helper both need.
+
+  Controlled — it reports `(from, to)` and the caller owns the array, so the same
+  list can drive form state, a draft saved on submit, or an optimistic write.
+
+  The move buttons are the control and the drag grip is a mouse shortcut on top of
+  them. A grip alone has no keyboard equivalent (WCAG 2.1.1), so `SortableItem`
+  renders the buttons itself, names each one after its item, and marks the grip
+  `aria-hidden`. There is no prop to turn them off.
+
 ## 1.25.3
 
 ### Patch Changes
