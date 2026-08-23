@@ -6,6 +6,9 @@ import { Cluster } from "./cluster"
 /**
  * Horizontal action bar for form submit/cancel buttons, separated by a top border.
  *
+ * Pass `FormActionsSecondary` / `FormActionsPrimary` to split the bar left and
+ * right; pass bare children and they cluster to the end.
+ *
  * @example
  * <FormActions>
  *   <Button variant="outline">Cancel</Button>
@@ -18,12 +21,14 @@ function FormActions({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const childArray = React.Children.toArray(children)
+  // Compared by reference, never by `child.type.name`. A minifier renames
+  // these functions to nothing, so a name check passes in `next dev` and
+  // fails in every production build — silently, as a bar written left/right
+  // rendering as one end-aligned pile.
   const hasSubComponents = childArray.some(
     (child) =>
       React.isValidElement(child) &&
-      typeof child.type === "function" &&
-      ((child.type as { name?: string }).name === "FormActionsPrimary" ||
-        (child.type as { name?: string }).name === "FormActionsSecondary")
+      (child.type === FormActionsPrimary || child.type === FormActionsSecondary)
   )
 
   if (!hasSubComponents) {
