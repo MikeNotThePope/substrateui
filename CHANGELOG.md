@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.26.1
+
+### Patch Changes
+
+- [#120](https://github.com/MikeNotThePope/substrateui/pull/120) [`f10a587`](https://github.com/MikeNotThePope/substrateui/commit/f10a587f27944c291e7685c84e447df398b74faa) Thanks [@MikeNotThePope](https://github.com/MikeNotThePope)! - Fix `FormActions` collapsing its left/right split in production builds. It
+  detected `FormActionsSecondary` and `FormActionsPrimary` by reading
+  `child.type.name`, which a minifier sets to `""` — so the split rendered
+  correctly under `next dev` and shipped as one end-aligned pile. The children
+  are now compared by reference.
+
 ## 1.26.0
 
 ### Minor Changes
