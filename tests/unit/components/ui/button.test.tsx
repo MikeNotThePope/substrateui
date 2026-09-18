@@ -140,4 +140,11 @@ describe('Button', () => {
       'submit'
     )
   })
+
+  it('sizes icon-sm to sit beside a small control', () => {
+    render(<Button size="icon-sm" aria-label="Copy" />)
+    const btn = screen.getByRole('button', { name: 'Copy' })
+    expect(btn.className).toContain('h-9')
+    expect(btn.className).toContain('w-9')
+  })
 })

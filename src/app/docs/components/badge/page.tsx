@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
-import { H3, P } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
@@ -18,6 +18,13 @@ export const metadata = pageMetadata({
 })
 
 const badgeProps: PropDef[] = [
+  {
+    name: "size",
+    type: '"default" | "xs"',
+    default: '"default"',
+    description:
+      "How tightly it is padded. `xs` is the tag that rides beside a line of text rather than labelling a block.",
+  },
   {
     name: "variant",
     type: '"default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error" | "info"',
@@ -61,6 +68,26 @@ export default function BadgePage() {
             <Badge variant="warning">Warning</Badge>
             <Badge variant="error">Error</Badge>
             <Badge variant="info">Info</Badge>
+          </Cluster>
+        </ComponentPreview>
+      </Stack>
+
+      {/* Sizes */}
+      <Stack gap="md">
+        <H3>Sizes</H3>
+        <P>
+          Only the padding changes. The type stays at 11px and the pill stays round, so a
+          small badge still reads as the same object as a large one. Reach for{" "}
+          <Code>xs</Code> when the badge annotates a line of text — a name with a role after
+          it, a row with a count — and the default when it labels a block.
+        </P>
+        <ComponentPreview
+          code={`<Badge>Default</Badge>
+<Badge size="xs">Extra small</Badge>`}
+        >
+          <Cluster gap="sm" className="items-center">
+            <Badge>Default</Badge>
+            <Badge size="xs">Extra small</Badge>
           </Cluster>
         </ComponentPreview>
       </Stack>

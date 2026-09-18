@@ -39,6 +39,7 @@ export * from "./form-actions";
 export * from "./form-section";
 export * from "./grid";
 export * from "./hover-card";
+export * from "./honeypot-field";
 export * from "./input";
 export * from "./input-group";
 export * from "./input-otp";

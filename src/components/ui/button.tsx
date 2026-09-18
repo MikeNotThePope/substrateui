@@ -19,7 +19,7 @@ export interface ButtonProps
  * <Button variant="outline" size="sm">Click me</Button>
  *
  * @prop variant - Visual style: "default" | "destructive" | "outline" | "secondary" | "secondary-fill" | "ghost" | "link". "amber" is a deprecated alias for "secondary-fill".
- * @prop size - Dimensions: "default" | "sm" | "lg" | "icon"
+ * @prop size - Dimensions: "default" | "sm" | "lg" | "icon" | "icon-sm"
  * @prop render - Render a different element instead of a button, e.g. render={<a href="…" />}
  */
 function Button({ className, variant, size, render, ...props }: ButtonProps) {

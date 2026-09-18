@@ -4,7 +4,7 @@ import { cva } from "class-variance-authority"
 // See src/variants.ts for why a re-export through the root barrel is not
 // enough.
 
-/** Badge style variants (default, secondary, destructive, outline, success, warning, error, info). Use with cn(badgeVariants({...})) for non-div elements. */
+/** Badge style variants (variant + size). Use with cn(badgeVariants({...})) for non-div elements. */
 // text-[11px] rather than the text-2xs step it inspired, deliberately. The
 // arbitrary value sets font-size and nothing else, so the badge's line box
 // comes from whatever it sits inside; text-2xs pairs a line-height, which
@@ -12,9 +12,19 @@ import { cva } from "class-variance-authority"
 // context. That is the better behaviour and it is a visual change, so it
 // wants its own PR and its own baselines rather than riding along here.
 export const badgeVariants = cva(
-  "inline-flex items-center rounded-full border-2 px-2.5 py-0.5 font-mono uppercase tracking-wider text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "inline-flex items-center rounded-full border-2 font-mono uppercase tracking-wider text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {
+      size: {
+        default: "px-2.5 py-0.5",
+        // The tag that rides beside a line of text rather than labelling a
+        // block: same type, no vertical padding, a quarter of the horizontal.
+        // Consumers were hand-writing it (MikeNotThePope/substrateui#123).
+        // Only the padding moves. The type stays at 11px because the step
+        // below it is 11px too (--text-2xs), and the pill shape stays so a
+        // small badge still reads as the same object as a large one.
+        xs: "px-1 py-0",
+      },
       variant: {
         default:
           "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
@@ -35,6 +45,7 @@ export const badgeVariants = cva(
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   }
 )
