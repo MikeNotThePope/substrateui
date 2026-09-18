@@ -48,12 +48,12 @@ Do not push commits straight to `main` — branch protection will reject them.
 
 # How releases happen
 
-Releases are driven by Changesets and `.github/workflows/release.yml`, which runs on every push to `main`. The npm publish is automated; there is exactly one manual gate.
+Releases are driven by Changesets and `.github/workflows/release.yml`, which runs on every push to `main`. There is no manual gate: a change a session merges reaches npm with no hand of Mike's.
 
 1. When PRs with changesets land on `main`, the release workflow opens (or updates) an auto-generated **"Version Packages"** PR. It consumes the pending `.changeset/*.md` files, bumps `package.json` (highest bump among them wins — three patches still make one patch), and writes `CHANGELOG.md`.
-2. **Merging the Version Packages PR is the only manual step** — the "yes, cut this release" checkpoint. Review the computed version and changelog before merging.
+2. **The same run arms auto-merge on that PR, so it merges itself once `verify` and `check` are green.** Those two are still the gate; what went was the click after them, which followed the first merge by minutes every time and read nothing. The computed version and changelog are reviewed after the fact, on the Releases page. The repository variable `RELEASE_PAUSED` set to `1` skips the step and is the stop: the PR then waits for a hand, as it used to. Setting it back to `0` arms nothing by itself; the next push to `main`, or a re-run of the last release run, does (MikeNotThePope/lavahire#798).
 
-   That PR needs the `RELEASE_PAT` secret to be mergeable without an admin bypass. Without it the release workflow opens the PR as `github-actions[bot]`, which raises no `pull_request` event, so `verify` never runs and branch protection waits on a check that cannot arrive. `docs/deployment.md` says how to mint the token.
+   That step needs the `RELEASE_PAT` secret. Without it the release workflow opens the PR as `github-actions[bot]`, which raises no `pull_request` event, so `verify` never runs and auto-merge would wait forever; the step fails red instead of arming it. `docs/deployment.md` says how to mint the token.
 3. That merge leaves `main` with no pending changesets, so the same workflow takes its other branch and runs `changeset publish` automatically: `npm publish` (via OIDC trusted publishing — no token), git tag, and a GitHub Release.
 
-So: changeset in your PR → merge → Version Packages PR appears → you merge it → npm publish is automatic. Do not bump `package.json` or tag releases by hand; Changesets owns that.
+So: changeset in your PR → merge → Version Packages PR appears and merges itself → npm publish is automatic. Do not bump `package.json` or tag releases by hand; Changesets owns that.

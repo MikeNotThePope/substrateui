@@ -63,6 +63,7 @@ jobs:
           fi
 
       - name: Create Release PR or Publish
+        id: changesets
         uses: changesets/action@v1
         with:
           publish: ${{ steps.probe.outputs.publish }}
@@ -80,3 +81,39 @@ jobs:
           # (configured on the npm package). Requires `id-token: write` above
           # and npm >= 11.5.1 (installed above). Provenance is part of OIDC.
           NPM_CONFIG_PROVENANCE: "true"
+
+      # The Version Packages pull request used to wait for Mike's hand, and
+      # that hand followed the first merge by minutes every time (#120 merged
+      # 11:44, #121 11:47) and read nothing. So the run that opens or updates
+      # it also arms auto-merge on it: `verify` and `check` stay the gate, and
+      # only the click after them is gone. The bump is read after the fact,
+      # on the Releases page. The repository variable RELEASE_PAUSED set to
+      # `1` skips this step, which is the stop: the pull request then waits
+      # for a hand, as before. Setting it back arms nothing by itself; the
+      # next push to main, or a re-run of the last release run, does.
+      #
+      # RELEASE_PAT is required here, not a fallback. A pull request the
+      # built-in GITHUB_TOKEN opened raises no `pull_request` event, so
+      # `verify` never runs on it and auto-merge would wait forever. Failing
+      # the step is the visible version of that. MikeNotThePope/lavahire#798.
+      - name: Merge the Version Packages pull request when it is green
+        if: steps.changesets.outputs.pullRequestNumber != '' && vars.RELEASE_PAUSED != '1'
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ steps.changesets.outputs.pullRequestNumber }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "RELEASE_PAT is not set, so #$PR was opened as github-actions[bot]: verify never runs on it and auto-merge would wait forever. Merge it by hand; docs/deployment.md says how to mint the token."
+            exit 1
+          fi
+          if gh pr merge "$PR" --squash --auto; then
+            echo "#$PR merges itself when verify and check are green."
+            exit 0
+          fi
+          # GitHub refuses to arm auto-merge on a pull request with nothing
+          # left to wait for ("clean status"). Then it is green already.
+          if [ "$(gh pr view "$PR" --json mergeStateStatus -q .mergeStateStatus)" = CLEAN ]; then
+            exec gh pr merge "$PR" --squash
+          fi
+          exit 1

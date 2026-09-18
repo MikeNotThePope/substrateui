@@ -166,8 +166,10 @@ Releases are automated via changesets and GitHub Actions. The flow is:
 2. The `release` workflow opens (or updates) a **Version Packages** PR
    that consumes the changesets, bumps `package.json`, and updates
    `CHANGELOG.md`.
-3. Review the Version Packages PR. Merge it when the version bump and
-   changelog read correctly.
+3. The same run arms auto-merge on that PR, and it merges itself once
+   `verify` and `check` pass. Nobody reads the bump before it ships; read
+   it on the Releases page after. Set the repository variable
+   `RELEASE_PAUSED` to `1` to hold it, and the PR waits for a hand.
 4. The `release` workflow runs again on that merge, detects the version
    is already bumped, and publishes to npm via OIDC trusted publishing
    (no stored tokens).
