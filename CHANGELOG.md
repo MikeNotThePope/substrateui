@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.26.3
+
+### Patch Changes
+
+- [#128](https://github.com/MikeNotThePope/substrateui/pull/128) [`acad220`](https://github.com/MikeNotThePope/substrateui/commit/acad22007f862c3e19aabefcd1343ac81614796c) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - README: the "No framework peer dependencies" paragraph under Requirements was
+  folded into the last list item, since no blank line separated them. Docs only,
+  no code change.
+
 ## 1.26.2
 
 ### Patch Changes
