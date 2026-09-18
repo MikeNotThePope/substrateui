@@ -111,8 +111,10 @@ Giving `changesets/action` a real token makes that PR an ordinary one.
 5. Save the value as repo secret `RELEASE_PAT`
    (Settings → Secrets and variables → Actions).
 
-This is only about who opens the release PR. Publishing stays on OIDC, with no
-npm credential anywhere.
+This is only about who opens and updates the release PR: `release.yml` checks
+out with `persist-credentials: false` so the branch pushes go out with this
+token too, not `GITHUB_TOKEN`, and CI runs on every update. Publishing stays
+on OIDC, with no npm credential anywhere.
 
 ### Automated release flow
 

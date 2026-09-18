@@ -18,6 +18,15 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          # Leave GITHUB_TOKEN out of the git config. changesets/action pushes
+          # the Version Packages branch with the token below through a netrc,
+          # and git prefers the header checkout persists over a netrc, so every
+          # update to that branch went out as github-actions[bot]. A push by
+          # that token raises no usable `pull_request` run, so an updated
+          # Version Packages pull request got no CI and auto-merge waited
+          # forever. Only the first push, which opens the pull request, arrived
+          # as RELEASE_PAT's user. MikeNotThePope/lavahire#798.
+          persist-credentials: false
 
       - uses: oven-sh/setup-bun@v2
         with:
@@ -116,6 +125,12 @@ jobs:
           if [ -z "$GH_TOKEN" ]; then
             echo "RELEASE_PAT is not set, so #$PR was opened as github-actions[bot]: verify never runs on it and auto-merge would wait forever. Merge it by hand; docs/deployment.md says how to mint the token."
             exit 1
+          fi
+          # A second changeset merge updates a pull request that is armed
+          # already, and GitHub refuses to arm it twice.
+          if [ "$(gh pr view "$PR" --json autoMergeRequest -q '.autoMergeRequest != null')" = true ]; then
+            echo "#$PR is armed already; it merges itself when verify and check are green."
+            exit 0
           fi
           if gh pr merge "$PR" --squash --auto; then
             echo "#$PR merges itself when verify and check are green."
