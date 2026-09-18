@@ -12,6 +12,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 - **Docs:** https://www.substrateui.dev/
 - **Storybook:** https://www.substrateui.dev/storybook/ — run locally with `bun run storybook`
 - **npm:** [`@mikenotthepope/substrateui`](https://www.npmjs.com/package/@mikenotthepope/substrateui)
+- **Releases:** cut by CI. A merged changeset opens a Version Packages pull request that merges itself when green, and the publish follows. The bump is read on the [Releases page](https://github.com/MikeNotThePope/substrateui/releases) after the fact.
 
 ## Features
 
