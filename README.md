@@ -126,6 +126,7 @@ Set up a project with the CLI: `npx @mikenotthepope/substrateui init`.
 - React 18+
 - Tailwind CSS 4+
 - `tw-animate-css` (for animations)
+
 No framework peer dependencies. The library is plain React — it runs under Next.js,
 Vite, Remix, or anything else that renders React.
 
