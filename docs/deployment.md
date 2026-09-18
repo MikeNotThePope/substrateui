@@ -121,7 +121,8 @@ npm credential anywhere.
 3. The same run arms auto-merge on the Version Packages PR, and it merges itself
    once `verify` and `check` pass. They run on it like any other PR because
    `RELEASE_PAT` opens it (see above). The repository variable `RELEASE_PAUSED`
-   set to `1` skips the arming, and the PR waits for a hand.
+   set to `1` stops the arming, the step's log says so, and the PR waits for
+   a hand.
 4. `release.yml` runs again and publishes to npm.
 
 Multiple changesets can be stacked before merging the Version PR — they're consumed together into one release.
