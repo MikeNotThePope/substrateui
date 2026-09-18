@@ -1,0 +1,91 @@
+# Opens the pull request for a pushed `claude/**` branch, as the App rather
+# than as Mike. Ported from lavahire's workflow of the same name
+# (MikeNotThePope/lavahire#797).
+#
+# Why a workflow at all, when a session can call the API itself: because the
+# author of a pull request is whichever token opened it, and a session's calls
+# all arrive as Mike. The dev container's proxy injects his credential and
+# ignores whatever the caller sends, so a session cannot author a pull request
+# as anyone else, whatever credential it is handed.
+#
+# That matters here because `Update Visual Baselines` runs only behind Mike's
+# approving review on the branch's pull request, and GitHub does not let an
+# author approve their own pull request. A pull request opened by a session is
+# one Mike can never approve, so the gate would be a wall. A workflow runs
+# outside the proxy, so the token it uses is the token it was given.
+#
+# The App's installation token, not the default `GITHUB_TOKEN`: GitHub refuses
+# to let the default token trigger further workflow runs, so a pull request
+# opened with it would never fire `ci.yml`.
+name: Open the pull request
+
+on:
+  push:
+    branches: ["claude/**"]
+
+jobs:
+  open:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # A missing secret is otherwise a one-line failure inside the token
+      # action, which reads as the App being broken rather than as setup that
+      # was never finished.
+      - name: Refuse early if the App's credentials are not set
+        env:
+          APP_ID: ${{ secrets.PR_APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PR_APP_PRIVATE_KEY }}
+        run: |
+          missing=""
+          [ -z "$APP_ID" ] && missing="$missing PR_APP_ID"
+          [ -z "$PRIVATE_KEY" ] && missing="$missing PR_APP_PRIVATE_KEY"
+          if [ -n "$missing" ]; then
+            echo "Missing repository secret(s):$missing"
+            echo "Settings -> Secrets and variables -> Actions. See MikeNotThePope/lavahire#797."
+            exit 1
+          fi
+
+      - uses: actions/create-github-app-token@v2
+        id: app
+        with:
+          app-id: ${{ secrets.PR_APP_ID }}
+          private-key: ${{ secrets.PR_APP_PRIVATE_KEY }}
+
+      # Title and body come from the branch's last commit, so a pull request is
+      # never empty even if the session that pushed it stops here. The session
+      # then rewrites the body with the fuller version — editing a pull request
+      # does not change who authored it, which is the only property this
+      # workflow exists to control.
+      - name: Open it, unless one is already open
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          BRANCH: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          open=$(gh api "repos/$REPO/pulls?state=open&head=${REPO%%/*}:$BRANCH" --jq 'length')
+          if [ "$open" != "0" ]; then
+            echo "a pull request is already open for $BRANCH — nothing to do"
+            exit 0
+          fi
+
+          # A branch pushed at the same commit as main has nothing to propose.
+          # `gh api compare` rather than a local diff: this job never checks out.
+          ahead=$(gh api "repos/$REPO/compare/main...$SHA" --jq '.ahead_by')
+          if [ "$ahead" = "0" ]; then
+            echo "$BRANCH is not ahead of main — nothing to propose"
+            exit 0
+          fi
+
+          title=$(gh api "repos/$REPO/commits/$SHA" --jq '.commit.message' | head -n 1)
+          body=$(gh api "repos/$REPO/commits/$SHA" --jq '.commit.message' | tail -n +2)
+
+          gh api "repos/$REPO/pulls" \
+            -f title="$title" \
+            -f head="$BRANCH" \
+            -f base=main \
+            -f body="$body" \
+            --jq '.html_url'

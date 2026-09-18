@@ -6,16 +6,30 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    # actions: write is for the re-run at the end; nothing else here needs more
-    # than a read of the repo.
+    # actions: write is for the re-run at the end, pull-requests: read for
+    # the gate's look at the reviews; nothing else here needs more than a read
+    # of the repo.
     permissions:
       actions: write
       contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      # There is one baseline archive, main and every branch read it, and this
+      # job overwrites it. So it moves only behind Mike's approving review on
+      # the branch's open pull request. The gate runs before anything is
+      # installed: a refusal costs seconds, not a Chromium download. Its
+      # reasoning and its tests are in scripts/baselines-gate.ts.
+      - name: Refuse unless the pull request carries Mike's approving review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.ref_name }}
+        run: bun scripts/baselines-gate.ts
+
       - uses: actions/setup-node@v5
         with:
           node-version: 22
