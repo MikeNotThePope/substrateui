@@ -104,9 +104,10 @@ Giving `changesets/action` a real token makes that PR an ordinary one.
    → only `substrateui`
 3. Repository permissions: **Contents** read/write, **Pull requests** read/write.
    Nothing else.
-4. Expiry: whatever you will actually rotate. The release still works when it
-   lapses — the workflow falls back to `GITHUB_TOKEN` — you just get the admin
-   bypass back until you renew it.
+4. Expiry: whatever you will actually rotate. When it lapses the workflow opens
+   the Version Packages PR with `GITHUB_TOKEN`, and the auto-merge step after
+   it fails red, since `verify` can never run on that PR. Publishing is
+   unaffected; you get the admin bypass back until you renew it.
 5. Save the value as repo secret `RELEASE_PAT`
    (Settings → Secrets and variables → Actions).
 
@@ -117,8 +118,10 @@ npm credential anywhere.
 
 1. Merge feature PRs that include `.changeset/*.md` files to `main`.
 2. `release.yml` opens a **Version Packages** PR that bumps the version and updates `CHANGELOG.md`.
-3. Review and merge the Version Packages PR. `verify` and `check` run on it like
-   any other, because `RELEASE_PAT` opens it (see above).
+3. The same run arms auto-merge on the Version Packages PR, and it merges itself
+   once `verify` and `check` pass. They run on it like any other PR because
+   `RELEASE_PAT` opens it (see above). The repository variable `RELEASE_PAUSED`
+   set to `1` skips the arming, and the PR waits for a hand.
 4. `release.yml` runs again and publishes to npm.
 
 Multiple changesets can be stacked before merging the Version PR — they're consumed together into one release.
