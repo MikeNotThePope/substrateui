@@ -71,6 +71,13 @@ that no longer exist locally (e.g. removed components).
 Alternatively, trigger the **Update Visual Baselines** workflow from
 the GitHub Actions tab — it regenerates and uploads in one step.
 
+It refuses to run unless the branch's open pull request carries
+Mike's approving review (`scripts/baselines-gate.ts`). There is one
+baseline archive and every branch reads it, so overwriting it is the
+one thing in this repository no later commit can undo. A session
+whose `visual` job goes red therefore asks for the review on its pull
+request rather than dispatching the workflow itself.
+
 Its last step then re-runs the branch's CI for you. That matters
 because there is one baseline archive in R2 and CI starts on push:
 a `verify` that began before the upload downloaded the *old*
