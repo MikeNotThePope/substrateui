@@ -8,6 +8,7 @@ import {
   PageHeaderTitle,
   PageHeaderDescription,
   PageHeaderActions,
+  PageHeaderBack,
 } from '@/components/page-header'
 
 /** Classes as a set, so a `toContain` on `h-16` never reads `min-h-16`. */
@@ -169,5 +170,38 @@ describe('PageHeaderActions', () => {
       </PageHeader>
     )
     expect(screen.getByTestId('actions').className).not.toContain('ms-auto')
+  })
+})
+
+describe('PageHeaderBack', () => {
+  it('names itself, since the arrow is all it draws', () => {
+    render(<PageHeaderBack label="Back to jobs" />)
+    expect(screen.getByRole('button', { name: 'Back to jobs' })).toBeInTheDocument()
+  })
+
+  it('renders a link when given one, so the destination is a real URL', () => {
+    render(<PageHeaderBack label="Back to jobs" render={<a href="/jobs" />} />)
+    const link = screen.getByRole('link', { name: 'Back to jobs' })
+    expect(link).toHaveAttribute('href', '/jobs')
+  })
+
+  it('is the small square, not the 40px one', () => {
+    render(<PageHeaderBack label="Back" />)
+    expect(screen.getByRole('button', { name: 'Back' }).className).toContain('h-9')
+  })
+})
+
+describe('PageHeader sizing', () => {
+  it('refuses to be squeezed by a scrolling body', () => {
+    // Without shrink-0 a long page compresses the header instead of the body,
+    // and every app that met that wrote the same override into its stylesheet.
+    render(
+      <PageHeader data-testid="header">
+        <PageHeaderContent>
+          <PageHeaderTitle>Jobs</PageHeaderTitle>
+        </PageHeaderContent>
+      </PageHeader>
+    )
+    expect(screen.getByTestId('header').className).toContain('shrink-0')
   })
 })

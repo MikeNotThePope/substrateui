@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/site"
 
 export const metadata = pageMetadata({
   title: "Button",
-  description: "Triggers an action. Seven variants, four sizes, and a 3px press offset that collapses under prefers-reduced-motion.",
+  description: "Triggers an action. Seven variants, five sizes, and a 3px press offset that collapses under prefers-reduced-motion.",
   route: "/docs/components/button",
 })
 
@@ -26,10 +26,10 @@ const buttonProps: PropDef[] = [
   },
   {
     name: "size",
-    type: '"default" | "sm" | "lg" | "icon"',
+    type: '"default" | "sm" | "lg" | "icon" | "icon-sm"',
     default: '"default"',
     description:
-      "Controls the height, padding, and border-radius of the button.",
+      "Controls the height, padding, and border-radius of the button. `icon` is a 40px square, `icon-sm` a 36px one for the row where the other controls are `sm`.",
   },
   {
     name: "render",
@@ -57,7 +57,7 @@ export default function ButtonPage() {
   return (
     <DocPage
       title="Button"
-      description="Triggers an action. Seven variants, four sizes, and a 3px press offset that collapses under prefers-reduced-motion."
+      description="Triggers an action. Seven variants, five sizes, and a 3px press offset that collapses under prefers-reduced-motion."
     >
       {/* Variants */}
       <Stack gap="md">
@@ -92,7 +92,8 @@ export default function ButtonPage() {
           code={`<Button size="default">Default</Button>
 <Button size="sm">Small</Button>
 <Button size="lg">Large</Button>
-<Button size="icon" aria-label="Add"><Plus /></Button>`}
+<Button size="icon" aria-label="Add"><Plus /></Button>
+<Button size="icon-sm" aria-label="Add"><Plus /></Button>`}
         >
           <Cluster gap="sm" align="center">
             <Button size="default">Default</Button>
@@ -101,8 +102,17 @@ export default function ButtonPage() {
             <Button size="icon" aria-label="Add">
               <Plus />
             </Button>
+            <Button size="icon-sm" aria-label="Add">
+              <Plus />
+            </Button>
           </Cluster>
         </ComponentPreview>
+        <P>
+          <Code>icon</Code> is 40px, the height of a default button. <Code>icon-sm</Code> is
+          36px, so it lines up with a <Code>sm</Code> control beside it instead of standing a
+          notch taller. Neither meets the 44px target size on its own — see Accessibility
+          below.
+        </P>
       </Stack>
 
       {/* With Icons */}

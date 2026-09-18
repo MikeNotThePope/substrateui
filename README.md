@@ -16,7 +16,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 
 ## Features
 
-- 91 components from atomic Button to organism App Shell
+- 92 components from atomic Button to organism App Shell
 - 3-layer OKLCH color system: raw palette → semantic tokens → Tailwind utilities
 - Dark mode as a token swap — zero component changes
 - Chunky 2px borders and press-down animations
@@ -109,7 +109,7 @@ import { LinkProvider } from "@mikenotthepope/substrateui"
 | `@mikenotthepope/substrateui/blocks` | Full compositions across Marketing, Application, Auth & E-commerce (Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid) |
 | `@mikenotthepope/substrateui/templates` | Complete assembled pages (DashboardTemplate, PricingTemplate) |
 | `@mikenotthepope/substrateui/hooks` | React hooks (useDisclosure, useClipboard, useLocalStorage, useMediaQuery, useHotkeys, useDebouncedValue, useFocusTrap, useAnnouncer, useCountdown, …) |
-| `@mikenotthepope/substrateui/utils` | `cn()` utility (clsx + tailwind-merge) |
+| `@mikenotthepope/substrateui/utils` | `cn()` (clsx + tailwind-merge) and `linkify()` |
 | `@mikenotthepope/substrateui/variants` | The `cva` class recipes (`buttonVariants`, `badgeVariants`, …) |
 | `@mikenotthepope/substrateui/styles.css` | OKLCH token system + Tailwind theme + base styles |
 
@@ -146,7 +146,7 @@ SubstrateUI uses a 3-layer OKLCH color system:
 
 ## Component Categories
 
-The 91 above, grouped the way the docs sidebar groups them — that list is where
+The 92 above, grouped the way the docs sidebar groups them — that list is where
 the count comes from, so start there when either goes stale.
 
 - **General** (8) — Button, Badge, ButtonGroup, Toggle, ToggleGroup, Kbd, Spinner, Skeleton
@@ -159,9 +159,9 @@ the count comes from, so start there when either goes stale.
 - **Overlays** (10) — Dialog, Sheet, Drawer, AlertDialog, Popover, Tooltip, HoverCard, ContextMenu, DropdownMenu, Command
 - **Navigation** (9) — Tabs, NavTabs, Link, Breadcrumb, Pagination, NavigationMenu, Menubar, Sidebar, Stepper
 - **Layouts** (5) — App Shell, Dashboard Shell, Nav Shell, Auth Shell, Page Layout
-- **Utilities** (2) — FocusTrap, SkipLink
+- **Utilities** (3) — FocusTrap, HoneypotField, SkipLink
 
-Two export paths hold things built *from* those, and are not counted among the 91:
+Two export paths hold things built *from* those, and are not counted among the 92:
 
 - **Blocks** (10) — Hero, FeatureGrid, Pricing, Cta, Footer, Stats, ActivityFeed, SignIn, SignUp, ProductGrid
 - **Templates** (2) — DashboardTemplate, PricingTemplate

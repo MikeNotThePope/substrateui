@@ -43,6 +43,11 @@ export const buttonVariants = cva(
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        // The square that fits beside a `size="sm"` control. `icon` is 40px and
+        // leaves a row of 36px inputs looking uneven, so callers were writing
+        // `className="h-9 w-9 p-0"` by hand; six sites in one consumer
+        // (MikeNotThePope/substrateui#123).
+        "icon-sm": "h-9 w-9",
       },
     },
     defaultVariants: {

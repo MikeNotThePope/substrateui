@@ -16,10 +16,11 @@ export interface BadgeProps
  * <Badge variant="success">Active</Badge>
  *
  * @prop variant - Visual style: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "error" | "info"
+ * @prop size - "default", or "xs" for the tighter tag that sits inline with text
  */
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, size, ...props }: BadgeProps) {
   return (
-    <div data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div data-slot="badge" className={cn(badgeVariants({ variant, size }), className)} {...props} />
   )
 }
 

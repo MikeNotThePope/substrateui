@@ -106,8 +106,8 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 
 \`\`\`tsx
 import { Button, Card, Stack, Input } from "@mikenotthepope/substrateui"
-import { AppShell, DashboardShell, NavShell, AuthShell, PageHeader, StatCard } from "@mikenotthepope/substrateui/organisms"
-import { cn } from "@mikenotthepope/substrateui/utils"
+import { AppShell, DashboardShell, NavShell, AuthShell, PageHeader, PageHeaderBack, StatCard } from "@mikenotthepope/substrateui/organisms"
+import { cn, linkify } from "@mikenotthepope/substrateui/utils"
 import { DatePicker, Calendar } from "@mikenotthepope/substrateui/date"
 \`\`\`
 

@@ -1,11 +1,10 @@
-import { ArrowLeft } from "lucide-react"
-
 import {
   PageHeader,
   PageHeaderContent,
   PageHeaderTitle,
   PageHeaderDescription,
   PageHeaderActions,
+  PageHeaderBack,
   PageHeaderBreadcrumb,
 } from "@/components/page-header"
 import { PageBody } from "@/components/page-body"
@@ -47,6 +46,29 @@ const pageHeaderProps: PropDef[] = [
     type: "string",
     default: undefined,
     description: "Additional CSS classes to apply to the page header.",
+  },
+]
+
+const pageHeaderBackProps: PropDef[] = [
+  {
+    name: "label",
+    type: "string",
+    default: undefined,
+    description:
+      "Where it goes back to, spoken. It is the accessible name, and it is required: the button draws an arrow and nothing else.",
+  },
+  {
+    name: "render",
+    type: "ReactElement",
+    default: undefined,
+    description:
+      "Render a link instead of a button, e.g. render={<Link href=\"/jobs\" />}. Prefer this over an onClick into history, so the destination is a URL a person can open in a new tab.",
+  },
+  {
+    name: "...Button props",
+    type: "ButtonProps",
+    default: 'variant="outline" size="icon-sm"',
+    description: "Forwarded to the Button underneath, including variant and size.",
   },
 ]
 
@@ -201,9 +223,7 @@ export default function PageLayoutPage() {
         </Muted>
         <ComponentPreview
           code={`<PageHeader size="sm">
-  <Button variant="outline" size="icon" aria-label="Back to jobs">
-    <ArrowLeft />
-  </Button>
+  <PageHeaderBack label="Back to jobs" render={<Link href="/jobs" />} />
   <PageHeaderTitle>Senior engineer</PageHeaderTitle>
   <Badge variant="success">Published</Badge>
   <PageHeaderActions>
@@ -213,9 +233,7 @@ export default function PageLayoutPage() {
         >
           <div className="w-full border-2 rounded-lg overflow-hidden">
             <PageHeader size="sm">
-              <Button variant="outline" size="icon" aria-label="Back to jobs">
-                <ArrowLeft />
-              </Button>
+              <PageHeaderBack label="Back to jobs" render={<a href="#" />} />
               <PageHeaderTitle>Senior engineer</PageHeaderTitle>
               <Badge variant="success">Published</Badge>
               <PageHeaderActions>
@@ -234,6 +252,17 @@ export default function PageLayoutPage() {
       <Stack gap="md">
         <H3>PageHeader Props</H3>
         <PropsTable props={pageHeaderProps} />
+      </Stack>
+
+      <Stack gap="md">
+        <H3>PageHeaderBack Props</H3>
+        <Muted>
+          The back arrow a deeper page wears, at the start of its bar. It is the outline
+          icon button with an <code>ArrowLeft</code> that every such page was writing out,
+          and it is 36px rather than 40 so it sits level with the <code>sm</code> controls
+          at the other end of the row.
+        </Muted>
+        <PropsTable props={pageHeaderBackProps} />
       </Stack>
 
       <Stack gap="md">

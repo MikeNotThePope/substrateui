@@ -2,7 +2,10 @@
 
 import * as React from "react"
 
+import { ArrowLeft } from "lucide-react"
+
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import { Stack } from "@/components/ui/stack"
 
 /** How much room the header takes, and therefore how its children lay out. */
@@ -59,7 +62,12 @@ function PageHeader({
         data-slot="page-header"
         data-size={size}
         className={cn(
-          "border-b-2",
+          // `shrink-0` because the header is almost always the first child of a
+          // flex column whose second child scrolls. Without it a long page
+          // squeezes the header instead of the body, and every app that met
+          // that wrote the same override into its own stylesheet
+          // (MikeNotThePope/substrateui#123).
+          "border-b-2 shrink-0",
           size === "sm"
             ? // `min-h-16` is the shell's bar height — the same one AppShellLogo
               // sets. The two sit either side of the sidebar's border and their
@@ -179,8 +187,54 @@ function PageHeaderActions({
   )
 }
 
+/** Props accepted by the PageHeaderBack component. */
+interface PageHeaderBackProps
+  extends Omit<React.ComponentProps<typeof Button>, "children"> {
+  /** Where it goes back to, spoken. Becomes the accessible name. */
+  label: string
+}
+
+/**
+ * The back arrow a deeper page wears, to the start of its header.
+ *
+ * It is an outline icon button with an `ArrowLeft` and nothing else, so it needs
+ * a name of its own: `label` is spoken and nothing is drawn from it. Pass a
+ * router link through `render` rather than wiring `onClick` to history, so the
+ * destination is a real URL a person can open in a new tab.
+ *
+ * @example
+ * <PageHeader size="sm">
+ *   <PageHeaderBack label="Back to jobs" render={<Link href="/jobs" />} />
+ *   <PageHeaderTitle>Senior engineer</PageHeaderTitle>
+ * </PageHeader>
+ *
+ * @prop label - The accessible name, e.g. "Back to jobs".
+ * @prop render - Render a link instead of a button, e.g. render={<Link href="/jobs" />}
+ */
+function PageHeaderBack({
+  label,
+  className,
+  variant = "outline",
+  size = "icon-sm",
+  ...props
+}: PageHeaderBackProps) {
+  return (
+    <Button
+      data-slot="page-header-back"
+      aria-label={label}
+      variant={variant}
+      size={size}
+      className={cn("shrink-0", className)}
+      {...props}
+    >
+      <ArrowLeft />
+    </Button>
+  )
+}
+
 export {
   PageHeader,
+  PageHeaderBack,
   PageHeaderBreadcrumb,
   PageHeaderContent,
   PageHeaderTitle,
