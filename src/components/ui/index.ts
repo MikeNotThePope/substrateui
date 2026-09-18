@@ -11,7 +11,6 @@ export * from "./breadcrumb";
 export * from "./button";
 export * from "./button-variants";
 export * from "./button-group";
-export * from "./calendar";
 export * from "./card";
 export * from "./carousel";
 export * from "./cascader";
@@ -25,7 +24,6 @@ export * from "./command";
 export * from "./context-menu";
 export * from "./countdown";
 export * from "./data-table";
-export * from "./date-picker";
 export * from "./descriptions";
 export * from "./dialog";
 export * from "./direction";
@@ -101,3 +99,6 @@ export {
   LabelsProvider,
   type SubstrateUILabels,
 } from "@/components/providers/labels-provider";
+
+// Calendar and DatePicker live at `/date` (src/components/ui/date.ts), not
+// here: re-exporting them made every root import pay for date-fns.

@@ -54,7 +54,7 @@ export default function DatePickerPage() {
         />
       </ComponentPreview>
 
-      <ImportLine names={["DatePicker"]} />
+      <ImportLine names={["DatePicker"]} entry="@mikenotthepope/substrateui/date" />
 
       {/* Direction */}
       <Stack gap="md">

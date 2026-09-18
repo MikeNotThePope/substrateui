@@ -108,6 +108,7 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 import { Button, Card, Stack, Input } from "@mikenotthepope/substrateui"
 import { AppShell, DashboardShell, NavShell, AuthShell, PageHeader, StatCard } from "@mikenotthepope/substrateui/organisms"
 import { cn } from "@mikenotthepope/substrateui/utils"
+import { DatePicker, Calendar } from "@mikenotthepope/substrateui/date"
 \`\`\`
 
 75 primitives are available — layout (Stack, Cluster, Grid, Center, Divider, Spacer), typography (H1–H4, P, Code, Kbd), forms (Input, Textarea, Select, Checkbox, RadioGroup, Switch, Slider, Combobox, DatePicker, InputOTP, SearchField, PasswordInput, plus Field/Fieldset/FormSection/FormActions/Form), data display (Table, DataTable, Card, Avatar, Calendar, Chart), feedback (Alert, Badge, Progress, Toast, Empty, Spinner, Skeleton), overlays (Dialog, Sheet, Drawer, AlertDialog, Popover, Tooltip, HoverCard, DropdownMenu, ContextMenu, Command, Menubar), and navigation (Tabs, NavTabs, Breadcrumb, Pagination, NavigationMenu).

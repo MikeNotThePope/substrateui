@@ -25,6 +25,7 @@ const DOCS_DIR = "src/app/docs/components"
 /** Modules that export no renderable component, so there is nothing to document. */
 const NOT_COMPONENTS = new Set<string>([
   "index.ts", // barrel export
+  "date.ts", // the /date entry: a barrel for Calendar and DatePicker, each with its own page
   // *-variants.ts is a class recipe, published from `/variants` so server code
   // can call it. The component's own page documents the variants it accepts.
 ])

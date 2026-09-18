@@ -27,6 +27,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./date": {
+      "types": "./dist/date.d.ts",
+      "import": "./dist/date.js"
+    },
     "./organisms": {
       "types": "./dist/organisms.d.ts",
       "import": "./dist/organisms.js"

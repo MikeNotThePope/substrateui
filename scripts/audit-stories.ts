@@ -16,6 +16,7 @@ const COMPONENT_DIR = "src/components/ui"
 // therefore don't need a stories file. Keep this list short and justified.
 const IGNORE = new Set<string>([
   "index.ts",       // barrel export
+  "date.ts",        // the /date entry: a barrel for Calendar and DatePicker, each with its own stories
   "direction.tsx",  // DirectionProvider — exercised via the global toolbar
 ])
 
