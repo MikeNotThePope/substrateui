@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.26.2
+
+### Patch Changes
+
+- [#126](https://github.com/MikeNotThePope/substrateui/pull/126) [`d991b0a`](https://github.com/MikeNotThePope/substrateui/commit/d991b0a5995ba9156a762101e88e44c178fe59b9) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - README: say how releases are cut. A merged changeset opens a Version Packages
+  pull request that merges itself when green, and the publish follows; the bump
+  is read on the Releases page after the fact. Docs only, no code change.
+
 ## 1.26.1
 
 ### Patch Changes
