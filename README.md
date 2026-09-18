@@ -84,6 +84,7 @@ import { Button, Stack, Card, CardHeader, CardTitle, CardContent } from "@mikeno
 import { AppShell, AppShellSidebar, AppShellMain } from "@mikenotthepope/substrateui/organisms"
 import { SignInBlock, HeroBlock, StatsBlock } from "@mikenotthepope/substrateui/blocks"
 import { cn } from "@mikenotthepope/substrateui/utils"
+import { DatePicker, Calendar } from "@mikenotthepope/substrateui/date"
 ```
 
 ### Framework-agnostic links

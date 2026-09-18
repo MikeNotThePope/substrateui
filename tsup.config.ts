@@ -5,6 +5,7 @@ import { markClientBoundaries } from "./scripts/client-boundary"
 export default defineConfig({
   entry: {
     index: "src/components/ui/index.ts",
+    date: "src/components/ui/date.ts",
     organisms: "src/components/index.ts",
     blocks: "src/components/blocks/index.ts",
     templates: "src/components/templates/index.ts",

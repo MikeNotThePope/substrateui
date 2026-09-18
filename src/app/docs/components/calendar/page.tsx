@@ -75,7 +75,7 @@ export default function CalendarPage() {
         </ComponentPreview>
       </Stack>
 
-      <ImportLine names={["Calendar"]} />
+      <ImportLine names={["Calendar"]} entry="@mikenotthepope/substrateui/date" />
 
       {/* Static Display */}
       <Stack gap="md">
