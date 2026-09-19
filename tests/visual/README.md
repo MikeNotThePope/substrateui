@@ -87,6 +87,30 @@ it is still going and re-runs it, which keeps the same `verify`
 check — the one branch protection requires — rather than reporting a
 detached second one. Nothing to sequence by hand.
 
+## If a pull request merges with `visual` red
+
+Recovering is not one button, so this is written down before the next
+time. Merging a red `visual` puts pages on `main` that no baseline
+matches, and the gate above means `main` cannot be the branch that fixes
+it: a dispatch needs an *open* pull request whose head is the dispatched
+branch, and `main` has none.
+
+The Version Packages pull request cannot be it either. The release
+workflow opens that one with `RELEASE_PAT`, which is Mike's own token,
+so the pull request is authored by the account whose approval the gate
+wants and GitHub does not let an author approve their own. Its
+`verify` stays red, its auto-merge never fires, and the version sits
+unpublished.
+
+What works is a fresh `claude/**` branch off `main` carrying some real
+change, however small. `pr-open.yml` opens its pull request as the App,
+Mike can approve that, and a dispatch on that branch regenerates the one
+archive — which is what every other branch, including the Version
+Packages one, then reads. Re-run the failed jobs on those and they go
+green without a push.
+
+This page is the change that carried the first one, after #134.
+
 ## When tests fail in CI
 
 Download the `playwright-report` artifact from the failed Actions run,
