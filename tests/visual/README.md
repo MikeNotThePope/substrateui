@@ -89,8 +89,10 @@ detached second one. Nothing to sequence by hand.
 
 ## If a pull request merges with `visual` red
 
-Recovering is not one button, so this is written down before the next
-time. Merging a red `visual` puts pages on `main` that no baseline
+Recovering is not one button, so this is written down before the first
+time. #134 came close: it merged with its `visual` red in CI, and the
+only reason nothing had to be recovered is that the baselines had
+already been regenerated from its branch beforehand. Merging a red `visual` puts pages on `main` that no baseline
 matches, and the gate above means `main` cannot be the branch that fixes
 it: a dispatch needs an *open* pull request whose head is the dispatched
 branch, and `main` has none.
@@ -109,7 +111,10 @@ archive — which is what every other branch, including the Version
 Packages one, then reads. Re-run the failed jobs on those and they go
 green without a push.
 
-This page is the change that carried the first one, after #134.
+None of this has had to be done yet, so treat it as reasoning rather
+than a tested recipe. The parts that are checked: the gate's four cases
+have unit tests, and the Version Packages pull request really is
+authored by Mike's account, because `RELEASE_PAT` is his.
 
 ## When tests fail in CI
 
