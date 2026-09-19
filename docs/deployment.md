@@ -116,6 +116,29 @@ out with `persist-credentials: false` so the branch pushes go out with this
 token too, not `GITHUB_TOKEN`, and CI runs on every update. Publishing stays
 on OIDC, with no npm credential anywhere.
 
+### One-time `LAVAHIRE_DISPATCH_TOKEN` setup
+
+Without this a publish still reaches npm, and lavahire is simply not told. Its
+pin on this package is a caret range, so the new version lands there silently,
+inside whatever unrelated pull request next reinstalls: that is how 1.26.1
+arrived, and the workaround it needed is still in that repository's
+`app/globals.css`. With the token, a publish fires a `repository_dispatch` at
+lavahire and the bump gets its own pull request there, with the version in the
+title and CI on it. MikeNotThePope/lavahire#800.
+
+1. Go to https://github.com/settings/personal-access-tokens/new
+2. Fine-grained token, **Resource owner** `MikeNotThePope`, **Repository access**
+   → only `lavahire`. Not this repository: the token acts on the one being
+   told, not on the one telling it.
+3. Repository permissions: **Contents** read/write. Nothing else.
+   `repository_dispatch` needs that one and nothing beside it.
+4. Expiry: whatever you will actually rotate. When it lapses the dispatch step
+   fails red after a publish that already succeeded, which is the honest
+   outcome: the version is out and lavahire's pin is not moving until you
+   renew. The release itself is unaffected.
+5. Save the value as repo secret `LAVAHIRE_DISPATCH_TOKEN`
+   (Settings → Secrets and variables → Actions).
+
 ### Automated release flow
 
 1. Merge feature PRs that include `.changeset/*.md` files to `main`.
@@ -126,6 +149,9 @@ on OIDC, with no npm credential anywhere.
    set to `1` stops the arming, the step's log says so, and the PR waits for
    a hand.
 4. `release.yml` runs again and publishes to npm.
+5. That same run tells lavahire, which opens its own pull request moving the
+   pin to the new version. Only on a real publish, and only with
+   `LAVAHIRE_DISPATCH_TOKEN` set (see above).
 
 Multiple changesets can be stacked before merging the Version PR — they're consumed together into one release.
 
