@@ -91,6 +91,54 @@ jobs:
           # and npm >= 11.5.1 (installed above). Provenance is part of OIDC.
           NPM_CONFIG_PROVENANCE: "true"
 
+      # lavahire pins this package on a caret range, so a new minor lands
+      # there silently, inside whatever unrelated pull request next
+      # reinstalls. 1.26.1 arrived exactly that way and the workaround it
+      # needed is still in that repository's `app/globals.css`, in a pull
+      # request that had nothing to do with the design system. This nudge
+      # makes the bump its own pull request there, carrying the version in
+      # its title, with CI and a smoke run on it: the first place a break in
+      # this package is seen is then a red check that names the release.
+      # MikeNotThePope/lavahire#800.
+      #
+      # It carries no payload. The receiving workflow reads the version from
+      # npm's own `latest` tag, so there is nothing here to keep in step with
+      # anything there, and a re-fire cannot install something npm is not
+      # serving.
+      #
+      # Only on a real publish, which is what `published` says. The other
+      # branch of this job opens the Version Packages pull request and puts
+      # nothing on npm, and a bump pull request for a version npm does not
+      # have yet would fail to install.
+      #
+      # A missing secret fails the step rather than skipping quietly. The
+      # publish has already happened by then, so the red is the honest
+      # outcome: the version is out and lavahire was not told. The `secrets`
+      # context cannot be read in an `if`, which is why this is a test in the
+      # shell rather than a condition above.
+      - name: Tell lavahire a version is out
+        if: steps.changesets.outputs.published == 'true'
+        env:
+          TOKEN: ${{ secrets.LAVAHIRE_DISPATCH_TOKEN }}
+          PUBLISHED: ${{ steps.changesets.outputs.publishedPackages }}
+        run: |
+          set -euo pipefail
+          echo "published: $PUBLISHED"
+
+          if [ -z "$TOKEN" ]; then
+            echo "LAVAHIRE_DISPATCH_TOKEN is not set, so lavahire was not told and its pin stays where it is."
+            echo "Settings -> Secrets and variables -> Actions. A fine-grained PAT scoped to MikeNotThePope/lavahire alone, with Contents: read and write, which is what repository_dispatch needs and all it needs."
+            exit 1
+          fi
+
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/MikeNotThePope/lavahire/dispatches \
+            -d '{"event_type":"substrateui-released"}'
+
+          echo "lavahire dispatched; it opens the bump pull request from here."
+
       # The Version Packages pull request used to wait for Mike's hand, and
       # that hand followed the first merge by minutes every time (#120 merged
       # 11:44, #121 11:47) and read nothing. So the run that opens or updates
