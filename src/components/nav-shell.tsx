@@ -19,8 +19,27 @@ const NavShellMobileContext = React.createContext<{ close: () => void }>({
   close: () => {},
 })
 
+// ─── Brand-strip context ────────────────────────────────────────────
+
+/**
+ * `true` anywhere inside a NavShellBrandStrip. Read only by the two parts
+ * that would make a `navigation` landmark, so they can refuse rather than
+ * make one in a banner whose whole claim is that it holds none.
+ *
+ * Context rather than inspecting children: a caller's own `<SiteNav />`
+ * wrapper, a fragment, a map — none of those are visible to
+ * `React.Children`, and all of them are visible to this.
+ */
+const NavShellStripContext = React.createContext(false)
+
 /** Top-navigation application shell: a horizontal header bar over a
  * scrollable content area. The classic marketing / top-nav app layout.
+ *
+ * The shell is a header over a main and nothing more — the nav lives in
+ * `NavShellNav`, a part you render or don't. Two header parts fill that
+ * slot: `NavShellHeader`, a sticky centred band built around a nav column,
+ * and `NavShellBrandStrip`, a full-bleed strip with a flush mark and no
+ * navigation at all.
  *
  * @example
  * <NavShell>
@@ -79,6 +98,79 @@ function NavShellHeader({
   )
 }
 
+/**
+ * The other header: a full-bleed brand strip with no navigation in it.
+ *
+ * `NavShellHeader` is not "a header" — it is a header *with a nav column*.
+ * Its two elements exist for that: an outer `<header>` for the sticky band,
+ * and an inner `mx-auto max-w-6xl` box so brand, nav and actions share one
+ * centred measure. A brand strip wants the opposite of that inner box. The
+ * mark is meant to touch the viewport edge, and nothing reaches an edge from
+ * inside a centred column — so this part is one element, not two, which is
+ * why it is a part and not a `variant` prop. A prop that deletes an element
+ * is two components wearing one name.
+ *
+ * **What it is.** A `banner`: `<header>` holding the site mark and the
+ * site-wide controls. HTML-AAM maps `<header>` to `banner` unless it is
+ * inside an `article`, `aside`, `main`, `nav` or `section`; `NavShell` is a
+ * `<div>`, so the mapping holds here exactly as it does for
+ * `NavShellHeader`.
+ *
+ * **What it is not.** A `navigation` landmark. There is no `<nav>` and no
+ * `aria-label="Primary"`, because a navigation landmark promises a list of
+ * destinations and this strip has a mark and a few controls. That is not a
+ * note in the docs: `NavShellNav` and `NavShellMobileNav` throw inside it.
+ * Nor is it a `toolbar` — the actions are an ordinary cluster, so a sign-out
+ * form and a theme toggle stay separate tab stops instead of sharing one
+ * behind a roving `tabIndex`.
+ *
+ * **What it does not excuse.** The skip link. WCAG 2.4.1 is about repeated
+ * blocks, and the actions repeat on every page; with no nav the block is
+ * shorter, not absent. Render `SkipLink` as the first child of `NavShell`
+ * and `NavShellMain` is already the target it looks for.
+ *
+ * It does not stick. A sticky bar earns its height by keeping destinations
+ * within reach, and this one has no destinations, so it scrolls away with
+ * the page — which is also why it can be opaque instead of a translucent
+ * blur over content sliding under it.
+ *
+ * @example
+ * <NavShell>
+ *   <SkipLink />
+ *   <NavShellBrandStrip>
+ *     <NavShellBrand>Acme</NavShellBrand>
+ *     <NavShellActions>
+ *       <Button variant="ghost" size="sm">Account</Button>
+ *     </NavShellActions>
+ *   </NavShellBrandStrip>
+ *   <NavShellMain>{children}</NavShellMain>
+ * </NavShell>
+ */
+function NavShellBrandStrip({
+  className,
+  ref,
+  ...props
+}: React.ComponentPropsWithRef<"header">) {
+  return (
+    <NavShellStripContext.Provider value={true}>
+      <header
+        ref={ref}
+        data-slot="nav-shell-brand-strip"
+        className={cn(
+          // No start padding at all: the flush mark is the point, and it is
+          // the strip declining to pad rather than the brand learning a prop.
+          // `pe-10` and not the header's `px-4 sm:px-6` because the actions
+          // are ghost buttons whose own padding already insets their glyphs,
+          // so the optical gutter is smaller than the declared one.
+          "flex h-15 shrink-0 items-center justify-between gap-4 border-b-2 bg-background pe-10",
+          className,
+        )}
+        {...props}
+      />
+    </NavShellStripContext.Provider>
+  )
+}
+
 /** Brand / logo area at the start of the header. */
 function NavShellBrand({
   className,
@@ -105,6 +197,11 @@ function NavShellNav({
   ref,
   ...props
 }: React.ComponentPropsWithRef<"nav">) {
+  if (React.useContext(NavShellStripContext)) {
+    throw new Error(
+      "<NavShellNav> cannot be rendered inside <NavShellBrandStrip>. The strip is a banner that holds no navigation — that is the whole of what it claims — and a `navigation` landmark inside it would make the claim false. Use <NavShellHeader> for a header with a nav.",
+    )
+  }
   return (
     <nav
       ref={ref}
@@ -201,8 +298,17 @@ function NavShellMobileNav({
   ref,
   ...props
 }: NavShellMobileNavProps) {
+  // Every hook before the throw, so the throw is not a conditional call.
+  const inStrip = React.useContext(NavShellStripContext)
   const [open, setOpen] = React.useState(false)
   const close = React.useCallback(() => setOpen(false), [])
+
+  if (inStrip) {
+    throw new Error(
+      "<NavShellMobileNav> cannot be rendered inside <NavShellBrandStrip>. A hamburger that opens a drawer titled Navigation, with nothing in it to navigate to, is worse than no hamburger. Use <NavShellHeader> for a header with a nav.",
+    )
+  }
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
@@ -240,7 +346,29 @@ function NavShellMobileNav({
   )
 }
 
-/** Scrollable main content region below the header. */
+/**
+ * Scrollable main content region below the header, and the target `SkipLink`
+ * is looking for.
+ *
+ * `id="main-content"` and `tabIndex={-1}` are defaults rather than something
+ * every page types out, because the pair is what makes a skip link skip.
+ * Without the `tabIndex` the browser scrolls to the anchor and leaves focus
+ * where it was, so the next Tab lands back in the header the reader just
+ * asked to bypass — a bypass link that bypasses nothing. `-1` keeps it
+ * programmatically focusable without adding a tab stop of its own, and
+ * `outline-none` is because focus only ever arrives here programmatically:
+ * a ring drawn around the whole page would say nothing a reader who just
+ * pressed the link does not already know.
+ *
+ * Both are ordinary props, so a page with a different target says so:
+ * `<NavShellMain id="report">` with `<SkipLink href="#report" />`.
+ *
+ * The `SkipLink` itself is the caller's to place, not this shell's. It has to
+ * be the first focusable element in the *document*, which is a fact about the
+ * document and not about the shell — this repository's own root layout
+ * already renders one, and a shell that inserted a second would put two skip
+ * links on every page of it.
+ */
 function NavShellMain({
   className,
   ref,
@@ -250,7 +378,9 @@ function NavShellMain({
     <main
       ref={ref}
       data-slot="nav-shell-main"
-      className={cn("flex-1", className)}
+      id="main-content"
+      tabIndex={-1}
+      className={cn("flex-1 outline-none", className)}
       {...props}
     />
   )
@@ -259,6 +389,7 @@ function NavShellMain({
 export {
   NavShell,
   NavShellHeader,
+  NavShellBrandStrip,
   NavShellBrand,
   NavShellNav,
   NavShellNavItem,
