@@ -77,6 +77,8 @@ const SOURCES: Record<string, string[]> = {
   // An organism, so it sits a level above src/components/ui and the slug
   // derivation would miss it.
   "/docs/components/stat-card": ["src/components/stat-card.tsx"],
+  // Same: an organism, one level above src/components/ui.
+  "/docs/components/theme-toggle": ["src/components/theme-toggle.tsx"],
   "/docs/foundations/ai-prompt": ["src/app/docs/foundations/ai-prompt/prompt.ts"],
   "/docs/foundations/cli": ["bin/substrateui.mjs"],
   "/docs/foundations/theme-generator": ["src/components/ui/theme.tsx"],
