@@ -54,7 +54,7 @@ import { PageBody } from "@/components/page-body"
     <AppShellSidebarTrigger />
     <DashboardShellBrand>Acme Inc</DashboardShellBrand>
     <DashboardShellActions>
-      <ThemeToggle />
+      <ThemeToggle value={mode} onValueChange={setMode} />
     </DashboardShellActions>
   </DashboardShellHeader>
   <DashboardShellBody>

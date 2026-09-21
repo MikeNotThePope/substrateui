@@ -74,6 +74,41 @@ for (const recipe of recipes) {
   }
 }
 
+// No framework inside dist.
+//
+// tsup.config.ts says a reintroduced `next` or `next-themes` import "fails the
+// build here instead", on the grounds that neither is listed in `external`.
+// That was not true. tsup externalises `dependencies` and `peerDependencies`
+// automatically and bundles everything else, and both packages are
+// devDependencies — so the import does not fail, it is *inlined*. Exporting
+// `ThemeToggle` while it still read `useTheme` from next-themes put 1.3KB of a
+// private copy of that package into `dist/organisms.js`, with a React context
+// no consumer's own `<ThemeProvider>` could ever fill: `useTheme` returns
+// `{ setTheme: () => {}, themes: [] }` and the control silently does nothing.
+//
+// Nothing else in the build could see that. The metafile can, so it is read
+// here (MikeNotThePope/substrateui#123).
+const FRAMEWORK = [/^node_modules\/next-themes\//, /^node_modules\/next\//]
+
+interface Metafile {
+  outputs: Record<string, { inputs?: Record<string, unknown> }>
+}
+
+const metafile = JSON.parse(
+  await readFile(join(DIST, "metafile-esm.json"), "utf-8")
+) as Metafile
+
+for (const [output, info] of Object.entries(metafile.outputs)) {
+  if (!output.endsWith(".js")) continue
+  for (const input of Object.keys(info.inputs ?? {})) {
+    if (!FRAMEWORK.some((pattern) => pattern.test(input))) continue
+    fail.push(
+      `${output} bundles ${input} — a published entrypoint must not carry a copy of the framework. ` +
+        `Take the import out, or make the package a real peer dependency and mark it external in tsup.config.ts.`
+    )
+  }
+}
+
 if (fail.length > 0) {
   console.error("Client-boundary audit failed:\n")
   for (const line of fail) console.error(`  ✗ ${line}`)

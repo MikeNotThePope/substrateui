@@ -6,9 +6,12 @@ import type { BreadcrumbLabels } from "@/components/ui/breadcrumb";
 import type { CarouselLabels } from "@/components/ui/carousel";
 import type { ComboboxLabels } from "@/components/ui/combobox";
 import type { CountdownLabels } from "@/components/ui/countdown";
+import type { CornerPanelLabels } from "@/components/ui/corner-panel";
 import type { DataTableLabels } from "@/components/ui/data-table";
 import type { DatePickerLabels } from "@/components/ui/date-picker";
 import type { DialogLabels } from "@/components/ui/dialog";
+import type { FileDropFieldLabels } from "@/components/ui/file-drop-field";
+import type { MessageThreadLabels } from "@/components/ui/message-thread";
 import type { PaginationLabels } from "@/components/ui/pagination";
 import type { PasswordInputLabels } from "@/components/ui/password-input";
 import type { SearchFieldLabels } from "@/components/ui/search-field";
@@ -16,13 +19,13 @@ import type { SheetLabels } from "@/components/ui/sheet";
 import type { SidebarLabels } from "@/components/ui/sidebar";
 import type { SortableLabels } from "@/components/ui/sortable";
 import type { SpinnerLabels } from "@/components/ui/spinner";
+import type { ThemeToggleLabels } from "@/components/theme-toggle";
 import type { DirectionToggleLabels } from "@/components/direction-toggle";
 import type { SiteHeaderLabels } from "@/components/site-header";
 import type { SiteHeaderNavLabels } from "@/components/site-header-nav";
 import type { SitePreferencesLabels } from "@/components/site-preferences";
 import type { StatCardLabels } from "@/components/stat-card";
 import type { ThemePickerLabels } from "@/components/theme-picker";
-import type { ThemeToggleLabels } from "@/components/theme-toggle";
 
 /** All translatable strings for published SubstrateUI components, keyed by component. */
 interface SubstrateUILabels {
@@ -30,9 +33,12 @@ interface SubstrateUILabels {
   carousel?: Partial<CarouselLabels>;
   combobox?: Partial<ComboboxLabels>;
   countdown?: Partial<CountdownLabels>;
+  cornerPanel?: Partial<CornerPanelLabels>;
   dataTable?: Partial<DataTableLabels>;
   datePicker?: Partial<DatePickerLabels>;
   dialog?: Partial<DialogLabels>;
+  fileDropField?: Partial<FileDropFieldLabels>;
+  messageThread?: Partial<MessageThreadLabels>;
   pagination?: Partial<PaginationLabels>;
   passwordInput?: Partial<PasswordInputLabels>;
   searchField?: Partial<SearchFieldLabels>;
@@ -41,6 +47,7 @@ interface SubstrateUILabels {
   sortable?: Partial<SortableLabels>;
   spinner?: Partial<SpinnerLabels>;
   statCard?: Partial<StatCardLabels>;
+  themeToggle?: Partial<ThemeToggleLabels>;
 }
 
 /**
@@ -55,7 +62,6 @@ interface SiteChromeLabels extends SubstrateUILabels {
   siteHeaderNav?: Partial<SiteHeaderNavLabels>;
   sitePreferences?: Partial<SitePreferencesLabels>;
   themePicker?: Partial<ThemePickerLabels>;
-  themeToggle?: Partial<ThemeToggleLabels>;
 }
 
 const LabelsContext = React.createContext<SubstrateUILabels & SiteChromeLabels>(

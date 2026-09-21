@@ -25,8 +25,16 @@ export default defineConfig({
   // No Next externals: nothing under the published entrypoints imports `next`,
   // `next/link`, or `next-themes`. Listing them here is what let a stray
   // top-level `next-themes` import survive into dist/index.js and break every
-  // consumer that didn't happen to have it installed. Leaving the list bare
-  // means a reintroduced framework import fails the build here instead.
+  // consumer that didn't happen to have it installed.
+  //
+  // Leaving the list bare does *not*, as this comment used to claim, make a
+  // reintroduced framework import fail the build. tsup externalises
+  // `dependencies` and `peerDependencies` on its own and bundles the rest, and
+  // both packages are devDependencies — so such an import is quietly inlined
+  // instead, publishing a second private copy of the package whose React
+  // context nothing in the consumer's tree ever fills. `audit:boundary` reads
+  // the metafile below and fails on exactly that
+  // (MikeNotThePope/substrateui#123).
   external: ["react", "react-dom", "react/jsx-runtime"],
   // Not banner: {js}: treeshake's rollup pass strips module-level directives,
   // so "use client" must be prepended after the build instead. Which files get

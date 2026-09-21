@@ -16,7 +16,7 @@ import { AppShellContext } from "@/components/app-shell"
  *     <AppShellSidebarTrigger />
  *     <DashboardShellBrand>Acme</DashboardShellBrand>
  *     <DashboardShellActions>
- *       <ThemeToggle />
+ *       <ThemeToggle value={mode} onValueChange={setMode} />
  *     </DashboardShellActions>
  *   </DashboardShellHeader>
  *   <DashboardShellBody>
