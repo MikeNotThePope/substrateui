@@ -138,13 +138,19 @@ describe('FileDropField', () => {
     expect(target).not.toHaveAttribute('data-dragging')
   })
 
-  it('turns the border red when it is invalid, and says so', () => {
+  it('turns red when it is invalid, and says so', () => {
     const { rerender } = render(<FileDropField aria-label="Resume" />)
-    expect(box().className).not.toContain('border-status-error')
+    expect(box().className).not.toContain('status-error')
     expect(screen.getByLabelText('Resume')).not.toHaveAttribute('aria-invalid')
 
     rerender(<FileDropField aria-label="Resume" invalid />)
+    // Border, fill and text together, the way Alert's error variant does it.
+    // The border alone is not enough to see: an unlayered
+    // `* { border-color: var(--border) }` in tokens.css outranks every
+    // border-colour utility on the site today (#143).
     expect(box().className).toContain('border-status-error')
+    expect(box().className).toContain('bg-status-error-surface')
+    expect(box().className).toContain('text-status-error-text')
     expect(screen.getByLabelText('Resume')).toHaveAttribute('aria-invalid', 'true')
   })
 
@@ -157,6 +163,7 @@ describe('FileDropField', () => {
       </Field>,
     )
     expect(box().className).toContain('border-status-error')
+    expect(box().className).toContain('bg-status-error-surface')
   })
 
   it('sizes the box and the icon together', () => {

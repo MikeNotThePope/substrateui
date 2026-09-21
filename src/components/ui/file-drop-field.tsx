@@ -250,7 +250,13 @@ function FileDropField({
         </span>
       ) : null}
       {hint ? (
-        <span data-slot="file-drop-field-hint" className="text-xs text-muted-foreground">
+        <span
+          data-slot="file-drop-field-hint"
+          // Muted only while the box is resting. Inside a rejected box the hint
+          // inherits the error text colour, which is the pairing the contrast
+          // audit covers against that fill; muted-foreground on it is not.
+          className={cn("text-xs", !isInvalid && "text-muted-foreground")}
+        >
           {hint}
         </span>
       ) : null}

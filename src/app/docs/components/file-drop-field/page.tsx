@@ -171,7 +171,8 @@ export default function FileDropFieldPage() {
       <Stack gap="md">
         <H3>Rejected</H3>
         <P>
-          <Code>invalid</Code> swaps the border to <Code>border-status-error</Code> and sets{" "}
+          <Code>invalid</Code> swaps the border, the fill and the text to the error tokens —
+          the same three <Code>Alert</Code>&apos;s error variant uses — and sets{" "}
           <Code>aria-invalid</Code>. Inside a <Code>Field</Code> there is nothing to pass: the
           field&apos;s own error state reaches the box.
         </P>
