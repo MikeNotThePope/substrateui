@@ -3,11 +3,26 @@
 Playwright snapshots every component docs page across four projects:
 `light`, `dark`, `light-rtl`, and `dark-rtl`. Each project seeds
 `localStorage` with the matching theme and `substrateui-direction`
-values, so every baseline captures a theme × direction combination.
+values, so every baseline captures a mode × direction combination, all
+of them on the default palette.
+
+A fifth project, `lava`, runs `themed-pages.spec.ts` and nothing else:
+five pages on the `lava` palette, seeded through `substrateui-theme`.
+It is the only automated proof that a named palette reaches a rendered
+page, and it is deliberately scoped, five baselines rather than the
+whole docs site times another theme. CONTRIBUTING.md asks a public
+theme for exactly that much.
+
+Every project names the spec files it runs, through `testMatch`. A
+spec file no project names never runs, and the suite reports green for
+finding nothing, which is what #138 was.
+`tests/unit/scripts/visual-project-coverage.test.ts` fails when that is
+true again, so a new spec here needs a project to name it.
 
 Baselines are stored in Cloudflare R2 (not in the git repo) and
-downloaded before tests run. The snapshot directory
-`components.spec.ts-snapshots/` is gitignored.
+downloaded before tests run. The snapshot directories
+(`components.spec.ts-snapshots/`, `themed-pages.spec.ts-snapshots/`)
+are gitignored, and `snapshots:upload` packs every one of them.
 
 ## Environment variables
 

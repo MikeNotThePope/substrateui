@@ -12,6 +12,18 @@ const themedPages: Array<{ slug: string; path: string }> = [
   { slug: 'foundations-themes', path: '/docs/foundations/themes' },
 ];
 
+/** SiteThemeProvider's localStorage key, seeded by the `lava` project in
+ *  playwright.config.ts. */
+const THEME_STORAGE_KEY = 'substrateui-theme';
+
+/** The palette SiteThemeProvider represents by removing `data-theme` rather
+ *  than setting it. Mirrors DEFAULT_THEME in src/components/theme-picker.tsx. */
+const UNATTRIBUTED_THEME = 'plum';
+
+/** Stored names that still name a live palette after a rename. Mirrors RENAMED
+ *  in src/components/theme-picker.tsx. */
+const RENAMED_THEMES: Record<string, string> = { default: UNATTRIBUTED_THEME, press: 'proof' };
+
 const FROZEN_NOW = new Date('2025-01-15T12:00:00.000Z').valueOf();
 
 test.beforeEach(async ({ page }) => {
@@ -49,13 +61,34 @@ async function preparePage(page: import('@playwright/test').Page) {
     return document.documentElement.getAttribute('dir') === expected;
   });
   // Wait for SiteThemeProvider to apply data-theme from localStorage.
-  // Default theme clears the attribute; named themes set it.
-  await page.waitForFunction(() => {
-    const storedTheme = localStorage.getItem('substrateui-theme') ?? 'default';
-    const attr = document.documentElement.getAttribute('data-theme');
-    if (storedTheme === 'default') return attr === null;
-    return attr === storedTheme;
-  });
+  //
+  // What it does, from src/components/theme-picker.tsx: on mount it reads
+  // `substrateui-theme`, maps a value left over from a rename forward, and
+  // sets `data-theme` for every palette except the default one, whose
+  // attribute it removes. The palette that wears no attribute is `plum`;
+  // "default" is only an old stored name that maps to it. This wait used to
+  // assume the opposite, so it would have hung forever on a project seeding
+  // `plum`, and with nothing stored it was satisfied at once, before the page
+  // had hydrated, which is a wait that proves nothing. No project seeded the
+  // key at all until the `lava` one, so neither case ever ran.
+  //
+  // With `lava` stored the attribute only appears once the provider's effect
+  // has run, so this is a real barrier: the screenshot cannot catch the
+  // default palette mid-swap.
+  await page.waitForFunction(
+    ({ key, unattributed, renamed }) => {
+      const stored = localStorage.getItem(key);
+      const attr = document.documentElement.getAttribute('data-theme');
+      // Nothing stored: the provider leaves the attribute alone. The `dir`
+      // wait above is the hydration barrier in that case, since
+      // DirectionController sets `dir` on mount whether or not anything is
+      // stored.
+      if (stored === null) return attr === null;
+      const theme = renamed[stored] ?? stored;
+      return theme === unattributed ? attr === null : attr === theme;
+    },
+    { key: THEME_STORAGE_KEY, unattributed: UNATTRIBUTED_THEME, renamed: RENAMED_THEMES },
+  );
   await page.addStyleTag({
     content: `
       *, *::before, *::after {

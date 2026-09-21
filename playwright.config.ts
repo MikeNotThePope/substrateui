@@ -1,5 +1,19 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Every project names the spec files it runs. It used to be the other way
+// around: four projects each carrying `testIgnore: /themed-pages\.spec\.ts/`,
+// which left that file with no project at all and a `visual` job that passed
+// by finding nothing (#138). Naming what a project runs turns a spec nobody
+// runs into a spec nobody named, and
+// `tests/unit/scripts/visual-project-coverage.test.ts` fails on exactly that,
+// so the next spec added here cannot arrive switched off in silence.
+
+/** The default palette, across light/dark and ltr/rtl. */
+const DEFAULT_THEME_SPECS = /(?:components|drawer\.behavior)\.spec\.ts$/;
+
+/** The only spec that renders a named palette. Five pages, one project. */
+const THEMED_SPECS = /themed-pages\.spec\.ts$/;
+
 export default defineConfig({
   testDir: './tests/visual',
   fullyParallel: true,
@@ -28,7 +42,7 @@ export default defineConfig({
   projects: [
     {
       name: 'light',
-      testIgnore: /themed-pages\.spec\.ts/,
+      testMatch: DEFAULT_THEME_SPECS,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 720 },
@@ -49,7 +63,7 @@ export default defineConfig({
     },
     {
       name: 'dark',
-      testIgnore: /themed-pages\.spec\.ts/,
+      testMatch: DEFAULT_THEME_SPECS,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 720 },
@@ -70,7 +84,7 @@ export default defineConfig({
     },
     {
       name: 'light-rtl',
-      testIgnore: /themed-pages\.spec\.ts/,
+      testMatch: DEFAULT_THEME_SPECS,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 720 },
@@ -91,7 +105,7 @@ export default defineConfig({
     },
     {
       name: 'dark-rtl',
-      testIgnore: /themed-pages\.spec\.ts/,
+      testMatch: DEFAULT_THEME_SPECS,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 720 },
@@ -104,6 +118,39 @@ export default defineConfig({
               localStorage: [
                 { name: 'theme', value: 'dark' },
                 { name: 'substrateui-direction', value: 'rtl' },
+              ],
+            },
+          ],
+        },
+      },
+    },
+    // CONTRIBUTING.md asks every public theme for scoped visual coverage, and
+    // until now nothing gave it any: `audit:contrast` reads tokens and renders
+    // no page. Lava first because it is the only palette a stranger ever sees.
+    // LavaHire ships `data-theme="lava"` in its root layout, so the one
+    // consumer's real UI runs on a palette this library had never
+    // screenshotted. Light mode, and only the five pages the spec names:
+    // enough to prove the palette reaches a rendered page, far short of the
+    // docs site times another theme.
+    {
+      name: 'lava',
+      testMatch: THEMED_SPECS,
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
+        storageState: {
+          cookies: [],
+          origins: [
+            {
+              origin: 'http://localhost:3000',
+              localStorage: [
+                // `substrateui-theme` is SiteThemeProvider's key (the palette),
+                // `theme` is next-themes' (light/dark). The spec waits on the
+                // first of them, which no project had ever set.
+                { name: 'substrateui-theme', value: 'lava' },
+                { name: 'theme', value: 'light' },
+                { name: 'substrateui-direction', value: 'ltr' },
               ],
             },
           ],
