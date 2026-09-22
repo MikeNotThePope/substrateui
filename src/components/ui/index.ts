@@ -16,6 +16,8 @@ export * from "./carousel";
 export * from "./cascader";
 export * from "./center";
 export * from "./chart";
+export * from "./choice-card";
+export * from "./choice-card-variants";
 export * from "./checkbox";
 export * from "./cluster";
 export * from "./collapsible";

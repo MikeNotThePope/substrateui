@@ -1,8 +1,11 @@
 import { Checkbox } from "@/components/ui/checkbox"
+import { CheckboxCard } from "@/components/ui/choice-card"
+import { Fieldset } from "@/components/ui/fieldset"
 import { Label } from "@/components/ui/label"
+import { Link } from "@/components/ui/link"
 import { Stack } from "@/components/ui/stack"
 import { Cluster } from "@/components/ui/cluster"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
@@ -55,7 +58,7 @@ export default function CheckboxPage() {
         <Checkbox />
       </ComponentPreview>
 
-      <ImportLine names={["Checkbox"]} />
+      <ImportLine names={["Checkbox", "CheckboxCard"]} />
 
       {/* With Label */}
       <Stack gap="md">
@@ -70,6 +73,38 @@ export default function CheckboxPage() {
             <Checkbox id="terms" />
             <Label htmlFor="terms">Accept terms and conditions</Label>
           </Cluster>
+        </ComponentPreview>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>As cards</H3>
+        <P>
+          <Code>Checkbox</Code> is the 18px box, and the target is the box.{" "}
+          <Code>CheckboxCard</Code> is the same control grown into the whole row: 44px on its
+          short side, a label and a muted description, and a tap anywhere in it toggles. It
+          also renders a frozen answer read-only without looking disabled. See{" "}
+          <Link href="/docs/components/choice-card">Choice Card</Link>.
+        </P>
+        <ComponentPreview
+          code={`<Fieldset legend="Which shifts can you cover?">
+  <CheckboxCard name="shift" value="mornings" description="06:00 – 14:00">
+    Mornings
+  </CheckboxCard>
+  <CheckboxCard name="shift" value="nights" description="22:00 – 06:00">
+    Nights
+  </CheckboxCard>
+</Fieldset>`}
+        >
+          <div className="w-full max-w-md">
+            <Fieldset legend="Which shifts can you cover?">
+              <CheckboxCard name="shift" value="mornings" description="06:00 – 14:00">
+                Mornings
+              </CheckboxCard>
+              <CheckboxCard name="shift" value="nights" description="22:00 – 06:00">
+                Nights
+              </CheckboxCard>
+            </Fieldset>
+          </div>
         </ComponentPreview>
       </Stack>
 
