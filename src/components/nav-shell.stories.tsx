@@ -4,6 +4,7 @@ import {
   NavShell,
   NavShellHeader,
   NavShellBrand,
+  NavShellBrandStrip,
   NavShellNav,
   NavShellNavItem,
   NavShellActions,
@@ -11,6 +12,7 @@ import {
   NavShellMain,
 } from "./nav-shell"
 import { Button } from "./ui/button"
+import { SkipLink } from "./ui/skip-link"
 import { Center } from "./ui/center"
 import { Stack } from "./ui/stack"
 import { H2, P } from "./ui/typography"
@@ -76,4 +78,50 @@ export const Mobile: Story = {
     layout: "fullscreen",
     viewport: { defaultViewport: "mobile1" },
   },
+}
+
+/**
+ * The other header: a full-bleed strip with the mark flush against the start
+ * edge, the actions at the end, and no navigation in it at all. `NavShellNav`
+ * and `NavShellMobileNav` throw inside it rather than put a `navigation`
+ * landmark in a banner that has nothing to navigate to.
+ *
+ * Tab into the frame to reach the `SkipLink`, then press Enter: focus lands
+ * on the `<main>`, which `NavShellMain` makes focusable for exactly that.
+ */
+export const BrandStrip: Story = {
+  render: () => (
+    <NavShell>
+      <SkipLink />
+      <NavShellBrandStrip>
+        <NavShellBrand className="min-w-0">
+          <span className="grid h-15 w-15 shrink-0 place-items-center bg-primary text-primary-foreground">
+            A
+          </span>
+          <span className="truncate">Acme</span>
+        </NavShellBrand>
+        <NavShellActions>
+          <Button variant="ghost" size="sm">
+            Account
+          </Button>
+          <Button variant="ghost" size="sm">
+            Sign out
+          </Button>
+        </NavShellActions>
+      </NavShellBrandStrip>
+      <NavShellMain>
+        <Center max="2xl" className="py-16">
+          <Stack gap="md">
+            <H2>One destination, so no nav</H2>
+            <P className="text-muted-foreground">
+              A staff tool whose every deeper page opens with a back arrow has
+              nowhere for a nav menu to go. The strip carries the mark and the
+              controls, and the skip link still earns its keep because the
+              controls repeat on every page.
+            </P>
+          </Stack>
+        </Center>
+      </NavShellMain>
+    </NavShell>
+  ),
 }
