@@ -1,7 +1,9 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { RadioGroupCard } from "@/components/ui/choice-card"
 import { Label } from "@/components/ui/label"
+import { Link } from "@/components/ui/link"
 import { Stack } from "@/components/ui/stack"
-import { H3 } from "@/components/ui/typography"
+import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { CompositionTree } from "../../_components/composition-tree"
@@ -85,6 +87,7 @@ export default function RadioGroupPage() {
         names={[
           "RadioGroup",
           "RadioGroupItem",
+          "RadioGroupCard",
         ]}
       />
 
@@ -94,8 +97,38 @@ export default function RadioGroupPage() {
           root="RadioGroup"
           nodes={[
             { name: "RadioGroupItem" },
+            { name: "RadioGroupCard" },
           ]}
         />
+      </Stack>
+
+      <Stack gap="md">
+        <H3>As cards</H3>
+        <P>
+          <Code>RadioGroupItem</Code> is the 18px circle, and the target is the circle.{" "}
+          <Code>RadioGroupCard</Code> is the same control grown into the whole row — 56px
+          tall, a label and a muted description — and a tap anywhere in it selects. It also
+          renders a submitted answer read-only, and a staff preview with no control in it at
+          all, neither of them dimmed. See{" "}
+          <Link href="/docs/components/choice-card">Choice Card</Link>.
+        </P>
+        <ComponentPreview
+          code={`<RadioGroup defaultValue="two-weeks" aria-label="Notice period">
+  <RadioGroupCard value="two-weeks" description="The usual arrangement">
+    Two weeks
+  </RadioGroupCard>
+  <RadioGroupCard value="a-month">A month or more</RadioGroupCard>
+</RadioGroup>`}
+        >
+          <div className="w-full max-w-md">
+            <RadioGroup defaultValue="two-weeks" aria-label="Notice period">
+              <RadioGroupCard value="two-weeks" description="The usual arrangement">
+                Two weeks
+              </RadioGroupCard>
+              <RadioGroupCard value="a-month">A month or more</RadioGroupCard>
+            </RadioGroup>
+          </div>
+        </ComponentPreview>
       </Stack>
 
       {/* API Reference */}

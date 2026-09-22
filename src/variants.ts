@@ -26,6 +26,7 @@
 export * from "./components/ui/badge-variants"
 export * from "./components/ui/banner-variants"
 export * from "./components/ui/button-variants"
+export * from "./components/ui/choice-card-variants"
 export * from "./components/ui/file-drop-field-variants"
 export * from "./components/ui/native-select-variants"
 export * from "./components/ui/overline-variants"

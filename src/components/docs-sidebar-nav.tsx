@@ -89,6 +89,7 @@ export const navSections = [
       { label: "NativeSelect", href: "/docs/components/native-select" },
       { label: "Checkbox", href: "/docs/components/checkbox" },
       { label: "RadioGroup", href: "/docs/components/radio-group" },
+      { label: "ChoiceCard", href: "/docs/components/choice-card" },
       { label: "Switch", href: "/docs/components/switch" },
       { label: "Slider", href: "/docs/components/slider" },
       { label: "Combobox", href: "/docs/components/combobox" },
