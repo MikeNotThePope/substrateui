@@ -153,6 +153,7 @@ export const navSections = [
       { label: "Sheet", href: "/docs/components/sheet" },
       { label: "Drawer", href: "/docs/components/drawer" },
       { label: "CornerPanel", href: "/docs/components/corner-panel" },
+      { label: "FloatingAction", href: "/docs/components/floating-action" },
       { label: "AlertDialog", href: "/docs/components/alert-dialog" },
       { label: "Popover", href: "/docs/components/popover" },
       { label: "Tooltip", href: "/docs/components/tooltip" },

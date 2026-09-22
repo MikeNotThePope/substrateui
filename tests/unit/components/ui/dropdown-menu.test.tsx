@@ -50,6 +50,40 @@ describe('DropdownMenu', () => {
     expect(screen.queryByRole('menu')).not.toBeInTheDocument()
   })
 
+  // A launcher pinned with `position: fixed` is anchored in viewport
+  // coordinates; a popup positioned `absolute` is placed in document ones.
+  // They agree only while the page is at the top, so the menu has to be
+  // able to use the same coordinate space its anchor does.
+  it('positions the popup absolutely by default, as Base UI does', async () => {
+    const user = userEvent.setup()
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+    await user.click(screen.getByRole('button', { name: 'Menu' }))
+    const popup = await screen.findByRole('menu')
+    expect(popup.parentElement).toHaveStyle({ position: 'absolute' })
+  })
+
+  it('positions against a fixed anchor when it is told the anchor is fixed', async () => {
+    const user = userEvent.setup()
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger className="fixed bottom-5 end-5">Menu</DropdownMenuTrigger>
+        <DropdownMenuContent positionMethod="fixed">
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+    await user.click(screen.getByRole('button', { name: 'Menu' }))
+    const popup = await screen.findByRole('menu')
+    expect(popup.parentElement).toHaveStyle({ position: 'fixed' })
+  })
+
   it('toggles checkbox items', async () => {
     const user = userEvent.setup()
     const onCheckedChange = vi.fn()
