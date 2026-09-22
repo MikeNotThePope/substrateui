@@ -14,7 +14,7 @@ import { pageMetadata } from "@/lib/site"
 export const metadata = pageMetadata({
   title: "Choice Card",
   description:
-    "A radio or a checkbox whose whole row is the target: 44px on the short side, a label, a muted description, and a read-only mode for a frozen answer.",
+    "A radio or a checkbox whose whole row is the target: 56px tall, a label, a muted description, and two non-answerable modes — a frozen answer and a picture of a form.",
   route: "/docs/components/choice-card",
 })
 
@@ -34,11 +34,25 @@ const props: PropDef[] = [
       "A muted second line under the label. Becomes the card's accessible description, not part of its name.",
   },
   {
+    name: "presentational",
+    type: "boolean",
+    default: "false",
+    description:
+      "Draw the card with no control in it: no role, no ARIA state, no tab stop. For a picture of a form — a staff preview, a published record waiting on answers. Dims nothing.",
+  },
+  {
+    name: "selected",
+    type: "boolean",
+    default: "false",
+    description:
+      "With `presentational`, whether the mark is drawn filled. There is no control to read it from.",
+  },
+  {
     name: "readOnly",
     type: "boolean",
     default: "false",
     description:
-      "Freeze the answer. Sets `aria-readonly`, keeps the role, the tick and the tab stop, and dims nothing. Set it on the RadioGroup to freeze a whole group at once.",
+      "Freeze a submitted answer. Base UI's: sets `aria-readonly`, keeps the role, the tick and the tab stop, and dims nothing. Set it on the RadioGroup to freeze a whole group at once.",
   },
   {
     name: "disabled",
@@ -74,7 +88,7 @@ export default function ChoiceCardPage() {
   return (
     <DocPage
       title="Choice Card"
-      description="A radio or a checkbox whose whole row is the target. The card carries the role, so a tap anywhere in it answers — and the same card renders a frozen answer read-only, without looking disabled."
+      description="A radio or a checkbox whose whole row is the target. The card carries the role, so a tap anywhere in it answers — and the same card renders a submitted answer, or a picture of a form with no control at all, without looking disabled."
     >
       <ComponentPreview
         code={`import { RadioGroup, RadioGroupCard } from "@mikenotthepope/substrateui"
@@ -123,8 +137,11 @@ export default function ChoiceCardPage() {
           pairs with a <Code>Label</Code> beside them, and the target is the box. Here the
           card itself carries <Code>role=&quot;radio&quot;</Code> — it is what{" "}
           <Code>Radio.Root</Code> renders — so the whole row answers, description included,
-          and the target is <Code>min-h-11</Code>: 44px on its short side, which is WCAG
-          2.2&apos;s enhanced target size (SC 2.5.5) rather than the 24px minimum (SC 2.5.8).
+          and the target is <Code>min-h-11</Code>: a 44px floor, which is WCAG 2.2&apos;s
+          enhanced target size (SC 2.5.5) rather than the 24px minimum (SC 2.5.8). A
+          one-line card measures 56px, because the padding and the line box exceed the
+          floor. The hand-rolled rows this replaces measured 36px — enough for SC 2.5.8,
+          short of SC 2.5.5 — so the card is a change of look, not a like-for-like port.
         </P>
         <P>
           Because the control did not move, neither did the keyboard: the group is one tab
@@ -165,15 +182,14 @@ export default function ChoiceCardPage() {
       </Stack>
 
       <Stack gap="md">
-        <H3>A frozen answer is not a disabled form</H3>
+        <H3>A submitted answer: <Code>readOnly</Code></H3>
         <P>
-          A submitted answer, a published questionnaire, a staff preview of either: the same
-          card with <Code>readOnly</Code>. It keeps its role, its <Code>aria-checked</Code>{" "}
-          and its place in the tab order, and gains <Code>aria-readonly</Code>, so a reader
-          can still find out what was chosen. Nothing is dimmed.{" "}
-          <Code>disabled</Code> says the option is unavailable; <Code>readOnly</Code> says the
-          answer is final. A record is the second one, and drawing it with the first is the
-          mistake this mode exists to stop.
+          An answer somebody gave, which a reader should still be able to read: the same card
+          with <Code>readOnly</Code> on the group. It keeps its role, its{" "}
+          <Code>aria-checked</Code> and its place in the tab order, and gains{" "}
+          <Code>aria-readonly</Code>, so a screen reader can still say which option was
+          chosen. Nothing is dimmed. This is Base UI&apos;s own prop — the library adds
+          only the refusal to grey it out.
         </P>
         <ComponentPreview
           code={`<RadioGroup value="two-weeks" readOnly aria-label="Notice period (submitted)">
@@ -199,6 +215,78 @@ export default function ChoiceCardPage() {
                 Two weeks
               </RadioGroupCard>
               <RadioGroupCard value="a-month">A month or more</RadioGroupCard>
+            </RadioGroup>
+          </div>
+        </ComponentPreview>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>A picture of a form: <Code>presentational</Code></H3>
+        <P>
+          A staff preview of a questionnaire, or a published record waiting on answers, is
+          not a form at all — nobody is being asked anything. A control there is the wrong
+          accessibility object: a <Code>radiogroup</Code> nobody can answer is a tab stop
+          that leads nowhere and a question announced to a reader who was not asked it.{" "}
+          <Code>presentational</Code> is the same card with no role, no ARIA state and no
+          tab stop, and no group needed around it. <Code>selected</Code> fills the mark,
+          because there is no control to read it from.
+        </P>
+        <P>
+          It is still not <Code>disabled</Code>. A preview of a form is not a disabled form,
+          and dimming it says something untrue about every option on the page.
+        </P>
+        <ComponentPreview
+          code={`<div className="flex flex-col gap-2">
+  <RadioGroupCard presentational description="No handover">
+    Immediately
+  </RadioGroupCard>
+  <RadioGroupCard presentational selected description="The usual arrangement">
+    Two weeks
+  </RadioGroupCard>
+  <RadioGroupCard presentational>A month or more</RadioGroupCard>
+</div>`}
+        >
+          <div className="flex w-full max-w-md flex-col gap-2">
+            <RadioGroupCard presentational description="No handover">
+              Immediately
+            </RadioGroupCard>
+            <RadioGroupCard
+              presentational
+              selected
+              description="The usual arrangement"
+            >
+              Two weeks
+            </RadioGroupCard>
+            <RadioGroupCard presentational>A month or more</RadioGroupCard>
+          </div>
+        </ComponentPreview>
+        <P>
+          Every mode comes off one recipe, so the picture and the control cannot drift
+          apart. That is the pair this component exists to delete: the applications that
+          hand-rolled this kept a test whose whole job was to assert two class strings
+          stayed equal.
+        </P>
+      </Stack>
+
+      <Stack gap="md">
+        <H3>Two options is not a special case</H3>
+        <P>
+          A true/false question is a single-select whose two options the caller wrote, so it
+          is an ordinary radio group and nothing here knows about booleans.
+        </P>
+        <ComponentPreview
+          code={`<RadioGroup defaultValue="yes" aria-label="Do you hold a valid work permit?">
+  <RadioGroupCard value="yes">Yes</RadioGroupCard>
+  <RadioGroupCard value="no">No</RadioGroupCard>
+</RadioGroup>`}
+        >
+          <div className="w-full max-w-md">
+            <RadioGroup
+              defaultValue="yes"
+              aria-label="Do you hold a valid work permit?"
+            >
+              <RadioGroupCard value="yes">Yes</RadioGroupCard>
+              <RadioGroupCard value="no">No</RadioGroupCard>
             </RadioGroup>
           </div>
         </ComponentPreview>

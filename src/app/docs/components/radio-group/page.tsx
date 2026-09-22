@@ -106,9 +106,10 @@ export default function RadioGroupPage() {
         <H3>As cards</H3>
         <P>
           <Code>RadioGroupItem</Code> is the 18px circle, and the target is the circle.{" "}
-          <Code>RadioGroupCard</Code> is the same control grown into the whole row: 44px on
-          its short side, a label and a muted description, and a tap anywhere in it selects.
-          It also renders a frozen answer read-only without looking disabled. See{" "}
+          <Code>RadioGroupCard</Code> is the same control grown into the whole row — 56px
+          tall, a label and a muted description — and a tap anywhere in it selects. It also
+          renders a submitted answer read-only, and a staff preview with no control in it at
+          all, neither of them dimmed. See{" "}
           <Link href="/docs/components/choice-card">Choice Card</Link>.
         </P>
         <ComponentPreview

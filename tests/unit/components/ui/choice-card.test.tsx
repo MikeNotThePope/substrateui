@@ -16,6 +16,15 @@ import { choiceCardVariants } from '@/components/ui/choice-card-variants'
 // with a test asserting the two class strings never drift. Both halves are what
 // these cards replace, so the read-only half is tested as hard as the live one.
 
+/**
+ * The card root a label sits in. `closest('[data-slot]')` would return the
+ * label span itself — `closest` includes the element — so the slot is named.
+ */
+const cardOf = (label: HTMLElement) =>
+  label.closest(
+    '[data-slot="radio-group-card"], [data-slot="checkbox-card"]'
+  ) as HTMLElement
+
 /** The mark: the circle or the box, whichever card drew it. */
 const mark = (card: HTMLElement) =>
   card.querySelector('[data-slot="choice-card-mark"]') as HTMLElement
@@ -400,5 +409,171 @@ describe('the two cards are one card', () => {
       'aria-hidden',
       'true'
     )
+  })
+})
+
+describe('a presentational choice card', () => {
+  // The correction to #123 item 6: lavahire's two staff views — the builder's
+  // applicant preview and the published record awaiting answers — render a
+  // plain `<span>` with no role and no ARIA at all. They are pictures of a
+  // form, not forms. A `readOnly` control is the wrong object for them: it
+  // puts a tab stop and a `radio` in a page where there is nothing to answer
+  // and, in the published view, no answer to read either.
+  it('has no role, no ARIA state and no tab stop', async () => {
+    const user = userEvent.setup()
+    render(
+      <>
+        <button type="button">before</button>
+        <div>
+          <RadioGroupCard presentational>Immediately</RadioGroupCard>
+          <RadioGroupCard presentational>Two weeks</RadioGroupCard>
+        </div>
+        <button type="button">after</button>
+      </>
+    )
+    expect(screen.queryByRole('radio')).not.toBeInTheDocument()
+    expect(screen.queryByRole('radiogroup')).not.toBeInTheDocument()
+    const card = cardOf(screen.getByText('Immediately'))
+    expect(card).not.toHaveAttribute('role')
+    expect(card).not.toHaveAttribute('aria-checked')
+    expect(card).not.toHaveAttribute('aria-readonly')
+    expect(card).not.toHaveAttribute('tabindex')
+
+    await user.click(screen.getByRole('button', { name: 'before' }))
+    await user.tab()
+    expect(screen.getByRole('button', { name: 'after' })).toHaveFocus()
+  })
+
+  it('renders outside a RadioGroup, and a checkbox card does too', () => {
+    render(
+      <>
+        <RadioGroupCard presentational description="No handover">
+          Immediately
+        </RadioGroupCard>
+        <CheckboxCard presentational>Mornings</CheckboxCard>
+      </>
+    )
+    expect(screen.getByText('Immediately')).toBeInTheDocument()
+    expect(screen.getByText('No handover')).toBeInTheDocument()
+    expect(screen.getByText('Mornings')).toBeInTheDocument()
+    expect(screen.queryByRole('checkbox')).not.toBeInTheDocument()
+  })
+
+  it('is not disabled and is not dimmed', () => {
+    render(<RadioGroupCard presentational selected>Two weeks</RadioGroupCard>)
+    const card = cardOf(screen.getByText('Two weeks'))
+    expect(card).not.toHaveAttribute('aria-disabled')
+    expect(card).not.toHaveAttribute('data-disabled')
+    expect(card).not.toHaveAttribute('disabled')
+    const recipe = choiceCardVariants()
+    expect(recipe).not.toMatch(/data-\[presentational\][^\s]*opacity/)
+  })
+
+  it('fills the mark for the picked option and leaves the rest empty', () => {
+    render(
+      <>
+        <RadioGroupCard presentational>Immediately</RadioGroupCard>
+        <RadioGroupCard presentational selected>
+          Two weeks
+        </RadioGroupCard>
+      </>
+    )
+    const picked = cardOf(screen.getByText('Two weeks'))
+    const empty = cardOf(screen.getByText('Immediately'))
+    expect(picked).toHaveAttribute('data-checked')
+    expect(empty).not.toHaveAttribute('data-checked')
+    // The paint keys off `data-checked` exactly as Base UI sets it on the live
+    // card, so a picture of a picked option and a picked option are one recipe.
+    expect(mark(picked).querySelector('svg')).toBeInTheDocument()
+    expect(mark(empty).querySelector('svg')).not.toBeInTheDocument()
+  })
+
+  it('marks its slot and says which mode it is in', () => {
+    render(<RadioGroupCard presentational>Two weeks</RadioGroupCard>)
+    const card = cardOf(screen.getByText('Two weeks'))
+    expect(card).toHaveAttribute('data-slot', 'radio-group-card')
+    expect(card).toHaveAttribute('data-presentational')
+  })
+
+  it('leaves data-presentational off the live card', () => {
+    render(
+      <RadioGroup aria-label="Notice period">
+        <RadioGroupCard value="two-weeks">Two weeks</RadioGroupCard>
+      </RadioGroup>
+    )
+    expect(
+      screen.getByRole('radio', { name: 'Two weeks' })
+    ).not.toHaveAttribute('data-presentational')
+  })
+
+  it('throws rather than fudge a function className', () => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    expect(() =>
+      render(
+        // @ts-expect-error — the union forbids it; the throw is for JS callers.
+        <RadioGroupCard presentational className={() => 'whatever'}>
+          Two weeks
+        </RadioGroupCard>
+      )
+    ).toThrow(/function `className`/)
+    spy.mockRestore()
+  })
+
+  it('is painted by the same recipe as the live card', () => {
+    // The pair lavahire could not keep in step — the control and the picture of
+    // it — is one component and one recipe here, and this is what says so.
+    const { unmount } = render(
+      <RadioGroup aria-label="Notice period">
+        <RadioGroupCard value="two-weeks">Two weeks</RadioGroupCard>
+      </RadioGroup>
+    )
+    const live = screen.getByRole('radio', { name: 'Two weeks' })
+    const liveBox = live.className
+    const liveMark = mark(live).className
+    unmount()
+
+    render(<RadioGroupCard presentational>Two weeks</RadioGroupCard>)
+    const shown = cardOf(screen.getByText('Two weeks'))
+    expect(shown.className).toBe(liveBox)
+    expect(mark(shown).className).toBe(liveMark)
+  })
+
+  it('draws the same filled mark as a live picked card', () => {
+    const { unmount } = render(
+      <RadioGroup aria-label="Notice period" defaultValue="two-weeks">
+        <RadioGroupCard value="two-weeks">Two weeks</RadioGroupCard>
+      </RadioGroup>
+    )
+    const live = mark(screen.getByRole('radio', { name: 'Two weeks' })).innerHTML
+    unmount()
+
+    render(<RadioGroupCard presentational selected>Two weeks</RadioGroupCard>)
+    const shown = mark(
+      cardOf(screen.getByText('Two weeks'))
+    ).innerHTML
+    expect(shown).toBe(live)
+  })
+})
+
+describe('a two-option radio group needs no special case', () => {
+  // lavahire's `boolean` kind is a single-select whose options it wrote, so it
+  // renders and answers exactly like `single`. Three kinds hit the choice path
+  // — single, multiple and boolean — and only `multiple` is a different
+  // control, which is why nothing here knows about true/false.
+  it('renders yes/no as an ordinary radio group', async () => {
+    const user = userEvent.setup()
+    const onValueChange = vi.fn()
+    render(
+      <RadioGroup
+        aria-label="Do you hold a valid work permit?"
+        onValueChange={onValueChange}
+      >
+        <RadioGroupCard value="yes">Yes</RadioGroupCard>
+        <RadioGroupCard value="no">No</RadioGroupCard>
+      </RadioGroup>
+    )
+    expect(screen.getAllByRole('radio')).toHaveLength(2)
+    await user.click(screen.getByRole('radio', { name: 'No' }))
+    expect(onValueChange).toHaveBeenCalledWith('no', expect.anything())
   })
 })

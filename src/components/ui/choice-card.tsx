@@ -30,6 +30,63 @@ function cardClassName<State>(
   return cn(recipe, className)
 }
 
+/**
+ * The same check, for the mode where the opposite is true. A presentational
+ * card renders its own `<span>` — there is no Base UI part and so no state to
+ * call a function `className` with, and calling it with an invented one would
+ * hand back classes for a state the card was never in. Saying so beats quietly
+ * dropping it, the way `Tabs unstackAt` and `Sheet dockAt` say it.
+ */
+function presentationalClassName(
+  className: unknown,
+  part: string
+): string | undefined {
+  if (typeof className === "function") {
+    throw new Error(
+      `${part} cannot take a function \`className\` when it is \`presentational\`: that form is called with Base UI's state for the control, and a presentational card has no control to give one. Pass a string, and select on \`data-checked\` or \`data-presentational\` for the rest.`
+    )
+  }
+  return className as string | undefined
+}
+
+/**
+ * The glyph inside the mark, and the box it centres in.
+ *
+ * Written once and handed to both modes. The live card wraps it in Base UI's
+ * `Indicator`, which mounts it only while checked; the presentational card
+ * mounts it on `selected`. Same element, same classes, so the picture of a
+ * picked option and a picked option cannot come apart.
+ */
+const INDICATOR_CLASS = "flex items-center justify-center"
+const RADIO_GLYPH = <Circle className="size-2.5 fill-current text-current" />
+const CHECKBOX_GLYPH = <Check className="size-4" />
+
+/** The mark, as the presentational card draws it. */
+function PresentationalMark({
+  shape,
+  selected,
+}: {
+  shape: "radio" | "checkbox"
+  selected?: boolean
+}) {
+  return (
+    <span
+      data-slot="choice-card-mark"
+      aria-hidden="true"
+      className={choiceCardMarkVariants({ shape })}
+    >
+      {selected && (
+        // `data-checked` mirrors what Base UI's `Indicator` puts here, so the
+        // two modes render byte-identical markup and a caller styling the
+        // indicator does not have to know which mode drew it.
+        <span data-checked="" className={INDICATOR_CLASS}>
+          {shape === "radio" ? RADIO_GLYPH : CHECKBOX_GLYPH}
+        </span>
+      )}
+    </span>
+  )
+}
+
 /** The label, and the muted second line under it. */
 function ChoiceCardBody({
   label,
@@ -38,7 +95,8 @@ function ChoiceCardBody({
   descriptionId,
 }: {
   label: React.ReactNode
-  labelId: string
+  /** Only set when a role needs naming — a presentational card has none. */
+  labelId?: string
   description?: React.ReactNode
   descriptionId?: string
 }) {
@@ -98,6 +156,27 @@ function useChoiceCardNaming(
   }
 }
 
+/**
+ * Props a card takes when it is a picture of a control rather than a control.
+ *
+ * The staff surfaces in MikeNotThePope/substrateui#123 item 6 — the builder's
+ * applicant preview and a published questionnaire awaiting answers — render a
+ * form without being one. A control there is the wrong accessibility object: it
+ * adds a tab stop that answers nothing, and announces a `radio` on a page where
+ * there is no question to answer. `presentational` is the same card with no
+ * role, no ARIA state and no tab stop, and — the part that matters — no dimming
+ * either, because the option is neither unavailable nor disabled.
+ *
+ * Use `readOnly` instead when there *is* an answer and a reader should be able
+ * to find out what it was. That keeps the role and gains `aria-readonly`.
+ */
+interface PresentationalChoiceCardProps {
+  /** Draw the card with no control inside it. */
+  presentational: true
+  /** Whether the mark is drawn filled. There is no control to read it from. */
+  selected?: boolean
+}
+
 /** Props both cards add on top of their Base UI primitive. */
 interface ChoiceCardOwnProps {
   /** The option, as the reader sees it. Becomes the card's accessible name. */
@@ -109,14 +188,71 @@ interface ChoiceCardOwnProps {
   description?: React.ReactNode
 }
 
-// ─── RadioGroupCard ──────────────────────────────────────────────────
+// ─── The presentational card ─────────────────────────────────────────
 
-/** Props accepted by the RadioGroupCard component. */
-export type RadioGroupCardProps = Omit<
-  React.ComponentPropsWithRef<typeof RadioPrimitive.Root>,
+/** What a presentational card is handed, once the mode prop has been read. */
+type PresentationalCardProps = Omit<
+  React.ComponentPropsWithRef<"span">,
+  "children"
+> &
+  ChoiceCardOwnProps &
+  Omit<PresentationalChoiceCardProps, "presentational">
+
+/** The live half's props, whichever primitive it wraps. */
+type LiveChoiceCardProps<T extends React.ElementType> = Omit<
+  React.ComponentPropsWithRef<T>,
   "children"
 > &
   ChoiceCardOwnProps
+
+/**
+ * The card with no control in it: one `<span>`, the same recipe, no role.
+ *
+ * Both cards render through this, so the shape is the only thing that differs
+ * between a presentational radio card and a presentational checkbox card —
+ * and the box is the same recipe the live card uses, so the pair lavahire
+ * could not keep in step is one piece of code here.
+ */
+function PresentationalChoiceCard({
+  className,
+  children,
+  description,
+  selected,
+  shape,
+  slot,
+  part,
+  ...props
+}: PresentationalCardProps & {
+  shape: "radio" | "checkbox"
+  slot: string
+  part: string
+}) {
+  return (
+    <span
+      data-slot={slot}
+      data-presentational=""
+      {...(selected ? { "data-checked": "" } : {})}
+      className={cn(
+        choiceCardVariants(),
+        presentationalClassName(className, part)
+      )}
+      {...props}
+    >
+      <PresentationalMark shape={shape} selected={selected} />
+      <ChoiceCardBody label={children} description={description} />
+    </span>
+  )
+}
+
+// ─── RadioGroupCard ──────────────────────────────────────────────────
+
+/** Props accepted by the RadioGroupCard component. */
+export type RadioGroupCardProps =
+  | (Omit<React.ComponentPropsWithRef<typeof RadioPrimitive.Root>, "children"> &
+      ChoiceCardOwnProps & { presentational?: false; selected?: never })
+  | (Omit<React.ComponentPropsWithRef<"span">, "children"> &
+      ChoiceCardOwnProps &
+      PresentationalChoiceCardProps)
 
 /**
  * One option in a {@link RadioGroup}, drawn as a card the whole of which is the
@@ -136,12 +272,11 @@ export type RadioGroupCardProps = Omit<
  *   <RadioGroupCard value="a-month">A month</RadioGroupCard>
  * </RadioGroup>
  *
- * A frozen answer — a submitted form, a published questionnaire, a staff
- * preview of either — is the same card with `readOnly` on the group. It keeps
- * its role, its `aria-checked` and its place in the tab order, and gains
- * `aria-readonly`, so a reader can still find out what was chosen. It is not
- * dimmed: `disabled` says the option is unavailable, `readOnly` says the answer
- * is final, and a record is the second one.
+ * There are two ways to stop being answerable, and they are not the same
+ * claim. A **submitted answer** a reader should still be able to read is
+ * `readOnly`, which is Base UI's and works on the group: the role, the
+ * `aria-checked` and the tab stop all stay, `aria-readonly` arrives, and
+ * nothing is dimmed.
  *
  * @example
  * <RadioGroup value={answer} readOnly aria-label="Notice period">
@@ -149,9 +284,42 @@ export type RadioGroupCardProps = Omit<
  *   <RadioGroupCard value="a-month">A month</RadioGroupCard>
  * </RadioGroup>
  *
+ * A **picture of a form** — a staff preview of a questionnaire, a published
+ * record waiting on answers, anywhere there is no question being put to the
+ * reader — is `presentational`. No role, no ARIA state, no tab stop, and no
+ * group around it: a `radiogroup` on a page nobody can answer is a tab stop
+ * that leads nowhere and a question announced to a reader who was not asked
+ * it. `selected` fills the mark, because there is no control to read it from.
+ *
+ * @example
+ * <div className="flex flex-col gap-2">
+ *   <RadioGroupCard presentational>Immediately</RadioGroupCard>
+ *   <RadioGroupCard presentational selected>Two weeks</RadioGroupCard>
+ * </div>
+ *
+ * Neither is `disabled`. Dimming says the option is unavailable, which is a
+ * third thing and the only one of the three that greys the card out.
+ *
  * @prop description - A muted second line, and the card's accessible description.
+ * @prop presentational - Draw the card with no control in it: no role, no ARIA, no tab stop.
+ * @prop selected - With `presentational`, whether the mark is drawn filled.
  */
-function RadioGroupCard({
+function RadioGroupCard({ presentational, ...rest }: RadioGroupCardProps) {
+  if (!presentational) {
+    return <LiveRadioGroupCard {...(rest as LiveChoiceCardProps<typeof LiveRadioGroupCard>)} />
+  }
+  return (
+    <PresentationalChoiceCard
+      {...(rest as PresentationalCardProps)}
+      shape="radio"
+      slot="radio-group-card"
+      part="RadioGroupCard"
+    />
+  )
+}
+
+/** The interactive half, split out so the hook is never called conditionally. */
+function LiveRadioGroupCard({
   className,
   children,
   description,
@@ -160,7 +328,8 @@ function RadioGroupCard({
   "aria-labelledby": ariaLabelledBy,
   "aria-describedby": ariaDescribedBy,
   ...props
-}: RadioGroupCardProps) {
+}: Omit<React.ComponentPropsWithRef<typeof RadioPrimitive.Root>, "children"> &
+  ChoiceCardOwnProps) {
   const { labelId, descriptionId, ...naming } = useChoiceCardNaming(
     description,
     ariaLabel,
@@ -181,8 +350,8 @@ function RadioGroupCard({
         aria-hidden="true"
         className={choiceCardMarkVariants({ shape: "radio" })}
       >
-        <RadioPrimitive.Indicator className="flex items-center justify-center">
-          <Circle className="size-2.5 fill-current text-current" />
+        <RadioPrimitive.Indicator className={INDICATOR_CLASS}>
+          {RADIO_GLYPH}
         </RadioPrimitive.Indicator>
       </span>
       <ChoiceCardBody
@@ -198,11 +367,12 @@ function RadioGroupCard({
 // ─── CheckboxCard ────────────────────────────────────────────────────
 
 /** Props accepted by the CheckboxCard component. */
-export type CheckboxCardProps = Omit<
-  React.ComponentPropsWithRef<typeof CheckboxPrimitive.Root>,
-  "children"
-> &
-  ChoiceCardOwnProps
+export type CheckboxCardProps =
+  | (Omit<React.ComponentPropsWithRef<typeof CheckboxPrimitive.Root>, "children"> &
+      ChoiceCardOwnProps & { presentational?: false; selected?: never })
+  | (Omit<React.ComponentPropsWithRef<"span">, "children"> &
+      ChoiceCardOwnProps &
+      PresentationalChoiceCardProps)
 
 /**
  * A {@link Checkbox} drawn as a card the whole of which is the target.
@@ -225,12 +395,31 @@ export type CheckboxCardProps = Omit<
  *   </CheckboxCard>
  * </Fieldset>
  *
- * `readOnly` freezes it the way it freezes a radio card: `aria-readonly`, the
- * answer still readable, and no dimming.
+ * `readOnly` and `presentational` mean here exactly what they mean on
+ * {@link RadioGroupCard}: the first keeps the control and freezes its answer,
+ * the second is a picture of the control with no role at all. Neither dims.
+ *
+ * @example
+ * <CheckboxCard presentational selected>Mornings</CheckboxCard>
  *
  * @prop description - A muted second line, and the card's accessible description.
  */
-function CheckboxCard({
+function CheckboxCard({ presentational, ...rest }: CheckboxCardProps) {
+  if (!presentational) {
+    return <LiveCheckboxCard {...(rest as LiveChoiceCardProps<typeof LiveCheckboxCard>)} />
+  }
+  return (
+    <PresentationalChoiceCard
+      {...(rest as PresentationalCardProps)}
+      shape="checkbox"
+      slot="checkbox-card"
+      part="CheckboxCard"
+    />
+  )
+}
+
+/** The interactive half, split out so the hook is never called conditionally. */
+function LiveCheckboxCard({
   className,
   children,
   description,
@@ -239,7 +428,8 @@ function CheckboxCard({
   "aria-labelledby": ariaLabelledBy,
   "aria-describedby": ariaDescribedBy,
   ...props
-}: CheckboxCardProps) {
+}: Omit<React.ComponentPropsWithRef<typeof CheckboxPrimitive.Root>, "children"> &
+  ChoiceCardOwnProps) {
   const { labelId, descriptionId, ...naming } = useChoiceCardNaming(
     description,
     ariaLabel,
@@ -260,8 +450,8 @@ function CheckboxCard({
         aria-hidden="true"
         className={choiceCardMarkVariants({ shape: "checkbox" })}
       >
-        <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-          <Check className="size-4" />
+        <CheckboxPrimitive.Indicator className={INDICATOR_CLASS}>
+          {CHECKBOX_GLYPH}
         </CheckboxPrimitive.Indicator>
       </span>
       <ChoiceCardBody

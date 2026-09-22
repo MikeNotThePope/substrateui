@@ -73,7 +73,26 @@ export const ReadOnly: Story = {
   ),
 }
 
-/** `disabled` is the other state, and the only one that dims. */
+/**
+ * A picture of a form: a staff preview, or a published record waiting on
+ * answers. No role, no ARIA state, no tab stop and no group — and still not
+ * dimmed, because a preview of a form is not a disabled form.
+ */
+export const Presentational: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-2">
+      <RadioGroupCard presentational description="No handover">
+        Immediately
+      </RadioGroupCard>
+      <RadioGroupCard presentational selected description="The usual arrangement">
+        Two weeks
+      </RadioGroupCard>
+      <RadioGroupCard presentational>A month or more</RadioGroupCard>
+    </div>
+  ),
+}
+
+/** `disabled` is the third state, and the only one that dims. */
 export const Disabled: Story = {
   render: () => (
     <div className="w-full max-w-md">
@@ -87,8 +106,11 @@ export const Disabled: Story = {
   ),
 }
 
-/** Labels alone, with nothing under them. */
-export const LabelOnly: Story = {
+/**
+ * True/false is a single-select whose options the caller wrote, so it is an
+ * ordinary two-option radio group and nothing here knows about booleans.
+ */
+export const TwoOptions: Story = {
   render: () => (
     <div className="w-full max-w-md">
       <RadioGroup defaultValue="yes" aria-label="Do you hold a valid work permit?">

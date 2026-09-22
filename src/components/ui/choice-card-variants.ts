@@ -21,9 +21,11 @@ import { cva } from "class-variance-authority"
  * and `bg-accent` is not in the cascade's way. `foreground on accent` and
  * `muted-foreground on accent` both pass AA in all six themes.
  *
- * `readOnly` dims nothing. A frozen answer is final, not unavailable: Base UI
- * gives it `aria-readonly` and `data-readonly`, and the only thing this recipe
- * takes away is the hover and the pointer. `disabled` is the state that dims.
+ * Neither `readOnly` nor `presentational` dims. A frozen answer is final, not
+ * unavailable, and a staff preview of a form is not a disabled form: all this
+ * recipe takes away from either is the hover and the pointer. `disabled` is the
+ * one state that dims. `presentational` also restores text selection, because
+ * a picture of a form is text a reader may want to copy.
  */
 export const choiceCardVariants = cva(
   [
@@ -32,6 +34,7 @@ export const choiceCardVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "data-[checked]:bg-accent data-[checked]:hover:bg-accent",
     "data-[readonly]:cursor-default data-[readonly]:hover:bg-background data-[readonly]:data-[checked]:hover:bg-accent",
+    "data-[presentational]:cursor-default data-[presentational]:select-text data-[presentational]:hover:bg-background data-[presentational]:data-[checked]:hover:bg-accent",
     "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[disabled]:hover:bg-background",
   ].join(" ")
 )

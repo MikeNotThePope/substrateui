@@ -80,9 +80,10 @@ export default function CheckboxPage() {
         <H3>As cards</H3>
         <P>
           <Code>Checkbox</Code> is the 18px box, and the target is the box.{" "}
-          <Code>CheckboxCard</Code> is the same control grown into the whole row: 44px on its
-          short side, a label and a muted description, and a tap anywhere in it toggles. It
-          also renders a frozen answer read-only without looking disabled. See{" "}
+          <Code>CheckboxCard</Code> is the same control grown into the whole row — 56px
+          tall, a label and a muted description — and a tap anywhere in it toggles. It also
+          renders a submitted answer read-only, and a staff preview with no control in it at
+          all, neither of them dimmed. See{" "}
           <Link href="/docs/components/choice-card">Choice Card</Link>.
         </P>
         <ComponentPreview
