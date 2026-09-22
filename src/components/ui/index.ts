@@ -50,6 +50,7 @@ export * from "./input";
 export * from "./input-group";
 export * from "./input-otp";
 export * from "./item";
+export * from "./item-variants";
 export * from "./kbd";
 export * from "./label";
 export * from "./link";
