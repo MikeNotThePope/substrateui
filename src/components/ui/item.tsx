@@ -24,7 +24,7 @@ export interface ItemProps
  *
  * `render` decides what element the row *is*. A row of actions is a list of
  * `button`s, a row of destinations is a list of `a`s, and a row that holds two
- * controls of its own has to stay a container — the same shape in all three
+ * controls of its own has to stay a container: the same shape in all three
  * cases, which is why this is one prop rather than an `ItemButton` beside an
  * `ItemLink` beside this.
  *
@@ -54,7 +54,7 @@ function Item({
 }: ItemProps) {
   // A `<button>` with no `type` submits the form it is standing in, and a row
   // of actions inside a form is exactly where this lands. React does not
-  // default it and neither does the DOM, so the row does — only when the caller
+  // default it and neither does the DOM, so the row does, and only when the caller
   // wrote a bare `<button>`, so an explicit `type="submit"` still means what it
   // says.
   const bareButton =
@@ -113,7 +113,7 @@ function ItemLabel({
  *
  * `ms-auto` on the first trailer takes the whole of the free space, so a second
  * one sits beside it rather than drifting back to the middle. What a trailer
- * *holds* is the caller's — a badge, a timestamp, a chevron — and so is whether
+ * *holds* is the caller's (a badge, a timestamp, a chevron), and so is whether
  * it survives a narrow screen: this ships no `hidden sm:inline`, because which
  * of two trailers is the expendable one is a fact about the content.
  */

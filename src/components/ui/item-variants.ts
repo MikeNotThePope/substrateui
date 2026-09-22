@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority"
 
 // The class recipe, kept out of `item.tsx` so a server component can call it.
 // `item.tsx` is `"use client"` from the moment it reaches for `useRender`, and
-// `"use client"` marks every export of a module — see src/variants.ts for why a
+// `"use client"` marks every export of a module. See src/variants.ts for why a
 // re-export through the root barrel is not enough.
 
 /**
@@ -10,7 +10,7 @@ import { cva } from "class-variance-authority"
  *
  * The row is a shape, not an element. `Item` renders a `div` by default and any
  * of `a`, `button`, `li` or `summary` through `render`, and this recipe has to
- * look the same on all of them — so the two things only an interactive element
+ * look the same on all of them, so the two things only an interactive element
  * needs are scoped to one. `w-full` and `text-start` are inside
  * `[&:where(a,button)]` because a `button` is `width: fit-content` and
  * `text-align: center` by UA default and a `div` is neither, and `:where()`

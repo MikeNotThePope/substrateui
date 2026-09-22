@@ -31,14 +31,14 @@ const itemProps: PropDef[] = [
     type: '"default" | "lg"',
     default: '"default"',
     description:
-      "Row height. default is 36px — a menu row under a pointer that is already there. lg is 44px, the target size of WCAG 2.2 SC 2.5.5, for a full-width row that is itself the control.",
+      "Row height. default is 36px, a menu row under a pointer that is already there. lg is 44px, the target size of WCAG 2.2 SC 2.5.5, for a full-width row that is itself the control.",
   },
   {
     name: "active",
     type: "boolean",
     default: "false",
     description:
-      "Marks the row as the current one — tinted surface and medium weight. Sets data-active for styling; adds no ARIA.",
+      "Marks the row as the current one: tinted surface and medium weight. Sets data-active for styling; adds no ARIA.",
   },
   {
     name: "disabled",
@@ -59,7 +59,7 @@ export default function ItemPage() {
   return (
     <DocPage
       title="Item"
-      description="One row of a menu or list: an icon slot, a truncating label, a trailer, and hover, active and disabled states. A styling primitive — it renders a div until render says otherwise, and then it is whatever you named."
+      description="One row of a menu or list: an icon slot, a truncating label, a trailer, and hover, active and disabled states. A styling primitive: it renders a div until render says otherwise, and then it is whatever you named."
     >
       <ComponentPreview
         code={`<Item active>
@@ -76,7 +76,7 @@ export default function ItemPage() {
 </Item>
 <Item disabled>
   <ItemIcon><Trash2 /></ItemIcon>
-  <ItemLabel>Trash — emptying</ItemLabel>
+  <ItemLabel>Trash (emptying)</ItemLabel>
 </Item>`}
       >
         <div className="w-full max-w-xs rounded-lg border-2 p-1">
@@ -102,7 +102,7 @@ export default function ItemPage() {
             <ItemIcon>
               <Trash2 />
             </ItemIcon>
-            <ItemLabel>Trash — emptying</ItemLabel>
+            <ItemLabel>Trash (emptying)</ItemLabel>
           </Item>
         </div>
       </ComponentPreview>
@@ -134,8 +134,8 @@ export default function ItemPage() {
         <Stack gap="sm">
           <P>
             A list of things you can do is a list of <Code>button</Code>s. Pass
-            one to <Code>render</Code> and the row becomes it — padding, hover,
-            focus ring and all — rather than becoming a container with a button
+            one to <Code>render</Code> and the row becomes it, padding, hover,
+            focus ring and all, rather than becoming a container with a button
             inside it fighting for the same width.
           </P>
           <P>
@@ -215,8 +215,8 @@ export default function ItemPage() {
         <P>
           <Code>default</Code> is 36px tall at <Code>text-sm</Code>. That is a
           menu row: the pointer is already on it, because a menu is what put it
-          there. <Code>lg</Code> is <Code>min-h-11</Code> — 44px, the target size
-          of WCAG 2.2 SC 2.5.5 — and is what a full-width row that is itself the
+          there. <Code>lg</Code> is <Code>min-h-11</Code>, 44px, the target size
+          of WCAG 2.2 SC 2.5.5, and is what a full-width row that is itself the
           control should be, because there the row is the only thing to hit and
           a thumb is what hits it.
         </P>
@@ -226,7 +226,7 @@ export default function ItemPage() {
         <H3>Item or ListGroup</H3>
         <Stack gap="sm">
           <P>
-            <Code>Item</Code> is one row and nothing around it — no container, no
+            <Code>Item</Code> is one row and nothing around it: no container, no
             dividers, no keyboard handling. Use it when you are building the
             surrounding control yourself: the rows of a custom menu, a filter
             list, a sidebar section, or a list whose parent is already something
@@ -239,7 +239,7 @@ export default function ItemPage() {
             >
               ListGroup
             </a>{" "}
-            is the finished list — a bordered container with separators and rows
+            is the finished list: a bordered container with separators and rows
             that take the same <Code>render</Code> prop. If you want a list,
             start there; come here when you want to assemble one, or when the
             list needs no box around it.
@@ -256,18 +256,18 @@ export default function ItemPage() {
           full string is reachable.
         </P>
         <ComponentPreview
-          code={`<Item title="Quarterly revenue reconciliation — EMEA, Q3 2026">
+          code={`<Item title="Quarterly revenue reconciliation, EMEA, Q3 2026">
   <ItemIcon><Archive /></ItemIcon>
-  <ItemLabel>Quarterly revenue reconciliation — EMEA, Q3 2026</ItemLabel>
+  <ItemLabel>Quarterly revenue reconciliation, EMEA, Q3 2026</ItemLabel>
 </Item>`}
         >
           <div className="w-full max-w-[220px] rounded-lg border-2 p-1">
-            <Item title="Quarterly revenue reconciliation — EMEA, Q3 2026">
+            <Item title="Quarterly revenue reconciliation, EMEA, Q3 2026">
               <ItemIcon>
                 <Archive />
               </ItemIcon>
               <ItemLabel>
-                Quarterly revenue reconciliation — EMEA, Q3 2026
+                Quarterly revenue reconciliation, EMEA, Q3 2026
               </ItemLabel>
             </Item>
           </div>
@@ -287,7 +287,7 @@ export default function ItemPage() {
           </P>
           <P>
             When the row is a control, everything inside it is its accessible
-            name, in source order and run together — adjacent inline spans
+            name, in source order and run together: adjacent inline spans
             contribute no whitespace, however far <Code>gap-2</Code> pushes them
             apart. A row of an icon, &ldquo;Salary&rdquo; and a{" "}
             <Code>ItemTrailer</Code> reading &ldquo;Short text&rdquo; announces
@@ -299,13 +299,13 @@ export default function ItemPage() {
             A trailer that disappears on a narrow screen disappears from the
             name too: <Code>hidden</Code> is <Code>display: none</Code>. That is
             usually right, and it is why this component ships no responsive
-            behaviour of its own — which of two trailers is the expendable one is
+            behaviour of its own, because which of two trailers is the expendable one is
             a fact about the content, not about the row.
           </P>
           <P>
             <Code>active</Code> is styling. It sets <Code>data-active</Code> and
             no ARIA, so pair it with <Code>aria-current</Code> on a navigation
-            row or <Code>aria-selected</Code> in a listbox — otherwise the
+            row or <Code>aria-selected</Code> in a listbox. Otherwise the
             current row is only current if you can see the tint.
           </P>
           <P>
@@ -321,7 +321,7 @@ export default function ItemPage() {
         <H3>API Reference</H3>
         <P>
           <Code>ItemIcon</Code>, <Code>ItemLabel</Code> and{" "}
-          <Code>ItemTrailer</Code> add no props of their own — everything,
+          <Code>ItemTrailer</Code> add no props of their own: everything,
           including <Code>className</Code>, goes to the underlying{" "}
           <Code>span</Code>. Same for anything you pass <Code>Item</Code> beyond
           the four below, which reaches whatever element <Code>render</Code>{" "}
