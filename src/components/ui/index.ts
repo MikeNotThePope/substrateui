@@ -36,6 +36,7 @@ export * from "./field";
 export * from "./fieldset";
 export * from "./file-drop-field";
 export * from "./file-drop-field-variants";
+export * from "./floating-action";
 export * from "./focus-trap";
 export * from "./form";
 export * from "./form-actions";

@@ -87,6 +87,13 @@ function DropdownMenuSubContent({
 /**
  * Animated popover panel containing the dropdown menu items.
  *
+ * `positionMethod` is the CSS `position` the popup is placed with, and it has
+ * to match the anchor's coordinate space. The default, `"absolute"`, measures
+ * the popup in document coordinates, which is right for a trigger that scrolls
+ * with the page. A trigger pinned with `position: fixed`, a corner launcher
+ * say, is anchored in viewport coordinates instead, and the two agree only
+ * while the page is scrolled to the top. Pass `positionMethod="fixed"` there.
+ *
  * @example
  * <DropdownMenu>
  *   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
@@ -99,12 +106,13 @@ function DropdownMenuContent({
   alignOffset,
   side,
   sideOffset = 4,
+  positionMethod,
   ref,
   ...props
 }: React.ComponentPropsWithRef<typeof MenuPrimitive.Popup> &
   Pick<
     React.ComponentProps<typeof MenuPrimitive.Positioner>,
-    "align" | "alignOffset" | "side" | "sideOffset"
+    "align" | "alignOffset" | "side" | "sideOffset" | "positionMethod"
   >) {
   return (
     <MenuPrimitive.Portal>
@@ -113,6 +121,7 @@ function DropdownMenuContent({
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
+        positionMethod={positionMethod}
         className="z-50"
       >
         <MenuPrimitive.Popup
