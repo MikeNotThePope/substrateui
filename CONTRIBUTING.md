@@ -248,7 +248,15 @@ To add a theme:
    for it — landing page, contrast matrix, and two representative
    component pages. Don't snapshot every component in every theme.
 
-A theme should ONLY vary color tokens. Spacing, typography, radii, and
-shadows stay constant across themes — they're structural, not brand.
+A theme varies color tokens plus the `// Feel` names in
+`ThemeTokenName` (`src/components/ui/theme.tsx`): `--radius-factor`,
+`--motion-duration` and `--motion-ease`, beside the two color-valued
+feel tokens `--hard-shadow-color` and `--spinner-track`. That type is
+what autocompletes in `createTheme`, so it is the contract, and
+`tests/unit/styles/tokens.test.ts` fails if a feel name stops resolving
+through `tokens.css`. Everything else is house: spacing, the type
+scale, border weight (the literal `border-2`) and shadow offsets stay
+constant across themes. A `--border-factor` token for thinner borders
+was rejected as post-ship decision S1 in `design/DESIGN-SYSTEM.md`.
 If you find yourself needing per-theme spacing or typography, rethink
 the abstraction before forking it.

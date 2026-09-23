@@ -95,7 +95,7 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 
 ## The DNA
 
-1. **Chunky borders.** Components wear visible 2px borders (\`--border-width: 2px\`), darker than typical libraries. Don't thin them or fade them out.
+1. **Chunky borders.** Components wear visible 2px borders (the literal \`border-2\` class, not a token), darker than typical libraries. Don't thin them or fade them out.
 2. **Physical press.** Solid buttons rest on a hard offset shadow, lift toward the light on hover, and sink flush on press. Interactions feel mechanical, not floaty. For custom pressable surfaces use \`shadow-hard-sm\` / \`shadow-hard\` / \`shadow-hard-lg\`.
 3. **OKLCH color.** The entire palette is OKLCH with perceptually even ramps. You never touch raw values — semantic tokens only.
 4. **Cut, not rounded.** Components use \`rounded-md\`/\`rounded-lg\`, but the whole radius scale is themable via \`--radius-factor\` and the baseline is 0.25x — corners read as cut rather than soft. Substrate and tundra retune it. Never hardcode pixel radii, and no pill buttons.

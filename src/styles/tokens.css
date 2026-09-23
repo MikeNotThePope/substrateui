@@ -197,10 +197,6 @@
   --hard-shadow-lg: 6px 6px 0 0 var(--hard-shadow-color);
   --hard-shadow-amber: 6px 6px 0 0 var(--secondary-fill);
 
-  /* ── SubstrateUI structural (shared across modes) ── */
-  --border-width: 2px;
-  --press-depth: 1.5px;
-
   /* ── SubstrateUI feel tokens (themable structure) ──
      Motion re-times every component transition that doesn't set an
      explicit duration or easing utility (see BASE STYLES). Radius

@@ -134,7 +134,7 @@ gradients, one display size per section.
 
 | # | Decision | Verdict | Why |
 |---|---|---|---|
-| 1 | Replace neo-brutalism inside the shipped components now | rejected | v1.14 is published; `border-2`/`shadow-hard` are in consumers' UIs. Client chose "website first, library follows later" — the site proves the language, a v2 track ports it. |
+| 1 | Replace neo-brutalism inside the shipped components now | rejected | v1.14 is published; `border-2`/`shadow-hard` are in consumers' UIs. Client chose "website first, library follows later". **Superseded by S1:** the v2 track that was to port the look was rejected on 2026-07-29, once the home page, built from zero-override shipped components, showed `border-2` reads as letterpress beside the process inks (P3: "Finding: it works"). The library keeps its borders. |
 | 2 | Replace the shipped default palette with Proof | rejected | Would be a silent breaking visual change for every existing consumer. `proof` is added as a new theme and the site opts into it via `data-theme`; the plum palette stays untouched. One attribute reverses this. |
 | 3 | Warm cream stock + editorial serif for the swatch-card feel | rejected | Lands squarely on AI default #1 (cream + serif + terracotta). Press proofs are all-grotesque on cool stock anyway — the truer reference is also the less generic one. |
 | 4 | Process magenta as the `destructive`/error token | rejected | Magenta sits at hue 4, a hair off true red; using it semantically makes "delete" and "brand accent" confusable. Magenta is brand-only; error is a distinct hue-27 red. |
