@@ -42,12 +42,17 @@ export const choiceCardVariants = cva(
  *
  * The size, the border weight and the corner are written as the same literal
  * tokens `RadioGroupItem` and `Checkbox` use, because a card is a bigger target
- * around the same control, not a bigger control. It is the one thing lavahire's
- * copy of this pattern needed a test for — its live control drew `rounded-sm`
- * where its read-only twin drew `rounded`, which is the sort of difference
- * nobody spots side by side and everybody spots in a screenshot. Here there is
- * one card rather than a twin, so the pair that can still drift is this mark
- * against the standalone control, and `choice-card.test.tsx` compares them.
+ * around the same control, not a bigger control. `choice-card.test.tsx`
+ * compares the two, which keeps them together and cannot tell whether the
+ * token they share is right.
+ *
+ * It was not. Both drew bare `rounded`, which is `--radius` (0.625rem), off the
+ * `--radius-factor` ladder: 10px on an 18px box clamps to a circle, so every
+ * checkbox read as a radio (#159). lavahire's live control drew `rounded-sm`,
+ * a 1px corner, and that was the right one, not the drift. The box is
+ * `rounded-sm` now, so it scales with the theme like every other corner, and
+ * `tests/visual/mark-corner.behavior.spec.ts` reads the computed corner
+ * against the box's own width in every palette.
  *
  * `mt-0.5` sits the mark on the label's first line rather than centring it
  * against a two-line card.
@@ -59,7 +64,7 @@ export const choiceCardMarkVariants = cva(
       shape: {
         radio: "rounded-full",
         checkbox:
-          "rounded group-data-[checked]/choice-card:bg-primary group-data-[checked]/choice-card:text-primary-foreground",
+          "rounded-sm group-data-[checked]/choice-card:bg-primary group-data-[checked]/choice-card:text-primary-foreground",
       },
     },
     defaultVariants: {

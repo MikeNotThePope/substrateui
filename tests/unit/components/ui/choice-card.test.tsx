@@ -348,8 +348,10 @@ describe('the two cards are one card', () => {
   })
 
   // What a card can still drift against is the standalone control it claims to
-  // be a bigger target for. Measured in a real browser before this test existed:
-  // the card's checkbox mark drew a 1px corner where `Checkbox` draws 10px.
+  // be a bigger target for. This catches the two parting ways and nothing else:
+  // it passed while both drew bare `rounded`, a 10px corner that makes an 18px
+  // box a circle (#159). Whether the shared corner is right is the browser's to
+  // say, in tests/visual/mark-corner.behavior.spec.ts.
   const SHAPE = /^(?:rounded|h-\[|w-\[|size-|border-2|border-primary)/
   const shapeOf = (el: Element) =>
     el.className.split(' ').filter((c) => SHAPE.test(c)).sort().join(' ')

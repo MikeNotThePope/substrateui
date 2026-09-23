@@ -8,8 +8,9 @@ import { defineConfig, devices } from '@playwright/test';
 // `tests/unit/scripts/visual-project-coverage.test.ts` fails on exactly that,
 // so the next spec added here cannot arrive switched off in silence.
 
-/** The default palette, across light/dark and ltr/rtl. */
-const DEFAULT_THEME_SPECS = /(?:components|drawer\.behavior)\.spec\.ts$/;
+/** The default palette, across light/dark and ltr/rtl. A `*.behavior.spec.ts`
+ *  asserts on the live page and takes no screenshot, so it needs no baseline. */
+const DEFAULT_THEME_SPECS = /(?:components|\.behavior)\.spec\.ts$/;
 
 /** The only spec that renders a named palette. Five pages, one project. */
 const THEMED_SPECS = /themed-pages\.spec\.ts$/;
