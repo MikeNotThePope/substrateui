@@ -23,10 +23,20 @@ async function openContainedMenu(page: Page, rtl: boolean) {
     );
   }
   const trigger = page.getByRole('button', { name: 'Account' });
-  await trigger.focus();
-  await page.keyboard.press('Enter');
   const menu = page.getByRole('menu');
-  await expect(menu).toBeVisible({ timeout: 10000 });
+  // The server renders the trigger before React hydrates it, and an Enter on
+  // it before then does nothing. A cold `next start` loses that race on the
+  // first test of a worker (CI: menu never opened, passed on retry). So press
+  // again until it opens, and never while it is open: a second Enter there
+  // would pick an item instead. Waiting on React's own markers on the node
+  // was the alternative; they are internals.
+  await expect(async () => {
+    if (!(await menu.isVisible())) {
+      await trigger.focus();
+      await page.keyboard.press('Enter');
+    }
+    await expect(menu).toBeVisible({ timeout: 1000 });
+  }).toPass({ timeout: 10000 });
   return { trigger, menu };
 }
 
