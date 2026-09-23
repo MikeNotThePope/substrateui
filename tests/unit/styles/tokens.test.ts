@@ -359,3 +359,21 @@ describe('tokens docs page', () => {
     ).toEqual([])
   })
 })
+
+describe('tokens.css — cascade layers', () => {
+  /**
+   * An unlayered declaration beats every layered one, whatever its
+   * specificity. Tailwind v4 emits utilities in `@layer utilities`, so an
+   * unlayered `* { border-color }` silently outranked `border-status-error`
+   * and every other border colour: Alert, Field and FileDropField drew their
+   * error states in the neutral border (#144). Nothing threw; it only showed
+   * in a browser.
+   */
+  it('sets the default border colour in the base layer, not unlayered', () => {
+    expect(BARE).toMatch(
+      /@layer base\s*\{\s*\*\s*\{\s*border-color:\s*var\(--border\);?\s*\}\s*\}/
+    )
+    const universal = [...BARE.matchAll(/(?:^|[\s}])\*\s*\{[^{}]*border-color/g)]
+    expect(universal, 'a second `*` border-color rule, likely unlayered').toHaveLength(1)
+  })
+})

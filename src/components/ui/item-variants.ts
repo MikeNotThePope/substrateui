@@ -29,11 +29,10 @@ import { cva } from "class-variance-authority"
  * `min-h-11`, the 44px of WCAG 2.2 SC 2.5.5 (Target Size, Enhanced), against
  * the 24px floor of SC 2.5.8.
  *
- * State is a background, never a border colour. An unlayered
- * `* { border-color: var(--border) }` in tokens.css outranks every
- * `border-<colour>` utility in the sheet, so a row that showed it was current
- * by turning its border `border-primary` would render identically to a resting
- * one (MikeNotThePope/substrateui#144).
+ * State is a background, never a border colour. That was forced while
+ * tokens.css's `*` border rule sat unlayered and outranked every
+ * `border-<colour>` utility (MikeNotThePope/substrateui#144), and it stays:
+ * `hover:` is already a background, so current and hovered read as one family.
  */
 export const itemVariants = cva(
   [
