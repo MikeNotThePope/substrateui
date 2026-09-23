@@ -42,7 +42,7 @@ describe('every visual spec is run by some project', () => {
     // A directory read that quietly returns nothing would make the assertion
     // below vacuous, which is the exact failure this file exists to catch.
     expect(specPaths.length).toBeGreaterThan(0)
-    expect(specPaths.map((p) => p.slice(VISUAL_DIR.length + 1))).toContain('themed-pages.spec.ts')
+    expect(specPaths.map((p) => p.slice(VISUAL_DIR.length + 1))).toContain('visible.behavior.spec.ts')
   })
 
   it('leaves no spec file behind', () => {
@@ -56,11 +56,14 @@ describe('every visual spec is run by some project', () => {
     ).toEqual([])
   })
 
-  it('runs themed-pages.spec.ts under exactly one project, which is the lava one', () => {
-    // Its five pages are scoped deliberately: one palette, five baselines, not
-    // the whole docs site times another theme.
-    expect(projectsRunning(join(VISUAL_DIR, 'themed-pages.spec.ts'), playwrightConfig)).toEqual([
-      'lava',
+  it('runs the visibility checks in every mode and direction', () => {
+    // They wear each named palette on the page, so the projects are what give
+    // them dark mode and rtl. Dropping one drops that half of every palette.
+    expect(projectsRunning(join(VISUAL_DIR, 'visible.behavior.spec.ts'), playwrightConfig)).toEqual([
+      'light',
+      'dark',
+      'light-rtl',
+      'dark-rtl',
     ])
   })
 })
