@@ -62,8 +62,8 @@ const EXEMPT: Array<{ page: string; where: string; why: string }> = [];
 /**
  * What these checks found on their first run, each a real failure waiting on a
  * fix in the component. The list only shrinks: an entry that no longer fails
- * fails the run, and a new failure never goes here. The issue this spec's pull
- * request filed carries the numbers.
+ * fails the run, and a new failure never goes here. #172 carries the numbers
+ * and the fixes.
  */
 const KNOWN: Array<{ page: string; rule: string; where: string }> = [
   // The arc nearly vanishes into its track in every dark palette (lava 1.07:1)
