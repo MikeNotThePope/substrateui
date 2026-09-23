@@ -1475,8 +1475,16 @@
    BASE STYLES
 ================================================================ */
 
-* {
-  border-color: var(--border);
+/* In the base layer, not unlayered: an unlayered declaration beats every
+   layered one, so from here it outranked every `border-<colour>` utility
+   in `@layer utilities` and `Alert`, `Field` and `FileDropField` never drew
+   their status borders (MikeNotThePope/substrateui#144). `@import
+   "tailwindcss"` declares the layer order before this file, so this joins
+   the existing base layer after preflight's `border: 0 solid`. */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
 }
 
 /* ── Motion feel ──

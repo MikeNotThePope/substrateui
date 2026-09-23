@@ -12,14 +12,12 @@ import { cva } from "class-variance-authority"
  * `min-h-11` is 2.75rem, the 44px of WCAG 2.2 SC 2.5.5 (Target Size, Enhanced),
  * against the 24px floor of SC 2.5.8. Width comes from the caller's column.
  *
- * Selection is a fill and a filled mark, not a border colour. An unlayered
- * `* { border-color: var(--border) }` in tokens.css outranks every
- * `border-<colour>` utility in the sheet, so a card that showed it was picked
- * by turning its border `border-primary` would render identically to a resting
- * one. That is a system-wide bug reported on MikeNotThePope/substrateui#144,
- * not this component's to fix — but a selected state has to be visible today,
- * and `bg-accent` is not in the cascade's way. `foreground on accent` and
- * `muted-foreground on accent` both pass AA in all six themes.
+ * Selection is a fill and a filled mark, not a border colour: a fill changes
+ * the whole card, where a recoloured 2px edge is easy to miss. It was also the
+ * only signal that worked while tokens.css's `*` border rule sat unlayered and
+ * outranked every `border-<colour>` utility (MikeNotThePope/substrateui#144).
+ * `foreground on accent` and `muted-foreground on accent` both pass AA in all
+ * six themes.
  *
  * Neither `readOnly` nor `presentational` dims. A frozen answer is final, not
  * unavailable, and a staff preview of a form is not a disabled form: all this
