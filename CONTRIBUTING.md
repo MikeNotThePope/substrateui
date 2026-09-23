@@ -75,8 +75,9 @@ Every new component MUST pass this checklist before merging:
 - [ ] Component has a documentation page with live examples and a
   props table
 - [ ] Component is added to the barrel export
-- [ ] If the component&apos;s appearance changes, update visual
-  snapshots (`bun run test:visual:update`) and commit the new baselines
+- [ ] If the component&apos;s appearance changes, its visual snapshots
+  go red until Mike reviews them and runs Update Visual Baselines
+  (AGENTS.md). Baselines live in R2, never in git
 
 ## Making Changes to Existing Components
 
