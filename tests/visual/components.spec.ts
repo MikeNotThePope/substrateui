@@ -2,27 +2,40 @@ import { test, expect } from '@playwright/test';
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const componentsDir = join(process.cwd(), 'src/app/docs/components');
+// Layouts are components too: AGENTS.md counts `src/app/docs/layouts` in
+// the component inventory, and until #151 no spec visited one, so a change
+// to a shell could not go red. Both folders feed the one loop below.
+// Snapshot names stay the bare slug, so every component baseline keeps the
+// name it already had in R2; the check below `extraPages` stops any two
+// pages, a layout and a component among them, from sharing one.
+const docSections = ['components', 'layouts'] as const;
 
-function getComponentSlugs(): string[] {
+function getSlugs(section: (typeof docSections)[number]): string[] {
+  const dir = join(process.cwd(), 'src/app/docs', section);
   try {
-    return readdirSync(componentsDir)
-      .filter((name) => {
-        const fullPath = join(componentsDir, name);
-        return statSync(fullPath).isDirectory();
-      })
+    return readdirSync(dir)
+      .filter((name) => statSync(join(dir, name)).isDirectory())
       .sort();
   } catch {
     return [];
   }
 }
 
-const componentSlugs = getComponentSlugs();
+const docPages = docSections.flatMap((section) =>
+  getSlugs(section).map((slug) => ({ section, slug })),
+);
 
 const extraPages: Array<{ slug: string; path: string }> = [
   { slug: 'landing', path: '/' },
   { slug: 'accessibility-contrast', path: '/docs/accessibility/contrast' },
 ];
+
+const duplicateSlugs = [...docPages, ...extraPages]
+  .map(({ slug }) => slug)
+  .filter((slug, i, all) => all.indexOf(slug) !== i);
+if (duplicateSlugs.length > 0) {
+  throw new Error(`Two pages share a snapshot name: ${duplicateSlugs.join(', ')}`);
+}
 
 const FROZEN_NOW = new Date('2025-01-15T12:00:00.000Z').valueOf();
 
@@ -77,8 +90,9 @@ async function preparePage(page: import('@playwright/test').Page) {
 }
 
 test.describe('component docs pages', () => {
-  for (const slug of componentSlugs) {
-    test(`component: ${slug}`, async ({ page }, testInfo) => {
+  for (const { section, slug } of docPages) {
+    const kind = section === 'layouts' ? 'layout' : 'component';
+    test(`${kind}: ${slug}`, async ({ page }, testInfo) => {
       // A newly added component page ships before its R2 baseline exists. On a
       // compare run (no --update-snapshots) skip the assertion when there's no
       // baseline yet, so the PR that introduces the component keeps CI green.
@@ -89,7 +103,7 @@ test.describe('component docs pages', () => {
         !updating && !existsSync(testInfo.snapshotPath(`${slug}.png`)),
         `No visual baseline for "${slug}" yet — run \`bun run snapshots:regenerate\``,
       );
-      await page.goto(`/docs/components/${slug}`);
+      await page.goto(`/docs/${section}/${slug}`);
       await preparePage(page);
       await expect(page).toHaveScreenshot(`${slug}.png`, { fullPage: true });
     });

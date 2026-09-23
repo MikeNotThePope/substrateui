@@ -1,6 +1,7 @@
 # Visual regression tests
 
-Playwright snapshots every component docs page across four projects:
+Playwright snapshots every component and layout docs page across
+four projects:
 `light`, `dark`, `light-rtl`, and `dark-rtl`. Each project seeds
 `localStorage` with the matching theme and `substrateui-direction`
 values, so every baseline captures a mode × direction combination, all
