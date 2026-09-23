@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.9.0
+
+### Minor Changes
+
+- [#162](https://github.com/MikeNotThePope/substrateui/pull/162) [`f48e83a`](https://github.com/MikeNotThePope/substrateui/commit/f48e83a0bd0551073f880756cb198498c710727b) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - `DropdownMenuContent` takes a `container` prop, passed to Base UI's portal, so an open menu can render inside `<main>` instead of on `<body>`, where axe's `region` rule fails it. The open menu's `aria-hidden-focus` finding is Base UI's focus guards, which axe misreads; the Dropdown Menu docs say why and how to scope the rule with `exclude("[data-base-ui-focus-guard]")`.
+
+### Patch Changes
+
+- [#162](https://github.com/MikeNotThePope/substrateui/pull/162) [`f48e83a`](https://github.com/MikeNotThePope/substrateui/commit/f48e83a0bd0551073f880756cb198498c710727b) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Border colour utilities now render. The stylesheet's default `* { border-color: var(--border) }` sat outside any cascade layer, so it beat every `border-<colour>` utility in `@layer utilities`: the destructive, success, warning and info `Alert`, an invalid `Field`'s input and an invalid `FileDropField` all drew the neutral border instead of their status colour. The rule now lives in `@layer base`, after Tailwind's preflight. Elements with no border colour utility still get `var(--border)`. `Toaster`'s status classes move from Tailwind v3's leading `!` to v4's trailing `!`.
+
+- [#162](https://github.com/MikeNotThePope/substrateui/pull/162) [`f48e83a`](https://github.com/MikeNotThePope/substrateui/commit/f48e83a0bd0551073f880756cb198498c710727b) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - `Checkbox` and `CheckboxCard`'s mark are square. Both drew bare `rounded`, which is `--radius` (10px) and ignores `--radius-factor`, so an 18px checkbox rendered as a circle, indistinguishable from a radio. They now use `rounded-sm`, which follows each theme's radius factor (1px in the house baseline).
+
+- [#162](https://github.com/MikeNotThePope/substrateui/pull/162) [`f48e83a`](https://github.com/MikeNotThePope/substrateui/commit/f48e83a0bd0551073f880756cb198498c710727b) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Remove the unused `--border-width` and `--press-depth` tokens from `styles.css`. No component read either one: borders are the literal `border-2` class and press offsets are literal `active:translate-*` values, so overriding them never changed anything. CONTRIBUTING now states the real theme contract, color plus the `// Feel` names in `ThemeTokenName`, and a unit test fails if tokens.css declares a token no shipped code reads or a feel name stops resolving.
+
+- [#162](https://github.com/MikeNotThePope/substrateui/pull/162) [`f48e83a`](https://github.com/MikeNotThePope/substrateui/commit/f48e83a0bd0551073f880756cb198498c710727b) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Five parts that fell under 3:1 contrast now reach it in every palette and mode. The spinner's arc stands out from its ring again: `--spinner-track` moves in dark plum, lava, proof, substrate and tundra, and in light proof, substrate and tundra. `--chart-2` is a step darker in light mode, so the second series of a chart reads on the page. `Rating` draws empty stars in `muted-foreground` rather than at 40% of it, and outlines filled stars in `secondary-fill-border`. `Select`'s chevron is `muted-foreground` rather than half opacity.
+
 ## 2.8.0
 
 ### Minor Changes
