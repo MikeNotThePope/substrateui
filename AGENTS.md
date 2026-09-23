@@ -42,9 +42,11 @@ For every code change, follow this flow:
 
    The same boundary in the *published* package is a separate question, and the docs site cannot answer it — it imports from `src/`, not `dist/`. `build:lib` runs `audit:boundary` after every build to answer it: which built file carries `"use client"` is decided from the real chunk graph (`scripts/client-boundary.ts`), and a recipe that never reaches `dist/variants.js` fails the build. A new `cva` recipe therefore needs a `*-variants.ts` module and a line in `src/variants.ts`, or the build says so.
 
-5. Push the branch and open a PR: `git push -u origin <branch>`, then `gh pr create`. A session pushes a `claude/**` branch instead and never opens the pull request itself: `pr-open.yml` opens it as the App, which is what lets Mike approve it (a session's API calls all arrive as his account, and GitHub does not let an author approve their own pull request). The session then rewrites the title and body.
-6. Wait for the required checks to pass: `verify` (CI: lint, tsc, tests, builds, audits, visual regression) and `check` (changeset present).
-7. Merge once green (0 approvals required on this solo repo). Squash-merge is fine.
+5. Push the branch and open a PR: `git push -u origin <branch>`, then `gh pr create`. A session pushes a `claude/**` branch instead and never opens the pull request itself: `pr-open.yml` opens it as a draft, as the App, which is what lets Mike approve it (a session's API calls all arrive as his account, and GitHub does not let an author approve their own pull request). The session then rewrites the title and body.
+6. A session marks its draft ready as its last step, once its own checks are green. That arms auto-merge (`self-merge.yml`), so the pull request merges itself when `verify` (CI: lint, tsc, tests, builds, audits, visual regression) and `check` (changeset present) are green. The session never merges by hand and never asks. The repository variable `MERGE_PAUSED` set to `1` is the stop; the workflow's header says what it does and does not undo.
+7. A person's branch merges once green (0 approvals required). Squash-merge is fine.
+
+lavahire is this package's only consumer, and its sessions are most of what lands here: a lavahire session that needs a component this package lacks builds it here first, then waits for the release to reach lavahire. The chain is lavahire's `docs/features/loops.md`.
 
 Do not push commits straight to `main` — branch protection will reject them.
 
@@ -60,4 +62,6 @@ Releases are driven by Changesets and `.github/workflows/release.yml`, which run
 
 4. That publish then fires a `repository_dispatch` at lavahire, which opens its own pull request moving its pin to the new version, with CI and a smoke run on it. lavahire pins a caret range, so the version was going to land there anyway, inside whatever unrelated pull request next reinstalled; on its own pull request a break in this package is seen as a red check that names the release. It needs the `LAVAHIRE_DISPATCH_TOKEN` secret, and fails red without it, after a publish that already succeeded. `docs/deployment.md` says how to mint it. MikeNotThePope/lavahire#800.
 
-So: changeset in your PR → merge → Version Packages PR appears and merges itself → npm publish is automatic → lavahire opens its own bump PR. Do not bump `package.json` or tag releases by hand; Changesets owns that.
+So: changeset in your PR → merge → Version Packages PR appears and merges itself → npm publish is automatic → lavahire opens its own bump PR, which merges itself when green. Do not bump `package.json` or tag releases by hand; Changesets owns that.
+
+A release that turns lavahire's bump red never merges there, so lavahire's pin never moves and nothing ships. The session that caused it fixes forward: a fix here, a patch release, and a new bump that replaces the red one. When the fix is not obvious in one try, it reverts the change here as a release of its own. `RELEASE_PAUSED=1` here and `MERGE_PAUSED=1` in either repository are the stops.
