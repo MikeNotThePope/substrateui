@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { existsSync, readdirSync, statSync } from 'node:fs';
+import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { skipWithoutBaseline } from './baseline';
 
 // Layouts are components too: AGENTS.md counts `src/app/docs/layouts` in
 // the component inventory, and until #151 no spec visited one, so a change
@@ -93,16 +94,7 @@ test.describe('component docs pages', () => {
   for (const { section, slug } of docPages) {
     const kind = section === 'layouts' ? 'layout' : 'component';
     test(`${kind}: ${slug}`, async ({ page }, testInfo) => {
-      // A newly added component page ships before its R2 baseline exists. On a
-      // compare run (no --update-snapshots) skip the assertion when there's no
-      // baseline yet, so the PR that introduces the component keeps CI green.
-      // `snapshots:regenerate` (which passes --update-snapshots) still creates
-      // the baseline, and every run thereafter compares it normally.
-      const updating = ['all', 'changed'].includes(testInfo.config.updateSnapshots);
-      test.skip(
-        !updating && !existsSync(testInfo.snapshotPath(`${slug}.png`)),
-        `No visual baseline for "${slug}" yet — run \`bun run snapshots:regenerate\``,
-      );
+      skipWithoutBaseline(testInfo, `${slug}.png`);
       await page.goto(`/docs/${section}/${slug}`);
       await preparePage(page);
       await expect(page).toHaveScreenshot(`${slug}.png`, { fullPage: true });
@@ -112,7 +104,8 @@ test.describe('component docs pages', () => {
 
 test.describe('extra pages', () => {
   for (const { slug, path } of extraPages) {
-    test(`page: ${slug}`, async ({ page }) => {
+    test(`page: ${slug}`, async ({ page }, testInfo) => {
+      skipWithoutBaseline(testInfo, `${slug}.png`);
       await page.goto(path);
       await preparePage(page);
       await expect(page).toHaveScreenshot(`${slug}.png`, { fullPage: true });

@@ -8,6 +8,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Snapshots are stored in Cloudflare R2, not in the git repo. Run `bun run snapshots:download` to fetch baselines before running visual tests. Do not run `bun run test:visual:update` on macOS — it produces `-darwin.png` files CI won't use.
 
+A page with no baseline yet skips its screenshot (`tests/visual/baseline.ts`), so a new component merges green, and `capture-baselines.yml` writes its baseline from `main` after the merge. That run only adds: it never rewrites a baseline that exists. So a new component needs nobody, and a changed one still waits for Mike, below.
+
 There is one baseline archive, `main` and every branch read it, and regenerating overwrites it. So a session never dispatches **Update Visual Baselines** itself. When the `visual` job goes red on a branch, the session ends with a comment on its pull request naming the failing snapshots (the `playwright-report` artifact lists them) and asking Mike for his approving review. The workflow refuses to run without that review on the branch's open pull request (`scripts/baselines-gate.ts`), and it is Mike who dispatches it, from the Actions tab or with `gh workflow run "Update Visual Baselines" --ref <branch>`. It regenerates, uploads, and then re-runs the branch's CI itself — a `verify` that began before the upload read the old baselines and would fail on exactly the snapshots just replaced, so nothing is sequenced by hand. For that review to be possible the pull request has to be opened by the App, not by Mike's account: push a `claude/**` branch and `pr-open.yml` opens it (MikeNotThePope/lavahire#797).
 
 # The home page's numbers are inventory

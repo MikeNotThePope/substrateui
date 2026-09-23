@@ -47,6 +47,14 @@ bun run test:visual           # verify against baselines
 bun run test:visual:report    # open HTML report from last run
 ```
 
+## New pages
+
+A page with no baseline skips its screenshot (`baseline.ts`), so the pull
+request adding it stays green. After it merges, `capture-baselines.yml`
+writes the missing baseline from `main` and uploads it. That run only adds
+files; it never rewrites a baseline that exists, so changing one is still
+the section below.
+
 ## Updating baselines
 
 Baselines must be generated on Ubuntu to match CI. The easiest way is

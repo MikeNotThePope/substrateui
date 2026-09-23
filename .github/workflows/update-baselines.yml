@@ -3,6 +3,12 @@ name: Update Visual Baselines
 on:
   workflow_dispatch:
 
+# One archive, one writer: capture-baselines.yml adds missing baselines from
+# main, and a run of each at once would upload over the other.
+concurrency:
+  group: baseline-archive
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest

@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { skipWithoutBaseline } from './baseline';
 
 // Scoped subset of pages we snapshot under alternative themes.
 // Goal: prove the theme works end-to-end without exploding baselines.
@@ -104,7 +105,8 @@ async function preparePage(page: import('@playwright/test').Page) {
 
 test.describe('themed pages', () => {
   for (const { slug, path } of themedPages) {
-    test(`themed: ${slug}`, async ({ page }) => {
+    test(`themed: ${slug}`, async ({ page }, testInfo) => {
+      skipWithoutBaseline(testInfo, `${slug}.png`);
       await page.goto(path);
       await preparePage(page);
       await expect(page).toHaveScreenshot(`${slug}.png`, { fullPage: true });
