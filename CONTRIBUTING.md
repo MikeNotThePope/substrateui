@@ -75,9 +75,8 @@ Every new component MUST pass this checklist before merging:
 - [ ] Component has a documentation page with live examples and a
   props table
 - [ ] Component is added to the barrel export
-- [ ] If the component&apos;s appearance changes, its visual snapshots
-  go red until Mike reviews them and runs Update Visual Baselines
-  (AGENTS.md). Baselines live in R2, never in git
+- [ ] Its docs page renders it inside `ComponentPreview`, so the
+  visibility checks in `tests/visual/` read it in every palette
 
 ## Making Changes to Existing Components
 
@@ -112,8 +111,8 @@ Write tests from the user&apos;s perspective:
   exact class-name lists beyond a characteristic marker).
 - Testing behaviors that Base UI already tests (focus trap, portal
   rendering, etc.) — only test the behavior **you** add on top of Base UI.
-- Snapshot tests for markup — visual regression in
-  `tests/visual/` handles that.
+- Snapshot tests for markup. What renders is checked in the browser, in
+  `tests/visual/`.
 
 Run `bun run test:watch` during development. Run `bun run test` to match
 CI.
@@ -245,9 +244,8 @@ To add a theme:
    theme must independently pass WCAG AA in both modes.
 6. **Add the theme to the docs `ThemePicker`** component for in-docs
    testing.
-7. **If this is a public theme, add scoped visual regression coverage**
-   for it — landing page, contrast matrix, and two representative
-   component pages. Don't snapshot every component in every theme.
+7. **Add the theme to `PALETTES` in `tests/visual/pages.ts`**, so the
+   visibility checks wear it on every component page.
 
 A theme varies color tokens plus the `// Feel` names in
 `ThemeTokenName` (`src/components/ui/theme.tsx`): `--radius-factor`,

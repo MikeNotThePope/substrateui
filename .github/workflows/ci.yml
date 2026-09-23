@@ -71,30 +71,19 @@ jobs:
       # If this script ever stops building the site, put `bun run build` back.
       - run: bun run scan:deprecations
 
-  # ── Visual regression ────────────────────────────────────────────────
+  # ── Rendered checks ──────────────────────────────────────────────────
+  # Playwright against a production build: behaviour specs and the visibility
+  # checks, which read what the browser computed rather than comparing a
+  # picture, so nothing is downloaded and nothing needs a secret. A fork's pull
+  # request runs them like any other (#162).
   visual:
     runs-on: ubuntu-latest
     strategy:
       # Report every shard's failures rather than cancelling the rest on the
-      # first one. A stale-baseline change usually spans all four.
+      # first one.
       fail-fast: false
       matrix:
         shard: [1, 2, 3, 4]
-    # Declared at job level so the `if:` guards below can read it — the `env`
-    # context in a step's `if:` does not see that step's own `env:` block.
-    # Pull requests from forks get no secrets, so R2_ACCESS_KEY_ID is empty
-    # there and the snapshot steps skip: outside contributors get the rest of
-    # CI without needing access to the baseline bucket.
-    #
-    # `ran` tells `verify` which of those it was: all shards read the same
-    # secret, so whichever shard's value wins, it is the same value.
-    outputs:
-      ran: ${{ env.R2_ACCESS_KEY_ID != '' }}
-    env:
-      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
-      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-      R2_BUCKET: ${{ secrets.R2_BUCKET }}
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
@@ -104,25 +93,12 @@ jobs:
         with:
           node-version: 22
       - run: bun install --frozen-lockfile
-
-      - name: Say the visual suite did not run
-        if: env.R2_ACCESS_KEY_ID == ''
-        run: echo "::warning::Visual suite not run. No R2 secrets here (a fork's pull request gets none), so verify reports skipped, not passed."
-
-      - name: Install Chromium
-        if: env.R2_ACCESS_KEY_ID != ''
-        run: bunx playwright install --with-deps chromium
-
-      - name: Download visual baselines
-        if: env.R2_ACCESS_KEY_ID != ''
-        timeout-minutes: 2
-        run: bun run snapshots:download
+      - run: bunx playwright install --with-deps chromium
 
       # The denominator is the matrix size, so adding a shard to the list above
       # is the only edit needed. Each shard builds the app itself through the
       # config's webServer, and that is the only build in this job.
       - name: Run visual tests (shard ${{ matrix.shard }} of ${{ strategy.job-total }})
-        if: env.R2_ACCESS_KEY_ID != ''
         timeout-minutes: 12
         run: bunx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
 
@@ -142,24 +118,9 @@ jobs:
   # `if: always()` is load-bearing. Without it, a failing dependency leaves this
   # job *skipped* rather than failed — and a skipped required check does not
   # block a merge, so a red build would become mergeable.
-  #
-  # The same rule is what reports a fork honestly. A fork's pull request gets
-  # no R2 secrets, so the visual suite cannot run there; its shards skip their
-  # steps and finish green. This job used to read that as success, so `verify`
-  # said "passed" for a suite that never ran. Now, when every other job passed
-  # and the suite did not run, this job skips: the check reads "Skipped", which
-  # branch protection accepts like neutral, and it is not a green tick. Any
-  # failure still runs it, and fails it. The rejected alternative was failing
-  # here: every outside contribution would then need an admin bypass for a
-  # check it could never run. A neutral check run through the Checks API is
-  # out too: a fork's token cannot write one.
   verify:
     needs: [lint, unit, build, visual]
-    if: >-
-      always() &&
-      (needs.visual.outputs.ran != 'false' ||
-       contains(needs.*.result, 'failure') ||
-       contains(needs.*.result, 'cancelled'))
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Fail if any job failed or was cancelled

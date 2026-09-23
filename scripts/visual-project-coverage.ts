@@ -12,7 +12,7 @@
 // `tests/unit/scripts/visual-project-coverage.test.ts` asserts that every
 // spec file in `tests/visual/` is run by at least one project. It is a pure
 // function over the config object, so it runs in `bun run test` with no
-// browser, no dev server and no R2 baselines.
+// browser and no dev server.
 //
 // What it does not do: it says nothing about what a project seeds, whether a
 // screenshot is right, or whether the suite runs on a fork's pull request. It
