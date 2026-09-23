@@ -94,6 +94,23 @@ function DropdownMenuSubContent({
  * say, is anchored in viewport coordinates instead, and the two agree only
  * while the page is scrolled to the top. Pass `positionMethod="fixed"` there.
  *
+ * `container` is the element the popup portals into, `<body>` by default. A
+ * popup on `<body>` sits outside every landmark, which axe's `region` rule
+ * reports; pass an element inside `<main>` to keep it in one. Submenus portal
+ * into their parent menu's portal, so they follow it.
+ *
+ * Open, the menu also fails axe's `aria-hidden-focus`, and the rule is wrong
+ * about it. Base UI brackets the trigger and the popup with
+ * `<span aria-hidden tabindex="0" data-base-ui-focus-guard>`: a sentinel that
+ * takes Tab, closes the menu and hands focus on at once. Nothing rests on
+ * one. axe knows the pattern (its check downgrades an element with an
+ * `onfocus` handler to "needs review"), but it reads the DOM property, and
+ * React attaches the handler at the root, so axe sees none. No prop turns the
+ * guards off. Without `tabindex`, Tab walks past and leaves the menu open
+ * behind it; without `aria-hidden`, screen readers announce empty spans.
+ * Scope the rule instead: `exclude("[data-base-ui-focus-guard]")`. Measured
+ * on Base UI 1.6.0 with axe-core 4.13.0; 1.8.0 renders the same guards (#160).
+ *
  * @example
  * <DropdownMenu>
  *   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
@@ -107,15 +124,17 @@ function DropdownMenuContent({
   side,
   sideOffset = 4,
   positionMethod,
+  container,
   ref,
   ...props
 }: React.ComponentPropsWithRef<typeof MenuPrimitive.Popup> &
   Pick<
     React.ComponentProps<typeof MenuPrimitive.Positioner>,
     "align" | "alignOffset" | "side" | "sideOffset" | "positionMethod"
-  >) {
+  > &
+  Pick<React.ComponentProps<typeof MenuPrimitive.Portal>, "container">) {
   return (
-    <MenuPrimitive.Portal>
+    <MenuPrimitive.Portal container={container}>
       <MenuPrimitive.Positioner
         align={align}
         alignOffset={alignOffset}
