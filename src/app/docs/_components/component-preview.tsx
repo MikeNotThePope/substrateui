@@ -37,7 +37,12 @@ export function ComponentPreview({ children, code, title, defaultOpen = false }:
           <Caps>{title}</Caps>
         </div>
       )}
-      <div className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4`}>
+      {/* data-specimen-body marks the live example: tests/visual/visible.behavior.spec.ts
+          checks what renders inside it, and nothing of the page around it. */}
+      <div
+        data-specimen-body
+        className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4`}
+      >
         {children}
       </div>
       {/* The code folds away by default. A page carrying eight worked examples

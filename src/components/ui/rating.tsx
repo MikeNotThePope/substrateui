@@ -72,13 +72,13 @@ function Rating({
           const fill = Math.max(0, Math.min(1, value - i))
           return (
             <span key={i} className={cn("relative inline-block", starClass)}>
-              <Star className={cn(starClass, "text-muted-foreground/40")} />
+              <Star className={cn(starClass, "text-muted-foreground")} />
               {fill > 0 && (
                 <span
                   className="absolute inset-0 overflow-hidden"
                   style={{ width: `${fill * 100}%` }}
                 >
-                  <Star className={cn(starClass, "fill-secondary-fill text-secondary-fill")} />
+                  <Star className={cn(starClass, "fill-secondary-fill text-secondary-fill-border")} />
                 </span>
               )}
             </span>
@@ -118,8 +118,8 @@ function Rating({
               className={cn(
                 starClass,
                 filled
-                  ? "fill-secondary-fill text-secondary-fill"
-                  : "text-muted-foreground/40"
+                  ? "fill-secondary-fill text-secondary-fill-border"
+                  : "text-muted-foreground"
               )}
             />
           </button>

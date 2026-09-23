@@ -83,9 +83,13 @@ jobs:
           title=$(gh api "repos/$REPO/commits/$SHA" --jq '.commit.message' | head -n 1)
           body=$(gh api "repos/$REPO/commits/$SHA" --jq '.commit.message' | tail -n +2)
 
+          # A draft, because self-merge.yml arms auto-merge when the session
+          # marks it ready. Opened ready, the first green work-in-progress
+          # push would merge before the session had finished.
           gh api "repos/$REPO/pulls" \
             -f title="$title" \
             -f head="$BRANCH" \
             -f base=main \
             -f body="$body" \
+            -F draft=true \
             --jq '.html_url'

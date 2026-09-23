@@ -337,11 +337,8 @@ export default function ChoiceCardPage() {
         <H3>Selection is a fill, not a border</H3>
         <P>
           A picked card is <Code>bg-accent</Code> with a filled mark, rather than a{" "}
-          <Code>border-primary</Code> edge. An unlayered <Code>* {"{"} border-color {"}"}</Code>{" "}
-          rule in the token sheet currently outranks every <Code>border-&lt;colour&gt;</Code>{" "}
-          utility, so a card that showed selection by recolouring its border would look
-          exactly like a resting one. That is a system-wide bug rather than this
-          component&apos;s, and the fill is what works today.
+          <Code>border-primary</Code> edge. A fill changes the whole card at a glance,
+          where a recoloured 2px edge is easy to miss.
         </P>
       </Stack>
 

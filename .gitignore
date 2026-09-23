@@ -47,7 +47,6 @@ dist/
 /test-results/
 /playwright-report/
 /playwright/.cache/
-tests/visual/**/*-snapshots/
 tests/visual/**/*.png
 tests/visual/**/*.tar.gz
 

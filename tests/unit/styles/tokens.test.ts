@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 /**
@@ -38,8 +38,6 @@ const BARE = CSS.replace(/\/\*[\s\S]*?\*\//g, '')
 const STRUCTURAL = new Set([
   '--radius',
   '--radius-factor',
-  '--border-width',
-  '--press-depth',
   '--motion-duration',
   '--motion-ease',
   '--hard-shadow',
@@ -168,6 +166,123 @@ describe('tokens.css — theme contract', () => {
 })
 
 /**
+ * A token nothing reads is a promise that does nothing. `--border-width` and
+ * `--press-depth` sat on :root for months while every 2px border was a literal
+ * `border-2` and every press a literal `active:translate-*`, and the AI prompt
+ * cited `--border-width` as the reason borders are 2px. Overriding either one
+ * changed nothing, silently.
+ *
+ * The reader has to be shipped code: `src/` minus the docs site, stories and
+ * tests. A read is `var(--x)` or Tailwind's `utility-(--x)` shorthand, and a
+ * read inside tokens.css itself counts: `--hard-shadow-color` is only ever
+ * read by the `--hard-shadow-*` values beside it.
+ *
+ * Two layers are out of scope, each by construction:
+ * - `@theme inline` is Tailwind's layer. Its names are read by utility class
+ *   (`bg-primary` reads `--color-primary`), never by `var()`. The Tailwind
+ *   reachability test above covers it.
+ * - `--raw-*` is the palette. Layer 1's own header says components never
+ *   reference it; semantic tokens do, and /docs/tokens shows every ramp step
+ *   by building its name from a template string no scan can resolve.
+ */
+const LIBRARY = ['src/components', 'src/hooks', 'src/lib', 'src/styles']
+
+function libraryCorpus(): string {
+  const files = LIBRARY.flatMap((dir) =>
+    readdirSync(join(process.cwd(), dir), { recursive: true, encoding: 'utf8' })
+      .filter((f) => /\.(css|tsx?)$/.test(f) && !/\.(test|stories)\./.test(f))
+      .map((f) => join(process.cwd(), dir, f))
+  )
+  files.push(join(process.cwd(), 'src/variants.ts'))
+  return files.map((f) => readFileSync(f, 'utf8')).join('\n')
+}
+
+const CORPUS = libraryCorpus()
+
+/** Is `--name` read anywhere in shipped code? */
+function isRead(name: string): boolean {
+  return new RegExp(`\\(\\s*${name}(?![\\w-])`).test(CORPUS)
+}
+
+/**
+ * Declared and deliberately read by no shipped code. Each entry is a name a
+ * consumer's own code is expected to read.
+ */
+const CONSUMER_FACING = new Set([
+  // A shadcn-expected name. Components added with the shadcn CLI, and
+  // stylesheets written against shadcn, read var(--radius). Our own radius
+  // scale reads --radius-factor instead.
+  '--radius',
+])
+
+describe('tokens.css — every token is read', () => {
+  const start = BARE.indexOf('@theme inline')
+  const end = BARE.indexOf('\n}', start)
+  const outsideTheme = BARE.slice(0, start) + BARE.slice(end)
+  const declared = new Set(
+    [...outsideTheme.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1] as string)
+  )
+
+  it('reads every declared custom property somewhere in shipped code', () => {
+    expect(start, '@theme inline block not found').toBeGreaterThan(0)
+
+    const unread = [...declared]
+      .filter((t) => !t.startsWith('--raw-'))
+      .filter((t) => !CONSUMER_FACING.has(t))
+      .filter((t) => !isRead(t))
+      .sort()
+
+    expect(
+      unread,
+      `These custom properties are declared in tokens.css and read by no ` +
+        `shipped code, so overriding them changes nothing. Delete them, or ` +
+        `add them to CONSUMER_FACING with the reason a consumer reads them.`
+    ).toEqual([])
+  })
+
+  it('keeps CONSUMER_FACING honest', () => {
+    for (const t of CONSUMER_FACING) {
+      expect(declared.has(t), `${t} is no longer declared`).toBe(true)
+      expect(isRead(t), `${t} is read now; drop it from the list`).toBe(false)
+    }
+  })
+
+  /**
+   * ThemeTokenName autocompletes inside createTheme, so its `// Feel` group
+   * is the public list of what a theme may vary beyond color. CONTRIBUTING
+   * and the AI prompt both repeat it. Each name has to be declared on the
+   * :root block of tokens.css and read by shipped code, or the type promises a knob with nothing on
+   * the other end.
+   */
+  it('resolves every // Feel name in ThemeTokenName', () => {
+    const THEME = readFileSync(
+      join(process.cwd(), 'src/components/ui/theme.tsx'),
+      'utf8'
+    )
+    const from = THEME.indexOf('  // Feel')
+    expect(from, '// Feel group not found in ThemeTokenName').toBeGreaterThan(0)
+    const group = THEME.slice(from, THEME.indexOf('\n\n', from))
+    const feel = [...group.matchAll(/\| "([\w-]+)"/g)].map((m) => `--${m[1] ?? ''}`)
+    expect(feel.length).toBeGreaterThan(0)
+
+    // The :root block is the house baseline, so a theme that sets no feel
+    // token still gets a value for every one.
+    const root = [...themeBlocks().entries()].find(([sel]) =>
+      sel.startsWith(':root,')
+    )?.[1]
+    expect(root, ':root block not found').toBeDefined()
+
+    const broken = feel.filter((t) => !root?.has(t) || !isRead(t))
+    expect(
+      broken,
+      `These // Feel names in ThemeTokenName are not declared on the tokens.css ` +
+        `:root block or read by no shipped code, so a theme that sets them ` +
+        `changes nothing or has no baseline to fall back to.`
+    ).toEqual([])
+  })
+})
+
+/**
  * The tokens docs page publishes a per-theme table of which raw ramp step each
  * semantic token resolves to. It is hand-maintained prose about machine-readable
  * data, so it drifts the moment a palette moves — silently, because nothing
@@ -242,5 +357,23 @@ describe('tokens docs page', () => {
       'The tokens docs page no longer matches tokens.css. Update the ' +
         '`semantic` table for the theme whose palette moved.'
     ).toEqual([])
+  })
+})
+
+describe('tokens.css — cascade layers', () => {
+  /**
+   * An unlayered declaration beats every layered one, whatever its
+   * specificity. Tailwind v4 emits utilities in `@layer utilities`, so an
+   * unlayered `* { border-color }` silently outranked `border-status-error`
+   * and every other border colour: Alert, Field and FileDropField drew their
+   * error states in the neutral border (#144). Nothing threw; it only showed
+   * in a browser.
+   */
+  it('sets the default border colour in the base layer, not unlayered', () => {
+    expect(BARE).toMatch(
+      /@layer base\s*\{\s*\*\s*\{\s*border-color:\s*var\(--border\);?\s*\}\s*\}/
+    )
+    const universal = [...BARE.matchAll(/(?:^|[\s}])\*\s*\{[^{}]*border-color/g)]
+    expect(universal, 'a second `*` border-color rule, likely unlayered').toHaveLength(1)
   })
 })

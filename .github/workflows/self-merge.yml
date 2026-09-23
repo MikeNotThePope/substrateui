@@ -1,0 +1,114 @@
+# Merges a session's pull request into `main` once it is green, with no
+# approval. lavahire is this package's only consumer, and a lavahire session
+# that needs a component this package lacks builds it here first, then waits
+# for the release to reach lavahire (lavahire's docs/features/loops.md). A
+# merge that waited on a hand stopped that chain at its first link, and the
+# hand read nothing: 0 approvals were already required.
+#
+# Which pull requests: a `claude/**` head, base `main`, opened by the App
+# (lavahire-pr-opener) from this repository. `pr-open.yml` opens every one of
+# those as a draft, and the session marks it ready as its last step, so
+# `ready_for_review` is the moment the session says it is finished. Arming on
+# `opened` was rejected: the first green work-in-progress push would merge.
+# A person's branch is never `claude/**`, so this never touches one.
+#
+# `pull_request_target`, so the rule that runs is `main`'s copy and a branch
+# cannot edit the gate it is held to. Nothing here checks out the branch.
+#
+# Native auto-merge rather than a merge script: it already waits for the
+# required `verify` and `check`, which are the gate. What it does not do is
+# bring a branch up to date, and `main` requires that, so the second job
+# updates every armed pull request that `main` has moved past.
+#
+# RELEASE_PAT, as in release.yml, and required rather than a fallback. A merge
+# or a branch update made with the built-in GITHUB_TOKEN raises no further
+# workflow run, so release.yml would never see the merge and CI would never
+# run on the updated branch.
+#
+# The repository variable MERGE_PAUSED set to `1` is the stop: nothing new is
+# armed, and nothing armed is updated, so an armed pull request waits once
+# `main` moves. Disarming one already armed is its own "Disable auto-merge"
+# button. Any value other than unset, `0` or `1` fails the run rather than
+# guessing which one was meant; lavahire's variable of the same name works the
+# same way.
+name: Self-merge
+
+on:
+  pull_request_target:
+    types: [ready_for_review]
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  arm:
+    if: >-
+      github.event_name == 'pull_request_target' &&
+      startsWith(github.head_ref, 'claude/') &&
+      github.base_ref == 'main' &&
+      github.event.pull_request.user.login == 'lavahire-pr-opener[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Arm auto-merge
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          PAUSED: ${{ vars.MERGE_PAUSED }}
+        run: |
+          paused=$(printf '%s' "$PAUSED" | tr -d '[:space:]')
+          case "$paused" in
+            1) echo "MERGE_PAUSED is 1: #$PR waits for a hand."; exit 0 ;;
+            ''|0) ;;
+            *) echo "::error::MERGE_PAUSED is '$paused'. Set it to 1 to stop or 0 to run."; exit 1 ;;
+          esac
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::RELEASE_PAT is not set, so a merge here would never reach release.yml. docs/deployment.md says how to mint it."
+            exit 1
+          fi
+          if [ "$(gh pr view "$PR" --json autoMergeRequest -q '.autoMergeRequest != null')" = true ]; then
+            echo "#$PR is armed already."
+            exit 0
+          fi
+          if gh pr merge "$PR" --squash --auto; then
+            echo "#$PR merges itself when verify and check are green."
+            exit 0
+          fi
+          # GitHub refuses to arm a pull request with nothing left to wait for.
+          if [ "$(gh pr view "$PR" --json mergeStateStatus -q .mergeStateStatus)" = CLEAN ]; then
+            exec gh pr merge "$PR" --squash
+          fi
+          exit 1
+
+  update:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bring armed pull requests up to date with main
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+          GH_REPO: ${{ github.repository }}
+          PAUSED: ${{ vars.MERGE_PAUSED }}
+        run: |
+          paused=$(printf '%s' "$PAUSED" | tr -d '[:space:]')
+          case "$paused" in
+            1) echo "MERGE_PAUSED is 1: no armed pull request is updated."; exit 0 ;;
+            ''|0) ;;
+            *) echo "::error::MERGE_PAUSED is '$paused'. Set it to 1 to stop or 0 to run."; exit 1 ;;
+          esac
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::RELEASE_PAT is not set. docs/deployment.md says how to mint it."
+            exit 1
+          fi
+          gh pr list --base main --state open --json number,headRefName,autoMergeRequest \
+            --jq '.[] | select(.autoMergeRequest != null and (.headRefName | startswith("claude/"))) | .number' |
+          while read -r n; do
+            # A branch already up to date answers 422; that is not a failure.
+            if gh api -X PUT "repos/$GH_REPO/pulls/$n/update-branch" --silent 2>/dev/null; then
+              echo "#$n brought up to date; CI runs again and auto-merge waits on it."
+            else
+              echo "#$n not updated (already up to date, or a conflict for its session)."
+            fi
+          done

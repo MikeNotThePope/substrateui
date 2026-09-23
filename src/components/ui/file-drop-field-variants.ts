@@ -31,15 +31,9 @@ export const fileDropFieldVariants = cva(
       //
       // The rejected state carries a fill and a text colour as well as the
       // border, matching `Alert`'s error variant, and both of those pairings
-      // are in the contrast audit. The border alone would not do: an unlayered
-      // `* { border-color: var(--border) }` in tokens.css currently outranks
-      // every `border-<colour>` utility in the sheet, `border-status-error`
-      // included, so a rejected box drawn only by its border renders
-      // identically to a resting one. That is a system-wide bug, not this
-      // component's — `Alert`, `Field` and `Toaster` are all affected — and it
-      // is reported on MikeNotThePope/substrateui#143 rather than fixed here,
-      // because fixing it recolours the whole site. The class stays so this
-      // box turns red along with everything else on the day it is fixed.
+      // are in the contrast audit. A border alone is a colour-only signal, and
+      // for a while it was not even that: tokens.css's `*` border rule sat
+      // unlayered and outranked `border-status-error` (#144).
       invalid: {
         true: "border-status-error bg-status-error-surface text-status-error-text hover:bg-status-error-surface [&_svg]:text-status-error-text",
         false:

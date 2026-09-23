@@ -129,7 +129,7 @@
 
   /* ── Chart colors ── */
   --chart-1: var(--raw-plum-600);
-  --chart-2: var(--raw-amber-500);
+  --chart-2: var(--raw-amber-600);
   --chart-3: var(--raw-plum-400);
   --chart-4: var(--raw-amber-300);
   --chart-5: var(--raw-plum-200);
@@ -196,10 +196,6 @@
   --hard-shadow: 4px 4px 0 0 var(--hard-shadow-color);
   --hard-shadow-lg: 6px 6px 0 0 var(--hard-shadow-color);
   --hard-shadow-amber: 6px 6px 0 0 var(--secondary-fill);
-
-  /* ── SubstrateUI structural (shared across modes) ── */
-  --border-width: 2px;
-  --press-depth: 1.5px;
 
   /* ── SubstrateUI feel tokens (themable structure) ──
      Motion re-times every component transition that doesn't set an
@@ -275,7 +271,7 @@
   --border-accent: var(--raw-plum-400);
 
   /* Spinner track: unchanged from the previously tuned dark-mode value */
-  --spinner-track: var(--raw-warm-400);
+  --spinner-track: var(--raw-warm-900);
 
   /* ── SubstrateUI extended: Accent fills ── */
   --accent-fill: var(--raw-plum-500);
@@ -404,7 +400,7 @@
 
   /* ── Chart ── */
   --chart-1: var(--raw-magma-600);
-  --chart-2: var(--raw-sulfur-500);
+  --chart-2: var(--raw-sulfur-700);
   --chart-3: var(--raw-magma-400);
   --chart-4: var(--raw-sulfur-300);
   --chart-5: var(--raw-magma-200);
@@ -532,7 +528,7 @@
   --border-subtle: var(--raw-basalt-700);
   --border-accent: var(--raw-magma-400);
 
-  --spinner-track: var(--raw-basalt-400);
+  --spinner-track: var(--raw-basalt-700);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-magma-500);
@@ -658,7 +654,7 @@
 
   /* ── Chart ── */
   --chart-1: var(--raw-cyan-600);
-  --chart-2: var(--raw-yellow-500);
+  --chart-2: var(--raw-yellow-700);
   --chart-3: var(--raw-cyan-400);
   --chart-4: var(--raw-yellow-300);
   --chart-5: var(--raw-cyan-200);
@@ -687,7 +683,7 @@
   --border-subtle: var(--raw-proof-200);
   --border-accent: var(--raw-cyan-600);
 
-  --spinner-track: var(--raw-proof-300);
+  --spinner-track: var(--raw-proof-200);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-cyan-700);
@@ -790,7 +786,7 @@
   --border-subtle: var(--raw-proof-800);
   --border-accent: var(--raw-cyan-400);
 
-  --spinner-track: var(--raw-proof-400);
+  --spinner-track: var(--raw-proof-600);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-cyan-400);
@@ -902,7 +898,7 @@
 
   /* ── Chart ── */
   --chart-1: var(--raw-jade-600);
-  --chart-2: var(--raw-instrument-500);
+  --chart-2: var(--raw-instrument-700);
   --chart-3: var(--raw-jade-400);
   --chart-4: var(--raw-instrument-300);
   --chart-5: var(--raw-jade-200);
@@ -931,7 +927,7 @@
   --border-subtle: var(--raw-graphite-200);
   --border-accent: var(--raw-jade-600);
 
-  --spinner-track: var(--raw-graphite-300);
+  --spinner-track: var(--raw-graphite-200);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-jade-700);
@@ -1031,7 +1027,7 @@
   --border-subtle: var(--raw-graphite-800);
   --border-accent: var(--raw-jade-400);
 
-  --spinner-track: var(--raw-graphite-400);
+  --spinner-track: var(--raw-graphite-600);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-jade-400);
@@ -1143,7 +1139,7 @@
 
   /* ── Chart ── */
   --chart-1: var(--raw-steel-600);
-  --chart-2: var(--raw-rose-500);
+  --chart-2: var(--raw-rose-700);
   --chart-3: var(--raw-steel-400);
   --chart-4: var(--raw-rose-300);
   --chart-5: var(--raw-steel-200);
@@ -1172,7 +1168,7 @@
   --border-subtle: var(--raw-frost-200);
   --border-accent: var(--raw-steel-600);
 
-  --spinner-track: var(--raw-frost-300);
+  --spinner-track: var(--raw-frost-200);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-steel-700);
@@ -1272,7 +1268,7 @@
   --border-subtle: var(--raw-frost-800);
   --border-accent: var(--raw-steel-400);
 
-  --spinner-track: var(--raw-frost-400);
+  --spinner-track: var(--raw-frost-600);
 
   /* ── Accent fills ── */
   --accent-fill: var(--raw-steel-400);
@@ -1479,8 +1475,16 @@
    BASE STYLES
 ================================================================ */
 
-* {
-  border-color: var(--border);
+/* In the base layer, not unlayered: an unlayered declaration beats every
+   layered one, so from here it outranked every `border-<colour>` utility
+   in `@layer utilities` and `Alert`, `Field` and `FileDropField` never drew
+   their status borders (MikeNotThePope/substrateui#144). `@import
+   "tailwindcss"` declares the layer order before this file, so this joins
+   the existing base layer after preflight's `border: 0 solid`. */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
 }
 
 /* ── Motion feel ──

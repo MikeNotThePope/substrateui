@@ -165,6 +165,14 @@ const pairings: Pairing[] = [
   { name: "border-strong on background", fg: "border-strong", bg: "background", type: "ui" },
   { name: "ring on background", fg: "ring", bg: "background", type: "ui" },
   { name: "border on card", fg: "border", bg: "card", type: "ui" },
+  // Spinner: the arc (primary) turns over its ring (spinner-track). An arc the
+  // lightness of its ring reads as a ring that stopped (#172).
+  { name: "primary on spinner-track (spinner arc)", fg: "primary", bg: "spinner-track", type: "ui" },
+  // Chart: the first two series are what a two-series chart draws, as a bar, a
+  // line or a dot on the page. chart-3 to chart-5 are tints by design, meant
+  // for fills under a stronger line, so they are not held to 3:1 here (#172).
+  { name: "chart-1 on background", fg: "chart-1", bg: "background", type: "ui" },
+  { name: "chart-2 on background", fg: "chart-2", bg: "background", type: "ui" },
 
   // Status borders (Alert/Toast draw status-X as a border around status-X-surface)
   { name: "status-success on status-success-surface", fg: "status-success", bg: "status-success-surface", type: "ui", backdrop: "background" },

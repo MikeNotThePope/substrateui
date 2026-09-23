@@ -89,11 +89,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots",
     "test:visual:report": "playwright show-report",
-    "snapshots:download": "bun scripts/snapshots.ts download",
-    "snapshots:upload": "bun scripts/snapshots.ts upload",
-    "snapshots:regenerate": "bash scripts/snapshots-regenerate.sh",
     "scan:deprecations": "tsx scripts/scan-deprecations.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o public/storybook && node .storybook/rewrite-base-paths.mjs",
@@ -124,7 +120,7 @@
     "@rollup/rollup-linux-arm64-gnu": "^4.60.1"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1024.0",
+    "@axe-core/playwright": "^4.13.0",
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.30.0",
     "@playwright/test": "^1.59.1",

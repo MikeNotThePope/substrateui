@@ -1,7 +1,6 @@
 import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { Overline } from "@/components/ui/overline"
-import { Badge } from "@/components/ui/badge"
 import { DocPage } from "../../_components/doc-page"
 import { ComponentPreview } from "../../_components/component-preview"
 import { ImportLine } from "../../_components/import-line"
@@ -84,7 +83,7 @@ export default function OverlinePage() {
         <H3>Sizes</H3>
         <P>
           <Code>2xs</Code> is 11px, one step below where Tailwind&apos;s scale stops. It exists
-          because <Badge>Badge</Badge> wanted that size and had been carrying a raw{" "}
+          because <Code>Badge</Code> wanted that size and had been carrying a raw{" "}
           <Code>text-[11px]</Code> to get it. Each size pairs its own line-height, so leading
           arrives with the size rather than being inherited from whatever the label happens to
           sit inside — which is the difference between this step and the arbitrary value, and

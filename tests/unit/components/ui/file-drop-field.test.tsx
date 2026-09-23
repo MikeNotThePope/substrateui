@@ -145,9 +145,6 @@ describe('FileDropField', () => {
 
     rerender(<FileDropField aria-label="Resume" invalid />)
     // Border, fill and text together, the way Alert's error variant does it.
-    // The border alone is not enough to see: an unlayered
-    // `* { border-color: var(--border) }` in tokens.css outranks every
-    // border-colour utility on the site today (#143).
     expect(box().className).toContain('border-status-error')
     expect(box().className).toContain('bg-status-error-surface')
     expect(box().className).toContain('text-status-error-text')
