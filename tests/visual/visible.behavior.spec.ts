@@ -60,24 +60,11 @@ const MOVING = ':is([role="switch"],[role="progressbar"],[data-slot="slider"]) *
 const EXEMPT: Array<{ page: string; where: string; why: string }> = [];
 
 /**
- * What these checks found on their first run, each a real failure waiting on a
- * fix in the component. The list only shrinks: an entry that no longer fails
- * fails the run, and a new failure never goes here. #172 carries the numbers
- * and the fixes.
+ * A real failure waiting on a fix in the component. Empty since #172 fixed the
+ * five the first run found. The list only shrinks: an entry that no longer
+ * fails fails the run, and a new failure goes here only with Mike's say-so.
  */
-const KNOWN: Array<{ page: string; rule: string; where: string }> = [
-  // The arc nearly vanishes into its track in every dark palette (lava 1.07:1)
-  // and in light proof, substrate and tundra. The spinner that looked stopped.
-  { page: 'components/spinner', rule: 'spinner arc vs its track', where: '[data-slot="spinner"]' },
-  // The paler series colours sit under 3:1 on the page in every palette.
-  { page: 'components/chart', rule: 'graphic', where: '[data-slot="chart"]' },
-  // The empty stars, which say how many a full rating has, at 1.85:1.
-  { page: 'components/rating', rule: 'graphic', where: '[data-slot="rating"]' },
-  // The chevron that says the trigger opens a list, at 2.13:1.
-  { page: 'components/select', rule: 'graphic', where: '[data-slot="select-trigger"]' },
-  // The page's examples throw a hydration mismatch.
-  { page: 'components/overline', rule: 'the page threw', where: '' },
-];
+const KNOWN: Array<{ page: string; rule: string; where: string }> = [];
 
 const known = (page: string, rule: string, where: string) =>
   KNOWN.some((k) => k.page === page && k.rule === rule && where.startsWith(k.where));
@@ -186,6 +173,9 @@ async function findings(
         })
         .filter((c) => c[3] >= 0.05);
       if (paints.length === 0) continue;
+      // A see-through fill with no outline is a wash under a line, like an area
+      // chart's shading. The line carries the data and is checked on its own.
+      if (s.stroke === 'none' && parseFloat(s.fillOpacity) < 1) continue;
       check('graphic', el, paints.reduce((a, c) => (ratio(over(c, bg), bg) > ratio(over(a, bg), bg) ? c : a)), bg);
     }
 

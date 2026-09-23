@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T15:33:08.858Z",
+  "generatedAt": "2026-09-23T09:54:13.704Z",
   "results": [
     {
       "name": "foreground on background",
@@ -286,6 +286,42 @@
       "required": 3,
       "light": 4.397165026074199,
       "dark": 6.448074809423677,
+      "lightPass": true,
+      "darkPass": true
+    },
+    {
+      "name": "primary on spinner-track (spinner arc)",
+      "fg": "primary",
+      "bg": "spinner-track",
+      "type": "ui",
+      "backdrop": null,
+      "required": 3,
+      "light": 4.306387371497338,
+      "dark": 3.4721993533557227,
+      "lightPass": true,
+      "darkPass": true
+    },
+    {
+      "name": "chart-1 on background",
+      "fg": "chart-1",
+      "bg": "background",
+      "type": "ui",
+      "backdrop": null,
+      "required": 3,
+      "light": 6.156045630434428,
+      "dark": 6.014844198309099,
+      "lightPass": true,
+      "darkPass": true
+    },
+    {
+      "name": "chart-2 on background",
+      "fg": "chart-2",
+      "bg": "background",
+      "type": "ui",
+      "backdrop": null,
+      "required": 3,
+      "light": 3.1055819129032134,
+      "dark": 11.993625325110735,
       "lightPass": true,
       "darkPass": true
     },
@@ -832,6 +868,54 @@
           "type": "ui",
           "required": 3,
           "ratio": 6.448074809423677,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.306387371497338,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.4721993533557227,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.156045630434428,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.014844198309099,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.1055819129032134,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 11.993625325110735,
           "pass": true
         },
         {
@@ -1433,6 +1517,54 @@
         },
         {
           "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.306387371497338,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.4721993533557227,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.156045630434428,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.014844198309099,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.1055819129032134,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 11.993625325110735,
+          "pass": true
+        },
+        {
+          "mode": "light",
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
@@ -1994,6 +2126,54 @@
           "type": "ui",
           "required": 3,
           "ratio": 4.9953165874023675,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.6382780834389097,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.280368790894472,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.134811794244273,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 9.301386447626243,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.007906938133058,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 11.472153355571571,
           "pass": true
         },
         {
@@ -2563,6 +2743,54 @@
         },
         {
           "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.4904800836049508,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.3637157681263288,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.0058915677916778,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 9.558526310456005,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.012875854439922,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 11.463797109494212,
+          "pass": true
+        },
+        {
+          "mode": "light",
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
@@ -3128,6 +3356,54 @@
         },
         {
           "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.021991345177625,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.485634335211886,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.370049951060025,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 8.877049954806923,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.811705493078855,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 11.893633198913276,
+          "pass": true
+        },
+        {
+          "mode": "light",
           "name": "status-success on status-success-surface",
           "type": "ui",
           "required": 3,
@@ -3689,6 +3965,54 @@
           "type": "ui",
           "required": 3,
           "ratio": 4.996428609076792,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.6885463373960263,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.249218490246398,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.1750750442268285,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 9.227967072252635,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.9970806894681887,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 12.079656240984187,
           "pass": true
         },
         {
