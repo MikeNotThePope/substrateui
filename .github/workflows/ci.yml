@@ -85,6 +85,11 @@ jobs:
     # Pull requests from forks get no secrets, so R2_ACCESS_KEY_ID is empty
     # there and the snapshot steps skip: outside contributors get the rest of
     # CI without needing access to the baseline bucket.
+    #
+    # `ran` tells `verify` which of those it was: all shards read the same
+    # secret, so whichever shard's value wins, it is the same value.
+    outputs:
+      ran: ${{ env.R2_ACCESS_KEY_ID != '' }}
     env:
       R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
       R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -99,6 +104,10 @@ jobs:
         with:
           node-version: 22
       - run: bun install --frozen-lockfile
+
+      - name: Say the visual suite did not run
+        if: env.R2_ACCESS_KEY_ID == ''
+        run: echo "::warning::Visual suite not run. No R2 secrets here (a fork's pull request gets none), so verify reports skipped, not passed."
 
       - name: Install Chromium
         if: env.R2_ACCESS_KEY_ID != ''
@@ -133,9 +142,24 @@ jobs:
   # `if: always()` is load-bearing. Without it, a failing dependency leaves this
   # job *skipped* rather than failed — and a skipped required check does not
   # block a merge, so a red build would become mergeable.
+  #
+  # The same rule is what reports a fork honestly. A fork's pull request gets
+  # no R2 secrets, so the visual suite cannot run there; its shards skip their
+  # steps and finish green. This job used to read that as success, so `verify`
+  # said "passed" for a suite that never ran. Now, when every other job passed
+  # and the suite did not run, this job skips: the check reads "Skipped", which
+  # branch protection accepts like neutral, and it is not a green tick. Any
+  # failure still runs it, and fails it. The rejected alternative was failing
+  # here: every outside contribution would then need an admin bypass for a
+  # check it could never run. A neutral check run through the Checks API is
+  # out too: a fork's token cannot write one.
   verify:
     needs: [lint, unit, build, visual]
-    if: always()
+    if: >-
+      always() &&
+      (needs.visual.outputs.ran != 'false' ||
+       contains(needs.*.result, 'failure') ||
+       contains(needs.*.result, 'cancelled'))
     runs-on: ubuntu-latest
     steps:
       - name: Fail if any job failed or was cancelled
