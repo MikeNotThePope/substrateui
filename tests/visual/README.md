@@ -8,8 +8,8 @@ screenshot, so there are no baselines, no R2 bucket and no secrets.
 - `visible.behavior.spec.ts` opens every component and layout docs page, wears
   each palette in `pages.ts` on it, and fails any part a person could not see.
   Its header has the rules.
-- `mark-corner.behavior.spec.ts`, `dropdown-menu.behavior.spec.ts` and
-  `drawer.behavior.spec.ts` each pin one behaviour a unit test cannot see,
+- `mark-corner.behavior.spec.ts`, `status-border.behavior.spec.ts`,
+  `dropdown-menu.behavior.spec.ts` and `drawer.behavior.spec.ts` each pin one behaviour a unit test cannot see,
   because jsdom computes no CSS.
 
 Every project names the spec files it runs, through `testMatch`. A spec file
