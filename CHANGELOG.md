@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.10.0
+
+### Minor Changes
+
+- [#177](https://github.com/MikeNotThePope/substrateui/pull/177) [`8dceb18`](https://github.com/MikeNotThePope/substrateui/commit/8dceb18b3811fec32a55ca51395046aa80f128e4) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Add `CopyField`: a read-only value in a mono block with a copy button at its end edge. The button flips to a check and "Copied", a polite live region announces it, and a refused clipboard selects the value instead. Labels resolve through `LabelsProvider` under `copyField`.
+
 ## 2.9.0
 
 ### Minor Changes
