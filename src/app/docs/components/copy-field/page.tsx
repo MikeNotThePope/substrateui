@@ -26,7 +26,7 @@ const copyFieldProps: PropDef[] = [
     type: "string",
     default: undefined,
     description:
-      "Accessible name of the copy button, naming what it copies. Falls back to labels.copy. The visible text stays labels.copy.",
+      "Accessible name of the copy button, naming what it copies. Falls back to labels.copy. The visible text stays labels.copy, so start label with it: a name holding the visible words is what lets a voice user say \"click Copy\" (WCAG 2.5.3).",
   },
   {
     name: "labels",
@@ -63,7 +63,8 @@ export default function CopyFieldPage() {
         <H3>Labels</H3>
         <P>
           The button&apos;s text is <Code>copy</Code> until a copy lands, then <Code>copied</Code>,
-          which is also what the live region announces. Below the <Code>sm</Code> breakpoint the
+          which is also what the live region announces. Its accessible name stays put, so a
+          focused button is not announced twice. Below the <Code>sm</Code> breakpoint the
           text is hidden and only the icon shows. Override one instance with the{" "}
           <Code>labels</Code> prop, or every instance through <Code>LabelsProvider</Code>&apos;s{" "}
           <Code>copyField</Code> key.
@@ -71,7 +72,7 @@ export default function CopyFieldPage() {
         <PropsTable
           props={[
             { name: "copy", type: "string", default: "\"Copy\"", description: "The button's text, and its name when no label is given." },
-            { name: "copied", type: "string", default: "\"Copied\"", description: "The button's text and name after a copy, and the announcement." },
+            { name: "copied", type: "string", default: "\"Copied\"", description: "The button's text after a copy, and the announcement. The button's name does not change." },
           ]}
         />
       </Stack>

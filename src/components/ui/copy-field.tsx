@@ -28,7 +28,9 @@ interface CopyFieldProps
   value: string
   /**
    * Accessible name of the copy button, naming what it copies ("Copy
-   * reference"). Defaults to `labels.copy`. The visible text stays `labels.copy`.
+   * reference"). Defaults to `labels.copy`. The visible text stays `labels.copy`,
+   * so start `label` with it: a name that contains the visible words is what
+   * lets a voice user say "click Copy" (WCAG 2.5.3).
    */
   label?: string
   labels?: CopyFieldLabels
@@ -37,8 +39,8 @@ interface CopyFieldProps
 /**
  * A read-only value in a mono block with a copy button at its end edge.
  *
- * The button flips to a check and "Copied" for two seconds after a copy, and a
- * polite live region says so. When the browser refuses the clipboard (plain
+ * The button's icon and text flip to a check and "Copied" for two seconds after
+ * a copy, and a polite live region says so. When the browser refuses the clipboard (plain
  * http, a denied permission), the value is selected instead, so the reader's
  * own long-press or Ctrl+C still works. A tap on the value selects it whole.
  *
@@ -79,13 +81,16 @@ function CopyField({
     >
       <code
         ref={valueRef}
+        dir="auto"
         className="min-w-0 flex-1 select-all break-all px-3 py-2 font-mono text-sm"
       >
         {value}
       </code>
       <button
         type="button"
-        aria-label={copied ? labels.copied : (label ?? labels.copy)}
+        // The name holds still: the live region says "Copied", and a focused
+        // button renamed to the same word would be announced twice.
+        aria-label={label ?? labels.copy}
         onClick={() => void copy(value)}
         className="flex shrink-0 items-center gap-1.5 rounded-e-sm border-s-2 border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >

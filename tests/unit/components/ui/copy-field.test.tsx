@@ -39,11 +39,11 @@ describe("CopyField", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Copy reference" }))
 
-    const button = await screen.findByRole("button", { name: "Copied" })
-    expect(writeText).toHaveBeenCalledWith(VALUE)
-    expect(button).toHaveTextContent("Copied")
     const region = document.querySelector('[aria-live="polite"]')
-    expect(region).toHaveTextContent("Copied")
+    await waitFor(() => expect(region).toHaveTextContent("Copied"))
+    expect(writeText).toHaveBeenCalledWith(VALUE)
+    const button = screen.getByRole("button", { name: "Copy reference" })
+    expect(button).toHaveTextContent("Copied")
   })
 
   it("selects the value when the clipboard refuses", async () => {
