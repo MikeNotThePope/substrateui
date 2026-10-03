@@ -24,6 +24,7 @@ export * from "./collapsible";
 export * from "./combobox";
 export * from "./command";
 export * from "./context-menu";
+export * from "./copy-field";
 export * from "./corner-panel";
 export * from "./countdown";
 export * from "./data-table";
