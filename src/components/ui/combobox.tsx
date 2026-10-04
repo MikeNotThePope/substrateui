@@ -287,7 +287,6 @@ function Combobox({
   const trigger = (
     <ComboboxPrimitive.Trigger
       {...fieldControl}
-      aria-expanded={undefined}
       data-slot="combobox"
       className={cn(
         buttonVariants({ variant: "outline" }),
