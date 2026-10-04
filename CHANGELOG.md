@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.11.0
+
+### Minor Changes
+
+- [#179](https://github.com/MikeNotThePope/substrateui/pull/179) [`539fdb3`](https://github.com/MikeNotThePope/substrateui/commit/539fdb3feccdc16525cc812067742bcec2ffc612) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - `Combobox` joins its `Field`: the trigger takes the field's `id`, so a `FieldLabel` names it, and its `aria-describedby` and `aria-invalid`, as `Input` does.
+
 ## 2.10.0
 
 ### Minor Changes
