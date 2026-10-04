@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.11.1
+
+### Patch Changes
+
+- [#181](https://github.com/MikeNotThePope/substrateui/pull/181) [`0601861`](https://github.com/MikeNotThePope/substrateui/commit/06018615ab90c950347bb9635e85db9b98492827) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - `Combobox`'s trigger keeps Base UI's `aria-expanded`, so axe's `aria-required-attr` no longer fails it.
+
 ## 2.11.0
 
 ### Minor Changes
