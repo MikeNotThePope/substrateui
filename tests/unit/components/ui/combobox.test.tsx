@@ -300,6 +300,20 @@ describe('Combobox — chips and clearing', () => {
   })
 })
 
+// axe's aria-required-attr fails a combobox with no aria-expanded, so the
+// trigger keeps the one Base UI sets rather than dropping it.
+describe('Combobox expanded state', () => {
+  it('reports closed, then open', async () => {
+    const user = userEvent.setup()
+    render(<Combobox options={OPTIONS} />)
+    const trigger = screen.getByRole('combobox')
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    await user.click(trigger)
+    await screen.findByText('Apple')
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+  })
+})
+
 describe('Combobox inside a Field', () => {
   it('takes the field id, so FieldLabel names the trigger', () => {
     render(
