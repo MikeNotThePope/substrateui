@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button-variants"
 import { Spinner } from "@/components/ui/spinner"
+import { useFieldControl } from "@/components/ui/field"
 import { resolveLabels } from "@/lib/resolve-labels"
 import { useLabels } from "@/components/providers/labels-provider"
 
@@ -118,6 +119,9 @@ function Combobox({
 }: ComboboxProps) {
   const ctx = useLabels()
   const labels = resolveLabels(defaultComboboxLabels, ctx.combobox, labelsProp)
+  // Inside a Field the trigger takes its id, so a FieldLabel names it, and its
+  // hint, error and invalid state, the way Input does.
+  const fieldControl = useFieldControl()
 
   const isMultiple = props.multiple === true
   const [query, setQuery] = React.useState("")
@@ -282,6 +286,7 @@ function Combobox({
 
   const trigger = (
     <ComboboxPrimitive.Trigger
+      {...fieldControl}
       aria-expanded={undefined}
       data-slot="combobox"
       className={cn(

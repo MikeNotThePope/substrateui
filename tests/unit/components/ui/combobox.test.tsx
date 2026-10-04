@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Combobox } from '@/components/ui/combobox'
+import { Field, FieldError, FieldHint, FieldLabel } from '@/components/ui/field'
 
 const OPTIONS = [
   { value: 'apple', label: 'Apple' },
@@ -296,5 +297,39 @@ describe('Combobox — chips and clearing', () => {
     )
     await user.click(screen.getByRole('button', { name: 'Remove Apple' }))
     expect(onValueChange).toHaveBeenCalledWith(['banana'])
+  })
+})
+
+describe('Combobox inside a Field', () => {
+  it('takes the field id, so FieldLabel names the trigger', () => {
+    render(
+      <Field id="fruit">
+        <FieldLabel>Fruit</FieldLabel>
+        <Combobox multiple options={OPTIONS} value={['apple']} />
+      </Field>
+    )
+    const trigger = screen.getByRole('combobox', { name: 'Fruit' })
+    expect(trigger).toHaveAttribute('id', 'fruit')
+  })
+
+  it('points at the rendered hint and error, and is aria-invalid', () => {
+    render(
+      <Field error>
+        <FieldLabel>Fruit</FieldLabel>
+        <Combobox options={OPTIONS} />
+        <FieldHint>Pick one you like.</FieldHint>
+        <FieldError>A fruit is required.</FieldError>
+      </Field>
+    )
+    const trigger = screen.getByRole('combobox', { name: 'Fruit' })
+    expect(trigger).toHaveAccessibleDescription('Pick one you like. A fruit is required.')
+    expect(trigger).toHaveAttribute('aria-invalid', 'true')
+  })
+
+  it('carries none of it outside a Field', () => {
+    render(<Combobox options={OPTIONS} />)
+    const trigger = screen.getByRole('combobox')
+    expect(trigger).not.toHaveAttribute('aria-describedby')
+    expect(trigger).not.toHaveAttribute('aria-invalid')
   })
 })
