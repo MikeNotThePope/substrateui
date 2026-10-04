@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Combobox } from "@/components/ui/combobox"
+import { Field, FieldError, FieldHint, FieldLabel } from "@/components/ui/field"
 import { Stack } from "@/components/ui/stack"
 import { H3, P, Code } from "@/components/ui/typography"
 import { DocPage } from "../../_components/doc-page"
@@ -115,6 +116,19 @@ function LimitTagsDemo() {
       value={value}
       onValueChange={setValue}
     />
+  )
+}
+
+function FieldDemo() {
+  const [value, setValue] = useState<string[]>([])
+  const empty = value.length === 0
+  return (
+    <Field error={empty}>
+      <FieldLabel>Runtimes</FieldLabel>
+      <Combobox multiple options={runtimes} value={value} onValueChange={setValue} />
+      <FieldHint>Every runtime the service deploys to.</FieldHint>
+      {empty && <FieldError>Pick at least one runtime.</FieldError>}
+    </Field>
   )
 }
 
@@ -237,6 +251,27 @@ export default function ComboboxPage() {
           code={`<Combobox multiple clearable limitTags={2} options={runtimes} value={value} onValueChange={setValue} />`}
         >
           <LimitTagsDemo />
+        </ComponentPreview>
+      </Stack>
+
+      {/* Field */}
+      <Stack gap="md">
+        <H3>Inside a Field</H3>
+        <P>
+          Inside a <Code>Field</Code> the trigger takes the field&apos;s id, so{" "}
+          <Code>FieldLabel</Code> names it, and points at the rendered{" "}
+          <Code>FieldHint</Code> and <Code>FieldError</Code>. The field&apos;s{" "}
+          <Code>error</Code> marks it <Code>aria-invalid</Code>.
+        </P>
+        <ComponentPreview
+          code={`<Field error={value.length === 0}>
+  <FieldLabel>Runtimes</FieldLabel>
+  <Combobox multiple options={runtimes} value={value} onValueChange={setValue} />
+  <FieldHint>Every runtime the service deploys to.</FieldHint>
+  {value.length === 0 && <FieldError>Pick at least one runtime.</FieldError>}
+</Field>`}
+        >
+          <FieldDemo />
         </ComponentPreview>
       </Stack>
 
