@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.11.2
+
+### Patch Changes
+
+- [#183](https://github.com/MikeNotThePope/substrateui/pull/183) [`7d8e90e`](https://github.com/MikeNotThePope/substrateui/commit/7d8e90e1782614c25b111e1ff1dd572d74ca9a59) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - `grid-auto-fit` and `grid-auto-fill` no longer overflow a container narrower than `--grid-min`. The minimum is now `min(var(--grid-min, 280px), 100%)`, so on a narrow phone column the grid wraps to one full-width track instead of pushing the page sideways.
+
 ## 2.11.1
 
 ### Patch Changes
