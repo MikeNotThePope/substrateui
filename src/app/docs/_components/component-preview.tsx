@@ -41,7 +41,7 @@ export function ComponentPreview({ children, code, title, defaultOpen = false }:
           checks what renders inside it, and nothing of the page around it. */}
       <div
         data-specimen-body
-        className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4`}
+        className={`border-2 ${title ? "border-t-0" : "rounded-t-lg"} p-6 bg-surface-page flex flex-wrap items-start gap-4 *:max-w-full`}
       >
         {children}
       </div>

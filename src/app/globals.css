@@ -33,6 +33,14 @@ body :is([data-slot="h1"], [data-slot="h2"], [data-slot="h3"]) {
   letter-spacing: inherit;
 }
 
+/* Inline code in prose breaks where it must. A package path or a type like
+   React.HTMLAttributes<HTMLDivElement> is one unbroken word, and on a phone
+   it pushed the whole page sideways. Site-only for the same reason as the
+   rule above: Code ships, and its wrapping is the consumer's call. */
+body :not(pre) > [data-slot="code"] {
+  overflow-wrap: anywhere;
+}
+
 /* ── Marketing-site entrance animations ──────────────────────────────
    Docs/site only — the published library ships tokens.css untouched.
    Everything below is gated on prefers-reduced-motion. */

@@ -34,7 +34,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t-2 bg-card">
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto max-w-6xl px-6 py-10 [body:has([data-docs-shell])_&]:max-w-none">
         <div className="grid gap-8 sm:grid-cols-[1fr_auto_auto]">
           <div>
             <Link

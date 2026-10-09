@@ -226,8 +226,8 @@ export default function DesignSystemPage() {
 
   return (
     <Center
-      max="xl"
-      className="py-12 outline-none"
+      padding={false}
+      className="max-w-6xl px-6 py-12 outline-none"
       render={<main id="main-content" tabIndex={-1} />}
     >
       <Stack gap="2xl">
@@ -933,7 +933,7 @@ export default function DesignSystemPage() {
             </Cluster>
 
             <H3>Skeleton</H3>
-            <div className="space-y-3 w-80">
+            <div className="space-y-3 w-full max-w-80">
               <Skeleton className="h-32 w-full rounded-lg" />
               <Skeleton className="h-4 w-3/4" />
               <Skeleton className="h-4 w-1/2" />
@@ -1213,7 +1213,7 @@ export default function DesignSystemPage() {
             </Grid>
 
             <H3>Center</H3>
-            <Muted>This page uses <Code>Center max=&quot;xl&quot;</Code> for its main content area.</Muted>
+            <Muted>This page uses <Code>Center</Code> for its main content area, capped at <Code>max-w-6xl</Code> to match the site header.</Muted>
 
             <H3>Divider</H3>
             <Stack gap="md">
@@ -1270,7 +1270,7 @@ export default function DesignSystemPage() {
             </Stack>
 
             <H3>Scroll Area</H3>
-            <ScrollArea className="h-48 w-80 border-2 rounded-lg p-4">
+            <ScrollArea className="h-48 w-full max-w-80 border-2 rounded-lg p-4">
               <Stack gap="sm">
                 {Array.from({ length: 20 }, (_, i) => (
                   <P key={i}>Scrollable item {i + 1}</P>
@@ -1279,7 +1279,7 @@ export default function DesignSystemPage() {
             </ScrollArea>
 
             <H3>Aspect Ratio</H3>
-            <div className="w-80">
+            <div className="w-full max-w-80">
               <AspectRatio ratio={16 / 9}>
                 <div className="w-full h-full rounded-lg bg-surface-sunken border-2 border-dashed border-border flex items-center justify-center text-muted-foreground text-sm font-mono">
                   16:9

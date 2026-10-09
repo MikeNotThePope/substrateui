@@ -296,7 +296,7 @@ function SemanticRow({ name, light, dark }: { name: string; light: string; dark:
       />
       <div className="flex-1 min-w-0">
         <Mono className="text-sm font-medium">{copied ? "Copied!" : variable}</Mono>
-        <div className="flex gap-4 text-xs text-muted-foreground">
+        <div className="flex flex-wrap gap-x-4 text-xs text-muted-foreground">
           <span>Light: {light}</span>
           <span>Dark: {dark}</span>
         </div>

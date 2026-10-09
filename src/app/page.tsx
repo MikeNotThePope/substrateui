@@ -118,7 +118,7 @@ export default function HomePage() {
       />
       {/* ── Thesis + the fan deck ─────────────────────────────── */}
       <section className="border-b-2 py-16 md:py-24">
-        <Center max="2xl" className="px-4">
+        <Center padding={false} className="max-w-6xl px-6">
           <Stack gap="xl">
             <Stack gap="lg" className="sui-enter items-start text-left">
               <Cluster gap="sm" className="items-center">
@@ -172,7 +172,7 @@ export default function HomePage() {
 
       {/* ── Tint ramps ────────────────────────────────────────── */}
       <section className="border-b-2 bg-surface-page py-12">
-        <Center max="2xl" className="px-4">
+        <Center padding={false} className="max-w-6xl px-6">
           <Stack gap="lg">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <Caps className="text-muted-foreground">Tint ramps</Caps>
@@ -191,7 +191,7 @@ export default function HomePage() {
 
       {/* ── Live UI beside the map that produced it ───────────── */}
       <section className="border-b-2 py-20">
-        <Center max="2xl" className="px-4">
+        <Center padding={false} className="max-w-6xl px-6">
           <Stack gap="xl">
             <Stack gap="sm">
               <Caps className="text-muted-foreground">Live</Caps>
@@ -204,7 +204,7 @@ export default function HomePage() {
               </P>
             </Stack>
 
-            <div className="grid items-start gap-8 lg:grid-cols-2">
+            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
               <Card className="sui-reveal">
                 <CardHeader>
                   <Cluster gap="sm" className="items-center justify-between">
@@ -265,7 +265,7 @@ const proof = createTheme({
 
       {/* ── Who it's for ──────────────────────────────────────── */}
       <section className="border-b-2 bg-surface-page py-20">
-        <Center max="2xl" className="px-4">
+        <Center padding={false} className="max-w-6xl px-6">
           <Stack gap="xl">
             <Stack gap="sm">
               <Caps className="text-muted-foreground">Fit</Caps>
@@ -292,7 +292,7 @@ const proof = createTheme({
 
       {/* ── Job docket ────────────────────────────────────────── */}
       <section className="py-20">
-        <Center max="2xl" className="px-4">
+        <Center padding={false} className="max-w-6xl px-6">
           <Stack gap="xl">
             <Stack gap="sm">
               <Caps className="text-muted-foreground">Job docket</Caps>

@@ -33,7 +33,11 @@ export function SiteHeader({ labels: labelsProp }: { labels?: SiteHeaderLabels }
       role="banner"
       className="sticky top-0 z-40 h-14 border-b-2 bg-card/90 backdrop-blur"
     >
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
+      {/* max-w-6xl px-6 is the site's one content box: the home page, the
+          design-system page and the footer use it too, so every left edge
+          lines up. Docs drop the cap, because there the sidebar sits flush
+          left under the brand and a centred brand floats over nothing. */}
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6 [body:has([data-docs-shell])_&]:max-w-none">
         <div className="flex items-center gap-3">
           <SiteHeaderMobileNav />
           <Link href="/" className="font-bold text-lg tracking-tight">

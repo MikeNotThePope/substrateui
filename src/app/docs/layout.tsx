@@ -13,7 +13,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   const entries = docsIndex()
 
   return (
-    <div className="flex">
+    // data-docs-shell widens the site header and footer to full bleed (see
+    // site-header.tsx), so the brand sits over the sidebar it belongs to.
+    <div data-docs-shell className="flex">
       {/* Desktop sidebar — sticky beneath the global SiteHeader.
           On mobile, this navigation is folded into the header's drawer
           (see SiteHeaderMobileNav) so there's only a single hamburger. */}
@@ -31,7 +33,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             breakpoint. Putting a copy in the desktop-only sidebar would mount
             two Cmd+K handlers and serialise the index into the payload twice,
             and leave mobile — where the sidebar is hidden — with no search. */}
-        <div className="border-b-2 border-border px-4 py-3 md:px-8">
+        <div className="border-b-2 border-border px-6 py-3 md:px-8">
           <DocsSearch entries={entries} className="md:max-w-sm" />
         </div>
         {children}
