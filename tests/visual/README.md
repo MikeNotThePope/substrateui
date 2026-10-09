@@ -8,6 +8,9 @@ screenshot, so there are no baselines, no R2 bucket and no secrets.
 - `visible.behavior.spec.ts` opens every component and layout docs page, wears
   each palette in `pages.ts` on it, and fails any part a person could not see.
   Its header has the rules.
+- `layout.behavior.spec.ts` opens every route the site serves at 360, 390,
+  768 and 1280px, and fails a page that scrolls sideways or whose header,
+  content and footer do not start at the same edge. Light only, ltr and rtl.
 - `mark-corner.behavior.spec.ts`, `status-border.behavior.spec.ts`,
   `dropdown-menu.behavior.spec.ts` and `drawer.behavior.spec.ts` each pin one behaviour a unit test cannot see,
   because jsdom computes no CSS.
