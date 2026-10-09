@@ -31,10 +31,12 @@ export function CodeBlock({ code, className }: { code: string; className?: strin
     // code in any locale. It also makes the logical utilities below resolve to
     // the same physical edge in both directions.
     <div dir="ltr" className={cn("relative overflow-hidden bg-warm-950 dark:bg-warm-900", className)}>
+      {/* Opaque, in the block's own ink: a line wider than the box scrolls
+          under the button, and on a phone a transparent one sat on the text. */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-2 end-2 h-8 w-8 text-warm-400 hover:bg-warm-800 hover:text-warm-100"
+        className="absolute top-2 end-2 h-8 w-8 bg-warm-950 text-warm-400 hover:bg-warm-800 hover:text-warm-100 dark:bg-warm-900 dark:hover:bg-warm-800"
         onClick={handleCopy}
         aria-label={copied ? "Copied" : "Copy code"}
       >

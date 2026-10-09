@@ -1518,12 +1518,15 @@ body {
 }
 
 
-/* ── Layout utilities ── */
+/* ── Layout utilities ──
+   min(…, 100%) lets a column shrink below --grid-min when the container
+   itself is narrower, so a 280px minimum on a 272px phone column wraps to
+   one full-width track instead of pushing the page sideways. */
 .grid-auto-fill {
-  grid-template-columns: repeat(auto-fill, minmax(var(--grid-min, 280px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min, 280px), 100%), 1fr));
 }
 .grid-auto-fit {
-  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 280px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 280px), 100%), 1fr));
 }
 
 

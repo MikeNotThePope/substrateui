@@ -74,7 +74,7 @@ export function ThemeGeneratorClient() {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       {/* Controls + preview */}
       <Stack gap="lg">
         <Stack gap="md">
