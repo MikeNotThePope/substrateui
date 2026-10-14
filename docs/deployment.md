@@ -22,25 +22,22 @@ This project uses `bun` as its package manager. Vercel supports bun natively.
 ### After the first deploy
 
 - Production branch: `main` (Settings → Git → Production Branch).
-- Preview deployments: enabled by default for all non-main branches and all PRs.
+- Preview deployments: off. `git.deploymentEnabled` in `vercel.json` deploys
+  `main` and nothing else. One build is about 116 MB (the prerendered docs plus
+  Storybook), Vercel stores one per push, and the free plan's 10 GB of
+  Deployment Storage reached 75% on PR previews nobody opened: PRs merge
+  themselves on green. The pattern is `**`, not `*`, because `*` does not match
+  the `/` in `claude/…` or `fix/…`. When two rules match a branch it deploys if
+  either is true, which is what keeps `main` on.
+- Deployment retention: 1 day for all four types (the project's Deployment
+  Retention Policy, a dashboard setting). Vercel still keeps the
+  build serving the site and the newest three, so a rollback stays possible.
 - The production URL goes in `README.md` under the Status block. It is
   <https://www.substrateui.dev/>.
 
 ### Environment variables
 
 None required for the docs site. Add future env vars in Project Settings → Environment Variables, scoped to Production/Preview/Development as appropriate.
-
-### Ignoring unnecessary builds (optional)
-
-Default behavior — deploy on every commit — is fine for a small project. Only add a `vercel.json` `ignoreCommand` if build minutes become a problem. Example:
-
-```json
-{
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ':!scripts' ':!src/lib' ':!README.md' ':!CHANGELOG.md' || exit 1"
-}
-```
-
-Adjust the ignore paths based on what actually affects the docs site.
 
 ### Custom domain (optional)
 
