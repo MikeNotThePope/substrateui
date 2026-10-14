@@ -72,4 +72,34 @@ describe('Accordion', () => {
     expect(screen.getByText('First content')).toBeVisible()
     expect(screen.getByText('Second content')).toBeVisible()
   })
+
+  it('keeps a detail outside the button, so its text selects, and still toggles', async () => {
+    const user = userEvent.setup()
+    render(
+      <Accordion>
+        <AccordionItem value="r1">
+          <AccordionTrigger detail={<span>3f2a9c1e</span>}>Oct 3, 14:02</AccordionTrigger>
+          <AccordionContent>What it meant</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    )
+
+    const trigger = screen.getByRole('button', { name: 'Oct 3, 14:02' })
+    const detail = screen.getByText('3f2a9c1e')
+    expect(trigger.contains(detail)).toBe(false)
+    expect(trigger.className).toContain('after:inset-0')
+    expect(trigger.className).not.toContain('active:')
+    expect(detail.closest('[data-slot=accordion-detail]')?.className).toContain('z-10')
+
+    await user.click(trigger)
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByText('What it meant')).toBeVisible()
+  })
+
+  it('keeps the whole row as the button when there is no detail', () => {
+    renderAccordion({})
+    const trigger = screen.getByRole('button', { name: 'First section' })
+    expect(trigger.className).toContain('flex-1')
+    expect(trigger.querySelector('svg')).not.toBeNull()
+  })
 })
