@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.0
+
+### Minor Changes
+
+- [#186](https://github.com/MikeNotThePope/substrateui/pull/186) [`52fefe7`](https://github.com/MikeNotThePope/substrateui/commit/52fefe74ef902cb6e01ca5da89e4082c54aab318) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Add `CardLink` and `CardRaised`. A Card holding a `CardLink` opens from anywhere on it: the link's hit area stretches over the card, and what sits in `CardRaised` stays above it, so its text selects and copies and its controls click. It lifts on hover and rings on focus, and never presses in. `AccordionTrigger` takes a `detail`: text beside the title, outside the button and above its hit area, so a date or a reference selects while the rest of the row still toggles.
+
 ## 2.11.2
 
 ### Patch Changes
