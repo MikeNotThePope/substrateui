@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.13.0
+
+### Minor Changes
+
+- [#190](https://github.com/MikeNotThePope/substrateui/pull/190) [`696088f`](https://github.com/MikeNotThePope/substrateui/commit/696088f9e00ff146320b997f9e8191246ebc4b58) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - `InputGroup` takes `stack`: below `sm` its suffix drops to its own line under the input, inside the same border, and sits beside it from `sm` up. A long fixed suffix such as an email domain no longer squeezes the input to a few characters on a phone. New `InputGroupReadback` wraps a group and reads back the whole value plus its suffix on a line under it, which one tap selects to copy.
+
 ## 2.12.0
 
 ### Minor Changes
