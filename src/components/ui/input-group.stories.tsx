@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import {
   InputGroup,
   InputGroupPrefix,
+  InputGroupReadback,
   InputGroupSuffix,
 } from "./input-group"
 import { Input } from "./input"
@@ -34,6 +35,24 @@ export const PrefixOnly: Story = {
         <InputGroupPrefix>@</InputGroupPrefix>
         <Input placeholder="username" />
       </InputGroup>
+    </div>
+  ),
+}
+
+/** A long fixed suffix drops under the input below `sm`; the line under it reads back the whole value. */
+export const StackedWithReadback: Story = {
+  render: () => (
+    <div className="w-full max-w-sm">
+      <InputGroupReadback
+        label="New address"
+        suffix="@alpha.magmalytics.science"
+        defaultValue="alpha.new.address"
+      >
+        <InputGroup stack>
+          <Input aria-label="New email" defaultValue="alpha.new.address" />
+          <InputGroupSuffix>@alpha.magmalytics.science</InputGroupSuffix>
+        </InputGroup>
+      </InputGroupReadback>
     </div>
   ),
 }
