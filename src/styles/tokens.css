@@ -1436,13 +1436,16 @@
   --secondary-text: var(--raw-ash-900);
 
   /* ── Hard shadows: none. Depth is a rule, not a drop. ── */
+  /* An empty shadow, not `none`: Tailwind draws the hard shadow and the
+     focus ring in one box-shadow list, and a `none` inside that list makes
+     the whole declaration invalid, ring included. */
   --hard-shadow-color: transparent;
-  --hard-shadow-sm: none;
-  --hard-shadow: none;
-  --hard-shadow-lg: none;
-  --hard-shadow-amber: none;
+  --hard-shadow-sm: 0 0 #0000;
+  --hard-shadow: 0 0 #0000;
+  --hard-shadow-lg: 0 0 #0000;
+  --hard-shadow-amber: 0 0 #0000;
 
-  /* Corners at two thirds of stock: 4px on a card, where the house cuts 1.5px. */
+  /* Corners at two thirds of stock: 4px on a button, where the house cuts 1.5px. */
   --radius-factor: 0.67;
 
   /* ── Faces ──
@@ -1836,12 +1839,40 @@ body {
 [data-theme="caldera"] .font-sans { font-family: var(--font-sans); }
 [data-theme="caldera"] .font-mono { font-family: var(--font-mono); }
 
-/* Stand-ins for hardcoded class strings: 1px lines instead of 2px, no offset shadow. */
+/* Stand-ins for hardcoded class strings: 1px lines instead of 2px. The
+   offset shadow needs no rule: the --hard-shadow-* tokens are empty. */
 [data-theme="caldera"] .border-2 { border-width: 1px; }
 [data-theme="caldera"] .border-b-2 { border-bottom-width: 1px; }
 [data-theme="caldera"] .border-t-2 { border-top-width: 1px; }
 [data-theme="caldera"] .border-y-2 { border-top-width: 1px; border-bottom-width: 1px; }
-[data-theme="caldera"] [class*="shadow-hard"] { box-shadow: none; }
+[data-theme="caldera"] .border-s-2 { border-inline-start-width: 1px; }
+[data-theme="caldera"] .border-e-2 { border-inline-end-width: 1px; }
+[data-theme="caldera"] .\[\&_tr\]\:border-b-2 tr { border-bottom-width: 1px; }
+[data-theme="caldera"] .group.toaster .group-\[\.toaster\]\:border-2 { border-width: 1px; }
+[data-theme="caldera"] .group[data-side="left"] .group-data-\[side\=left\]\:border-e-2 { border-inline-end-width: 1px; }
+[data-theme="caldera"] .group[data-side="right"] .group-data-\[side\=right\]\:border-s-2 { border-inline-start-width: 1px; }
+@media (width >= 40rem) {
+  [data-theme="caldera"] .sm\:border-b-2 { border-bottom-width: 1px; }
+  [data-theme="caldera"] .sm\:border-e-2 { border-inline-end-width: 1px; }
+}
+@media (width >= 48rem) {
+  [data-theme="caldera"] .md\:border-b-2 { border-bottom-width: 1px; }
+}
+@media (width >= 64rem) {
+  [data-theme="caldera"] .lg\:border-b-2 { border-bottom-width: 1px; }
+}
+@media (width >= 80rem) {
+  [data-theme="caldera"] .xl\:border-b-2 { border-bottom-width: 1px; }
+}
+@media (width >= 96rem) {
+  [data-theme="caldera"] .\32xl\:border-b-2 { border-bottom-width: 1px; }
+}
+/* The rules above are unlayered, so they would also beat a side-zero
+   utility beside them (a drawer's `border-b-0`, a table's last row).
+   These put those sides back to zero. */
+[data-theme="caldera"] .border-b-0,
+[data-theme="caldera"] .last\:border-b-0:last-child { border-bottom-width: 0; }
+[data-theme="caldera"] .border-t-0 { border-top-width: 0; }
 
 /* Headings in Red Hat Display. The page title is 26px at either
    PageHeader size, so it sits with the content rather than above it. */
@@ -1892,7 +1923,6 @@ body {
   border-width: 1px 0 0 0;
   border-color: var(--border-default);
   border-radius: 0;
-  box-shadow: none;
 }
 
 /* The strip: one band of magma under it, and dark in both modes because the
@@ -1910,7 +1940,8 @@ body {
    magma-500 is right for a button and fails contrast as text on ash, so
    text takes --primary-text: magma-800 in light, magma-400 in dark and on
    the strip. */
-[data-theme="caldera"] .text-primary { color: var(--primary-text); }
+[data-theme="caldera"] .text-primary,
+[data-theme="caldera"] .hover\:text-primary:hover { color: var(--primary-text); }
 
 /* Orange as a line or a moving part, in light mode. A control's edge, a
    slider's range, a progress bar and a spinner's arc all draw in --primary,

@@ -139,7 +139,7 @@ export default function HomePage() {
               </H1>
 
               <Lead className="max-w-2xl text-lg md:text-xl">
-                I built it for my own projects. 99 components, five themes, every colour pairing
+                I built it for my own projects. 99 components, six themes, every colour pairing
                 audited against WCAG AA &mdash; because I&rsquo;m the one who has to look at it. Set one
                 attribute and everything repaints, including the components you wrote.
               </Lead>
@@ -325,7 +325,7 @@ const proof = createTheme({
             <Stack gap="md">
               <H3 className="font-display text-lg font-bold">Bring your own theme</H3>
               <P className="max-w-2xl text-muted-foreground">
-                Five themes ship, but the set is open. A theme is a token map — no component ever
+                Six themes ship, but the set is open. A theme is a token map — no component ever
                 learns its name.
               </P>
               <Cluster gap="sm">
