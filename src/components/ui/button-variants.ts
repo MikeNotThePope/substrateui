@@ -27,6 +27,14 @@ export const buttonVariants = cva(
         default: `bg-primary text-primary-foreground border-2 border-primary-border hover:bg-primary/90 ${pressable}`,
         destructive: `bg-destructive text-destructive-foreground border-2 border-transparent hover:bg-destructive/90 ${pressable}`,
         outline: `border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground ${pressable}`,
+        // The one-way door that should not be the loudest thing on the page:
+        // no fill, so it sits beside `outline` at the same weight, and the
+        // danger colour on its text and border says what it does. The text is
+        // the status-error-text token rather than `destructive`, because the
+        // fill colour is tuned for a white label on it, not for text on the
+        // ground; the hover tint is the Alert's surface, a pair the contrast
+        // audit already reads.
+        "destructive-outline": `border-2 border-status-error bg-transparent text-status-error-text hover:bg-status-error-surface ${pressable}`,
         secondary: `bg-secondary text-secondary-foreground border-2 border-transparent hover:bg-secondary/80 ${pressable}`,
         "secondary-fill": secondaryFill,
         /** @deprecated Renamed to `secondary-fill` in 1.16. "Amber" is the
