@@ -1843,8 +1843,8 @@ body {
 [data-theme="caldera"] .border-y-2 { border-top-width: 1px; border-bottom-width: 1px; }
 [data-theme="caldera"] [class*="shadow-hard"] { box-shadow: none; }
 
-/* Headings in Red Hat Display. The page title is 26px, a step over
-   text-2xl, so it sits with the content rather than above it. */
+/* Headings in Red Hat Display. The page title is 26px at either
+   PageHeader size, so it sits with the content rather than above it. */
 [data-theme="caldera"] h1,
 [data-theme="caldera"] h2,
 [data-theme="caldera"] h3,
@@ -1852,7 +1852,7 @@ body {
   font-family: var(--font-heading);
   letter-spacing: -0.015em;
 }
-[data-theme="caldera"] [data-slot="page-header-title"].text-2xl { font-size: 1.625rem; }
+[data-theme="caldera"] [data-slot="page-header-title"] { font-size: 1.625rem; line-height: 1.2; }
 
 /* Labels in sentence case, not tracked mono caps. The recipe is also used
    without the component's data-slot (field labels, headings that call the
