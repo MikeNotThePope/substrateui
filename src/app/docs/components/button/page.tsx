@@ -12,17 +12,17 @@ import { pageMetadata } from "@/lib/site"
 
 export const metadata = pageMetadata({
   title: "Button",
-  description: "Triggers an action. Seven variants, five sizes, and a 3px press offset that collapses under prefers-reduced-motion.",
+  description: "Triggers an action. Eight variants, five sizes, and a 3px press offset that collapses under prefers-reduced-motion.",
   route: "/docs/components/button",
 })
 
 const buttonProps: PropDef[] = [
   {
     name: "variant",
-    type: '"default" | "destructive" | "outline" | "secondary" | "secondary-fill" | "ghost" | "link"',
+    type: '"default" | "destructive" | "destructive-outline" | "outline" | "secondary" | "secondary-fill" | "ghost" | "link"',
     default: '"default"',
     description:
-      "Which token family paints the button. secondary is the tinted surface; secondary-fill is the saturated one. amber still works as an alias for secondary-fill but is deprecated — it named the colour plum happens to use, and every theme colours that slot differently.",
+      "Which token family paints the button. secondary is the tinted surface; secondary-fill is the saturated one. destructive-outline is the danger action drawn without a fill, for a one-way door that should sit quietly beside the controls around it. amber still works as an alias for secondary-fill but is deprecated — it named the colour plum happens to use, and every theme colours that slot differently.",
   },
   {
     name: "size",
@@ -57,7 +57,7 @@ export default function ButtonPage() {
   return (
     <DocPage
       title="Button"
-      description="Triggers an action. Seven variants, five sizes, and a 3px press offset that collapses under prefers-reduced-motion."
+      description="Triggers an action. Eight variants, five sizes, and a 3px press offset that collapses under prefers-reduced-motion."
     >
       {/* Variants */}
       <Stack gap="md">
@@ -65,6 +65,7 @@ export default function ButtonPage() {
         <ComponentPreview
           code={`<Button>Default</Button>
 <Button variant="destructive">Destructive</Button>
+<Button variant="destructive-outline">Destructive outline</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="secondary-fill">Secondary fill</Button>
@@ -74,6 +75,7 @@ export default function ButtonPage() {
           <Cluster gap="sm">
             <Button>Default</Button>
             <Button variant="destructive">Destructive</Button>
+            <Button variant="destructive-outline">Destructive outline</Button>
             <Button variant="outline">Outline</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="secondary-fill">Secondary fill</Button>
