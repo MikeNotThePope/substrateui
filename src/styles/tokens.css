@@ -1839,6 +1839,13 @@ body {
 [data-theme="caldera"] .font-sans { font-family: var(--font-sans); }
 [data-theme="caldera"] .font-mono { font-family: var(--font-mono); }
 
+/* No lift and no press. A button lifts toward its hard shadow on hover and
+   sinks into it on press; with no shadow, that is a 1px jump toward nothing,
+   and a pointer resting on the lifted edge makes it jitter in and out of
+   hover. Matched by class because the offsets are literal utilities. */
+[data-theme="caldera"] [class*="hover:-translate-"]:hover,
+[data-theme="caldera"] [class*="active:translate-"]:active { translate: none; }
+
 /* Stand-ins for hardcoded class strings: 1px lines instead of 2px. The
    offset shadow needs no rule: the --hard-shadow-* tokens are empty. */
 [data-theme="caldera"] .border-2 { border-width: 1px; }

@@ -274,7 +274,8 @@ export default function ThemesPage() {
         </P>
         <P>
           Caldera is the exception, and says so. It thins the 2px border to
-          1px, drops the hard shadow, draws a card as a rule, sets labels in
+          1px, drops the hard shadow and the press that sinks into it, draws a card
+          as a rule, sets labels in
           sentence case and uses Red Hat in place of DM Sans and DM Mono.
           None of that is a token: the border is the literal{" "}
           <Code>border-2</Code> in each component, so Caldera matches those
