@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.14.0
+
+### Minor Changes
+
+- [#192](https://github.com/MikeNotThePope/substrateui/pull/192) [`e80f194`](https://github.com/MikeNotThePope/substrateui/commit/e80f1942c63314d2c28efe91122d9905b6ec2d7a) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Button gains `variant="destructive-outline"`: no fill, danger-coloured text and border, and a danger tint on hover. It is for a one-way action, such as closing or deleting, that should not be the loudest thing on the page.
+
 ## 2.13.0
 
 ### Minor Changes
