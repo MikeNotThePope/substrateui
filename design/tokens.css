@@ -13,7 +13,7 @@
  *
  * NAMING: "default" is a ROLE (which theme you get with no attribute), not a
  * theme name. Every theme has a real name — plum, press, substrate, lava,
- * tundra — so the default can move without renaming anything.
+ * tundra, caldera — so the default can move without renaming anything.
  *
  * Fonts: Archivo (display) · Inter (body) · Barlow Condensed (utility caps)
  *        Martian Mono (data). Loaded by the consuming document.
@@ -278,6 +278,39 @@
   --ds-radius-factor: 0.15;
   --ds-duration: 120ms;
   --ds-ease: cubic-bezier(0.16, 0, 0.1, 1);
+}
+
+/* ── CALDERA — magma on ash, brown-black in dark (LavaHire's) ────── */
+[data-ds-theme="caldera"] {
+  --ds-stock:        oklch(0.885 0.008 60);
+  --ds-surface:      var(--ds-stock);
+  --ds-raised:       oklch(0.915 0.008 60);
+  --ds-sunken:       oklch(0.855 0.009 60);
+  --ds-interactive:  oklch(0.855 0.009 60);
+  --ds-ink:          oklch(0.200 0.012 50);
+  --ds-muted:        oklch(0.430 0.012 55);
+  --ds-rule:         oklch(0.520 0.012 55);
+  --ds-rule-subtle:  oklch(0.760 0.010 55);
+
+  /* the fill is magma-500 with dark ink on it; orange as text is magma-800 */
+  --ds-primary:       oklch(0.700 0.215 50);
+  --ds-primary-hover: oklch(0.420 0.155 30);
+  --ds-primary-ink:   oklch(0.700 0.215 50);
+  --ds-on-primary:    oklch(0.170 0.020 40);
+  --ds-primary-surface: oklch(0.860 0.050 55);
+
+  /* no second hue: the secondary is ink on a darker ash */
+  --ds-secondary:     oklch(0.830 0.009 60);
+  --ds-on-secondary:  oklch(0.200 0.012 50);
+
+  /* third ink — the focus ring's deeper magma */
+  --ds-mark:          oklch(0.520 0.195 35);
+  --ds-error:         oklch(0.430 0.170 28);
+
+  /* corners at two thirds of stock, the house stop */
+  --ds-radius-factor: 0.67;
+  --ds-duration: 140ms;
+  --ds-ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* ── Derived shape ── every radius scales with the theme ─────────── */

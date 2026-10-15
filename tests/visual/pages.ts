@@ -25,7 +25,7 @@ export const pages: Array<{ slug: string; path: string }> = [
 ];
 
 /** `plum` is also what no attribute renders; the rest each set their own tokens. */
-export const PALETTES = [null, 'plum', 'proof', 'substrate', 'lava', 'tundra'] as const;
+export const PALETTES = [null, 'plum', 'proof', 'substrate', 'lava', 'tundra', 'caldera'] as const;
 
 /**
  * Every route the site serves: each `page.tsx` under `src/app`, read from disk

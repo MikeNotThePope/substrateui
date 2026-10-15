@@ -19,7 +19,7 @@ Component internals (border widths, shadow shapes, density) are **not** changed 
 see no visual break. See Decision log #1.
 
 **"Default" is a role, not a name.** Every theme has a real name — `plum`, `press`, `substrate`,
-`lava`, `tundra` — and "default" only says which one you get with no `data-theme` attribute. `plum`
+`lava`, `tundra`, `caldera` — and "default" only says which one you get with no `data-theme` attribute. `plum`
 is the palette the library shipped as v1's default; it stays a peer in the deck, and the default role
 can move to `press` later without renaming a thing. See Decision log #10.
 
@@ -189,6 +189,11 @@ Both were tempting because they sound like diligence. Neither survived a measure
 | S7 | Leave the sample copy inside the blocks demo alone as "consumer content" | **rejected** | It said "batteries fully included", a phrase the anti-patterns strike by name, and it renders on our page in our chrome. A reader does not know which strings we consider example data. |
 | S8 | Rename `Button variant="amber"` to `"secondary-fill"`, keeping `amber` as an alias | **accepted** | Decision #10 applied to the component API. `amber` named the colour *plum* puts in that slot; press paints it yellow from its own `--raw-yellow-*` ramp, so the API was asserting a colour the theme system exists to change. `secondary-fill` names the token family that actually paints it, and distinguishes it from `secondary` (the tinted surface). `amber` stays as an alias because it shipped in 1.x, and a unit test asserts the two resolve to identical classes so the deprecation can't quietly restyle anyone's buttons. |
 | S9 | Audit the secondary-fill button per theme, not just under plum | **accepted** | The only pairings covering that button were `raw-warm-900 on raw-amber-500` and its dark twin, both in `defaultOnlyPairings` — so the variant's contrast was unverified in press, substrate, lava and tundra, the four themes that repaint it. Added `secondary-fill-foreground on secondary-fill` (normal) and `secondary-fill-border on background` (ui) to the generic set. All five themes pass, light and dark, so this cost nothing and closed a real gap. Pair count per theme: 33 → 35. |
+
+| # | Proposal | Verdict | Evidence |
+|---|---|---|---|
+| S10 | Caldera thins the components' `border-2`, drops the hard shadow and draws a card as a rule, by rules scoped to `[data-theme="caldera"]` in `tokens.css` | **accepted — S1 revisited for Caldera alone** | S1 said to revisit only if a theme fights the borders. Caldera does: its look is a hairline rule on brown-black, and a 2px box around every control is the neo-brutalism LavaHire chose to leave (MikeNotThePope/lavahire#2386). The rules match class strings (`.border-2`, `.border-b-2`, `[class*="shadow-hard"]`) and slots (`card`, `badge`, `overline`), so no other theme moves. The token route stays rejected until a second theme needs thin borders: it would touch `border-2` in every component that draws one, for one theme. |
+| S11 | Caldera sets Red Hat Text, Display and Mono inside the theme | **accepted — P1 unchanged for every other theme** | P1 kept DM Sans and DM Mono because swapping `--font-sans` and `--font-mono` restyles every installation. Scoped to `[data-theme="caldera"]`, the swap reaches only a consumer who opts into Caldera and loads Red Hat. Plum, proof, substrate, lava and tundra keep DM Sans and DM Mono. |
 
 The voice test used: does the sentence state what the thing **is** or what it **costs**, in words that can
 be checked? "Seven variants, four sizes, a 3px press offset" passes. "A versatile button with a

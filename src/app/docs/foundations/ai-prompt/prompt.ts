@@ -81,7 +81,7 @@ npm install @mikenotthepope/substrateui
 @source "../node_modules/@mikenotthepope/substrateui";
 \`\`\`
 
-Load the "DM Sans" and "DM Mono" fonts (e.g. via \`next/font\`) — the token sheet expects them.
+Load the "DM Sans" and "DM Mono" fonts (e.g. via \`next/font\`) — the token sheet expects them. The caldera theme alone expects Red Hat Text, Display and Mono instead.
 
 ${dna.enable}
 
@@ -95,10 +95,10 @@ ${dna.not.map((n) => `- ❌ ${n}`).join("\n")}
 
 ## The DNA
 
-1. **Chunky borders.** Components wear visible 2px borders (the literal \`border-2\` class, not a token), darker than typical libraries. Don't thin them or fade them out.
+1. **Chunky borders.** Components wear visible 2px borders (the literal \`border-2\` class, not a token), darker than typical libraries. Don't thin them or fade them out; the caldera theme thins them to 1px with its own rules, so app code never does.
 2. **Physical press.** Solid buttons rest on a hard offset shadow, lift toward the light on hover, and sink flush on press. Interactions feel mechanical, not floaty. For custom pressable surfaces use \`shadow-hard-sm\` / \`shadow-hard\` / \`shadow-hard-lg\`.
 3. **OKLCH color.** The entire palette is OKLCH with perceptually even ramps. You never touch raw values — semantic tokens only.
-4. **Cut, not rounded.** Components use \`rounded-md\`/\`rounded-lg\`, but the whole radius scale is themable via \`--radius-factor\` and the baseline is 0.25x — corners read as cut rather than soft. Substrate and tundra retune it. Never hardcode pixel radii, and no pill buttons.
+4. **Cut, not rounded.** Components use \`rounded-md\`/\`rounded-lg\`, but the whole radius scale is themable via \`--radius-factor\` and the baseline is 0.25x — corners read as cut rather than soft. Substrate, tundra and caldera retune it. Never hardcode pixel radii, and no pill buttons.
 5. **Light and dark are equal citizens.** Every token pairing passes WCAG AA in both modes. Never hand-tune a color for one mode.
 6. **Status is never color-only.** Success/warning/error/info always pair color with an icon. Alert positions and colors the icon for you, but you pass it — put the \`<svg>\` as a *direct* child of \`<Alert>\`, before AlertTitle, and it is placed absolutely with the text indented around it. Wrapping it in a layout element opts out of that. Follow the same rule in custom UI.
 

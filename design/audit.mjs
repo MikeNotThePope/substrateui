@@ -13,7 +13,7 @@ const blocks = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(m => ({
   decls: Object.fromEntries([...m[2].matchAll(/(--ds-[a-z0-9-]+):\s*([^;]+);/gi)].map(d => [d[1], d[2].trim()])),
 }))
 
-const THEMES = ["press", "substrate", "lava", "tundra", "plum"]
+const THEMES = ["press", "substrate", "lava", "tundra", "caldera", "plum"]
 
 function tokensFor(theme) {
   const out = {}

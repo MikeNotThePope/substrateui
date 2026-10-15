@@ -67,6 +67,17 @@ const themeDna = [
       "Pastel — rose is a cold signal, not a soft accent",
     ],
   },
+  {
+    name: "Caldera",
+    keywords: "Quiet, warm, exact, editorial, hot where you act.",
+    feels: "Cooled rock with one seam of magma — hairline rules on brown-black, orange on everything you act on.",
+    not: [
+      "Boxed — a card is a rule above, not a box; the one theme that leaves the house 2px border and hard shadow",
+      "White — nothing is white in either mode; light mode is ash carrying the brown-black's tint",
+      "Two-tone — there is no second hue; the secondary is ink, so orange only ever means act here",
+      "Shouting — labels are sentence case; only status badges keep mono caps, beside a dot",
+    ],
+  },
 ]
 
 /** One row per theme so the table scales as themes are added — the previous
@@ -77,6 +88,7 @@ const themeDiff = [
   ["Substrate", "Jade", "Instrument amber", "Graphite", "160ms, settling", "Softened (0.4x)"],
   ["Lava", "Magma — yellow→red as it deepens", "Sulfur yellow", "Basalt", "140ms, hard stop", "Cut (0.25x)"],
   ["Tundra", "Steel blue", "Cold rose", "Frost", "120ms, brittle", "Square (0.15x)"],
+  ["Caldera", "Magma, a darker step for text", "None: ink", "Cinder (dark), ash (light)", "140ms, hard stop", "Eased (0.67x)"],
 ]
 
 const cascadeExample = `:root { /* plum light — the default role */ }
@@ -259,6 +271,17 @@ export default function ThemesPage() {
           color; substrate slows and softens slightly, tundra goes quicker
           and squarer, and that spread is about as far as the feel tokens
           should travel.
+        </P>
+        <P>
+          Caldera is the exception, and says so. It thins the 2px border to
+          1px, drops the hard shadow, draws a card as a rule, sets labels in
+          sentence case and uses Red Hat in place of DM Sans and DM Mono.
+          None of that is a token: the border is the literal{" "}
+          <Code>border-2</Code> in each component, so Caldera matches those
+          class strings with rules scoped to{" "}
+          <Code>[data-theme=&quot;caldera&quot;]</Code> in{" "}
+          <Code>tokens.css</Code>. Every other theme keeps the house border,
+          shadow and faces.
         </P>
         <P>
           Semantic token names, the spacing scale, and the typography scale

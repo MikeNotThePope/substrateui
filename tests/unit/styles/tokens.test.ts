@@ -320,6 +320,10 @@ describe('tokens docs page', () => {
       light: '[data-theme="tundra"] {',
       dark: '.dark [data-theme="tundra"] {',
     },
+    caldera: {
+      light: '[data-theme="caldera"] {',
+      dark: '.dark [data-theme="caldera"],',
+    },
   }
 
   it('documents the ramp step each semantic token actually resolves to', () => {

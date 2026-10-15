@@ -143,13 +143,14 @@ section { margin-top: var(--ds-space-7); }
               box-shadow var(--ds-duration) var(--ds-ease);
 }
 /* A fan reads left-over-right: the first card sits on top of the next. */
-.chip:nth-child(1) { z-index: 5; }
-.chip:nth-child(2) { z-index: 4; }
-.chip:nth-child(3) { z-index: 3; }
-.chip:nth-child(4) { z-index: 2; }
-.chip:nth-child(5) { z-index: 1; }
-.chip:hover, .chip:focus-visible { --chip-lift: -10px; box-shadow: var(--ds-lift-3); z-index: 6; }
-.chip[aria-pressed="true"] { --chip-lift: -18px; box-shadow: var(--ds-lift-3); z-index: 7; }
+.chip:nth-child(1) { z-index: 6; }
+.chip:nth-child(2) { z-index: 5; }
+.chip:nth-child(3) { z-index: 4; }
+.chip:nth-child(4) { z-index: 3; }
+.chip:nth-child(5) { z-index: 2; }
+.chip:nth-child(6) { z-index: 1; }
+.chip:hover, .chip:focus-visible { --chip-lift: -10px; box-shadow: var(--ds-lift-3); z-index: 7; }
+.chip[aria-pressed="true"] { --chip-lift: -18px; box-shadow: var(--ds-lift-3); z-index: 8; }
 .chip:last-child { margin-inline-end: 0; }
 .chip-inks { display: flex; height: 44px; border-radius: var(--ds-r-sm); overflow: hidden; }
 .chip-inks span { flex: 1; }
@@ -364,13 +365,22 @@ section { margin-top: var(--ds-space-7); }
         <span class="chip-name"><span class="code">Tundra</span><span class="code muted">04</span></span>
         <span class="data">0.47 0.105 238</span>
       </button>
+      <button class="chip" type="button" data-theme="caldera" aria-pressed="false" aria-label="Caldera theme" data-ds-theme="caldera">
+        <span class="chip-inks" aria-hidden="true">
+          <span style="background: var(--ds-primary-ink)"></span>
+          <span style="background: var(--ds-mark)"></span>
+          <span style="background: var(--ds-secondary)"></span>
+        </span>
+        <span class="chip-name"><span class="code">Caldera</span><span class="code muted">05</span></span>
+        <span class="data">0.70 0.215 050</span>
+      </button>
       <button class="chip" type="button" data-theme="plum" aria-pressed="false" aria-label="Plum theme" data-ds-theme="plum">
         <span class="chip-inks" aria-hidden="true">
           <span style="background: var(--ds-primary-ink)"></span>
           <span style="background: var(--ds-mark)"></span>
           <span style="background: var(--ds-secondary)"></span>
         </span>
-        <span class="chip-name"><span class="code">Plum</span><span class="code muted">05</span></span>
+        <span class="chip-name"><span class="code">Plum</span><span class="code muted">06</span></span>
         <span class="data">0.48 0.145 314</span>
       </button>
     </div>
