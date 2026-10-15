@@ -212,7 +212,7 @@ a { color: inherit; }
 }
 .chip:nth-child(1) { z-index: 5; } .chip:nth-child(2) { z-index: 4; }
 .chip:nth-child(3) { z-index: 3; } .chip:nth-child(4) { z-index: 2; }
-.chip:nth-child(5) { z-index: 1; }
+.chip:nth-child(5) { z-index: 1; } .chip:nth-child(6) { z-index: 0; }
 .chip:hover, .chip:focus-visible { --chip-lift: -10px; box-shadow: var(--ds-lift-3); z-index: 6; }
 .chip[aria-pressed="true"] { --chip-lift: -18px; box-shadow: var(--ds-lift-3); z-index: 7; }
 .chip:last-child { margin-inline-end: 0; }
@@ -473,7 +473,7 @@ a { color: inherit; }
     <p class="eyebrow">Job docket</p>
     <dl>
       <div class="row"><dt class="code">Components</dt><dd><b>75</b> <span class="muted">atomic Button through organism App Shell</span></dd></div>
-      <div class="row"><dt class="code">Themes</dt><dd><b>5</b> <span class="muted">proof · substrate · lava · tundra · plum</span></dd></div>
+      <div class="row"><dt class="code">Themes</dt><dd><b>6</b> <span class="muted">proof · substrate · lava · tundra · caldera · plum</span></dd></div>
       <div class="row"><dt class="code">Audited pairs</dt><dd><b>31</b> <span class="muted">per theme, light and dark. A failing ratio fails the build.</span></dd></div>
       <div class="row"><dt class="code">Colour</dt><dd>OKLCH throughout <span class="muted">— perceptually uniform ramps, so contrast is computed, not eyeballed</span></dd></div>
       <div class="row"><dt class="code">Primitives</dt><dd>Base UI <span class="muted">— focus management, dismissal and ARIA are handled</span></dd></div>
@@ -512,6 +512,7 @@ const THEMES = [
   { id: "substrate", name: "Substrate", lch: "0.52 0.095 172" },
   { id: "lava",      name: "Lava",      lch: "0.52 0.195 035" },
   { id: "tundra",    name: "Tundra",    lch: "0.47 0.105 238" },
+  { id: "caldera",   name: "Caldera",   lch: "0.70 0.215 050" },
   { id: "plum",      name: "Plum",      lch: "0.48 0.145 314" },
 ];
 

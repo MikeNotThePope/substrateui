@@ -30,6 +30,7 @@ const THEMES: Array<[string, string]> = [
   ["substrate", "#007e65"], // --raw-jade-700   oklch(0.520 0.121 175)
   ["lava", "#bf2400"], //      --raw-magma-700  oklch(0.52  0.195 35)
   ["tundra", "#1e6ea7"], //    --raw-steel-700  oklch(0.520 0.117 245)
+  ["caldera", "#ff6800"], //   --raw-magma-500  oklch(0.70  0.215 50)
   ["plum", "#7a3f96"], //      --raw-plum-600   oklch(0.480 0.145 314)
 ]
 
@@ -107,7 +108,7 @@ export default function OpengraphImage() {
               color: MUTED,
             }}
           >
-            75 components on OKLCH, Tailwind CSS v4 and Base UI. Five themes, light and dark, every
+            99 components on OKLCH, Tailwind CSS v4 and Base UI. Six themes, light and dark, every
             colour pairing audited against WCAG AA.
           </div>
         </div>

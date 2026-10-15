@@ -31,6 +31,7 @@ export const SITE_THEMES = [
   { value: "substrate", label: "Substrate" },
   { value: "lava", label: "Lava" },
   { value: "tundra", label: "Tundra" },
+  { value: "caldera", label: "Caldera" },
 ] as const
 
 type Theme = (typeof SITE_THEMES)[number]["value"]

@@ -257,5 +257,8 @@ through `tokens.css`. Everything else is house: spacing, the type
 scale, border weight (the literal `border-2`) and shadow offsets stay
 constant across themes. A `--border-factor` token for thinner borders
 was rejected as post-ship decision S1 in `design/DESIGN-SYSTEM.md`.
+Caldera is the one theme that leaves the house border, shadow and
+faces, by rules scoped to it rather than by tokens: rows S10 and S11
+there say why, and what would reopen the token route.
 If you find yourself needing per-theme spacing or typography, rethink
 the abstraction before forking it.

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T09:54:13.704Z",
+  "generatedAt": "2026-10-15T00:44:34.334Z",
   "results": [
     {
       "name": "foreground on background",
@@ -4189,6 +4189,619 @@
           "type": "ui",
           "required": 3,
           "ratio": 6.618411388194412,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "caldera",
+      "results": [
+        {
+          "mode": "light",
+          "name": "foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 12.819940297230952,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.819454502303442,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "card-foreground on card",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.07814800519989,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "card-foreground on card",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.827615927929937,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "popover-foreground on popover",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.07814800519989,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "popover-foreground on popover",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.827615927929937,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary-foreground on primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.6517354355477325,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary-foreground on primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.403427121432685,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "secondary-foreground on secondary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 11.642188970845934,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "secondary-foreground on secondary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 13.792448457414505,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "muted-foreground on muted",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.221493748557153,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "muted-foreground on muted",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.828647792370967,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "muted-foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.7497123854023355,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "muted-foreground on background",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.68525453229416,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "accent-foreground on accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.826700020003022,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "accent-foreground on accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.028446373913061,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-foreground on sidebar",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 11.642188970845934,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-foreground on sidebar",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.23625137561938,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-primary-foreground on sidebar-primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.6517354355477325,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-primary-foreground on sidebar-primary",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.403427121432685,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "sidebar-accent-foreground on sidebar-accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.337719664864226,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "sidebar-accent-foreground on sidebar-accent",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.319167501925741,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-ground",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 12.819940297230952,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-ground",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.819454502303442,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-page",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 13.438555085202484,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-page",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 15.46583397244071,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-raised",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.07814800519989,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-raised",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 14.827615927929937,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-sunken",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 11.642188970845934,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-sunken",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 16.23625137561938,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "foreground on surface-interactive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 11.642188970845934,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "foreground on surface-interactive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 13.792448457414505,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-success-text on status-success-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.1246917599851045,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-success-text on status-success-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 9.078635895900549,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-warning-text on status-warning-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.280885200581315,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-warning-text on status-warning-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 9.429269979310558,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-error-text on status-error-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 5.958316530799285,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-error-text on status-error-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.25740501462259,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-info-text on status-info-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.089470211259774,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-info-text on status-info-surface",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 8.677521767777606,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.9064340169001577,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.2958316543545747,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border-strong on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.531509673918394,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border-strong on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.556632577949881,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "ring on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.284270051039889,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "ring on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 8.31365792829866,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "border on card",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.289829358592777,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "border on card",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.089191598026834,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 7.044296779391521,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "primary on spinner-track (spinner arc)",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.129365189552007,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.284270051039889,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-1 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 8.31365792829866,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.556221918424402,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "chart-2 on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 11.138790301261988,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-success on status-success-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.159390534546909,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-success on status-success-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 7.6858105118692714,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-warning on status-warning-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.106913499509289,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-warning on status-warning-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 8.096552211338688,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-error on status-error-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.066569870462379,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-error on status-error-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.929707640256868,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-info on status-info-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 4.9300496658524535,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-info on status-info-surface",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.5492472869181055,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-success on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.191841236213052,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-success on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 9.40732464907213,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-warning on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.079115492824098,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-warning on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 10.329227224812216,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-error on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.255873469667022,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-error on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 6.946995731296253,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "status-info on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 5.9077715748055795,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "status-info on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 7.95879073713357,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "destructive-foreground on destructive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 7.873064201171085,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "destructive-foreground on destructive",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 6.600571721807427,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "secondary-fill-foreground on secondary-fill",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 10.723572404097853,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "secondary-fill-foreground on secondary-fill",
+          "type": "normal",
+          "required": 4.5,
+          "ratio": 12.322820355501905,
+          "pass": true
+        },
+        {
+          "mode": "light",
+          "name": "secondary-fill-border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.9064340169001577,
+          "pass": true
+        },
+        {
+          "mode": "dark",
+          "name": "secondary-fill-border on background",
+          "type": "ui",
+          "required": 3,
+          "ratio": 3.2958316543545747,
           "pass": true
         }
       ]

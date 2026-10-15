@@ -117,6 +117,7 @@ const THEMES: ThemeSpec[] = [
   { name: "substrate", lightSelector: '[data-theme="substrate"]', darkSelector: '[data-theme="substrate"].dark' },
   { name: "lava", lightSelector: '[data-theme="lava"]', darkSelector: '[data-theme="lava"].dark' },
   { name: "tundra", lightSelector: '[data-theme="tundra"]', darkSelector: '[data-theme="tundra"].dark' },
+  { name: "caldera", lightSelector: '[data-theme="caldera"]', darkSelector: '[data-theme="caldera"].dark' },
 ]
 
 // ─── Pairings to audit ────────────────────────────────────────────────

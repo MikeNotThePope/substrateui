@@ -72,8 +72,8 @@ function TintRamp({ token, label }: { token: string; label: string }) {
 // the named ones, so THEMES there is one longer for the default.
 const docket: Array<[string, string, string]> = [
   ["Components", "99", "atomic Button through organism App Shell"],
-  ["Themes", "5", "proof · substrate · lava · tundra · plum"],
-  ["Audited pairs", "35", "per theme, light and dark. A failing ratio fails the build."],
+  ["Themes", "6", "proof · substrate · lava · tundra · caldera · plum"],
+  ["Audited pairs", "38", "per theme, light and dark. A failing ratio fails the build."],
   ["Colour", "OKLCH", "perceptually uniform ramps, so contrast is computed, not eyeballed"],
   ["Primitives", "Base UI", "focus management, dismissal and ARIA are handled"],
   ["CSS", "Tailwind v4", "@theme inline — no config file"],
@@ -95,7 +95,7 @@ const audience: Array<{ heading: string; body: string }> = [
   },
   {
     heading: "Accessibility as a requirement",
-    body: "35 colour pairings per theme are checked against WCAG AA on every commit, and a failing ratio fails the build. Base UI handles focus, dismissal and ARIA underneath.",
+    body: "38 colour pairings per theme are checked against WCAG AA on every commit, and a failing ratio fails the build. Base UI handles focus, dismissal and ARIA underneath.",
   },
   {
     heading: "Owning your own stack",

@@ -249,6 +249,52 @@ const themeColorData: Record<Theme, ThemeColorData> = {
       { name: "ring", light: "magma-600", dark: "magma-400" },
     ],
   },
+  caldera: {
+    ramps: [
+      {
+        title: "Magma (Primary)",
+        description:
+          "Lava's ramp, reused. A fill takes 500 in both modes; orange text takes 800 on ash and 400 on cinder.",
+        prefix: "magma",
+        shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      },
+      {
+        title: "Cinder (Dark Neutrals)",
+        description:
+          "Brown-black, the ground in dark mode and the brand strip in both. Text and the ink on a magma fill are cool on purpose.",
+        prefix: "cinder",
+        shades: ["50", "400", "500", "600", "750", "775", "800", "850", "900", "925", "950", "975", "990", "ink"],
+      },
+      {
+        title: "Ash (Light Neutrals)",
+        description:
+          "The brown-black's warm tint carried up to a light ground. Nothing is white.",
+        prefix: "ash",
+        shades: ["50", "100", "125", "150", "200", "250", "300", "350", "500", "600", "650", "900", "950"],
+      },
+    ],
+    status: [
+      { variable: "--status-success", label: "success" },
+      { variable: "--status-warning", label: "warning" },
+      { variable: "--status-error", label: "error" },
+      { variable: "--status-info", label: "info" },
+    ],
+    semantic: [
+      { name: "background", light: "ash-150", dark: "cinder-950" },
+      { name: "foreground", light: "ash-900", dark: "cinder-50" },
+      { name: "primary", light: "magma-500", dark: "magma-500" },
+      { name: "primary-text", light: "magma-800", dark: "magma-400" },
+      { name: "primary-foreground", light: "ash-950", dark: "cinder-ink" },
+      { name: "secondary", light: "ash-200", dark: "cinder-850" },
+      { name: "muted", light: "ash-200", dark: "cinder-850" },
+      { name: "muted-foreground", light: "ash-600", dark: "cinder-400" },
+      { name: "accent", light: "magma @ 12%", dark: "magma @ 14%" },
+      { name: "destructive", light: "error", dark: "error (lighter)" },
+      { name: "border", light: "ash-500", dark: "cinder-600" },
+      { name: "card", light: "ash-100", dark: "cinder-900" },
+      { name: "ring", light: "magma-700", dark: "magma-400" },
+    ],
+  },
 }
 
 // ─── Swatch ───────────────────────────────────────────────────────────

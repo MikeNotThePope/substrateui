@@ -1302,6 +1302,270 @@
 
 
 /* ================================================================
+   CALDERA THEME — enable with <html data-theme="caldera">
+
+   LavaHire's theme, picked over two rounds of mockups (MikeNotThePope/
+   lavahire#2386). Lava's magma on a brown-black ground in dark and a warm
+   ash in light, with nothing white in either. Where lava keeps the house
+   geometry, Caldera leaves it: 1px rules instead of 2px borders, no hard
+   shadows, a card drawn as a rule above rather than a box, sentence-case
+   labels and Red Hat faces. The colour lives in the blocks below; the
+   geometry lives in CALDERA RULES at the end of this file, because most of
+   it is a literal class string no token reaches (DESIGN-SYSTEM.md, S1 and
+   P1 revisited).
+
+   Magma is lava's ramp, reused rather than copied. Orange as a fill and
+   orange as text are two tokens here: magma-500 is right for a button and
+   fails 4.5:1 as text on ash, so `text-primary` reads --primary-text.
+================================================================ */
+
+:root {
+  /* ── Cinder (dark-mode neutrals) ──
+     Brown-black, hue ~50. Two steps leave the hue on purpose: the text
+     (cinder-50) and the ink on a magma fill (cinder-ink) are cool, so ink
+     reads as ink rather than as a tint of the ground. */
+  --raw-cinder-50:  oklch(0.930 0.005 248);
+  --raw-cinder-400: oklch(0.679 0.022 58);
+  --raw-cinder-500: oklch(0.583 0.033 60);
+  /* The mockup drew borders at 0.456 (#645347), which measured 2.5:1 on a
+     card. One 0.05 step clears 3:1 (WCAG 1.4.11). */
+  --raw-cinder-600: oklch(0.506 0.030 57);
+  --raw-cinder-750: oklch(0.312 0.021 52);
+  --raw-cinder-775: oklch(0.277 0.017 56);
+  --raw-cinder-800: oklch(0.270 0.018 48);
+  --raw-cinder-850: oklch(0.230 0.015 48);
+  --raw-cinder-900: oklch(0.198 0.012 48);
+  --raw-cinder-925: oklch(0.175 0.012 48);
+  --raw-cinder-950: oklch(0.160 0.011 53);
+  --raw-cinder-975: oklch(0.139 0.009 53);
+  --raw-cinder-990: oklch(0.120 0.008 43);
+  --raw-cinder-ink: oklch(0.190 0.009 256);
+
+  /* ── Ash (light-mode neutrals) ──
+     The brown-black's warm tint carried up to a light ground. The
+     lightest step is 0.96, not white: nothing in Caldera is white. */
+  --raw-ash-50:  oklch(0.960 0.005 60);
+  --raw-ash-100: oklch(0.915 0.008 60);
+  --raw-ash-125: oklch(0.900 0.008 60);
+  --raw-ash-150: oklch(0.885 0.008 60);
+  --raw-ash-200: oklch(0.855 0.009 60);
+  --raw-ash-250: oklch(0.830 0.009 60);
+  --raw-ash-300: oklch(0.800 0.010 60);
+  --raw-ash-350: oklch(0.760 0.010 55);
+  --raw-ash-500: oklch(0.520 0.012 55);
+  --raw-ash-600: oklch(0.430 0.012 55);
+  --raw-ash-650: oklch(0.400 0.012 55);
+  --raw-ash-900: oklch(0.200 0.012 50);
+  --raw-ash-950: oklch(0.170 0.020 40);
+}
+
+
+/* ── CALDERA LIGHT ── */
+
+[data-theme="caldera"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-ash-150);
+  --foreground: var(--raw-ash-900);
+  --card: var(--raw-ash-100);
+  --card-foreground: var(--raw-ash-900);
+  --popover: var(--raw-ash-100);
+  --popover-foreground: var(--raw-ash-900);
+  --primary: var(--raw-magma-500);
+  --primary-foreground: var(--raw-ash-950);
+  --primary-border: var(--raw-magma-700);
+  --primary-text: var(--raw-magma-800);
+  --secondary: var(--raw-ash-200);
+  --secondary-foreground: var(--raw-ash-900);
+  --muted: var(--raw-ash-200);
+  --muted-foreground: var(--raw-ash-600);
+  --accent: oklch(0.70 0.215 50 / 0.12);
+  --accent-foreground: var(--raw-magma-800);
+  --destructive: oklch(0.43 0.17 28);
+  --destructive-foreground: var(--raw-ash-50);
+  --border: var(--raw-ash-500);
+  --input: var(--raw-ash-500);
+  --ring: var(--raw-magma-700);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-magma-700);
+  --chart-2: var(--raw-sulfur-800);
+  --chart-3: var(--raw-magma-500);
+  --chart-4: var(--raw-sulfur-500);
+  --chart-5: var(--raw-magma-300);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-ash-200);
+  --sidebar-foreground: var(--raw-ash-900);
+  --sidebar-primary: var(--raw-magma-500);
+  --sidebar-primary-foreground: var(--raw-ash-950);
+  --sidebar-accent: oklch(0.70 0.215 50 / 0.12);
+  --sidebar-accent-foreground: var(--raw-magma-800);
+  --sidebar-border: var(--raw-ash-350);
+  --sidebar-ring: var(--raw-magma-700);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-ash-150);
+  --surface-page: var(--raw-ash-125);
+  --surface-raised: var(--raw-ash-100);
+  --surface-sunken: var(--raw-ash-200);
+  --surface-interactive: var(--raw-ash-200);
+  --surface-interactive-hover: var(--raw-ash-250);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-ash-500);
+  --border-strong: var(--raw-ash-650);
+  --border-subtle: var(--raw-ash-350);
+  --border-accent: var(--raw-magma-700);
+
+  /* The strip's near-black. The arc draws magma-700 in light (CALDERA
+     RULES), and a ring must clear 3:1 against it and against magma-500,
+     which the audit measures; only a near-black does both. */
+  --spinner-track: var(--raw-cinder-990);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-magma-500);
+  --accent-fill-hover: var(--raw-magma-400);
+  --accent-surface: oklch(0.70 0.215 50 / 0.12);
+
+  /* ── Secondary: ink, not a second hue. Orange is the only colour you act on. ── */
+  --secondary-fill: var(--raw-ash-250);
+  --secondary-fill-hover: var(--raw-ash-300);
+  --secondary-fill-foreground: var(--raw-ash-900);
+  --secondary-fill-border: var(--raw-ash-500);
+  --secondary-surface: var(--raw-ash-200);
+  --secondary-text: var(--raw-ash-900);
+
+  /* ── Hard shadows: none. Depth is a rule, not a drop. ── */
+  --hard-shadow-color: transparent;
+  --hard-shadow-sm: none;
+  --hard-shadow: none;
+  --hard-shadow-lg: none;
+  --hard-shadow-amber: none;
+
+  /* Corners at two thirds of stock: 4px on a card, where the house cuts 1.5px. */
+  --radius-factor: 0.67;
+
+  /* ── Faces ──
+     Red Hat Text, Display and Mono, where every other theme keeps DM Sans
+     and DM Mono. The first name in each is the variable next/font sets when
+     a consumer loads the face under it, since next/font hashes the family;
+     the quoted family is for a consumer that loads it by name. */
+  --font-sans: var(--font-red-hat-text, "Red Hat Text"), system-ui, sans-serif;
+  --font-heading: var(--font-red-hat-display, "Red Hat Display"), system-ui, sans-serif;
+  --font-mono: var(--font-red-hat-mono, "Red Hat Mono"), ui-monospace, monospace;
+
+  /* ── Status ── */
+  --status-success: oklch(0.40 0.11 150);
+  --status-success-surface: oklch(0.40 0.11 150 / 0.12);
+  --status-success-text: oklch(0.36 0.10 150);
+  --status-warning: oklch(0.42 0.09 75);
+  --status-warning-surface: oklch(0.42 0.09 75 / 0.12);
+  --status-warning-text: oklch(0.37 0.08 75);
+  --status-error: oklch(0.43 0.17 28);
+  --status-error-surface: oklch(0.43 0.17 28 / 0.12);
+  --status-error-text: oklch(0.39 0.16 28);
+  --status-info: oklch(0.42 0.10 240);
+  --status-info-surface: oklch(0.42 0.10 240 / 0.12);
+  --status-info-text: oklch(0.37 0.09 240);
+}
+
+
+/* ── CALDERA DARK ── */
+
+/* The third selector is the brand strip: it stays dark in light mode,
+   because the tile was drawn for a dark strip. So it carries this whole
+   block rather than a few tokens of it. */
+[data-theme="caldera"].dark,
+.dark [data-theme="caldera"],
+[data-theme="caldera"] [data-slot="nav-shell-brand-strip"] {
+  /* ── Shadcn core ── */
+  --background: var(--raw-cinder-950);
+  --foreground: var(--raw-cinder-50);
+  --card: var(--raw-cinder-900);
+  --card-foreground: var(--raw-cinder-50);
+  --popover: var(--raw-cinder-900);
+  --popover-foreground: var(--raw-cinder-50);
+  --primary: var(--raw-magma-500);
+  --primary-foreground: var(--raw-cinder-ink);
+  --primary-border: var(--raw-magma-600);
+  --primary-text: var(--raw-magma-400);
+  --secondary: var(--raw-cinder-850);
+  --secondary-foreground: var(--raw-cinder-50);
+  --muted: var(--raw-cinder-850);
+  --muted-foreground: var(--raw-cinder-400);
+  --accent: oklch(0.70 0.215 50 / 0.14);
+  --accent-foreground: var(--raw-magma-400);
+  --destructive: oklch(0.709 0.183 28);
+  --destructive-foreground: var(--raw-cinder-ink);
+  --border: var(--raw-cinder-600);
+  --input: var(--raw-cinder-600);
+  --ring: var(--raw-magma-400);
+
+  /* ── Chart ── */
+  --chart-1: var(--raw-magma-400);
+  --chart-2: var(--raw-sulfur-400);
+  --chart-3: var(--raw-magma-300);
+  --chart-4: var(--raw-sulfur-300);
+  --chart-5: var(--raw-magma-600);
+
+  /* ── Sidebar ── */
+  --sidebar: var(--raw-cinder-975);
+  --sidebar-foreground: var(--raw-cinder-50);
+  --sidebar-primary: var(--raw-magma-500);
+  --sidebar-primary-foreground: var(--raw-cinder-ink);
+  --sidebar-accent: oklch(0.70 0.215 50 / 0.14);
+  --sidebar-accent-foreground: var(--raw-magma-400);
+  --sidebar-border: var(--raw-cinder-775);
+  --sidebar-ring: var(--raw-magma-400);
+
+  /* ── Surfaces ── */
+  --surface-ground: var(--raw-cinder-950);
+  --surface-page: var(--raw-cinder-925);
+  --surface-raised: var(--raw-cinder-900);
+  --surface-sunken: var(--raw-cinder-975);
+  --surface-interactive: var(--raw-cinder-850);
+  --surface-interactive-hover: var(--raw-cinder-800);
+
+  /* ── Borders ── */
+  --border-default: var(--raw-cinder-600);
+  --border-strong: var(--raw-cinder-500);
+  --border-subtle: var(--raw-cinder-775);
+  --border-accent: var(--raw-magma-400);
+
+  --spinner-track: var(--raw-cinder-775);
+
+  /* ── Accent fills ── */
+  --accent-fill: var(--raw-magma-500);
+  --accent-fill-hover: var(--raw-magma-400);
+  --accent-surface: oklch(0.70 0.215 50 / 0.14);
+
+  /* ── Secondary: ink ── */
+  --secondary-fill: var(--raw-cinder-800);
+  --secondary-fill-hover: var(--raw-cinder-750);
+  --secondary-fill-foreground: var(--raw-cinder-50);
+  --secondary-fill-border: var(--raw-cinder-600);
+  --secondary-surface: var(--raw-cinder-850);
+  --secondary-text: var(--raw-cinder-50);
+
+  --hard-shadow-color: transparent;
+
+  /* ── Status ── */
+  --status-success: oklch(0.755 0.137 156);
+  --status-success-surface: oklch(0.72 0.14 150 / 0.14);
+  --status-success-text: oklch(0.806 0.115 156);
+  --status-warning: oklch(0.801 0.132 82);
+  --status-warning-surface: oklch(0.80 0.13 80 / 0.14);
+  --status-warning-text: oklch(0.845 0.116 85);
+  --status-error: oklch(0.709 0.183 28);
+  --status-error-surface: oklch(0.65 0.19 28 / 0.15);
+  --status-error-text: oklch(0.759 0.144 27);
+  --status-info: oklch(0.72 0.12 240);
+  --status-info-surface: oklch(0.72 0.12 240 / 0.14);
+  --status-info-text: oklch(0.80 0.10 240);
+}
+
+
+/* ================================================================
    @theme inline — MAPS VARIABLES TO TAILWIND UTILITIES
 
    This replaces tailwind.config.ts entirely.
@@ -1553,6 +1817,113 @@ body {
     linear-gradient(90deg, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+
+/* ================================================================
+   CALDERA RULES
+
+   What Caldera changes that no token reaches. A component's 2px border is
+   the literal `border-2` in its class string, not a token, and
+   a width token every component reads was rejected (DESIGN-SYSTEM.md, S1,
+   revisited for Caldera alone). So these rules match the class strings and
+   slots instead, scoped to the theme. Each comment names what it stands in
+   for. They are unlayered, like the motion rules above, so they outrank
+   the utilities they replace.
+================================================================ */
+
+/* Faces. body reads --font-sans already; `font-sans` and `font-mono` are
+   compiled to DM's literal family, so they are matched by class. */
+[data-theme="caldera"] .font-sans { font-family: var(--font-sans); }
+[data-theme="caldera"] .font-mono { font-family: var(--font-mono); }
+
+/* Stand-ins for hardcoded class strings: 1px lines instead of 2px, no offset shadow. */
+[data-theme="caldera"] .border-2 { border-width: 1px; }
+[data-theme="caldera"] .border-b-2 { border-bottom-width: 1px; }
+[data-theme="caldera"] .border-t-2 { border-top-width: 1px; }
+[data-theme="caldera"] .border-y-2 { border-top-width: 1px; border-bottom-width: 1px; }
+[data-theme="caldera"] [class*="shadow-hard"] { box-shadow: none; }
+
+/* Headings in Red Hat Display. The page title is 26px, a step over
+   text-2xl, so it sits with the content rather than above it. */
+[data-theme="caldera"] h1,
+[data-theme="caldera"] h2,
+[data-theme="caldera"] h3,
+[data-theme="caldera"] [data-slot="page-header-title"] {
+  font-family: var(--font-heading);
+  letter-spacing: -0.015em;
+}
+[data-theme="caldera"] [data-slot="page-header-title"].text-2xl { font-size: 1.625rem; }
+
+/* Labels in sentence case, not tracked mono caps. The recipe is also used
+   without the component's data-slot (field labels, headings that call the
+   variant directly), so the class string itself is matched too. */
+[data-theme="caldera"] [data-slot="overline"],
+[data-theme="caldera"] [data-slot="field-label"],
+[data-theme="caldera"] .font-mono.uppercase.tracking-wider.text-2xs {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+/* Status badges: a dot plus mono caps. */
+[data-theme="caldera"] [data-slot="badge"] {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  border-radius: 3px;
+  gap: 6px;
+}
+/* Only a status badge gets the dot; job-detail chips are not states. */
+[data-theme="caldera"] [data-slot="badge"][class*="bg-status-"]::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+/* Rules, not cards: a hairline above, no box, no fill. */
+[data-theme="caldera"] [data-slot="card"] {
+  background: transparent;
+  border-width: 1px 0 0 0;
+  border-color: var(--border-default);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* The strip: one band of magma under it, and dark in both modes because the
+   tile was drawn for a dark strip. It carries the dark block's tokens (see
+   CALDERA DARK); in light mode it also sits a step below the dark ground. */
+[data-theme="caldera"] [data-slot="nav-shell-brand-strip"] {
+  border-bottom: 3px solid var(--primary);
+  color: var(--foreground);
+}
+[data-theme="caldera"]:not(.dark) [data-slot="nav-shell-brand-strip"] {
+  background-color: var(--raw-cinder-990);
+}
+
+/* Orange text. SubstrateUI uses one primary token for fills and text;
+   magma-500 is right for a button and fails contrast as text on ash, so
+   text takes --primary-text: magma-800 in light, magma-400 in dark and on
+   the strip. */
+[data-theme="caldera"] .text-primary { color: var(--primary-text); }
+
+/* Orange as a line or a moving part, in light mode. A control's edge, a
+   slider's range, a progress bar and a spinner's arc all draw in --primary,
+   and magma-500 on ash is about 2:1, under the 3:1 a control needs (WCAG
+   1.4.11). They take magma-700, the --primary-border step, which a filled
+   button already wears as its edge. Fills keep magma-500: a button's label
+   carries it, not its edge. Dark mode needs none of this. */
+[data-theme="caldera"]:not(.dark) .border-primary { border-color: var(--primary-border); }
+[data-theme="caldera"]:not(.dark) [data-slot="progress"] .bg-primary,
+[data-theme="caldera"]:not(.dark) [data-slot="slider"] .bg-primary {
+  background-color: var(--primary-border);
+}
+[data-theme="caldera"]:not(.dark) [data-slot="spinner"] { border-top-color: var(--primary-border); }
 
 
 /* ================================================================

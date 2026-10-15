@@ -18,7 +18,7 @@ import { test, expect, type Page } from '@playwright/test';
 // apply at any depth.
 
 /** `plum` is also what no attribute renders; the rest each set their own factor. */
-const PALETTES = [null, 'plum', 'proof', 'substrate', 'lava', 'tundra'] as const;
+const PALETTES = [null, 'plum', 'proof', 'substrate', 'lava', 'tundra', 'caldera'] as const;
 
 interface Corner {
   width: number;
@@ -49,7 +49,7 @@ async function cornersIn(page: Page, selector: string, palette: string | null) {
 }
 
 /** A box stays a box while its corner is under a quarter of its side. The
- *  roundest theme on the ladder (substrate, 0.4) draws 1.6px on 18px. */
+ *  roundest theme on the ladder (caldera, 0.67) draws 2.7px on 18px. */
 function expectBox(corners: Corner[], what: string) {
   expect(corners.length, `found no ${what}`).toBeGreaterThan(0);
   for (const { width, radius } of corners) {
