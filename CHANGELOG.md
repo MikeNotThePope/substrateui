@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.15.1
+
+### Patch Changes
+
+- [#197](https://github.com/MikeNotThePope/substrateui/pull/197) [`56e2e6c`](https://github.com/MikeNotThePope/substrateui/commit/56e2e6c83efe1f6d59a37cd3279b060b35a8a97a) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Caldera drops the hover lift and the press. With no hard shadow they moved a control 1px toward nothing, and a pointer resting on a lifted edge flipped it in and out of hover.
+
 ## 2.15.0
 
 ### Minor Changes
