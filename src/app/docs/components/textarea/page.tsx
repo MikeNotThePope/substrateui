@@ -32,7 +32,8 @@ const textareaProps: PropDef[] = [
     name: "rows",
     type: "number",
     default: undefined,
-    description: "The number of visible text lines.",
+    description:
+      "Native rows. The box grows with its text from an 80px floor to 18 lines, so rows sets nothing where `field-sizing` is supported; a fixed `h-*` class still holds it.",
   },
   {
     name: "className",
