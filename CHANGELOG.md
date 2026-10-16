@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.16.0
+
+### Minor Changes
+
+- [#199](https://github.com/MikeNotThePope/substrateui/pull/199) [`3aba03a`](https://github.com/MikeNotThePope/substrateui/commit/3aba03a2848b793b15819e73e085a606411c8493) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Caldera: an outline button's edge is magma (magma-700 on ash, magma-500 in dark and on the strip) with an ink label. Every Caldera badge wears a dot in its own colour, outline and secondary included; `Badge` gains `dot={false}` for a badge that is not a state. `Textarea` grows with its text (`field-sizing: content`) from its 80px floor to 18 lines, then scrolls.
+
+- [#200](https://github.com/MikeNotThePope/substrateui/pull/200) [`58b27ea`](https://github.com/MikeNotThePope/substrateui/commit/58b27eabfb75427bfb51c647c613ab8535feaf09) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Add `CopyButton`: a square outline icon button that copies `value`, named by `label`. For two seconds after a copy its icon is a check and its name is "Copied"; `value={null}` disables it. Labels through `LabelsProvider` as `copyButton`.
+
+### Patch Changes
+
+- [#201](https://github.com/MikeNotThePope/substrateui/pull/201) [`24add61`](https://github.com/MikeNotThePope/substrateui/commit/24add618f0fdc14e25ee618bd9d6eb9df7d43ee4) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Caldera: a page header's rule starts and ends where its text does. The header steps in 24px instead of padding its text, so its bottom rule shares the content's edge. Other themes keep the full-width rule.
+
+  `CardLink` and `CardRaised` accept a `render` element that arrives as a lazy reference, as React sends one once a server payload row passes 3200 bytes (facebook/react#32392). They threw on it before.
+
 ## 2.15.1
 
 ### Patch Changes
