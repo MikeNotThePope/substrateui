@@ -33,6 +33,13 @@ const badgeProps: PropDef[] = [
       "The visual style of the badge. Each variant uses a distinct color scheme suited to its semantic meaning.",
   },
   {
+    name: "dot",
+    type: "boolean",
+    default: "true",
+    description:
+      "Whether a theme that marks states with a dot draws one. Caldera dots every variant; pass `false` for a badge that is not a state, such as a job's detail chip. Other themes draw no dot either way.",
+  },
+  {
     name: "className",
     type: "string",
     default: undefined,

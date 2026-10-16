@@ -2,7 +2,16 @@ import * as React from 'react'
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button-variants'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { toggleVariants } from '@/components/ui/toggle-variants'
+
+/** The class match Caldera draws an outline button's magma edge on. */
+const OUTLINE_EDGE = '.border-input[class*="shadow-hard-sm"]'
 
 describe('Button', () => {
   it('renders children', () => {
@@ -146,5 +155,46 @@ describe('Button', () => {
     const btn = screen.getByRole('button', { name: 'Copy' })
     expect(btn.className).toContain('h-9')
     expect(btn.className).toContain('w-9')
+  })
+
+  describe('Caldera outline edge', () => {
+    const css = readFileSync(join(process.cwd(), 'src/styles/tokens.css'), 'utf8')
+
+    it('is a rule in both modes', () => {
+      expect(css).toContain(`[data-theme="caldera"] ${OUTLINE_EDGE} { border-color: var(--primary); }`)
+      expect(css).toContain(`[data-theme="caldera"]:not(.dark) ${OUTLINE_EDGE}:not(`)
+    })
+
+    it('matches an outline Button and an outline buttonVariants link', () => {
+      render(
+        <>
+          <Button variant="outline">Sign out</Button>
+          <a href="/x" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
+            Your applications
+          </a>
+        </>
+      )
+      expect(screen.getByRole('button', { name: 'Sign out' }).matches(OUTLINE_EDGE)).toBe(true)
+      expect(screen.getByRole('link', { name: 'Your applications' }).matches(OUTLINE_EDGE)).toBe(true)
+    })
+
+    it('matches no other variant and no field', () => {
+      render(
+        <>
+          <Button>Save</Button>
+          <Button variant="secondary">Later</Button>
+          <Input aria-label="name" />
+          <Textarea aria-label="note" />
+          <button type="button" className={toggleVariants({ variant: 'outline' })}>
+            Bold
+          </button>
+        </>
+      )
+      for (const name of ['Save', 'Later', 'Bold']) {
+        expect(screen.getByRole('button', { name }).matches(OUTLINE_EDGE)).toBe(false)
+      }
+      expect(screen.getByLabelText('name').matches(OUTLINE_EDGE)).toBe(false)
+      expect(screen.getByLabelText('note').matches(OUTLINE_EDGE)).toBe(false)
+    })
   })
 })

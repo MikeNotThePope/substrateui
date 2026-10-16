@@ -1915,8 +1915,13 @@ body {
   border-radius: 3px;
   gap: 6px;
 }
-/* Only a status badge gets the dot; job-detail chips are not states. */
-[data-theme="caldera"] [data-slot="badge"][class*="bg-status-"]::before {
+/* Every badge is a state and wears a dot in its own colour, whatever its
+   variant: an outline DRAFT and a secondary CLOSED as much as a success
+   PUBLISHED. A badge that is not a state, a job's detail chip, opts out with
+   `dot={false}`, which writes data-dot="false". Keying the dot on the
+   status variants was the rejected alternative: it left DRAFT and CLOSED
+   bare (MikeNotThePope/lavahire#2414). */
+[data-theme="caldera"] [data-slot="badge"]:not([data-dot="false"])::before {
   content: "";
   width: 7px;
   height: 7px;
@@ -1963,6 +1968,18 @@ body {
   background-color: var(--primary-border);
 }
 [data-theme="caldera"]:not(.dark) [data-slot="spinner"] { border-top-color: var(--primary-border); }
+
+/* An outline button's edge is magma, its label ink (MikeNotThePope/
+   lavahire#2414): magma marks every button, and an edge is a line. Magma-500
+   in dark and on the strip; magma-700 on ash, where 500 is about 2:1 (see
+   above). Matched by class rather than slot because `buttonVariants` styles
+   links and triggers that are not a Button, and no other recipe pairs
+   `border-input` with the hard shadow: inputs, selects and toggles carry
+   no shadow. tests/unit/styles/caldera.test.ts pins both halves of that. */
+[data-theme="caldera"] .border-input[class*="shadow-hard-sm"] { border-color: var(--primary); }
+[data-theme="caldera"]:not(.dark) .border-input[class*="shadow-hard-sm"]:not([data-slot="nav-shell-brand-strip"] *) {
+  border-color: var(--primary-border);
+}
 
 
 /* ================================================================
