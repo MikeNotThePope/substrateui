@@ -129,6 +129,7 @@ export const navSections = [
       { label: "Transfer", href: "/docs/components/transfer" },
       { label: "Sortable", href: "/docs/components/sortable" },
       { label: "Countdown", href: "/docs/components/countdown" },
+      { label: "CopyButton", href: "/docs/components/copy-button" },
       { label: "CopyField", href: "/docs/components/copy-field" },
       { label: "StatCard", href: "/docs/components/stat-card" },
       { label: "Chart", href: "/docs/components/chart" },

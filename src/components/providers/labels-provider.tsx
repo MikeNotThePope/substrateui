@@ -5,6 +5,7 @@ import * as React from "react";
 import type { BreadcrumbLabels } from "@/components/ui/breadcrumb";
 import type { CarouselLabels } from "@/components/ui/carousel";
 import type { ComboboxLabels } from "@/components/ui/combobox";
+import type { CopyButtonLabels } from "@/components/ui/copy-button";
 import type { CopyFieldLabels } from "@/components/ui/copy-field";
 import type { CountdownLabels } from "@/components/ui/countdown";
 import type { CornerPanelLabels } from "@/components/ui/corner-panel";
@@ -33,6 +34,7 @@ interface SubstrateUILabels {
   breadcrumb?: Partial<BreadcrumbLabels>;
   carousel?: Partial<CarouselLabels>;
   combobox?: Partial<ComboboxLabels>;
+  copyButton?: Partial<CopyButtonLabels>;
   copyField?: Partial<CopyFieldLabels>;
   countdown?: Partial<CountdownLabels>;
   cornerPanel?: Partial<CornerPanelLabels>;
