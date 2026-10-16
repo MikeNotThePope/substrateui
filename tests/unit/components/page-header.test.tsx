@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { render, screen } from '@testing-library/react'
 
 import { AppShellLogo } from '@/components/app-shell'
@@ -203,5 +205,26 @@ describe('PageHeader sizing', () => {
       </PageHeader>
     )
     expect(screen.getByTestId('header').className).toContain('shrink-0')
+  })
+
+  it('insets its rule to its text in Caldera', () => {
+    // jsdom applies no stylesheet, so the rule is read from tokens.css: the
+    // header trades its inline padding for the same margin, and the bottom
+    // rule then spans only what the text does. Both sizes px-6, so 1.5rem.
+    const css = readFileSync(join(process.cwd(), 'src/styles/tokens.css'), 'utf8')
+    expect(css).toMatch(
+      /\[data-theme="caldera"\] \[data-slot="page-header"\] \{\s*margin-inline: 1\.5rem;\s*padding-inline: 0;\s*\}/
+    )
+    render(
+      <>
+        <PageHeader data-testid="band" />
+        <PageHeader size="sm" data-testid="bar" />
+      </>
+    )
+    for (const id of ['band', 'bar']) {
+      const header = screen.getByTestId(id)
+      expect(header.matches('[data-slot="page-header"]')).toBe(true)
+      expect(classes(header)).toContain('px-6')
+    }
   })
 })
