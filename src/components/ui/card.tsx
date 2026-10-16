@@ -46,17 +46,32 @@ function Card({
 /** An element to render as, such as a router's link, given the merged props. */
 type Render = React.ReactElement<{ className?: string }>
 
+// The symbol React marks a lazy reference with.
+const REACT_LAZY_TYPE = Symbol.for("react.lazy")
+
 // cloneElement, not Base UI's useRender: Card renders on the server, and a
 // hook would make this module a client one.
+//
+// `render` can arrive as a lazy reference rather than an element. Imported
+// from the package root, Card is a client component, so a server page hands
+// it `render` through React's payload, and once a payload row passes 3200
+// bytes React defers each further element as a lazy reference, which has no
+// props to read or clone (facebook/react#32392). A long list of linked cards
+// crossed it in MikeNotThePope/lavahire#2459 and threw on `.props`.
+// Children.toArray unwraps it, which is Base UI's own workaround in
+// useRender.
 function renderAs(
   tag: "a" | "div",
   render: Render | undefined,
   props: Record<string, unknown> & { className?: string }
 ) {
   if (!render) return React.createElement(tag, props)
-  return React.cloneElement(render, {
+  const element = (render as { $$typeof?: symbol }).$$typeof === REACT_LAZY_TYPE
+    ? (React.Children.toArray(render)[0] as Render)
+    : render
+  return React.cloneElement(element, {
     ...props,
-    className: cn(props.className, render.props.className),
+    className: cn(props.className, element.props.className),
   })
 }
 

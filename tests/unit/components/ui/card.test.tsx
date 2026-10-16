@@ -54,6 +54,27 @@ describe('CardLink', () => {
     expect(link.className).toContain('text-lg')
     expect(link.className).toContain('after:inset-0')
   })
+
+  it('renders an element that arrives as a lazy reference', () => {
+    // What a server page's payload hands a client Card once its row passes
+    // 3200 bytes (facebook/react#32392): no props until it is unwrapped.
+    const lazy = {
+      $$typeof: Symbol.for('react.lazy'),
+      _payload: <a href="/r" className="font-medium" />,
+      _init: (payload: React.ReactElement) => payload,
+    } as unknown as React.ReactElement<{ className?: string }>
+    render(
+      <Card>
+        <CardLink render={lazy} className="text-lg">
+          Deferred
+        </CardLink>
+      </Card>
+    )
+    const link = screen.getByRole('link', { name: 'Deferred' })
+    expect(link).toHaveAttribute('href', '/r')
+    expect(link.className).toContain('font-medium')
+    expect(link.className).toContain('text-lg')
+  })
 })
 
 describe('CardRaised', () => {
