@@ -1930,6 +1930,19 @@ body {
   flex: none;
 }
 
+/* A page header's rule starts and ends where its text does: the header
+   steps in by its own padding instead of padding its text, so its bottom
+   rule and its title share one edge with the content under it
+   (MikeNotThePope/lavahire#2436, "every rule starts and ends where the text
+   of its own column does"). Caldera alone: the house header spans the
+   column so its rule meets AppShellLogo's across the sidebar's edge, and
+   insetting it in every theme was the rejected alternative. Unlayered, so a
+   caller's `px-*` on the header has no effect here. */
+[data-theme="caldera"] [data-slot="page-header"] {
+  margin-inline: 1.5rem;
+  padding-inline: 0;
+}
+
 /* Rules, not cards: a hairline above, no box, no fill. */
 [data-theme="caldera"] [data-slot="card"] {
   background: transparent;
