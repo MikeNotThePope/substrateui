@@ -22,10 +22,16 @@ export const Default: Story = {}
 
 export const InALabel: Story = {
   render: (args) => (
-    <label className="block max-w-[18rem] text-sm font-semibold leading-8">
-      Type <CopyChip {...args} /> to confirm
-      <input type="email" className="mt-2 block w-full rounded-md border-2 border-input px-3 py-2" />
-    </label>
+    <div className="max-w-[18rem]">
+      <label htmlFor="copy-chip-story" className="block text-sm font-semibold leading-8">
+        Type <CopyChip {...args} /> to confirm
+      </label>
+      <input
+        id="copy-chip-story"
+        type="email"
+        className="mt-2 block w-full rounded-md border-2 border-input px-3 py-2"
+      />
+    </div>
   ),
 }
 

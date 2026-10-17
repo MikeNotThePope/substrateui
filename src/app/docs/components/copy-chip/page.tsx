@@ -80,7 +80,9 @@ export default function CopyChipPage() {
           the label it sits in still reads as the sentence: the field above is named
           &ldquo;Type {EMAIL} to confirm&rdquo;. The announcement goes through the shared live
           region, outside every label, for the same reason. A press on the chip copies; it
-          does not move focus to the field.
+          does not move focus to the field. The label has to point at its field with{" "}
+          <Code>htmlFor</Code>, as <Code>FieldLabel</Code> does: a label wrapped around the
+          field instead labels the first control inside it, which is the chip.
         </P>
       </Stack>
 

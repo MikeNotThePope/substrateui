@@ -54,6 +54,10 @@ function pieces(value: string, breakAfter: string | undefined): string[] {
  * clipboard (plain http, a denied permission), the value is selected instead,
  * so the reader's own long-press or Ctrl+C still works.
  *
+ * The label must point at its field with `for` (`htmlFor`, or `FieldLabel`
+ * inside a `Field`), never by wrapping it: a label with no `for` labels the
+ * first control inside it, and the chip comes first.
+ *
  * `CopyButton` is the bare icon beside a value; `CopyField` is a value in its
  * own box, on its own line.
  *
@@ -77,13 +81,18 @@ function CopyChip({
   const { copy, copied, error } = useClipboard()
   const valueRef = React.useRef<HTMLSpanElement>(null)
   const descriptionId = React.useId()
+  // One per press that has settled, so a second copy inside the two seconds
+  // is announced too: `copied` is already true then and would not change.
+  const [settled, setSettled] = React.useState(0)
 
   // A live region in the chip would land in the sentence around it, and so
   // in the name of whatever field that sentence labels. The shared one sits
-  // outside every label.
+  // outside every label. Keyed on the press alone: a new `labels` mid-flight
+  // is no reason to say it twice.
   React.useEffect(() => {
-    if (copied) announce(labels.copied)
-  }, [copied, labels.copied])
+    if (settled > 0 && copied) announce(labels.copied)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settled])
 
   // A refused clipboard leaves the reader to copy by hand, so do the
   // selecting for them. Keyed on the error object: each refusal is a new one.
@@ -98,8 +107,8 @@ function CopyChip({
       data-slot="copy-chip"
       // `hidden` keeps "Copy" out of the chip's name and out of any label's
       // text, while aria-describedby still reads it.
-      aria-describedby={cn(descriptionId, describedBy)}
-      onClick={() => void copy(value)}
+      aria-describedby={[descriptionId, describedBy].filter(Boolean).join(" ")}
+      onClick={() => void copy(value).then(() => setSettled((n) => n + 1))}
       className={cn(
         "group inline-flex max-w-full items-center gap-1.5 rounded-sm border border-border px-1.5 align-middle text-start font-normal leading-6 transition-colors hover:border-primary hover:text-primary motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className

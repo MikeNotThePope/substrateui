@@ -4,7 +4,7 @@ import { act, render, screen, fireEvent, waitFor } from "@testing-library/react"
 
 import { CopyChip } from "@/components/ui/copy-chip"
 import { LabelsProvider } from "@/components/providers/labels-provider"
-import { destroyAnnouncer } from "@/hooks/use-announcer"
+import { clearAnnouncer, destroyAnnouncer } from "@/hooks/use-announcer"
 
 const EMAIL = "staging-admin@admin.staging.example.com"
 
@@ -69,6 +69,17 @@ describe("CopyChip", () => {
     expect(writeText).toHaveBeenCalledWith(EMAIL)
     // The name holds still: the value, not the state.
     expect(screen.getByRole("button", { name: EMAIL })).toBeInTheDocument()
+  })
+
+  it("announces a second copy inside the two seconds", async () => {
+    stubClipboard(vi.fn().mockResolvedValue(undefined))
+    render(<CopyChip value={EMAIL} />)
+    const chip = screen.getByRole("button", { name: EMAIL })
+    fireEvent.click(chip)
+    await waitFor(() => expect(announced()).toBe("Copied"))
+    clearAnnouncer()
+    fireEvent.click(chip)
+    await waitFor(() => expect(announced()).toBe("Copied"))
   })
 
   it("shows a check for two seconds after a copy", async () => {
