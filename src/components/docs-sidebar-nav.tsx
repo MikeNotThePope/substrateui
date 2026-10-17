@@ -130,6 +130,7 @@ export const navSections = [
       { label: "Sortable", href: "/docs/components/sortable" },
       { label: "Countdown", href: "/docs/components/countdown" },
       { label: "CopyButton", href: "/docs/components/copy-button" },
+      { label: "CopyChip", href: "/docs/components/copy-chip" },
       { label: "CopyField", href: "/docs/components/copy-field" },
       { label: "StatCard", href: "/docs/components/stat-card" },
       { label: "Chart", href: "/docs/components/chart" },

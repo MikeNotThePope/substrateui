@@ -25,6 +25,7 @@ export * from "./combobox";
 export * from "./command";
 export * from "./context-menu";
 export * from "./copy-button";
+export * from "./copy-chip";
 export * from "./copy-field";
 export * from "./corner-panel";
 export * from "./countdown";
