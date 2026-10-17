@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.17.0
+
+### Minor Changes
+
+- [#203](https://github.com/MikeNotThePope/substrateui/pull/203) [`4aec54b`](https://github.com/MikeNotThePope/substrateui/commit/4aec54bbeb42ef27c138fc1448306fd338e6f68b) Thanks [@lavahire-pr-opener](https://github.com/apps/lavahire-pr-opener)! - Add `CopyChip`: a value and a copy icon in one outlined inline chip, for a value set inside a sentence ("Type <chip> to confirm"). Its name is the value, so a label it sits in still reads as the sentence; "Copy" is its description. `breakAfter` names the one place the value may wrap. The icon flips to a check for two seconds and "Copied" is announced; a refused clipboard selects the value instead.
+
 ## 2.16.0
 
 ### Minor Changes
