@@ -16,7 +16,7 @@ A chunky, opinionated design system for Next.js — OKLCH tokens, Tailwind CSS v
 
 ## Features
 
-- 100 components from atomic Button to organism App Shell
+- 101 components from atomic Button to organism App Shell
 - 3-layer OKLCH color system: raw palette → semantic tokens → Tailwind utilities
 - Dark mode as a token swap — zero component changes
 - Chunky 2px borders and press-down animations
@@ -154,7 +154,7 @@ the count comes from, so start there when either goes stale.
 - **Layout Primitives** (9) — Stack, Cluster, Grid, Center, Divider, Separator, ScrollArea, Resizable, Spacer
 - **Forms** (18) — Label, Input, InputGroup, Textarea, Select, NativeSelect, Checkbox, RadioGroup, ChoiceCard, Switch, Slider, Combobox, Cascader, DatePicker, InputOTP, SearchField, PasswordInput, FileDropField
 - **Form Patterns** (5) — Field, Fieldset, FormSection, FormActions, Form
-- **Data Display** (23) — Table, DataTable, Card, Avatar, AspectRatio, Calendar, Timeline, MessageThread, Rating, ListGroup, Tree, Descriptions, Transfer, Sortable, Countdown, CopyButton, CopyField, StatCard, Chart, Carousel, Accordion, Collapsible, Item
+- **Data Display** (24) — Table, DataTable, Card, Avatar, AspectRatio, Calendar, Timeline, MessageThread, Rating, ListGroup, Tree, Descriptions, Transfer, Sortable, Countdown, CopyButton, CopyChip, CopyField, StatCard, Chart, Carousel, Accordion, Collapsible, Item
 - **Feedback** (5) — Alert, Banner, Progress, Toast, Empty
 - **Overlays** (12) — Dialog, Sheet, Drawer, CornerPanel, FloatingAction, AlertDialog, Popover, Tooltip, HoverCard, ContextMenu, DropdownMenu, Command
 - **Navigation** (9) — Tabs, NavTabs, Link, Breadcrumb, Pagination, NavigationMenu, Menubar, Sidebar, Stepper

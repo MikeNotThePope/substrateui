@@ -6,6 +6,7 @@ import type { BreadcrumbLabels } from "@/components/ui/breadcrumb";
 import type { CarouselLabels } from "@/components/ui/carousel";
 import type { ComboboxLabels } from "@/components/ui/combobox";
 import type { CopyButtonLabels } from "@/components/ui/copy-button";
+import type { CopyChipLabels } from "@/components/ui/copy-chip";
 import type { CopyFieldLabels } from "@/components/ui/copy-field";
 import type { CountdownLabels } from "@/components/ui/countdown";
 import type { CornerPanelLabels } from "@/components/ui/corner-panel";
@@ -35,6 +36,7 @@ interface SubstrateUILabels {
   carousel?: Partial<CarouselLabels>;
   combobox?: Partial<ComboboxLabels>;
   copyButton?: Partial<CopyButtonLabels>;
+  copyChip?: Partial<CopyChipLabels>;
   copyField?: Partial<CopyFieldLabels>;
   countdown?: Partial<CountdownLabels>;
   cornerPanel?: Partial<CornerPanelLabels>;
